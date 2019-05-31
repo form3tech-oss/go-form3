@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+	"github.com/form3tech-oss/go-form3/pkg/form3"
+)
+
+func main() {
+
+	f3 := form3.New()
+	p := f3.Payments.CreatePayment()
+	p.Data.WithType("payments")
+	p.Data.Attributes.Reference = "123"
+	p.Data.Attributes.
+		WithAmount("200").
+		WithReference("Testing")
+	created, err := p.Do()
+
+	fmt.Println(err)
+
+	f3.Payments.CreatePaymentSubmission().
+		WithID(*created.Data.ID).MustDo()
+}
