@@ -34,6 +34,14 @@
   version = "v9"
 
 [[projects]]
+  digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  pruneopts = "NUT"
+  revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
+  version = "v1.1.1"
+
+[[projects]]
   branch = "master"
   digest = "1:ce0cdcf4a121add67d3c6f7cc08e6233275d0f417852f025b790d35da88fab10"
   name = "github.com/globalsign/mgo"
@@ -165,6 +173,25 @@
   version = "v1.1.2"
 
 [[projects]]
+  digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  pruneopts = "NUT"
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:85adecf1dbfae5769cc62a8bcea6498f8e9f0e2452e4e6686eb36fa4428a5a6e"
+  name = "github.com/stretchr/testify"
+  packages = [
+    "assert",
+    "require",
+  ]
+  pruneopts = "NUT"
+  revision = "ffdc059bfe9ce6a4e144ba849dbedead332c6053"
+  version = "v1.3.0"
+
+[[projects]]
   branch = "master"
   digest = "1:15a159ca3e34c429f800dd822cbb37707e98552c9523b8d07fdd244dba62f04b"
   name = "golang.org/x/net"
@@ -210,46 +237,16 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/PuerkitoBio/purell",
-    "github.com/PuerkitoBio/urlesc",
     "github.com/ahmetb/go-linq",
-    "github.com/asaskevich/govalidator",
-    "github.com/globalsign/mgo/bson",
-    "github.com/globalsign/mgo/internal/json",
-    "github.com/go-openapi/analysis",
-    "github.com/go-openapi/analysis/internal",
     "github.com/go-openapi/errors",
-    "github.com/go-openapi/jsonpointer",
-    "github.com/go-openapi/jsonreference",
-    "github.com/go-openapi/loads",
     "github.com/go-openapi/runtime",
     "github.com/go-openapi/runtime/client",
-    "github.com/go-openapi/runtime/logger",
-    "github.com/go-openapi/runtime/middleware",
-    "github.com/go-openapi/runtime/middleware/denco",
-    "github.com/go-openapi/runtime/middleware/header",
-    "github.com/go-openapi/runtime/middleware/untyped",
-    "github.com/go-openapi/runtime/security",
-    "github.com/go-openapi/spec",
     "github.com/go-openapi/strfmt",
     "github.com/go-openapi/swag",
     "github.com/go-openapi/validate",
     "github.com/google/uuid",
-    "github.com/mailru/easyjson/buffer",
-    "github.com/mailru/easyjson/jlexer",
-    "github.com/mailru/easyjson/jwriter",
-    "github.com/mitchellh/mapstructure",
-    "golang.org/x/net/idna",
-    "golang.org/x/text/collate",
-    "golang.org/x/text/internal/gen",
-    "golang.org/x/text/internal/ucd",
-    "golang.org/x/text/language",
-    "golang.org/x/text/transform",
-    "golang.org/x/text/unicode/bidi",
-    "golang.org/x/text/unicode/norm",
-    "golang.org/x/text/unicode/rangetable",
-    "golang.org/x/text/width",
-    "gopkg.in/yaml.v2",
+    "github.com/stretchr/testify/assert",
+    "github.com/stretchr/testify/require",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

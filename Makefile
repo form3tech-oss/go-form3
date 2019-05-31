@@ -25,3 +25,11 @@ generate-client: modify-swagger-file
 	@mkdir pkg/generated
 	swagger generate client -f swagger/form3-swagger-updated.yaml -t pkg/generated/ -T templates -C templates/layout.yaml
 
+
+GOFMT_FILES?=$$(find ./ -name '*.go' | grep -v vendor)
+
+goimports:
+	goimports -w $(GOFMT_FILES)
+
+test:
+	go test ./tests
