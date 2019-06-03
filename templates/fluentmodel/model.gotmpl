@@ -1,0 +1,29 @@
+{{ template "fluentmodelHeader" . }}
+
+{{ if .IncludeModel }}
+  {{- if eq .Name "ApiResponse" }}// APIResponse is the response to an API call.
+  {{- else }}
+    {{- if .IsExported -}}
+      // {{ pascalize .Name }} {{ template "fluentmodelDocstring" . }}
+      {{- if not .IsBaseType }}
+// swagger:model {{ .Name }}
+      {{- else }}
+// swagger:discriminator {{ .Name }} {{ .DiscriminatorField }}
+      {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{ template "fluentmodelSchema" . }}
+
+{{ range .ExtraSchemas }}
+  {{- if .IsExported }}
+{{ if .IncludeModel }}// {{ pascalize .Name }} {{ template "fluentmodelDocstring" . }}
+  {{- if not .IsBaseType }}
+// swagger:model {{ .Name }}
+  {{- else }}
+// swagger:discriminator {{ .Name }} {{ .DiscriminatorField }}
+  {{- end }}
+{{- end}}
+{{- end }}
+{{ template "fluentmodelSchema" . }}
+{{ end }}

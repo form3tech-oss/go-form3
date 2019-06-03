@@ -1,0 +1,49 @@
+{{ define "fluentmodelStructfield" }}
+  {{- if not $.IsBaseType -}}
+    // {{ template "fluentmodelDocstring" . }}
+    {{- template "propertyValidationDocString" .}}
+  {{- end}}
+{{ pascalize .Name}} {{ template "fluentmodelSchemaType" . }} `json:"
+{{- if $.HasBaseType -}}
+  -
+{{- else }}
+  {{- .OriginalName }}
+  {{- if and (not .Required) .IsEmptyOmitted }},omitempty{{ end }}
+{{- end }}"
+{{- if .XMLName }} xml:"{{ .XMLName }}"{{ end }}
+{{- if .CustomTag }} {{ .CustomTag }}{{ end }}`
+{{ end }}
+
+{{- define "fluentmodelTuplefield" }}
+  {{- if not $.IsBaseType -}}
+    // {{ template "fluentmodelDocstring" . }}
+    {{- template "propertyValidationDocString" .}}
+{{ end }}
+{{- pascalize .Name}} {{ template "fluentmodelSchemaType" . }} `json:"-"
+{{- if .CustomTag }} {{ .CustomTag }}{{ end }}` // custom serializer
+{{ end }}
+
+{{- define "fluentmodelStructfieldIface" }}
+  {{- if not $.IsBaseType -}}
+    // {{ template "fluentmodelDocstring" . }}
+    {{- template "propertyValidationDocString" .}}
+  {{- end }}
+{{ pascalize .Name}}() {{ template "fluentmodelSchemaType" . }}
+Set{{ pascalize .Name}}({{ template "fluentmodelSchemaType" . }})
+{{ end }}
+{{ define "fluentmodelTuplefieldIface" }}
+  {{- if not $.IsBaseType -}}
+    // {{ template "fluentmodelDocstring" . }}
+    {{- template "propertyValidationDocString" . }}
+{{ end }}
+{{- pascalize .Name}}() {{ template "fluentmodelSchemaType" . }}
+Set{{ pascalize .Name}}({{ template "fluentmodelSchemaType" . }})
+{{ end }}
+
+{{- define "fluentmodelPrivstructfield" }}
+  {{- camelize .Name}}Field {{ template "fluentmodelSchemaType" . }}
+{{ end }}
+
+{{- define "fluentmodelPrivtuplefield" }}
+  {{- camelize .Name}}Field {{ template "fluentmodelSchemaType" . }}
+{{ end }}

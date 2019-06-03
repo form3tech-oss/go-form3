@@ -1,0 +1,27 @@
+{{ define "fluentmodelSchemaType" }}
+  {{- if and (or ((len .AllOf) gt 0) .IsAnonymous) ( not .IsMap) }}
+    {{- template "fluentmodelSchemaBody" . }}
+  {{- else }}
+    {{- if and (not .IsMap) .IsNullable (not .IsSuperAlias) }}*{{ end }}
+    {{- if .IsSuperAlias }} = {{ end }}
+    {{- .GoType }}
+  {{- end}}
+{{- end }}
+
+{{- define "fluentmodelDereffedSchemaType" }}
+  {{- if and (or ((len .AllOf) gt 0) .IsAnonymous) ( not .IsMap) }}
+    {{- template "fluentmodelSchemaBody" . }}
+  {{- else }}
+    {{- .GoType }}
+  {{- end}}
+{{- end }}
+
+{{- define "fluentmodelTypeSchemaType"}}
+  {{- if and (or ((len .AllOf) gt 0) .IsAnonymous) ( not .IsMap) }}
+    {{- template "fluentmodelSchemaBody" . }}
+  {{- else }}
+    {{- if and (not .IsMap) .IsNullable (not .IsSuperAlias) }}*{{ end }}
+    {{- if .IsSuperAlias }} = {{ end }}
+    {{- if .AliasedType }}{{ .AliasedType }}{{ else }}{{ .GoType }}{{ end }}
+  {{- end}}
+{{- end }}
