@@ -60,7 +60,8 @@ func (a *{{ pascalize .Name }}Request) Do() {{ if .SuccessResponse }}({{ range .
            ConsumesMediaTypes: {{ printf "%#v" .ConsumesMediaTypes }},
            Schemes: {{ printf "%#v" .Schemes }},
            Params: a,
-           Reader: &{{ pascalize .Name }}Reader{formats: a.formats{{ if .HasStreamingResponse }}, writer: writer{{ end }}},{{ if .Authorized }}
+           {{ if .HasStreamingResponse }} // TODO - pass streaming response to reader.  {{ end }}
+           Reader: &{{ pascalize .Name }}Reader{formats: a.formats},{{ if .Authorized }}
            //AuthInfo: authInfo,{{ end}}
            Context: a.Context,
            Client: a.HTTPClient,
