@@ -84,6 +84,13 @@ func (a *{{ pascalize .Name }}Request) MustDo() {{ if .SuccessResponse }}({{ ran
     return r
 }
 
+func (a *{{ pascalize .Name }}Request) WithTimeout(d time.Duration) *{{ pascalize .Name }}Request {
+    deadlineTime := time.Now().Add(d)
+    a.Context, _ = context.WithDeadline(a.Context, deadlineTime)
+    a.Context, _ = context.WithTimeout(a.Context, d)
+    return a
+}
+
 {{ end }}
 
 /////////
