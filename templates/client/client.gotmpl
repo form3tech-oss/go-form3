@@ -76,12 +76,12 @@ func (a *{{ pascalize .Name }}Request) Do() {{ if .SuccessResponse }}({{ range .
          {{ else }}return nil{{ end }}
 }
 
-func (a *{{ pascalize .Name }}Request) MustDo() {{ if .SuccessResponse }}({{ range .SuccessResponses }}*{{ pascalize .Name }} {{ end }}{{ end }}{{ if .SuccessResponse }}){{ end }} {
-    r, err := a.Do()
+func (a *{{ pascalize .Name }}Request) MustDo() {{ if .SuccessResponse }}({{ range .SuccessResponses }}*{{ pascalize .Name }}, {{ end }}{{ end }}{{ if .SuccessResponse }}){{ end }} {
+    {{ range $i, $v := .SuccessResponses }}r{{$i}},{{ end }} err := a.Do()
     if err != nil {
         panic(err)
     }
-    return r
+    {{ if .SuccessResponse }}return {{ range $i, $v := .SuccessResponses }}{{if gt $i 0}},{{end}}r{{$i}}{{ end }}{{end}}
 }
 
 {{ end }}
