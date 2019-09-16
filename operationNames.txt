@@ -71,6 +71,7 @@ paths./transaction/directdebits/{id}/reversals/{reversalId}.get.operationId: Get
 paths./transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}.get.operationId: GetDirectDebitReversalAdmission
 paths./transaction/directdebits/{id}/submissions.post.operationId: CreateDirectDebitSubmission
 paths./transaction/directdebits/{id}/submissions/{submissionId}.get.operationId: GetDirectDebitSubmission
+paths./transaction/directdebits/{id}/submissions/{submissionId}.patch.operationId: ModifyDirectDebitSubmission
 paths./transaction/mandates.get.operationId: ListMandates
 paths./transaction/mandates.post.operationId: CreateMandate
 paths./transaction/mandates/health.get.operationId: GetMandatesHealth
