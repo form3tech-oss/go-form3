@@ -2,12 +2,13 @@ package form3
 
 import (
 	"context"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client"
-	rc "github.com/go-openapi/runtime/client"
-	"github.com/go-openapi/strfmt"
 	"net/http"
 	"net/url"
 	"os"
+
+	"github.com/form3tech-oss/go-form3/pkg/generated/client"
+	rc "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 )
 
 type F3 struct {
@@ -16,10 +17,18 @@ type F3 struct {
 }
 
 func New() *F3 {
-	host := getEnv("FORM3_HOST")
+	return NewWithConfig(
+		getEnv("FORM3_HOST"),
+		getEnv("FORM3_CLIENT_ID"),
+		getEnv("FORM3_CLIENT_SECRET"),
+		getEnv("FORM3_ORGANISATION_ID"),
+	)
+}
+
+func NewWithConfig(host, clientID, secret, organisationID string) *F3 {
 	u, _ := url.Parse("https://" + host)
 
-	httpclientconf := NewClientConfig(getEnv("FORM3_CLIENT_ID"), getEnv("FORM3_CLIENT_SECRET"), u)
+	httpclientconf := NewClientConfig(clientID, secret, u)
 	httpClient := NewHttpClient(httpclientconf)
 	httpClient.Transport = &AddHeaderTransport{httpClient.Transport}
 
@@ -30,7 +39,7 @@ func New() *F3 {
 	rt.SetDebug(hasDebug && debug == "1")
 
 	defaults := NewTestDefaults()
-	orgId := strfmt.UUID(getEnv("FORM3_ORGANISATION_ID"))
+	orgId := strfmt.UUID(organisationID)
 	defaults.OrganisationId = &orgId
 	cli := client.New(rt, strfmt.Default, defaults)
 
