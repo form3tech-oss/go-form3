@@ -1,6 +1,8 @@
 package form3
 
 import (
+	"bytes"
+	"io"
 	"net/http"
 
 	"encoding/json"
@@ -54,47 +56,56 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
 	}
 
+	var requestBodyClone io.Reader
+	if req.Body != nil {
+		originalRequestBody, err := ioutil.ReadAll(req.Body)
+		if err != nil {
+			return nil, err
+		}
+		req.Body = ioutil.NopCloser(bytes.NewBuffer(originalRequestBody))
+		requestBodyClone = bytes.NewBuffer(originalRequestBody)
+	}
+
 	res, err := t.underlyingTransport.RoundTrip(req)
-
 	if res != nil && (res.StatusCode == 401 || res.StatusCode == 403) {
-
 		authRequest, err := http.NewRequest("POST", t.config.HostUrl.String()+t.config.authEndpoint, nil)
-		authRequest.SetBasicAuth(t.config.ClientId, t.config.ClientSecret)
-
 		if err != nil {
 			return nil, fmt.Errorf("could not build auth request, error: %v", err)
 		}
+		authRequest.SetBasicAuth(t.config.ClientId, t.config.ClientSecret)
 
 		authResponse, err := t.underlyingTransport.RoundTrip(authRequest)
-
 		if err != nil {
 			return nil, fmt.Errorf("error authenticating, error: %v", err)
 		}
+		defer authResponse.Body.Close()
 
 		if authResponse.StatusCode != 200 {
 			return nil, fmt.Errorf("non 200 status code getting token, status code: %d", authResponse.StatusCode)
 		}
 
 		authBody, err := ioutil.ReadAll(authResponse.Body)
-
 		if err != nil {
 			return nil, fmt.Errorf("could not read auth response body, error: %v", err)
 		}
 
 		var authJson authJsonResponse
-
 		err = json.Unmarshal(authBody, &authJson)
-
 		if err != nil {
 			return nil, fmt.Errorf("could not parse auth json response, error: %v", err)
 		}
 
 		t.token = authJson.AccessToken
-
 		req.Header.Del("Authorization")
-		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
 
-		return t.underlyingTransport.RoundTrip(req)
+		retryRequest, err := http.NewRequest(req.Method, req.URL.String(), requestBodyClone)
+		if err != nil {
+			return nil, fmt.Errorf("could not build authenticated request, error: %v", err)
+		}
+		retryRequest.Header = req.Header
+		retryRequest.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
+
+		return t.underlyingTransport.RoundTrip(retryRequest)
 	}
 
 	return res, err
