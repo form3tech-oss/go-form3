@@ -55,6 +55,7 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 
 	res, err := t.underlyingTransport.RoundTrip(req)
+	req, err = resetRequestBody(req)
 
 	if res != nil && (res.StatusCode == 401 || res.StatusCode == 403) {
 
@@ -109,3 +110,15 @@ func NewHttpClient(config *ClientConfig) *http.Client {
 
 	return h
 }
+
+func resetRequestBody(req *http.Request) (*http.Request, error) {
+	newReq := *req
+	body, err := req.GetBody()
+	newReq.Body = body
+	if err != nil {
+		return nil, fmt.Errorf("could not reset request body, error: %v", err)
+	}
+	req = &newReq
+	return req, err
+}
+
