@@ -7,7 +7,7 @@ swagger_binary := "swagger_linux_amd64"
 endif
 
 install-swagger:
-	@sudo curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger; \
+	@curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger
 
 download-swagger:
 	@mkdir swagger || true

@@ -59,8 +59,8 @@ func (a *{{ pascalize .Name }}Request) Do() {{ if .SuccessResponse }}({{ range .
            ProducesMediaTypes: {{ printf "%#v" .ProducesMediaTypes }},
            ConsumesMediaTypes: {{ printf "%#v" .ConsumesMediaTypes }},
            Schemes: {{ printf "%#v" .Schemes }},
-           Params: a,
-           {{ if .HasStreamingResponse }} // TODO - pass streaming response to reader.  {{ end }}
+           Params: a,{{- if .HasStreamingResponse }}
+           // TODO - pass streaming response to reader.{{ end }}
            Reader: &{{ pascalize .Name }}Reader{formats: a.formats},{{ if .Authorized }}
            //AuthInfo: authInfo,{{ end}}
            Context: a.Context,
