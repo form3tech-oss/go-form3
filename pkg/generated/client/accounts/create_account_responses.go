@@ -26,7 +26,6 @@ func (o *CreateAccountReader) ReadResponse(response runtime.ClientResponse, cons
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateAccountCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

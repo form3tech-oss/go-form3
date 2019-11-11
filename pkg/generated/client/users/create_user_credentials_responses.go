@@ -26,7 +26,6 @@ func (o *CreateUserCredentialsReader) ReadResponse(response runtime.ClientRespon
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateUserCredentialsCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -23,7 +23,6 @@ func (o *DeleteUserCredentialReader) ReadResponse(response runtime.ClientRespons
 	switch response.Code() {
 
 	case 204:
-
 		result := NewDeleteUserCredentialNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

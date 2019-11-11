@@ -26,7 +26,6 @@ func (o *GetUnitReader) ReadResponse(response runtime.ClientResponse, consumer r
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetUnitOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

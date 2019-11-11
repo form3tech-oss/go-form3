@@ -26,7 +26,6 @@ func (o *CreateDirectDebitSubmissionReader) ReadResponse(response runtime.Client
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateDirectDebitSubmissionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreateDirectDebitSubmissionReader) ReadResponse(response runtime.Client
 		return result, nil
 
 	case 400:
-
 		result := NewCreateDirectDebitSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

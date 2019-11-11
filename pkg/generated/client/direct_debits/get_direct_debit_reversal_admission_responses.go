@@ -26,7 +26,6 @@ func (o *GetDirectDebitReversalAdmissionReader) ReadResponse(response runtime.Cl
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetDirectDebitReversalAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

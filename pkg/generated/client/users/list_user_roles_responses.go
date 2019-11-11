@@ -26,7 +26,6 @@ func (o *ListUserRolesReader) ReadResponse(response runtime.ClientResponse, cons
 	switch response.Code() {
 
 	case 200:
-
 		result := NewListUserRolesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

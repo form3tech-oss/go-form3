@@ -26,7 +26,6 @@ func (o *CreateClaimReversalSubmissionReader) ReadResponse(response runtime.Clie
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateClaimReversalSubmissionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreateClaimReversalSubmissionReader) ReadResponse(response runtime.Clie
 		return result, nil
 
 	case 400:
-
 		result := NewCreateClaimReversalSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -26,7 +26,6 @@ func (o *GetPaymentReturnAdmissionReader) ReadResponse(response runtime.ClientRe
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetPaymentReturnAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

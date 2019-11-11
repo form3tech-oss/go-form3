@@ -26,7 +26,6 @@ func (o *CreateMandateReturnReader) ReadResponse(response runtime.ClientResponse
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateMandateReturnCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreateMandateReturnReader) ReadResponse(response runtime.ClientResponse
 		return result, nil
 
 	case 400:
-
 		result := NewCreateMandateReturnBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

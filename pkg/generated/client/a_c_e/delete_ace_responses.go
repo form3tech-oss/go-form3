@@ -23,7 +23,6 @@ func (o *DeleteAceReader) ReadResponse(response runtime.ClientResponse, consumer
 	switch response.Code() {
 
 	case 204:
-
 		result := NewDeleteAceNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -26,7 +26,6 @@ func (o *GetOrganisationAccountsIDEventsReader) ReadResponse(response runtime.Cl
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetOrganisationAccountsIDEventsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

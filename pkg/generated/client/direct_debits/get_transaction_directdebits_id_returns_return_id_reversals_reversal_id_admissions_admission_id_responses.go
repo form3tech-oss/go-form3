@@ -26,7 +26,6 @@ func (o *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmission
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

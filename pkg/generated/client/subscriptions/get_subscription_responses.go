@@ -26,7 +26,6 @@ func (o *GetSubscriptionReader) ReadResponse(response runtime.ClientResponse, co
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetSubscriptionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

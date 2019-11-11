@@ -26,7 +26,6 @@ func (o *GetMandateReturnReader) ReadResponse(response runtime.ClientResponse, c
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetMandateReturnOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

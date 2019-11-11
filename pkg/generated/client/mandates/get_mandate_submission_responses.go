@@ -26,7 +26,6 @@ func (o *GetMandateSubmissionReader) ReadResponse(response runtime.ClientRespons
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetMandateSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *GetMandateSubmissionReader) ReadResponse(response runtime.ClientRespons
 		return result, nil
 
 	case 400:
-
 		result := NewGetMandateSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

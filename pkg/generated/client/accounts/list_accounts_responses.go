@@ -26,7 +26,6 @@ func (o *ListAccountsReader) ReadResponse(response runtime.ClientResponse, consu
 	switch response.Code() {
 
 	case 200:
-
 		result := NewListAccountsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

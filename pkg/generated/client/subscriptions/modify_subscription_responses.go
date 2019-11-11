@@ -26,7 +26,6 @@ func (o *ModifySubscriptionReader) ReadResponse(response runtime.ClientResponse,
 	switch response.Code() {
 
 	case 200:
-
 		result := NewModifySubscriptionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *ModifySubscriptionReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 
 	case 400:
-
 		result := NewModifySubscriptionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -42,7 +40,6 @@ func (o *ModifySubscriptionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 404:
-
 		result := NewModifySubscriptionNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -50,7 +47,6 @@ func (o *ModifySubscriptionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 409:
-
 		result := NewModifySubscriptionConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -58,7 +54,6 @@ func (o *ModifySubscriptionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 500:
-
 		result := NewModifySubscriptionInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

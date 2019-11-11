@@ -26,7 +26,6 @@ func (o *ListUsersReader) ReadResponse(response runtime.ClientResponse, consumer
 	switch response.Code() {
 
 	case 200:
-
 		result := NewListUsersOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

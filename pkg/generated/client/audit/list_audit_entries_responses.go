@@ -26,7 +26,6 @@ func (o *ListAuditEntriesReader) ReadResponse(response runtime.ClientResponse, c
 	switch response.Code() {
 
 	case 200:
-
 		result := NewListAuditEntriesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

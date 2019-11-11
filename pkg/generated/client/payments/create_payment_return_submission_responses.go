@@ -26,7 +26,6 @@ func (o *CreatePaymentReturnSubmissionReader) ReadResponse(response runtime.Clie
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreatePaymentReturnSubmissionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreatePaymentReturnSubmissionReader) ReadResponse(response runtime.Clie
 		return result, nil
 
 	case 400:
-
 		result := NewCreatePaymentReturnSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

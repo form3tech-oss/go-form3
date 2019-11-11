@@ -26,7 +26,6 @@ func (o *GetDirectDebitReturnSubmissionReader) ReadResponse(response runtime.Cli
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetDirectDebitReturnSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

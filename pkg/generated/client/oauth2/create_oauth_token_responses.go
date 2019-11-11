@@ -26,7 +26,6 @@ func (o *CreateOauthTokenReader) ReadResponse(response runtime.ClientResponse, c
 	switch response.Code() {
 
 	case 200:
-
 		result := NewCreateOauthTokenOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreateOauthTokenReader) ReadResponse(response runtime.ClientResponse, c
 		return result, nil
 
 	case 403:
-
 		result := NewCreateOauthTokenForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

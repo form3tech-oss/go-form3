@@ -26,7 +26,6 @@ func (o *GetMandateAdmissionReader) ReadResponse(response runtime.ClientResponse
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetMandateAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

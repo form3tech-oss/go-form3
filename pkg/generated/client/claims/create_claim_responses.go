@@ -26,7 +26,6 @@ func (o *CreateClaimReader) ReadResponse(response runtime.ClientResponse, consum
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateClaimCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreateClaimReader) ReadResponse(response runtime.ClientResponse, consum
 		return result, nil
 
 	case 400:
-
 		result := NewCreateClaimBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

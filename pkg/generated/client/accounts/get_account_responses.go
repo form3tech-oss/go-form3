@@ -26,7 +26,6 @@ func (o *GetAccountReader) ReadResponse(response runtime.ClientResponse, consume
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetAccountOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

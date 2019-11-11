@@ -26,7 +26,6 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetReportAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 
 	case 400:
-
 		result := NewGetReportAdmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -42,7 +40,6 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 403:
-
 		result := NewGetReportAdmissionForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -50,7 +47,6 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 404:
-
 		result := NewGetReportAdmissionNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

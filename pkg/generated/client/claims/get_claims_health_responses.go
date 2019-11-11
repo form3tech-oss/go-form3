@@ -26,7 +26,6 @@ func (o *GetClaimsHealthReader) ReadResponse(response runtime.ClientResponse, co
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetClaimsHealthOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -26,7 +26,6 @@ func (o *GetPaymentRecallReversalAdmissionReader) ReadResponse(response runtime.
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetPaymentRecallReversalAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

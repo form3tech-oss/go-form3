@@ -26,7 +26,6 @@ func (o *GetClaimSubmissionReader) ReadResponse(response runtime.ClientResponse,
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetClaimSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *GetClaimSubmissionReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 
 	case 400:
-
 		result := NewGetClaimSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

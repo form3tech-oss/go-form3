@@ -26,7 +26,6 @@ func (o *ListReportsReader) ReadResponse(response runtime.ClientResponse, consum
 	switch response.Code() {
 
 	case 200:
-
 		result := NewListReportsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *ListReportsReader) ReadResponse(response runtime.ClientResponse, consum
 		return result, nil
 
 	case 400:
-
 		result := NewListReportsBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -42,7 +40,6 @@ func (o *ListReportsReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, result
 
 	case 403:
-
 		result := NewListReportsForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

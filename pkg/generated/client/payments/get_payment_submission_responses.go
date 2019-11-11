@@ -26,7 +26,6 @@ func (o *GetPaymentSubmissionReader) ReadResponse(response runtime.ClientRespons
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetPaymentSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

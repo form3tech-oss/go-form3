@@ -26,7 +26,6 @@ func (o *CreateAceReader) ReadResponse(response runtime.ClientResponse, consumer
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateAceCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

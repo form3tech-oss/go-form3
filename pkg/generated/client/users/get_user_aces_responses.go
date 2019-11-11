@@ -26,7 +26,6 @@ func (o *GetUserAcesReader) ReadResponse(response runtime.ClientResponse, consum
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetUserAcesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

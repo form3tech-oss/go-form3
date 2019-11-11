@@ -26,7 +26,6 @@ func (o *CreatePaymentReversalSubmissionReader) ReadResponse(response runtime.Cl
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreatePaymentReversalSubmissionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *CreatePaymentReversalSubmissionReader) ReadResponse(response runtime.Cl
 		return result, nil
 
 	case 400:
-
 		result := NewCreatePaymentReversalSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

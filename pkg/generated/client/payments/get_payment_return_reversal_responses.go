@@ -26,7 +26,6 @@ func (o *GetPaymentReturnReversalReader) ReadResponse(response runtime.ClientRes
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetPaymentReturnReversalOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

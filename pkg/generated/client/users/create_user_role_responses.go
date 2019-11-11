@@ -23,7 +23,6 @@ func (o *CreateUserRoleReader) ReadResponse(response runtime.ClientResponse, con
 	switch response.Code() {
 
 	case 201:
-
 		result := NewCreateUserRoleCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

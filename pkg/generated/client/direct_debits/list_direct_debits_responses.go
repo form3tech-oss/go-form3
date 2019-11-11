@@ -26,7 +26,6 @@ func (o *ListDirectDebitsReader) ReadResponse(response runtime.ClientResponse, c
 	switch response.Code() {
 
 	case 200:
-
 		result := NewListDirectDebitsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

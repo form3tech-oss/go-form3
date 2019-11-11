@@ -26,7 +26,6 @@ func (o *GetAuditEntryReader) ReadResponse(response runtime.ClientResponse, cons
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetAuditEntryOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

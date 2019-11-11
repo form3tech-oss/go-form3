@@ -26,7 +26,6 @@ func (o *GetPaymentRecallDecisionReader) ReadResponse(response runtime.ClientRes
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetPaymentRecallDecisionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -23,7 +23,6 @@ func (o *DeleteSubscriptionReader) ReadResponse(response runtime.ClientResponse,
 	switch response.Code() {
 
 	case 204:
-
 		result := NewDeleteSubscriptionNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -26,7 +26,6 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 	switch response.Code() {
 
 	case 200:
-
 		result := NewGetSchemeMessageAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -34,7 +33,6 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		return result, nil
 
 	case 400:
-
 		result := NewGetSchemeMessageAdmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -42,7 +40,6 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		return nil, result
 
 	case 403:
-
 		result := NewGetSchemeMessageAdmissionForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -50,7 +47,6 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		return nil, result
 
 	case 404:
-
 		result := NewGetSchemeMessageAdmissionNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

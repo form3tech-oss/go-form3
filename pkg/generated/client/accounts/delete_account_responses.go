@@ -23,7 +23,6 @@ func (o *DeleteAccountReader) ReadResponse(response runtime.ClientResponse, cons
 	switch response.Code() {
 
 	case 204:
-
 		result := NewDeleteAccountNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

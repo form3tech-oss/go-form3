@@ -23,7 +23,6 @@ func (o *DeleteRoleReader) ReadResponse(response runtime.ClientResponse, consume
 	switch response.Code() {
 
 	case 204:
-
 		result := NewDeleteRoleNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

@@ -23,7 +23,6 @@ func (o *DeleteUserReader) ReadResponse(response runtime.ClientResponse, consume
 	switch response.Code() {
 
 	case 204:
-
 		result := NewDeleteUserNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
