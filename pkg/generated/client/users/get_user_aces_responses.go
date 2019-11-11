@@ -22,10 +22,12 @@ type GetUserAcesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetUserAcesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetUserAcesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of access control entries for this user
 type GetUserAcesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AceDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetUserAcesOK) readResponse(response runtime.ClientResponse, consumer r
 	o.AceDetailsListResponse = new(models.AceDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AceDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

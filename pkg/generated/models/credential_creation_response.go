@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // CredentialCreationResponse credential creation response
@@ -21,11 +22,14 @@ import (
 type CredentialCreationResponse struct {
 
 	// data
-	Data *CredentialSecret `json:"data,omitempty"`
+	// Required: true
+	Data *CredentialSecret `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
+
+// line 140
 
 func CredentialCreationResponseWithDefaults(defaults client.Defaults) *CredentialCreationResponse {
 	return &CredentialCreationResponse{
@@ -80,8 +84,8 @@ func (m *CredentialCreationResponse) Validate(formats strfmt.Registry) error {
 
 func (m *CredentialCreationResponse) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

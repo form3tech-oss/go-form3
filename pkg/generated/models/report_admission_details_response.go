@@ -29,6 +29,8 @@ type ReportAdmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func ReportAdmissionDetailsResponseWithDefaults(defaults client.Defaults) *ReportAdmissionDetailsResponse {
 	return &ReportAdmissionDetailsResponse{
 

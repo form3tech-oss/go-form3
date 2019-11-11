@@ -22,10 +22,12 @@ type ListUserRolesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListUserRolesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListUserRolesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of roles for user
 type ListUserRolesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserRoleListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListUserRolesOK) readResponse(response runtime.ClientResponse, consumer
 	o.UserRoleListResponse = new(models.UserRoleListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserRoleListResponse); err != nil && err != io.EOF {
 		return err
 	}

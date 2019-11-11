@@ -29,6 +29,8 @@ type RoleAttributes struct {
 	ParentRoleID *strfmt.UUID `json:"parent_role_id,omitempty"`
 }
 
+// line 140
+
 func RoleAttributesWithDefaults(defaults client.Defaults) *RoleAttributes {
 	return &RoleAttributes{
 

@@ -24,6 +24,8 @@ type ReturnReversalCreation struct {
 	Data *ReturnReversal `json:"data,omitempty"`
 }
 
+// line 140
+
 func ReturnReversalCreationWithDefaults(defaults client.Defaults) *ReturnReversalCreation {
 	return &ReturnReversalCreation{
 

@@ -22,10 +22,12 @@ type ListAuditEntriesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListAuditEntriesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListAuditEntriesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Audit details
 type ListAuditEntriesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AuditEntryListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListAuditEntriesOK) readResponse(response runtime.ClientResponse, consu
 	o.AuditEntryListResponse = new(models.AuditEntryListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AuditEntryListResponse); err != nil && err != io.EOF {
 		return err
 	}

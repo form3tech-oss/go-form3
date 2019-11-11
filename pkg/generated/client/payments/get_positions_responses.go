@@ -22,10 +22,12 @@ type GetPositionsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetPositionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetPositionsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of position details
 type GetPositionsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.PositionDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetPositionsOK) readResponse(response runtime.ClientResponse, consumer 
 	o.PositionDetailsListResponse = new(models.PositionDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.PositionDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

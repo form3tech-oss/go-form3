@@ -22,10 +22,12 @@ type GetDirectDebitReturnSubmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetDirectDebitReturnSubmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetDirectDebitReturnSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Return submission details
 type GetDirectDebitReturnSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitReturnSubmissionDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetDirectDebitReturnSubmissionOK) readResponse(response runtime.ClientR
 	o.DirectDebitReturnSubmissionDetailsResponse = new(models.DirectDebitReturnSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitReturnSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

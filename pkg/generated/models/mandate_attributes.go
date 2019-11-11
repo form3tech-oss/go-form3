@@ -48,7 +48,7 @@ type MandateAttributes struct {
 
 	// processing date
 	// Format: date
-	ProcessingDate strfmt.Date `json:"processing_date,omitempty"`
+	ProcessingDate *strfmt.Date `json:"processing_date,omitempty"`
 
 	// reference
 	Reference string `json:"reference,omitempty"`
@@ -58,11 +58,13 @@ type MandateAttributes struct {
 
 	// scheme processing date
 	// Format: date
-	SchemeProcessingDate strfmt.Date `json:"scheme_processing_date,omitempty"`
+	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
 	// unique scheme id
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
+
+// line 140
 
 func MandateAttributesWithDefaults(defaults client.Defaults) *MandateAttributes {
 	return &MandateAttributes{
@@ -83,13 +85,13 @@ func MandateAttributesWithDefaults(defaults client.Defaults) *MandateAttributes 
 
 		PaymentScheme: defaults.GetString("MandateAttributes", "payment_scheme"),
 
-		ProcessingDate: defaults.GetStrfmtDate("MandateAttributes", "processing_date"),
+		ProcessingDate: defaults.GetStrfmtDatePtr("MandateAttributes", "processing_date"),
 
 		Reference: defaults.GetString("MandateAttributes", "reference"),
 
 		SchemePaymentType: defaults.GetString("MandateAttributes", "scheme_payment_type"),
 
-		SchemeProcessingDate: defaults.GetStrfmtDate("MandateAttributes", "scheme_processing_date"),
+		SchemeProcessingDate: defaults.GetStrfmtDatePtr("MandateAttributes", "scheme_processing_date"),
 
 		UniqueSchemeID: defaults.GetString("MandateAttributes", "unique_scheme_id"),
 	}
@@ -163,8 +165,13 @@ func (m *MandateAttributes) WithPaymentScheme(paymentScheme string) *MandateAttr
 
 func (m *MandateAttributes) WithProcessingDate(processingDate strfmt.Date) *MandateAttributes {
 
-	m.ProcessingDate = processingDate
+	m.ProcessingDate = &processingDate
 
+	return m
+}
+
+func (m *MandateAttributes) WithoutProcessingDate() *MandateAttributes {
+	m.ProcessingDate = nil
 	return m
 }
 
@@ -184,8 +191,13 @@ func (m *MandateAttributes) WithSchemePaymentType(schemePaymentType string) *Man
 
 func (m *MandateAttributes) WithSchemeProcessingDate(schemeProcessingDate strfmt.Date) *MandateAttributes {
 
-	m.SchemeProcessingDate = schemeProcessingDate
+	m.SchemeProcessingDate = &schemeProcessingDate
 
+	return m
+}
+
+func (m *MandateAttributes) WithoutSchemeProcessingDate() *MandateAttributes {
+	m.SchemeProcessingDate = nil
 	return m
 }
 

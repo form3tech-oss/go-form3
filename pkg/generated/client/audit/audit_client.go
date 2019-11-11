@@ -43,7 +43,8 @@ func (a *GetAuditEntryRequest) Do() (*GetAuditEntryOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetAuditEntryReader{formats: a.formats},
+
+		Reader: &GetAuditEntryReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *GetAuditEntryRequest) Do() (*GetAuditEntryOK, error) {
 }
 
 func (a *GetAuditEntryRequest) MustDo() *GetAuditEntryOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *GetAuditHealthRequest) Do() (*GetAuditHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetAuditHealthReader{formats: a.formats},
+
+		Reader: &GetAuditHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *GetAuditHealthRequest) Do() (*GetAuditHealthOK, error) {
 }
 
 func (a *GetAuditHealthRequest) MustDo() *GetAuditHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *ListAuditEntriesRequest) Do() (*ListAuditEntriesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListAuditEntriesReader{formats: a.formats},
+
+		Reader: &ListAuditEntriesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *ListAuditEntriesRequest) Do() (*ListAuditEntriesOK, error) {
 }
 
 func (a *ListAuditEntriesRequest) MustDo() *ListAuditEntriesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

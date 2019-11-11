@@ -22,10 +22,12 @@ type CreateSubscriptionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateSubscriptionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateSubscriptionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Subscription creation response
 type CreateSubscriptionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SubscriptionCreationResponse
 }
 
@@ -61,6 +65,7 @@ func (o *CreateSubscriptionCreated) readResponse(response runtime.ClientResponse
 	o.SubscriptionCreationResponse = new(models.SubscriptionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SubscriptionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

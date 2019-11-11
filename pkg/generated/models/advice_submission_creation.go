@@ -24,6 +24,8 @@ type AdviceSubmissionCreation struct {
 	Data *NewAdviceSubmission `json:"data,omitempty"`
 }
 
+// line 140
+
 func AdviceSubmissionCreationWithDefaults(defaults client.Defaults) *AdviceSubmissionCreation {
 	return &AdviceSubmissionCreation{
 

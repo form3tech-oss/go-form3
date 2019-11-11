@@ -43,7 +43,8 @@ func (a *CreatePaymentRequest) Do() (*CreatePaymentCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentReader{formats: a.formats},
+
+		Reader: &CreatePaymentReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreatePaymentRequest) Do() (*CreatePaymentCreated, error) {
 }
 
 func (a *CreatePaymentRequest) MustDo() *CreatePaymentCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *CreatePaymentAdviceRequest) Do() (*CreatePaymentAdviceCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentAdviceReader{formats: a.formats},
+
+		Reader: &CreatePaymentAdviceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *CreatePaymentAdviceRequest) Do() (*CreatePaymentAdviceCreated, error) {
 }
 
 func (a *CreatePaymentAdviceRequest) MustDo() *CreatePaymentAdviceCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *CreatePaymentAdviceSubmissionRequest) Do() (*CreatePaymentAdviceSubmiss
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentAdviceSubmissionReader{formats: a.formats},
+
+		Reader: &CreatePaymentAdviceSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *CreatePaymentAdviceSubmissionRequest) Do() (*CreatePaymentAdviceSubmiss
 }
 
 func (a *CreatePaymentAdviceSubmissionRequest) MustDo() *CreatePaymentAdviceSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *CreatePaymentRecallRequest) Do() (*CreatePaymentRecallCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentRecallReader{formats: a.formats},
+
+		Reader: &CreatePaymentRecallReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *CreatePaymentRecallRequest) Do() (*CreatePaymentRecallCreated, error) {
 }
 
 func (a *CreatePaymentRecallRequest) MustDo() *CreatePaymentRecallCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +179,8 @@ func (a *CreatePaymentRecallDecisionRequest) Do() (*CreatePaymentRecallDecisionC
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentRecallDecisionReader{formats: a.formats},
+
+		Reader: &CreatePaymentRecallDecisionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +193,11 @@ func (a *CreatePaymentRecallDecisionRequest) Do() (*CreatePaymentRecallDecisionC
 }
 
 func (a *CreatePaymentRecallDecisionRequest) MustDo() *CreatePaymentRecallDecisionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -208,7 +213,8 @@ func (a *CreatePaymentRecallDecisionSubmissionRequest) Do() (*CreatePaymentRecal
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentRecallDecisionSubmissionReader{formats: a.formats},
+
+		Reader: &CreatePaymentRecallDecisionSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -221,11 +227,11 @@ func (a *CreatePaymentRecallDecisionSubmissionRequest) Do() (*CreatePaymentRecal
 }
 
 func (a *CreatePaymentRecallDecisionSubmissionRequest) MustDo() *CreatePaymentRecallDecisionSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -241,7 +247,8 @@ func (a *CreatePaymentRecallSubmissionRequest) Do() (*CreatePaymentRecallSubmiss
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentRecallSubmissionReader{formats: a.formats},
+
+		Reader: &CreatePaymentRecallSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -254,11 +261,11 @@ func (a *CreatePaymentRecallSubmissionRequest) Do() (*CreatePaymentRecallSubmiss
 }
 
 func (a *CreatePaymentRecallSubmissionRequest) MustDo() *CreatePaymentRecallSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -274,7 +281,8 @@ func (a *CreatePaymentReturnRequest) Do() (*CreatePaymentReturnCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentReturnReader{formats: a.formats},
+
+		Reader: &CreatePaymentReturnReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -287,11 +295,11 @@ func (a *CreatePaymentReturnRequest) Do() (*CreatePaymentReturnCreated, error) {
 }
 
 func (a *CreatePaymentReturnRequest) MustDo() *CreatePaymentReturnCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -307,7 +315,8 @@ func (a *CreatePaymentReturnReversalRequest) Do() (*CreatePaymentReturnReversalC
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentReturnReversalReader{formats: a.formats},
+
+		Reader: &CreatePaymentReturnReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -320,11 +329,11 @@ func (a *CreatePaymentReturnReversalRequest) Do() (*CreatePaymentReturnReversalC
 }
 
 func (a *CreatePaymentReturnReversalRequest) MustDo() *CreatePaymentReturnReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -340,7 +349,8 @@ func (a *CreatePaymentReturnSubmissionRequest) Do() (*CreatePaymentReturnSubmiss
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentReturnSubmissionReader{formats: a.formats},
+
+		Reader: &CreatePaymentReturnSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -353,11 +363,11 @@ func (a *CreatePaymentReturnSubmissionRequest) Do() (*CreatePaymentReturnSubmiss
 }
 
 func (a *CreatePaymentReturnSubmissionRequest) MustDo() *CreatePaymentReturnSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -373,7 +383,8 @@ func (a *CreatePaymentReversalRequest) Do() (*CreatePaymentReversalCreated, erro
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentReversalReader{formats: a.formats},
+
+		Reader: &CreatePaymentReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -386,11 +397,11 @@ func (a *CreatePaymentReversalRequest) Do() (*CreatePaymentReversalCreated, erro
 }
 
 func (a *CreatePaymentReversalRequest) MustDo() *CreatePaymentReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -406,7 +417,8 @@ func (a *CreatePaymentReversalSubmissionRequest) Do() (*CreatePaymentReversalSub
 		ConsumesMediaTypes: []string{"application/json", "application/vnc.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentReversalSubmissionReader{formats: a.formats},
+
+		Reader: &CreatePaymentReversalSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -419,11 +431,11 @@ func (a *CreatePaymentReversalSubmissionRequest) Do() (*CreatePaymentReversalSub
 }
 
 func (a *CreatePaymentReversalSubmissionRequest) MustDo() *CreatePaymentReversalSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -439,7 +451,8 @@ func (a *CreatePaymentSubmissionRequest) Do() (*CreatePaymentSubmissionCreated, 
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreatePaymentSubmissionReader{formats: a.formats},
+
+		Reader: &CreatePaymentSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -452,11 +465,11 @@ func (a *CreatePaymentSubmissionRequest) Do() (*CreatePaymentSubmissionCreated, 
 }
 
 func (a *CreatePaymentSubmissionRequest) MustDo() *CreatePaymentSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -472,7 +485,8 @@ func (a *GetPaymentRequest) Do() (*GetPaymentOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReader{formats: a.formats},
+
+		Reader: &GetPaymentReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -485,11 +499,11 @@ func (a *GetPaymentRequest) Do() (*GetPaymentOK, error) {
 }
 
 func (a *GetPaymentRequest) MustDo() *GetPaymentOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -505,7 +519,8 @@ func (a *GetPaymentAdmissionsRequest) Do() (*GetPaymentAdmissionsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentAdmissionsReader{formats: a.formats},
+
+		Reader: &GetPaymentAdmissionsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -518,11 +533,11 @@ func (a *GetPaymentAdmissionsRequest) Do() (*GetPaymentAdmissionsOK, error) {
 }
 
 func (a *GetPaymentAdmissionsRequest) MustDo() *GetPaymentAdmissionsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -538,7 +553,8 @@ func (a *GetPaymentAdviceSubmissionRequest) Do() (*GetPaymentAdviceSubmissionOK,
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentAdviceSubmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentAdviceSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -551,11 +567,11 @@ func (a *GetPaymentAdviceSubmissionRequest) Do() (*GetPaymentAdviceSubmissionOK,
 }
 
 func (a *GetPaymentAdviceSubmissionRequest) MustDo() *GetPaymentAdviceSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -571,7 +587,8 @@ func (a *GetPaymentRecallRequest) Do() (*GetPaymentRecallOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -584,11 +601,11 @@ func (a *GetPaymentRecallRequest) Do() (*GetPaymentRecallOK, error) {
 }
 
 func (a *GetPaymentRecallRequest) MustDo() *GetPaymentRecallOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -604,7 +621,8 @@ func (a *GetPaymentRecallAdmissionRequest) Do() (*GetPaymentRecallAdmissionOK, e
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallAdmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -617,11 +635,11 @@ func (a *GetPaymentRecallAdmissionRequest) Do() (*GetPaymentRecallAdmissionOK, e
 }
 
 func (a *GetPaymentRecallAdmissionRequest) MustDo() *GetPaymentRecallAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -637,7 +655,8 @@ func (a *GetPaymentRecallDecisionRequest) Do() (*GetPaymentRecallDecisionOK, err
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallDecisionReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallDecisionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -650,11 +669,11 @@ func (a *GetPaymentRecallDecisionRequest) Do() (*GetPaymentRecallDecisionOK, err
 }
 
 func (a *GetPaymentRecallDecisionRequest) MustDo() *GetPaymentRecallDecisionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -670,7 +689,8 @@ func (a *GetPaymentRecallDecisionAdmissionRequest) Do() (*GetPaymentRecallDecisi
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallDecisionAdmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallDecisionAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -683,11 +703,11 @@ func (a *GetPaymentRecallDecisionAdmissionRequest) Do() (*GetPaymentRecallDecisi
 }
 
 func (a *GetPaymentRecallDecisionAdmissionRequest) MustDo() *GetPaymentRecallDecisionAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -703,7 +723,8 @@ func (a *GetPaymentRecallDecisionSubmissionRequest) Do() (*GetPaymentRecallDecis
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallDecisionSubmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallDecisionSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -716,11 +737,11 @@ func (a *GetPaymentRecallDecisionSubmissionRequest) Do() (*GetPaymentRecallDecis
 }
 
 func (a *GetPaymentRecallDecisionSubmissionRequest) MustDo() *GetPaymentRecallDecisionSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -736,7 +757,8 @@ func (a *GetPaymentRecallReversalRequest) Do() (*GetPaymentRecallReversalOK, err
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallReversalReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -749,11 +771,11 @@ func (a *GetPaymentRecallReversalRequest) Do() (*GetPaymentRecallReversalOK, err
 }
 
 func (a *GetPaymentRecallReversalRequest) MustDo() *GetPaymentRecallReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -769,7 +791,8 @@ func (a *GetPaymentRecallReversalAdmissionRequest) Do() (*GetPaymentRecallRevers
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallReversalAdmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallReversalAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -782,11 +805,11 @@ func (a *GetPaymentRecallReversalAdmissionRequest) Do() (*GetPaymentRecallRevers
 }
 
 func (a *GetPaymentRecallReversalAdmissionRequest) MustDo() *GetPaymentRecallReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -802,7 +825,8 @@ func (a *GetPaymentRecallSubmissionRequest) Do() (*GetPaymentRecallSubmissionOK,
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentRecallSubmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentRecallSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -815,11 +839,11 @@ func (a *GetPaymentRecallSubmissionRequest) Do() (*GetPaymentRecallSubmissionOK,
 }
 
 func (a *GetPaymentRecallSubmissionRequest) MustDo() *GetPaymentRecallSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -835,7 +859,8 @@ func (a *GetPaymentReturnRequest) Do() (*GetPaymentReturnOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReturnReader{formats: a.formats},
+
+		Reader: &GetPaymentReturnReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -848,11 +873,11 @@ func (a *GetPaymentReturnRequest) Do() (*GetPaymentReturnOK, error) {
 }
 
 func (a *GetPaymentReturnRequest) MustDo() *GetPaymentReturnOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -868,7 +893,8 @@ func (a *GetPaymentReturnAdmissionRequest) Do() (*GetPaymentReturnAdmissionOK, e
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReturnAdmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentReturnAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -881,11 +907,11 @@ func (a *GetPaymentReturnAdmissionRequest) Do() (*GetPaymentReturnAdmissionOK, e
 }
 
 func (a *GetPaymentReturnAdmissionRequest) MustDo() *GetPaymentReturnAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -901,7 +927,8 @@ func (a *GetPaymentReturnReversalRequest) Do() (*GetPaymentReturnReversalOK, err
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReturnReversalReader{formats: a.formats},
+
+		Reader: &GetPaymentReturnReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -914,11 +941,11 @@ func (a *GetPaymentReturnReversalRequest) Do() (*GetPaymentReturnReversalOK, err
 }
 
 func (a *GetPaymentReturnReversalRequest) MustDo() *GetPaymentReturnReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -934,7 +961,8 @@ func (a *GetPaymentReturnReversalAdmissionRequest) Do() (*GetPaymentReturnRevers
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReturnReversalAdmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentReturnReversalAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -947,11 +975,11 @@ func (a *GetPaymentReturnReversalAdmissionRequest) Do() (*GetPaymentReturnRevers
 }
 
 func (a *GetPaymentReturnReversalAdmissionRequest) MustDo() *GetPaymentReturnReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -967,7 +995,8 @@ func (a *GetPaymentReturnSubmissionRequest) Do() (*GetPaymentReturnSubmissionOK,
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReturnSubmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentReturnSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -980,11 +1009,11 @@ func (a *GetPaymentReturnSubmissionRequest) Do() (*GetPaymentReturnSubmissionOK,
 }
 
 func (a *GetPaymentReturnSubmissionRequest) MustDo() *GetPaymentReturnSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1000,7 +1029,8 @@ func (a *GetPaymentReversalRequest) Do() (*GetPaymentReversalOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReversalReader{formats: a.formats},
+
+		Reader: &GetPaymentReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1013,11 +1043,11 @@ func (a *GetPaymentReversalRequest) Do() (*GetPaymentReversalOK, error) {
 }
 
 func (a *GetPaymentReversalRequest) MustDo() *GetPaymentReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1033,7 +1063,8 @@ func (a *GetPaymentReversalAdmissionRequest) Do() (*GetPaymentReversalAdmissionO
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReversalAdmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentReversalAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1046,11 +1077,11 @@ func (a *GetPaymentReversalAdmissionRequest) Do() (*GetPaymentReversalAdmissionO
 }
 
 func (a *GetPaymentReversalAdmissionRequest) MustDo() *GetPaymentReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1066,7 +1097,8 @@ func (a *GetPaymentReversalSubmissionRequest) Do() (*GetPaymentReversalSubmissio
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentReversalSubmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentReversalSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1079,11 +1111,11 @@ func (a *GetPaymentReversalSubmissionRequest) Do() (*GetPaymentReversalSubmissio
 }
 
 func (a *GetPaymentReversalSubmissionRequest) MustDo() *GetPaymentReversalSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1099,7 +1131,8 @@ func (a *GetPaymentSubmissionRequest) Do() (*GetPaymentSubmissionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentSubmissionReader{formats: a.formats},
+
+		Reader: &GetPaymentSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1112,11 +1145,11 @@ func (a *GetPaymentSubmissionRequest) Do() (*GetPaymentSubmissionOK, error) {
 }
 
 func (a *GetPaymentSubmissionRequest) MustDo() *GetPaymentSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1132,7 +1165,8 @@ func (a *GetPaymentsHealthRequest) Do() (*GetPaymentsHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentsHealthReader{formats: a.formats},
+
+		Reader: &GetPaymentsHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1145,11 +1179,11 @@ func (a *GetPaymentsHealthRequest) Do() (*GetPaymentsHealthOK, error) {
 }
 
 func (a *GetPaymentsHealthRequest) MustDo() *GetPaymentsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1165,7 +1199,8 @@ func (a *GetPositionsRequest) Do() (*GetPositionsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPositionsReader{formats: a.formats},
+
+		Reader: &GetPositionsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1178,11 +1213,11 @@ func (a *GetPositionsRequest) Do() (*GetPositionsOK, error) {
 }
 
 func (a *GetPositionsRequest) MustDo() *GetPositionsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1198,7 +1233,8 @@ func (a *ListPaymentAdvicesRequest) Do() (*ListPaymentAdvicesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListPaymentAdvicesReader{formats: a.formats},
+
+		Reader: &ListPaymentAdvicesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1211,11 +1247,11 @@ func (a *ListPaymentAdvicesRequest) Do() (*ListPaymentAdvicesOK, error) {
 }
 
 func (a *ListPaymentAdvicesRequest) MustDo() *ListPaymentAdvicesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1231,7 +1267,8 @@ func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListPaymentsReader{formats: a.formats},
+
+		Reader: &ListPaymentsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -1244,11 +1281,11 @@ func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
 }
 
 func (a *ListPaymentsRequest) MustDo() *ListPaymentsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

@@ -43,7 +43,8 @@ func (a *CreateAceRequest) Do() (*CreateAceCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateAceReader{formats: a.formats},
+
+		Reader: &CreateAceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateAceRequest) Do() (*CreateAceCreated, error) {
 }
 
 func (a *CreateAceRequest) MustDo() *CreateAceCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *DeleteAceRequest) Do() (*DeleteAceNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteAceReader{formats: a.formats},
+
+		Reader: &DeleteAceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *DeleteAceRequest) Do() (*DeleteAceNoContent, error) {
 }
 
 func (a *DeleteAceRequest) MustDo() *DeleteAceNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *GetAceRequest) Do() (*GetAceOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetAceReader{formats: a.formats},
+
+		Reader: &GetAceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *GetAceRequest) Do() (*GetAceOK, error) {
 }
 
 func (a *GetAceRequest) MustDo() *GetAceOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *ListAcesRequest) Do() (*ListAcesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListAcesReader{formats: a.formats},
+
+		Reader: &ListAcesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *ListAcesRequest) Do() (*ListAcesOK, error) {
 }
 
 func (a *ListAcesRequest) MustDo() *ListAcesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

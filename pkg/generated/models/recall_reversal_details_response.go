@@ -27,6 +27,8 @@ type RecallReversalDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func RecallReversalDetailsResponseWithDefaults(defaults client.Defaults) *RecallReversalDetailsResponse {
 	return &RecallReversalDetailsResponse{
 

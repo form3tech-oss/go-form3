@@ -27,6 +27,8 @@ type MandateReturnCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func MandateReturnCreationResponseWithDefaults(defaults client.Defaults) *MandateReturnCreationResponse {
 	return &MandateReturnCreationResponse{
 

@@ -54,6 +54,8 @@ type ReturnReversal struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func ReturnReversalWithDefaults(defaults client.Defaults) *ReturnReversal {
 	return &ReturnReversal{
 
@@ -333,6 +335,8 @@ type ReturnReversalRelationships struct {
 	// ID of the return reversal admission resource related to the return reversal
 	ReturnReversalAdmission *RelationshipLinks `json:"return_reversal_admission,omitempty"`
 }
+
+// line 140
 
 func ReturnReversalRelationshipsWithDefaults(defaults client.Defaults) *ReturnReversalRelationships {
 	return &ReturnReversalRelationships{

@@ -22,10 +22,12 @@ type GetRoleReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetRoleReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetRoleOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Role details
 type GetRoleOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RoleDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetRoleOK) readResponse(response runtime.ClientResponse, consumer runti
 	o.RoleDetailsResponse = new(models.RoleDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RoleDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

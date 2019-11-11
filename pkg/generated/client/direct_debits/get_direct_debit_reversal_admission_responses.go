@@ -22,10 +22,12 @@ type GetDirectDebitReversalAdmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetDirectDebitReversalAdmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetDirectDebitReversalAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Reversal admission details
 type GetDirectDebitReversalAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitReversalAdmissionDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetDirectDebitReversalAdmissionOK) readResponse(response runtime.Client
 	o.DirectDebitReversalAdmissionDetailsResponse = new(models.DirectDebitReversalAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitReversalAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

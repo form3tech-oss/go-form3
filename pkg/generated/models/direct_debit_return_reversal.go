@@ -53,6 +53,8 @@ type DirectDebitReturnReversal struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func DirectDebitReturnReversalWithDefaults(defaults client.Defaults) *DirectDebitReturnReversal {
 	return &DirectDebitReturnReversal{
 
@@ -323,6 +325,8 @@ type DirectDebitReturnReversalRelationships struct {
 	DirectDebitReturnReversalAdmission *DirectDebitReturnReversalRelationshipsDirectDebitReturnReversalAdmission `json:"direct_debit_return_reversal_admission,omitempty"`
 }
 
+// line 140
+
 func DirectDebitReturnReversalRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalRelationships {
 	return &DirectDebitReturnReversalRelationships{
 
@@ -479,6 +483,8 @@ type DirectDebitReturnReversalRelationshipsDirectDebit struct {
 	Data []*DirectDebit `json:"data"`
 }
 
+// line 140
+
 func DirectDebitReturnReversalRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalRelationshipsDirectDebit {
 	return &DirectDebitReturnReversalRelationshipsDirectDebit{
 
@@ -565,6 +571,8 @@ type DirectDebitReturnReversalRelationshipsDirectDebitReturn struct {
 	Data []*DirectDebitReturn `json:"data"`
 }
 
+// line 140
+
 func DirectDebitReturnReversalRelationshipsDirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalRelationshipsDirectDebitReturn {
 	return &DirectDebitReturnReversalRelationshipsDirectDebitReturn{
 
@@ -650,6 +658,8 @@ type DirectDebitReturnReversalRelationshipsDirectDebitReturnReversalAdmission st
 	// data
 	Data []*DirectDebitReturnReversalAdmission `json:"data"`
 }
+
+// line 140
 
 func DirectDebitReturnReversalRelationshipsDirectDebitReturnReversalAdmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalRelationshipsDirectDebitReturnReversalAdmission {
 	return &DirectDebitReturnReversalRelationshipsDirectDebitReturnReversalAdmission{

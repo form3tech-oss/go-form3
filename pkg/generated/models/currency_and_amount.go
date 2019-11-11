@@ -29,6 +29,8 @@ type CurrencyAndAmount struct {
 	Currency string `json:"currency,omitempty"`
 }
 
+// line 140
+
 func CurrencyAndAmountWithDefaults(defaults client.Defaults) *CurrencyAndAmount {
 	return &CurrencyAndAmount{
 

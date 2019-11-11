@@ -38,6 +38,8 @@ type SchemeMessageAdmissionAttributes struct {
 	Status SchemeMessageAdmissionStatus `json:"status,omitempty"`
 }
 
+// line 140
+
 func SchemeMessageAdmissionAttributesWithDefaults(defaults client.Defaults) *SchemeMessageAdmissionAttributes {
 	return &SchemeMessageAdmissionAttributes{
 

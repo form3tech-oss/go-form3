@@ -21,6 +21,12 @@ import (
 // swagger:model MandateRelationships
 type MandateRelationships struct {
 
+	// beneficiary party
+	BeneficiaryParty *MandateRelationshipsBeneficiaryParty `json:"beneficiary_party,omitempty"`
+
+	// debtor party account
+	DebtorPartyAccount *MandateRelationshipsDebtorPartyAccount `json:"debtor_party_account,omitempty"`
+
 	// mandate admission
 	MandateAdmission *MandateRelationshipsMandateAdmission `json:"mandate_admission,omitempty"`
 
@@ -31,8 +37,14 @@ type MandateRelationships struct {
 	MandateSubmission *MandateRelationshipsMandateSubmission `json:"mandate_submission,omitempty"`
 }
 
+// line 140
+
 func MandateRelationshipsWithDefaults(defaults client.Defaults) *MandateRelationships {
 	return &MandateRelationships{
+
+		BeneficiaryParty: MandateRelationshipsBeneficiaryPartyWithDefaults(defaults),
+
+		DebtorPartyAccount: MandateRelationshipsDebtorPartyAccountWithDefaults(defaults),
 
 		MandateAdmission: MandateRelationshipsMandateAdmissionWithDefaults(defaults),
 
@@ -40,6 +52,30 @@ func MandateRelationshipsWithDefaults(defaults client.Defaults) *MandateRelation
 
 		MandateSubmission: MandateRelationshipsMandateSubmissionWithDefaults(defaults),
 	}
+}
+
+func (m *MandateRelationships) WithBeneficiaryParty(beneficiaryParty MandateRelationshipsBeneficiaryParty) *MandateRelationships {
+
+	m.BeneficiaryParty = &beneficiaryParty
+
+	return m
+}
+
+func (m *MandateRelationships) WithoutBeneficiaryParty() *MandateRelationships {
+	m.BeneficiaryParty = nil
+	return m
+}
+
+func (m *MandateRelationships) WithDebtorPartyAccount(debtorPartyAccount MandateRelationshipsDebtorPartyAccount) *MandateRelationships {
+
+	m.DebtorPartyAccount = &debtorPartyAccount
+
+	return m
+}
+
+func (m *MandateRelationships) WithoutDebtorPartyAccount() *MandateRelationships {
+	m.DebtorPartyAccount = nil
+	return m
 }
 
 func (m *MandateRelationships) WithMandateAdmission(mandateAdmission MandateRelationshipsMandateAdmission) *MandateRelationships {
@@ -82,6 +118,14 @@ func (m *MandateRelationships) WithoutMandateSubmission() *MandateRelationships 
 func (m *MandateRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateBeneficiaryParty(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorPartyAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMandateAdmission(formats); err != nil {
 		res = append(res, err)
 	}
@@ -97,6 +141,42 @@ func (m *MandateRelationships) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *MandateRelationships) validateBeneficiaryParty(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BeneficiaryParty) { // not required
+		return nil
+	}
+
+	if m.BeneficiaryParty != nil {
+		if err := m.BeneficiaryParty.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary_party")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *MandateRelationships) validateDebtorPartyAccount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DebtorPartyAccount) { // not required
+		return nil
+	}
+
+	if m.DebtorPartyAccount != nil {
+		if err := m.DebtorPartyAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("debtor_party_account")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -179,6 +259,182 @@ func (m *MandateRelationships) Json() string {
 	return string(json)
 }
 
+// MandateRelationshipsBeneficiaryParty mandate relationships beneficiary party
+// swagger:model MandateRelationshipsBeneficiaryParty
+type MandateRelationshipsBeneficiaryParty struct {
+
+	// data
+	Data []*BeneficiaryParty `json:"data"`
+}
+
+// line 140
+
+func MandateRelationshipsBeneficiaryPartyWithDefaults(defaults client.Defaults) *MandateRelationshipsBeneficiaryParty {
+	return &MandateRelationshipsBeneficiaryParty{
+
+		Data: make([]*BeneficiaryParty, 0),
+	}
+}
+
+func (m *MandateRelationshipsBeneficiaryParty) WithData(data []*BeneficiaryParty) *MandateRelationshipsBeneficiaryParty {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this mandate relationships beneficiary party
+func (m *MandateRelationshipsBeneficiaryParty) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MandateRelationshipsBeneficiaryParty) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("beneficiary_party" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *MandateRelationshipsBeneficiaryParty) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *MandateRelationshipsBeneficiaryParty) UnmarshalBinary(b []byte) error {
+	var res MandateRelationshipsBeneficiaryParty
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *MandateRelationshipsBeneficiaryParty) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// MandateRelationshipsDebtorPartyAccount mandate relationships debtor party account
+// swagger:model MandateRelationshipsDebtorPartyAccount
+type MandateRelationshipsDebtorPartyAccount struct {
+
+	// data
+	Data []*DebtorPartyAccount `json:"data"`
+}
+
+// line 140
+
+func MandateRelationshipsDebtorPartyAccountWithDefaults(defaults client.Defaults) *MandateRelationshipsDebtorPartyAccount {
+	return &MandateRelationshipsDebtorPartyAccount{
+
+		Data: make([]*DebtorPartyAccount, 0),
+	}
+}
+
+func (m *MandateRelationshipsDebtorPartyAccount) WithData(data []*DebtorPartyAccount) *MandateRelationshipsDebtorPartyAccount {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this mandate relationships debtor party account
+func (m *MandateRelationshipsDebtorPartyAccount) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MandateRelationshipsDebtorPartyAccount) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("debtor_party_account" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *MandateRelationshipsDebtorPartyAccount) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *MandateRelationshipsDebtorPartyAccount) UnmarshalBinary(b []byte) error {
+	var res MandateRelationshipsDebtorPartyAccount
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *MandateRelationshipsDebtorPartyAccount) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
 // MandateRelationshipsMandateAdmission mandate relationships mandate admission
 // swagger:model MandateRelationshipsMandateAdmission
 type MandateRelationshipsMandateAdmission struct {
@@ -186,6 +442,8 @@ type MandateRelationshipsMandateAdmission struct {
 	// data
 	Data []*MandateAdmission `json:"data"`
 }
+
+// line 140
 
 func MandateRelationshipsMandateAdmissionWithDefaults(defaults client.Defaults) *MandateRelationshipsMandateAdmission {
 	return &MandateRelationshipsMandateAdmission{
@@ -273,6 +531,8 @@ type MandateRelationshipsMandateReturn struct {
 	Data []*MandateReturn `json:"data"`
 }
 
+// line 140
+
 func MandateRelationshipsMandateReturnWithDefaults(defaults client.Defaults) *MandateRelationshipsMandateReturn {
 	return &MandateRelationshipsMandateReturn{
 
@@ -358,6 +618,8 @@ type MandateRelationshipsMandateSubmission struct {
 	// data
 	Data []*MandateSubmission `json:"data"`
 }
+
+// line 140
 
 func MandateRelationshipsMandateSubmissionWithDefaults(defaults client.Defaults) *MandateRelationshipsMandateSubmission {
 	return &MandateRelationshipsMandateSubmission{

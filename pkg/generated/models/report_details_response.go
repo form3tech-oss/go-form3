@@ -26,6 +26,8 @@ type ReportDetailsResponse struct {
 	Data *Report `json:"data"`
 }
 
+// line 140
+
 func ReportDetailsResponseWithDefaults(defaults client.Defaults) *ReportDetailsResponse {
 	return &ReportDetailsResponse{
 

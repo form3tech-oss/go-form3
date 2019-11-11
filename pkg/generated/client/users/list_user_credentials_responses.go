@@ -22,10 +22,12 @@ type ListUserCredentialsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListUserCredentialsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListUserCredentialsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of credentials for user
 type ListUserCredentialsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserCredentialListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListUserCredentialsOK) readResponse(response runtime.ClientResponse, co
 	o.UserCredentialListResponse = new(models.UserCredentialListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserCredentialListResponse); err != nil && err != io.EOF {
 		return err
 	}

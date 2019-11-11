@@ -22,10 +22,12 @@ type GetSchemeMessageAdmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetSchemeMessageAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		return result, nil
 
 	case 400:
+
 		result := NewGetSchemeMessageAdmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -40,6 +43,7 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		return nil, result
 
 	case 403:
+
 		result := NewGetSchemeMessageAdmissionForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -47,6 +51,7 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		return nil, result
 
 	case 404:
+
 		result := NewGetSchemeMessageAdmissionNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -70,6 +75,8 @@ Get scheme message admission by Id
 type GetSchemeMessageAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SchemeMessageAdmissionDetailsResponse
 }
 
@@ -82,6 +89,7 @@ func (o *GetSchemeMessageAdmissionOK) readResponse(response runtime.ClientRespon
 	o.SchemeMessageAdmissionDetailsResponse = new(models.SchemeMessageAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SchemeMessageAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -101,6 +109,8 @@ Scheme Message Admission by Id bad request
 type GetSchemeMessageAdmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -113,6 +123,7 @@ func (o *GetSchemeMessageAdmissionBadRequest) readResponse(response runtime.Clie
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -132,6 +143,8 @@ Forbidden
 type GetSchemeMessageAdmissionForbidden struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -144,6 +157,7 @@ func (o *GetSchemeMessageAdmissionForbidden) readResponse(response runtime.Clien
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -163,6 +177,8 @@ Scheme Message Not found
 type GetSchemeMessageAdmissionNotFound struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -175,6 +191,7 @@ func (o *GetSchemeMessageAdmissionNotFound) readResponse(response runtime.Client
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

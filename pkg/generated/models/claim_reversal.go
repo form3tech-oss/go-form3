@@ -47,6 +47,8 @@ type ClaimReversal struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func ClaimReversalWithDefaults(defaults client.Defaults) *ClaimReversal {
 	return &ClaimReversal{
 
@@ -286,6 +288,8 @@ type ClaimReversalAttributes struct {
 	// Required: true
 	OriginalInstructionID *string `json:"original_instruction_id"`
 }
+
+// line 140
 
 func ClaimReversalAttributesWithDefaults(defaults client.Defaults) *ClaimReversalAttributes {
 	return &ClaimReversalAttributes{

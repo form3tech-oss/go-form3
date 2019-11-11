@@ -27,6 +27,8 @@ type AdviceSubmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func AdviceSubmissionDetailsResponseWithDefaults(defaults client.Defaults) *AdviceSubmissionDetailsResponse {
 	return &AdviceSubmissionDetailsResponse{
 

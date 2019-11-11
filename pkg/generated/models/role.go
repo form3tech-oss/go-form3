@@ -40,6 +40,8 @@ type Role struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func RoleWithDefaults(defaults client.Defaults) *Role {
 	return &Role{
 

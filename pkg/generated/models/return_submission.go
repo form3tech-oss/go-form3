@@ -54,6 +54,8 @@ type ReturnSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func ReturnSubmissionWithDefaults(defaults client.Defaults) *ReturnSubmission {
 	return &ReturnSubmission{
 
@@ -397,6 +399,8 @@ type ReturnSubmissionAttributes struct {
 	// Format: date-time
 	TransactionStartDatetime *strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
 }
+
+// line 140
 
 func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionAttributes {
 	return &ReturnSubmissionAttributes{

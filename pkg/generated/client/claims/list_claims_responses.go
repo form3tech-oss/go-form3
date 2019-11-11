@@ -22,10 +22,12 @@ type ListClaimsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListClaimsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListClaimsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of claims details
 type ListClaimsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListClaimsOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.ClaimDetailsListResponse = new(models.ClaimDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

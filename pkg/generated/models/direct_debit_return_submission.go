@@ -45,6 +45,8 @@ type DirectDebitReturnSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func DirectDebitReturnSubmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmission {
 	return &DirectDebitReturnSubmission{
 
@@ -293,6 +295,8 @@ type DirectDebitReturnSubmissionAttributes struct {
 	TransactionStartDatetime strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
 }
 
+// line 140
+
 func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionAttributes {
 	return &DirectDebitReturnSubmissionAttributes{
 
@@ -452,6 +456,8 @@ type DirectDebitReturnSubmissionRelationships struct {
 	DirectDebitReturn *DirectDebitReturnSubmissionRelationshipsDirectDebitReturn `json:"direct_debit_return,omitempty"`
 }
 
+// line 140
+
 func DirectDebitReturnSubmissionRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionRelationships {
 	return &DirectDebitReturnSubmissionRelationships{
 
@@ -572,6 +578,8 @@ type DirectDebitReturnSubmissionRelationshipsDirectDebit struct {
 	Data []*DirectDebit `json:"data"`
 }
 
+// line 140
+
 func DirectDebitReturnSubmissionRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionRelationshipsDirectDebit {
 	return &DirectDebitReturnSubmissionRelationshipsDirectDebit{
 
@@ -657,6 +665,8 @@ type DirectDebitReturnSubmissionRelationshipsDirectDebitReturn struct {
 	// data
 	Data []*DirectDebitReturn `json:"data"`
 }
+
+// line 140
 
 func DirectDebitReturnSubmissionRelationshipsDirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionRelationshipsDirectDebitReturn {
 	return &DirectDebitReturnSubmissionRelationshipsDirectDebitReturn{

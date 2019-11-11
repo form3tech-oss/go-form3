@@ -22,10 +22,12 @@ type ModifyUnitReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ModifyUnitReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewModifyUnitOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Organisation details
 type ModifyUnitOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.OrganisationDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ModifyUnitOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.OrganisationDetailsResponse = new(models.OrganisationDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

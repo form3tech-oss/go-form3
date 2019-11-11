@@ -43,7 +43,8 @@ func (a *CreateRolesRequest) Do() (*CreateRolesCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateRolesReader{formats: a.formats},
+
+		Reader: &CreateRolesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateRolesRequest) Do() (*CreateRolesCreated, error) {
 }
 
 func (a *CreateRolesRequest) MustDo() *CreateRolesCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *DeleteRoleRequest) Do() (*DeleteRoleNoContent, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteRoleReader{formats: a.formats},
+
+		Reader: &DeleteRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *DeleteRoleRequest) Do() (*DeleteRoleNoContent, error) {
 }
 
 func (a *DeleteRoleRequest) MustDo() *DeleteRoleNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *GetRoleRequest) Do() (*GetRoleOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetRoleReader{formats: a.formats},
+
+		Reader: &GetRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *GetRoleRequest) Do() (*GetRoleOK, error) {
 }
 
 func (a *GetRoleRequest) MustDo() *GetRoleOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *ListRolesRequest) Do() (*ListRolesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListRolesReader{formats: a.formats},
+
+		Reader: &ListRolesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *ListRolesRequest) Do() (*ListRolesOK, error) {
 }
 
 func (a *ListRolesRequest) MustDo() *ListRolesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

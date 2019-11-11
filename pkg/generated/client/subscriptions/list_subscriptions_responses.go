@@ -22,10 +22,12 @@ type ListSubscriptionsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListSubscriptionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListSubscriptionsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of subscription details
 type ListSubscriptionsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SubscriptionDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListSubscriptionsOK) readResponse(response runtime.ClientResponse, cons
 	o.SubscriptionDetailsListResponse = new(models.SubscriptionDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SubscriptionDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

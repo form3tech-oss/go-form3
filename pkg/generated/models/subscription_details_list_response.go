@@ -28,6 +28,8 @@ type SubscriptionDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func SubscriptionDetailsListResponseWithDefaults(defaults client.Defaults) *SubscriptionDetailsListResponse {
 	return &SubscriptionDetailsListResponse{
 

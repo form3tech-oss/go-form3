@@ -32,7 +32,12 @@ type DirectDebitRelationships struct {
 
 	// direct debit submission
 	DirectDebitSubmission *DirectDebitRelationshipsDirectDebitSubmission `json:"direct_debit_submission,omitempty"`
+
+	// mandate
+	Mandate *Mandate `json:"mandate,omitempty"`
 }
+
+// line 140
 
 func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitRelationships {
 	return &DirectDebitRelationships{
@@ -44,6 +49,8 @@ func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebit
 		DirectDebitReversal: DirectDebitRelationshipsDirectDebitReversalWithDefaults(defaults),
 
 		DirectDebitSubmission: DirectDebitRelationshipsDirectDebitSubmissionWithDefaults(defaults),
+
+		Mandate: MandateWithDefaults(defaults),
 	}
 }
 
@@ -95,6 +102,18 @@ func (m *DirectDebitRelationships) WithoutDirectDebitSubmission() *DirectDebitRe
 	return m
 }
 
+func (m *DirectDebitRelationships) WithMandate(mandate Mandate) *DirectDebitRelationships {
+
+	m.Mandate = &mandate
+
+	return m
+}
+
+func (m *DirectDebitRelationships) WithoutMandate() *DirectDebitRelationships {
+	m.Mandate = nil
+	return m
+}
+
 // Validate validates this direct debit relationships
 func (m *DirectDebitRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -112,6 +131,10 @@ func (m *DirectDebitRelationships) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDirectDebitSubmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMandate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -193,6 +216,24 @@ func (m *DirectDebitRelationships) validateDirectDebitSubmission(formats strfmt.
 	return nil
 }
 
+func (m *DirectDebitRelationships) validateMandate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Mandate) { // not required
+		return nil
+	}
+
+	if m.Mandate != nil {
+		if err := m.Mandate.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mandate")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *DirectDebitRelationships) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -225,6 +266,8 @@ type DirectDebitRelationshipsDirectDebitAdmission struct {
 	// data
 	Data []*DirectDebitAdmission `json:"data"`
 }
+
+// line 140
 
 func DirectDebitRelationshipsDirectDebitAdmissionWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitAdmission {
 	return &DirectDebitRelationshipsDirectDebitAdmission{
@@ -312,6 +355,8 @@ type DirectDebitRelationshipsDirectDebitReturn struct {
 	Data []*DirectDebitReturn `json:"data"`
 }
 
+// line 140
+
 func DirectDebitRelationshipsDirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitReturn {
 	return &DirectDebitRelationshipsDirectDebitReturn{
 
@@ -398,6 +443,8 @@ type DirectDebitRelationshipsDirectDebitReversal struct {
 	Data []*DirectDebitReversal `json:"data"`
 }
 
+// line 140
+
 func DirectDebitRelationshipsDirectDebitReversalWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitReversal {
 	return &DirectDebitRelationshipsDirectDebitReversal{
 
@@ -483,6 +530,8 @@ type DirectDebitRelationshipsDirectDebitSubmission struct {
 	// data
 	Data []*DirectDebitSubmission `json:"data"`
 }
+
+// line 140
 
 func DirectDebitRelationshipsDirectDebitSubmissionWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitSubmission {
 	return &DirectDebitRelationshipsDirectDebitSubmission{

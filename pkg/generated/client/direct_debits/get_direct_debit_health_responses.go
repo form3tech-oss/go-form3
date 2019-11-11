@@ -22,10 +22,12 @@ type GetDirectDebitHealthReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetDirectDebitHealthReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetDirectDebitHealthOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Direct debit service health
 type GetDirectDebitHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +65,7 @@ func (o *GetDirectDebitHealthOK) readResponse(response runtime.ClientResponse, c
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

@@ -54,6 +54,8 @@ type ReturnAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func ReturnAdmissionWithDefaults(defaults client.Defaults) *ReturnAdmission {
 	return &ReturnAdmission{
 
@@ -379,6 +381,8 @@ type ReturnAdmissionAttributes struct {
 	// Scheme-specific unique ID (42 character string)
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
+
+// line 140
 
 func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmissionAttributes {
 	return &ReturnAdmissionAttributes{

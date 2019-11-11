@@ -27,6 +27,8 @@ type RecallDecisionAdmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func RecallDecisionAdmissionDetailsResponseWithDefaults(defaults client.Defaults) *RecallDecisionAdmissionDetailsResponse {
 	return &RecallDecisionAdmissionDetailsResponse{
 

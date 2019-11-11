@@ -25,6 +25,8 @@ type ReportRelationships struct {
 	ReportAdmission *ReportRelationshipsReportAdmission `json:"report_admission,omitempty"`
 }
 
+// line 140
+
 func ReportRelationshipsWithDefaults(defaults client.Defaults) *ReportRelationships {
 	return &ReportRelationships{
 
@@ -108,6 +110,8 @@ type ReportRelationshipsReportAdmission struct {
 	// data
 	Data []*ReportAdmission `json:"data"`
 }
+
+// line 140
 
 func ReportRelationshipsReportAdmissionWithDefaults(defaults client.Defaults) *ReportRelationshipsReportAdmission {
 	return &ReportRelationshipsReportAdmission{

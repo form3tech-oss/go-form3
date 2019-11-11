@@ -22,10 +22,12 @@ type ListUsersReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListUsersReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListUsersOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of user details
 type ListUsersOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListUsersOK) readResponse(response runtime.ClientResponse, consumer run
 	o.UserDetailsListResponse = new(models.UserDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

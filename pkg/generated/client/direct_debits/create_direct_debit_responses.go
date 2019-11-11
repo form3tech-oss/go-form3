@@ -22,10 +22,12 @@ type CreateDirectDebitReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateDirectDebitReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateDirectDebitCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *CreateDirectDebitReader) ReadResponse(response runtime.ClientResponse, 
 		return result, nil
 
 	case 400:
+
 		result := NewCreateDirectDebitBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Direct Debit creation response
 type CreateDirectDebitCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitCreationResponse
 }
 
@@ -68,6 +73,7 @@ func (o *CreateDirectDebitCreated) readResponse(response runtime.ClientResponse,
 	o.DirectDebitCreationResponse = new(models.DirectDebitCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Direct Debit creation error
 type CreateDirectDebitBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *CreateDirectDebitBadRequest) readResponse(response runtime.ClientRespon
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

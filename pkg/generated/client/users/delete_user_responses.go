@@ -19,10 +19,12 @@ type DeleteUserReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *DeleteUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 204:
+
 		result := NewDeleteUserNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err

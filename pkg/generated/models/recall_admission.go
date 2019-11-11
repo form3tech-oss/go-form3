@@ -54,6 +54,8 @@ type RecallAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func RecallAdmissionWithDefaults(defaults client.Defaults) *RecallAdmission {
 	return &RecallAdmission{
 
@@ -365,6 +367,8 @@ type RecallAdmissionAttributes struct {
 	// Human-readable reason for failure if admission status is failed
 	StatusReason string `json:"status_reason,omitempty"`
 }
+
+// line 140
 
 func RecallAdmissionAttributesWithDefaults(defaults client.Defaults) *RecallAdmissionAttributes {
 	return &RecallAdmissionAttributes{

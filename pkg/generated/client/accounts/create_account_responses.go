@@ -22,10 +22,12 @@ type CreateAccountReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateAccountReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateAccountCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Account creation response
 type CreateAccountCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AccountCreationResponse
 }
 
@@ -61,6 +65,7 @@ func (o *CreateAccountCreated) readResponse(response runtime.ClientResponse, con
 	o.AccountCreationResponse = new(models.AccountCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AccountCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

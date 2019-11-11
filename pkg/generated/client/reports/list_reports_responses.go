@@ -22,10 +22,12 @@ type ListReportsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListReportsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListReportsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *ListReportsReader) ReadResponse(response runtime.ClientResponse, consum
 		return result, nil
 
 	case 400:
+
 		result := NewListReportsBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -40,6 +43,7 @@ func (o *ListReportsReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, result
 
 	case 403:
+
 		result := NewListReportsForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -63,6 +67,8 @@ List of reports
 type ListReportsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReportDetailsListResponse
 }
 
@@ -75,6 +81,7 @@ func (o *ListReportsOK) readResponse(response runtime.ClientResponse, consumer r
 	o.ReportDetailsListResponse = new(models.ReportDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReportDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -94,6 +101,8 @@ Reports bad request
 type ListReportsBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -106,6 +115,7 @@ func (o *ListReportsBadRequest) readResponse(response runtime.ClientResponse, co
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -125,6 +135,8 @@ Forbidden
 type ListReportsForbidden struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -137,6 +149,7 @@ func (o *ListReportsForbidden) readResponse(response runtime.ClientResponse, con
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

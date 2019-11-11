@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // UserCreationResponse user creation response
@@ -21,11 +22,14 @@ import (
 type UserCreationResponse struct {
 
 	// data
-	Data *User `json:"data,omitempty"`
+	// Required: true
+	Data *User `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
+
+// line 140
 
 func UserCreationResponseWithDefaults(defaults client.Defaults) *UserCreationResponse {
 	return &UserCreationResponse{
@@ -80,8 +84,8 @@ func (m *UserCreationResponse) Validate(formats strfmt.Registry) error {
 
 func (m *UserCreationResponse) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

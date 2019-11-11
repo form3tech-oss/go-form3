@@ -29,6 +29,8 @@ type RelationshipData struct {
 	Type string `json:"type,omitempty"`
 }
 
+// line 140
+
 func RelationshipDataWithDefaults(defaults client.Defaults) *RelationshipData {
 	return &RelationshipData{
 

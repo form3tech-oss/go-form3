@@ -22,10 +22,12 @@ type GetUserReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetUserOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ User details
 type GetUserOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetUserOK) readResponse(response runtime.ClientResponse, consumer runti
 	o.UserDetailsResponse = new(models.UserDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

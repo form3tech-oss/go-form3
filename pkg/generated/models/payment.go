@@ -55,6 +55,8 @@ type Payment struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func PaymentWithDefaults(defaults client.Defaults) *Payment {
 	return &Payment{
 
@@ -395,7 +397,7 @@ type PaymentAttributes struct {
 	// fx
 	Fx *PaymentAttributesFx `json:"fx,omitempty"`
 
-	// Unique identification, as assigned by the initiating party to unambigiously identify the transaction. This identification is an point-to-point reference and is passed on, unchanged, throughout the entire chain. Cannot includ leading, trailing or internal spaces.
+	// Unique identification, as assigned by the initiating party to unambiguously identify the transaction. This identification is an point-to-point reference and is passed on, unchanged, throughout the entire chain. Cannot include leading, trailing or internal spaces.
 	InstructionID string `json:"instruction_id,omitempty"`
 
 	// intermediary bank
@@ -406,7 +408,7 @@ type PaymentAttributes struct {
 
 	// Timestamp of when the payment instruction meets the set processing conditions. Format: YYYY-MM-DDThh:mm:ss:mmm+hh:mm
 	// Format: date-time
-	PaymentAcceptanceDatetime strfmt.DateTime `json:"payment_acceptance_datetime,omitempty"`
+	PaymentAcceptanceDatetime *strfmt.DateTime `json:"payment_acceptance_datetime,omitempty"`
 
 	// Purpose of the payment in a proprietary form
 	PaymentPurpose string `json:"payment_purpose,omitempty"`
@@ -422,7 +424,7 @@ type PaymentAttributes struct {
 
 	// Date on which the payment is to be debited from the debtor account. Formatted according to ISO 8601 format: YYYY-MM-DD.
 	// Format: date
-	ProcessingDate strfmt.Date `json:"processing_date,omitempty"`
+	ProcessingDate *strfmt.Date `json:"processing_date,omitempty"`
 
 	// receivers correspondent
 	ReceiversCorrespondent *ReceiversCorrespondentAccountHoldingEntity `json:"receivers_correspondent,omitempty"`
@@ -447,7 +449,7 @@ type PaymentAttributes struct {
 
 	// Date on which the payment is processed by the scheme. Only used if different from `processing_date`.
 	// Format: date
-	SchemeProcessingDate strfmt.Date `json:"scheme_processing_date,omitempty"`
+	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
 	// Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain.
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
@@ -470,6 +472,8 @@ type PaymentAttributes struct {
 	// The scheme-specific unique transaction ID. Populated by the scheme.
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
+
+// line 140
 
 func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes {
 	return &PaymentAttributes{
@@ -508,7 +512,7 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 
 		NumericReference: defaults.GetString("PaymentAttributes", "numeric_reference"),
 
-		PaymentAcceptanceDatetime: defaults.GetStrfmtDateTime("PaymentAttributes", "payment_acceptance_datetime"),
+		PaymentAcceptanceDatetime: defaults.GetStrfmtDateTimePtr("PaymentAttributes", "payment_acceptance_datetime"),
 
 		PaymentPurpose: defaults.GetString("PaymentAttributes", "payment_purpose"),
 
@@ -518,7 +522,7 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 
 		PaymentType: defaults.GetString("PaymentAttributes", "payment_type"),
 
-		ProcessingDate: defaults.GetStrfmtDate("PaymentAttributes", "processing_date"),
+		ProcessingDate: defaults.GetStrfmtDatePtr("PaymentAttributes", "processing_date"),
 
 		ReceiversCorrespondent: ReceiversCorrespondentAccountHoldingEntityWithDefaults(defaults),
 
@@ -534,7 +538,7 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 
 		SchemePaymentType: defaults.GetString("PaymentAttributes", "scheme_payment_type"),
 
-		SchemeProcessingDate: defaults.GetStrfmtDate("PaymentAttributes", "scheme_processing_date"),
+		SchemeProcessingDate: defaults.GetStrfmtDatePtr("PaymentAttributes", "scheme_processing_date"),
 
 		SchemeTransactionID: defaults.GetString("PaymentAttributes", "scheme_transaction_id"),
 
@@ -698,8 +702,13 @@ func (m *PaymentAttributes) WithNumericReference(numericReference string) *Payme
 
 func (m *PaymentAttributes) WithPaymentAcceptanceDatetime(paymentAcceptanceDatetime strfmt.DateTime) *PaymentAttributes {
 
-	m.PaymentAcceptanceDatetime = paymentAcceptanceDatetime
+	m.PaymentAcceptanceDatetime = &paymentAcceptanceDatetime
 
+	return m
+}
+
+func (m *PaymentAttributes) WithoutPaymentAcceptanceDatetime() *PaymentAttributes {
+	m.PaymentAcceptanceDatetime = nil
 	return m
 }
 
@@ -733,8 +742,13 @@ func (m *PaymentAttributes) WithPaymentType(paymentType string) *PaymentAttribut
 
 func (m *PaymentAttributes) WithProcessingDate(processingDate strfmt.Date) *PaymentAttributes {
 
-	m.ProcessingDate = processingDate
+	m.ProcessingDate = &processingDate
 
+	return m
+}
+
+func (m *PaymentAttributes) WithoutProcessingDate() *PaymentAttributes {
+	m.ProcessingDate = nil
 	return m
 }
 
@@ -799,8 +813,13 @@ func (m *PaymentAttributes) WithSchemePaymentType(schemePaymentType string) *Pay
 
 func (m *PaymentAttributes) WithSchemeProcessingDate(schemeProcessingDate strfmt.Date) *PaymentAttributes {
 
-	m.SchemeProcessingDate = schemeProcessingDate
+	m.SchemeProcessingDate = &schemeProcessingDate
 
+	return m
+}
+
+func (m *PaymentAttributes) WithoutSchemeProcessingDate() *PaymentAttributes {
+	m.SchemeProcessingDate = nil
 	return m
 }
 
@@ -1292,8 +1311,11 @@ type PaymentAttributesBeneficiaryParty struct {
 	// The code that specifies the type of `organisation_identification`
 	OrganisationIdentificationCode string `json:"organisation_identification_code,omitempty"`
 
-	// Issuer of the organisation identification
+	// Issuer of the `organisation_identification`
 	OrganisationIdentificationIssuer string `json:"organisation_identification_issuer,omitempty"`
+
+	// The code that specifies the scheme of `organisation_identification`
+	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
@@ -1301,6 +1323,8 @@ type PaymentAttributesBeneficiaryParty struct {
 	// Beneficiary phone number
 	TelephoneNumber string `json:"telephone_number,omitempty"`
 }
+
+// line 140
 
 func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *PaymentAttributesBeneficiaryParty {
 	return &PaymentAttributesBeneficiaryParty{
@@ -1334,6 +1358,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		OrganisationIdentificationCode: defaults.GetString("PaymentAttributesBeneficiaryParty", "organisation_identification_code"),
 
 		OrganisationIdentificationIssuer: defaults.GetString("PaymentAttributesBeneficiaryParty", "organisation_identification_issuer"),
+
+		OrganisationIdentificationScheme: defaults.GetString("PaymentAttributesBeneficiaryParty", "organisation_identification_scheme"),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 
@@ -1452,6 +1478,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithOrganisationIdentificationCode(o
 func (m *PaymentAttributesBeneficiaryParty) WithOrganisationIdentificationIssuer(organisationIdentificationIssuer string) *PaymentAttributesBeneficiaryParty {
 
 	m.OrganisationIdentificationIssuer = organisationIdentificationIssuer
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithOrganisationIdentificationScheme(organisationIdentificationScheme string) *PaymentAttributesBeneficiaryParty {
+
+	m.OrganisationIdentificationScheme = organisationIdentificationScheme
 
 	return m
 }
@@ -1644,9 +1677,14 @@ type PaymentAttributesDebtorParty struct {
 	// Issuer of the `organisation_identification`
 	OrganisationIdentificationIssuer string `json:"organisation_identification_issuer,omitempty"`
 
+	// The code that specifies the scheme of `organisation_identification`
+	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 }
+
+// line 140
 
 func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *PaymentAttributesDebtorParty {
 	return &PaymentAttributesDebtorParty{
@@ -1682,6 +1720,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 		OrganisationIdentificationCode: defaults.GetString("PaymentAttributesDebtorParty", "organisation_identification_code"),
 
 		OrganisationIdentificationIssuer: defaults.GetString("PaymentAttributesDebtorParty", "organisation_identification_issuer"),
+
+		OrganisationIdentificationScheme: defaults.GetString("PaymentAttributesDebtorParty", "organisation_identification_scheme"),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 	}
@@ -1805,6 +1845,13 @@ func (m *PaymentAttributesDebtorParty) WithOrganisationIdentificationCode(organi
 func (m *PaymentAttributesDebtorParty) WithOrganisationIdentificationIssuer(organisationIdentificationIssuer string) *PaymentAttributesDebtorParty {
 
 	m.OrganisationIdentificationIssuer = organisationIdentificationIssuer
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithOrganisationIdentificationScheme(organisationIdentificationScheme string) *PaymentAttributesDebtorParty {
+
+	m.OrganisationIdentificationScheme = organisationIdentificationScheme
 
 	return m
 }
@@ -1950,9 +1997,11 @@ type PaymentAttributesFx struct {
 	// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as instructed by the initiating party. Decimal value. Must be > 0.
 	OriginalAmount string `json:"original_amount,omitempty"`
 
-	// Currency of `orginal_amount`. Currency code as defined in ISO 4217.
+	// Currency of `original_amount`. Currency code as defined in ISO 4217.
 	OriginalCurrency string `json:"original_currency,omitempty"`
 }
+
+// line 140
 
 func PaymentAttributesFxWithDefaults(defaults client.Defaults) *PaymentAttributesFx {
 	return &PaymentAttributesFx{
@@ -2036,6 +2085,8 @@ type PaymentAttributesStructuredReference struct {
 	Reference string `json:"reference,omitempty"`
 }
 
+// line 140
+
 func PaymentAttributesStructuredReferenceWithDefaults(defaults client.Defaults) *PaymentAttributesStructuredReference {
 	return &PaymentAttributesStructuredReference{
 
@@ -2108,6 +2159,8 @@ type PaymentAttributesSwift struct {
 	// This repetitive field specifies one or several time indication(s) related to the processing of the payment instruction.
 	TimeIndication string `json:"time_indication,omitempty"`
 }
+
+// line 140
 
 func PaymentAttributesSwiftWithDefaults(defaults client.Defaults) *PaymentAttributesSwift {
 	return &PaymentAttributesSwift{
@@ -2243,6 +2296,8 @@ type PaymentAttributesSwiftHeader struct {
 	// Message User Reference (MUR) value, which can be up to 16 characters, and will be returned in the ACK
 	UserReference string `json:"user_reference,omitempty"`
 }
+
+// line 140
 
 func PaymentAttributesSwiftHeaderWithDefaults(defaults client.Defaults) *PaymentAttributesSwiftHeader {
 	return &PaymentAttributesSwiftHeader{

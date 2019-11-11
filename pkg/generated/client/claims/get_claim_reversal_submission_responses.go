@@ -22,10 +22,12 @@ type GetClaimReversalSubmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetClaimReversalSubmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetClaimReversalSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *GetClaimReversalSubmissionReader) ReadResponse(response runtime.ClientR
 		return result, nil
 
 	case 400:
+
 		result := NewGetClaimReversalSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Claim Reversal Submission details
 type GetClaimReversalSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimReversalSubmissionDetailsResponse
 }
 
@@ -68,6 +73,7 @@ func (o *GetClaimReversalSubmissionOK) readResponse(response runtime.ClientRespo
 	o.ClaimReversalSubmissionDetailsResponse = new(models.ClaimReversalSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimReversalSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Error
 type GetClaimReversalSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *GetClaimReversalSubmissionBadRequest) readResponse(response runtime.Cli
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

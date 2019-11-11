@@ -22,10 +22,12 @@ type GetPaymentRecallSubmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetPaymentRecallSubmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetPaymentRecallSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Recall submission details
 type GetPaymentRecallSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RecallSubmissionDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetPaymentRecallSubmissionOK) readResponse(response runtime.ClientRespo
 	o.RecallSubmissionDetailsResponse = new(models.RecallSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RecallSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

@@ -22,10 +22,12 @@ type CreateAceReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateAceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateAceCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ ACE creation response
 type CreateAceCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AceCreationResponse
 }
 
@@ -61,6 +65,7 @@ func (o *CreateAceCreated) readResponse(response runtime.ClientResponse, consume
 	o.AceCreationResponse = new(models.AceCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AceCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

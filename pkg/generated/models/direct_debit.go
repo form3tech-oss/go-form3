@@ -55,6 +55,8 @@ type DirectDebit struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func DirectDebitWithDefaults(defaults client.Defaults) *DirectDebit {
 	return &DirectDebit{
 
@@ -396,6 +398,8 @@ type DirectDebitAttributes struct {
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
 
+// line 140
+
 func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAttributes {
 	return &DirectDebitAttributes{
 
@@ -731,6 +735,8 @@ type DirectDebitAttributesBeneficiaryParty struct {
 	Country string `json:"country,omitempty"`
 }
 
+// line 140
+
 func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesBeneficiaryParty {
 	return &DirectDebitAttributesBeneficiaryParty{
 
@@ -903,6 +909,8 @@ type DirectDebitAttributesDebtorParty struct {
 	// Country of debtor address. ISO 3166 format country code"
 	Country string `json:"country,omitempty"`
 }
+
+// line 140
 
 func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesDebtorParty {
 	return &DirectDebitAttributesDebtorParty{

@@ -30,6 +30,8 @@ type ReportLink struct {
 	Meta *ReportLinkMeta `json:"meta,omitempty"`
 }
 
+// line 140
+
 func ReportLinkWithDefaults(defaults client.Defaults) *ReportLink {
 	return &ReportLink{
 
@@ -144,6 +146,8 @@ type ReportLinkMeta struct {
 	// content type
 	ContentType string `json:"content-type,omitempty"`
 }
+
+// line 140
 
 func ReportLinkMetaWithDefaults(defaults client.Defaults) *ReportLinkMeta {
 	return &ReportLinkMeta{

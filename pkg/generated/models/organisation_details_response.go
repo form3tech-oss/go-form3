@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // OrganisationDetailsResponse organisation details response
@@ -21,11 +22,14 @@ import (
 type OrganisationDetailsResponse struct {
 
 	// data
-	Data *Organisation `json:"data,omitempty"`
+	// Required: true
+	Data *Organisation `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
+
+// line 140
 
 func OrganisationDetailsResponseWithDefaults(defaults client.Defaults) *OrganisationDetailsResponse {
 	return &OrganisationDetailsResponse{
@@ -80,8 +84,8 @@ func (m *OrganisationDetailsResponse) Validate(formats strfmt.Registry) error {
 
 func (m *OrganisationDetailsResponse) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

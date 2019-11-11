@@ -22,10 +22,12 @@ type GetPaymentReturnReversalReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetPaymentReturnReversalReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetPaymentReturnReversalOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Return reversal details
 type GetPaymentReturnReversalOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReturnReversalDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetPaymentReturnReversalOK) readResponse(response runtime.ClientRespons
 	o.ReturnReversalDetailsResponse = new(models.ReturnReversalDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReturnReversalDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

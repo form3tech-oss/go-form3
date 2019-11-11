@@ -34,6 +34,8 @@ type ChargesInformation struct {
 	SenderCharges []*ChargesInformationSenderChargesItems0 `json:"sender_charges,omitempty"`
 }
 
+// line 140
+
 func ChargesInformationWithDefaults(defaults client.Defaults) *ChargesInformation {
 	return &ChargesInformation{
 
@@ -149,6 +151,8 @@ type ChargesInformationSenderChargesItems0 struct {
 	// Currency of `amount`. Currency code as defined in [ISO 4217](http://www.iso.org/iso/home/standards/currency_codes.htm).
 	Currency string `json:"currency,omitempty"`
 }
+
+// line 140
 
 func ChargesInformationSenderChargesItems0WithDefaults(defaults client.Defaults) *ChargesInformationSenderChargesItems0 {
 	return &ChargesInformationSenderChargesItems0{

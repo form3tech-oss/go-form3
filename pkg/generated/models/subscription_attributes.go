@@ -21,31 +21,39 @@ import (
 // swagger:model SubscriptionAttributes
 type SubscriptionAttributes struct {
 
-	// Type of callback channel used
+	// callback transport
 	// Required: true
 	// Enum: [http email queue]
 	CallbackTransport *string `json:"callback_transport"`
 
-	// URI on the platform that is called when an event occurs
+	// callback uri
 	// Required: true
-	// Pattern: ^[A-Za-z0-9 .,@:\/-_]*$
+	// Pattern: ^[A-Za-z0-9 .,@:\&\?=\/\-_]*$
 	CallbackURI *string `json:"callback_uri"`
 
-	// The type of event the subscription is for. See: [event types](http://draft-api-docs.form3.tech/api.html#enumerations-event-types)
+	// deactivated
+	Deactivated bool `json:"deactivated,omitempty"`
+
+	// event type
 	// Required: true
 	// Pattern: ^[A-Za-z_-]*$
 	EventType *string `json:"event_type"`
 
-	// The type of resource the subscription is for. See: [record types](http://draft-api-docs.form3.tech/api.html#enumerations-record-types)
+	// filter
+	Filter string `json:"filter,omitempty"`
+
+	// record type
 	// Required: true
 	// Pattern: ^[A-Za-z_-]*$
 	RecordType *string `json:"record_type"`
 
-	// User ID of the user this subscription is mapped to
+	// user id
 	// Read Only: true
 	// Format: uuid
 	UserID strfmt.UUID `json:"user_id,omitempty"`
 }
+
+// line 140
 
 func SubscriptionAttributesWithDefaults(defaults client.Defaults) *SubscriptionAttributes {
 	return &SubscriptionAttributes{
@@ -54,7 +62,11 @@ func SubscriptionAttributesWithDefaults(defaults client.Defaults) *SubscriptionA
 
 		CallbackURI: defaults.GetStringPtr("SubscriptionAttributes", "callback_uri"),
 
+		Deactivated: defaults.GetBool("SubscriptionAttributes", "deactivated"),
+
 		EventType: defaults.GetStringPtr("SubscriptionAttributes", "event_type"),
+
+		Filter: defaults.GetString("SubscriptionAttributes", "filter"),
 
 		RecordType: defaults.GetStringPtr("SubscriptionAttributes", "record_type"),
 
@@ -86,6 +98,13 @@ func (m *SubscriptionAttributes) WithoutCallbackURI() *SubscriptionAttributes {
 	return m
 }
 
+func (m *SubscriptionAttributes) WithDeactivated(deactivated bool) *SubscriptionAttributes {
+
+	m.Deactivated = deactivated
+
+	return m
+}
+
 func (m *SubscriptionAttributes) WithEventType(eventType string) *SubscriptionAttributes {
 
 	m.EventType = &eventType
@@ -95,6 +114,13 @@ func (m *SubscriptionAttributes) WithEventType(eventType string) *SubscriptionAt
 
 func (m *SubscriptionAttributes) WithoutEventType() *SubscriptionAttributes {
 	m.EventType = nil
+	return m
+}
+
+func (m *SubscriptionAttributes) WithFilter(filter string) *SubscriptionAttributes {
+
+	m.Filter = filter
+
 	return m
 }
 
@@ -199,7 +225,7 @@ func (m *SubscriptionAttributes) validateCallbackURI(formats strfmt.Registry) er
 		return err
 	}
 
-	if err := validate.Pattern("callback_uri", "body", string(*m.CallbackURI), `^[A-Za-z0-9 .,@:\/-_]*$`); err != nil {
+	if err := validate.Pattern("callback_uri", "body", string(*m.CallbackURI), `^[A-Za-z0-9 .,@:\&\?=\/\-_]*$`); err != nil {
 		return err
 	}
 

@@ -22,10 +22,12 @@ type CreateDirectDebitReversalReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateDirectDebitReversalReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateDirectDebitReversalCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *CreateDirectDebitReversalReader) ReadResponse(response runtime.ClientRe
 		return result, nil
 
 	case 400:
+
 		result := NewCreateDirectDebitReversalBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Reversal creation response
 type CreateDirectDebitReversalCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitReversalCreationResponse
 }
 
@@ -68,6 +73,7 @@ func (o *CreateDirectDebitReversalCreated) readResponse(response runtime.ClientR
 	o.DirectDebitReversalCreationResponse = new(models.DirectDebitReversalCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitReversalCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Reversal creation error
 type CreateDirectDebitReversalBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *CreateDirectDebitReversalBadRequest) readResponse(response runtime.Clie
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

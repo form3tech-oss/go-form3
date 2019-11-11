@@ -45,6 +45,8 @@ type MandateAttributesBeneficiaryParty struct {
 	Country string `json:"country,omitempty"`
 }
 
+// line 140
+
 func MandateAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *MandateAttributesBeneficiaryParty {
 	return &MandateAttributesBeneficiaryParty{
 

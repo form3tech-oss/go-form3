@@ -15,6 +15,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // RoleDetailsListResponse role details list response
@@ -22,11 +23,14 @@ import (
 type RoleDetailsListResponse struct {
 
 	// data
+	// Required: true
 	Data []*Role `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
+
+// line 140
 
 func RoleDetailsListResponseWithDefaults(defaults client.Defaults) *RoleDetailsListResponse {
 	return &RoleDetailsListResponse{
@@ -76,8 +80,8 @@ func (m *RoleDetailsListResponse) Validate(formats strfmt.Registry) error {
 
 func (m *RoleDetailsListResponse) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Data); i++ {

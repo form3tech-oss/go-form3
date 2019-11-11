@@ -24,6 +24,8 @@ type DirectDebitReturnCreation struct {
 	Data *DirectDebitReturn `json:"data,omitempty"`
 }
 
+// line 140
+
 func DirectDebitReturnCreationWithDefaults(defaults client.Defaults) *DirectDebitReturnCreation {
 	return &DirectDebitReturnCreation{
 

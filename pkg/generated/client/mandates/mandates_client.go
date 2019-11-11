@@ -43,7 +43,8 @@ func (a *CreateMandateRequest) Do() (*CreateMandateCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateMandateReader{formats: a.formats},
+
+		Reader: &CreateMandateReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateMandateRequest) Do() (*CreateMandateCreated, error) {
 }
 
 func (a *CreateMandateRequest) MustDo() *CreateMandateCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *CreateMandateReturnRequest) Do() (*CreateMandateReturnCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateMandateReturnReader{formats: a.formats},
+
+		Reader: &CreateMandateReturnReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *CreateMandateReturnRequest) Do() (*CreateMandateReturnCreated, error) {
 }
 
 func (a *CreateMandateReturnRequest) MustDo() *CreateMandateReturnCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *CreateMandateReturnSubmissionRequest) Do() (*CreateMandateReturnSubmiss
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateMandateReturnSubmissionReader{formats: a.formats},
+
+		Reader: &CreateMandateReturnSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *CreateMandateReturnSubmissionRequest) Do() (*CreateMandateReturnSubmiss
 }
 
 func (a *CreateMandateReturnSubmissionRequest) MustDo() *CreateMandateReturnSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *CreateMandateSubmissionRequest) Do() (*CreateMandateSubmissionCreated, 
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateMandateSubmissionReader{formats: a.formats},
+
+		Reader: &CreateMandateSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *CreateMandateSubmissionRequest) Do() (*CreateMandateSubmissionCreated, 
 }
 
 func (a *CreateMandateSubmissionRequest) MustDo() *CreateMandateSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +179,8 @@ func (a *GetMandateRequest) Do() (*GetMandateOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetMandateReader{formats: a.formats},
+
+		Reader: &GetMandateReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +193,11 @@ func (a *GetMandateRequest) Do() (*GetMandateOK, error) {
 }
 
 func (a *GetMandateRequest) MustDo() *GetMandateOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -208,7 +213,8 @@ func (a *GetMandateAdmissionRequest) Do() (*GetMandateAdmissionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetMandateAdmissionReader{formats: a.formats},
+
+		Reader: &GetMandateAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -221,11 +227,11 @@ func (a *GetMandateAdmissionRequest) Do() (*GetMandateAdmissionOK, error) {
 }
 
 func (a *GetMandateAdmissionRequest) MustDo() *GetMandateAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -241,7 +247,8 @@ func (a *GetMandateReturnRequest) Do() (*GetMandateReturnOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetMandateReturnReader{formats: a.formats},
+
+		Reader: &GetMandateReturnReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -254,11 +261,11 @@ func (a *GetMandateReturnRequest) Do() (*GetMandateReturnOK, error) {
 }
 
 func (a *GetMandateReturnRequest) MustDo() *GetMandateReturnOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -274,7 +281,8 @@ func (a *GetMandateReturnSubmissionRequest) Do() (*GetMandateReturnSubmissionOK,
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetMandateReturnSubmissionReader{formats: a.formats},
+
+		Reader: &GetMandateReturnSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -287,11 +295,11 @@ func (a *GetMandateReturnSubmissionRequest) Do() (*GetMandateReturnSubmissionOK,
 }
 
 func (a *GetMandateReturnSubmissionRequest) MustDo() *GetMandateReturnSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -307,7 +315,8 @@ func (a *GetMandateSubmissionRequest) Do() (*GetMandateSubmissionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetMandateSubmissionReader{formats: a.formats},
+
+		Reader: &GetMandateSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -320,11 +329,11 @@ func (a *GetMandateSubmissionRequest) Do() (*GetMandateSubmissionOK, error) {
 }
 
 func (a *GetMandateSubmissionRequest) MustDo() *GetMandateSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -340,7 +349,8 @@ func (a *GetMandatesHealthRequest) Do() (*GetMandatesHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetMandatesHealthReader{formats: a.formats},
+
+		Reader: &GetMandatesHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -353,11 +363,11 @@ func (a *GetMandatesHealthRequest) Do() (*GetMandatesHealthOK, error) {
 }
 
 func (a *GetMandatesHealthRequest) MustDo() *GetMandatesHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -373,7 +383,8 @@ func (a *ListMandatesRequest) Do() (*ListMandatesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListMandatesReader{formats: a.formats},
+
+		Reader: &ListMandatesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -386,11 +397,11 @@ func (a *ListMandatesRequest) Do() (*ListMandatesOK, error) {
 }
 
 func (a *ListMandatesRequest) MustDo() *ListMandatesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -406,7 +417,8 @@ func (a *ModifyMandateRequest) Do() (*ModifyMandateOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ModifyMandateReader{formats: a.formats},
+
+		Reader: &ModifyMandateReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -419,11 +431,11 @@ func (a *ModifyMandateRequest) Do() (*ModifyMandateOK, error) {
 }
 
 func (a *ModifyMandateRequest) MustDo() *ModifyMandateOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

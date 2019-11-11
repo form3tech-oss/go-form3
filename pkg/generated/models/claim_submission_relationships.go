@@ -25,6 +25,8 @@ type ClaimSubmissionRelationships struct {
 	Claim *ClaimSubmissionRelationshipsClaim `json:"claim,omitempty"`
 }
 
+// line 140
+
 func ClaimSubmissionRelationshipsWithDefaults(defaults client.Defaults) *ClaimSubmissionRelationships {
 	return &ClaimSubmissionRelationships{
 
@@ -108,6 +110,8 @@ type ClaimSubmissionRelationshipsClaim struct {
 	// data
 	Data []*Claim `json:"data"`
 }
+
+// line 140
 
 func ClaimSubmissionRelationshipsClaimWithDefaults(defaults client.Defaults) *ClaimSubmissionRelationshipsClaim {
 	return &ClaimSubmissionRelationshipsClaim{

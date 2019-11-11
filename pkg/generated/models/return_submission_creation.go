@@ -24,6 +24,8 @@ type ReturnSubmissionCreation struct {
 	Data *NewReturnSubmission `json:"data,omitempty"`
 }
 
+// line 140
+
 func ReturnSubmissionCreationWithDefaults(defaults client.Defaults) *ReturnSubmissionCreation {
 	return &ReturnSubmissionCreation{
 

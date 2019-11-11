@@ -21,17 +21,19 @@ import (
 type AdviceSubmissionRelationships struct {
 
 	// advice
-	Advice *RelationshipLinks `json:"advice,omitempty"`
+	Advice *RelationshipAdvices `json:"advice,omitempty"`
 }
+
+// line 140
 
 func AdviceSubmissionRelationshipsWithDefaults(defaults client.Defaults) *AdviceSubmissionRelationships {
 	return &AdviceSubmissionRelationships{
 
-		Advice: RelationshipLinksWithDefaults(defaults),
+		Advice: RelationshipAdvicesWithDefaults(defaults),
 	}
 }
 
-func (m *AdviceSubmissionRelationships) WithAdvice(advice RelationshipLinks) *AdviceSubmissionRelationships {
+func (m *AdviceSubmissionRelationships) WithAdvice(advice RelationshipAdvices) *AdviceSubmissionRelationships {
 
 	m.Advice = &advice
 

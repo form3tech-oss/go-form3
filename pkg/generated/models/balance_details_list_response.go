@@ -28,6 +28,8 @@ type BalanceDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func BalanceDetailsListResponseWithDefaults(defaults client.Defaults) *BalanceDetailsListResponse {
 	return &BalanceDetailsListResponse{
 

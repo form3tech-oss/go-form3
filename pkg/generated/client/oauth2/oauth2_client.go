@@ -43,7 +43,8 @@ func (a *CreateOauthTokenRequest) Do() (*CreateOauthTokenOK, error) {
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateOauthTokenReader{formats: a.formats},
+
+		Reader: &CreateOauthTokenReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateOauthTokenRequest) Do() (*CreateOauthTokenOK, error) {
 }
 
 func (a *CreateOauthTokenRequest) MustDo() *CreateOauthTokenOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

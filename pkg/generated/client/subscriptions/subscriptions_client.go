@@ -43,7 +43,8 @@ func (a *CreateSubscriptionRequest) Do() (*CreateSubscriptionCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateSubscriptionReader{formats: a.formats},
+
+		Reader: &CreateSubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateSubscriptionRequest) Do() (*CreateSubscriptionCreated, error) {
 }
 
 func (a *CreateSubscriptionRequest) MustDo() *CreateSubscriptionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *DeleteSubscriptionRequest) Do() (*DeleteSubscriptionNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteSubscriptionReader{formats: a.formats},
+
+		Reader: &DeleteSubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *DeleteSubscriptionRequest) Do() (*DeleteSubscriptionNoContent, error) {
 }
 
 func (a *DeleteSubscriptionRequest) MustDo() *DeleteSubscriptionNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *GetSubscriptionRequest) Do() (*GetSubscriptionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetSubscriptionReader{formats: a.formats},
+
+		Reader: &GetSubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *GetSubscriptionRequest) Do() (*GetSubscriptionOK, error) {
 }
 
 func (a *GetSubscriptionRequest) MustDo() *GetSubscriptionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *GetSubscriptionsHealthRequest) Do() (*GetSubscriptionsHealthOK, error) 
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetSubscriptionsHealthReader{formats: a.formats},
+
+		Reader: &GetSubscriptionsHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *GetSubscriptionsHealthRequest) Do() (*GetSubscriptionsHealthOK, error) 
 }
 
 func (a *GetSubscriptionsHealthRequest) MustDo() *GetSubscriptionsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +179,8 @@ func (a *ListSubscriptionsRequest) Do() (*ListSubscriptionsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListSubscriptionsReader{formats: a.formats},
+
+		Reader: &ListSubscriptionsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +193,11 @@ func (a *ListSubscriptionsRequest) Do() (*ListSubscriptionsOK, error) {
 }
 
 func (a *ListSubscriptionsRequest) MustDo() *ListSubscriptionsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -208,7 +213,8 @@ func (a *ModifySubscriptionRequest) Do() (*ModifySubscriptionOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ModifySubscriptionReader{formats: a.formats},
+
+		Reader: &ModifySubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -221,11 +227,11 @@ func (a *ModifySubscriptionRequest) Do() (*ModifySubscriptionOK, error) {
 }
 
 func (a *ModifySubscriptionRequest) MustDo() *ModifySubscriptionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

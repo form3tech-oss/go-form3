@@ -22,10 +22,12 @@ type CreatePaymentAdviceReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreatePaymentAdviceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreatePaymentAdviceCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *CreatePaymentAdviceReader) ReadResponse(response runtime.ClientResponse
 		return result, nil
 
 	case 400:
+
 		result := NewCreatePaymentAdviceBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Advice creation response
 type CreatePaymentAdviceCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AdviceCreationResponse
 }
 
@@ -68,6 +73,7 @@ func (o *CreatePaymentAdviceCreated) readResponse(response runtime.ClientRespons
 	o.AdviceCreationResponse = new(models.AdviceCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AdviceCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Advice creation error
 type CreatePaymentAdviceBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *CreatePaymentAdviceBadRequest) readResponse(response runtime.ClientResp
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

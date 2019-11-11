@@ -22,10 +22,12 @@ type CreateRolesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateRolesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateRolesCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Role creation response
 type CreateRolesCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RoleCreationResponse
 }
 
@@ -61,6 +65,7 @@ func (o *CreateRolesCreated) readResponse(response runtime.ClientResponse, consu
 	o.RoleCreationResponse = new(models.RoleCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RoleCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

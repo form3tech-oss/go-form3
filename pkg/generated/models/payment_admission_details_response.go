@@ -27,6 +27,8 @@ type PaymentAdmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func PaymentAdmissionDetailsResponseWithDefaults(defaults client.Defaults) *PaymentAdmissionDetailsResponse {
 	return &PaymentAdmissionDetailsResponse{
 

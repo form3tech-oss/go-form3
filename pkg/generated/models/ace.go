@@ -41,6 +41,8 @@ type Ace struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func AceWithDefaults(defaults client.Defaults) *Ace {
 	return &Ace{
 
@@ -245,6 +247,8 @@ type AceAttributes struct {
 	// Format: uuid
 	RoleID strfmt.UUID `json:"role_id,omitempty"`
 }
+
+// line 140
 
 func AceAttributesWithDefaults(defaults client.Defaults) *AceAttributes {
 	return &AceAttributes{

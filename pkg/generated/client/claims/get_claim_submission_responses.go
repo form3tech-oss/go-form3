@@ -22,10 +22,12 @@ type GetClaimSubmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetClaimSubmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetClaimSubmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *GetClaimSubmissionReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 
 	case 400:
+
 		result := NewGetClaimSubmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Claim Submission details
 type GetClaimSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimSubmissionDetailsResponse
 }
 
@@ -68,6 +73,7 @@ func (o *GetClaimSubmissionOK) readResponse(response runtime.ClientResponse, con
 	o.ClaimSubmissionDetailsResponse = new(models.ClaimSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Error
 type GetClaimSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *GetClaimSubmissionBadRequest) readResponse(response runtime.ClientRespo
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

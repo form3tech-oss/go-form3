@@ -24,6 +24,8 @@ type RecallCreation struct {
 	Data *NewRecall `json:"data,omitempty"`
 }
 
+// line 140
+
 func RecallCreationWithDefaults(defaults client.Defaults) *RecallCreation {
 	return &RecallCreation{
 

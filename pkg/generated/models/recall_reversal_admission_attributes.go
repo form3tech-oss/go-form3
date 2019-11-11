@@ -26,6 +26,8 @@ type RecallReversalAdmissionAttributes struct {
 	SourceGateway string `json:"source_gateway,omitempty"`
 }
 
+// line 140
+
 func RecallReversalAdmissionAttributesWithDefaults(defaults client.Defaults) *RecallReversalAdmissionAttributes {
 	return &RecallReversalAdmissionAttributes{
 

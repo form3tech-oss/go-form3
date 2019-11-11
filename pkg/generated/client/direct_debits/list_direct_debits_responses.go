@@ -22,10 +22,12 @@ type ListDirectDebitsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListDirectDebitsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListDirectDebitsOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ List of direct debit details
 type ListDirectDebitsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ListDirectDebitsOK) readResponse(response runtime.ClientResponse, consu
 	o.DirectDebitDetailsListResponse = new(models.DirectDebitDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

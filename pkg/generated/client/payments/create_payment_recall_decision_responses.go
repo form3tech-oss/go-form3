@@ -22,10 +22,12 @@ type CreatePaymentRecallDecisionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreatePaymentRecallDecisionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreatePaymentRecallDecisionCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *CreatePaymentRecallDecisionReader) ReadResponse(response runtime.Client
 		return result, nil
 
 	case 400:
+
 		result := NewCreatePaymentRecallDecisionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Recall decision creation response
 type CreatePaymentRecallDecisionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RecallDecisionCreationResponse
 }
 
@@ -68,6 +73,7 @@ func (o *CreatePaymentRecallDecisionCreated) readResponse(response runtime.Clien
 	o.RecallDecisionCreationResponse = new(models.RecallDecisionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RecallDecisionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Recall decision creation error
 type CreatePaymentRecallDecisionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *CreatePaymentRecallDecisionBadRequest) readResponse(response runtime.Cl
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

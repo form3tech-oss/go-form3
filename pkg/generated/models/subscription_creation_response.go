@@ -27,6 +27,8 @@ type SubscriptionCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func SubscriptionCreationResponseWithDefaults(defaults client.Defaults) *SubscriptionCreationResponse {
 	return &SubscriptionCreationResponse{
 

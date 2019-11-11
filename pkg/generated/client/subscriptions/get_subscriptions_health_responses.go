@@ -22,10 +22,12 @@ type GetSubscriptionsHealthReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetSubscriptionsHealthReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetSubscriptionsHealthOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Notification service health
 type GetSubscriptionsHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +65,7 @@ func (o *GetSubscriptionsHealthOK) readResponse(response runtime.ClientResponse,
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

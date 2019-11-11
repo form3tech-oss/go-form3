@@ -28,6 +28,8 @@ type MandateDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func MandateDetailsListResponseWithDefaults(defaults client.Defaults) *MandateDetailsListResponse {
 	return &MandateDetailsListResponse{
 

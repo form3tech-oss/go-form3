@@ -29,6 +29,8 @@ type APIError struct {
 	ErrorMessage string `json:"error_message,omitempty"`
 }
 
+// line 140
+
 func APIErrorWithDefaults(defaults client.Defaults) *APIError {
 	return &APIError{
 

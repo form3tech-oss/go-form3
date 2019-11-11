@@ -54,6 +54,8 @@ type Recall struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func RecallWithDefaults(defaults client.Defaults) *Recall {
 	return &Recall{
 
@@ -360,6 +362,8 @@ type RecallAttributes struct {
 	// status
 	Status RecallStatus `json:"status,omitempty"`
 }
+
+// line 140
 
 func RecallAttributesWithDefaults(defaults client.Defaults) *RecallAttributes {
 	return &RecallAttributes{

@@ -26,6 +26,8 @@ type ClaimReversalSubmissionCreation struct {
 	Data *ClaimReversalSubmission `json:"data"`
 }
 
+// line 140
+
 func ClaimReversalSubmissionCreationWithDefaults(defaults client.Defaults) *ClaimReversalSubmissionCreation {
 	return &ClaimReversalSubmissionCreation{
 

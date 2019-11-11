@@ -27,6 +27,8 @@ type ReturnAdmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func ReturnAdmissionDetailsResponseWithDefaults(defaults client.Defaults) *ReturnAdmissionDetailsResponse {
 	return &ReturnAdmissionDetailsResponse{
 

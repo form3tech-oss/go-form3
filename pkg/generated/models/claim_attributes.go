@@ -72,6 +72,8 @@ type ClaimAttributes struct {
 	RequestDate strfmt.Date `json:"request_date,omitempty"`
 }
 
+// line 140
+
 func ClaimAttributesWithDefaults(defaults client.Defaults) *ClaimAttributes {
 	return &ClaimAttributes{
 
@@ -476,6 +478,8 @@ type ClaimAttributesBeneficiaryParty struct {
 	BankID *string `json:"bank_id"`
 }
 
+// line 140
+
 func ClaimAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *ClaimAttributesBeneficiaryParty {
 	return &ClaimAttributesBeneficiaryParty{
 
@@ -592,6 +596,8 @@ type ClaimAttributesDebtorParty struct {
 	// Required: true
 	BankID *string `json:"bank_id"`
 }
+
+// line 140
 
 func ClaimAttributesDebtorPartyWithDefaults(defaults client.Defaults) *ClaimAttributesDebtorParty {
 	return &ClaimAttributesDebtorParty{
@@ -735,6 +741,8 @@ type ClaimAttributesOriginalInstruction struct {
 	// Required: true
 	Reference *string `json:"reference"`
 }
+
+// line 140
 
 func ClaimAttributesOriginalInstructionWithDefaults(defaults client.Defaults) *ClaimAttributesOriginalInstruction {
 	return &ClaimAttributesOriginalInstruction{

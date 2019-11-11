@@ -22,10 +22,12 @@ type GetBalancedReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetBalancedReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetBalancedOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Associations details
 type GetBalancedOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.BalanceDetailsListResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetBalancedOK) readResponse(response runtime.ClientResponse, consumer r
 	o.BalanceDetailsListResponse = new(models.BalanceDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.BalanceDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

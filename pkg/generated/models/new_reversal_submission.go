@@ -40,6 +40,8 @@ type NewReversalSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func NewReversalSubmissionWithDefaults(defaults client.Defaults) *NewReversalSubmission {
 	return &NewReversalSubmission{
 

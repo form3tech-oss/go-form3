@@ -52,6 +52,8 @@ type Subscription struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func SubscriptionWithDefaults(defaults client.Defaults) *Subscription {
 	return &Subscription{
 

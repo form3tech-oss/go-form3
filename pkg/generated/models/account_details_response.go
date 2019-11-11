@@ -27,6 +27,8 @@ type AccountDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func AccountDetailsResponseWithDefaults(defaults client.Defaults) *AccountDetailsResponse {
 	return &AccountDetailsResponse{
 

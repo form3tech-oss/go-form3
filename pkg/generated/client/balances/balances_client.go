@@ -43,7 +43,8 @@ func (a *GetBalancedRequest) Do() (*GetBalancedOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetBalancedReader{formats: a.formats},
+
+		Reader: &GetBalancedReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *GetBalancedRequest) Do() (*GetBalancedOK, error) {
 }
 
 func (a *GetBalancedRequest) MustDo() *GetBalancedOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

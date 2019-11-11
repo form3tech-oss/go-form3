@@ -43,7 +43,8 @@ func (a *CreateUserRequest) Do() (*CreateUserCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateUserReader{formats: a.formats},
+
+		Reader: &CreateUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateUserRequest) Do() (*CreateUserCreated, error) {
 }
 
 func (a *CreateUserRequest) MustDo() *CreateUserCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *CreateUserCredentialsRequest) Do() (*CreateUserCredentialsCreated, erro
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateUserCredentialsReader{formats: a.formats},
+
+		Reader: &CreateUserCredentialsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *CreateUserCredentialsRequest) Do() (*CreateUserCredentialsCreated, erro
 }
 
 func (a *CreateUserCredentialsRequest) MustDo() *CreateUserCredentialsCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *CreateUserRoleRequest) Do() (*CreateUserRoleCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateUserRoleReader{formats: a.formats},
+
+		Reader: &CreateUserRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *CreateUserRoleRequest) Do() (*CreateUserRoleCreated, error) {
 }
 
 func (a *CreateUserRoleRequest) MustDo() *CreateUserRoleCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *DeleteUserRequest) Do() (*DeleteUserNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteUserReader{formats: a.formats},
+
+		Reader: &DeleteUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *DeleteUserRequest) Do() (*DeleteUserNoContent, error) {
 }
 
 func (a *DeleteUserRequest) MustDo() *DeleteUserNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +179,8 @@ func (a *DeleteUserCredentialRequest) Do() (*DeleteUserCredentialNoContent, erro
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteUserCredentialReader{formats: a.formats},
+
+		Reader: &DeleteUserCredentialReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +193,11 @@ func (a *DeleteUserCredentialRequest) Do() (*DeleteUserCredentialNoContent, erro
 }
 
 func (a *DeleteUserCredentialRequest) MustDo() *DeleteUserCredentialNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -208,7 +213,8 @@ func (a *DeleteUserRoleRequest) Do() (*DeleteUserRoleNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteUserRoleReader{formats: a.formats},
+
+		Reader: &DeleteUserRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -221,11 +227,11 @@ func (a *DeleteUserRoleRequest) Do() (*DeleteUserRoleNoContent, error) {
 }
 
 func (a *DeleteUserRoleRequest) MustDo() *DeleteUserRoleNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -241,7 +247,8 @@ func (a *GetUserRequest) Do() (*GetUserOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetUserReader{formats: a.formats},
+
+		Reader: &GetUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -254,11 +261,11 @@ func (a *GetUserRequest) Do() (*GetUserOK, error) {
 }
 
 func (a *GetUserRequest) MustDo() *GetUserOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -274,7 +281,8 @@ func (a *GetUserAcesRequest) Do() (*GetUserAcesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetUserAcesReader{formats: a.formats},
+
+		Reader: &GetUserAcesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -287,11 +295,11 @@ func (a *GetUserAcesRequest) Do() (*GetUserAcesOK, error) {
 }
 
 func (a *GetUserAcesRequest) MustDo() *GetUserAcesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -307,7 +315,8 @@ func (a *GetUsersHealthRequest) Do() (*GetUsersHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetUsersHealthReader{formats: a.formats},
+
+		Reader: &GetUsersHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -320,11 +329,11 @@ func (a *GetUsersHealthRequest) Do() (*GetUsersHealthOK, error) {
 }
 
 func (a *GetUsersHealthRequest) MustDo() *GetUsersHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -340,7 +349,8 @@ func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListUserCredentialsReader{formats: a.formats},
+
+		Reader: &ListUserCredentialsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -353,11 +363,11 @@ func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {
 }
 
 func (a *ListUserCredentialsRequest) MustDo() *ListUserCredentialsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -373,7 +383,8 @@ func (a *ListUserRolesRequest) Do() (*ListUserRolesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListUserRolesReader{formats: a.formats},
+
+		Reader: &ListUserRolesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -386,11 +397,11 @@ func (a *ListUserRolesRequest) Do() (*ListUserRolesOK, error) {
 }
 
 func (a *ListUserRolesRequest) MustDo() *ListUserRolesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -406,7 +417,8 @@ func (a *ListUsersRequest) Do() (*ListUsersOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListUsersReader{formats: a.formats},
+
+		Reader: &ListUsersReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -419,11 +431,11 @@ func (a *ListUsersRequest) Do() (*ListUsersOK, error) {
 }
 
 func (a *ListUsersRequest) MustDo() *ListUsersOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -439,7 +451,8 @@ func (a *ModifyUserRequest) Do() (*ModifyUserOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ModifyUserReader{formats: a.formats},
+
+		Reader: &ModifyUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -452,11 +465,11 @@ func (a *ModifyUserRequest) Do() (*ModifyUserOK, error) {
 }
 
 func (a *ModifyUserRequest) MustDo() *ModifyUserOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

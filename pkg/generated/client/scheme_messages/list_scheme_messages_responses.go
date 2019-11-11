@@ -22,10 +22,12 @@ type ListSchemeMessagesReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ListSchemeMessagesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewListSchemeMessagesOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *ListSchemeMessagesReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 
 	case 400:
+
 		result := NewListSchemeMessagesBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -40,6 +43,7 @@ func (o *ListSchemeMessagesReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 403:
+
 		result := NewListSchemeMessagesForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -63,6 +67,8 @@ List of scheme messages
 type ListSchemeMessagesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SchemeMessageDetailsListResponse
 }
 
@@ -75,6 +81,7 @@ func (o *ListSchemeMessagesOK) readResponse(response runtime.ClientResponse, con
 	o.SchemeMessageDetailsListResponse = new(models.SchemeMessageDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SchemeMessageDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -94,6 +101,8 @@ Scheme Message bad request
 type ListSchemeMessagesBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -106,6 +115,7 @@ func (o *ListSchemeMessagesBadRequest) readResponse(response runtime.ClientRespo
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -125,6 +135,8 @@ Forbidden
 type ListSchemeMessagesForbidden struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -137,6 +149,7 @@ func (o *ListSchemeMessagesForbidden) readResponse(response runtime.ClientRespon
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

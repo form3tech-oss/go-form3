@@ -22,10 +22,12 @@ type ModifyUserReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *ModifyUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewModifyUserOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ User details
 type ModifyUserOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *ModifyUserOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.UserDetailsResponse = new(models.UserDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

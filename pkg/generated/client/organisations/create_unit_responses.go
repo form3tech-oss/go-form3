@@ -22,10 +22,12 @@ type CreateUnitReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateUnitReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateUnitCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Organisation creation response
 type CreateUnitCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.OrganisationCreationResponse
 }
 
@@ -61,6 +65,7 @@ func (o *CreateUnitCreated) readResponse(response runtime.ClientResponse, consum
 	o.OrganisationCreationResponse = new(models.OrganisationCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.OrganisationCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

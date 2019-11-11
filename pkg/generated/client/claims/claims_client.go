@@ -43,7 +43,8 @@ func (a *CreateClaimRequest) Do() (*CreateClaimCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateClaimReader{formats: a.formats},
+
+		Reader: &CreateClaimReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateClaimRequest) Do() (*CreateClaimCreated, error) {
 }
 
 func (a *CreateClaimRequest) MustDo() *CreateClaimCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *CreateClaimReversalRequest) Do() (*CreateClaimReversalCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateClaimReversalReader{formats: a.formats},
+
+		Reader: &CreateClaimReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *CreateClaimReversalRequest) Do() (*CreateClaimReversalCreated, error) {
 }
 
 func (a *CreateClaimReversalRequest) MustDo() *CreateClaimReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *CreateClaimReversalSubmissionRequest) Do() (*CreateClaimReversalSubmiss
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateClaimReversalSubmissionReader{formats: a.formats},
+
+		Reader: &CreateClaimReversalSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *CreateClaimReversalSubmissionRequest) Do() (*CreateClaimReversalSubmiss
 }
 
 func (a *CreateClaimReversalSubmissionRequest) MustDo() *CreateClaimReversalSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *CreateClaimSubmissionRequest) Do() (*CreateClaimSubmissionCreated, erro
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateClaimSubmissionReader{formats: a.formats},
+
+		Reader: &CreateClaimSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *CreateClaimSubmissionRequest) Do() (*CreateClaimSubmissionCreated, erro
 }
 
 func (a *CreateClaimSubmissionRequest) MustDo() *CreateClaimSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +179,8 @@ func (a *GetClaimRequest) Do() (*GetClaimOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetClaimReader{formats: a.formats},
+
+		Reader: &GetClaimReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +193,11 @@ func (a *GetClaimRequest) Do() (*GetClaimOK, error) {
 }
 
 func (a *GetClaimRequest) MustDo() *GetClaimOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -208,7 +213,8 @@ func (a *GetClaimReversalRequest) Do() (*GetClaimReversalOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetClaimReversalReader{formats: a.formats},
+
+		Reader: &GetClaimReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -221,11 +227,11 @@ func (a *GetClaimReversalRequest) Do() (*GetClaimReversalOK, error) {
 }
 
 func (a *GetClaimReversalRequest) MustDo() *GetClaimReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -241,7 +247,8 @@ func (a *GetClaimReversalSubmissionRequest) Do() (*GetClaimReversalSubmissionOK,
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetClaimReversalSubmissionReader{formats: a.formats},
+
+		Reader: &GetClaimReversalSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -254,11 +261,11 @@ func (a *GetClaimReversalSubmissionRequest) Do() (*GetClaimReversalSubmissionOK,
 }
 
 func (a *GetClaimReversalSubmissionRequest) MustDo() *GetClaimReversalSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -274,7 +281,8 @@ func (a *GetClaimSubmissionRequest) Do() (*GetClaimSubmissionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetClaimSubmissionReader{formats: a.formats},
+
+		Reader: &GetClaimSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -287,11 +295,11 @@ func (a *GetClaimSubmissionRequest) Do() (*GetClaimSubmissionOK, error) {
 }
 
 func (a *GetClaimSubmissionRequest) MustDo() *GetClaimSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -307,7 +315,8 @@ func (a *GetClaimsHealthRequest) Do() (*GetClaimsHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetClaimsHealthReader{formats: a.formats},
+
+		Reader: &GetClaimsHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -320,11 +329,11 @@ func (a *GetClaimsHealthRequest) Do() (*GetClaimsHealthOK, error) {
 }
 
 func (a *GetClaimsHealthRequest) MustDo() *GetClaimsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -340,7 +349,8 @@ func (a *ListClaimsRequest) Do() (*ListClaimsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListClaimsReader{formats: a.formats},
+
+		Reader: &ListClaimsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -353,11 +363,11 @@ func (a *ListClaimsRequest) Do() (*ListClaimsOK, error) {
 }
 
 func (a *ListClaimsRequest) MustDo() *ListClaimsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

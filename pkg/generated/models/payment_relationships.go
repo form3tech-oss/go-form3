@@ -40,6 +40,8 @@ type PaymentRelationships struct {
 	PaymentSubmission *PaymentRelationshipsPaymentSubmission `json:"payment_submission,omitempty"`
 }
 
+// line 140
+
 func PaymentRelationshipsWithDefaults(defaults client.Defaults) *PaymentRelationships {
 	return &PaymentRelationships{
 
@@ -304,6 +306,8 @@ type PaymentRelationshipsPaymentAdmission struct {
 	Data []*PaymentAdmission `json:"data"`
 }
 
+// line 140
+
 func PaymentRelationshipsPaymentAdmissionWithDefaults(defaults client.Defaults) *PaymentRelationshipsPaymentAdmission {
 	return &PaymentRelationshipsPaymentAdmission{
 
@@ -389,6 +393,8 @@ type PaymentRelationshipsPaymentAdvice struct {
 	// Array of Payment Advice resources related to the payment
 	Data []*PaymentAdvice `json:"data"`
 }
+
+// line 140
 
 func PaymentRelationshipsPaymentAdviceWithDefaults(defaults client.Defaults) *PaymentRelationshipsPaymentAdvice {
 	return &PaymentRelationshipsPaymentAdvice{
@@ -476,6 +482,8 @@ type PaymentRelationshipsPaymentRecall struct {
 	Data []*Recall `json:"data"`
 }
 
+// line 140
+
 func PaymentRelationshipsPaymentRecallWithDefaults(defaults client.Defaults) *PaymentRelationshipsPaymentRecall {
 	return &PaymentRelationshipsPaymentRecall{
 
@@ -561,6 +569,8 @@ type PaymentRelationshipsPaymentReturn struct {
 	// Array of Payment Return resources related to the payment
 	Data []*ReturnPayment `json:"data"`
 }
+
+// line 140
 
 func PaymentRelationshipsPaymentReturnWithDefaults(defaults client.Defaults) *PaymentRelationshipsPaymentReturn {
 	return &PaymentRelationshipsPaymentReturn{
@@ -648,6 +658,8 @@ type PaymentRelationshipsPaymentReversal struct {
 	Data []*ReversalPayment `json:"data"`
 }
 
+// line 140
+
 func PaymentRelationshipsPaymentReversalWithDefaults(defaults client.Defaults) *PaymentRelationshipsPaymentReversal {
 	return &PaymentRelationshipsPaymentReversal{
 
@@ -733,6 +745,8 @@ type PaymentRelationshipsPaymentSubmission struct {
 	// Array of Payment Submission resources related to the payment
 	Data []*PaymentSubmission `json:"data"`
 }
+
+// line 140
 
 func PaymentRelationshipsPaymentSubmissionWithDefaults(defaults client.Defaults) *PaymentRelationshipsPaymentSubmission {
 	return &PaymentRelationshipsPaymentSubmission{

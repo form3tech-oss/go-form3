@@ -20,28 +20,30 @@ import (
 // swagger:model ReturnAdmissionRelationships
 type ReturnAdmissionRelationships struct {
 
-	// ID of the payment resource related to the return admission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the return resource related to the return admission
-	PaymentReturn *RelationshipLinks `json:"payment_return,omitempty"`
+	// payment return
+	PaymentReturn *RelationshipReturns `json:"payment_return,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
 
+// line 140
+
 func ReturnAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReturnAdmissionRelationships {
 	return &ReturnAdmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		PaymentReturn: RelationshipLinksWithDefaults(defaults),
+		PaymentReturn: RelationshipReturnsWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
 }
 
-func (m *ReturnAdmissionRelationships) WithPayment(payment RelationshipLinks) *ReturnAdmissionRelationships {
+func (m *ReturnAdmissionRelationships) WithPayment(payment RelationshipPayments) *ReturnAdmissionRelationships {
 
 	m.Payment = &payment
 
@@ -53,7 +55,7 @@ func (m *ReturnAdmissionRelationships) WithoutPayment() *ReturnAdmissionRelation
 	return m
 }
 
-func (m *ReturnAdmissionRelationships) WithPaymentReturn(paymentReturn RelationshipLinks) *ReturnAdmissionRelationships {
+func (m *ReturnAdmissionRelationships) WithPaymentReturn(paymentReturn RelationshipReturns) *ReturnAdmissionRelationships {
 
 	m.PaymentReturn = &paymentReturn
 

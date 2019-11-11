@@ -23,6 +23,8 @@ type Self struct {
 	Self string `json:"self,omitempty"`
 }
 
+// line 140
+
 func SelfWithDefaults(defaults client.Defaults) *Self {
 	return &Self{
 

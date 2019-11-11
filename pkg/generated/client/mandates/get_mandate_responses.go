@@ -22,10 +22,12 @@ type GetMandateReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetMandateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetMandateOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Mandate details
 type GetMandateOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetMandateOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.MandateDetailsResponse = new(models.MandateDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

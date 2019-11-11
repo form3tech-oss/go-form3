@@ -54,6 +54,8 @@ type RecallReversalAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func RecallReversalAdmissionWithDefaults(defaults client.Defaults) *RecallReversalAdmission {
 	return &RecallReversalAdmission{
 
@@ -351,28 +353,30 @@ func (m *RecallReversalAdmission) Json() string {
 // swagger:model RecallReversalAdmissionRelationships
 type RecallReversalAdmissionRelationships struct {
 
-	// ID of the payment resource related to the recall reversal admission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the recall resource related to the recall reversal admission
-	Recall *RelationshipLinks `json:"recall,omitempty"`
+	// recall
+	Recall *RelationshipRecalls `json:"recall,omitempty"`
 
-	// ID of the recall reversal resource related to the recall reversal admission
-	RecallReversal *RelationshipLinks `json:"recall_reversal,omitempty"`
+	// recall reversal
+	RecallReversal *RelationshipRecallReversals `json:"recall_reversal,omitempty"`
 }
+
+// line 140
 
 func RecallReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallReversalAdmissionRelationships {
 	return &RecallReversalAdmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		Recall: RelationshipLinksWithDefaults(defaults),
+		Recall: RelationshipRecallsWithDefaults(defaults),
 
-		RecallReversal: RelationshipLinksWithDefaults(defaults),
+		RecallReversal: RelationshipRecallReversalsWithDefaults(defaults),
 	}
 }
 
-func (m *RecallReversalAdmissionRelationships) WithPayment(payment RelationshipLinks) *RecallReversalAdmissionRelationships {
+func (m *RecallReversalAdmissionRelationships) WithPayment(payment RelationshipPayments) *RecallReversalAdmissionRelationships {
 
 	m.Payment = &payment
 
@@ -384,7 +388,7 @@ func (m *RecallReversalAdmissionRelationships) WithoutPayment() *RecallReversalA
 	return m
 }
 
-func (m *RecallReversalAdmissionRelationships) WithRecall(recall RelationshipLinks) *RecallReversalAdmissionRelationships {
+func (m *RecallReversalAdmissionRelationships) WithRecall(recall RelationshipRecalls) *RecallReversalAdmissionRelationships {
 
 	m.Recall = &recall
 
@@ -396,7 +400,7 @@ func (m *RecallReversalAdmissionRelationships) WithoutRecall() *RecallReversalAd
 	return m
 }
 
-func (m *RecallReversalAdmissionRelationships) WithRecallReversal(recallReversal RelationshipLinks) *RecallReversalAdmissionRelationships {
+func (m *RecallReversalAdmissionRelationships) WithRecallReversal(recallReversal RelationshipRecallReversals) *RecallReversalAdmissionRelationships {
 
 	m.RecallReversal = &recallReversal
 

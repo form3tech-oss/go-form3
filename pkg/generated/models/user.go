@@ -41,6 +41,8 @@ type User struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func UserWithDefaults(defaults client.Defaults) *User {
 	return &User{
 
@@ -217,16 +219,19 @@ type UserAttributes struct {
 	ClientCredentialIds []string `json:"client_credential_ids"`
 
 	// Email address
-	// Pattern: ^[A-Za-z0-9-+@.]*$
 	Email string `json:"email,omitempty"`
+
+	// public key ids
+	PublicKeyIds []strfmt.UUID `json:"public_key_ids"`
 
 	// List of roles that this user belongs to
 	RoleIds []strfmt.UUID `json:"role_ids"`
 
 	// User name
-	// Pattern: ^[A-Za-z0-9-+@.]*$
 	Username string `json:"username,omitempty"`
 }
+
+// line 140
 
 func UserAttributesWithDefaults(defaults client.Defaults) *UserAttributes {
 	return &UserAttributes{
@@ -234,6 +239,8 @@ func UserAttributesWithDefaults(defaults client.Defaults) *UserAttributes {
 		ClientCredentialIds: make([]string, 0),
 
 		Email: defaults.GetString("UserAttributes", "email"),
+
+		PublicKeyIds: make([]strfmt.UUID, 0),
 
 		RoleIds: make([]strfmt.UUID, 0),
 
@@ -251,6 +258,13 @@ func (m *UserAttributes) WithClientCredentialIds(clientCredentialIds []string) *
 func (m *UserAttributes) WithEmail(email string) *UserAttributes {
 
 	m.Email = email
+
+	return m
+}
+
+func (m *UserAttributes) WithPublicKeyIds(publicKeyIds []strfmt.UUID) *UserAttributes {
+
+	m.PublicKeyIds = publicKeyIds
 
 	return m
 }
@@ -273,15 +287,11 @@ func (m *UserAttributes) WithUsername(username string) *UserAttributes {
 func (m *UserAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateEmail(formats); err != nil {
+	if err := m.validatePublicKeyIds(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateRoleIds(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUsername(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -291,14 +301,18 @@ func (m *UserAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *UserAttributes) validateEmail(formats strfmt.Registry) error {
+func (m *UserAttributes) validatePublicKeyIds(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Email) { // not required
+	if swag.IsZero(m.PublicKeyIds) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"email", "body", string(m.Email), `^[A-Za-z0-9-+@.]*$`); err != nil {
-		return err
+	for i := 0; i < len(m.PublicKeyIds); i++ {
+
+		if err := validate.FormatOf("attributes"+"."+"public_key_ids"+"."+strconv.Itoa(i), "body", "uuid", m.PublicKeyIds[i].String(), formats); err != nil {
+			return err
+		}
+
 	}
 
 	return nil
@@ -316,19 +330,6 @@ func (m *UserAttributes) validateRoleIds(formats strfmt.Registry) error {
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *UserAttributes) validateUsername(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Username) { // not required
-		return nil
-	}
-
-	if err := validate.Pattern("attributes"+"."+"username", "body", string(m.Username), `^[A-Za-z0-9-+@.]*$`); err != nil {
-		return err
 	}
 
 	return nil

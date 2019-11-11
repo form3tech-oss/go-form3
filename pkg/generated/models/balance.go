@@ -40,6 +40,8 @@ type Balance struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func BalanceWithDefaults(defaults client.Defaults) *Balance {
 	return &Balance{
 

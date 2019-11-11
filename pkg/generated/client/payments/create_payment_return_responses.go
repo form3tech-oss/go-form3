@@ -22,10 +22,12 @@ type CreatePaymentReturnReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreatePaymentReturnReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreatePaymentReturnCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *CreatePaymentReturnReader) ReadResponse(response runtime.ClientResponse
 		return result, nil
 
 	case 400:
+
 		result := NewCreatePaymentReturnBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Return creation response
 type CreatePaymentReturnCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReturnCreationResponse
 }
 
@@ -68,6 +73,7 @@ func (o *CreatePaymentReturnCreated) readResponse(response runtime.ClientRespons
 	o.ReturnCreationResponse = new(models.ReturnCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReturnCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Return creation error
 type CreatePaymentReturnBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *CreatePaymentReturnBadRequest) readResponse(response runtime.ClientResp
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

@@ -43,7 +43,8 @@ func (a *CreateAccountRequest) Do() (*CreateAccountCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateAccountReader{formats: a.formats},
+
+		Reader: &CreateAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateAccountRequest) Do() (*CreateAccountCreated, error) {
 }
 
 func (a *CreateAccountRequest) MustDo() *CreateAccountCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *DeleteAccountRequest) Do() (*DeleteAccountNoContent, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &DeleteAccountReader{formats: a.formats},
+
+		Reader: &DeleteAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *DeleteAccountRequest) Do() (*DeleteAccountNoContent, error) {
 }
 
 func (a *DeleteAccountRequest) MustDo() *DeleteAccountNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *GetAccountRequest) Do() (*GetAccountOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetAccountReader{formats: a.formats},
+
+		Reader: &GetAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,45 @@ func (a *GetAccountRequest) Do() (*GetAccountOK, error) {
 }
 
 func (a *GetAccountRequest) MustDo() *GetAccountOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
+}
+
+/*
+get organisation accounts ID events API
+*/
+func (a *GetOrganisationAccountsIDEventsRequest) Do() (*GetOrganisationAccountsIDEventsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetOrganisationAccountsIDEvents",
+		Method:             "GET",
+		PathPattern:        "/organisation/accounts/{id}/events",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+
+		Reader: &GetOrganisationAccountsIDEventsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetOrganisationAccountsIDEventsOK), nil
+
+}
+
+func (a *GetOrganisationAccountsIDEventsRequest) MustDo() *GetOrganisationAccountsIDEventsOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
 }
 
 /*
@@ -142,7 +179,8 @@ func (a *ListAccountsRequest) Do() (*ListAccountsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListAccountsReader{formats: a.formats},
+
+		Reader: &ListAccountsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +193,11 @@ func (a *ListAccountsRequest) Do() (*ListAccountsOK, error) {
 }
 
 func (a *ListAccountsRequest) MustDo() *ListAccountsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +213,8 @@ func (a *ModifyAccountRequest) Do() (*ModifyAccountOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ModifyAccountReader{formats: a.formats},
+
+		Reader: &ModifyAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +227,11 @@ func (a *ModifyAccountRequest) Do() (*ModifyAccountOK, error) {
 }
 
 func (a *ModifyAccountRequest) MustDo() *ModifyAccountOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

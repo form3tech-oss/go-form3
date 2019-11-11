@@ -22,10 +22,12 @@ type GetMandatesHealthReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetMandatesHealthReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetMandatesHealthOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Mandate service health
 type GetMandatesHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +65,7 @@ func (o *GetMandatesHealthOK) readResponse(response runtime.ClientResponse, cons
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

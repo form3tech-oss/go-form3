@@ -20,18 +20,37 @@ import (
 // swagger:model RecallAdmissionRelationships
 type RecallAdmissionRelationships struct {
 
-	// ID of the recall resource related to the recall admission
-	Recall *RelationshipLinks `json:"recall,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
+
+	// recall
+	Recall *RelationshipRecalls `json:"recall,omitempty"`
 }
+
+// line 140
 
 func RecallAdmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallAdmissionRelationships {
 	return &RecallAdmissionRelationships{
 
-		Recall: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
+
+		Recall: RelationshipRecallsWithDefaults(defaults),
 	}
 }
 
-func (m *RecallAdmissionRelationships) WithRecall(recall RelationshipLinks) *RecallAdmissionRelationships {
+func (m *RecallAdmissionRelationships) WithPayment(payment RelationshipPayments) *RecallAdmissionRelationships {
+
+	m.Payment = &payment
+
+	return m
+}
+
+func (m *RecallAdmissionRelationships) WithoutPayment() *RecallAdmissionRelationships {
+	m.Payment = nil
+	return m
+}
+
+func (m *RecallAdmissionRelationships) WithRecall(recall RelationshipRecalls) *RecallAdmissionRelationships {
 
 	m.Recall = &recall
 
@@ -47,6 +66,10 @@ func (m *RecallAdmissionRelationships) WithoutRecall() *RecallAdmissionRelations
 func (m *RecallAdmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePayment(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRecall(formats); err != nil {
 		res = append(res, err)
 	}
@@ -54,6 +77,24 @@ func (m *RecallAdmissionRelationships) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RecallAdmissionRelationships) validatePayment(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Payment) { // not required
+		return nil
+	}
+
+	if m.Payment != nil {
+		if err := m.Payment.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("payment")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

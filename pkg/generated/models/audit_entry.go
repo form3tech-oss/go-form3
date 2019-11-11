@@ -41,6 +41,8 @@ type AuditEntry struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func AuditEntryWithDefaults(defaults client.Defaults) *AuditEntry {
 	return &AuditEntry{
 
@@ -256,6 +258,8 @@ type AuditEntryAttributes struct {
 	// Pattern: ^[A-Za-z]*$
 	RecordType string `json:"record_type,omitempty"`
 }
+
+// line 140
 
 func AuditEntryAttributesWithDefaults(defaults client.Defaults) *AuditEntryAttributes {
 	return &AuditEntryAttributes{

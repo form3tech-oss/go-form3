@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // RoleCreation role creation
@@ -21,8 +22,11 @@ import (
 type RoleCreation struct {
 
 	// data
-	Data *Role `json:"data,omitempty"`
+	// Required: true
+	Data *Role `json:"data"`
 }
+
+// line 140
 
 func RoleCreationWithDefaults(defaults client.Defaults) *RoleCreation {
 	return &RoleCreation{
@@ -59,8 +63,8 @@ func (m *RoleCreation) Validate(formats strfmt.Registry) error {
 
 func (m *RoleCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

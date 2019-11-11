@@ -22,10 +22,12 @@ type CreateMandateReturnReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *CreateMandateReturnReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 201:
+
 		result := NewCreateMandateReturnCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *CreateMandateReturnReader) ReadResponse(response runtime.ClientResponse
 		return result, nil
 
 	case 400:
+
 		result := NewCreateMandateReturnBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -56,6 +59,8 @@ Return creation response
 type CreateMandateReturnCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateReturnCreationResponse
 }
 
@@ -68,6 +73,7 @@ func (o *CreateMandateReturnCreated) readResponse(response runtime.ClientRespons
 	o.MandateReturnCreationResponse = new(models.MandateReturnCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateReturnCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +93,8 @@ Return creation error
 type CreateMandateReturnBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +107,7 @@ func (o *CreateMandateReturnBadRequest) readResponse(response runtime.ClientResp
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

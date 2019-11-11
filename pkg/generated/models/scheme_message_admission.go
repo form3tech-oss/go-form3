@@ -46,6 +46,8 @@ type SchemeMessageAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func SchemeMessageAdmissionWithDefaults(defaults client.Defaults) *SchemeMessageAdmission {
 	return &SchemeMessageAdmission{
 

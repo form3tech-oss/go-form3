@@ -22,10 +22,12 @@ type GetReportAdmissionReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetReportAdmissionOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -33,6 +35,7 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 
 	case 400:
+
 		result := NewGetReportAdmissionBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -40,6 +43,7 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 403:
+
 		result := NewGetReportAdmissionForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -47,6 +51,7 @@ func (o *GetReportAdmissionReader) ReadResponse(response runtime.ClientResponse,
 		return nil, result
 
 	case 404:
+
 		result := NewGetReportAdmissionNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -70,6 +75,8 @@ Get report admission by Id
 type GetReportAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReportAdmissionDetailsResponse
 }
 
@@ -82,6 +89,7 @@ func (o *GetReportAdmissionOK) readResponse(response runtime.ClientResponse, con
 	o.ReportAdmissionDetailsResponse = new(models.ReportAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReportAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -101,6 +109,8 @@ Bad Request
 type GetReportAdmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -113,6 +123,7 @@ func (o *GetReportAdmissionBadRequest) readResponse(response runtime.ClientRespo
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -132,6 +143,8 @@ Forbidden
 type GetReportAdmissionForbidden struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -144,6 +157,7 @@ func (o *GetReportAdmissionForbidden) readResponse(response runtime.ClientRespon
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -163,6 +177,8 @@ Not Found
 type GetReportAdmissionNotFound struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -175,6 +191,7 @@ func (o *GetReportAdmissionNotFound) readResponse(response runtime.ClientRespons
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

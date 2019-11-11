@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // OrganisationUpdate organisation update
@@ -21,8 +22,11 @@ import (
 type OrganisationUpdate struct {
 
 	// data
-	Data *Organisation `json:"data,omitempty"`
+	// Required: true
+	Data *Organisation `json:"data"`
 }
+
+// line 140
 
 func OrganisationUpdateWithDefaults(defaults client.Defaults) *OrganisationUpdate {
 	return &OrganisationUpdate{
@@ -59,8 +63,8 @@ func (m *OrganisationUpdate) Validate(formats strfmt.Registry) error {
 
 func (m *OrganisationUpdate) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

@@ -32,6 +32,8 @@ type PrivateIdentification struct {
 	IdentificationSchemeCode string `json:"identification_scheme_code,omitempty"`
 }
 
+// line 140
+
 func PrivateIdentificationWithDefaults(defaults client.Defaults) *PrivateIdentification {
 	return &PrivateIdentification{
 

@@ -20,18 +20,20 @@ import (
 // swagger:model RecallSubmissionRelationships
 type RecallSubmissionRelationships struct {
 
-	// ID of the recall resource related to the return submission
-	Recall *RelationshipLinks `json:"recall,omitempty"`
+	// recall
+	Recall *RelationshipRecalls `json:"recall,omitempty"`
 }
+
+// line 140
 
 func RecallSubmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallSubmissionRelationships {
 	return &RecallSubmissionRelationships{
 
-		Recall: RelationshipLinksWithDefaults(defaults),
+		Recall: RelationshipRecallsWithDefaults(defaults),
 	}
 }
 
-func (m *RecallSubmissionRelationships) WithRecall(recall RelationshipLinks) *RecallSubmissionRelationships {
+func (m *RecallSubmissionRelationships) WithRecall(recall RelationshipRecalls) *RecallSubmissionRelationships {
 
 	m.Recall = &recall
 

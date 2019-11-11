@@ -54,6 +54,8 @@ type ReturnReversalAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func ReturnReversalAdmissionWithDefaults(defaults client.Defaults) *ReturnReversalAdmission {
 	return &ReturnReversalAdmission{
 
@@ -357,6 +359,8 @@ type ReturnReversalAdmissionAttributes struct {
 	// [Description](http://draft-api-docs.form3.tech/api.html#enumerations-scheme-status-codes-for-bacs) of scheme_status_code
 	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
 }
+
+// line 140
 
 func ReturnReversalAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnReversalAdmissionAttributes {
 	return &ReturnReversalAdmissionAttributes{

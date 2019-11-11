@@ -32,6 +32,9 @@ type MandateSubmission struct {
 	// Format: uuid
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
+	// relationships
+	Relationships *MandateSubmissionRelationships `json:"relationships,omitempty"`
+
 	// type
 	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
@@ -41,6 +44,8 @@ type MandateSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
+// line 140
+
 func MandateSubmissionWithDefaults(defaults client.Defaults) *MandateSubmission {
 	return &MandateSubmission{
 
@@ -49,6 +54,8 @@ func MandateSubmissionWithDefaults(defaults client.Defaults) *MandateSubmission 
 		ID: defaults.GetStrfmtUUID("MandateSubmission", "id"),
 
 		OrganisationID: defaults.GetStrfmtUUID("MandateSubmission", "organisation_id"),
+
+		Relationships: MandateSubmissionRelationshipsWithDefaults(defaults),
 
 		Type: defaults.GetString("MandateSubmission", "type"),
 
@@ -79,6 +86,18 @@ func (m *MandateSubmission) WithOrganisationID(organisationID strfmt.UUID) *Mand
 
 	m.OrganisationID = organisationID
 
+	return m
+}
+
+func (m *MandateSubmission) WithRelationships(relationships MandateSubmissionRelationships) *MandateSubmission {
+
+	m.Relationships = &relationships
+
+	return m
+}
+
+func (m *MandateSubmission) WithoutRelationships() *MandateSubmission {
+	m.Relationships = nil
 	return m
 }
 
@@ -114,6 +133,10 @@ func (m *MandateSubmission) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrganisationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRelationships(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -170,6 +193,24 @@ func (m *MandateSubmission) validateOrganisationID(formats strfmt.Registry) erro
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *MandateSubmission) validateRelationships(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Relationships) { // not required
+		return nil
+	}
+
+	if m.Relationships != nil {
+		if err := m.Relationships.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -243,9 +284,9 @@ type MandateSubmissionAttributes struct {
 	// status reason
 	StatusReason string `json:"status_reason,omitempty"`
 
-	// submission date
+	// submission datetime
 	// Format: date-time
-	SubmissionDate strfmt.DateTime `json:"submission_date,omitempty"`
+	SubmissionDatetime strfmt.DateTime `json:"submission_datetime,omitempty"`
 
 	// submission reason
 	SubmissionReason string `json:"submission_reason,omitempty"`
@@ -253,6 +294,8 @@ type MandateSubmissionAttributes struct {
 	// submitted mandate
 	SubmittedMandate *MandateAttributes `json:"submitted_mandate,omitempty"`
 }
+
+// line 140
 
 func MandateSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateSubmissionAttributes {
 	return &MandateSubmissionAttributes{
@@ -265,7 +308,7 @@ func MandateSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateS
 
 		StatusReason: defaults.GetString("MandateSubmissionAttributes", "status_reason"),
 
-		SubmissionDate: defaults.GetStrfmtDateTime("MandateSubmissionAttributes", "submission_date"),
+		SubmissionDatetime: defaults.GetStrfmtDateTime("MandateSubmissionAttributes", "submission_datetime"),
 
 		SubmissionReason: defaults.GetString("MandateSubmissionAttributes", "submission_reason"),
 
@@ -306,9 +349,9 @@ func (m *MandateSubmissionAttributes) WithStatusReason(statusReason string) *Man
 	return m
 }
 
-func (m *MandateSubmissionAttributes) WithSubmissionDate(submissionDate strfmt.DateTime) *MandateSubmissionAttributes {
+func (m *MandateSubmissionAttributes) WithSubmissionDatetime(submissionDatetime strfmt.DateTime) *MandateSubmissionAttributes {
 
-	m.SubmissionDate = submissionDate
+	m.SubmissionDatetime = submissionDatetime
 
 	return m
 }
@@ -348,7 +391,7 @@ func (m *MandateSubmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSubmissionDate(formats); err != nil {
+	if err := m.validateSubmissionDatetime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -409,13 +452,13 @@ func (m *MandateSubmissionAttributes) validateStatus(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *MandateSubmissionAttributes) validateSubmissionDate(formats strfmt.Registry) error {
+func (m *MandateSubmissionAttributes) validateSubmissionDatetime(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.SubmissionDate) { // not required
+	if swag.IsZero(m.SubmissionDatetime) { // not required
 		return nil
 	}
 
-	if err := validate.FormatOf("attributes"+"."+"submission_date", "body", "date-time", m.SubmissionDate.String(), formats); err != nil {
+	if err := validate.FormatOf("attributes"+"."+"submission_datetime", "body", "date-time", m.SubmissionDatetime.String(), formats); err != nil {
 		return err
 	}
 

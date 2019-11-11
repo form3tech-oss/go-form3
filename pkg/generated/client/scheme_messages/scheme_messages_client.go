@@ -43,7 +43,8 @@ func (a *GetSchemeMessageRequest) Do() (*GetSchemeMessageOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetSchemeMessageReader{formats: a.formats},
+
+		Reader: &GetSchemeMessageReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *GetSchemeMessageRequest) Do() (*GetSchemeMessageOK, error) {
 }
 
 func (a *GetSchemeMessageRequest) MustDo() *GetSchemeMessageOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *GetSchemeMessageAdmissionRequest) Do() (*GetSchemeMessageAdmissionOK, e
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetSchemeMessageAdmissionReader{formats: a.formats},
+
+		Reader: &GetSchemeMessageAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *GetSchemeMessageAdmissionRequest) Do() (*GetSchemeMessageAdmissionOK, e
 }
 
 func (a *GetSchemeMessageAdmissionRequest) MustDo() *GetSchemeMessageAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *ListSchemeMessagesRequest) Do() (*ListSchemeMessagesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListSchemeMessagesReader{formats: a.formats},
+
+		Reader: &ListSchemeMessagesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *ListSchemeMessagesRequest) Do() (*ListSchemeMessagesOK, error) {
 }
 
 func (a *ListSchemeMessagesRequest) MustDo() *ListSchemeMessagesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

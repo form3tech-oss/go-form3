@@ -35,6 +35,8 @@ type BalanceAttributes struct {
 	HoldingInstitution string `json:"holding_institution,omitempty"`
 }
 
+// line 140
+
 func BalanceAttributesWithDefaults(defaults client.Defaults) *BalanceAttributes {
 	return &BalanceAttributes{
 

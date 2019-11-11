@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // AceCreation ace creation
@@ -21,8 +22,11 @@ import (
 type AceCreation struct {
 
 	// data
-	Data *Ace `json:"data,omitempty"`
+	// Required: true
+	Data *Ace `json:"data"`
 }
+
+// line 140
 
 func AceCreationWithDefaults(defaults client.Defaults) *AceCreation {
 	return &AceCreation{
@@ -59,8 +63,8 @@ func (m *AceCreation) Validate(formats strfmt.Registry) error {
 
 func (m *AceCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

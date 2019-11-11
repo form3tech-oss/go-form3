@@ -43,6 +43,8 @@ type ReportAttributes struct {
 	ReportTypeDescription string `json:"report_type_description,omitempty"`
 }
 
+// line 140
+
 func ReportAttributesWithDefaults(defaults client.Defaults) *ReportAttributes {
 	return &ReportAttributes{
 

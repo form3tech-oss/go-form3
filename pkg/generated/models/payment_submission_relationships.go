@@ -20,23 +20,25 @@ import (
 // swagger:model PaymentSubmissionRelationships
 type PaymentSubmissionRelationships struct {
 
-	// ID of the payment resource related to the payment submission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
 
+// line 140
+
 func PaymentSubmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentSubmissionRelationships {
 	return &PaymentSubmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
 }
 
-func (m *PaymentSubmissionRelationships) WithPayment(payment RelationshipLinks) *PaymentSubmissionRelationships {
+func (m *PaymentSubmissionRelationships) WithPayment(payment RelationshipPayments) *PaymentSubmissionRelationships {
 
 	m.Payment = &payment
 

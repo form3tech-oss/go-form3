@@ -27,6 +27,8 @@ type ReturnReversalCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
+// line 140
+
 func ReturnReversalCreationResponseWithDefaults(defaults client.Defaults) *ReturnReversalCreationResponse {
 	return &ReturnReversalCreationResponse{
 

@@ -43,7 +43,8 @@ func (a *CreateDirectDebitRequest) Do() (*CreateDirectDebitCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateDirectDebitReader{formats: a.formats},
+
+		Reader: &CreateDirectDebitReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -56,11 +57,11 @@ func (a *CreateDirectDebitRequest) Do() (*CreateDirectDebitCreated, error) {
 }
 
 func (a *CreateDirectDebitRequest) MustDo() *CreateDirectDebitCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -76,7 +77,8 @@ func (a *CreateDirectDebitReturnRequest) Do() (*CreateDirectDebitReturnCreated, 
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateDirectDebitReturnReader{formats: a.formats},
+
+		Reader: &CreateDirectDebitReturnReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -89,11 +91,11 @@ func (a *CreateDirectDebitReturnRequest) Do() (*CreateDirectDebitReturnCreated, 
 }
 
 func (a *CreateDirectDebitReturnRequest) MustDo() *CreateDirectDebitReturnCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -109,7 +111,8 @@ func (a *CreateDirectDebitReturnSubmissionRequest) Do() (*CreateDirectDebitRetur
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateDirectDebitReturnSubmissionReader{formats: a.formats},
+
+		Reader: &CreateDirectDebitReturnSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -122,11 +125,11 @@ func (a *CreateDirectDebitReturnSubmissionRequest) Do() (*CreateDirectDebitRetur
 }
 
 func (a *CreateDirectDebitReturnSubmissionRequest) MustDo() *CreateDirectDebitReturnSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -142,7 +145,8 @@ func (a *CreateDirectDebitReversalRequest) Do() (*CreateDirectDebitReversalCreat
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateDirectDebitReversalReader{formats: a.formats},
+
+		Reader: &CreateDirectDebitReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -155,11 +159,11 @@ func (a *CreateDirectDebitReversalRequest) Do() (*CreateDirectDebitReversalCreat
 }
 
 func (a *CreateDirectDebitReversalRequest) MustDo() *CreateDirectDebitReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -175,7 +179,8 @@ func (a *CreateDirectDebitSubmissionRequest) Do() (*CreateDirectDebitSubmissionC
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &CreateDirectDebitSubmissionReader{formats: a.formats},
+
+		Reader: &CreateDirectDebitSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -188,11 +193,11 @@ func (a *CreateDirectDebitSubmissionRequest) Do() (*CreateDirectDebitSubmissionC
 }
 
 func (a *CreateDirectDebitSubmissionRequest) MustDo() *CreateDirectDebitSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -208,7 +213,8 @@ func (a *GetDirectDebitRequest) Do() (*GetDirectDebitOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitReader{formats: a.formats},
+
+		Reader: &GetDirectDebitReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -221,11 +227,11 @@ func (a *GetDirectDebitRequest) Do() (*GetDirectDebitOK, error) {
 }
 
 func (a *GetDirectDebitRequest) MustDo() *GetDirectDebitOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -241,7 +247,8 @@ func (a *GetDirectDebitAdmissionRequest) Do() (*GetDirectDebitAdmissionOK, error
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitAdmissionReader{formats: a.formats},
+
+		Reader: &GetDirectDebitAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -254,11 +261,11 @@ func (a *GetDirectDebitAdmissionRequest) Do() (*GetDirectDebitAdmissionOK, error
 }
 
 func (a *GetDirectDebitAdmissionRequest) MustDo() *GetDirectDebitAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -274,7 +281,8 @@ func (a *GetDirectDebitHealthRequest) Do() (*GetDirectDebitHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitHealthReader{formats: a.formats},
+
+		Reader: &GetDirectDebitHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -287,11 +295,11 @@ func (a *GetDirectDebitHealthRequest) Do() (*GetDirectDebitHealthOK, error) {
 }
 
 func (a *GetDirectDebitHealthRequest) MustDo() *GetDirectDebitHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -307,7 +315,8 @@ func (a *GetDirectDebitReturnRequest) Do() (*GetDirectDebitReturnOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitReturnReader{formats: a.formats},
+
+		Reader: &GetDirectDebitReturnReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -320,11 +329,11 @@ func (a *GetDirectDebitReturnRequest) Do() (*GetDirectDebitReturnOK, error) {
 }
 
 func (a *GetDirectDebitReturnRequest) MustDo() *GetDirectDebitReturnOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -340,7 +349,8 @@ func (a *GetDirectDebitReturnSubmissionRequest) Do() (*GetDirectDebitReturnSubmi
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitReturnSubmissionReader{formats: a.formats},
+
+		Reader: &GetDirectDebitReturnSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -353,11 +363,11 @@ func (a *GetDirectDebitReturnSubmissionRequest) Do() (*GetDirectDebitReturnSubmi
 }
 
 func (a *GetDirectDebitReturnSubmissionRequest) MustDo() *GetDirectDebitReturnSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -373,7 +383,8 @@ func (a *GetDirectDebitReversalRequest) Do() (*GetDirectDebitReversalOK, error) 
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitReversalReader{formats: a.formats},
+
+		Reader: &GetDirectDebitReversalReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -386,11 +397,11 @@ func (a *GetDirectDebitReversalRequest) Do() (*GetDirectDebitReversalOK, error) 
 }
 
 func (a *GetDirectDebitReversalRequest) MustDo() *GetDirectDebitReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -406,7 +417,8 @@ func (a *GetDirectDebitReversalAdmissionRequest) Do() (*GetDirectDebitReversalAd
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitReversalAdmissionReader{formats: a.formats},
+
+		Reader: &GetDirectDebitReversalAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -419,11 +431,11 @@ func (a *GetDirectDebitReversalAdmissionRequest) Do() (*GetDirectDebitReversalAd
 }
 
 func (a *GetDirectDebitReversalAdmissionRequest) MustDo() *GetDirectDebitReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -439,7 +451,8 @@ func (a *GetDirectDebitSubmissionRequest) Do() (*GetDirectDebitSubmissionOK, err
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetDirectDebitSubmissionReader{formats: a.formats},
+
+		Reader: &GetDirectDebitSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -452,11 +465,113 @@ func (a *GetDirectDebitSubmissionRequest) Do() (*GetDirectDebitSubmissionOK, err
 }
 
 func (a *GetDirectDebitSubmissionRequest) MustDo() *GetDirectDebitSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
+}
+
+/*
+get transaction directdebits ID returns return ID admissions admission ID API
+*/
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDRequest) Do() (*GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+
+		Reader: &GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDRequest) MustDo() *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction directdebits ID returns return ID reversals reversal ID API
+*/
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDRequest) Do() (*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+
+		Reader: &GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDRequest) MustDo() *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction directdebits ID returns return ID reversals reversal ID admissions admission ID API
+*/
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDRequest) Do() (*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+
+		Reader: &GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDRequest) MustDo() *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
 }
 
 /*
@@ -472,7 +587,8 @@ func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &ListDirectDebitsReader{formats: a.formats},
+
+		Reader: &ListDirectDebitsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -485,11 +601,11 @@ func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
 }
 
 func (a *ListDirectDebitsRequest) MustDo() *ListDirectDebitsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

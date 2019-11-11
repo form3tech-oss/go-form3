@@ -22,10 +22,12 @@ type GetUnitReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
+
 func (o *GetUnitReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
 	case 200:
+
 		result := NewGetUnitOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
@@ -49,6 +51,8 @@ Organisation details
 type GetUnitOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.OrganisationDetailsResponse
 }
 
@@ -61,6 +65,7 @@ func (o *GetUnitOK) readResponse(response runtime.ClientResponse, consumer runti
 	o.OrganisationDetailsResponse = new(models.OrganisationDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
