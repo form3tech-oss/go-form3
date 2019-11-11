@@ -26,8 +26,6 @@ type SubscriptionAmendment struct {
 	Data *SubscriptionUpdate `json:"data"`
 }
 
-// line 140
-
 func SubscriptionAmendmentWithDefaults(defaults client.Defaults) *SubscriptionAmendment {
 	return &SubscriptionAmendment{
 

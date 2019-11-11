@@ -54,8 +54,6 @@ type ReversalAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ReversalAdmissionWithDefaults(defaults client.Defaults) *ReversalAdmission {
 	return &ReversalAdmission{
 
@@ -363,8 +361,6 @@ type ReversalAdmissionAttributes struct {
 	SourceGateway string `json:"source_gateway,omitempty"`
 }
 
-// line 140
-
 func ReversalAdmissionAttributesWithDefaults(defaults client.Defaults) *ReversalAdmissionAttributes {
 	return &ReversalAdmissionAttributes{
 
@@ -437,8 +433,6 @@ type ReversalAdmissionRelationships struct {
 	// reversal
 	Reversal *RelationshipReversals `json:"reversal,omitempty"`
 }
-
-// line 140
 
 func ReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReversalAdmissionRelationships {
 	return &ReversalAdmissionRelationships{

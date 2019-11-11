@@ -52,8 +52,6 @@ type DirectDebitAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func DirectDebitAdmissionWithDefaults(defaults client.Defaults) *DirectDebitAdmission {
 	return &DirectDebitAdmission{
 
@@ -358,8 +356,6 @@ type DirectDebitAdmissionAttributes struct {
 	// status reason
 	StatusReason DirectDebitAdmissionStatusReason `json:"status_reason,omitempty"`
 }
-
-// line 140
 
 func DirectDebitAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitAdmissionAttributes {
 	return &DirectDebitAdmissionAttributes{

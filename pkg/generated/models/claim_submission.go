@@ -46,8 +46,6 @@ type ClaimSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ClaimSubmissionWithDefaults(defaults client.Defaults) *ClaimSubmission {
 	return &ClaimSubmission{
 
@@ -296,8 +294,6 @@ type ClaimSubmissionAttributes struct {
 	// Format: date-time
 	SubmissionDatetime strfmt.DateTime `json:"submission_datetime,omitempty"`
 }
-
-// line 140
 
 func ClaimSubmissionAttributesWithDefaults(defaults client.Defaults) *ClaimSubmissionAttributes {
 	return &ClaimSubmissionAttributes{

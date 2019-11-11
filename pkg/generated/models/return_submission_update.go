@@ -43,8 +43,6 @@ type ReturnSubmissionUpdate struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ReturnSubmissionUpdateWithDefaults(defaults client.Defaults) *ReturnSubmissionUpdate {
 	return &ReturnSubmissionUpdate{
 
@@ -270,8 +268,6 @@ type ReturnSubmissionUpdateAttributes struct {
 	// Description of the submission status
 	StatusReason string `json:"status_reason,omitempty"`
 }
-
-// line 140
 
 func ReturnSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionUpdateAttributes {
 	return &ReturnSubmissionUpdateAttributes{

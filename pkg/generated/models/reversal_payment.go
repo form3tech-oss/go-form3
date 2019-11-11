@@ -54,8 +54,6 @@ type ReversalPayment struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ReversalPaymentWithDefaults(defaults client.Defaults) *ReversalPayment {
 	return &ReversalPayment{
 
@@ -335,8 +333,6 @@ type ReversalPaymentRelationships struct {
 	// ID of the reversal submission resource related to the reversal
 	ReversalSubmission *RelationshipLinks `json:"reversal_submission,omitempty"`
 }
-
-// line 140
 
 func ReversalPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReversalPaymentRelationships {
 	return &ReversalPaymentRelationships{

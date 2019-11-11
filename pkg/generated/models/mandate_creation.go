@@ -24,8 +24,6 @@ type MandateCreation struct {
 	Data *Mandate `json:"data,omitempty"`
 }
 
-// line 140
-
 func MandateCreationWithDefaults(defaults client.Defaults) *MandateCreation {
 	return &MandateCreation{
 

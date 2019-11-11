@@ -35,8 +35,6 @@ type Links struct {
 	Self string `json:"self,omitempty"`
 }
 
-// line 140
-
 func LinksWithDefaults(defaults client.Defaults) *Links {
 	return &Links{
 

@@ -26,8 +26,6 @@ type AceCreation struct {
 	Data *Ace `json:"data"`
 }
 
-// line 140
-
 func AceCreationWithDefaults(defaults client.Defaults) *AceCreation {
 	return &AceCreation{
 

@@ -22,7 +22,6 @@ type CreateUserCredentialsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-
 func (o *CreateUserCredentialsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 

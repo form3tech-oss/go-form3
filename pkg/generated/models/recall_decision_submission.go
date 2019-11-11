@@ -54,8 +54,6 @@ type RecallDecisionSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func RecallDecisionSubmissionWithDefaults(defaults client.Defaults) *RecallDecisionSubmission {
 	return &RecallDecisionSubmission{
 
@@ -364,8 +362,6 @@ type RecallDecisionSubmissionAttributes struct {
 	// Format: date-time
 	SubmissionDatetime *strfmt.DateTime `json:"submission_datetime,omitempty"`
 }
-
-// line 140
 
 func RecallDecisionSubmissionAttributesWithDefaults(defaults client.Defaults) *RecallDecisionSubmissionAttributes {
 	return &RecallDecisionSubmissionAttributes{

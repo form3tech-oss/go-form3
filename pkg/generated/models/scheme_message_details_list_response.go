@@ -30,8 +30,6 @@ type SchemeMessageDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func SchemeMessageDetailsListResponseWithDefaults(defaults client.Defaults) *SchemeMessageDetailsListResponse {
 	return &SchemeMessageDetailsListResponse{
 

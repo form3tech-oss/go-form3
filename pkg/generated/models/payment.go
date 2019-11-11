@@ -55,8 +55,6 @@ type Payment struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func PaymentWithDefaults(defaults client.Defaults) *Payment {
 	return &Payment{
 
@@ -472,8 +470,6 @@ type PaymentAttributes struct {
 	// The scheme-specific unique transaction ID. Populated by the scheme.
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
-
-// line 140
 
 func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes {
 	return &PaymentAttributes{
@@ -1324,8 +1320,6 @@ type PaymentAttributesBeneficiaryParty struct {
 	TelephoneNumber string `json:"telephone_number,omitempty"`
 }
 
-// line 140
-
 func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *PaymentAttributesBeneficiaryParty {
 	return &PaymentAttributesBeneficiaryParty{
 
@@ -1684,8 +1678,6 @@ type PaymentAttributesDebtorParty struct {
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 }
 
-// line 140
-
 func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *PaymentAttributesDebtorParty {
 	return &PaymentAttributesDebtorParty{
 
@@ -2001,8 +1993,6 @@ type PaymentAttributesFx struct {
 	OriginalCurrency string `json:"original_currency,omitempty"`
 }
 
-// line 140
-
 func PaymentAttributesFxWithDefaults(defaults client.Defaults) *PaymentAttributesFx {
 	return &PaymentAttributesFx{
 
@@ -2085,8 +2075,6 @@ type PaymentAttributesStructuredReference struct {
 	Reference string `json:"reference,omitempty"`
 }
 
-// line 140
-
 func PaymentAttributesStructuredReferenceWithDefaults(defaults client.Defaults) *PaymentAttributesStructuredReference {
 	return &PaymentAttributesStructuredReference{
 
@@ -2159,8 +2147,6 @@ type PaymentAttributesSwift struct {
 	// This repetitive field specifies one or several time indication(s) related to the processing of the payment instruction.
 	TimeIndication string `json:"time_indication,omitempty"`
 }
-
-// line 140
 
 func PaymentAttributesSwiftWithDefaults(defaults client.Defaults) *PaymentAttributesSwift {
 	return &PaymentAttributesSwift{
@@ -2296,8 +2282,6 @@ type PaymentAttributesSwiftHeader struct {
 	// Message User Reference (MUR) value, which can be up to 16 characters, and will be returned in the ACK
 	UserReference string `json:"user_reference,omitempty"`
 }
-
-// line 140
 
 func PaymentAttributesSwiftHeaderWithDefaults(defaults client.Defaults) *PaymentAttributesSwiftHeader {
 	return &PaymentAttributesSwiftHeader{

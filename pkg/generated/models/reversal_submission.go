@@ -54,8 +54,6 @@ type ReversalSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ReversalSubmissionWithDefaults(defaults client.Defaults) *ReversalSubmission {
 	return &ReversalSubmission{
 
@@ -375,8 +373,6 @@ type ReversalSubmissionAttributes struct {
 	// Format: date-time
 	TransactionStartDatetime strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
 }
-
-// line 140
 
 func ReversalSubmissionAttributesWithDefaults(defaults client.Defaults) *ReversalSubmissionAttributes {
 	return &ReversalSubmissionAttributes{

@@ -43,8 +43,7 @@ func (a *CreateUnitRequest) Do() (*CreateUnitCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateUnitReader{formats: a.formats},
+		Reader:             &CreateUnitReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *GetUnitRequest) Do() (*GetUnitOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetUnitReader{formats: a.formats},
+		Reader:             &GetUnitReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *GetUnitsHealthRequest) Do() (*GetUnitsHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetUnitsHealthReader{formats: a.formats},
+		Reader:             &GetUnitsHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -145,8 +142,7 @@ func (a *ListUnitsRequest) Do() (*ListUnitsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListUnitsReader{formats: a.formats},
+		Reader:             &ListUnitsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -179,8 +175,7 @@ func (a *ModifyUnitRequest) Do() (*ModifyUnitOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ModifyUnitReader{formats: a.formats},
+		Reader:             &ModifyUnitReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

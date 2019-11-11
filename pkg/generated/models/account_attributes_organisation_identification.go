@@ -40,8 +40,6 @@ type AccountAttributesOrganisationIdentification struct {
 	TaxResidency string `json:"tax_residency,omitempty"`
 }
 
-// line 140
-
 func AccountAttributesOrganisationIdentificationWithDefaults(defaults client.Defaults) *AccountAttributesOrganisationIdentification {
 	return &AccountAttributesOrganisationIdentification{
 
@@ -235,8 +233,6 @@ type AccountAttributesOrganisationIdentificationRepresentative struct {
 	// residency
 	Residency string `json:"residency,omitempty"`
 }
-
-// line 140
 
 func AccountAttributesOrganisationIdentificationRepresentativeWithDefaults(defaults client.Defaults) *AccountAttributesOrganisationIdentificationRepresentative {
 	return &AccountAttributesOrganisationIdentificationRepresentative{

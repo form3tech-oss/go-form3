@@ -27,8 +27,6 @@ type RecallAdmissionRelationships struct {
 	Recall *RelationshipRecalls `json:"recall,omitempty"`
 }
 
-// line 140
-
 func RecallAdmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallAdmissionRelationships {
 	return &RecallAdmissionRelationships{
 

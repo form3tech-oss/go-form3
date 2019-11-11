@@ -45,8 +45,6 @@ type AccountEventAttributes struct {
 	RoutingStatus *string `json:"routing_status"`
 }
 
-// line 140
-
 func AccountEventAttributesWithDefaults(defaults client.Defaults) *AccountEventAttributes {
 	return &AccountEventAttributes{
 

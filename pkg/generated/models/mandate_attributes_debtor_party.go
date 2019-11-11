@@ -42,8 +42,6 @@ type MandateAttributesDebtorParty struct {
 	Country string `json:"country,omitempty"`
 }
 
-// line 140
-
 func MandateAttributesDebtorPartyWithDefaults(defaults client.Defaults) *MandateAttributesDebtorParty {
 	return &MandateAttributesDebtorParty{
 

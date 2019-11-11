@@ -43,8 +43,7 @@ func (a *CreateOauthTokenRequest) Do() (*CreateOauthTokenOK, error) {
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateOauthTokenReader{formats: a.formats},
+		Reader:             &CreateOauthTokenReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

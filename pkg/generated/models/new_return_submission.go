@@ -43,8 +43,6 @@ type NewReturnSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func NewReturnSubmissionWithDefaults(defaults client.Defaults) *NewReturnSubmission {
 	return &NewReturnSubmission{
 

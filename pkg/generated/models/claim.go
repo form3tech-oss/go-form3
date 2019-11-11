@@ -47,8 +47,6 @@ type Claim struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ClaimWithDefaults(defaults client.Defaults) *Claim {
 	return &Claim{
 

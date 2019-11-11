@@ -25,8 +25,6 @@ type MandateSubmissionCreation struct {
 	Data *MandateSubmissionCreationData `json:"data,omitempty"`
 }
 
-// line 140
-
 func MandateSubmissionCreationWithDefaults(defaults client.Defaults) *MandateSubmissionCreation {
 	return &MandateSubmissionCreation{
 
@@ -126,8 +124,6 @@ type MandateSubmissionCreationData struct {
 	// Minimum: 0
 	Version *int64 `json:"version,omitempty"`
 }
-
-// line 140
 
 func MandateSubmissionCreationDataWithDefaults(defaults client.Defaults) *MandateSubmissionCreationData {
 	return &MandateSubmissionCreationData{
@@ -325,8 +321,6 @@ type MandateSubmissionCreationDataAttributes struct {
 	// submission reason
 	SubmissionReason string `json:"submission_reason,omitempty"`
 }
-
-// line 140
 
 func MandateSubmissionCreationDataAttributesWithDefaults(defaults client.Defaults) *MandateSubmissionCreationDataAttributes {
 	return &MandateSubmissionCreationDataAttributes{

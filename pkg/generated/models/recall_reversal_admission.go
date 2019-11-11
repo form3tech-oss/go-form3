@@ -54,8 +54,6 @@ type RecallReversalAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func RecallReversalAdmissionWithDefaults(defaults client.Defaults) *RecallReversalAdmission {
 	return &RecallReversalAdmission{
 
@@ -362,8 +360,6 @@ type RecallReversalAdmissionRelationships struct {
 	// recall reversal
 	RecallReversal *RelationshipRecallReversals `json:"recall_reversal,omitempty"`
 }
-
-// line 140
 
 func RecallReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallReversalAdmissionRelationships {
 	return &RecallReversalAdmissionRelationships{

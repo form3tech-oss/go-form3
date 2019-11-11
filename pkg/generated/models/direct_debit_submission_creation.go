@@ -24,8 +24,6 @@ type DirectDebitSubmissionCreation struct {
 	Data *DirectDebitSubmission `json:"data,omitempty"`
 }
 
-// line 140
-
 func DirectDebitSubmissionCreationWithDefaults(defaults client.Defaults) *DirectDebitSubmissionCreation {
 	return &DirectDebitSubmissionCreation{
 

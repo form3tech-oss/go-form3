@@ -24,8 +24,6 @@ type AccountRelationships struct {
 	MasterAccount *RelationshipLinks `json:"master_account,omitempty"`
 }
 
-// line 140
-
 func AccountRelationshipsWithDefaults(defaults client.Defaults) *AccountRelationships {
 	return &AccountRelationships{
 

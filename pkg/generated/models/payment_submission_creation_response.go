@@ -27,8 +27,6 @@ type PaymentSubmissionCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func PaymentSubmissionCreationResponseWithDefaults(defaults client.Defaults) *PaymentSubmissionCreationResponse {
 	return &PaymentSubmissionCreationResponse{
 

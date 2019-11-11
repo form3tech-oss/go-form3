@@ -26,8 +26,6 @@ type ClaimSubmissionCreation struct {
 	Data *ClaimSubmission `json:"data"`
 }
 
-// line 140
-
 func ClaimSubmissionCreationWithDefaults(defaults client.Defaults) *ClaimSubmissionCreation {
 	return &ClaimSubmissionCreation{
 

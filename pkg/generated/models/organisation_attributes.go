@@ -23,8 +23,6 @@ type OrganisationAttributes struct {
 	Name string `json:"name,omitempty"`
 }
 
-// line 140
-
 func OrganisationAttributesWithDefaults(defaults client.Defaults) *OrganisationAttributes {
 	return &OrganisationAttributes{
 

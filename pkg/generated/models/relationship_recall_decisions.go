@@ -25,8 +25,6 @@ type RelationshipRecallDecisions struct {
 	Data []*RecallDecision `json:"data"`
 }
 
-// line 140
-
 func RelationshipRecallDecisionsWithDefaults(defaults client.Defaults) *RelationshipRecallDecisions {
 	return &RelationshipRecallDecisions{
 

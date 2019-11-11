@@ -54,8 +54,6 @@ type ReturnPayment struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ReturnPaymentWithDefaults(defaults client.Defaults) *ReturnPayment {
 	return &ReturnPayment{
 
@@ -380,8 +378,6 @@ type ReturnPaymentAttributes struct {
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
 }
 
-// line 140
-
 func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymentAttributes {
 	return &ReturnPaymentAttributes{
 
@@ -564,8 +560,6 @@ type ReturnPaymentRelationships struct {
 	// ID of the return submission resource related to the return
 	ReturnSubmission *RelationshipLinks `json:"return_submission,omitempty"`
 }
-
-// line 140
 
 func ReturnPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReturnPaymentRelationships {
 	return &ReturnPaymentRelationships{

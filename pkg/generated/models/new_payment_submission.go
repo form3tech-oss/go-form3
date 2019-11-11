@@ -43,8 +43,6 @@ type NewPaymentSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func NewPaymentSubmissionWithDefaults(defaults client.Defaults) *NewPaymentSubmission {
 	return &NewPaymentSubmission{
 
@@ -247,8 +245,6 @@ type NewPaymentSubmissionRelationships struct {
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
-
-// line 140
 
 func NewPaymentSubmissionRelationshipsWithDefaults(defaults client.Defaults) *NewPaymentSubmissionRelationships {
 	return &NewPaymentSubmissionRelationships{

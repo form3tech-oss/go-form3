@@ -25,8 +25,6 @@ type DirectDebitAdmissionRelationships struct {
 	DirectDebit *DirectDebitAdmissionRelationshipsDirectDebit `json:"direct_debit,omitempty"`
 }
 
-// line 140
-
 func DirectDebitAdmissionRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitAdmissionRelationships {
 	return &DirectDebitAdmissionRelationships{
 
@@ -110,8 +108,6 @@ type DirectDebitAdmissionRelationshipsDirectDebit struct {
 	// data
 	Data []*DirectDebit `json:"data"`
 }
-
-// line 140
 
 func DirectDebitAdmissionRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *DirectDebitAdmissionRelationshipsDirectDebit {
 	return &DirectDebitAdmissionRelationshipsDirectDebit{

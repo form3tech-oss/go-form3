@@ -26,8 +26,6 @@ type OrganisationCreation struct {
 	Data *Organisation `json:"data"`
 }
 
-// line 140
-
 func OrganisationCreationWithDefaults(defaults client.Defaults) *OrganisationCreation {
 	return &OrganisationCreation{
 

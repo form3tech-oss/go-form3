@@ -26,8 +26,6 @@ type UserCreation struct {
 	Data *User `json:"data"`
 }
 
-// line 140
-
 func UserCreationWithDefaults(defaults client.Defaults) *UserCreation {
 	return &UserCreation{
 

@@ -53,8 +53,6 @@ type DirectDebitReturn struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func DirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitReturn {
 	return &DirectDebitReturn{
 
@@ -349,8 +347,6 @@ type DirectDebitReturnAttributes struct {
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
 }
 
-// line 140
-
 func DirectDebitReturnAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnAttributes {
 	return &DirectDebitReturnAttributes{
 
@@ -420,8 +416,6 @@ type DirectDebitReturnRelationships struct {
 	// direct debit return submission
 	DirectDebitReturnSubmission *DirectDebitReturnRelationshipsDirectDebitReturnSubmission `json:"direct_debit_return_submission,omitempty"`
 }
-
-// line 140
 
 func DirectDebitReturnRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationships {
 	return &DirectDebitReturnRelationships{
@@ -615,8 +609,6 @@ type DirectDebitReturnRelationshipsDirectDebit struct {
 	Data []*DirectDebit `json:"data"`
 }
 
-// line 140
-
 func DirectDebitReturnRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationshipsDirectDebit {
 	return &DirectDebitReturnRelationshipsDirectDebit{
 
@@ -702,8 +694,6 @@ type DirectDebitReturnRelationshipsDirectDebitReturnAdmission struct {
 	// data
 	Data []*DirectDebitReturnAdmission `json:"data"`
 }
-
-// line 140
 
 func DirectDebitReturnRelationshipsDirectDebitReturnAdmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationshipsDirectDebitReturnAdmission {
 	return &DirectDebitReturnRelationshipsDirectDebitReturnAdmission{
@@ -791,8 +781,6 @@ type DirectDebitReturnRelationshipsDirectDebitReturnReversal struct {
 	Data []*DirectDebitReturnReversal `json:"data"`
 }
 
-// line 140
-
 func DirectDebitReturnRelationshipsDirectDebitReturnReversalWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationshipsDirectDebitReturnReversal {
 	return &DirectDebitReturnRelationshipsDirectDebitReturnReversal{
 
@@ -878,8 +866,6 @@ type DirectDebitReturnRelationshipsDirectDebitReturnSubmission struct {
 	// data
 	Data []*DirectDebitReturnSubmission `json:"data"`
 }
-
-// line 140
 
 func DirectDebitReturnRelationshipsDirectDebitReturnSubmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationshipsDirectDebitReturnSubmission {
 	return &DirectDebitReturnRelationshipsDirectDebitReturnSubmission{

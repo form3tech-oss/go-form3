@@ -30,8 +30,6 @@ type UserRoleListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func UserRoleListResponseWithDefaults(defaults client.Defaults) *UserRoleListResponse {
 	return &UserRoleListResponse{
 

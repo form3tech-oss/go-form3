@@ -27,8 +27,6 @@ type PaymentSubmissionRelationships struct {
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
 
-// line 140
-
 func PaymentSubmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentSubmissionRelationships {
 	return &PaymentSubmissionRelationships{
 

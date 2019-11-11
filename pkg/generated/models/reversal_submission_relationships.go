@@ -30,8 +30,6 @@ type ReversalSubmissionRelationships struct {
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
 
-// line 140
-
 func ReversalSubmissionRelationshipsWithDefaults(defaults client.Defaults) *ReversalSubmissionRelationships {
 	return &ReversalSubmissionRelationships{
 

@@ -45,8 +45,6 @@ type MandateReturnSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func MandateReturnSubmissionWithDefaults(defaults client.Defaults) *MandateReturnSubmission {
 	return &MandateReturnSubmission{
 
@@ -289,8 +287,6 @@ type MandateReturnSubmissionAttributes struct {
 	TransactionStartDatetime strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
 }
 
-// line 140
-
 func MandateReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateReturnSubmissionAttributes {
 	return &MandateReturnSubmissionAttributes{
 
@@ -432,8 +428,6 @@ type MandateReturnSubmissionRelationships struct {
 	MandateReturn *MandateReturnSubmissionRelationshipsMandateReturn `json:"mandate_return,omitempty"`
 }
 
-// line 140
-
 func MandateReturnSubmissionRelationshipsWithDefaults(defaults client.Defaults) *MandateReturnSubmissionRelationships {
 	return &MandateReturnSubmissionRelationships{
 
@@ -554,8 +548,6 @@ type MandateReturnSubmissionRelationshipsMandate struct {
 	Data []*Mandate `json:"data"`
 }
 
-// line 140
-
 func MandateReturnSubmissionRelationshipsMandateWithDefaults(defaults client.Defaults) *MandateReturnSubmissionRelationshipsMandate {
 	return &MandateReturnSubmissionRelationshipsMandate{
 
@@ -641,8 +633,6 @@ type MandateReturnSubmissionRelationshipsMandateReturn struct {
 	// data
 	Data []*MandateReturn `json:"data"`
 }
-
-// line 140
 
 func MandateReturnSubmissionRelationshipsMandateReturnWithDefaults(defaults client.Defaults) *MandateReturnSubmissionRelationshipsMandateReturn {
 	return &MandateReturnSubmissionRelationshipsMandateReturn{

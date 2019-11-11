@@ -44,8 +44,6 @@ type MandateSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func MandateSubmissionWithDefaults(defaults client.Defaults) *MandateSubmission {
 	return &MandateSubmission{
 
@@ -294,8 +292,6 @@ type MandateSubmissionAttributes struct {
 	// submitted mandate
 	SubmittedMandate *MandateAttributes `json:"submitted_mandate,omitempty"`
 }
-
-// line 140
 
 func MandateSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateSubmissionAttributes {
 	return &MandateSubmissionAttributes{

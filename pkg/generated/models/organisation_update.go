@@ -26,8 +26,6 @@ type OrganisationUpdate struct {
 	Data *Organisation `json:"data"`
 }
 
-// line 140
-
 func OrganisationUpdateWithDefaults(defaults client.Defaults) *OrganisationUpdate {
 	return &OrganisationUpdate{
 

@@ -36,8 +36,6 @@ type SendersCorrespondentAccountHoldingEntity struct {
 	BankPartyID string `json:"bank_party_id,omitempty"`
 }
 
-// line 140
-
 func SendersCorrespondentAccountHoldingEntityWithDefaults(defaults client.Defaults) *SendersCorrespondentAccountHoldingEntity {
 	return &SendersCorrespondentAccountHoldingEntity{
 

@@ -25,8 +25,6 @@ type RelationshipReturnReversals struct {
 	Data []*ReturnReversal `json:"data"`
 }
 
-// line 140
-
 func RelationshipReturnReversalsWithDefaults(defaults client.Defaults) *RelationshipReturnReversals {
 	return &RelationshipReturnReversals{
 

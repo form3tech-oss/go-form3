@@ -28,8 +28,6 @@ type AccountEventListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func AccountEventListResponseWithDefaults(defaults client.Defaults) *AccountEventListResponse {
 	return &AccountEventListResponse{
 

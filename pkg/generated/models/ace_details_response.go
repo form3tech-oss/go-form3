@@ -29,8 +29,6 @@ type AceDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func AceDetailsResponseWithDefaults(defaults client.Defaults) *AceDetailsResponse {
 	return &AceDetailsResponse{
 

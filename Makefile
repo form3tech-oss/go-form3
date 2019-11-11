@@ -11,7 +11,7 @@ install-swagger:
 
 download-swagger:
 	@mkdir swagger || true
-	curl -s http://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
+	curl -s https://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
 	yq r swagger/form3-swagger-raw.yaml paths | grep -v "^   .*" | tr '\n' 'X' | sed -e 's/\(\/[^X]*\):X *\([^:]*\):/paths.\1.\2.OperationId: TODO/g' | tr 'X' '\n' > swagger/paths.txt
 
 

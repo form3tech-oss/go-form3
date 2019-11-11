@@ -59,8 +59,6 @@ type UltimateEntity struct {
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 }
 
-// line 140
-
 func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 	return &UltimateEntity{
 

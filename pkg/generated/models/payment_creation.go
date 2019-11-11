@@ -24,8 +24,6 @@ type PaymentCreation struct {
 	Data *Payment `json:"data,omitempty"`
 }
 
-// line 140
-
 func PaymentCreationWithDefaults(defaults client.Defaults) *PaymentCreation {
 	return &PaymentCreation{
 

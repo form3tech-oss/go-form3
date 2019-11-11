@@ -46,8 +46,6 @@ type NewRecall struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func NewRecallWithDefaults(defaults client.Defaults) *NewRecall {
 	return &NewRecall{
 
@@ -289,8 +287,6 @@ type NewRecallAttributes struct {
 	// The reason for the recall. Has to be a valid [recall reason code](http://api-docs.form3.tech/api.html#enumerations-recall-reason-codes).
 	ReasonCode string `json:"reason_code,omitempty"`
 }
-
-// line 140
 
 func NewRecallAttributesWithDefaults(defaults client.Defaults) *NewRecallAttributes {
 	return &NewRecallAttributes{

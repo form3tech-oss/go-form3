@@ -25,8 +25,6 @@ type RelationshipLinks struct {
 	Data []*RelationshipData `json:"data"`
 }
 
-// line 140
-
 func RelationshipLinksWithDefaults(defaults client.Defaults) *RelationshipLinks {
 	return &RelationshipLinks{
 

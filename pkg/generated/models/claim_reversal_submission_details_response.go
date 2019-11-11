@@ -27,8 +27,6 @@ type ClaimReversalSubmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func ClaimReversalSubmissionDetailsResponseWithDefaults(defaults client.Defaults) *ClaimReversalSubmissionDetailsResponse {
 	return &ClaimReversalSubmissionDetailsResponse{
 

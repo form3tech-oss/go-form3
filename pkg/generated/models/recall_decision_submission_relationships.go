@@ -30,8 +30,6 @@ type RecallDecisionSubmissionRelationships struct {
 	RecallDecision *RelationshipRecallDecisions `json:"recall_decision,omitempty"`
 }
 
-// line 140
-
 func RecallDecisionSubmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallDecisionSubmissionRelationships {
 	return &RecallDecisionSubmissionRelationships{
 

@@ -27,8 +27,6 @@ type AccountRoutingCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func AccountRoutingCreationResponseWithDefaults(defaults client.Defaults) *AccountRoutingCreationResponse {
 	return &AccountRoutingCreationResponse{
 

@@ -30,8 +30,6 @@ type DebtorPartyAccount struct {
 	Type string `json:"type,omitempty"`
 }
 
-// line 140
-
 func DebtorPartyAccountWithDefaults(defaults client.Defaults) *DebtorPartyAccount {
 	return &DebtorPartyAccount{
 

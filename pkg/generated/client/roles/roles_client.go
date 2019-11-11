@@ -43,8 +43,7 @@ func (a *CreateRolesRequest) Do() (*CreateRolesCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateRolesReader{formats: a.formats},
+		Reader:             &CreateRolesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *DeleteRoleRequest) Do() (*DeleteRoleNoContent, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteRoleReader{formats: a.formats},
+		Reader:             &DeleteRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *GetRoleRequest) Do() (*GetRoleOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetRoleReader{formats: a.formats},
+		Reader:             &GetRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -145,8 +142,7 @@ func (a *ListRolesRequest) Do() (*ListRolesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListRolesReader{formats: a.formats},
+		Reader:             &ListRolesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

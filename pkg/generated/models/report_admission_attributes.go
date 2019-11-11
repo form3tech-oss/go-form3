@@ -38,8 +38,6 @@ type ReportAdmissionAttributes struct {
 	Status ReportAdmissionStatus `json:"status,omitempty"`
 }
 
-// line 140
-
 func ReportAdmissionAttributesWithDefaults(defaults client.Defaults) *ReportAdmissionAttributes {
 	return &ReportAdmissionAttributes{
 

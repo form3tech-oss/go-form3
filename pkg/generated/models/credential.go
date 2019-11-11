@@ -23,8 +23,6 @@ type Credential struct {
 	ClientID string `json:"client_id,omitempty"`
 }
 
-// line 140
-
 func CredentialWithDefaults(defaults client.Defaults) *Credential {
 	return &Credential{
 

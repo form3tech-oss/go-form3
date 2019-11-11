@@ -54,8 +54,6 @@ type PaymentSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func PaymentSubmissionWithDefaults(defaults client.Defaults) *PaymentSubmission {
 	return &PaymentSubmission{
 
@@ -399,8 +397,6 @@ type PaymentSubmissionAttributes struct {
 	// Format: date-time
 	TransactionStartDatetime strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
 }
-
-// line 140
 
 func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentSubmissionAttributes {
 	return &PaymentSubmissionAttributes{

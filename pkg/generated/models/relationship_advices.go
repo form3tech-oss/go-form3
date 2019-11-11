@@ -25,8 +25,6 @@ type RelationshipAdvices struct {
 	Data []*PaymentAdvice `json:"data"`
 }
 
-// line 140
-
 func RelationshipAdvicesWithDefaults(defaults client.Defaults) *RelationshipAdvices {
 	return &RelationshipAdvices{
 

@@ -43,8 +43,7 @@ func (a *GetSchemeMessageRequest) Do() (*GetSchemeMessageOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetSchemeMessageReader{formats: a.formats},
+		Reader:             &GetSchemeMessageReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *GetSchemeMessageAdmissionRequest) Do() (*GetSchemeMessageAdmissionOK, e
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetSchemeMessageAdmissionReader{formats: a.formats},
+		Reader:             &GetSchemeMessageAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *ListSchemeMessagesRequest) Do() (*ListSchemeMessagesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListSchemeMessagesReader{formats: a.formats},
+		Reader:             &ListSchemeMessagesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

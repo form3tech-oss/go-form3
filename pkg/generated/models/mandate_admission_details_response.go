@@ -27,8 +27,6 @@ type MandateAdmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func MandateAdmissionDetailsResponseWithDefaults(defaults client.Defaults) *MandateAdmissionDetailsResponse {
 	return &MandateAdmissionDetailsResponse{
 

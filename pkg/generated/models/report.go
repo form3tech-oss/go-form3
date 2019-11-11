@@ -57,8 +57,6 @@ type Report struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ReportWithDefaults(defaults client.Defaults) *Report {
 	return &Report{
 

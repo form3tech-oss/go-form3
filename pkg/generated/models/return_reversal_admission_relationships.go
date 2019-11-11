@@ -30,8 +30,6 @@ type ReturnReversalAdmissionRelationships struct {
 	PaymentReturnReversal *RelationshipReturnReversals `json:"payment_return_reversal,omitempty"`
 }
 
-// line 140
-
 func ReturnReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReturnReversalAdmissionRelationships {
 	return &ReturnReversalAdmissionRelationships{
 

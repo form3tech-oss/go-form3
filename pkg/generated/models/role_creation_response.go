@@ -29,8 +29,6 @@ type RoleCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func RoleCreationResponseWithDefaults(defaults client.Defaults) *RoleCreationResponse {
 	return &RoleCreationResponse{
 

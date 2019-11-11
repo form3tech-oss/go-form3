@@ -29,8 +29,6 @@ type CredentialCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func CredentialCreationResponseWithDefaults(defaults client.Defaults) *CredentialCreationResponse {
 	return &CredentialCreationResponse{
 

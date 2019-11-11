@@ -43,8 +43,6 @@ type RecallDecisionSubmissionUpdate struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func RecallDecisionSubmissionUpdateWithDefaults(defaults client.Defaults) *RecallDecisionSubmissionUpdate {
 	return &RecallDecisionSubmissionUpdate{
 
@@ -250,8 +248,6 @@ type RecallDecisionSubmissionUpdateAttributes struct {
 	// Reason for submission failure if status is `delivery_failed`
 	StatusReason string `json:"status_reason,omitempty"`
 }
-
-// line 140
 
 func RecallDecisionSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *RecallDecisionSubmissionUpdateAttributes {
 	return &RecallDecisionSubmissionUpdateAttributes{

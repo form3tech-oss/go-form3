@@ -24,8 +24,6 @@ type MandateReturnSubmissionCreation struct {
 	Data *MandateReturnSubmission `json:"data,omitempty"`
 }
 
-// line 140
-
 func MandateReturnSubmissionCreationWithDefaults(defaults client.Defaults) *MandateReturnSubmissionCreation {
 	return &MandateReturnSubmissionCreation{
 

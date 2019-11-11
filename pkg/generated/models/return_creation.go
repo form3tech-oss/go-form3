@@ -24,8 +24,6 @@ type ReturnCreation struct {
 	Data *ReturnPayment `json:"data,omitempty"`
 }
 
-// line 140
-
 func ReturnCreationWithDefaults(defaults client.Defaults) *ReturnCreation {
 	return &ReturnCreation{
 

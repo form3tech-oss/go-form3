@@ -37,8 +37,6 @@ type MandateRelationships struct {
 	MandateSubmission *MandateRelationshipsMandateSubmission `json:"mandate_submission,omitempty"`
 }
 
-// line 140
-
 func MandateRelationshipsWithDefaults(defaults client.Defaults) *MandateRelationships {
 	return &MandateRelationships{
 
@@ -267,8 +265,6 @@ type MandateRelationshipsBeneficiaryParty struct {
 	Data []*BeneficiaryParty `json:"data"`
 }
 
-// line 140
-
 func MandateRelationshipsBeneficiaryPartyWithDefaults(defaults client.Defaults) *MandateRelationshipsBeneficiaryParty {
 	return &MandateRelationshipsBeneficiaryParty{
 
@@ -354,8 +350,6 @@ type MandateRelationshipsDebtorPartyAccount struct {
 	// data
 	Data []*DebtorPartyAccount `json:"data"`
 }
-
-// line 140
 
 func MandateRelationshipsDebtorPartyAccountWithDefaults(defaults client.Defaults) *MandateRelationshipsDebtorPartyAccount {
 	return &MandateRelationshipsDebtorPartyAccount{
@@ -443,8 +437,6 @@ type MandateRelationshipsMandateAdmission struct {
 	Data []*MandateAdmission `json:"data"`
 }
 
-// line 140
-
 func MandateRelationshipsMandateAdmissionWithDefaults(defaults client.Defaults) *MandateRelationshipsMandateAdmission {
 	return &MandateRelationshipsMandateAdmission{
 
@@ -531,8 +523,6 @@ type MandateRelationshipsMandateReturn struct {
 	Data []*MandateReturn `json:"data"`
 }
 
-// line 140
-
 func MandateRelationshipsMandateReturnWithDefaults(defaults client.Defaults) *MandateRelationshipsMandateReturn {
 	return &MandateRelationshipsMandateReturn{
 
@@ -618,8 +608,6 @@ type MandateRelationshipsMandateSubmission struct {
 	// data
 	Data []*MandateSubmission `json:"data"`
 }
-
-// line 140
 
 func MandateRelationshipsMandateSubmissionWithDefaults(defaults client.Defaults) *MandateRelationshipsMandateSubmission {
 	return &MandateRelationshipsMandateSubmission{

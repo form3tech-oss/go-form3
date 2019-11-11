@@ -24,8 +24,6 @@ type DirectDebitReturnReversalDetailsResponse struct {
 	Data *DirectDebitReturnReversal `json:"data,omitempty"`
 }
 
-// line 140
-
 func DirectDebitReturnReversalDetailsResponseWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalDetailsResponse {
 	return &DirectDebitReturnReversalDetailsResponse{
 

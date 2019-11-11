@@ -22,7 +22,6 @@ type GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDReader stru
 }
 
 // ReadResponse reads a server response into the received o.
-
 func (o *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 

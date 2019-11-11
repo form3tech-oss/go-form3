@@ -24,8 +24,6 @@ type ClaimCreation struct {
 	Data *Claim `json:"data,omitempty"`
 }
 
-// line 140
-
 func ClaimCreationWithDefaults(defaults client.Defaults) *ClaimCreation {
 	return &ClaimCreation{
 

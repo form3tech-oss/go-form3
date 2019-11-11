@@ -52,8 +52,6 @@ type DirectDebitReturnAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func DirectDebitReturnAdmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnAdmission {
 	return &DirectDebitReturnAdmission{
 
@@ -366,8 +364,6 @@ type DirectDebitReturnAdmissionAttributes struct {
 	// status
 	Status DirectDebitReturnAdmissionStatus `json:"status,omitempty"`
 }
-
-// line 140
 
 func DirectDebitReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnAdmissionAttributes {
 	return &DirectDebitReturnAdmissionAttributes{

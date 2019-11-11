@@ -54,8 +54,6 @@ type PaymentAdvice struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func PaymentAdviceWithDefaults(defaults client.Defaults) *PaymentAdvice {
 	return &PaymentAdvice{
 
@@ -360,8 +358,6 @@ type PaymentAdviceAttributes struct {
 	ReasonCode string `json:"reason_code,omitempty"`
 }
 
-// line 140
-
 func PaymentAdviceAttributesWithDefaults(defaults client.Defaults) *PaymentAdviceAttributes {
 	return &PaymentAdviceAttributes{
 
@@ -455,8 +451,6 @@ type PaymentAdviceAttributesBeneficiaryParty struct {
 	NewBankDetails *PaymentAdviceAttributesBeneficiaryPartyNewBankDetails `json:"new_bank_details,omitempty"`
 }
 
-// line 140
-
 func PaymentAdviceAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *PaymentAdviceAttributesBeneficiaryParty {
 	return &PaymentAdviceAttributesBeneficiaryParty{
 
@@ -549,8 +543,6 @@ type PaymentAdviceAttributesBeneficiaryPartyNewBankDetails struct {
 	// roll number
 	RollNumber string `json:"roll_number,omitempty"`
 }
-
-// line 140
 
 func PaymentAdviceAttributesBeneficiaryPartyNewBankDetailsWithDefaults(defaults client.Defaults) *PaymentAdviceAttributesBeneficiaryPartyNewBankDetails {
 	return &PaymentAdviceAttributesBeneficiaryPartyNewBankDetails{
@@ -685,8 +677,6 @@ type PaymentAdviceRelationships struct {
 	// payment
 	Payment *RelationshipLinks `json:"payment,omitempty"`
 }
-
-// line 140
 
 func PaymentAdviceRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdviceRelationships {
 	return &PaymentAdviceRelationships{

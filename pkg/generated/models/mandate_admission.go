@@ -44,8 +44,6 @@ type MandateAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func MandateAdmissionWithDefaults(defaults client.Defaults) *MandateAdmission {
 	return &MandateAdmission{
 
@@ -288,8 +286,6 @@ type MandateAdmissionAttributes struct {
 	// status reason
 	StatusReason MandateAdmissionStatusReason `json:"status_reason,omitempty"`
 }
-
-// line 140
 
 func MandateAdmissionAttributesWithDefaults(defaults client.Defaults) *MandateAdmissionAttributes {
 	return &MandateAdmissionAttributes{

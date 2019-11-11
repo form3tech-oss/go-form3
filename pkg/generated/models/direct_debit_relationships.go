@@ -37,8 +37,6 @@ type DirectDebitRelationships struct {
 	Mandate *Mandate `json:"mandate,omitempty"`
 }
 
-// line 140
-
 func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitRelationships {
 	return &DirectDebitRelationships{
 
@@ -267,8 +265,6 @@ type DirectDebitRelationshipsDirectDebitAdmission struct {
 	Data []*DirectDebitAdmission `json:"data"`
 }
 
-// line 140
-
 func DirectDebitRelationshipsDirectDebitAdmissionWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitAdmission {
 	return &DirectDebitRelationshipsDirectDebitAdmission{
 
@@ -354,8 +350,6 @@ type DirectDebitRelationshipsDirectDebitReturn struct {
 	// data
 	Data []*DirectDebitReturn `json:"data"`
 }
-
-// line 140
 
 func DirectDebitRelationshipsDirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitReturn {
 	return &DirectDebitRelationshipsDirectDebitReturn{
@@ -443,8 +437,6 @@ type DirectDebitRelationshipsDirectDebitReversal struct {
 	Data []*DirectDebitReversal `json:"data"`
 }
 
-// line 140
-
 func DirectDebitRelationshipsDirectDebitReversalWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitReversal {
 	return &DirectDebitRelationshipsDirectDebitReversal{
 
@@ -530,8 +522,6 @@ type DirectDebitRelationshipsDirectDebitSubmission struct {
 	// data
 	Data []*DirectDebitSubmission `json:"data"`
 }
-
-// line 140
 
 func DirectDebitRelationshipsDirectDebitSubmissionWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitSubmission {
 	return &DirectDebitRelationshipsDirectDebitSubmission{

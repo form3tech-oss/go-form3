@@ -54,8 +54,6 @@ type RecallDecision struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func RecallDecisionWithDefaults(defaults client.Defaults) *RecallDecision {
 	return &RecallDecision{
 
@@ -369,8 +367,6 @@ type RecallDecisionAttributes struct {
 	RecallAmount *CurrencyAndAmount `json:"recall_amount,omitempty"`
 }
 
-// line 140
-
 func RecallDecisionAttributesWithDefaults(defaults client.Defaults) *RecallDecisionAttributes {
 	return &RecallDecisionAttributes{
 
@@ -546,8 +542,6 @@ type RecallDecisionRelationships struct {
 	// ID of the recall resource related to the recall decision
 	Recall *RelationshipLinks `json:"recall,omitempty"`
 }
-
-// line 140
 
 func RecallDecisionRelationshipsWithDefaults(defaults client.Defaults) *RecallDecisionRelationships {
 	return &RecallDecisionRelationships{

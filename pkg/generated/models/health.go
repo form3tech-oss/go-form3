@@ -26,8 +26,6 @@ type Health struct {
 	Status string `json:"status,omitempty"`
 }
 
-// line 140
-
 func HealthWithDefaults(defaults client.Defaults) *Health {
 	return &Health{
 

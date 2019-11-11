@@ -24,8 +24,6 @@ type RecallDecisionCreation struct {
 	Data *RecallDecision `json:"data,omitempty"`
 }
 
-// line 140
-
 func RecallDecisionCreationWithDefaults(defaults client.Defaults) *RecallDecisionCreation {
 	return &RecallDecisionCreation{
 

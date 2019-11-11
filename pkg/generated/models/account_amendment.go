@@ -24,8 +24,6 @@ type AccountAmendment struct {
 	Data *Account `json:"data,omitempty"`
 }
 
-// line 140
-
 func AccountAmendmentWithDefaults(defaults client.Defaults) *AccountAmendment {
 	return &AccountAmendment{
 

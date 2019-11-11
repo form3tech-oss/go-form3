@@ -24,8 +24,6 @@ type AdviceCreation struct {
 	Data *PaymentAdvice `json:"data,omitempty"`
 }
 
-// line 140
-
 func AdviceCreationWithDefaults(defaults client.Defaults) *AdviceCreation {
 	return &AdviceCreation{
 

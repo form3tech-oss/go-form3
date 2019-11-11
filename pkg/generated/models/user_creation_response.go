@@ -29,8 +29,6 @@ type UserCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func UserCreationResponseWithDefaults(defaults client.Defaults) *UserCreationResponse {
 	return &UserCreationResponse{
 

@@ -22,7 +22,6 @@ type GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdm
 }
 
 // ReadResponse reads a server response into the received o.
-
 func (o *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 

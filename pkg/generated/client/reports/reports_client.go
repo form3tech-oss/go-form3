@@ -43,8 +43,7 @@ func (a *GetReportRequest) Do() (*GetReportOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetReportReader{formats: a.formats},
+		Reader:             &GetReportReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *GetReportAdmissionRequest) Do() (*GetReportAdmissionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetReportAdmissionReader{formats: a.formats},
+		Reader:             &GetReportAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *ListReportsRequest) Do() (*ListReportsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListReportsReader{formats: a.formats},
+		Reader:             &ListReportsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

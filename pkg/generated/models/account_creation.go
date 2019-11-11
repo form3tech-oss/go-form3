@@ -26,8 +26,6 @@ type AccountCreation struct {
 	Data *Account `json:"data"`
 }
 
-// line 140
-
 func AccountCreationWithDefaults(defaults client.Defaults) *AccountCreation {
 	return &AccountCreation{
 

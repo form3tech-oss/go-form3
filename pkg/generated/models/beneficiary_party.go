@@ -30,8 +30,6 @@ type BeneficiaryParty struct {
 	Type string `json:"type,omitempty"`
 }
 
-// line 140
-
 func BeneficiaryPartyWithDefaults(defaults client.Defaults) *BeneficiaryParty {
 	return &BeneficiaryParty{
 

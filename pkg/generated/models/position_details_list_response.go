@@ -25,8 +25,6 @@ type PositionDetailsListResponse struct {
 	Data []*Position `json:"data"`
 }
 
-// line 140
-
 func PositionDetailsListResponseWithDefaults(defaults client.Defaults) *PositionDetailsListResponse {
 	return &PositionDetailsListResponse{
 

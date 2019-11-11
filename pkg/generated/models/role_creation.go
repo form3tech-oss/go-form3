@@ -26,8 +26,6 @@ type RoleCreation struct {
 	Data *Role `json:"data"`
 }
 
-// line 140
-
 func RoleCreationWithDefaults(defaults client.Defaults) *RoleCreation {
 	return &RoleCreation{
 

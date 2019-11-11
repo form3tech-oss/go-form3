@@ -22,7 +22,6 @@ type GetOrganisationAccountsIDEventsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-
 func (o *GetOrganisationAccountsIDEventsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 

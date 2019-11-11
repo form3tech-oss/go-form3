@@ -25,8 +25,6 @@ type RelationshipPayments struct {
 	Data []*Payment `json:"data"`
 }
 
-// line 140
-
 func RelationshipPaymentsWithDefaults(defaults client.Defaults) *RelationshipPayments {
 	return &RelationshipPayments{
 

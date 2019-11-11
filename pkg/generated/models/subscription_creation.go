@@ -26,8 +26,6 @@ type SubscriptionCreation struct {
 	Data *Subscription `json:"data"`
 }
 
-// line 140
-
 func SubscriptionCreationWithDefaults(defaults client.Defaults) *SubscriptionCreation {
 	return &SubscriptionCreation{
 

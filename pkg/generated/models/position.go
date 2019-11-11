@@ -47,8 +47,6 @@ type Position struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func PositionWithDefaults(defaults client.Defaults) *Position {
 	return &Position{
 
@@ -296,8 +294,6 @@ type PositionAttributes struct {
 	// Pattern: ^[A-Za-z_\-]*$
 	Scheme string `json:"scheme,omitempty"`
 }
-
-// line 140
 
 func PositionAttributesWithDefaults(defaults client.Defaults) *PositionAttributes {
 	return &PositionAttributes{

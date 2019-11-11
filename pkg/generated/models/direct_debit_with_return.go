@@ -27,8 +27,6 @@ type DirectDebitWithReturn struct {
 	DirectDebitReturn *DirectDebitReturn `json:"direct_debit_return,omitempty"`
 }
 
-// line 140
-
 func DirectDebitWithReturnWithDefaults(defaults client.Defaults) *DirectDebitWithReturn {
 	return &DirectDebitWithReturn{
 

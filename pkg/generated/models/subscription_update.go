@@ -44,8 +44,6 @@ type SubscriptionUpdate struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func SubscriptionUpdateWithDefaults(defaults client.Defaults) *SubscriptionUpdate {
 	return &SubscriptionUpdate{
 
@@ -272,8 +270,6 @@ type SubscriptionUpdateAttributes struct {
 	// Format: uuid
 	UserID strfmt.UUID `json:"user_id,omitempty"`
 }
-
-// line 140
 
 func SubscriptionUpdateAttributesWithDefaults(defaults client.Defaults) *SubscriptionUpdateAttributes {
 	return &SubscriptionUpdateAttributes{

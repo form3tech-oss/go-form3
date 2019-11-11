@@ -54,8 +54,6 @@ type DirectDebitSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func DirectDebitSubmissionWithDefaults(defaults client.Defaults) *DirectDebitSubmission {
 	return &DirectDebitSubmission{
 
@@ -375,8 +373,6 @@ type DirectDebitSubmissionAttributes struct {
 	// Format: date-time
 	TransactionStartDatetime strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
 }
-
-// line 140
 
 func DirectDebitSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitSubmissionAttributes {
 	return &DirectDebitSubmissionAttributes{

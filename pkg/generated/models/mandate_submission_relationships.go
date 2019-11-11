@@ -25,8 +25,6 @@ type MandateSubmissionRelationships struct {
 	Mandate *MandateSubmissionRelationshipsMandate `json:"mandate,omitempty"`
 }
 
-// line 140
-
 func MandateSubmissionRelationshipsWithDefaults(defaults client.Defaults) *MandateSubmissionRelationships {
 	return &MandateSubmissionRelationships{
 
@@ -110,8 +108,6 @@ type MandateSubmissionRelationshipsMandate struct {
 	// data
 	Data []*Mandate `json:"data"`
 }
-
-// line 140
 
 func MandateSubmissionRelationshipsMandateWithDefaults(defaults client.Defaults) *MandateSubmissionRelationshipsMandate {
 	return &MandateSubmissionRelationshipsMandate{

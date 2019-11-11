@@ -45,8 +45,6 @@ type MandateReturn struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func MandateReturnWithDefaults(defaults client.Defaults) *MandateReturn {
 	return &MandateReturn{
 
@@ -279,8 +277,6 @@ type MandateReturnAttributes struct {
 	ReturnCode string `json:"return_code,omitempty"`
 }
 
-// line 140
-
 func MandateReturnAttributesWithDefaults(defaults client.Defaults) *MandateReturnAttributes {
 	return &MandateReturnAttributes{
 
@@ -374,8 +370,6 @@ type MandateReturnAttributesDebtorParty struct {
 	NewBankDetails *MandateReturnAttributesDebtorPartyNewBankDetails `json:"new_bank_details,omitempty"`
 }
 
-// line 140
-
 func MandateReturnAttributesDebtorPartyWithDefaults(defaults client.Defaults) *MandateReturnAttributesDebtorParty {
 	return &MandateReturnAttributesDebtorParty{
 
@@ -465,8 +459,6 @@ type MandateReturnAttributesDebtorPartyNewBankDetails struct {
 	// account with
 	AccountWith *AccountHoldingEntity `json:"account_with,omitempty"`
 }
-
-// line 140
 
 func MandateReturnAttributesDebtorPartyNewBankDetailsWithDefaults(defaults client.Defaults) *MandateReturnAttributesDebtorPartyNewBankDetails {
 	return &MandateReturnAttributesDebtorPartyNewBankDetails{
@@ -593,8 +585,6 @@ type MandateReturnRelationships struct {
 	MandateReturnSubmission *MandateReturnRelationshipsMandateReturnSubmission `json:"mandate_return_submission,omitempty"`
 }
 
-// line 140
-
 func MandateReturnRelationshipsWithDefaults(defaults client.Defaults) *MandateReturnRelationships {
 	return &MandateReturnRelationships{
 
@@ -715,8 +705,6 @@ type MandateReturnRelationshipsMandate struct {
 	Data []*Mandate `json:"data"`
 }
 
-// line 140
-
 func MandateReturnRelationshipsMandateWithDefaults(defaults client.Defaults) *MandateReturnRelationshipsMandate {
 	return &MandateReturnRelationshipsMandate{
 
@@ -802,8 +790,6 @@ type MandateReturnRelationshipsMandateReturnSubmission struct {
 	// data
 	Data []*MandateReturnSubmission `json:"data"`
 }
-
-// line 140
 
 func MandateReturnRelationshipsMandateReturnSubmissionWithDefaults(defaults client.Defaults) *MandateReturnRelationshipsMandateReturnSubmission {
 	return &MandateReturnRelationshipsMandateReturnSubmission{

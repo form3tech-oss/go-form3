@@ -25,8 +25,6 @@ type SchemeMessageAdmissionRelationships struct {
 	SchemeMessage *SchemeMessageAdmissionRelationshipsSchemeMessage `json:"scheme_message,omitempty"`
 }
 
-// line 140
-
 func SchemeMessageAdmissionRelationshipsWithDefaults(defaults client.Defaults) *SchemeMessageAdmissionRelationships {
 	return &SchemeMessageAdmissionRelationships{
 
@@ -110,8 +108,6 @@ type SchemeMessageAdmissionRelationshipsSchemeMessage struct {
 	// data
 	Data []*SchemeMessage `json:"data"`
 }
-
-// line 140
 
 func SchemeMessageAdmissionRelationshipsSchemeMessageWithDefaults(defaults client.Defaults) *SchemeMessageAdmissionRelationshipsSchemeMessage {
 	return &SchemeMessageAdmissionRelationshipsSchemeMessage{

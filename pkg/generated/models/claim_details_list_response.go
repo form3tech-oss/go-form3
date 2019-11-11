@@ -28,8 +28,6 @@ type ClaimDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func ClaimDetailsListResponseWithDefaults(defaults client.Defaults) *ClaimDetailsListResponse {
 	return &ClaimDetailsListResponse{
 

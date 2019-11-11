@@ -43,8 +43,7 @@ func (a *CreateAccountRequest) Do() (*CreateAccountCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateAccountReader{formats: a.formats},
+		Reader:             &CreateAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *DeleteAccountRequest) Do() (*DeleteAccountNoContent, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteAccountReader{formats: a.formats},
+		Reader:             &DeleteAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *GetAccountRequest) Do() (*GetAccountOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetAccountReader{formats: a.formats},
+		Reader:             &GetAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -145,8 +142,7 @@ func (a *GetOrganisationAccountsIDEventsRequest) Do() (*GetOrganisationAccountsI
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetOrganisationAccountsIDEventsReader{formats: a.formats},
+		Reader:             &GetOrganisationAccountsIDEventsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -179,8 +175,7 @@ func (a *ListAccountsRequest) Do() (*ListAccountsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListAccountsReader{formats: a.formats},
+		Reader:             &ListAccountsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -213,8 +208,7 @@ func (a *ModifyAccountRequest) Do() (*ModifyAccountOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ModifyAccountReader{formats: a.formats},
+		Reader:             &ModifyAccountReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

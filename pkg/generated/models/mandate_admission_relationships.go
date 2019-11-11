@@ -25,8 +25,6 @@ type MandateAdmissionRelationships struct {
 	Mandate *MandateAdmissionRelationshipsMandate `json:"mandate,omitempty"`
 }
 
-// line 140
-
 func MandateAdmissionRelationshipsWithDefaults(defaults client.Defaults) *MandateAdmissionRelationships {
 	return &MandateAdmissionRelationships{
 
@@ -110,8 +108,6 @@ type MandateAdmissionRelationshipsMandate struct {
 	// data
 	Data []*Mandate `json:"data"`
 }
-
-// line 140
 
 func MandateAdmissionRelationshipsMandateWithDefaults(defaults client.Defaults) *MandateAdmissionRelationshipsMandate {
 	return &MandateAdmissionRelationshipsMandate{

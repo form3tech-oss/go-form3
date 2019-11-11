@@ -47,8 +47,6 @@ type Account struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func AccountWithDefaults(defaults client.Defaults) *Account {
 	return &Account{
 

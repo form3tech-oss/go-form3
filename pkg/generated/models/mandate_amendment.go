@@ -24,8 +24,6 @@ type MandateAmendment struct {
 	Data *Mandate `json:"data,omitempty"`
 }
 
-// line 140
-
 func MandateAmendmentWithDefaults(defaults client.Defaults) *MandateAmendment {
 	return &MandateAmendment{
 

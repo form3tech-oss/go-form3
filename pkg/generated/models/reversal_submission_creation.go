@@ -24,8 +24,6 @@ type ReversalSubmissionCreation struct {
 	Data *NewReversalSubmission `json:"data,omitempty"`
 }
 
-// line 140
-
 func ReversalSubmissionCreationWithDefaults(defaults client.Defaults) *ReversalSubmissionCreation {
 	return &ReversalSubmissionCreation{
 

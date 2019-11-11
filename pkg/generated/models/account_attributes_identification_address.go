@@ -36,8 +36,6 @@ type AccountAttributesIdentificationAddress struct {
 	StreetNumber string `json:"street_number,omitempty"`
 }
 
-// line 140
-
 func AccountAttributesIdentificationAddressWithDefaults(defaults client.Defaults) *AccountAttributesIdentificationAddress {
 	return &AccountAttributesIdentificationAddress{
 

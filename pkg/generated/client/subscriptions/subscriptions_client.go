@@ -43,8 +43,7 @@ func (a *CreateSubscriptionRequest) Do() (*CreateSubscriptionCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateSubscriptionReader{formats: a.formats},
+		Reader:             &CreateSubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *DeleteSubscriptionRequest) Do() (*DeleteSubscriptionNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteSubscriptionReader{formats: a.formats},
+		Reader:             &DeleteSubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *GetSubscriptionRequest) Do() (*GetSubscriptionOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetSubscriptionReader{formats: a.formats},
+		Reader:             &GetSubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -145,8 +142,7 @@ func (a *GetSubscriptionsHealthRequest) Do() (*GetSubscriptionsHealthOK, error) 
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetSubscriptionsHealthReader{formats: a.formats},
+		Reader:             &GetSubscriptionsHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -179,8 +175,7 @@ func (a *ListSubscriptionsRequest) Do() (*ListSubscriptionsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListSubscriptionsReader{formats: a.formats},
+		Reader:             &ListSubscriptionsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -213,8 +208,7 @@ func (a *ModifySubscriptionRequest) Do() (*ModifySubscriptionOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ModifySubscriptionReader{formats: a.formats},
+		Reader:             &ModifySubscriptionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

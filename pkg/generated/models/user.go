@@ -41,8 +41,6 @@ type User struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func UserWithDefaults(defaults client.Defaults) *User {
 	return &User{
 
@@ -230,8 +228,6 @@ type UserAttributes struct {
 	// User name
 	Username string `json:"username,omitempty"`
 }
-
-// line 140
 
 func UserAttributesWithDefaults(defaults client.Defaults) *UserAttributes {
 	return &UserAttributes{

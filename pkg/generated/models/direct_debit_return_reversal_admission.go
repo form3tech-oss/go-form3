@@ -53,8 +53,6 @@ type DirectDebitReturnReversalAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func DirectDebitReturnReversalAdmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmission {
 	return &DirectDebitReturnReversalAdmission{
 
@@ -353,8 +351,6 @@ type DirectDebitReturnReversalAdmissionAttributes struct {
 	SchemeStatusCodeDescription *string `json:"scheme_status_code_description"`
 }
 
-// line 140
-
 func DirectDebitReturnReversalAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionAttributes {
 	return &DirectDebitReturnReversalAdmissionAttributes{
 
@@ -470,8 +466,6 @@ type DirectDebitReturnReversalAdmissionRelationships struct {
 	// direct debit return reversal
 	DirectDebitReturnReversal *DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturnReversal `json:"direct_debit_return_reversal,omitempty"`
 }
-
-// line 140
 
 func DirectDebitReturnReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionRelationships {
 	return &DirectDebitReturnReversalAdmissionRelationships{
@@ -629,8 +623,6 @@ type DirectDebitReturnReversalAdmissionRelationshipsDirectDebit struct {
 	Data []*DirectDebit `json:"data"`
 }
 
-// line 140
-
 func DirectDebitReturnReversalAdmissionRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionRelationshipsDirectDebit {
 	return &DirectDebitReturnReversalAdmissionRelationshipsDirectDebit{
 
@@ -717,8 +709,6 @@ type DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturn struct {
 	Data []*DirectDebitReturn `json:"data"`
 }
 
-// line 140
-
 func DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturn {
 	return &DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturn{
 
@@ -804,8 +794,6 @@ type DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturnReversal st
 	// data
 	Data []*DirectDebitReturnReversal `json:"data"`
 }
-
-// line 140
 
 func DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturnReversalWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturnReversal {
 	return &DirectDebitReturnReversalAdmissionRelationshipsDirectDebitReturnReversal{

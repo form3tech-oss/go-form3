@@ -26,8 +26,6 @@ type CredentialSecret struct {
 	ClientSecret string `json:"client_secret,omitempty"`
 }
 
-// line 140
-
 func CredentialSecretWithDefaults(defaults client.Defaults) *CredentialSecret {
 	return &CredentialSecret{
 

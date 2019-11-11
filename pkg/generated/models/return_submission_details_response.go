@@ -27,8 +27,6 @@ type ReturnSubmissionDetailsResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func ReturnSubmissionDetailsResponseWithDefaults(defaults client.Defaults) *ReturnSubmissionDetailsResponse {
 	return &ReturnSubmissionDetailsResponse{
 

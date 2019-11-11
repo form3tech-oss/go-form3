@@ -28,8 +28,6 @@ type DirectDebitReturnAdmissionRelationships struct {
 	DirectDebitReturn *DirectDebitReturnAdmissionRelationshipsDirectDebitReturn `json:"direct_debit_return,omitempty"`
 }
 
-// line 140
-
 func DirectDebitReturnAdmissionRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitReturnAdmissionRelationships {
 	return &DirectDebitReturnAdmissionRelationships{
 
@@ -150,8 +148,6 @@ type DirectDebitReturnAdmissionRelationshipsDirectDebit struct {
 	Data []*DirectDebit `json:"data"`
 }
 
-// line 140
-
 func DirectDebitReturnAdmissionRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *DirectDebitReturnAdmissionRelationshipsDirectDebit {
 	return &DirectDebitReturnAdmissionRelationshipsDirectDebit{
 
@@ -237,8 +233,6 @@ type DirectDebitReturnAdmissionRelationshipsDirectDebitReturn struct {
 	// data
 	Data []*DirectDebitReturn `json:"data"`
 }
-
-// line 140
 
 func DirectDebitReturnAdmissionRelationshipsDirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitReturnAdmissionRelationshipsDirectDebitReturn {
 	return &DirectDebitReturnAdmissionRelationshipsDirectDebitReturn{

@@ -46,8 +46,6 @@ type ClaimReversalSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func ClaimReversalSubmissionWithDefaults(defaults client.Defaults) *ClaimReversalSubmission {
 	return &ClaimReversalSubmission{
 
@@ -294,8 +292,6 @@ type ClaimReversalSubmissionAttributes struct {
 	// Format: date-time
 	SubmissionDatetime strfmt.DateTime `json:"submission_datetime,omitempty"`
 }
-
-// line 140
 
 func ClaimReversalSubmissionAttributesWithDefaults(defaults client.Defaults) *ClaimReversalSubmissionAttributes {
 	return &ClaimReversalSubmissionAttributes{

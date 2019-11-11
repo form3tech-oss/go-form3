@@ -24,8 +24,6 @@ type AdviceSubmissionRelationships struct {
 	Advice *RelationshipAdvices `json:"advice,omitempty"`
 }
 
-// line 140
-
 func AdviceSubmissionRelationshipsWithDefaults(defaults client.Defaults) *AdviceSubmissionRelationships {
 	return &AdviceSubmissionRelationships{
 

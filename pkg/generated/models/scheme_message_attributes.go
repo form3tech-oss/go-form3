@@ -43,8 +43,6 @@ type SchemeMessageAttributes struct {
 	UniqueSchemeID *string `json:"unique_scheme_id,omitempty"`
 }
 
-// line 140
-
 func SchemeMessageAttributesWithDefaults(defaults client.Defaults) *SchemeMessageAttributes {
 	return &SchemeMessageAttributes{
 

@@ -28,8 +28,6 @@ type AuditEntryListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func AuditEntryListResponseWithDefaults(defaults client.Defaults) *AuditEntryListResponse {
 	return &AuditEntryListResponse{
 

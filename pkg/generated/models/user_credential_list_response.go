@@ -30,8 +30,6 @@ type UserCredentialListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func UserCredentialListResponseWithDefaults(defaults client.Defaults) *UserCredentialListResponse {
 	return &UserCredentialListResponse{
 

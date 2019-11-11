@@ -24,8 +24,6 @@ type AccountRoutingCreation struct {
 	Data *AccountRouting `json:"data,omitempty"`
 }
 
-// line 140
-
 func AccountRoutingCreationWithDefaults(defaults client.Defaults) *AccountRoutingCreation {
 	return &AccountRoutingCreation{
 

@@ -27,8 +27,6 @@ type RecallSubmissionCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func RecallSubmissionCreationResponseWithDefaults(defaults client.Defaults) *RecallSubmissionCreationResponse {
 	return &RecallSubmissionCreationResponse{
 

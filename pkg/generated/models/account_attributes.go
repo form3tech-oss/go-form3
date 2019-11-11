@@ -99,8 +99,6 @@ type AccountAttributes struct {
 	Title string `json:"title,omitempty"`
 }
 
-// line 140
-
 func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes {
 	return &AccountAttributes{
 

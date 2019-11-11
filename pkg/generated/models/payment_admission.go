@@ -54,8 +54,6 @@ type PaymentAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func PaymentAdmissionWithDefaults(defaults client.Defaults) *PaymentAdmission {
 	return &PaymentAdmission{
 
@@ -379,8 +377,6 @@ type PaymentAdmissionAttributes struct {
 	StatusReason PaymentAdmissionStatusReason `json:"status_reason,omitempty"`
 }
 
-// line 140
-
 func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAdmissionAttributes {
 	return &PaymentAdmissionAttributes{
 
@@ -593,8 +589,6 @@ type PaymentAdmissionRelationships struct {
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 }
-
-// line 140
 
 func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdmissionRelationships {
 	return &PaymentAdmissionRelationships{

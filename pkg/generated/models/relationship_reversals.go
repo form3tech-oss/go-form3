@@ -25,8 +25,6 @@ type RelationshipReversals struct {
 	Data []*ReversalPayment `json:"data"`
 }
 
-// line 140
-
 func RelationshipReversalsWithDefaults(defaults client.Defaults) *RelationshipReversals {
 	return &RelationshipReversals{
 

@@ -25,8 +25,6 @@ type RelationshipReturns struct {
 	Data []*ReturnPayment `json:"data"`
 }
 
-// line 140
-
 func RelationshipReturnsWithDefaults(defaults client.Defaults) *RelationshipReturns {
 	return &RelationshipReturns{
 

@@ -22,7 +22,6 @@ type CreatePaymentReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-
 func (o *CreatePaymentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 

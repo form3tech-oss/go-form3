@@ -64,8 +64,6 @@ type MandateAttributes struct {
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
 
-// line 140
-
 func MandateAttributesWithDefaults(defaults client.Defaults) *MandateAttributes {
 	return &MandateAttributes{
 

@@ -30,8 +30,6 @@ type UserDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func UserDetailsListResponseWithDefaults(defaults client.Defaults) *UserDetailsListResponse {
 	return &UserDetailsListResponse{
 

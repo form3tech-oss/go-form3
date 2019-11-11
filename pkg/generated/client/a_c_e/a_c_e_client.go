@@ -43,8 +43,7 @@ func (a *CreateAceRequest) Do() (*CreateAceCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateAceReader{formats: a.formats},
+		Reader:             &CreateAceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *DeleteAceRequest) Do() (*DeleteAceNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteAceReader{formats: a.formats},
+		Reader:             &DeleteAceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *GetAceRequest) Do() (*GetAceOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetAceReader{formats: a.formats},
+		Reader:             &GetAceReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -145,8 +142,7 @@ func (a *ListAcesRequest) Do() (*ListAcesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListAcesReader{formats: a.formats},
+		Reader:             &ListAcesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

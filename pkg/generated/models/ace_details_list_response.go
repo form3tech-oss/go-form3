@@ -30,8 +30,6 @@ type AceDetailsListResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func AceDetailsListResponseWithDefaults(defaults client.Defaults) *AceDetailsListResponse {
 	return &AceDetailsListResponse{
 

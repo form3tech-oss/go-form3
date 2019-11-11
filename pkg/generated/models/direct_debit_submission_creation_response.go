@@ -27,8 +27,6 @@ type DirectDebitSubmissionCreationResponse struct {
 	Links *Links `json:"links,omitempty"`
 }
 
-// line 140
-
 func DirectDebitSubmissionCreationResponseWithDefaults(defaults client.Defaults) *DirectDebitSubmissionCreationResponse {
 	return &DirectDebitSubmissionCreationResponse{
 

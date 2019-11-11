@@ -40,8 +40,6 @@ type Organisation struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func OrganisationWithDefaults(defaults client.Defaults) *Organisation {
 	return &Organisation{
 

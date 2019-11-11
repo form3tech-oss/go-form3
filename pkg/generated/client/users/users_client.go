@@ -43,8 +43,7 @@ func (a *CreateUserRequest) Do() (*CreateUserCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateUserReader{formats: a.formats},
+		Reader:             &CreateUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -77,8 +76,7 @@ func (a *CreateUserCredentialsRequest) Do() (*CreateUserCredentialsCreated, erro
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateUserCredentialsReader{formats: a.formats},
+		Reader:             &CreateUserCredentialsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -111,8 +109,7 @@ func (a *CreateUserRoleRequest) Do() (*CreateUserRoleCreated, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &CreateUserRoleReader{formats: a.formats},
+		Reader:             &CreateUserRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -145,8 +142,7 @@ func (a *DeleteUserRequest) Do() (*DeleteUserNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteUserReader{formats: a.formats},
+		Reader:             &DeleteUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -179,8 +175,7 @@ func (a *DeleteUserCredentialRequest) Do() (*DeleteUserCredentialNoContent, erro
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteUserCredentialReader{formats: a.formats},
+		Reader:             &DeleteUserCredentialReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -213,8 +208,7 @@ func (a *DeleteUserRoleRequest) Do() (*DeleteUserRoleNoContent, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &DeleteUserRoleReader{formats: a.formats},
+		Reader:             &DeleteUserRoleReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -247,8 +241,7 @@ func (a *GetUserRequest) Do() (*GetUserOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetUserReader{formats: a.formats},
+		Reader:             &GetUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -281,8 +274,7 @@ func (a *GetUserAcesRequest) Do() (*GetUserAcesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetUserAcesReader{formats: a.formats},
+		Reader:             &GetUserAcesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -315,8 +307,7 @@ func (a *GetUsersHealthRequest) Do() (*GetUsersHealthOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &GetUsersHealthReader{formats: a.formats},
+		Reader:             &GetUsersHealthReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -349,8 +340,7 @@ func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListUserCredentialsReader{formats: a.formats},
+		Reader:             &ListUserCredentialsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -383,8 +373,7 @@ func (a *ListUserRolesRequest) Do() (*ListUserRolesOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListUserRolesReader{formats: a.formats},
+		Reader:             &ListUserRolesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -417,8 +406,7 @@ func (a *ListUsersRequest) Do() (*ListUsersOK, error) {
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ListUsersReader{formats: a.formats},
+		Reader:             &ListUsersReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -451,8 +439,7 @@ func (a *ModifyUserRequest) Do() (*ModifyUserOK, error) {
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-
-		Reader: &ModifyUserReader{formats: a.formats},
+		Reader:             &ModifyUserReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,

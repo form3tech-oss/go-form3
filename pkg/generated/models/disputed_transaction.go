@@ -32,8 +32,6 @@ type DisputedTransaction struct {
 	Date *strfmt.Date `json:"date"`
 }
 
-// line 140
-
 func DisputedTransactionWithDefaults(defaults client.Defaults) *DisputedTransaction {
 	return &DisputedTransaction{
 

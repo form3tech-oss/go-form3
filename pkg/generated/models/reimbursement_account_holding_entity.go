@@ -36,8 +36,6 @@ type ReimbursementAccountHoldingEntity struct {
 	BankPartyID string `json:"bank_party_id,omitempty"`
 }
 
-// line 140
-
 func ReimbursementAccountHoldingEntityWithDefaults(defaults client.Defaults) *ReimbursementAccountHoldingEntity {
 	return &ReimbursementAccountHoldingEntity{
 

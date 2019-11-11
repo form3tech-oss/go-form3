@@ -46,8 +46,6 @@ type AccountEvent struct {
 	Version *int64 `json:"version"`
 }
 
-// line 140
-
 func AccountEventWithDefaults(defaults client.Defaults) *AccountEvent {
 	return &AccountEvent{
 

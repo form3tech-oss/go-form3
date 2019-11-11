@@ -53,8 +53,6 @@ type SubscriptionAttributes struct {
 	UserID strfmt.UUID `json:"user_id,omitempty"`
 }
 
-// line 140
-
 func SubscriptionAttributesWithDefaults(defaults client.Defaults) *SubscriptionAttributes {
 	return &SubscriptionAttributes{
 

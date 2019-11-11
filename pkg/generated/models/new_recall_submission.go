@@ -46,8 +46,6 @@ type NewRecallSubmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-// line 140
-
 func NewRecallSubmissionWithDefaults(defaults client.Defaults) *NewRecallSubmission {
 	return &NewRecallSubmission{
 

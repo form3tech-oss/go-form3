@@ -25,8 +25,6 @@ type RelationshipRecalls struct {
 	Data []*Recall `json:"data"`
 }
 
-// line 140
-
 func RelationshipRecallsWithDefaults(defaults client.Defaults) *RelationshipRecalls {
 	return &RelationshipRecalls{
 

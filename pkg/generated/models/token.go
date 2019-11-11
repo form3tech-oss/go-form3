@@ -32,8 +32,6 @@ type Token struct {
 	TokenType string `json:"token_type,omitempty"`
 }
 
-// line 140
-
 func TokenWithDefaults(defaults client.Defaults) *Token {
 	return &Token{
 

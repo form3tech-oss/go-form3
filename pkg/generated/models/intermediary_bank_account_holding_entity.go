@@ -36,8 +36,6 @@ type IntermediaryBankAccountHoldingEntity struct {
 	BankPartyID string `json:"bank_party_id,omitempty"`
 }
 
-// line 140
-
 func IntermediaryBankAccountHoldingEntityWithDefaults(defaults client.Defaults) *IntermediaryBankAccountHoldingEntity {
 	return &IntermediaryBankAccountHoldingEntity{
 
