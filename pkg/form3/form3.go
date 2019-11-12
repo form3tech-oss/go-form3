@@ -65,7 +65,7 @@ func NewWithConfig(config Config) *F3 {
 	httpClient := NewHttpClient(httpclientconf)
 	httpClient.Transport = &AddHeaderTransport{httpClient.Transport}
 
-	rt := rc.NewWithClient(config.Host, "/v1", config.schemes, httpClient)
+	rt := rc.NewWithClient(u.Host, "/v1", config.schemes, httpClient)
 	rt.Context = context.Background()
 
 	rt.SetDebug(config.HttpDebug)
