@@ -55,7 +55,7 @@ type GetOrganisationAccountsIDEventsOK struct {
 }
 
 func (o *GetOrganisationAccountsIDEventsOK) Error() string {
-	return fmt.Sprintf("[GET /organisation/accounts/{id}/events][%d] getOrganisationAccountsIdEventsOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /organisation/accounts/{id}/events][%d] getOrganisationAccountsIdEventsOK", 200)
 }
 
 func (o *GetOrganisationAccountsIDEventsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -62,7 +62,7 @@ type CreateMandateReturnSubmissionCreated struct {
 }
 
 func (o *CreateMandateReturnSubmissionCreated) Error() string {
-	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns/{returnId}/submissions][%d] createMandateReturnSubmissionCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns/{returnId}/submissions][%d] createMandateReturnSubmissionCreated", 201)
 }
 
 func (o *CreateMandateReturnSubmissionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type CreateMandateReturnSubmissionBadRequest struct {
 }
 
 func (o *CreateMandateReturnSubmissionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns/{returnId}/submissions][%d] createMandateReturnSubmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns/{returnId}/submissions][%d] createMandateReturnSubmissionBadRequest", 400)
 }
 
 func (o *CreateMandateReturnSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

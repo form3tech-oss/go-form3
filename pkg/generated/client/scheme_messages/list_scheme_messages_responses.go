@@ -69,7 +69,7 @@ type ListSchemeMessagesOK struct {
 }
 
 func (o *ListSchemeMessagesOK) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesOK", 200)
 }
 
 func (o *ListSchemeMessagesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -103,7 +103,7 @@ type ListSchemeMessagesBadRequest struct {
 }
 
 func (o *ListSchemeMessagesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesBadRequest", 400)
 }
 
 func (o *ListSchemeMessagesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,7 +137,7 @@ type ListSchemeMessagesForbidden struct {
 }
 
 func (o *ListSchemeMessagesForbidden) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesForbidden  %+v", 403, o)
+	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesForbidden", 403)
 }
 
 func (o *ListSchemeMessagesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

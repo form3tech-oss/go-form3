@@ -83,7 +83,7 @@ type ModifySubscriptionOK struct {
 }
 
 func (o *ModifySubscriptionOK) Error() string {
-	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionOK  %+v", 200, o)
+	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionOK", 200)
 }
 
 func (o *ModifySubscriptionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -117,7 +117,7 @@ type ModifySubscriptionBadRequest struct {
 }
 
 func (o *ModifySubscriptionBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionBadRequest", 400)
 }
 
 func (o *ModifySubscriptionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -151,7 +151,7 @@ type ModifySubscriptionNotFound struct {
 }
 
 func (o *ModifySubscriptionNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionNotFound  %+v", 404, o)
+	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionNotFound", 404)
 }
 
 func (o *ModifySubscriptionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -185,7 +185,7 @@ type ModifySubscriptionConflict struct {
 }
 
 func (o *ModifySubscriptionConflict) Error() string {
-	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionConflict  %+v", 409, o)
+	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionConflict", 409)
 }
 
 func (o *ModifySubscriptionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -219,7 +219,7 @@ type ModifySubscriptionInternalServerError struct {
 }
 
 func (o *ModifySubscriptionInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionInternalServerError  %+v", 500, o)
+	return fmt.Sprintf("[PATCH /notification/subscriptions/{id}][%d] modifySubscriptionInternalServerError", 500)
 }
 
 func (o *ModifySubscriptionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

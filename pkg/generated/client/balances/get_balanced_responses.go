@@ -55,7 +55,7 @@ type GetBalancedOK struct {
 }
 
 func (o *GetBalancedOK) Error() string {
-	return fmt.Sprintf("[GET /organisation/balances][%d] getBalancedOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /organisation/balances][%d] getBalancedOK", 200)
 }
 
 func (o *GetBalancedOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

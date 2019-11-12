@@ -55,7 +55,7 @@ type CreateAccountCreated struct {
 }
 
 func (o *CreateAccountCreated) Error() string {
-	return fmt.Sprintf("[POST /organisation/accounts][%d] createAccountCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /organisation/accounts][%d] createAccountCreated", 201)
 }
 
 func (o *CreateAccountCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

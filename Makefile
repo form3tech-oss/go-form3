@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := generate-client
+
 swagger_codegen_version := "v0.19.0"
 
 platform := $(shell uname)

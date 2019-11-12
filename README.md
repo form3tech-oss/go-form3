@@ -63,3 +63,10 @@ Run `gore -autoimport` then type commands interactively, with completion, histor
 `gorun cmd/sample_scripts/print_organisation_names.go`
 
 See [cmd/sample_scripts](cmd/sample_scripts/) for a small subset of sample scripts
+
+## Updating the Client
+
+Tasks in the `Make` file download and preprocess the latest API swagger version.
+
+* `make install-swagger` to install go-swagger if not already installed.
+* `make` to regenerate the client files.

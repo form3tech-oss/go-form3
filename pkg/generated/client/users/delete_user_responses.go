@@ -47,7 +47,7 @@ type DeleteUserNoContent struct {
 }
 
 func (o *DeleteUserNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /security/users/{user_id}][%d] deleteUserNoContent ", 204)
+	return fmt.Sprintf("[DELETE /security/users/{user_id}][%d] deleteUserNoContent", 204)
 }
 
 func (o *DeleteUserNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

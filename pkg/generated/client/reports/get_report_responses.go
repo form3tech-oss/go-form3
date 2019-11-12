@@ -83,7 +83,7 @@ type GetReportOK struct {
 }
 
 func (o *GetReportOK) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportOK", 200)
 }
 
 func (o *GetReportOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -117,7 +117,7 @@ type GetReportBadRequest struct {
 }
 
 func (o *GetReportBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportBadRequest", 400)
 }
 
 func (o *GetReportBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -151,7 +151,7 @@ type GetReportForbidden struct {
 }
 
 func (o *GetReportForbidden) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportForbidden  %+v", 403, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportForbidden", 403)
 }
 
 func (o *GetReportForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -185,7 +185,7 @@ type GetReportNotFound struct {
 }
 
 func (o *GetReportNotFound) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportNotFound  %+v", 404, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportNotFound", 404)
 }
 
 func (o *GetReportNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -219,7 +219,7 @@ type GetReportNotAcceptable struct {
 }
 
 func (o *GetReportNotAcceptable) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportNotAcceptable  %+v", 406, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}][%d] getReportNotAcceptable", 406)
 }
 
 func (o *GetReportNotAcceptable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -55,7 +55,7 @@ type ModifyUnitOK struct {
 }
 
 func (o *ModifyUnitOK) Error() string {
-	return fmt.Sprintf("[PATCH /organisation/units/{id}][%d] modifyUnitOK  %+v", 200, o)
+	return fmt.Sprintf("[PATCH /organisation/units/{id}][%d] modifyUnitOK", 200)
 }
 
 func (o *ModifyUnitOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

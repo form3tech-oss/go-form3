@@ -55,7 +55,7 @@ type GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK struct {
 }
 
 func (o *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}][%d] getTransactionDirectdebitsIdReturnsReturnIdAdmissionsAdmissionIdOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}][%d] getTransactionDirectdebitsIdReturnsReturnIdAdmissionsAdmissionIdOK", 200)
 }
 
 func (o *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

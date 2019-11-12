@@ -55,7 +55,7 @@ type GetClaimOK struct {
 }
 
 func (o *GetClaimOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/claims/{id}][%d] getClaimOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/claims/{id}][%d] getClaimOK", 200)
 }
 
 func (o *GetClaimOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

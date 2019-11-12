@@ -55,7 +55,7 @@ type GetDirectDebitReversalAdmissionOK struct {
 }
 
 func (o *GetDirectDebitReversalAdmissionOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}][%d] getDirectDebitReversalAdmissionOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}][%d] getDirectDebitReversalAdmissionOK", 200)
 }
 
 func (o *GetDirectDebitReversalAdmissionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

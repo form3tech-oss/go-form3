@@ -55,7 +55,7 @@ type GetAceOK struct {
 }
 
 func (o *GetAceOK) Error() string {
-	return fmt.Sprintf("[GET /security/roles/{role_id}/aces/{ace_id}][%d] getAceOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /security/roles/{role_id}/aces/{ace_id}][%d] getAceOK", 200)
 }
 
 func (o *GetAceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -47,7 +47,7 @@ type DeleteUserCredentialNoContent struct {
 }
 
 func (o *DeleteUserCredentialNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /security/users/{user_id}/credentials/{client_id}][%d] deleteUserCredentialNoContent ", 204)
+	return fmt.Sprintf("[DELETE /security/users/{user_id}/credentials/{client_id}][%d] deleteUserCredentialNoContent", 204)
 }
 
 func (o *DeleteUserCredentialNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

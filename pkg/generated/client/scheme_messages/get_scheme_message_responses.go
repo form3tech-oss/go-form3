@@ -76,7 +76,7 @@ type GetSchemeMessageOK struct {
 }
 
 func (o *GetSchemeMessageOK) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageOK", 200)
 }
 
 func (o *GetSchemeMessageOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -110,7 +110,7 @@ type GetSchemeMessageBadRequest struct {
 }
 
 func (o *GetSchemeMessageBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageBadRequest", 400)
 }
 
 func (o *GetSchemeMessageBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,7 +144,7 @@ type GetSchemeMessageForbidden struct {
 }
 
 func (o *GetSchemeMessageForbidden) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageForbidden  %+v", 403, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageForbidden", 403)
 }
 
 func (o *GetSchemeMessageForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -178,7 +178,7 @@ type GetSchemeMessageNotFound struct {
 }
 
 func (o *GetSchemeMessageNotFound) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageNotFound  %+v", 404, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageNotFound", 404)
 }
 
 func (o *GetSchemeMessageNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

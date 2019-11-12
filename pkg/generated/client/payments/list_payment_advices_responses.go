@@ -55,7 +55,7 @@ type ListPaymentAdvicesOK struct {
 }
 
 func (o *ListPaymentAdvicesOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/payments/{id}/advices/{adviceId}][%d] listPaymentAdvicesOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/payments/{id}/advices/{adviceId}][%d] listPaymentAdvicesOK", 200)
 }
 
 func (o *ListPaymentAdvicesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

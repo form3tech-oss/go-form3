@@ -76,7 +76,7 @@ type GetReportAdmissionOK struct {
 }
 
 func (o *GetReportAdmissionOK) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionOK", 200)
 }
 
 func (o *GetReportAdmissionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -110,7 +110,7 @@ type GetReportAdmissionBadRequest struct {
 }
 
 func (o *GetReportAdmissionBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionBadRequest", 400)
 }
 
 func (o *GetReportAdmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,7 +144,7 @@ type GetReportAdmissionForbidden struct {
 }
 
 func (o *GetReportAdmissionForbidden) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionForbidden  %+v", 403, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionForbidden", 403)
 }
 
 func (o *GetReportAdmissionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -178,7 +178,7 @@ type GetReportAdmissionNotFound struct {
 }
 
 func (o *GetReportAdmissionNotFound) Error() string {
-	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionNotFound  %+v", 404, o)
+	return fmt.Sprintf("[GET /notification/reports/{id}/admissions/{admissionId}][%d] getReportAdmissionNotFound", 404)
 }
 
 func (o *GetReportAdmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

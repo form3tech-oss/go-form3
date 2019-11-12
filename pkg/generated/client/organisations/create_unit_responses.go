@@ -55,7 +55,7 @@ type CreateUnitCreated struct {
 }
 
 func (o *CreateUnitCreated) Error() string {
-	return fmt.Sprintf("[POST /organisation/units][%d] createUnitCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /organisation/units][%d] createUnitCreated", 201)
 }
 
 func (o *CreateUnitCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

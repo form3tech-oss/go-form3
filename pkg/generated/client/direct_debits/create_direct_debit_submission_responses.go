@@ -62,7 +62,7 @@ type CreateDirectDebitSubmissionCreated struct {
 }
 
 func (o *CreateDirectDebitSubmissionCreated) Error() string {
-	return fmt.Sprintf("[POST /transaction/directdebits/{id}/submissions][%d] createDirectDebitSubmissionCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /transaction/directdebits/{id}/submissions][%d] createDirectDebitSubmissionCreated", 201)
 }
 
 func (o *CreateDirectDebitSubmissionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type CreateDirectDebitSubmissionBadRequest struct {
 }
 
 func (o *CreateDirectDebitSubmissionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /transaction/directdebits/{id}/submissions][%d] createDirectDebitSubmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[POST /transaction/directdebits/{id}/submissions][%d] createDirectDebitSubmissionBadRequest", 400)
 }
 
 func (o *CreateDirectDebitSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

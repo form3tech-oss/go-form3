@@ -47,7 +47,7 @@ type DeleteAceNoContent struct {
 }
 
 func (o *DeleteAceNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /security/roles/{role_id}/aces/{ace_id}][%d] deleteAceNoContent ", 204)
+	return fmt.Sprintf("[DELETE /security/roles/{role_id}/aces/{ace_id}][%d] deleteAceNoContent", 204)
 }
 
 func (o *DeleteAceNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

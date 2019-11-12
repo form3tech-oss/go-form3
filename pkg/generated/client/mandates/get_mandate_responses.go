@@ -55,7 +55,7 @@ type GetMandateOK struct {
 }
 
 func (o *GetMandateOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/mandates/{id}][%d] getMandateOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/mandates/{id}][%d] getMandateOK", 200)
 }
 
 func (o *GetMandateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

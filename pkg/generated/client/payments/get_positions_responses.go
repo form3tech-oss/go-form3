@@ -55,7 +55,7 @@ type GetPositionsOK struct {
 }
 
 func (o *GetPositionsOK) Error() string {
-	return fmt.Sprintf("[GET /organisation/positions][%d] getPositionsOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /organisation/positions][%d] getPositionsOK", 200)
 }
 
 func (o *GetPositionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

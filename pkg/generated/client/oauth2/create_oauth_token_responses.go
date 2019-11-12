@@ -62,7 +62,7 @@ type CreateOauthTokenOK struct {
 }
 
 func (o *CreateOauthTokenOK) Error() string {
-	return fmt.Sprintf("[POST /oauth2/token][%d] createOauthTokenOK  %+v", 200, o)
+	return fmt.Sprintf("[POST /oauth2/token][%d] createOauthTokenOK", 200)
 }
 
 func (o *CreateOauthTokenOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -91,7 +91,7 @@ type CreateOauthTokenForbidden struct {
 }
 
 func (o *CreateOauthTokenForbidden) Error() string {
-	return fmt.Sprintf("[POST /oauth2/token][%d] createOauthTokenForbidden ", 403)
+	return fmt.Sprintf("[POST /oauth2/token][%d] createOauthTokenForbidden", 403)
 }
 
 func (o *CreateOauthTokenForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

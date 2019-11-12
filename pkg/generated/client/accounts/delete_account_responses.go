@@ -47,7 +47,7 @@ type DeleteAccountNoContent struct {
 }
 
 func (o *DeleteAccountNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /organisation/accounts/{id}][%d] deleteAccountNoContent ", 204)
+	return fmt.Sprintf("[DELETE /organisation/accounts/{id}][%d] deleteAccountNoContent", 204)
 }
 
 func (o *DeleteAccountNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
