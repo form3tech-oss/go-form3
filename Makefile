@@ -1,5 +1,6 @@
 swagger_codegen_version := "v0.19.0"
 
+platform := $(shell uname)
 ifeq (${platform},Darwin)
 swagger_binary := "swagger_darwin_amd64"
 else
