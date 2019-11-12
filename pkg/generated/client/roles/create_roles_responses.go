@@ -55,7 +55,7 @@ type CreateRolesCreated struct {
 }
 
 func (o *CreateRolesCreated) Error() string {
-	return fmt.Sprintf("[POST /security/roles][%d] createRolesCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /security/roles][%d] createRolesCreated", 201)
 }
 
 func (o *CreateRolesCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

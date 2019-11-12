@@ -47,7 +47,7 @@ type DeleteSubscriptionNoContent struct {
 }
 
 func (o *DeleteSubscriptionNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /notification/subscriptions/{id}][%d] deleteSubscriptionNoContent ", 204)
+	return fmt.Sprintf("[DELETE /notification/subscriptions/{id}][%d] deleteSubscriptionNoContent", 204)
 }
 
 func (o *DeleteSubscriptionNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -55,7 +55,7 @@ type ModifyUserOK struct {
 }
 
 func (o *ModifyUserOK) Error() string {
-	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserOK  %+v", 200, o)
+	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserOK", 200)
 }
 
 func (o *ModifyUserOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

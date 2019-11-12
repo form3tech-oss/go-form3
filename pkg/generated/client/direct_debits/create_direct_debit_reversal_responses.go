@@ -62,7 +62,7 @@ type CreateDirectDebitReversalCreated struct {
 }
 
 func (o *CreateDirectDebitReversalCreated) Error() string {
-	return fmt.Sprintf("[POST /transaction/directdebits/{id}/reversals][%d] createDirectDebitReversalCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /transaction/directdebits/{id}/reversals][%d] createDirectDebitReversalCreated", 201)
 }
 
 func (o *CreateDirectDebitReversalCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type CreateDirectDebitReversalBadRequest struct {
 }
 
 func (o *CreateDirectDebitReversalBadRequest) Error() string {
-	return fmt.Sprintf("[POST /transaction/directdebits/{id}/reversals][%d] createDirectDebitReversalBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[POST /transaction/directdebits/{id}/reversals][%d] createDirectDebitReversalBadRequest", 400)
 }
 
 func (o *CreateDirectDebitReversalBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

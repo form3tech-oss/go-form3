@@ -62,7 +62,7 @@ type GetClaimSubmissionOK struct {
 }
 
 func (o *GetClaimSubmissionOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/claims/{id}/submissions/{submissionId}][%d] getClaimSubmissionOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/claims/{id}/submissions/{submissionId}][%d] getClaimSubmissionOK", 200)
 }
 
 func (o *GetClaimSubmissionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type GetClaimSubmissionBadRequest struct {
 }
 
 func (o *GetClaimSubmissionBadRequest) Error() string {
-	return fmt.Sprintf("[GET /transaction/claims/{id}/submissions/{submissionId}][%d] getClaimSubmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /transaction/claims/{id}/submissions/{submissionId}][%d] getClaimSubmissionBadRequest", 400)
 }
 
 func (o *GetClaimSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -62,7 +62,7 @@ type ModifyMandateOK struct {
 }
 
 func (o *ModifyMandateOK) Error() string {
-	return fmt.Sprintf("[PATCH /transaction/mandates/{id}][%d] modifyMandateOK  %+v", 200, o)
+	return fmt.Sprintf("[PATCH /transaction/mandates/{id}][%d] modifyMandateOK", 200)
 }
 
 func (o *ModifyMandateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type ModifyMandateBadRequest struct {
 }
 
 func (o *ModifyMandateBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /transaction/mandates/{id}][%d] modifyMandateBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[PATCH /transaction/mandates/{id}][%d] modifyMandateBadRequest", 400)
 }
 
 func (o *ModifyMandateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

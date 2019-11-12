@@ -62,7 +62,7 @@ type CreatePaymentRecallSubmissionCreated struct {
 }
 
 func (o *CreatePaymentRecallSubmissionCreated) Error() string {
-	return fmt.Sprintf("[POST /transaction/payments/{id}/recalls/{recallId}/submissions][%d] createPaymentRecallSubmissionCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /transaction/payments/{id}/recalls/{recallId}/submissions][%d] createPaymentRecallSubmissionCreated", 201)
 }
 
 func (o *CreatePaymentRecallSubmissionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type CreatePaymentRecallSubmissionBadRequest struct {
 }
 
 func (o *CreatePaymentRecallSubmissionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /transaction/payments/{id}/recalls/{recallId}/submissions][%d] createPaymentRecallSubmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[POST /transaction/payments/{id}/recalls/{recallId}/submissions][%d] createPaymentRecallSubmissionBadRequest", 400)
 }
 
 func (o *CreatePaymentRecallSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

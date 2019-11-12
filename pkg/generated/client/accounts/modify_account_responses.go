@@ -55,7 +55,7 @@ type ModifyAccountOK struct {
 }
 
 func (o *ModifyAccountOK) Error() string {
-	return fmt.Sprintf("[PATCH /organisation/accounts/{id}][%d] modifyAccountOK  %+v", 200, o)
+	return fmt.Sprintf("[PATCH /organisation/accounts/{id}][%d] modifyAccountOK", 200)
 }
 
 func (o *ModifyAccountOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

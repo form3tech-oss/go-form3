@@ -55,7 +55,7 @@ type GetUnitOK struct {
 }
 
 func (o *GetUnitOK) Error() string {
-	return fmt.Sprintf("[GET /organisation/units/{id}][%d] getUnitOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /organisation/units/{id}][%d] getUnitOK", 200)
 }
 
 func (o *GetUnitOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

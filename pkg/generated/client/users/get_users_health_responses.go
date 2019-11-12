@@ -55,7 +55,7 @@ type GetUsersHealthOK struct {
 }
 
 func (o *GetUsersHealthOK) Error() string {
-	return fmt.Sprintf("[GET /security/users/health][%d] getUsersHealthOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /security/users/health][%d] getUsersHealthOK", 200)
 }
 
 func (o *GetUsersHealthOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

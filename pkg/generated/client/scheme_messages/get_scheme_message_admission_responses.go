@@ -76,7 +76,7 @@ type GetSchemeMessageAdmissionOK struct {
 }
 
 func (o *GetSchemeMessageAdmissionOK) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionOK", 200)
 }
 
 func (o *GetSchemeMessageAdmissionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -110,7 +110,7 @@ type GetSchemeMessageAdmissionBadRequest struct {
 }
 
 func (o *GetSchemeMessageAdmissionBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionBadRequest", 400)
 }
 
 func (o *GetSchemeMessageAdmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,7 +144,7 @@ type GetSchemeMessageAdmissionForbidden struct {
 }
 
 func (o *GetSchemeMessageAdmissionForbidden) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionForbidden  %+v", 403, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionForbidden", 403)
 }
 
 func (o *GetSchemeMessageAdmissionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -178,7 +178,7 @@ type GetSchemeMessageAdmissionNotFound struct {
 }
 
 func (o *GetSchemeMessageAdmissionNotFound) Error() string {
-	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionNotFound  %+v", 404, o)
+	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionNotFound", 404)
 }
 
 func (o *GetSchemeMessageAdmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

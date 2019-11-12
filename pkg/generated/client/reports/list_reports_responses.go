@@ -69,7 +69,7 @@ type ListReportsOK struct {
 }
 
 func (o *ListReportsOK) Error() string {
-	return fmt.Sprintf("[GET /notification/reports][%d] listReportsOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/reports][%d] listReportsOK", 200)
 }
 
 func (o *ListReportsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -103,7 +103,7 @@ type ListReportsBadRequest struct {
 }
 
 func (o *ListReportsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification/reports][%d] listReportsBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /notification/reports][%d] listReportsBadRequest", 400)
 }
 
 func (o *ListReportsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,7 +137,7 @@ type ListReportsForbidden struct {
 }
 
 func (o *ListReportsForbidden) Error() string {
-	return fmt.Sprintf("[GET /notification/reports][%d] listReportsForbidden  %+v", 403, o)
+	return fmt.Sprintf("[GET /notification/reports][%d] listReportsForbidden", 403)
 }
 
 func (o *ListReportsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

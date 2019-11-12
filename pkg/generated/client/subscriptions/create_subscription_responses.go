@@ -55,7 +55,7 @@ type CreateSubscriptionCreated struct {
 }
 
 func (o *CreateSubscriptionCreated) Error() string {
-	return fmt.Sprintf("[POST /notification/subscriptions][%d] createSubscriptionCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /notification/subscriptions][%d] createSubscriptionCreated", 201)
 }
 
 func (o *CreateSubscriptionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

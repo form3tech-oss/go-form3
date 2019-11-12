@@ -55,7 +55,7 @@ type GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdm
 }
 
 func (o *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}][%d] getTransactionDirectdebitsIdReturnsReturnIdReversalsReversalIdAdmissionsAdmissionIdOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}][%d] getTransactionDirectdebitsIdReturnsReturnIdReversalsReversalIdAdmissionsAdmissionIdOK", 200)
 }
 
 func (o *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

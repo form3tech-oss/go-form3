@@ -62,7 +62,7 @@ type CreateClaimReversalSubmissionCreated struct {
 }
 
 func (o *CreateClaimReversalSubmissionCreated) Error() string {
-	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals/{reversalId}/submissions][%d] createClaimReversalSubmissionCreated  %+v", 201, o)
+	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals/{reversalId}/submissions][%d] createClaimReversalSubmissionCreated", 201)
 }
 
 func (o *CreateClaimReversalSubmissionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type CreateClaimReversalSubmissionBadRequest struct {
 }
 
 func (o *CreateClaimReversalSubmissionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals/{reversalId}/submissions][%d] createClaimReversalSubmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals/{reversalId}/submissions][%d] createClaimReversalSubmissionBadRequest", 400)
 }
 
 func (o *CreateClaimReversalSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

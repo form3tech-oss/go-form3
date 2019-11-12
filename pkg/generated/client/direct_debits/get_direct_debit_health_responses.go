@@ -55,7 +55,7 @@ type GetDirectDebitHealthOK struct {
 }
 
 func (o *GetDirectDebitHealthOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/directdebits/health][%d] getDirectDebitHealthOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/directdebits/health][%d] getDirectDebitHealthOK", 200)
 }
 
 func (o *GetDirectDebitHealthOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

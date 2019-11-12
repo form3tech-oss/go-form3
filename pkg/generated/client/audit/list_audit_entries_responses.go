@@ -55,7 +55,7 @@ type ListAuditEntriesOK struct {
 }
 
 func (o *ListAuditEntriesOK) Error() string {
-	return fmt.Sprintf("[GET /audit/entries/{record_type}][%d] listAuditEntriesOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /audit/entries/{record_type}][%d] listAuditEntriesOK", 200)
 }
 
 func (o *ListAuditEntriesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

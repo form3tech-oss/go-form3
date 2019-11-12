@@ -55,7 +55,7 @@ type GetSubscriptionOK struct {
 }
 
 func (o *GetSubscriptionOK) Error() string {
-	return fmt.Sprintf("[GET /notification/subscriptions/{id}][%d] getSubscriptionOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /notification/subscriptions/{id}][%d] getSubscriptionOK", 200)
 }
 
 func (o *GetSubscriptionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

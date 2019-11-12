@@ -47,7 +47,7 @@ type DeleteRoleNoContent struct {
 }
 
 func (o *DeleteRoleNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /security/roles/{role_id}][%d] deleteRoleNoContent ", 204)
+	return fmt.Sprintf("[DELETE /security/roles/{role_id}][%d] deleteRoleNoContent", 204)
 }
 
 func (o *DeleteRoleNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

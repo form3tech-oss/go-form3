@@ -62,7 +62,7 @@ type GetClaimReversalSubmissionOK struct {
 }
 
 func (o *GetClaimReversalSubmissionOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionOK  %+v", 200, o)
+	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionOK", 200)
 }
 
 func (o *GetClaimReversalSubmissionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -96,7 +96,7 @@ type GetClaimReversalSubmissionBadRequest struct {
 }
 
 func (o *GetClaimReversalSubmissionBadRequest) Error() string {
-	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionBadRequest  %+v", 400, o)
+	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionBadRequest", 400)
 }
 
 func (o *GetClaimReversalSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
