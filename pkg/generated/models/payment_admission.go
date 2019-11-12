@@ -586,18 +586,18 @@ func (m *PaymentAdmissionAttributes) Json() string {
 // swagger:model PaymentAdmissionRelationships
 type PaymentAdmissionRelationships struct {
 
-	// ID of the payment resource related to the payment admission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 }
 
 func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdmissionRelationships {
 	return &PaymentAdmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 	}
 }
 
-func (m *PaymentAdmissionRelationships) WithPayment(payment RelationshipLinks) *PaymentAdmissionRelationships {
+func (m *PaymentAdmissionRelationships) WithPayment(payment RelationshipPayments) *PaymentAdmissionRelationships {
 
 	m.Payment = &payment
 

@@ -49,6 +49,8 @@ List of claims details
 type ListClaimsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListClaimsOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.ClaimDetailsListResponse = new(models.ClaimDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

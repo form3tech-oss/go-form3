@@ -56,6 +56,8 @@ Direct Debit creation response
 type CreateDirectDebitCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreateDirectDebitCreated) readResponse(response runtime.ClientResponse,
 	o.DirectDebitCreationResponse = new(models.DirectDebitCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Direct Debit creation error
 type CreateDirectDebitBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreateDirectDebitBadRequest) readResponse(response runtime.ClientRespon
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

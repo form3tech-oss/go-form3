@@ -56,11 +56,11 @@ func (a *CreateRolesRequest) Do() (*CreateRolesCreated, error) {
 }
 
 func (a *CreateRolesRequest) MustDo() *CreateRolesCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *DeleteRoleRequest) Do() (*DeleteRoleNoContent, error) {
 }
 
 func (a *DeleteRoleRequest) MustDo() *DeleteRoleNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *GetRoleRequest) Do() (*GetRoleOK, error) {
 }
 
 func (a *GetRoleRequest) MustDo() *GetRoleOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *ListRolesRequest) Do() (*ListRolesOK, error) {
 }
 
 func (a *ListRolesRequest) MustDo() *ListRolesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

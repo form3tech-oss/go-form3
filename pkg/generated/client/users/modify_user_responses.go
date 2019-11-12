@@ -49,6 +49,8 @@ User details
 type ModifyUserOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ModifyUserOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.UserDetailsResponse = new(models.UserDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

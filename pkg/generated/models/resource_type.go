@@ -33,6 +33,12 @@ const (
 	// ResourceTypeAccountConfigurations captures enum value "account_configurations"
 	ResourceTypeAccountConfigurations ResourceType = "account_configurations"
 
+	// ResourceTypeAccountRoutings captures enum value "account_routings"
+	ResourceTypeAccountRoutings ResourceType = "account_routings"
+
+	// ResourceTypeAccountEvents captures enum value "account_events"
+	ResourceTypeAccountEvents ResourceType = "account_events"
+
 	// ResourceTypePaymentAdmissions captures enum value "payment_admissions"
 	ResourceTypePaymentAdmissions ResourceType = "payment_admissions"
 
@@ -126,6 +132,9 @@ const (
 	// ResourceTypePaymentAdviceSubmissionValidations captures enum value "payment_advice_submission_validations"
 	ResourceTypePaymentAdviceSubmissionValidations ResourceType = "payment_advice_submission_validations"
 
+	// ResourceTypePaymentAutomaticReturns captures enum value "payment_automatic_returns"
+	ResourceTypePaymentAutomaticReturns ResourceType = "payment_automatic_returns"
+
 	// ResourceTypeSchemeMessages captures enum value "scheme_messages"
 	ResourceTypeSchemeMessages ResourceType = "scheme_messages"
 
@@ -138,7 +147,7 @@ var resourceTypeEnum []interface{}
 
 func init() {
 	var res []ResourceType
-	if err := json.Unmarshal([]byte(`["accounts","bics","bank_ids","account_configurations","payment_admissions","payment_batches","payment_submissions","payment_submission_validations","payments","return_admissions","return_reversals","return_reversal_admissions","return_submissions","return_submission_validations","returns","reversal_admissions","reversal_submissions","reversal_submission_validations","reversals","limits","positions","payment_defaults","recalls","recall_submissions","recall_admissions","recall_decisions","recall_decision_admissions","recall_decision_submissions","recall_submission_validations","recall_decision_submission_validations","recall_reversals","recall_reversal_admissions","payment_advices","payment_advice_submissions","payment_advice_submission_validations","scheme_messages","scheme_message_admissions"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accounts","bics","bank_ids","account_configurations","account_routings","account_events","payment_admissions","payment_batches","payment_submissions","payment_submission_validations","payments","return_admissions","return_reversals","return_reversal_admissions","return_submissions","return_submission_validations","returns","reversal_admissions","reversal_submissions","reversal_submission_validations","reversals","limits","positions","payment_defaults","recalls","recall_submissions","recall_admissions","recall_decisions","recall_decision_admissions","recall_decision_submissions","recall_submission_validations","recall_decision_submission_validations","recall_reversals","recall_reversal_admissions","payment_advices","payment_advice_submissions","payment_advice_submission_validations","payment_automatic_returns","scheme_messages","scheme_message_admissions"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

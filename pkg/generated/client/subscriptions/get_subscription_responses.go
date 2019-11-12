@@ -49,6 +49,8 @@ Subscription details
 type GetSubscriptionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SubscriptionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetSubscriptionOK) readResponse(response runtime.ClientResponse, consum
 	o.SubscriptionDetailsResponse = new(models.SubscriptionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SubscriptionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

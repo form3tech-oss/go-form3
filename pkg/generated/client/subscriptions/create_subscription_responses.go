@@ -49,6 +49,8 @@ Subscription creation response
 type CreateSubscriptionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SubscriptionCreationResponse
 }
 
@@ -61,6 +63,7 @@ func (o *CreateSubscriptionCreated) readResponse(response runtime.ClientResponse
 	o.SubscriptionCreationResponse = new(models.SubscriptionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SubscriptionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

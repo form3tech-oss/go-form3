@@ -25,12 +25,14 @@ type Mandate struct {
 	Attributes *MandateAttributes `json:"attributes,omitempty"`
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *MandateRelationships `json:"relationships,omitempty"`
@@ -49,9 +51,9 @@ func MandateWithDefaults(defaults client.Defaults) *Mandate {
 
 		Attributes: MandateAttributesWithDefaults(defaults),
 
-		ID: defaults.GetStrfmtUUID("Mandate", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("Mandate", "id"),
 
-		OrganisationID: defaults.GetStrfmtUUID("Mandate", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("Mandate", "organisation_id"),
 
 		Relationships: MandateRelationshipsWithDefaults(defaults),
 
@@ -75,15 +77,25 @@ func (m *Mandate) WithoutAttributes() *Mandate {
 
 func (m *Mandate) WithID(id strfmt.UUID) *Mandate {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *Mandate) WithoutID() *Mandate {
+	m.ID = nil
 	return m
 }
 
 func (m *Mandate) WithOrganisationID(organisationID strfmt.UUID) *Mandate {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *Mandate) WithoutOrganisationID() *Mandate {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -172,8 +184,8 @@ func (m *Mandate) validateAttributes(formats strfmt.Registry) error {
 
 func (m *Mandate) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -185,8 +197,8 @@ func (m *Mandate) validateID(formats strfmt.Registry) error {
 
 func (m *Mandate) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {

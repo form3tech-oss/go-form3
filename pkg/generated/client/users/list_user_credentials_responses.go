@@ -49,6 +49,8 @@ List of credentials for user
 type ListUserCredentialsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserCredentialListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListUserCredentialsOK) readResponse(response runtime.ClientResponse, co
 	o.UserCredentialListResponse = new(models.UserCredentialListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserCredentialListResponse); err != nil && err != io.EOF {
 		return err
 	}

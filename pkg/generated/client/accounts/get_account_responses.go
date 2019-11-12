@@ -49,6 +49,8 @@ Account details
 type GetAccountOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AccountDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetAccountOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.AccountDetailsResponse = new(models.AccountDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AccountDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

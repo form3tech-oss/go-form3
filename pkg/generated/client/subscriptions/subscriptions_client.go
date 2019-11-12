@@ -56,11 +56,11 @@ func (a *CreateSubscriptionRequest) Do() (*CreateSubscriptionCreated, error) {
 }
 
 func (a *CreateSubscriptionRequest) MustDo() *CreateSubscriptionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *DeleteSubscriptionRequest) Do() (*DeleteSubscriptionNoContent, error) {
 }
 
 func (a *DeleteSubscriptionRequest) MustDo() *DeleteSubscriptionNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *GetSubscriptionRequest) Do() (*GetSubscriptionOK, error) {
 }
 
 func (a *GetSubscriptionRequest) MustDo() *GetSubscriptionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *GetSubscriptionsHealthRequest) Do() (*GetSubscriptionsHealthOK, error) 
 }
 
 func (a *GetSubscriptionsHealthRequest) MustDo() *GetSubscriptionsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *ListSubscriptionsRequest) Do() (*ListSubscriptionsOK, error) {
 }
 
 func (a *ListSubscriptionsRequest) MustDo() *ListSubscriptionsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -221,11 +221,11 @@ func (a *ModifySubscriptionRequest) Do() (*ModifySubscriptionOK, error) {
 }
 
 func (a *ModifySubscriptionRequest) MustDo() *ModifySubscriptionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

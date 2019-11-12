@@ -56,6 +56,8 @@ Payment creation response
 type CreatePaymentCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.PaymentCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreatePaymentCreated) readResponse(response runtime.ClientResponse, con
 	o.PaymentCreationResponse = new(models.PaymentCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.PaymentCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Payment creation error
 type CreatePaymentBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreatePaymentBadRequest) readResponse(response runtime.ClientResponse, 
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

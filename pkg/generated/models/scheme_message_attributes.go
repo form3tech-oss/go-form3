@@ -40,8 +40,7 @@ type SchemeMessageAttributes struct {
 	SchemeMessageType string `json:"scheme_message_type"`
 
 	// unique scheme id
-	// Required: true
-	UniqueSchemeID string `json:"unique_scheme_id"`
+	UniqueSchemeID *string `json:"unique_scheme_id,omitempty"`
 }
 
 func SchemeMessageAttributesWithDefaults(defaults client.Defaults) *SchemeMessageAttributes {
@@ -55,7 +54,7 @@ func SchemeMessageAttributesWithDefaults(defaults client.Defaults) *SchemeMessag
 
 		SchemeMessageType: defaults.GetString("SchemeMessageAttributes", "scheme_message_type"),
 
-		UniqueSchemeID: defaults.GetString("SchemeMessageAttributes", "unique_scheme_id"),
+		UniqueSchemeID: defaults.GetStringPtr("SchemeMessageAttributes", "unique_scheme_id"),
 	}
 }
 
@@ -89,8 +88,13 @@ func (m *SchemeMessageAttributes) WithSchemeMessageType(schemeMessageType string
 
 func (m *SchemeMessageAttributes) WithUniqueSchemeID(uniqueSchemeID string) *SchemeMessageAttributes {
 
-	m.UniqueSchemeID = uniqueSchemeID
+	m.UniqueSchemeID = &uniqueSchemeID
 
+	return m
+}
+
+func (m *SchemeMessageAttributes) WithoutUniqueSchemeID() *SchemeMessageAttributes {
+	m.UniqueSchemeID = nil
 	return m
 }
 
@@ -111,10 +115,6 @@ func (m *SchemeMessageAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSchemeMessageType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUniqueSchemeID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -177,15 +177,6 @@ func (m *SchemeMessageAttributes) validatePaymentScheme(formats strfmt.Registry)
 func (m *SchemeMessageAttributes) validateSchemeMessageType(formats strfmt.Registry) error {
 
 	if err := validate.RequiredString("scheme_message_type", "body", string(m.SchemeMessageType)); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *SchemeMessageAttributes) validateUniqueSchemeID(formats strfmt.Registry) error {
-
-	if err := validate.RequiredString("unique_scheme_id", "body", string(m.UniqueSchemeID)); err != nil {
 		return err
 	}
 

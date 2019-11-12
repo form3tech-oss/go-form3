@@ -56,11 +56,11 @@ func (a *CreatePaymentRequest) Do() (*CreatePaymentCreated, error) {
 }
 
 func (a *CreatePaymentRequest) MustDo() *CreatePaymentCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *CreatePaymentAdviceRequest) Do() (*CreatePaymentAdviceCreated, error) {
 }
 
 func (a *CreatePaymentAdviceRequest) MustDo() *CreatePaymentAdviceCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *CreatePaymentAdviceSubmissionRequest) Do() (*CreatePaymentAdviceSubmiss
 }
 
 func (a *CreatePaymentAdviceSubmissionRequest) MustDo() *CreatePaymentAdviceSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *CreatePaymentRecallRequest) Do() (*CreatePaymentRecallCreated, error) {
 }
 
 func (a *CreatePaymentRecallRequest) MustDo() *CreatePaymentRecallCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *CreatePaymentRecallDecisionRequest) Do() (*CreatePaymentRecallDecisionC
 }
 
 func (a *CreatePaymentRecallDecisionRequest) MustDo() *CreatePaymentRecallDecisionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -221,11 +221,11 @@ func (a *CreatePaymentRecallDecisionSubmissionRequest) Do() (*CreatePaymentRecal
 }
 
 func (a *CreatePaymentRecallDecisionSubmissionRequest) MustDo() *CreatePaymentRecallDecisionSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -254,11 +254,11 @@ func (a *CreatePaymentRecallSubmissionRequest) Do() (*CreatePaymentRecallSubmiss
 }
 
 func (a *CreatePaymentRecallSubmissionRequest) MustDo() *CreatePaymentRecallSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -287,11 +287,11 @@ func (a *CreatePaymentReturnRequest) Do() (*CreatePaymentReturnCreated, error) {
 }
 
 func (a *CreatePaymentReturnRequest) MustDo() *CreatePaymentReturnCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -320,11 +320,11 @@ func (a *CreatePaymentReturnReversalRequest) Do() (*CreatePaymentReturnReversalC
 }
 
 func (a *CreatePaymentReturnReversalRequest) MustDo() *CreatePaymentReturnReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -353,11 +353,11 @@ func (a *CreatePaymentReturnSubmissionRequest) Do() (*CreatePaymentReturnSubmiss
 }
 
 func (a *CreatePaymentReturnSubmissionRequest) MustDo() *CreatePaymentReturnSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -386,11 +386,11 @@ func (a *CreatePaymentReversalRequest) Do() (*CreatePaymentReversalCreated, erro
 }
 
 func (a *CreatePaymentReversalRequest) MustDo() *CreatePaymentReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -419,11 +419,11 @@ func (a *CreatePaymentReversalSubmissionRequest) Do() (*CreatePaymentReversalSub
 }
 
 func (a *CreatePaymentReversalSubmissionRequest) MustDo() *CreatePaymentReversalSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -452,11 +452,11 @@ func (a *CreatePaymentSubmissionRequest) Do() (*CreatePaymentSubmissionCreated, 
 }
 
 func (a *CreatePaymentSubmissionRequest) MustDo() *CreatePaymentSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -485,11 +485,11 @@ func (a *GetPaymentRequest) Do() (*GetPaymentOK, error) {
 }
 
 func (a *GetPaymentRequest) MustDo() *GetPaymentOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -518,11 +518,11 @@ func (a *GetPaymentAdmissionsRequest) Do() (*GetPaymentAdmissionsOK, error) {
 }
 
 func (a *GetPaymentAdmissionsRequest) MustDo() *GetPaymentAdmissionsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -551,11 +551,11 @@ func (a *GetPaymentAdviceSubmissionRequest) Do() (*GetPaymentAdviceSubmissionOK,
 }
 
 func (a *GetPaymentAdviceSubmissionRequest) MustDo() *GetPaymentAdviceSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -584,11 +584,11 @@ func (a *GetPaymentRecallRequest) Do() (*GetPaymentRecallOK, error) {
 }
 
 func (a *GetPaymentRecallRequest) MustDo() *GetPaymentRecallOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -617,11 +617,11 @@ func (a *GetPaymentRecallAdmissionRequest) Do() (*GetPaymentRecallAdmissionOK, e
 }
 
 func (a *GetPaymentRecallAdmissionRequest) MustDo() *GetPaymentRecallAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -650,11 +650,11 @@ func (a *GetPaymentRecallDecisionRequest) Do() (*GetPaymentRecallDecisionOK, err
 }
 
 func (a *GetPaymentRecallDecisionRequest) MustDo() *GetPaymentRecallDecisionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -683,11 +683,11 @@ func (a *GetPaymentRecallDecisionAdmissionRequest) Do() (*GetPaymentRecallDecisi
 }
 
 func (a *GetPaymentRecallDecisionAdmissionRequest) MustDo() *GetPaymentRecallDecisionAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -716,11 +716,11 @@ func (a *GetPaymentRecallDecisionSubmissionRequest) Do() (*GetPaymentRecallDecis
 }
 
 func (a *GetPaymentRecallDecisionSubmissionRequest) MustDo() *GetPaymentRecallDecisionSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -749,11 +749,11 @@ func (a *GetPaymentRecallReversalRequest) Do() (*GetPaymentRecallReversalOK, err
 }
 
 func (a *GetPaymentRecallReversalRequest) MustDo() *GetPaymentRecallReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -782,11 +782,11 @@ func (a *GetPaymentRecallReversalAdmissionRequest) Do() (*GetPaymentRecallRevers
 }
 
 func (a *GetPaymentRecallReversalAdmissionRequest) MustDo() *GetPaymentRecallReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -815,11 +815,11 @@ func (a *GetPaymentRecallSubmissionRequest) Do() (*GetPaymentRecallSubmissionOK,
 }
 
 func (a *GetPaymentRecallSubmissionRequest) MustDo() *GetPaymentRecallSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -848,11 +848,11 @@ func (a *GetPaymentReturnRequest) Do() (*GetPaymentReturnOK, error) {
 }
 
 func (a *GetPaymentReturnRequest) MustDo() *GetPaymentReturnOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -881,11 +881,11 @@ func (a *GetPaymentReturnAdmissionRequest) Do() (*GetPaymentReturnAdmissionOK, e
 }
 
 func (a *GetPaymentReturnAdmissionRequest) MustDo() *GetPaymentReturnAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -914,11 +914,11 @@ func (a *GetPaymentReturnReversalRequest) Do() (*GetPaymentReturnReversalOK, err
 }
 
 func (a *GetPaymentReturnReversalRequest) MustDo() *GetPaymentReturnReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -947,11 +947,11 @@ func (a *GetPaymentReturnReversalAdmissionRequest) Do() (*GetPaymentReturnRevers
 }
 
 func (a *GetPaymentReturnReversalAdmissionRequest) MustDo() *GetPaymentReturnReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -980,11 +980,11 @@ func (a *GetPaymentReturnSubmissionRequest) Do() (*GetPaymentReturnSubmissionOK,
 }
 
 func (a *GetPaymentReturnSubmissionRequest) MustDo() *GetPaymentReturnSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1013,11 +1013,11 @@ func (a *GetPaymentReversalRequest) Do() (*GetPaymentReversalOK, error) {
 }
 
 func (a *GetPaymentReversalRequest) MustDo() *GetPaymentReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1046,11 +1046,11 @@ func (a *GetPaymentReversalAdmissionRequest) Do() (*GetPaymentReversalAdmissionO
 }
 
 func (a *GetPaymentReversalAdmissionRequest) MustDo() *GetPaymentReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1079,11 +1079,11 @@ func (a *GetPaymentReversalSubmissionRequest) Do() (*GetPaymentReversalSubmissio
 }
 
 func (a *GetPaymentReversalSubmissionRequest) MustDo() *GetPaymentReversalSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1112,11 +1112,11 @@ func (a *GetPaymentSubmissionRequest) Do() (*GetPaymentSubmissionOK, error) {
 }
 
 func (a *GetPaymentSubmissionRequest) MustDo() *GetPaymentSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1145,11 +1145,11 @@ func (a *GetPaymentsHealthRequest) Do() (*GetPaymentsHealthOK, error) {
 }
 
 func (a *GetPaymentsHealthRequest) MustDo() *GetPaymentsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1178,11 +1178,11 @@ func (a *GetPositionsRequest) Do() (*GetPositionsOK, error) {
 }
 
 func (a *GetPositionsRequest) MustDo() *GetPositionsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1211,11 +1211,11 @@ func (a *ListPaymentAdvicesRequest) Do() (*ListPaymentAdvicesOK, error) {
 }
 
 func (a *ListPaymentAdvicesRequest) MustDo() *ListPaymentAdvicesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -1244,11 +1244,11 @@ func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
 }
 
 func (a *ListPaymentsRequest) MustDo() *ListPaymentsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

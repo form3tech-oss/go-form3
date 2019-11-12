@@ -49,6 +49,8 @@ User creation response
 type CreateUserCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserCreationResponse
 }
 
@@ -61,6 +63,7 @@ func (o *CreateUserCreated) readResponse(response runtime.ClientResponse, consum
 	o.UserCreationResponse = new(models.UserCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

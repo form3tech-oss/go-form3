@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // UserDetailsResponse user details response
@@ -21,7 +22,8 @@ import (
 type UserDetailsResponse struct {
 
 	// data
-	Data *User `json:"data,omitempty"`
+	// Required: true
+	Data *User `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
@@ -80,8 +82,8 @@ func (m *UserDetailsResponse) Validate(formats strfmt.Registry) error {
 
 func (m *UserDetailsResponse) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

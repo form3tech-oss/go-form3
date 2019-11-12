@@ -56,6 +56,8 @@ Authorisation token (Bearer)
 type CreateOauthTokenOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Token
 }
 
@@ -68,6 +70,7 @@ func (o *CreateOauthTokenOK) readResponse(response runtime.ClientResponse, consu
 	o.Token = new(models.Token)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Token); err != nil && err != io.EOF {
 		return err
 	}

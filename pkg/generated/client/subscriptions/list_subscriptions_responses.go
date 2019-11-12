@@ -49,6 +49,8 @@ List of subscription details
 type ListSubscriptionsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.SubscriptionDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListSubscriptionsOK) readResponse(response runtime.ClientResponse, cons
 	o.SubscriptionDetailsListResponse = new(models.SubscriptionDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.SubscriptionDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

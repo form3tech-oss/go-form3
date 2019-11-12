@@ -32,7 +32,7 @@ type ReceiversCorrespondentAccountHoldingEntity struct {
 	// Receiver's correspondent's name
 	BankName string `json:"bank_name,omitempty"`
 
-	// Reciever's correspondent party identifier
+	// Receiver's correspondent party identifier
 	BankPartyID string `json:"bank_party_id,omitempty"`
 }
 

@@ -49,6 +49,8 @@ List of organisation details
 type ListUnitsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.OrganisationDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListUnitsOK) readResponse(response runtime.ClientResponse, consumer run
 	o.OrganisationDetailsListResponse = new(models.OrganisationDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

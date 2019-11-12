@@ -407,6 +407,12 @@ type DirectDebitReturnRelationships struct {
 	// direct debit
 	DirectDebit *DirectDebitReturnRelationshipsDirectDebit `json:"direct_debit,omitempty"`
 
+	// direct debit return admission
+	DirectDebitReturnAdmission *DirectDebitReturnRelationshipsDirectDebitReturnAdmission `json:"direct_debit_return_admission,omitempty"`
+
+	// direct debit return reversal
+	DirectDebitReturnReversal *DirectDebitReturnRelationshipsDirectDebitReturnReversal `json:"direct_debit_return_reversal,omitempty"`
+
 	// direct debit return submission
 	DirectDebitReturnSubmission *DirectDebitReturnRelationshipsDirectDebitReturnSubmission `json:"direct_debit_return_submission,omitempty"`
 }
@@ -415,6 +421,10 @@ func DirectDebitReturnRelationshipsWithDefaults(defaults client.Defaults) *Direc
 	return &DirectDebitReturnRelationships{
 
 		DirectDebit: DirectDebitReturnRelationshipsDirectDebitWithDefaults(defaults),
+
+		DirectDebitReturnAdmission: DirectDebitReturnRelationshipsDirectDebitReturnAdmissionWithDefaults(defaults),
+
+		DirectDebitReturnReversal: DirectDebitReturnRelationshipsDirectDebitReturnReversalWithDefaults(defaults),
 
 		DirectDebitReturnSubmission: DirectDebitReturnRelationshipsDirectDebitReturnSubmissionWithDefaults(defaults),
 	}
@@ -429,6 +439,30 @@ func (m *DirectDebitReturnRelationships) WithDirectDebit(directDebit DirectDebit
 
 func (m *DirectDebitReturnRelationships) WithoutDirectDebit() *DirectDebitReturnRelationships {
 	m.DirectDebit = nil
+	return m
+}
+
+func (m *DirectDebitReturnRelationships) WithDirectDebitReturnAdmission(directDebitReturnAdmission DirectDebitReturnRelationshipsDirectDebitReturnAdmission) *DirectDebitReturnRelationships {
+
+	m.DirectDebitReturnAdmission = &directDebitReturnAdmission
+
+	return m
+}
+
+func (m *DirectDebitReturnRelationships) WithoutDirectDebitReturnAdmission() *DirectDebitReturnRelationships {
+	m.DirectDebitReturnAdmission = nil
+	return m
+}
+
+func (m *DirectDebitReturnRelationships) WithDirectDebitReturnReversal(directDebitReturnReversal DirectDebitReturnRelationshipsDirectDebitReturnReversal) *DirectDebitReturnRelationships {
+
+	m.DirectDebitReturnReversal = &directDebitReturnReversal
+
+	return m
+}
+
+func (m *DirectDebitReturnRelationships) WithoutDirectDebitReturnReversal() *DirectDebitReturnRelationships {
+	m.DirectDebitReturnReversal = nil
 	return m
 }
 
@@ -452,6 +486,14 @@ func (m *DirectDebitReturnRelationships) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
+	if err := m.validateDirectDebitReturnAdmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDirectDebitReturnReversal(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDirectDebitReturnSubmission(formats); err != nil {
 		res = append(res, err)
 	}
@@ -472,6 +514,42 @@ func (m *DirectDebitReturnRelationships) validateDirectDebit(formats strfmt.Regi
 		if err := m.DirectDebit.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("relationships" + "." + "direct_debit")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnRelationships) validateDirectDebitReturnAdmission(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DirectDebitReturnAdmission) { // not required
+		return nil
+	}
+
+	if m.DirectDebitReturnAdmission != nil {
+		if err := m.DirectDebitReturnAdmission.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "direct_debit_return_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnRelationships) validateDirectDebitReturnReversal(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DirectDebitReturnReversal) { // not required
+		return nil
+	}
+
+	if m.DirectDebitReturnReversal != nil {
+		if err := m.DirectDebitReturnReversal.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "direct_debit_return_reversal")
 			}
 			return err
 		}
@@ -602,6 +680,178 @@ func (m *DirectDebitReturnRelationshipsDirectDebit) UnmarshalBinary(b []byte) er
 	return nil
 }
 func (m *DirectDebitReturnRelationshipsDirectDebit) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitReturnRelationshipsDirectDebitReturnAdmission direct debit return relationships direct debit return admission
+// swagger:model DirectDebitReturnRelationshipsDirectDebitReturnAdmission
+type DirectDebitReturnRelationshipsDirectDebitReturnAdmission struct {
+
+	// data
+	Data []*DirectDebitReturnAdmission `json:"data"`
+}
+
+func DirectDebitReturnRelationshipsDirectDebitReturnAdmissionWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationshipsDirectDebitReturnAdmission {
+	return &DirectDebitReturnRelationshipsDirectDebitReturnAdmission{
+
+		Data: make([]*DirectDebitReturnAdmission, 0),
+	}
+}
+
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnAdmission) WithData(data []*DirectDebitReturnAdmission) *DirectDebitReturnRelationshipsDirectDebitReturnAdmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this direct debit return relationships direct debit return admission
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnAdmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnAdmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "direct_debit_return_admission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnAdmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnAdmission) UnmarshalBinary(b []byte) error {
+	var res DirectDebitReturnRelationshipsDirectDebitReturnAdmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitReturnRelationshipsDirectDebitReturnReversal direct debit return relationships direct debit return reversal
+// swagger:model DirectDebitReturnRelationshipsDirectDebitReturnReversal
+type DirectDebitReturnRelationshipsDirectDebitReturnReversal struct {
+
+	// data
+	Data []*DirectDebitReturnReversal `json:"data"`
+}
+
+func DirectDebitReturnRelationshipsDirectDebitReturnReversalWithDefaults(defaults client.Defaults) *DirectDebitReturnRelationshipsDirectDebitReturnReversal {
+	return &DirectDebitReturnRelationshipsDirectDebitReturnReversal{
+
+		Data: make([]*DirectDebitReturnReversal, 0),
+	}
+}
+
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnReversal) WithData(data []*DirectDebitReturnReversal) *DirectDebitReturnRelationshipsDirectDebitReturnReversal {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this direct debit return relationships direct debit return reversal
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnReversal) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnReversal) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "direct_debit_return_reversal" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnReversal) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnReversal) UnmarshalBinary(b []byte) error {
+	var res DirectDebitReturnRelationshipsDirectDebitReturnReversal
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitReturnRelationshipsDirectDebitReturnReversal) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -49,6 +49,8 @@ Direct debit service health
 type GetDirectDebitHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +63,7 @@ func (o *GetDirectDebitHealthOK) readResponse(response runtime.ClientResponse, c
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

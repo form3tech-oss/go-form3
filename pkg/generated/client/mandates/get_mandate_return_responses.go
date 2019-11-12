@@ -49,6 +49,8 @@ Return details
 type GetMandateReturnOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateReturnDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetMandateReturnOK) readResponse(response runtime.ClientResponse, consu
 	o.MandateReturnDetailsResponse = new(models.MandateReturnDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateReturnDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

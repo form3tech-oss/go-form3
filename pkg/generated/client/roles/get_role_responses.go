@@ -49,6 +49,8 @@ Role details
 type GetRoleOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RoleDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetRoleOK) readResponse(response runtime.ClientResponse, consumer runti
 	o.RoleDetailsResponse = new(models.RoleDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RoleDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

@@ -56,6 +56,8 @@ Mandate creation response
 type CreateMandateCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreateMandateCreated) readResponse(response runtime.ClientResponse, con
 	o.MandateCreationResponse = new(models.MandateCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Mandate creation error
 type CreateMandateBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreateMandateBadRequest) readResponse(response runtime.ClientResponse, 
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

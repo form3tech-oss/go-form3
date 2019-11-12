@@ -49,6 +49,8 @@ Claims service health
 type GetClaimsHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +63,7 @@ func (o *GetClaimsHealthOK) readResponse(response runtime.ClientResponse, consum
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

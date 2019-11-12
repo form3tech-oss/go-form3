@@ -56,11 +56,11 @@ func (a *GetAuditEntryRequest) Do() (*GetAuditEntryOK, error) {
 }
 
 func (a *GetAuditEntryRequest) MustDo() *GetAuditEntryOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *GetAuditHealthRequest) Do() (*GetAuditHealthOK, error) {
 }
 
 func (a *GetAuditHealthRequest) MustDo() *GetAuditHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *ListAuditEntriesRequest) Do() (*ListAuditEntriesOK, error) {
 }
 
 func (a *ListAuditEntriesRequest) MustDo() *ListAuditEntriesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

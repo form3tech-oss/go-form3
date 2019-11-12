@@ -49,6 +49,8 @@ List of direct debit details
 type ListDirectDebitsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListDirectDebitsOK) readResponse(response runtime.ClientResponse, consu
 	o.DirectDebitDetailsListResponse = new(models.DirectDebitDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

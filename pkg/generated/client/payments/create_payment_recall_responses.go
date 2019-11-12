@@ -56,6 +56,8 @@ Recall creation response
 type CreatePaymentRecallCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RecallCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreatePaymentRecallCreated) readResponse(response runtime.ClientRespons
 	o.RecallCreationResponse = new(models.RecallCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RecallCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Recall creation error
 type CreatePaymentRecallBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreatePaymentRecallBadRequest) readResponse(response runtime.ClientResp
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

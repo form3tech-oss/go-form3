@@ -49,6 +49,8 @@ Organisation creation response
 type CreateUnitCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.OrganisationCreationResponse
 }
 
@@ -61,6 +63,7 @@ func (o *CreateUnitCreated) readResponse(response runtime.ClientResponse, consum
 	o.OrganisationCreationResponse = new(models.OrganisationCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.OrganisationCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

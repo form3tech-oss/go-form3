@@ -49,6 +49,8 @@ ACE creation response
 type CreateAceCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AceCreationResponse
 }
 
@@ -61,6 +63,7 @@ func (o *CreateAceCreated) readResponse(response runtime.ClientResponse, consume
 	o.AceCreationResponse = new(models.AceCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AceCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

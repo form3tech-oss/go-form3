@@ -49,6 +49,8 @@ Audit service health
 type GetAuditHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +63,7 @@ func (o *GetAuditHealthOK) readResponse(response runtime.ClientResponse, consume
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

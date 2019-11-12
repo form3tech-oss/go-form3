@@ -330,7 +330,7 @@ type ReversalPaymentRelationships struct {
 	// ID of the reversal admission resource related to the reversal
 	ReversalAdmission *RelationshipLinks `json:"reversal_admission,omitempty"`
 
-	// ID of the reversaal submission resource related to the reversal
+	// ID of the reversal submission resource related to the reversal
 	ReversalSubmission *RelationshipLinks `json:"reversal_submission,omitempty"`
 }
 

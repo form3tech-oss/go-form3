@@ -368,6 +368,9 @@ type ReturnPaymentAttributes struct {
 	// Format: date-time
 	LimitBreachStartDatetime *strfmt.DateTime `json:"limit_breach_start_datetime,omitempty"`
 
+	// reason
+	Reason *string `json:"reason,omitempty"`
+
 	// The return [reason code](http://draft-api-docs.form3.tech/api.html#enumerations-payment-return-codes)
 	ReturnCode string `json:"return_code,omitempty"`
 
@@ -385,6 +388,8 @@ func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymen
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("ReturnPaymentAttributes", "limit_breach_end_datetime"),
 
 		LimitBreachStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnPaymentAttributes", "limit_breach_start_datetime"),
+
+		Reason: defaults.GetStringPtr("ReturnPaymentAttributes", "reason"),
 
 		ReturnCode: defaults.GetString("ReturnPaymentAttributes", "return_code"),
 
@@ -427,6 +432,18 @@ func (m *ReturnPaymentAttributes) WithLimitBreachStartDatetime(limitBreachStartD
 
 func (m *ReturnPaymentAttributes) WithoutLimitBreachStartDatetime() *ReturnPaymentAttributes {
 	m.LimitBreachStartDatetime = nil
+	return m
+}
+
+func (m *ReturnPaymentAttributes) WithReason(reason string) *ReturnPaymentAttributes {
+
+	m.Reason = &reason
+
+	return m
+}
+
+func (m *ReturnPaymentAttributes) WithoutReason() *ReturnPaymentAttributes {
+	m.Reason = nil
 	return m
 }
 

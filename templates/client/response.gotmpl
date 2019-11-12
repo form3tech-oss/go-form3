@@ -71,7 +71,6 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}) readResponse(response runtime.
   {{ .ReceiverName }}.{{ stripPackage .Schema.GoType .Schema.Pkg }} = new({{ .Schema.GoType }})
   {{ end }}{{ if not .Schema.IsBaseType }}
   // response payload
-
 {{ if .Schema.IsStream }} // todo stream
 {{ else }}
   if err := consumer.Consume(response.Body(), {{ if not (or .Schema.IsComplexObject .Schema.IsStream) }}&{{ end}}{{ .ReceiverName }}.{{ stripPackage .Schema.GoType .Schema.Pkg }}); err != nil && err != io.EOF {
@@ -118,15 +117,12 @@ type {{ pascalize .Name }}Reader struct {
 }
 
 // ReadResponse reads a server response into the received {{ .ReceiverName }}.
-
 func ({{ .ReceiverName }} *{{ pascalize .Name }}Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
   {{ if .Responses}}switch response.Code() {
   {{ end }}{{ range .Responses }}
 
 
-        case {{ .Code }}:
-{{ if .Schema }}{{ if .Schema.IsStream }}/*{{ end }} {{ end}}
-
+        case {{ .Code }}:{{ if .Schema }}{{ if .Schema.IsStream }}/*{{ end }} {{ end}}
           result := New{{ pascalize .Name }}({{ if .Schema }}{{ if .Schema.IsStream }}{{ $.ReceiverName }}.writer{{ end }}{{ end }})
           if err := result.readResponse(response, consumer, {{ $.ReceiverName }}.formats); err != nil {
             return nil, err

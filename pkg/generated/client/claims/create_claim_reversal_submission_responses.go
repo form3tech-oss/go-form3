@@ -56,6 +56,8 @@ Claim Reversal Submission creation response
 type CreateClaimReversalSubmissionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimReversalSubmissionDetailsResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreateClaimReversalSubmissionCreated) readResponse(response runtime.Cli
 	o.ClaimReversalSubmissionDetailsResponse = new(models.ClaimReversalSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimReversalSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Claim Reversal creation error
 type CreateClaimReversalSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreateClaimReversalSubmissionBadRequest) readResponse(response runtime.
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

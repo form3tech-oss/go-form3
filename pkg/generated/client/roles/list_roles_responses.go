@@ -49,6 +49,8 @@ List of role details
 type ListRolesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RoleDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListRolesOK) readResponse(response runtime.ClientResponse, consumer run
 	o.RoleDetailsListResponse = new(models.RoleDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RoleDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

@@ -20,28 +20,28 @@ import (
 // swagger:model RecallDecisionSubmissionRelationships
 type RecallDecisionSubmissionRelationships struct {
 
-	// ID of the payment resource related to the recall decicsion submission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the recall resource related to the recall decicsion submission
-	Recall *RelationshipLinks `json:"recall,omitempty"`
+	// recall
+	Recall *RelationshipRecalls `json:"recall,omitempty"`
 
-	// ID of the recall decision resource related to the recall decicsion submission
-	RecallDecision *RelationshipLinks `json:"recall_decision,omitempty"`
+	// recall decision
+	RecallDecision *RelationshipRecallDecisions `json:"recall_decision,omitempty"`
 }
 
 func RecallDecisionSubmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallDecisionSubmissionRelationships {
 	return &RecallDecisionSubmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		Recall: RelationshipLinksWithDefaults(defaults),
+		Recall: RelationshipRecallsWithDefaults(defaults),
 
-		RecallDecision: RelationshipLinksWithDefaults(defaults),
+		RecallDecision: RelationshipRecallDecisionsWithDefaults(defaults),
 	}
 }
 
-func (m *RecallDecisionSubmissionRelationships) WithPayment(payment RelationshipLinks) *RecallDecisionSubmissionRelationships {
+func (m *RecallDecisionSubmissionRelationships) WithPayment(payment RelationshipPayments) *RecallDecisionSubmissionRelationships {
 
 	m.Payment = &payment
 
@@ -53,7 +53,7 @@ func (m *RecallDecisionSubmissionRelationships) WithoutPayment() *RecallDecision
 	return m
 }
 
-func (m *RecallDecisionSubmissionRelationships) WithRecall(recall RelationshipLinks) *RecallDecisionSubmissionRelationships {
+func (m *RecallDecisionSubmissionRelationships) WithRecall(recall RelationshipRecalls) *RecallDecisionSubmissionRelationships {
 
 	m.Recall = &recall
 
@@ -65,7 +65,7 @@ func (m *RecallDecisionSubmissionRelationships) WithoutRecall() *RecallDecisionS
 	return m
 }
 
-func (m *RecallDecisionSubmissionRelationships) WithRecallDecision(recallDecision RelationshipLinks) *RecallDecisionSubmissionRelationships {
+func (m *RecallDecisionSubmissionRelationships) WithRecallDecision(recallDecision RelationshipRecallDecisions) *RecallDecisionSubmissionRelationships {
 
 	m.RecallDecision = &recallDecision
 

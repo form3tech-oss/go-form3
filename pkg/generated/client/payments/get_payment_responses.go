@@ -49,6 +49,8 @@ Payment details
 type GetPaymentOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.PaymentDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetPaymentOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.PaymentDetailsResponse = new(models.PaymentDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.PaymentDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

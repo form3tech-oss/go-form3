@@ -49,6 +49,8 @@ Advice details
 type ListPaymentAdvicesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AdviceDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListPaymentAdvicesOK) readResponse(response runtime.ClientResponse, con
 	o.AdviceDetailsResponse = new(models.AdviceDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AdviceDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

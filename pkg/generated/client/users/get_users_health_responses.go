@@ -49,6 +49,8 @@ Security service health
 type GetUsersHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +63,7 @@ func (o *GetUsersHealthOK) readResponse(response runtime.ClientResponse, consume
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

@@ -49,6 +49,8 @@ Direct Debit Admission details
 type GetDirectDebitAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitAdmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetDirectDebitAdmissionOK) readResponse(response runtime.ClientResponse
 	o.DirectDebitAdmissionDetailsResponse = new(models.DirectDebitAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

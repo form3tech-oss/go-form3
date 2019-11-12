@@ -49,6 +49,8 @@ Organisation service health
 type GetUnitsHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +63,7 @@ func (o *GetUnitsHealthOK) readResponse(response runtime.ClientResponse, consume
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

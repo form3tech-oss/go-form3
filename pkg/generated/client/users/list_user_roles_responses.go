@@ -49,6 +49,8 @@ List of roles for user
 type ListUserRolesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.UserRoleListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListUserRolesOK) readResponse(response runtime.ClientResponse, consumer
 	o.UserRoleListResponse = new(models.UserRoleListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.UserRoleListResponse); err != nil && err != io.EOF {
 		return err
 	}

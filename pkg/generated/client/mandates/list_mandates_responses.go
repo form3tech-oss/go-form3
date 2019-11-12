@@ -49,6 +49,8 @@ List of mandates details
 type ListMandatesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListMandatesOK) readResponse(response runtime.ClientResponse, consumer 
 	o.MandateDetailsListResponse = new(models.MandateDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

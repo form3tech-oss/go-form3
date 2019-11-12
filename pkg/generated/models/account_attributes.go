@@ -67,7 +67,7 @@ type AccountAttributes struct {
 	// Pattern: ^[a-zA-Z0-9-$@., ]{0,256}$
 	CustomerID string `json:"customer_id,omitempty"`
 
-	// Customer first name.
+	// - deprecated - Customer first name.
 	// Max Length: 40
 	// Min Length: 1
 	FirstName string `json:"first_name,omitempty"`
@@ -79,12 +79,21 @@ type AccountAttributes struct {
 	// Is the account joint?
 	JointAccount *bool `json:"joint_account,omitempty"`
 
+	// organisation identification
+	OrganisationIdentification *AccountAttributesOrganisationIdentification `json:"organisation_identification,omitempty"`
+
+	// private identification
+	PrivateIdentification *AccountAttributesPrivateIdentification `json:"private_identification,omitempty"`
+
 	// Secondary identification, e.g. building society roll number. Used for Confirmation of Payee.
 	// Max Length: 140
 	// Min Length: 1
 	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 
-	// Customer title.
+	// Indicates whether the account has been switched using the Current Account Switch Service.
+	Switched *bool `json:"switched,omitempty"`
+
+	// - deprecated - Customer title.
 	// Max Length: 40
 	// Min Length: 1
 	Title string `json:"title,omitempty"`
@@ -121,7 +130,13 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 
 		JointAccount: defaults.GetBoolPtr("AccountAttributes", "joint_account"),
 
+		OrganisationIdentification: AccountAttributesOrganisationIdentificationWithDefaults(defaults),
+
+		PrivateIdentification: AccountAttributesPrivateIdentificationWithDefaults(defaults),
+
 		SecondaryIdentification: defaults.GetString("AccountAttributes", "secondary_identification"),
+
+		Switched: defaults.GetBoolPtr("AccountAttributes", "switched"),
 
 		Title: defaults.GetString("AccountAttributes", "title"),
 	}
@@ -245,10 +260,46 @@ func (m *AccountAttributes) WithoutJointAccount() *AccountAttributes {
 	return m
 }
 
+func (m *AccountAttributes) WithOrganisationIdentification(organisationIdentification AccountAttributesOrganisationIdentification) *AccountAttributes {
+
+	m.OrganisationIdentification = &organisationIdentification
+
+	return m
+}
+
+func (m *AccountAttributes) WithoutOrganisationIdentification() *AccountAttributes {
+	m.OrganisationIdentification = nil
+	return m
+}
+
+func (m *AccountAttributes) WithPrivateIdentification(privateIdentification AccountAttributesPrivateIdentification) *AccountAttributes {
+
+	m.PrivateIdentification = &privateIdentification
+
+	return m
+}
+
+func (m *AccountAttributes) WithoutPrivateIdentification() *AccountAttributes {
+	m.PrivateIdentification = nil
+	return m
+}
+
 func (m *AccountAttributes) WithSecondaryIdentification(secondaryIdentification string) *AccountAttributes {
 
 	m.SecondaryIdentification = secondaryIdentification
 
+	return m
+}
+
+func (m *AccountAttributes) WithSwitched(switched bool) *AccountAttributes {
+
+	m.Switched = &switched
+
+	return m
+}
+
+func (m *AccountAttributes) WithoutSwitched() *AccountAttributes {
+	m.Switched = nil
 	return m
 }
 
@@ -308,6 +359,14 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateIban(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrganisationIdentification(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrivateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -528,6 +587,42 @@ func (m *AccountAttributes) validateIban(formats strfmt.Registry) error {
 
 	if err := validate.Pattern("iban", "body", string(m.Iban), `^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$`); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validateOrganisationIdentification(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.OrganisationIdentification) { // not required
+		return nil
+	}
+
+	if m.OrganisationIdentification != nil {
+		if err := m.OrganisationIdentification.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("organisation_identification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validatePrivateIdentification(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PrivateIdentification) { // not required
+		return nil
+	}
+
+	if m.PrivateIdentification != nil {
+		if err := m.PrivateIdentification.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("private_identification")
+			}
+			return err
+		}
 	}
 
 	return nil

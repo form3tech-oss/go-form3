@@ -20,28 +20,28 @@ import (
 // swagger:model ReturnReversalAdmissionRelationships
 type ReturnReversalAdmissionRelationships struct {
 
-	// ID of the payment resource related to the return reversal admission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the return resource related to the return reversal admission
-	PaymentReturn *RelationshipLinks `json:"payment_return,omitempty"`
+	// payment return
+	PaymentReturn *RelationshipReturns `json:"payment_return,omitempty"`
 
-	// ID of the return reversal resource related to the return reversal admission
-	PaymentReturnReversal *RelationshipLinks `json:"payment_return_reversal,omitempty"`
+	// payment return reversal
+	PaymentReturnReversal *RelationshipReturnReversals `json:"payment_return_reversal,omitempty"`
 }
 
 func ReturnReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReturnReversalAdmissionRelationships {
 	return &ReturnReversalAdmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		PaymentReturn: RelationshipLinksWithDefaults(defaults),
+		PaymentReturn: RelationshipReturnsWithDefaults(defaults),
 
-		PaymentReturnReversal: RelationshipLinksWithDefaults(defaults),
+		PaymentReturnReversal: RelationshipReturnReversalsWithDefaults(defaults),
 	}
 }
 
-func (m *ReturnReversalAdmissionRelationships) WithPayment(payment RelationshipLinks) *ReturnReversalAdmissionRelationships {
+func (m *ReturnReversalAdmissionRelationships) WithPayment(payment RelationshipPayments) *ReturnReversalAdmissionRelationships {
 
 	m.Payment = &payment
 
@@ -53,7 +53,7 @@ func (m *ReturnReversalAdmissionRelationships) WithoutPayment() *ReturnReversalA
 	return m
 }
 
-func (m *ReturnReversalAdmissionRelationships) WithPaymentReturn(paymentReturn RelationshipLinks) *ReturnReversalAdmissionRelationships {
+func (m *ReturnReversalAdmissionRelationships) WithPaymentReturn(paymentReturn RelationshipReturns) *ReturnReversalAdmissionRelationships {
 
 	m.PaymentReturn = &paymentReturn
 
@@ -65,7 +65,7 @@ func (m *ReturnReversalAdmissionRelationships) WithoutPaymentReturn() *ReturnRev
 	return m
 }
 
-func (m *ReturnReversalAdmissionRelationships) WithPaymentReturnReversal(paymentReturnReversal RelationshipLinks) *ReturnReversalAdmissionRelationships {
+func (m *ReturnReversalAdmissionRelationships) WithPaymentReturnReversal(paymentReturnReversal RelationshipReturnReversals) *ReturnReversalAdmissionRelationships {
 
 	m.PaymentReturnReversal = &paymentReturnReversal
 

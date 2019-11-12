@@ -20,11 +20,11 @@ import (
 // swagger:model ReversalSubmissionRelationships
 type ReversalSubmissionRelationships struct {
 
-	// ID of the payment resource related to the reversal subdmission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the reversal resource related to the reversal submission
-	Reversal *RelationshipLinks `json:"reversal,omitempty"`
+	// reversal
+	Reversal *RelationshipReversals `json:"reversal,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
@@ -33,15 +33,15 @@ type ReversalSubmissionRelationships struct {
 func ReversalSubmissionRelationshipsWithDefaults(defaults client.Defaults) *ReversalSubmissionRelationships {
 	return &ReversalSubmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		Reversal: RelationshipLinksWithDefaults(defaults),
+		Reversal: RelationshipReversalsWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
 }
 
-func (m *ReversalSubmissionRelationships) WithPayment(payment RelationshipLinks) *ReversalSubmissionRelationships {
+func (m *ReversalSubmissionRelationships) WithPayment(payment RelationshipPayments) *ReversalSubmissionRelationships {
 
 	m.Payment = &payment
 
@@ -53,7 +53,7 @@ func (m *ReversalSubmissionRelationships) WithoutPayment() *ReversalSubmissionRe
 	return m
 }
 
-func (m *ReversalSubmissionRelationships) WithReversal(reversal RelationshipLinks) *ReversalSubmissionRelationships {
+func (m *ReversalSubmissionRelationships) WithReversal(reversal RelationshipReversals) *ReversalSubmissionRelationships {
 
 	m.Reversal = &reversal
 

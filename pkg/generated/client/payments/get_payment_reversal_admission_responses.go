@@ -49,6 +49,8 @@ Reversal admission details
 type GetPaymentReversalAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReversalAdmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetPaymentReversalAdmissionOK) readResponse(response runtime.ClientResp
 	o.ReversalAdmissionDetailsResponse = new(models.ReversalAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReversalAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

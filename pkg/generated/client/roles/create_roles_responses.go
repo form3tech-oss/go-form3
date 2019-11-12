@@ -49,6 +49,8 @@ Role creation response
 type CreateRolesCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RoleCreationResponse
 }
 
@@ -61,6 +63,7 @@ func (o *CreateRolesCreated) readResponse(response runtime.ClientResponse, consu
 	o.RoleCreationResponse = new(models.RoleCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RoleCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

@@ -56,6 +56,8 @@ Claim Submission creation response
 type CreateClaimSubmissionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimSubmissionDetailsResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreateClaimSubmissionCreated) readResponse(response runtime.ClientRespo
 	o.ClaimSubmissionDetailsResponse = new(models.ClaimSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Claim Submission creation error
 type CreateClaimSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreateClaimSubmissionBadRequest) readResponse(response runtime.ClientRe
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

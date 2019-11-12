@@ -49,6 +49,8 @@ Return details
 type GetPaymentReturnOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReturnDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetPaymentReturnOK) readResponse(response runtime.ClientResponse, consu
 	o.ReturnDetailsResponse = new(models.ReturnDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReturnDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

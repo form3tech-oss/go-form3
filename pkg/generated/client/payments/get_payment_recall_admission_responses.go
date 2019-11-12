@@ -49,6 +49,8 @@ Recall admission details
 type GetPaymentRecallAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RecallAdmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetPaymentRecallAdmissionOK) readResponse(response runtime.ClientRespon
 	o.RecallAdmissionDetailsResponse = new(models.RecallAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RecallAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

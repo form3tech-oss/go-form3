@@ -362,7 +362,7 @@ type RecallDecisionAdmissionAttributes struct {
 	// status
 	Status RecallDecisionAdmissionStatus `json:"status,omitempty"`
 
-	// Human-readable reason for failure if stastus is failed.
+	// Human-readable reason for failure if status is failed.
 	StatusReason string `json:"status_reason,omitempty"`
 }
 

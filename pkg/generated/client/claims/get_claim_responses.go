@@ -49,6 +49,8 @@ Claim details
 type GetClaimOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetClaimOK) readResponse(response runtime.ClientResponse, consumer runt
 	o.ClaimDetailsResponse = new(models.ClaimDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

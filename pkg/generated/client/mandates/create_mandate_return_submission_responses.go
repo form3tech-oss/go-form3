@@ -56,6 +56,8 @@ Return submission creation response
 type CreateMandateReturnSubmissionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateReturnSubmissionCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreateMandateReturnSubmissionCreated) readResponse(response runtime.Cli
 	o.MandateReturnSubmissionCreationResponse = new(models.MandateReturnSubmissionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateReturnSubmissionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Return submission creation error
 type CreateMandateReturnSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreateMandateReturnSubmissionBadRequest) readResponse(response runtime.
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

@@ -136,8 +136,6 @@ func Unmarshal{{ pascalize .Name }}Slice(reader io.Reader, consumer runtime.Cons
 {{ else -}}
   {{ if or .IsComplexObject .IsTuple .IsAdditionalProperties -}}
     {{ if .Name }}type {{ if not .IsExported }}{{ .Name }}{{ else }}{{ pascalize .Name }}{{ end }}{{ end }} {{ template "fluentmodelSchemaBody" . }}
-    // line 140
-
     func {{pascalize .Name}}WithDefaults(defaults client.Defaults) *{{ pascalize .Name }}{
             return &{{ pascalize $.Name }}{
                 {{ range .Properties }}

@@ -49,6 +49,8 @@ List of account details
 type ListAccountsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AccountDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListAccountsOK) readResponse(response runtime.ClientResponse, consumer 
 	o.AccountDetailsListResponse = new(models.AccountDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AccountDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

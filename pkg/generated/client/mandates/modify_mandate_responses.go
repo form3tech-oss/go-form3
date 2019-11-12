@@ -56,6 +56,8 @@ Mandate details
 type ModifyMandateOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateDetailsResponse
 }
 
@@ -68,6 +70,7 @@ func (o *ModifyMandateOK) readResponse(response runtime.ClientResponse, consumer
 	o.MandateDetailsResponse = new(models.MandateDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Mandate update error
 type ModifyMandateBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *ModifyMandateBadRequest) readResponse(response runtime.ClientResponse, 
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

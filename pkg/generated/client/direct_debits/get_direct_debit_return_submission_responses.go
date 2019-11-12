@@ -49,6 +49,8 @@ Return submission details
 type GetDirectDebitReturnSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitReturnSubmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetDirectDebitReturnSubmissionOK) readResponse(response runtime.ClientR
 	o.DirectDebitReturnSubmissionDetailsResponse = new(models.DirectDebitReturnSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitReturnSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

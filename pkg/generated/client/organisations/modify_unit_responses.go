@@ -49,6 +49,8 @@ Organisation details
 type ModifyUnitOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.OrganisationDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ModifyUnitOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.OrganisationDetailsResponse = new(models.OrganisationDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

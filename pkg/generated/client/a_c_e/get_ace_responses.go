@@ -49,6 +49,8 @@ ACE details
 type GetAceOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AceDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetAceOK) readResponse(response runtime.ClientResponse, consumer runtim
 	o.AceDetailsResponse = new(models.AceDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AceDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

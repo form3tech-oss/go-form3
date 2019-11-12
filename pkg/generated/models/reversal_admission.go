@@ -427,23 +427,23 @@ func (m *ReversalAdmissionAttributes) Json() string {
 // swagger:model ReversalAdmissionRelationships
 type ReversalAdmissionRelationships struct {
 
-	// ID of the payment resource related to the reversal admission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the reversal resource related to the reversal admission
-	Reversal *RelationshipLinks `json:"reversal,omitempty"`
+	// reversal
+	Reversal *RelationshipReversals `json:"reversal,omitempty"`
 }
 
 func ReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReversalAdmissionRelationships {
 	return &ReversalAdmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		Reversal: RelationshipLinksWithDefaults(defaults),
+		Reversal: RelationshipReversalsWithDefaults(defaults),
 	}
 }
 
-func (m *ReversalAdmissionRelationships) WithPayment(payment RelationshipLinks) *ReversalAdmissionRelationships {
+func (m *ReversalAdmissionRelationships) WithPayment(payment RelationshipPayments) *ReversalAdmissionRelationships {
 
 	m.Payment = &payment
 
@@ -455,7 +455,7 @@ func (m *ReversalAdmissionRelationships) WithoutPayment() *ReversalAdmissionRela
 	return m
 }
 
-func (m *ReversalAdmissionRelationships) WithReversal(reversal RelationshipLinks) *ReversalAdmissionRelationships {
+func (m *ReversalAdmissionRelationships) WithReversal(reversal RelationshipReversals) *ReversalAdmissionRelationships {
 
 	m.Reversal = &reversal
 

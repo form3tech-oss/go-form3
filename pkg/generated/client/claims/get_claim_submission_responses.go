@@ -56,6 +56,8 @@ Claim Submission details
 type GetClaimSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ClaimSubmissionDetailsResponse
 }
 
@@ -68,6 +70,7 @@ func (o *GetClaimSubmissionOK) readResponse(response runtime.ClientResponse, con
 	o.ClaimSubmissionDetailsResponse = new(models.ClaimSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ClaimSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Error
 type GetClaimSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *GetClaimSubmissionBadRequest) readResponse(response runtime.ClientRespo
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

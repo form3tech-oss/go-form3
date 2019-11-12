@@ -49,6 +49,8 @@ Audit details
 type ListAuditEntriesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AuditEntryListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListAuditEntriesOK) readResponse(response runtime.ClientResponse, consu
 	o.AuditEntryListResponse = new(models.AuditEntryListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AuditEntryListResponse); err != nil && err != io.EOF {
 		return err
 	}

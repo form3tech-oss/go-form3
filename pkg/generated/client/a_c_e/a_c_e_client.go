@@ -56,11 +56,11 @@ func (a *CreateAceRequest) Do() (*CreateAceCreated, error) {
 }
 
 func (a *CreateAceRequest) MustDo() *CreateAceCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *DeleteAceRequest) Do() (*DeleteAceNoContent, error) {
 }
 
 func (a *DeleteAceRequest) MustDo() *DeleteAceNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *GetAceRequest) Do() (*GetAceOK, error) {
 }
 
 func (a *GetAceRequest) MustDo() *GetAceOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *ListAcesRequest) Do() (*ListAcesOK, error) {
 }
 
 func (a *ListAcesRequest) MustDo() *ListAcesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

@@ -49,6 +49,8 @@ Mandate Admission details
 type GetMandateAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.MandateAdmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetMandateAdmissionOK) readResponse(response runtime.ClientResponse, co
 	o.MandateAdmissionDetailsResponse = new(models.MandateAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.MandateAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

@@ -49,6 +49,8 @@ Credential creation response
 type CreateUserCredentialsCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.CredentialCreationResponse
 }
 
@@ -61,6 +63,7 @@ func (o *CreateUserCredentialsCreated) readResponse(response runtime.ClientRespo
 	o.CredentialCreationResponse = new(models.CredentialCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.CredentialCreationResponse); err != nil && err != io.EOF {
 		return err
 	}

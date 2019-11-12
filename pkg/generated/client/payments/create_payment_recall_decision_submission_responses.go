@@ -56,6 +56,8 @@ Recall decision submission creation response
 type CreatePaymentRecallDecisionSubmissionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RecallDecisionSubmissionCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreatePaymentRecallDecisionSubmissionCreated) readResponse(response run
 	o.RecallDecisionSubmissionCreationResponse = new(models.RecallDecisionSubmissionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RecallDecisionSubmissionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Recall decision submission creation error
 type CreatePaymentRecallDecisionSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreatePaymentRecallDecisionSubmissionBadRequest) readResponse(response 
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

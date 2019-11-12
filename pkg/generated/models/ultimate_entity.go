@@ -27,7 +27,7 @@ type UltimateEntity struct {
 	// Ultimate debtor/beneficiary birth city
 	BirthCity string `json:"birth_city,omitempty"`
 
-	// Ultimate debtor/beneficiary birth countr. ISO 3166 format country code
+	// Ultimate debtor/beneficiary birth country. ISO 3166 format country code
 	BirthCountry string `json:"birth_country,omitempty"`
 
 	// Ultimate debtor/beneficiary birth date. Formatted ISO 8601 format YYYY-MM-DD
@@ -51,6 +51,9 @@ type UltimateEntity struct {
 
 	// Issuer of the `organisation_identification`
 	OrganisationIdentificationIssuer string `json:"organisation_identification_issuer,omitempty"`
+
+	// The code that specifies the scheme of `organisation_identification`
+	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
@@ -78,6 +81,8 @@ func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 		OrganisationIdentificationCode: defaults.GetString("UltimateEntity", "organisation_identification_code"),
 
 		OrganisationIdentificationIssuer: defaults.GetString("UltimateEntity", "organisation_identification_issuer"),
+
+		OrganisationIdentificationScheme: defaults.GetString("UltimateEntity", "organisation_identification_scheme"),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 	}
@@ -154,6 +159,13 @@ func (m *UltimateEntity) WithOrganisationIdentificationCode(organisationIdentifi
 func (m *UltimateEntity) WithOrganisationIdentificationIssuer(organisationIdentificationIssuer string) *UltimateEntity {
 
 	m.OrganisationIdentificationIssuer = organisationIdentificationIssuer
+
+	return m
+}
+
+func (m *UltimateEntity) WithOrganisationIdentificationScheme(organisationIdentificationScheme string) *UltimateEntity {
+
+	m.OrganisationIdentificationScheme = organisationIdentificationScheme
 
 	return m
 }

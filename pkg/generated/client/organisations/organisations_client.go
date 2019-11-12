@@ -56,11 +56,11 @@ func (a *CreateUnitRequest) Do() (*CreateUnitCreated, error) {
 }
 
 func (a *CreateUnitRequest) MustDo() *CreateUnitCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *GetUnitRequest) Do() (*GetUnitOK, error) {
 }
 
 func (a *GetUnitRequest) MustDo() *GetUnitOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *GetUnitsHealthRequest) Do() (*GetUnitsHealthOK, error) {
 }
 
 func (a *GetUnitsHealthRequest) MustDo() *GetUnitsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *ListUnitsRequest) Do() (*ListUnitsOK, error) {
 }
 
 func (a *ListUnitsRequest) MustDo() *ListUnitsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *ModifyUnitRequest) Do() (*ModifyUnitOK, error) {
 }
 
 func (a *ModifyUnitRequest) MustDo() *ModifyUnitOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

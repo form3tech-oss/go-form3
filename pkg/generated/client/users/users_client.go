@@ -56,11 +56,11 @@ func (a *CreateUserRequest) Do() (*CreateUserCreated, error) {
 }
 
 func (a *CreateUserRequest) MustDo() *CreateUserCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *CreateUserCredentialsRequest) Do() (*CreateUserCredentialsCreated, erro
 }
 
 func (a *CreateUserCredentialsRequest) MustDo() *CreateUserCredentialsCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *CreateUserRoleRequest) Do() (*CreateUserRoleCreated, error) {
 }
 
 func (a *CreateUserRoleRequest) MustDo() *CreateUserRoleCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *DeleteUserRequest) Do() (*DeleteUserNoContent, error) {
 }
 
 func (a *DeleteUserRequest) MustDo() *DeleteUserNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *DeleteUserCredentialRequest) Do() (*DeleteUserCredentialNoContent, erro
 }
 
 func (a *DeleteUserCredentialRequest) MustDo() *DeleteUserCredentialNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -221,11 +221,11 @@ func (a *DeleteUserRoleRequest) Do() (*DeleteUserRoleNoContent, error) {
 }
 
 func (a *DeleteUserRoleRequest) MustDo() *DeleteUserRoleNoContent {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -254,11 +254,11 @@ func (a *GetUserRequest) Do() (*GetUserOK, error) {
 }
 
 func (a *GetUserRequest) MustDo() *GetUserOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -287,11 +287,11 @@ func (a *GetUserAcesRequest) Do() (*GetUserAcesOK, error) {
 }
 
 func (a *GetUserAcesRequest) MustDo() *GetUserAcesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -320,11 +320,11 @@ func (a *GetUsersHealthRequest) Do() (*GetUsersHealthOK, error) {
 }
 
 func (a *GetUsersHealthRequest) MustDo() *GetUsersHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -353,11 +353,11 @@ func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {
 }
 
 func (a *ListUserCredentialsRequest) MustDo() *ListUserCredentialsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -386,11 +386,11 @@ func (a *ListUserRolesRequest) Do() (*ListUserRolesOK, error) {
 }
 
 func (a *ListUserRolesRequest) MustDo() *ListUserRolesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -419,11 +419,11 @@ func (a *ListUsersRequest) Do() (*ListUsersOK, error) {
 }
 
 func (a *ListUsersRequest) MustDo() *ListUsersOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -452,11 +452,11 @@ func (a *ModifyUserRequest) Do() (*ModifyUserOK, error) {
 }
 
 func (a *ModifyUserRequest) MustDo() *ModifyUserOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

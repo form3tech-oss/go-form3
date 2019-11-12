@@ -49,6 +49,8 @@ List of position details
 type GetPositionsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.PositionDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetPositionsOK) readResponse(response runtime.ClientResponse, consumer 
 	o.PositionDetailsListResponse = new(models.PositionDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.PositionDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

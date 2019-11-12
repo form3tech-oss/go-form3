@@ -49,6 +49,8 @@ Recall submission details
 type GetPaymentRecallSubmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.RecallSubmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetPaymentRecallSubmissionOK) readResponse(response runtime.ClientRespo
 	o.RecallSubmissionDetailsResponse = new(models.RecallSubmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.RecallSubmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}

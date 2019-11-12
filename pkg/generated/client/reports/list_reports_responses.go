@@ -63,6 +63,8 @@ List of reports
 type ListReportsOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReportDetailsListResponse
 }
 
@@ -75,6 +77,7 @@ func (o *ListReportsOK) readResponse(response runtime.ClientResponse, consumer r
 	o.ReportDetailsListResponse = new(models.ReportDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReportDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -94,6 +97,8 @@ Reports bad request
 type ListReportsBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -106,6 +111,7 @@ func (o *ListReportsBadRequest) readResponse(response runtime.ClientResponse, co
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -125,6 +131,8 @@ Forbidden
 type ListReportsForbidden struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -137,6 +145,7 @@ func (o *ListReportsForbidden) readResponse(response runtime.ClientResponse, con
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

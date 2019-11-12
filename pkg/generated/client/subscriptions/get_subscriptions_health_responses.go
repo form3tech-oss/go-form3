@@ -49,6 +49,8 @@ Notification service health
 type GetSubscriptionsHealthOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.Health
 }
 
@@ -61,6 +63,7 @@ func (o *GetSubscriptionsHealthOK) readResponse(response runtime.ClientResponse,
 	o.Health = new(models.Health)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.Health); err != nil && err != io.EOF {
 		return err
 	}

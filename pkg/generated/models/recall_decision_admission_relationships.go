@@ -20,28 +20,28 @@ import (
 // swagger:model RecallDecisionAdmissionRelationships
 type RecallDecisionAdmissionRelationships struct {
 
-	// ID of the payment resource related to the recall decicsion admission
-	Payment *RelationshipLinks `json:"payment,omitempty"`
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 
-	// ID of the recall resource related to the recall decicsion admission
-	Recall *RelationshipLinks `json:"recall,omitempty"`
+	// recall
+	Recall *RelationshipRecalls `json:"recall,omitempty"`
 
-	// ID of the recall decision resource related to the recall decicsion admission
-	RecallDecision *RelationshipLinks `json:"recall_decision,omitempty"`
+	// recall decision
+	RecallDecision *RelationshipRecallDecisions `json:"recall_decision,omitempty"`
 }
 
 func RecallDecisionAdmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallDecisionAdmissionRelationships {
 	return &RecallDecisionAdmissionRelationships{
 
-		Payment: RelationshipLinksWithDefaults(defaults),
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		Recall: RelationshipLinksWithDefaults(defaults),
+		Recall: RelationshipRecallsWithDefaults(defaults),
 
-		RecallDecision: RelationshipLinksWithDefaults(defaults),
+		RecallDecision: RelationshipRecallDecisionsWithDefaults(defaults),
 	}
 }
 
-func (m *RecallDecisionAdmissionRelationships) WithPayment(payment RelationshipLinks) *RecallDecisionAdmissionRelationships {
+func (m *RecallDecisionAdmissionRelationships) WithPayment(payment RelationshipPayments) *RecallDecisionAdmissionRelationships {
 
 	m.Payment = &payment
 
@@ -53,7 +53,7 @@ func (m *RecallDecisionAdmissionRelationships) WithoutPayment() *RecallDecisionA
 	return m
 }
 
-func (m *RecallDecisionAdmissionRelationships) WithRecall(recall RelationshipLinks) *RecallDecisionAdmissionRelationships {
+func (m *RecallDecisionAdmissionRelationships) WithRecall(recall RelationshipRecalls) *RecallDecisionAdmissionRelationships {
 
 	m.Recall = &recall
 
@@ -65,7 +65,7 @@ func (m *RecallDecisionAdmissionRelationships) WithoutRecall() *RecallDecisionAd
 	return m
 }
 
-func (m *RecallDecisionAdmissionRelationships) WithRecallDecision(recallDecision RelationshipLinks) *RecallDecisionAdmissionRelationships {
+func (m *RecallDecisionAdmissionRelationships) WithRecallDecision(recallDecision RelationshipRecallDecisions) *RecallDecisionAdmissionRelationships {
 
 	m.RecallDecision = &recallDecision
 

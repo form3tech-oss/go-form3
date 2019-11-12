@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/form3tech-oss/go-form3/pkg/generated/client"
 	rc "github.com/go-openapi/runtime/client"
@@ -16,30 +17,61 @@ type F3 struct {
 	Defaults *TestDefaults
 }
 
+type Config struct {
+	Host           string
+	ClientId       string
+	ClientSecret   string
+	OrganisationId string
+	HttpDebug      bool
+	schemes        []string
+}
+
+func NewConfig(host, clientID, secret, organisationID string) Config {
+	var schemes []string
+	if strings.HasPrefix(host, "https://") {
+		schemes = append(schemes, "https")
+	} else if strings.HasPrefix(host, "http://") {
+		schemes = append(schemes, "http")
+	} else {
+		panic("Unsupported host protocol")
+	}
+
+	config := Config{
+		Host:           host,
+		ClientId:       clientID,
+		ClientSecret:   secret,
+		OrganisationId: organisationID,
+		HttpDebug:      false,
+		schemes:        schemes,
+	}
+	return config
+}
+
 func New() *F3 {
 	return NewWithConfig(
-		getEnv("FORM3_HOST"),
-		getEnv("FORM3_CLIENT_ID"),
-		getEnv("FORM3_CLIENT_SECRET"),
-		getEnv("FORM3_ORGANISATION_ID"),
+		NewConfig(
+			getEnv("FORM3_HOST"),
+			getEnv("FORM3_CLIENT_ID"),
+			getEnv("FORM3_CLIENT_SECRET"),
+			getEnv("FORM3_ORGANISATION_ID"),
+		),
 	)
 }
 
-func NewWithConfig(host, clientID, secret, organisationID string) *F3 {
-	u, _ := url.Parse("https://" + host)
+func NewWithConfig(config Config) *F3 {
+	u, _ := url.Parse(config.Host)
 
-	httpclientconf := NewClientConfig(clientID, secret, u)
+	httpclientconf := NewClientConfig(config.ClientId, config.ClientSecret, u)
 	httpClient := NewHttpClient(httpclientconf)
 	httpClient.Transport = &AddHeaderTransport{httpClient.Transport}
 
-	rt := rc.NewWithClient(host, "/v1", []string{"https"}, httpClient)
+	rt := rc.NewWithClient(u.Host, "/v1", config.schemes, httpClient)
 	rt.Context = context.Background()
 
-	debug, hasDebug := os.LookupEnv("HTTP_DEBUG")
-	rt.SetDebug(hasDebug && debug == "1")
+	rt.SetDebug(config.HttpDebug)
 
 	defaults := NewTestDefaults()
-	orgId := strfmt.UUID(organisationID)
+	orgId := strfmt.UUID(config.OrganisationId)
 	defaults.OrganisationId = &orgId
 	cli := client.New(rt, strfmt.Default, defaults)
 

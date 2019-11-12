@@ -56,11 +56,11 @@ func (a *CreateMandateRequest) Do() (*CreateMandateCreated, error) {
 }
 
 func (a *CreateMandateRequest) MustDo() *CreateMandateCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *CreateMandateReturnRequest) Do() (*CreateMandateReturnCreated, error) {
 }
 
 func (a *CreateMandateReturnRequest) MustDo() *CreateMandateReturnCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *CreateMandateReturnSubmissionRequest) Do() (*CreateMandateReturnSubmiss
 }
 
 func (a *CreateMandateReturnSubmissionRequest) MustDo() *CreateMandateReturnSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *CreateMandateSubmissionRequest) Do() (*CreateMandateSubmissionCreated, 
 }
 
 func (a *CreateMandateSubmissionRequest) MustDo() *CreateMandateSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *GetMandateRequest) Do() (*GetMandateOK, error) {
 }
 
 func (a *GetMandateRequest) MustDo() *GetMandateOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -221,11 +221,11 @@ func (a *GetMandateAdmissionRequest) Do() (*GetMandateAdmissionOK, error) {
 }
 
 func (a *GetMandateAdmissionRequest) MustDo() *GetMandateAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -254,11 +254,11 @@ func (a *GetMandateReturnRequest) Do() (*GetMandateReturnOK, error) {
 }
 
 func (a *GetMandateReturnRequest) MustDo() *GetMandateReturnOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -287,11 +287,11 @@ func (a *GetMandateReturnSubmissionRequest) Do() (*GetMandateReturnSubmissionOK,
 }
 
 func (a *GetMandateReturnSubmissionRequest) MustDo() *GetMandateReturnSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -320,11 +320,11 @@ func (a *GetMandateSubmissionRequest) Do() (*GetMandateSubmissionOK, error) {
 }
 
 func (a *GetMandateSubmissionRequest) MustDo() *GetMandateSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -353,11 +353,11 @@ func (a *GetMandatesHealthRequest) Do() (*GetMandatesHealthOK, error) {
 }
 
 func (a *GetMandatesHealthRequest) MustDo() *GetMandatesHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -386,11 +386,11 @@ func (a *ListMandatesRequest) Do() (*ListMandatesOK, error) {
 }
 
 func (a *ListMandatesRequest) MustDo() *ListMandatesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -419,11 +419,11 @@ func (a *ModifyMandateRequest) Do() (*ModifyMandateOK, error) {
 }
 
 func (a *ModifyMandateRequest) MustDo() *ModifyMandateOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

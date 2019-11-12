@@ -77,6 +77,8 @@ Report details
 type GetReportOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReportDetailsResponse
 }
 
@@ -89,6 +91,7 @@ func (o *GetReportOK) readResponse(response runtime.ClientResponse, consumer run
 	o.ReportDetailsResponse = new(models.ReportDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReportDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -108,6 +111,8 @@ Bad Request
 type GetReportBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -120,6 +125,7 @@ func (o *GetReportBadRequest) readResponse(response runtime.ClientResponse, cons
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -139,6 +145,8 @@ Forbidden
 type GetReportForbidden struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -151,6 +159,7 @@ func (o *GetReportForbidden) readResponse(response runtime.ClientResponse, consu
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -170,6 +179,8 @@ Report Not Found
 type GetReportNotFound struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -182,6 +193,7 @@ func (o *GetReportNotFound) readResponse(response runtime.ClientResponse, consum
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
@@ -201,6 +213,8 @@ Report not available in acceptable format
 type GetReportNotAcceptable struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -213,6 +227,7 @@ func (o *GetReportNotAcceptable) readResponse(response runtime.ClientResponse, c
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

@@ -56,6 +56,8 @@ Reversal submission creation response
 type CreatePaymentReversalSubmissionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.ReversalSubmissionCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreatePaymentReversalSubmissionCreated) readResponse(response runtime.C
 	o.ReversalSubmissionCreationResponse = new(models.ReversalSubmissionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.ReversalSubmissionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Reversal submission creation error
 type CreatePaymentReversalSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreatePaymentReversalSubmissionBadRequest) readResponse(response runtim
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

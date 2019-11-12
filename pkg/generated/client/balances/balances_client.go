@@ -56,11 +56,11 @@ func (a *GetBalancedRequest) Do() (*GetBalancedOK, error) {
 }
 
 func (a *GetBalancedRequest) MustDo() *GetBalancedOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

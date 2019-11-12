@@ -341,49 +341,90 @@ func (m *DirectDebitReturnReversalAdmission) Json() string {
 type DirectDebitReturnReversalAdmissionAttributes struct {
 
 	// scheme status code
-	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
+	// Required: true
+	// Min Length: 1
+	SchemeStatusCode *string `json:"scheme_status_code"`
 
 	// scheme status code description
-	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
-
-	// source gateway
-	SourceGateway string `json:"source_gateway,omitempty"`
+	// Required: true
+	// Min Length: 1
+	SchemeStatusCodeDescription *string `json:"scheme_status_code_description"`
 }
 
 func DirectDebitReturnReversalAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionAttributes {
 	return &DirectDebitReturnReversalAdmissionAttributes{
 
-		SchemeStatusCode: defaults.GetString("DirectDebitReturnReversalAdmissionAttributes", "scheme_status_code"),
+		SchemeStatusCode: defaults.GetStringPtr("DirectDebitReturnReversalAdmissionAttributes", "scheme_status_code"),
 
-		SchemeStatusCodeDescription: defaults.GetString("DirectDebitReturnReversalAdmissionAttributes", "scheme_status_code_description"),
-
-		SourceGateway: defaults.GetString("DirectDebitReturnReversalAdmissionAttributes", "source_gateway"),
+		SchemeStatusCodeDescription: defaults.GetStringPtr("DirectDebitReturnReversalAdmissionAttributes", "scheme_status_code_description"),
 	}
 }
 
 func (m *DirectDebitReturnReversalAdmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitReturnReversalAdmissionAttributes {
 
-	m.SchemeStatusCode = schemeStatusCode
+	m.SchemeStatusCode = &schemeStatusCode
 
+	return m
+}
+
+func (m *DirectDebitReturnReversalAdmissionAttributes) WithoutSchemeStatusCode() *DirectDebitReturnReversalAdmissionAttributes {
+	m.SchemeStatusCode = nil
 	return m
 }
 
 func (m *DirectDebitReturnReversalAdmissionAttributes) WithSchemeStatusCodeDescription(schemeStatusCodeDescription string) *DirectDebitReturnReversalAdmissionAttributes {
 
-	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
+	m.SchemeStatusCodeDescription = &schemeStatusCodeDescription
 
 	return m
 }
 
-func (m *DirectDebitReturnReversalAdmissionAttributes) WithSourceGateway(sourceGateway string) *DirectDebitReturnReversalAdmissionAttributes {
-
-	m.SourceGateway = sourceGateway
-
+func (m *DirectDebitReturnReversalAdmissionAttributes) WithoutSchemeStatusCodeDescription() *DirectDebitReturnReversalAdmissionAttributes {
+	m.SchemeStatusCodeDescription = nil
 	return m
 }
 
 // Validate validates this direct debit return reversal admission attributes
 func (m *DirectDebitReturnReversalAdmissionAttributes) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSchemeStatusCode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeStatusCodeDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitReturnReversalAdmissionAttributes) validateSchemeStatusCode(formats strfmt.Registry) error {
+
+	if err := validate.Required("attributes"+"."+"scheme_status_code", "body", m.SchemeStatusCode); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("attributes"+"."+"scheme_status_code", "body", string(*m.SchemeStatusCode), 1); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnReversalAdmissionAttributes) validateSchemeStatusCodeDescription(formats strfmt.Registry) error {
+
+	if err := validate.Required("attributes"+"."+"scheme_status_code_description", "body", m.SchemeStatusCodeDescription); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("attributes"+"."+"scheme_status_code_description", "body", string(*m.SchemeStatusCodeDescription), 1); err != nil {
+		return err
+	}
+
 	return nil
 }
 

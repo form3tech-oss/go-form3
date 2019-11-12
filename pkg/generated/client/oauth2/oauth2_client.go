@@ -56,11 +56,11 @@ func (a *CreateOauthTokenRequest) Do() (*CreateOauthTokenOK, error) {
 }
 
 func (a *CreateOauthTokenRequest) MustDo() *CreateOauthTokenOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

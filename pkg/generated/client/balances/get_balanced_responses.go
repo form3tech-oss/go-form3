@@ -49,6 +49,8 @@ Associations details
 type GetBalancedOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.BalanceDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetBalancedOK) readResponse(response runtime.ClientResponse, consumer r
 	o.BalanceDetailsListResponse = new(models.BalanceDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.BalanceDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

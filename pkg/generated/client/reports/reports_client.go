@@ -56,11 +56,11 @@ func (a *GetReportRequest) Do() (*GetReportOK, error) {
 }
 
 func (a *GetReportRequest) MustDo() *GetReportOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *GetReportAdmissionRequest) Do() (*GetReportAdmissionOK, error) {
 }
 
 func (a *GetReportAdmissionRequest) MustDo() *GetReportAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *ListReportsRequest) Do() (*ListReportsOK, error) {
 }
 
 func (a *ListReportsRequest) MustDo() *ListReportsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

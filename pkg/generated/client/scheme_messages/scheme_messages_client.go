@@ -56,11 +56,11 @@ func (a *GetSchemeMessageRequest) Do() (*GetSchemeMessageOK, error) {
 }
 
 func (a *GetSchemeMessageRequest) MustDo() *GetSchemeMessageOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *GetSchemeMessageAdmissionRequest) Do() (*GetSchemeMessageAdmissionOK, e
 }
 
 func (a *GetSchemeMessageAdmissionRequest) MustDo() *GetSchemeMessageAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *ListSchemeMessagesRequest) Do() (*ListSchemeMessagesOK, error) {
 }
 
 func (a *ListSchemeMessagesRequest) MustDo() *ListSchemeMessagesOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

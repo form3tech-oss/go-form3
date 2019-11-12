@@ -56,11 +56,11 @@ func (a *CreateDirectDebitRequest) Do() (*CreateDirectDebitCreated, error) {
 }
 
 func (a *CreateDirectDebitRequest) MustDo() *CreateDirectDebitCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *CreateDirectDebitReturnRequest) Do() (*CreateDirectDebitReturnCreated, 
 }
 
 func (a *CreateDirectDebitReturnRequest) MustDo() *CreateDirectDebitReturnCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *CreateDirectDebitReturnSubmissionRequest) Do() (*CreateDirectDebitRetur
 }
 
 func (a *CreateDirectDebitReturnSubmissionRequest) MustDo() *CreateDirectDebitReturnSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *CreateDirectDebitReversalRequest) Do() (*CreateDirectDebitReversalCreat
 }
 
 func (a *CreateDirectDebitReversalRequest) MustDo() *CreateDirectDebitReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *CreateDirectDebitSubmissionRequest) Do() (*CreateDirectDebitSubmissionC
 }
 
 func (a *CreateDirectDebitSubmissionRequest) MustDo() *CreateDirectDebitSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -221,11 +221,11 @@ func (a *GetDirectDebitRequest) Do() (*GetDirectDebitOK, error) {
 }
 
 func (a *GetDirectDebitRequest) MustDo() *GetDirectDebitOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -254,11 +254,11 @@ func (a *GetDirectDebitAdmissionRequest) Do() (*GetDirectDebitAdmissionOK, error
 }
 
 func (a *GetDirectDebitAdmissionRequest) MustDo() *GetDirectDebitAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -287,11 +287,11 @@ func (a *GetDirectDebitHealthRequest) Do() (*GetDirectDebitHealthOK, error) {
 }
 
 func (a *GetDirectDebitHealthRequest) MustDo() *GetDirectDebitHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -320,11 +320,11 @@ func (a *GetDirectDebitReturnRequest) Do() (*GetDirectDebitReturnOK, error) {
 }
 
 func (a *GetDirectDebitReturnRequest) MustDo() *GetDirectDebitReturnOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -353,11 +353,11 @@ func (a *GetDirectDebitReturnSubmissionRequest) Do() (*GetDirectDebitReturnSubmi
 }
 
 func (a *GetDirectDebitReturnSubmissionRequest) MustDo() *GetDirectDebitReturnSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -386,11 +386,11 @@ func (a *GetDirectDebitReversalRequest) Do() (*GetDirectDebitReversalOK, error) 
 }
 
 func (a *GetDirectDebitReversalRequest) MustDo() *GetDirectDebitReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -419,11 +419,11 @@ func (a *GetDirectDebitReversalAdmissionRequest) Do() (*GetDirectDebitReversalAd
 }
 
 func (a *GetDirectDebitReversalAdmissionRequest) MustDo() *GetDirectDebitReversalAdmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -452,11 +452,110 @@ func (a *GetDirectDebitSubmissionRequest) Do() (*GetDirectDebitSubmissionOK, err
 }
 
 func (a *GetDirectDebitSubmissionRequest) MustDo() *GetDirectDebitSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
+}
+
+/*
+get transaction directdebits ID returns return ID admissions admission ID API
+*/
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDRequest) Do() (*GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDRequest) MustDo() *GetTransactionDirectdebitsIDReturnsReturnIDAdmissionsAdmissionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction directdebits ID returns return ID reversals reversal ID API
+*/
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDRequest) Do() (*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDRequest) MustDo() *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction directdebits ID returns return ID reversals reversal ID admissions admission ID API
+*/
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDRequest) Do() (*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDRequest) MustDo() *GetTransactionDirectdebitsIDReturnsReturnIDReversalsReversalIDAdmissionsAdmissionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
 }
 
 /*
@@ -485,11 +584,11 @@ func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
 }
 
 func (a *ListDirectDebitsRequest) MustDo() *ListDirectDebitsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

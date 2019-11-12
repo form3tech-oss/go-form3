@@ -32,6 +32,9 @@ type DirectDebitRelationships struct {
 
 	// direct debit submission
 	DirectDebitSubmission *DirectDebitRelationshipsDirectDebitSubmission `json:"direct_debit_submission,omitempty"`
+
+	// mandate
+	Mandate *Mandate `json:"mandate,omitempty"`
 }
 
 func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitRelationships {
@@ -44,6 +47,8 @@ func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebit
 		DirectDebitReversal: DirectDebitRelationshipsDirectDebitReversalWithDefaults(defaults),
 
 		DirectDebitSubmission: DirectDebitRelationshipsDirectDebitSubmissionWithDefaults(defaults),
+
+		Mandate: MandateWithDefaults(defaults),
 	}
 }
 
@@ -95,6 +100,18 @@ func (m *DirectDebitRelationships) WithoutDirectDebitSubmission() *DirectDebitRe
 	return m
 }
 
+func (m *DirectDebitRelationships) WithMandate(mandate Mandate) *DirectDebitRelationships {
+
+	m.Mandate = &mandate
+
+	return m
+}
+
+func (m *DirectDebitRelationships) WithoutMandate() *DirectDebitRelationships {
+	m.Mandate = nil
+	return m
+}
+
 // Validate validates this direct debit relationships
 func (m *DirectDebitRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -112,6 +129,10 @@ func (m *DirectDebitRelationships) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDirectDebitSubmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMandate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -185,6 +206,24 @@ func (m *DirectDebitRelationships) validateDirectDebitSubmission(formats strfmt.
 		if err := m.DirectDebitSubmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("direct_debit_submission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitRelationships) validateMandate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Mandate) { // not required
+		return nil
+	}
+
+	if m.Mandate != nil {
+		if err := m.Mandate.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("mandate")
 			}
 			return err
 		}

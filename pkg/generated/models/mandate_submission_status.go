@@ -39,6 +39,9 @@ const (
 	// MandateSubmissionStatusQueuedForDelivery captures enum value "queued_for_delivery"
 	MandateSubmissionStatusQueuedForDelivery MandateSubmissionStatus = "queued_for_delivery"
 
+	// MandateSubmissionStatusSubmitted captures enum value "submitted"
+	MandateSubmissionStatusSubmitted MandateSubmissionStatus = "submitted"
+
 	// MandateSubmissionStatusDeliveryConfirmed captures enum value "delivery_confirmed"
 	MandateSubmissionStatusDeliveryConfirmed MandateSubmissionStatus = "delivery_confirmed"
 
@@ -51,7 +54,7 @@ var mandateSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []MandateSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","validation_failed","validation_pending","validation_passed","released_to_gateway","queued_for_delivery","delivery_confirmed","delivery_failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","validation_failed","validation_pending","validation_passed","released_to_gateway","queued_for_delivery","submitted","delivery_confirmed","delivery_failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -49,6 +49,8 @@ List of ACE details
 type ListAcesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AceDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *ListAcesOK) readResponse(response runtime.ClientResponse, consumer runt
 	o.AceDetailsListResponse = new(models.AceDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AceDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

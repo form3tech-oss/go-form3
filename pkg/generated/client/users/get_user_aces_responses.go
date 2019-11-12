@@ -49,6 +49,8 @@ List of access control entries for this user
 type GetUserAcesOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AceDetailsListResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetUserAcesOK) readResponse(response runtime.ClientResponse, consumer r
 	o.AceDetailsListResponse = new(models.AceDetailsListResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AceDetailsListResponse); err != nil && err != io.EOF {
 		return err
 	}

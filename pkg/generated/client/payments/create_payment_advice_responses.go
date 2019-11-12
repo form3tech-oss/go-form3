@@ -56,6 +56,8 @@ Advice creation response
 type CreatePaymentAdviceCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.AdviceCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreatePaymentAdviceCreated) readResponse(response runtime.ClientRespons
 	o.AdviceCreationResponse = new(models.AdviceCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.AdviceCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Advice creation error
 type CreatePaymentAdviceBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreatePaymentAdviceBadRequest) readResponse(response runtime.ClientResp
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

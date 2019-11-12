@@ -1,5 +1,6 @@
 swagger_codegen_version := "v0.19.0"
 
+platform := $(shell uname)
 ifeq (${platform},Darwin)
 swagger_binary := "swagger_darwin_amd64"
 else
@@ -7,11 +8,11 @@ swagger_binary := "swagger_linux_amd64"
 endif
 
 install-swagger:
-	@sudo curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger; \
+	@curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger
 
 download-swagger:
 	@mkdir swagger || true
-	curl -s http://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
+	curl -s https://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
 	yq r swagger/form3-swagger-raw.yaml paths | grep -v "^   .*" | tr '\n' 'X' | sed -e 's/\(\/[^X]*\):X *\([^:]*\):/paths.\1.\2.OperationId: TODO/g' | tr 'X' '\n' > swagger/paths.txt
 
 

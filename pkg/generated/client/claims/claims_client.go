@@ -56,11 +56,11 @@ func (a *CreateClaimRequest) Do() (*CreateClaimCreated, error) {
 }
 
 func (a *CreateClaimRequest) MustDo() *CreateClaimCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -89,11 +89,11 @@ func (a *CreateClaimReversalRequest) Do() (*CreateClaimReversalCreated, error) {
 }
 
 func (a *CreateClaimReversalRequest) MustDo() *CreateClaimReversalCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -122,11 +122,11 @@ func (a *CreateClaimReversalSubmissionRequest) Do() (*CreateClaimReversalSubmiss
 }
 
 func (a *CreateClaimReversalSubmissionRequest) MustDo() *CreateClaimReversalSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -155,11 +155,11 @@ func (a *CreateClaimSubmissionRequest) Do() (*CreateClaimSubmissionCreated, erro
 }
 
 func (a *CreateClaimSubmissionRequest) MustDo() *CreateClaimSubmissionCreated {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -188,11 +188,11 @@ func (a *GetClaimRequest) Do() (*GetClaimOK, error) {
 }
 
 func (a *GetClaimRequest) MustDo() *GetClaimOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -221,11 +221,11 @@ func (a *GetClaimReversalRequest) Do() (*GetClaimReversalOK, error) {
 }
 
 func (a *GetClaimReversalRequest) MustDo() *GetClaimReversalOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -254,11 +254,11 @@ func (a *GetClaimReversalSubmissionRequest) Do() (*GetClaimReversalSubmissionOK,
 }
 
 func (a *GetClaimReversalSubmissionRequest) MustDo() *GetClaimReversalSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -287,11 +287,11 @@ func (a *GetClaimSubmissionRequest) Do() (*GetClaimSubmissionOK, error) {
 }
 
 func (a *GetClaimSubmissionRequest) MustDo() *GetClaimSubmissionOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -320,11 +320,11 @@ func (a *GetClaimsHealthRequest) Do() (*GetClaimsHealthOK, error) {
 }
 
 func (a *GetClaimsHealthRequest) MustDo() *GetClaimsHealthOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /*
@@ -353,11 +353,11 @@ func (a *ListClaimsRequest) Do() (*ListClaimsOK, error) {
 }
 
 func (a *ListClaimsRequest) MustDo() *ListClaimsOK {
-	r, err := a.Do()
+	r0, err := a.Do()
 	if err != nil {
 		panic(err)
 	}
-	return r
+	return r0
 }
 
 /////////

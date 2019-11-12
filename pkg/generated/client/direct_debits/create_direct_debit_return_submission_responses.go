@@ -56,6 +56,8 @@ Return submission creation response
 type CreateDirectDebitReturnSubmissionCreated struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitReturnSubmissionCreationResponse
 }
 
@@ -68,6 +70,7 @@ func (o *CreateDirectDebitReturnSubmissionCreated) readResponse(response runtime
 	o.DirectDebitReturnSubmissionCreationResponse = new(models.DirectDebitReturnSubmissionCreationResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitReturnSubmissionCreationResponse); err != nil && err != io.EOF {
 		return err
 	}
@@ -87,6 +90,8 @@ Return submission creation error
 type CreateDirectDebitReturnSubmissionBadRequest struct {
 
 	//Payload
+
+	// isStream: false
 	*models.APIError
 }
 
@@ -99,6 +104,7 @@ func (o *CreateDirectDebitReturnSubmissionBadRequest) readResponse(response runt
 	o.APIError = new(models.APIError)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}

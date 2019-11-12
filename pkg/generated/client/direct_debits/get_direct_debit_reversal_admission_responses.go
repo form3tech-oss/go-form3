@@ -49,6 +49,8 @@ Reversal admission details
 type GetDirectDebitReversalAdmissionOK struct {
 
 	//Payload
+
+	// isStream: false
 	*models.DirectDebitReversalAdmissionDetailsResponse
 }
 
@@ -61,6 +63,7 @@ func (o *GetDirectDebitReversalAdmissionOK) readResponse(response runtime.Client
 	o.DirectDebitReversalAdmissionDetailsResponse = new(models.DirectDebitReversalAdmissionDetailsResponse)
 
 	// response payload
+
 	if err := consumer.Consume(response.Body(), o.DirectDebitReversalAdmissionDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
