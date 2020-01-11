@@ -5,12 +5,12 @@ import (
 	"github.com/google/uuid"
 )
 
-type TestDefaults struct {
+type ClientDefaults struct {
 	EmptyDefaults
 	OrganisationId *strfmt.UUID
 }
 
-func (d *TestDefaults) GetStrfmtUUIDPtr(objectName, attributeName string) *strfmt.UUID {
+func (d *ClientDefaults) GetStrfmtUUIDPtr(objectName, attributeName string) *strfmt.UUID {
 	if "organisation_id" == attributeName {
 		return d.OrganisationId
 	}
@@ -21,8 +21,8 @@ func (d *TestDefaults) GetStrfmtUUIDPtr(objectName, attributeName string) *strfm
 	return nil
 }
 
-func NewTestDefaults() *TestDefaults {
-	return &TestDefaults{
+func NewClientDefaults() *ClientDefaults {
+	return &ClientDefaults{
 		EmptyDefaults: *NewEmptyDefaults(),
 	}
 }

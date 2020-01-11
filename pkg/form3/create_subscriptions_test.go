@@ -1,4 +1,4 @@
-package tests
+package form3_test
 
 import (
 	"os"

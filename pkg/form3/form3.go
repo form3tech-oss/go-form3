@@ -20,7 +20,7 @@ const (
 
 type F3 struct {
 	genClient.Form3Public
-	Defaults *TestDefaults
+	Defaults *ClientDefaults
 }
 
 func New(host, pubKeyID string, privateKey *rsa.PrivateKey, orgID string) *F3 {
@@ -83,7 +83,7 @@ func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
 	rt := rc.NewWithClient(u.Host, "/v1", []string{u.Scheme}, c)
 	rt.Context = context.Background()
 
-	defaults := NewTestDefaults()
+	defaults := NewClientDefaults()
 	orgUUID := strfmt.UUID(orgID)
 	defaults.OrganisationId = &orgUUID
 
