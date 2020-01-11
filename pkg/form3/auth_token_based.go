@@ -2,26 +2,28 @@ package form3
 
 import (
 	"bytes"
-	"io"
-	"net/http"
-
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"net/url"
 )
 
-type ClientConfig struct {
-	ClientId            string
-	ClientSecret        string
-	HostUrl             *url.URL
-	InitialToken        string
-	authEndpoint        string
-	UnderlyingTransport http.RoundTripper
+const (
+	tokenBasedAuthEndpoint = "/v1/oauth2/token"
+)
+
+type TokenBasedClientConfig struct {
+	clientID            string
+	clientSecret        string
+	hostURL             *url.URL
+	initialToken        string
+	underlyingTransport http.RoundTripper
 }
 
-type transport struct {
-	config              *ClientConfig
+type tokenBasedTransport struct {
+	config              *TokenBasedClientConfig
 	token               string
 	underlyingTransport http.RoundTripper
 }
@@ -30,27 +32,35 @@ type authJsonResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
-func NewClientConfig(clientId, clientSecret string, hostUrl *url.URL) *ClientConfig {
-	return &ClientConfig{
-		ClientId:            clientId,
-		ClientSecret:        clientSecret,
-		HostUrl:             hostUrl,
-		authEndpoint:        "/v1/oauth2/token",
-		UnderlyingTransport: http.DefaultTransport,
+func NewTokenBasedClientConfig(clientId, clientSecret string, hostUrl *url.URL) *TokenBasedClientConfig {
+	return &TokenBasedClientConfig{
+		clientID:            clientId,
+		clientSecret:        clientSecret,
+		hostURL:             hostUrl,
+		underlyingTransport: http.DefaultTransport,
 	}
 }
 
-func (c *ClientConfig) WithInitialToken(token string) *ClientConfig {
-	c.InitialToken = token
+func (c *TokenBasedClientConfig) WithinitialToken(token string) *TokenBasedClientConfig {
+	c.initialToken = token
 	return c
 }
 
-func (c *ClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *ClientConfig {
-	c.UnderlyingTransport = underlyingTransport
+func (c *TokenBasedClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *TokenBasedClientConfig {
+	c.underlyingTransport = underlyingTransport
 	return c
 }
 
-func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
+func NewTokenBasedHttpClient(config *TokenBasedClientConfig) *http.Client {
+	transport := &tokenBasedTransport{underlyingTransport: config.underlyingTransport, config: config}
+	transport.token = config.initialToken
+
+	h := &http.Client{Transport: transport}
+
+	return h
+}
+
+func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	if t.token != "" {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
@@ -68,11 +78,11 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	res, err := t.underlyingTransport.RoundTrip(req)
 	if res != nil && (res.StatusCode == 401 || res.StatusCode == 403) {
-		authRequest, err := http.NewRequest("POST", t.config.HostUrl.String()+t.config.authEndpoint, nil)
+		authRequest, err := http.NewRequest("POST", t.config.hostURL.String()+tokenBasedAuthEndpoint, nil)
 		if err != nil {
 			return nil, fmt.Errorf("could not build auth request, error: %v", err)
 		}
-		authRequest.SetBasicAuth(t.config.ClientId, t.config.ClientSecret)
+		authRequest.SetBasicAuth(t.config.clientID, t.config.clientSecret)
 
 		authResponse, err := t.underlyingTransport.RoundTrip(authRequest)
 		if err != nil {
@@ -110,13 +120,4 @@ func (t *transport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	return res, err
 
-}
-
-func NewHttpClient(config *ClientConfig) *http.Client {
-	transport := &transport{underlyingTransport: config.UnderlyingTransport, config: config}
-	transport.token = config.InitialToken
-
-	h := &http.Client{Transport: transport}
-
-	return h
 }
