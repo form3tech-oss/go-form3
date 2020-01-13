@@ -56,17 +56,17 @@ func (t *requestSigningTransport) RoundTrip(req *http.Request) (*http.Response, 
 	dt := time.Now().Format(time.RFC1123)
 
 	msgToSign := fmt.Sprintf(`(request-target): %s %s
-Host: %s
-Date: %s
-Accept: %s`,
+host: %s
+date: %s`,
 		strings.ToLower(req.Method),
 		req.URL.RequestURI(),
-		req.Host,
+		req.URL.Host,
 		dt,
-		ReqMimeType,
 	)
 
-	headers = append(headers, "(request-target)", "Host", "Date", "Accept")
+	headers = append(headers, "(request-target)", "host", "date")
+
+	req.Header.Set("Date", dt)
 
 	// Calculate the digest from payload for POST, PUT, PATCH requests
 	if (req.Method == http.MethodPost ||
@@ -81,21 +81,22 @@ Accept: %s`,
 		if _, err := hasher.Write(body); err != nil {
 			return nil, err
 		}
-		digest := hasher.Sum(nil)
+		digest := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
 
 		msgToSign += fmt.Sprintf(`
-Content-Type: %s
-Digest: SHA-256=%s
-Content-Length: %d`,
+content-type: %s
+digest: SHA-256=%s
+content-length: %d`,
 			ReqMimeType,
-			base64.StdEncoding.EncodeToString(digest),
+			digest,
 			req.ContentLength,
 		)
 
-		headers = append(headers, "Content-Type", "Digest", "Content-Length")
+		headers = append(headers, "content-type", "digest", "content-length")
 
 		req.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", ReqMimeType)
+		req.Header.Set("Digest", digest)
 
 	}
 
@@ -118,7 +119,7 @@ Content-Length: %d`,
 	req.Header.Set(
 		"Authorization",
 		fmt.Sprintf(
-			`Signature: keyId="%s",algorithm="rsa-sha256",headers="%s", signature="%s"`,
+			`Signature keyId="%s",algorithm="rsa-sha256",headers="%s", signature="%s"`,
 			t.config.pubKeyID,
 			strings.Join(headers, " "),
 			base64.StdEncoding.EncodeToString(signature),
