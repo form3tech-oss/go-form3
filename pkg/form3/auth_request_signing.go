@@ -53,7 +53,7 @@ func (t *requestSigningTransport) RoundTrip(req *http.Request) (*http.Response, 
 
 	var headers []string
 	hasher := sha256.New()
-	dt := time.Now().Format(time.RFC1123)
+	dt := time.Now().UTC().Format(time.RFC1123)
 
 	msgToSign := fmt.Sprintf(`(request-target): %s %s
 host: %s
