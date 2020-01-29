@@ -6,7 +6,7 @@ This is ideal for:
 
 - Calling the API interactively (e.g. investigating resources or testing new features).
 - Scripting (e.g. multi-call investigation or cleanup scripts)
-- Testing, particularly when multiple calls to the API are involved. 
+- Testing, particularly when multiple calls to the API are involved.
 - Load Testing, with K6 integration for initiating the requests
 
 [gorun](https://github.com/erning/gorun) and [gore](https://github.com/motemen/gore) are highly recommended for running scripts and interactively developing scripts
@@ -19,8 +19,8 @@ A simple client with:
 - Automatic authentication and re-authentication based on environment variables (use `f3 creds` to set them)
 - Pre-populated request objects with configurable defaults
 - Sensible operation naming
-- A fluent api with reduced repetition compared with vanilla swagger-go generated clients 
-- All the power and flexibility of Go! 
+- A fluent api with reduced repetition compared with vanilla swagger-go generated clients
+- All the power and flexibility of Go!
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ go get -u github.com/go-openapi/swag
 go get -u github.com/go-openapi/strfmt
 go get -u github.com/motemen/gore/cmd/gore
 go get -u github.com/mdempsky/gocode
-go get -u github.com/k0kubun/pp   
+go get -u github.com/k0kubun/pp
 go get -u github.com/google/uuid
 ```
 
@@ -72,3 +72,13 @@ Tasks in the `Make` file download and preprocess the latest API swagger version.
 
 * `make install-swagger` to install go-swagger if not already installed.
 * `make` to regenerate the client files.
+
+## License
+Copyright 2019 Form3 Financial Cloud
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
