@@ -6,7 +6,7 @@ This is ideal for:
 
 - Calling the API interactively (e.g. investigating resources or testing new features).
 - Scripting (e.g. multi-call investigation or cleanup scripts)
-- Testing, particularly when multiple calls to the API are involved. 
+- Testing, particularly when multiple calls to the API are involved.
 - Load Testing, with K6 integration for initiating the requests
 
 [gorun](https://github.com/erning/gorun) and [gore](https://github.com/motemen/gore) are highly recommended for running scripts and interactively developing scripts
@@ -19,8 +19,8 @@ A simple client with:
 - Automatic authentication and re-authentication based on environment variables (use `f3 creds` to set them)
 - Pre-populated request objects with configurable defaults
 - Sensible operation naming
-- A fluent api with reduced repetition compared with vanilla swagger-go generated clients 
-- All the power and flexibility of Go! 
+- A fluent api with reduced repetition compared with vanilla swagger-go generated clients
+- All the power and flexibility of Go!
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ go get -u github.com/go-openapi/swag
 go get -u github.com/go-openapi/strfmt
 go get -u github.com/motemen/gore/cmd/gore
 go get -u github.com/mdempsky/gocode
-go get -u github.com/k0kubun/pp   
+go get -u github.com/k0kubun/pp
 go get -u github.com/google/uuid
 ```
 
