@@ -2,8 +2,11 @@ language: go
 go:
 - stable
 - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_a8b9a7a20f52_key -iv $encrypted_a8b9a7a20f52_iv
+  -in private.key.enc -out private.key -d
 script:
-- make test
+- FORM3_PRIVATE_KEY=$(cat private.key) make test
 env:
   global:
   - FORM3_HOST=https://whistle.api.env.staging-form3.tech
