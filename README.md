@@ -37,20 +37,22 @@ go get -u github.com/google/uuid
 
 ### Required Environment Variables
 
-| Environment variable | Description                                |
-|:---------------------|:-------------------------------------------|
-| FORM3_HOST           | Form 3 host e.g. api.form3.tech            |
-| FORM3_CLIENT_ID      | Client id                                  |
-| FORM3_CLIENT_SECRET  | Secret                                     |
-| FORM3_ORGANISATION_ID| Organisation Id                            |
-| HTTP_DEBUG           | Output full HTTP calls and responses       |
+| Environment variable | Description                                   |
+|:---------------------|:----------------------------------------------|
+| FORM3_HOST           | Form 3 host e.g. api.form3.tech               |
+| FORM3_PUBLIC_KEY_ID  | Public key ID for request signing             |
+| FORM3_PRIVATE_KEY    | Private key in PEM format for request signing |
+| FORM3_ORGANISATION_ID| Organisation Id                               |
+| DEBUG                | Output full HTTP calls and responses          |
+| FORM3_CLIENT_ID      | Client id for token based auth (deprecated)   |
+| FORM3_CLIENT_SECRET  | Secret for token based auth (deprecated)      |
 
 ### Local Tests
 
 Run `gore -autoimport` then type commands interactively, with completion, history, and more. Gore will compile and run your script after each line, printing the output to the screen. Scripts can be output using `:print` and reset with `:clear`. Use `:help` for more details or [github](https://github.com/motemen/gore).
 
 ```go
-    f3 := form3.New()
+    f3 := form3.NewFromEnv()
 	units := f3.Organisations.GetOrganisationUnits().MustDo()
 	for _, unit := range units.Data {
 		fmt.Printf("%s - %s\n", unit.ID, unit.Attributes.Name)

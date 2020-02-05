@@ -35,4 +35,4 @@ goimports:
 	goimports -w $(GOFMT_FILES)
 
 test:
-	go test ./tests
+	go test -v -race -cover ./pkg/form3
