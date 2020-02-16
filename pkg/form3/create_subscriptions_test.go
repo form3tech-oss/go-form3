@@ -17,7 +17,7 @@ func TestCreateSubscriptions(t *testing.T) {
 	organisationId := strfmt.UUID(uuid.MustParse(os.Getenv("FORM3_ORGANISATION_ID")).String())
 	id := strfmt.UUID(uuid.New().String())
 	transport := "http"
-	callbackUri := "https://google.com/callback"
+	callbackUri := "https://form3.tech/callback"
 	eventType := "created"
 	recordType := "PaymentSubmission"
 
