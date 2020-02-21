@@ -12,7 +12,9 @@ import (
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // Links links
@@ -20,73 +22,117 @@ import (
 type Links struct {
 
 	// Link to the first resource in the list
-	First string `json:"first,omitempty"`
+	First *string `json:"first,omitempty"`
 
 	// Link to the last resource in the list
-	Last string `json:"last,omitempty"`
+	Last *string `json:"last,omitempty"`
 
 	// Link to the next resource in the list
-	Next string `json:"next,omitempty"`
+	Next *string `json:"next,omitempty"`
 
 	// Link to the previous resource in the list
-	Prev string `json:"prev,omitempty"`
+	Prev *string `json:"prev,omitempty"`
 
 	// Link to this resource type
-	Self string `json:"self,omitempty"`
+	// Required: true
+	Self *string `json:"self"`
 }
 
 func LinksWithDefaults(defaults client.Defaults) *Links {
 	return &Links{
 
-		First: defaults.GetString("Links", "first"),
+		First: defaults.GetStringPtr("Links", "first"),
 
-		Last: defaults.GetString("Links", "last"),
+		Last: defaults.GetStringPtr("Links", "last"),
 
-		Next: defaults.GetString("Links", "next"),
+		Next: defaults.GetStringPtr("Links", "next"),
 
-		Prev: defaults.GetString("Links", "prev"),
+		Prev: defaults.GetStringPtr("Links", "prev"),
 
-		Self: defaults.GetString("Links", "self"),
+		Self: defaults.GetStringPtr("Links", "self"),
 	}
 }
 
 func (m *Links) WithFirst(first string) *Links {
 
-	m.First = first
+	m.First = &first
 
+	return m
+}
+
+func (m *Links) WithoutFirst() *Links {
+	m.First = nil
 	return m
 }
 
 func (m *Links) WithLast(last string) *Links {
 
-	m.Last = last
+	m.Last = &last
 
+	return m
+}
+
+func (m *Links) WithoutLast() *Links {
+	m.Last = nil
 	return m
 }
 
 func (m *Links) WithNext(next string) *Links {
 
-	m.Next = next
+	m.Next = &next
 
+	return m
+}
+
+func (m *Links) WithoutNext() *Links {
+	m.Next = nil
 	return m
 }
 
 func (m *Links) WithPrev(prev string) *Links {
 
-	m.Prev = prev
+	m.Prev = &prev
 
+	return m
+}
+
+func (m *Links) WithoutPrev() *Links {
+	m.Prev = nil
 	return m
 }
 
 func (m *Links) WithSelf(self string) *Links {
 
-	m.Self = self
+	m.Self = &self
 
+	return m
+}
+
+func (m *Links) WithoutSelf() *Links {
+	m.Self = nil
 	return m
 }
 
 // Validate validates this links
 func (m *Links) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSelf(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Links) validateSelf(formats strfmt.Registry) error {
+
+	if err := validate.Required("self", "body", m.Self); err != nil {
+		return err
+	}
+
 	return nil
 }
 

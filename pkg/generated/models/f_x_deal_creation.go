@@ -14,37 +14,39 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// AccountRoutingCreation account routing creation
-// swagger:model AccountRoutingCreation
-type AccountRoutingCreation struct {
+// FXDealCreation f x deal creation
+// swagger:model FXDealCreation
+type FXDealCreation struct {
 
 	// data
-	Data *AccountRouting `json:"data,omitempty"`
+	// Required: true
+	Data *NewFXDeal `json:"data"`
 }
 
-func AccountRoutingCreationWithDefaults(defaults client.Defaults) *AccountRoutingCreation {
-	return &AccountRoutingCreation{
+func FXDealCreationWithDefaults(defaults client.Defaults) *FXDealCreation {
+	return &FXDealCreation{
 
-		Data: AccountRoutingWithDefaults(defaults),
+		Data: NewFXDealWithDefaults(defaults),
 	}
 }
 
-func (m *AccountRoutingCreation) WithData(data AccountRouting) *AccountRoutingCreation {
+func (m *FXDealCreation) WithData(data NewFXDeal) *FXDealCreation {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *AccountRoutingCreation) WithoutData() *AccountRoutingCreation {
+func (m *FXDealCreation) WithoutData() *FXDealCreation {
 	m.Data = nil
 	return m
 }
 
-// Validate validates this account routing creation
-func (m *AccountRoutingCreation) Validate(formats strfmt.Registry) error {
+// Validate validates this f x deal creation
+func (m *FXDealCreation) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -57,10 +59,10 @@ func (m *AccountRoutingCreation) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AccountRoutingCreation) validateData(formats strfmt.Registry) error {
+func (m *FXDealCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {
@@ -76,7 +78,7 @@ func (m *AccountRoutingCreation) validateData(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *AccountRoutingCreation) MarshalBinary() ([]byte, error) {
+func (m *FXDealCreation) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -84,15 +86,15 @@ func (m *AccountRoutingCreation) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *AccountRoutingCreation) UnmarshalBinary(b []byte) error {
-	var res AccountRoutingCreation
+func (m *FXDealCreation) UnmarshalBinary(b []byte) error {
+	var res FXDealCreation
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *AccountRoutingCreation) Json() string {
+func (m *FXDealCreation) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

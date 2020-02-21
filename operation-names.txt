@@ -119,4 +119,10 @@ paths./transaction/payments/{id}/reversals/{reversalId}/submissions.post.operati
 paths./transaction/payments/{id}/reversals/{reversalId}/submissions/{submissionId}.get.operationId: GetPaymentReversalSubmission
 paths./transaction/payments/{id}/submissions.post.operationId: CreatePaymentSubmission
 paths./transaction/payments/{id}/submissions/{submissionId}.get.operationId: GetPaymentSubmission
-
+paths./fx/rates.get.operationId: GetFXRates
+paths./fx/deals.get.operationId: ListFXDeals
+paths./fx/deals.post.operationId: CreateFXDeal
+paths./fx/deals/{fx_deal_id}.get.operationId: GetFXDeal
+paths./fx/deals/{fx_deal_id}/submissions.post.operationId: CreateFXDealSubmission
+paths./fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}.get.operationId: GetFXDealSubmission
+paths./fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}.patch.operationId: ModifyFXDealSubmission

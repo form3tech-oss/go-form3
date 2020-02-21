@@ -14,54 +14,56 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// AccountRoutingCreationResponse account routing creation response
-// swagger:model AccountRoutingCreationResponse
-type AccountRoutingCreationResponse struct {
+// FXDealResponse f x deal response
+// swagger:model FXDealResponse
+type FXDealResponse struct {
 
 	// data
-	Data *AccountRouting `json:"data,omitempty"`
+	// Required: true
+	Data *FXDeal `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
 
-func AccountRoutingCreationResponseWithDefaults(defaults client.Defaults) *AccountRoutingCreationResponse {
-	return &AccountRoutingCreationResponse{
+func FXDealResponseWithDefaults(defaults client.Defaults) *FXDealResponse {
+	return &FXDealResponse{
 
-		Data: AccountRoutingWithDefaults(defaults),
+		Data: FXDealWithDefaults(defaults),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *AccountRoutingCreationResponse) WithData(data AccountRouting) *AccountRoutingCreationResponse {
+func (m *FXDealResponse) WithData(data FXDeal) *FXDealResponse {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *AccountRoutingCreationResponse) WithoutData() *AccountRoutingCreationResponse {
+func (m *FXDealResponse) WithoutData() *FXDealResponse {
 	m.Data = nil
 	return m
 }
 
-func (m *AccountRoutingCreationResponse) WithLinks(links Links) *AccountRoutingCreationResponse {
+func (m *FXDealResponse) WithLinks(links Links) *FXDealResponse {
 
 	m.Links = &links
 
 	return m
 }
 
-func (m *AccountRoutingCreationResponse) WithoutLinks() *AccountRoutingCreationResponse {
+func (m *FXDealResponse) WithoutLinks() *FXDealResponse {
 	m.Links = nil
 	return m
 }
 
-// Validate validates this account routing creation response
-func (m *AccountRoutingCreationResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this f x deal response
+func (m *FXDealResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -78,10 +80,10 @@ func (m *AccountRoutingCreationResponse) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *AccountRoutingCreationResponse) validateData(formats strfmt.Registry) error {
+func (m *FXDealResponse) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {
@@ -96,7 +98,7 @@ func (m *AccountRoutingCreationResponse) validateData(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *AccountRoutingCreationResponse) validateLinks(formats strfmt.Registry) error {
+func (m *FXDealResponse) validateLinks(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Links) { // not required
 		return nil
@@ -115,7 +117,7 @@ func (m *AccountRoutingCreationResponse) validateLinks(formats strfmt.Registry) 
 }
 
 // MarshalBinary interface implementation
-func (m *AccountRoutingCreationResponse) MarshalBinary() ([]byte, error) {
+func (m *FXDealResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -123,15 +125,15 @@ func (m *AccountRoutingCreationResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *AccountRoutingCreationResponse) UnmarshalBinary(b []byte) error {
-	var res AccountRoutingCreationResponse
+func (m *FXDealResponse) UnmarshalBinary(b []byte) error {
+	var res FXDealResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *AccountRoutingCreationResponse) Json() string {
+func (m *FXDealResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

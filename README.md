@@ -68,7 +68,12 @@ See [cmd/sample_scripts](cmd/sample_scripts/) for a small subset of sample scrip
 
 ## Updating the Client
 
-Tasks in the `Make` file download and preprocess the latest API swagger version.
+Tasks in the `Make` file download and preprocess the latest API swagger version. These tasks
+currently require version 2 of the [`yq`](https://github.com/mikefarah/yq/) utility.
 
+* `make install-yq` to install v2 of yq if not already installed.
 * `make install-swagger` to install go-swagger if not already installed.
 * `make` to regenerate the client files.
+* `make determine-missing-operations` to append the paths for new endpoints to `operation-names.txt`.
+  * In the `operation-names.txt` file, replace the `TODOs` with correct names for the new endpoints.
+  * Run `make` again to generate the client code for the new endpoints.

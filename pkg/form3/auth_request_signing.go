@@ -113,7 +113,7 @@ content-length: %d`,
 		hashedMsgToSign[:],
 	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to sign message %s: %w", msgToSign, err)
+		return nil, fmt.Errorf("failed to sign message %s: %v", msgToSign, err)
 	}
 
 	req.Header.Set(

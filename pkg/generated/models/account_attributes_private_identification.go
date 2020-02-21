@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -22,7 +23,7 @@ import (
 type AccountAttributesPrivateIdentification struct {
 
 	// address
-	Address *AccountAttributesIdentificationAddress `json:"address,omitempty"`
+	Address []string `json:"address"`
 
 	// birth country
 	// Pattern: ^[A-Z]{2}$
@@ -31,6 +32,15 @@ type AccountAttributesPrivateIdentification struct {
 	// Customer birth date
 	// Format: date
 	BirthDate *strfmt.Date `json:"birth_date,omitempty"`
+
+	// city
+	// Max Length: 35
+	// Min Length: 1
+	City string `json:"city,omitempty"`
+
+	// country
+	// Pattern: ^[A-Z]{2}$
+	Country string `json:"country,omitempty"`
 
 	// document number
 	DocumentNumber string `json:"document_number,omitempty"`
@@ -45,10 +55,6 @@ type AccountAttributesPrivateIdentification struct {
 	// Min Length: 1
 	LastName string `json:"last_name,omitempty"`
 
-	// residency
-	// Pattern: ^[A-Z]{2}$
-	Residency string `json:"residency,omitempty"`
-
 	// Customer title.
 	// Max Length: 40
 	// Min Length: 1
@@ -58,11 +64,15 @@ type AccountAttributesPrivateIdentification struct {
 func AccountAttributesPrivateIdentificationWithDefaults(defaults client.Defaults) *AccountAttributesPrivateIdentification {
 	return &AccountAttributesPrivateIdentification{
 
-		Address: AccountAttributesIdentificationAddressWithDefaults(defaults),
+		Address: make([]string, 0),
 
 		BirthCountry: defaults.GetString("AccountAttributesPrivateIdentification", "birth_country"),
 
 		BirthDate: defaults.GetStrfmtDatePtr("AccountAttributesPrivateIdentification", "birth_date"),
+
+		City: defaults.GetString("AccountAttributesPrivateIdentification", "city"),
+
+		Country: defaults.GetString("AccountAttributesPrivateIdentification", "country"),
 
 		DocumentNumber: defaults.GetString("AccountAttributesPrivateIdentification", "document_number"),
 
@@ -70,21 +80,14 @@ func AccountAttributesPrivateIdentificationWithDefaults(defaults client.Defaults
 
 		LastName: defaults.GetString("AccountAttributesPrivateIdentification", "last_name"),
 
-		Residency: defaults.GetString("AccountAttributesPrivateIdentification", "residency"),
-
 		Title: defaults.GetString("AccountAttributesPrivateIdentification", "title"),
 	}
 }
 
-func (m *AccountAttributesPrivateIdentification) WithAddress(address AccountAttributesIdentificationAddress) *AccountAttributesPrivateIdentification {
+func (m *AccountAttributesPrivateIdentification) WithAddress(address []string) *AccountAttributesPrivateIdentification {
 
-	m.Address = &address
+	m.Address = address
 
-	return m
-}
-
-func (m *AccountAttributesPrivateIdentification) WithoutAddress() *AccountAttributesPrivateIdentification {
-	m.Address = nil
 	return m
 }
 
@@ -107,6 +110,20 @@ func (m *AccountAttributesPrivateIdentification) WithoutBirthDate() *AccountAttr
 	return m
 }
 
+func (m *AccountAttributesPrivateIdentification) WithCity(city string) *AccountAttributesPrivateIdentification {
+
+	m.City = city
+
+	return m
+}
+
+func (m *AccountAttributesPrivateIdentification) WithCountry(country string) *AccountAttributesPrivateIdentification {
+
+	m.Country = country
+
+	return m
+}
+
 func (m *AccountAttributesPrivateIdentification) WithDocumentNumber(documentNumber string) *AccountAttributesPrivateIdentification {
 
 	m.DocumentNumber = documentNumber
@@ -124,13 +141,6 @@ func (m *AccountAttributesPrivateIdentification) WithFirstName(firstName string)
 func (m *AccountAttributesPrivateIdentification) WithLastName(lastName string) *AccountAttributesPrivateIdentification {
 
 	m.LastName = lastName
-
-	return m
-}
-
-func (m *AccountAttributesPrivateIdentification) WithResidency(residency string) *AccountAttributesPrivateIdentification {
-
-	m.Residency = residency
 
 	return m
 }
@@ -158,15 +168,19 @@ func (m *AccountAttributesPrivateIdentification) Validate(formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.validateCity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCountry(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFirstName(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateLastName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateResidency(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -186,13 +200,16 @@ func (m *AccountAttributesPrivateIdentification) validateAddress(formats strfmt.
 		return nil
 	}
 
-	if m.Address != nil {
-		if err := m.Address.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("address")
-			}
+	for i := 0; i < len(m.Address); i++ {
+
+		if err := validate.MinLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 1); err != nil {
 			return err
 		}
+
+		if err := validate.MaxLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 140); err != nil {
+			return err
+		}
+
 	}
 
 	return nil
@@ -218,6 +235,36 @@ func (m *AccountAttributesPrivateIdentification) validateBirthDate(formats strfm
 	}
 
 	if err := validate.FormatOf("birth_date", "body", "date", m.BirthDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributesPrivateIdentification) validateCity(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.City) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("city", "body", string(m.City), 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("city", "body", string(m.City), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributesPrivateIdentification) validateCountry(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Country) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("country", "body", string(m.Country), `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 
@@ -252,19 +299,6 @@ func (m *AccountAttributesPrivateIdentification) validateLastName(formats strfmt
 	}
 
 	if err := validate.MaxLength("last_name", "body", string(m.LastName), 40); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *AccountAttributesPrivateIdentification) validateResidency(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Residency) { // not required
-		return nil
-	}
-
-	if err := validate.Pattern("residency", "body", string(m.Residency), `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 
