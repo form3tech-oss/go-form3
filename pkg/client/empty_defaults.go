@@ -79,3 +79,11 @@ func (*EmptyDefaults) GetInt64Ptr(objectName, attributeName string) *int64 {
 func (*EmptyDefaults) GetInt32(objectName, attributeName string) int32 {
 	return int32(44)
 }
+
+func (*EmptyDefaults) GetFloat64(objectName, attributeName string) float64 {
+	return float64(44)
+}
+
+func (*EmptyDefaults) GetFloat64Ptr(objectName, attributeName string) *float64 {
+	return nil
+}

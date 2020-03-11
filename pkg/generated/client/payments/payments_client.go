@@ -469,7 +469,7 @@ func (a *GetPaymentRequest) Do() (*GetPaymentOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReader{formats: a.formats},
@@ -493,19 +493,19 @@ func (a *GetPaymentRequest) MustDo() *GetPaymentOK {
 }
 
 /*
-get payment admissions API
+get payment admission API
 */
-func (a *GetPaymentAdmissionsRequest) Do() (*GetPaymentAdmissionsOK, error) {
+func (a *GetPaymentAdmissionRequest) Do() (*GetPaymentAdmissionOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPaymentAdmissions",
+		ID:                 "GetPaymentAdmission",
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPaymentAdmissionsReader{formats: a.formats},
+		Reader:             &GetPaymentAdmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -513,11 +513,44 @@ func (a *GetPaymentAdmissionsRequest) Do() (*GetPaymentAdmissionsOK, error) {
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPaymentAdmissionsOK), nil
+	return result.(*GetPaymentAdmissionOK), nil
 
 }
 
-func (a *GetPaymentAdmissionsRequest) MustDo() *GetPaymentAdmissionsOK {
+func (a *GetPaymentAdmissionRequest) MustDo() *GetPaymentAdmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get payment advice API
+*/
+func (a *GetPaymentAdviceRequest) Do() (*GetPaymentAdviceOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetPaymentAdvice",
+		Method:             "GET",
+		PathPattern:        "/transaction/payments/{id}/advices/{adviceId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetPaymentAdviceReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetPaymentAdviceOK), nil
+
+}
+
+func (a *GetPaymentAdviceRequest) MustDo() *GetPaymentAdviceOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -535,7 +568,7 @@ func (a *GetPaymentAdviceSubmissionRequest) Do() (*GetPaymentAdviceSubmissionOK,
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/advices/{adviceId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentAdviceSubmissionReader{formats: a.formats},
@@ -568,7 +601,7 @@ func (a *GetPaymentRecallRequest) Do() (*GetPaymentRecallOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallReader{formats: a.formats},
@@ -601,7 +634,7 @@ func (a *GetPaymentRecallAdmissionRequest) Do() (*GetPaymentRecallAdmissionOK, e
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallAdmissionReader{formats: a.formats},
@@ -634,7 +667,7 @@ func (a *GetPaymentRecallDecisionRequest) Do() (*GetPaymentRecallDecisionOK, err
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallDecisionReader{formats: a.formats},
@@ -667,7 +700,7 @@ func (a *GetPaymentRecallDecisionAdmissionRequest) Do() (*GetPaymentRecallDecisi
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallDecisionAdmissionReader{formats: a.formats},
@@ -700,7 +733,7 @@ func (a *GetPaymentRecallDecisionSubmissionRequest) Do() (*GetPaymentRecallDecis
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallDecisionSubmissionReader{formats: a.formats},
@@ -733,7 +766,7 @@ func (a *GetPaymentRecallReversalRequest) Do() (*GetPaymentRecallReversalOK, err
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/reversals/{reversalId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallReversalReader{formats: a.formats},
@@ -766,7 +799,7 @@ func (a *GetPaymentRecallReversalAdmissionRequest) Do() (*GetPaymentRecallRevers
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/reversals/{reversalId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallReversalAdmissionReader{formats: a.formats},
@@ -799,7 +832,7 @@ func (a *GetPaymentRecallSubmissionRequest) Do() (*GetPaymentRecallSubmissionOK,
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/recalls/{recallId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentRecallSubmissionReader{formats: a.formats},
@@ -832,7 +865,7 @@ func (a *GetPaymentReturnRequest) Do() (*GetPaymentReturnOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/returns/{returnId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReturnReader{formats: a.formats},
@@ -865,7 +898,7 @@ func (a *GetPaymentReturnAdmissionRequest) Do() (*GetPaymentReturnAdmissionOK, e
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/returns/{returnId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReturnAdmissionReader{formats: a.formats},
@@ -898,7 +931,7 @@ func (a *GetPaymentReturnReversalRequest) Do() (*GetPaymentReturnReversalOK, err
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/returns/{returnId}/reversals/{reversalId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReturnReversalReader{formats: a.formats},
@@ -931,7 +964,7 @@ func (a *GetPaymentReturnReversalAdmissionRequest) Do() (*GetPaymentReturnRevers
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReturnReversalAdmissionReader{formats: a.formats},
@@ -964,7 +997,7 @@ func (a *GetPaymentReturnSubmissionRequest) Do() (*GetPaymentReturnSubmissionOK,
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/returns/{returnId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReturnSubmissionReader{formats: a.formats},
@@ -997,7 +1030,7 @@ func (a *GetPaymentReversalRequest) Do() (*GetPaymentReversalOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/reversals/{reversalId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReversalReader{formats: a.formats},
@@ -1030,7 +1063,7 @@ func (a *GetPaymentReversalAdmissionRequest) Do() (*GetPaymentReversalAdmissionO
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReversalAdmissionReader{formats: a.formats},
@@ -1063,7 +1096,7 @@ func (a *GetPaymentReversalSubmissionRequest) Do() (*GetPaymentReversalSubmissio
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/reversals/{reversalId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentReversalSubmissionReader{formats: a.formats},
@@ -1096,7 +1129,7 @@ func (a *GetPaymentSubmissionRequest) Do() (*GetPaymentSubmissionOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/{id}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentSubmissionReader{formats: a.formats},
@@ -1129,7 +1162,7 @@ func (a *GetPaymentsHealthRequest) Do() (*GetPaymentsHealthOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments/health",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPaymentsHealthReader{formats: a.formats},
@@ -1162,7 +1195,7 @@ func (a *GetPositionsRequest) Do() (*GetPositionsOK, error) {
 		Method:             "GET",
 		PathPattern:        "/organisation/positions",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetPositionsReader{formats: a.formats},
@@ -1186,39 +1219,6 @@ func (a *GetPositionsRequest) MustDo() *GetPositionsOK {
 }
 
 /*
-list payment advices API
-*/
-func (a *ListPaymentAdvicesRequest) Do() (*ListPaymentAdvicesOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListPaymentAdvices",
-		Method:             "GET",
-		PathPattern:        "/transaction/payments/{id}/advices/{adviceId}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &ListPaymentAdvicesReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*ListPaymentAdvicesOK), nil
-
-}
-
-func (a *ListPaymentAdvicesRequest) MustDo() *ListPaymentAdvicesOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list payments API
 */
 func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
@@ -1228,7 +1228,7 @@ func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/payments",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListPaymentsReader{formats: a.formats},

@@ -90,6 +90,14 @@ func (*ClientDefaults) GetInt32(objectName, attributeName string) int32 {
 	return int32(44)
 }
 
+func (*ClientDefaults) GetFloat64(objectName, attributeName string) float64 {
+	return float64(44)
+}
+
+func (*ClientDefaults) GetFloat64Ptr(objectName, attributeName string) *float64 {
+	return nil
+}
+
 func NewClientDefaults() *ClientDefaults {
 	return &ClientDefaults{}
 }
