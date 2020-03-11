@@ -9,8 +9,13 @@ type ClientDefaults struct {
 	OrganisationId *strfmt.UUID
 }
 
-func (*ClientDefaults) GetStrfmtUUID(objectName, attributeName string) strfmt.UUID {
+func (d *ClientDefaults) GetStrfmtUUID(objectName, attributeName string) strfmt.UUID {
 	var a strfmt.UUID
+	if "organisation_id" == attributeName && d.OrganisationId != nil {
+		a = *d.OrganisationId
+	} else if "id" == attributeName {
+		a = strfmt.UUID(uuid.Must(uuid.NewRandom()).String())
+	}
 	return a
 }
 
