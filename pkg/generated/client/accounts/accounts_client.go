@@ -73,7 +73,7 @@ func (a *DeleteAccountRequest) Do() (*DeleteAccountNoContent, error) {
 		Method:             "DELETE",
 		PathPattern:        "/organisation/accounts/{id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteAccountReader{formats: a.formats},
@@ -106,7 +106,7 @@ func (a *GetAccountRequest) Do() (*GetAccountOK, error) {
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts/{id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetAccountReader{formats: a.formats},
@@ -130,19 +130,19 @@ func (a *GetAccountRequest) MustDo() *GetAccountOK {
 }
 
 /*
-get organisation accounts ID events API
+list account events API
 */
-func (a *GetOrganisationAccountsIDEventsRequest) Do() (*GetOrganisationAccountsIDEventsOK, error) {
+func (a *ListAccountEventsRequest) Do() (*ListAccountEventsOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationAccountsIDEvents",
+		ID:                 "ListAccountEvents",
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts/{id}/events",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetOrganisationAccountsIDEventsReader{formats: a.formats},
+		Reader:             &ListAccountEventsReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -150,11 +150,11 @@ func (a *GetOrganisationAccountsIDEventsRequest) Do() (*GetOrganisationAccountsI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetOrganisationAccountsIDEventsOK), nil
+	return result.(*ListAccountEventsOK), nil
 
 }
 
-func (a *GetOrganisationAccountsIDEventsRequest) MustDo() *GetOrganisationAccountsIDEventsOK {
+func (a *ListAccountEventsRequest) MustDo() *ListAccountEventsOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -172,7 +172,7 @@ func (a *ListAccountsRequest) Do() (*ListAccountsOK, error) {
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListAccountsReader{formats: a.formats},

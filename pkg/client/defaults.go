@@ -26,4 +26,7 @@ type Defaults interface {
 	GetInt64Ptr(objectName, attributeName string) *int64
 
 	GetInt32(objectName, attributeName string) int32
+
+	GetFloat64(objectName, attributeName string) float64
+	GetFloat64Ptr(objectName, attributeName string) *float64
 }

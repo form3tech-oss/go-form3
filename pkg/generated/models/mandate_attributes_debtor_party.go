@@ -22,7 +22,6 @@ import (
 type MandateAttributesDebtorParty struct {
 
 	// account name
-	// Pattern: ^[A-Za-z0-9 \/\-?:\(\)\.,’\+\#\=\!\"%&\*\<\>;\{@\r\n]*$
 	AccountName string `json:"account_name"`
 
 	// account number
@@ -110,10 +109,6 @@ func (m *MandateAttributesDebtorParty) WithCountry(country string) *MandateAttri
 func (m *MandateAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAccountName(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateAccountNumber(formats); err != nil {
 		res = append(res, err)
 	}
@@ -129,19 +124,6 @@ func (m *MandateAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *MandateAttributesDebtorParty) validateAccountName(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.AccountName) { // not required
-		return nil
-	}
-
-	if err := validate.Pattern("account_name", "body", string(m.AccountName), `^[A-Za-z0-9 \/\-?:\(\)\.,’\+\#\=\!\"%&\*\<\>;\{@\r\n]*$`); err != nil {
-		return err
-	}
-
 	return nil
 }
 

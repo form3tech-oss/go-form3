@@ -31,19 +31,19 @@ type Client struct {
 // range of operations
 
 /*
-get balanced API
+get balances API
 */
-func (a *GetBalancedRequest) Do() (*GetBalancedOK, error) {
+func (a *GetBalancesRequest) Do() (*GetBalancesOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetBalanced",
+		ID:                 "GetBalances",
 		Method:             "GET",
 		PathPattern:        "/organisation/balances",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetBalancedReader{formats: a.formats},
+		Reader:             &GetBalancesReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -51,11 +51,11 @@ func (a *GetBalancedRequest) Do() (*GetBalancedOK, error) {
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetBalancedOK), nil
+	return result.(*GetBalancesOK), nil
 
 }
 
-func (a *GetBalancedRequest) MustDo() *GetBalancedOK {
+func (a *GetBalancesRequest) MustDo() *GetBalancesOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
