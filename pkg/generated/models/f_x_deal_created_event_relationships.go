@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -23,7 +24,7 @@ type FXDealCreatedEventRelationships struct {
 
 	// fx deal submission
 	// Required: true
-	FxDealSubmission *FXDealCreatedEventRelationshipFXDealSubmission `json:"fx_deal_submission"`
+	FxDealSubmission *FXDealCreatedEventRelationshipsFxDealSubmission `json:"fx_deal_submission"`
 
 	// party
 	// Required: true
@@ -33,13 +34,13 @@ type FXDealCreatedEventRelationships struct {
 func FXDealCreatedEventRelationshipsWithDefaults(defaults client.Defaults) *FXDealCreatedEventRelationships {
 	return &FXDealCreatedEventRelationships{
 
-		FxDealSubmission: FXDealCreatedEventRelationshipFXDealSubmissionWithDefaults(defaults),
+		FxDealSubmission: FXDealCreatedEventRelationshipsFxDealSubmissionWithDefaults(defaults),
 
 		Party: FXDealRelationshipPartyWithDefaults(defaults),
 	}
 }
 
-func (m *FXDealCreatedEventRelationships) WithFxDealSubmission(fxDealSubmission FXDealCreatedEventRelationshipFXDealSubmission) *FXDealCreatedEventRelationships {
+func (m *FXDealCreatedEventRelationships) WithFxDealSubmission(fxDealSubmission FXDealCreatedEventRelationshipsFxDealSubmission) *FXDealCreatedEventRelationships {
 
 	m.FxDealSubmission = &fxDealSubmission
 
@@ -135,6 +136,93 @@ func (m *FXDealCreatedEventRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *FXDealCreatedEventRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// FXDealCreatedEventRelationshipsFxDealSubmission f x deal created event relationships fx deal submission
+// swagger:model FXDealCreatedEventRelationshipsFxDealSubmission
+type FXDealCreatedEventRelationshipsFxDealSubmission struct {
+
+	// data
+	// Required: true
+	Data []*FXDealCreatedEventRelationshipFXDealSubmission `json:"data"`
+}
+
+func FXDealCreatedEventRelationshipsFxDealSubmissionWithDefaults(defaults client.Defaults) *FXDealCreatedEventRelationshipsFxDealSubmission {
+	return &FXDealCreatedEventRelationshipsFxDealSubmission{
+
+		Data: make([]*FXDealCreatedEventRelationshipFXDealSubmission, 0),
+	}
+}
+
+func (m *FXDealCreatedEventRelationshipsFxDealSubmission) WithData(data []*FXDealCreatedEventRelationshipFXDealSubmission) *FXDealCreatedEventRelationshipsFxDealSubmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this f x deal created event relationships fx deal submission
+func (m *FXDealCreatedEventRelationshipsFxDealSubmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *FXDealCreatedEventRelationshipsFxDealSubmission) validateData(formats strfmt.Registry) error {
+
+	if err := validate.Required("fx_deal_submission"+"."+"data", "body", m.Data); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("fx_deal_submission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *FXDealCreatedEventRelationshipsFxDealSubmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *FXDealCreatedEventRelationshipsFxDealSubmission) UnmarshalBinary(b []byte) error {
+	var res FXDealCreatedEventRelationshipsFxDealSubmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *FXDealCreatedEventRelationshipsFxDealSubmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -90,6 +90,10 @@ type AccountAttributes struct {
 	// Min Length: 1
 	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 
+	// Current status of the account
+	// Enum: [pending failed confirmed]
+	Status string `json:"status,omitempty"`
+
 	// Indicates whether the account has been switched using the Current Account Switch Service.
 	Switched *bool `json:"switched,omitempty"`
 
@@ -135,6 +139,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 		PrivateIdentification: AccountAttributesPrivateIdentificationWithDefaults(defaults),
 
 		SecondaryIdentification: defaults.GetString("AccountAttributes", "secondary_identification"),
+
+		Status: defaults.GetString("AccountAttributes", "status"),
 
 		Switched: defaults.GetBoolPtr("AccountAttributes", "switched"),
 
@@ -291,6 +297,13 @@ func (m *AccountAttributes) WithSecondaryIdentification(secondaryIdentification 
 	return m
 }
 
+func (m *AccountAttributes) WithStatus(status string) *AccountAttributes {
+
+	m.Status = status
+
+	return m
+}
+
 func (m *AccountAttributes) WithSwitched(switched bool) *AccountAttributes {
 
 	m.Switched = &switched
@@ -371,6 +384,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSecondaryIdentification(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -639,6 +656,52 @@ func (m *AccountAttributes) validateSecondaryIdentification(formats strfmt.Regis
 	}
 
 	if err := validate.MaxLength("secondary_identification", "body", string(m.SecondaryIdentification), 140); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var accountAttributesTypeStatusPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["pending","failed","confirmed"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		accountAttributesTypeStatusPropEnum = append(accountAttributesTypeStatusPropEnum, v)
+	}
+}
+
+const (
+
+	// AccountAttributesStatusPending captures enum value "pending"
+	AccountAttributesStatusPending string = "pending"
+
+	// AccountAttributesStatusFailed captures enum value "failed"
+	AccountAttributesStatusFailed string = "failed"
+
+	// AccountAttributesStatusConfirmed captures enum value "confirmed"
+	AccountAttributesStatusConfirmed string = "confirmed"
+)
+
+// prop value enum
+func (m *AccountAttributes) validateStatusEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, accountAttributesTypeStatusPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *AccountAttributes) validateStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateStatusEnum("status", "body", m.Status); err != nil {
 		return err
 	}
 
