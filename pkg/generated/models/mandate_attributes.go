@@ -60,6 +60,9 @@ type MandateAttributes struct {
 	// Format: date
 	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
+	// status
+	Status MandateStatus `json:"status,omitempty"`
+
 	// unique scheme id
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
@@ -90,6 +93,8 @@ func MandateAttributesWithDefaults(defaults client.Defaults) *MandateAttributes 
 		SchemePaymentType: defaults.GetString("MandateAttributes", "scheme_payment_type"),
 
 		SchemeProcessingDate: defaults.GetStrfmtDatePtr("MandateAttributes", "scheme_processing_date"),
+
+		// TODO Status: MandateStatus,
 
 		UniqueSchemeID: defaults.GetString("MandateAttributes", "unique_scheme_id"),
 	}
@@ -199,6 +204,13 @@ func (m *MandateAttributes) WithoutSchemeProcessingDate() *MandateAttributes {
 	return m
 }
 
+func (m *MandateAttributes) WithStatus(status MandateStatus) *MandateAttributes {
+
+	m.Status = status
+
+	return m
+}
+
 func (m *MandateAttributes) WithUniqueSchemeID(uniqueSchemeID string) *MandateAttributes {
 
 	m.UniqueSchemeID = uniqueSchemeID
@@ -231,6 +243,10 @@ func (m *MandateAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSchemeProcessingDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -325,6 +341,22 @@ func (m *MandateAttributes) validateSchemeProcessingDate(formats strfmt.Registry
 	}
 
 	if err := validate.FormatOf("scheme_processing_date", "body", "date", m.SchemeProcessingDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MandateAttributes) validateStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	if err := m.Status.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("status")
+		}
 		return err
 	}
 

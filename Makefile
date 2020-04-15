@@ -13,18 +13,28 @@ install-swagger:
 	@curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger
 
 download-swagger:
-	@mkdir swagger || true
+	@mkdir -p swagger
 	curl -s https://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
-	yq r swagger/form3-swagger-raw.yaml paths | grep -v "^   .*" | tr '\n' 'X' | sed -e 's/\(\/[^X]*\):X *\([^:]*\):/paths.\1.\2.OperationId: TODO/g' | tr 'X' '\n' > swagger/paths.txt
+	./scripts/extract_paths.py swagger/form3-swagger-raw.yaml swagger/paths.yaml
 
 
 modify-swagger-file: download-swagger
-	yq w swagger/form3-swagger-raw.yaml -s operationNames.txt > swagger/form3-swagger-updated.yaml
+	# Add an operation name (operationId) to each endpoint
+	yq w swagger/form3-swagger-raw.yaml -s operationNames.yaml > swagger/form3-swagger-updated.yaml
+	# Delete the ReportDetailsResponse links property (and its definition)
 	yq d -i swagger/form3-swagger-updated.yaml definitions.ReportLinks
 	yq d -i swagger/form3-swagger-updated.yaml definitions.ReportDetailsResponse.properties.links
+	# Links.properties.Self appears to be a duplicate of Links.properties.self
+	yq d -i swagger/form3-swagger-updated.yaml definitions.Links.properties.Self
+	# Delete anything to do with /participants/[open_banking_id]/open-banking/v3.1/accounts/name-verification
+	yq d -i swagger/form3-swagger-updated.yaml paths./participants/*
+	yq d -i swagger/form3-swagger-updated.yaml responses.OBNameVerification1
+	yq d -i swagger/form3-swagger-updated.yaml parameters.OBNameVerificationRequest1
+	yq d -i swagger/form3-swagger-updated.yaml parameters.Authorization
+	yq d -i swagger/form3-swagger-updated.yaml definitions.Meta
 
 generate-client: modify-swagger-file
-	@rm -r pkg/generated || true
+	@rm -rf pkg/generated
 	@mkdir pkg/generated
 	swagger generate client -f swagger/form3-swagger-updated.yaml -t pkg/generated/ -T templates -C templates/layout.yaml
 
@@ -35,4 +45,4 @@ goimports:
 	goimports -w $(GOFMT_FILES)
 
 test:
-	go test ./tests
+	go test -v -race -cover ./pkg/form3

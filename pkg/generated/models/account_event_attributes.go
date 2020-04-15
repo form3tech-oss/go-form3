@@ -21,20 +21,10 @@ import (
 // swagger:model AccountEventAttributes
 type AccountEventAttributes struct {
 
-	// ID of the account this event relates to
-	// Required: true
-	// Format: uuid
-	AccountID *strfmt.UUID `json:"account_id"`
-
 	// date time
 	// Required: true
 	// Format: date-time
 	DateTime *strfmt.DateTime `json:"date_time"`
-
-	// Contains the event description
-	// Required: true
-	// Enum: [pending failed confirmed]
-	Description *string `json:"description"`
 
 	// Failure reason. Should only be present when description is failed
 	Reason string `json:"reason,omitempty"`
@@ -43,33 +33,24 @@ type AccountEventAttributes struct {
 	// Required: true
 	// Enum: [unroutable routable deleted]
 	RoutingStatus *string `json:"routing_status"`
+
+	// Contains the event status
+	// Required: true
+	// Enum: [pending failed confirmed]
+	Status *string `json:"status"`
 }
 
 func AccountEventAttributesWithDefaults(defaults client.Defaults) *AccountEventAttributes {
 	return &AccountEventAttributes{
 
-		AccountID: defaults.GetStrfmtUUIDPtr("AccountEventAttributes", "account_id"),
-
 		DateTime: defaults.GetStrfmtDateTimePtr("AccountEventAttributes", "date_time"),
-
-		Description: defaults.GetStringPtr("AccountEventAttributes", "description"),
 
 		Reason: defaults.GetString("AccountEventAttributes", "reason"),
 
 		RoutingStatus: defaults.GetStringPtr("AccountEventAttributes", "routing_status"),
+
+		Status: defaults.GetStringPtr("AccountEventAttributes", "status"),
 	}
-}
-
-func (m *AccountEventAttributes) WithAccountID(accountID strfmt.UUID) *AccountEventAttributes {
-
-	m.AccountID = &accountID
-
-	return m
-}
-
-func (m *AccountEventAttributes) WithoutAccountID() *AccountEventAttributes {
-	m.AccountID = nil
-	return m
 }
 
 func (m *AccountEventAttributes) WithDateTime(dateTime strfmt.DateTime) *AccountEventAttributes {
@@ -81,18 +62,6 @@ func (m *AccountEventAttributes) WithDateTime(dateTime strfmt.DateTime) *Account
 
 func (m *AccountEventAttributes) WithoutDateTime() *AccountEventAttributes {
 	m.DateTime = nil
-	return m
-}
-
-func (m *AccountEventAttributes) WithDescription(description string) *AccountEventAttributes {
-
-	m.Description = &description
-
-	return m
-}
-
-func (m *AccountEventAttributes) WithoutDescription() *AccountEventAttributes {
-	m.Description = nil
 	return m
 }
 
@@ -115,19 +84,23 @@ func (m *AccountEventAttributes) WithoutRoutingStatus() *AccountEventAttributes 
 	return m
 }
 
+func (m *AccountEventAttributes) WithStatus(status string) *AccountEventAttributes {
+
+	m.Status = &status
+
+	return m
+}
+
+func (m *AccountEventAttributes) WithoutStatus() *AccountEventAttributes {
+	m.Status = nil
+	return m
+}
+
 // Validate validates this account event attributes
 func (m *AccountEventAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAccountID(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateDateTime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDescription(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -135,22 +108,13 @@ func (m *AccountEventAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AccountEventAttributes) validateAccountID(formats strfmt.Registry) error {
-
-	if err := validate.Required("account_id", "body", m.AccountID); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("account_id", "body", "uuid", m.AccountID.String(), formats); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -161,52 +125,6 @@ func (m *AccountEventAttributes) validateDateTime(formats strfmt.Registry) error
 	}
 
 	if err := validate.FormatOf("date_time", "body", "date-time", m.DateTime.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var accountEventAttributesTypeDescriptionPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["pending","failed","confirmed"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		accountEventAttributesTypeDescriptionPropEnum = append(accountEventAttributesTypeDescriptionPropEnum, v)
-	}
-}
-
-const (
-
-	// AccountEventAttributesDescriptionPending captures enum value "pending"
-	AccountEventAttributesDescriptionPending string = "pending"
-
-	// AccountEventAttributesDescriptionFailed captures enum value "failed"
-	AccountEventAttributesDescriptionFailed string = "failed"
-
-	// AccountEventAttributesDescriptionConfirmed captures enum value "confirmed"
-	AccountEventAttributesDescriptionConfirmed string = "confirmed"
-)
-
-// prop value enum
-func (m *AccountEventAttributes) validateDescriptionEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, accountEventAttributesTypeDescriptionPropEnum); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *AccountEventAttributes) validateDescription(formats strfmt.Registry) error {
-
-	if err := validate.Required("description", "body", m.Description); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateDescriptionEnum("description", "body", *m.Description); err != nil {
 		return err
 	}
 
@@ -253,6 +171,52 @@ func (m *AccountEventAttributes) validateRoutingStatus(formats strfmt.Registry) 
 
 	// value enum
 	if err := m.validateRoutingStatusEnum("routing_status", "body", *m.RoutingStatus); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var accountEventAttributesTypeStatusPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["pending","failed","confirmed"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		accountEventAttributesTypeStatusPropEnum = append(accountEventAttributesTypeStatusPropEnum, v)
+	}
+}
+
+const (
+
+	// AccountEventAttributesStatusPending captures enum value "pending"
+	AccountEventAttributesStatusPending string = "pending"
+
+	// AccountEventAttributesStatusFailed captures enum value "failed"
+	AccountEventAttributesStatusFailed string = "failed"
+
+	// AccountEventAttributesStatusConfirmed captures enum value "confirmed"
+	AccountEventAttributesStatusConfirmed string = "confirmed"
+)
+
+// prop value enum
+func (m *AccountEventAttributes) validateStatusEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, accountEventAttributesTypeStatusPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *AccountEventAttributes) validateStatus(formats strfmt.Registry) error {
+
+	if err := validate.Required("status", "body", m.Status); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateStatusEnum("status", "body", *m.Status); err != nil {
 		return err
 	}
 

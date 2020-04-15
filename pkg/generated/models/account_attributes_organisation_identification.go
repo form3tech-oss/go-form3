@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -22,7 +23,16 @@ import (
 type AccountAttributesOrganisationIdentification struct {
 
 	// address
-	Address *AccountAttributesIdentificationAddress `json:"address,omitempty"`
+	Address []string `json:"address"`
+
+	// city
+	// Max Length: 35
+	// Min Length: 1
+	City string `json:"city,omitempty"`
+
+	// country
+	// Pattern: ^[A-Z]{2}$
+	Country string `json:"country,omitempty"`
 
 	// name
 	// Max Length: 40
@@ -43,7 +53,11 @@ type AccountAttributesOrganisationIdentification struct {
 func AccountAttributesOrganisationIdentificationWithDefaults(defaults client.Defaults) *AccountAttributesOrganisationIdentification {
 	return &AccountAttributesOrganisationIdentification{
 
-		Address: AccountAttributesIdentificationAddressWithDefaults(defaults),
+		Address: make([]string, 0),
+
+		City: defaults.GetString("AccountAttributesOrganisationIdentification", "city"),
+
+		Country: defaults.GetString("AccountAttributesOrganisationIdentification", "country"),
 
 		Name: defaults.GetString("AccountAttributesOrganisationIdentification", "name"),
 
@@ -55,15 +69,24 @@ func AccountAttributesOrganisationIdentificationWithDefaults(defaults client.Def
 	}
 }
 
-func (m *AccountAttributesOrganisationIdentification) WithAddress(address AccountAttributesIdentificationAddress) *AccountAttributesOrganisationIdentification {
+func (m *AccountAttributesOrganisationIdentification) WithAddress(address []string) *AccountAttributesOrganisationIdentification {
 
-	m.Address = &address
+	m.Address = address
 
 	return m
 }
 
-func (m *AccountAttributesOrganisationIdentification) WithoutAddress() *AccountAttributesOrganisationIdentification {
-	m.Address = nil
+func (m *AccountAttributesOrganisationIdentification) WithCity(city string) *AccountAttributesOrganisationIdentification {
+
+	m.City = city
+
+	return m
+}
+
+func (m *AccountAttributesOrganisationIdentification) WithCountry(country string) *AccountAttributesOrganisationIdentification {
+
+	m.Country = country
+
 	return m
 }
 
@@ -108,6 +131,14 @@ func (m *AccountAttributesOrganisationIdentification) Validate(formats strfmt.Re
 		res = append(res, err)
 	}
 
+	if err := m.validateCity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCountry(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -132,13 +163,46 @@ func (m *AccountAttributesOrganisationIdentification) validateAddress(formats st
 		return nil
 	}
 
-	if m.Address != nil {
-		if err := m.Address.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("address")
-			}
+	for i := 0; i < len(m.Address); i++ {
+
+		if err := validate.MinLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 1); err != nil {
 			return err
 		}
+
+		if err := validate.MaxLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 140); err != nil {
+			return err
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AccountAttributesOrganisationIdentification) validateCity(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.City) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("city", "body", string(m.City), 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("city", "body", string(m.City), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributesOrganisationIdentification) validateCountry(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Country) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("country", "body", string(m.Country), `^[A-Z]{2}$`); err != nil {
+		return err
 	}
 
 	return nil

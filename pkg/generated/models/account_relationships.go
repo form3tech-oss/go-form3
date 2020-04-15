@@ -20,6 +20,9 @@ import (
 // swagger:model AccountRelationships
 type AccountRelationships struct {
 
+	// Events related to the lifecycle of this account
+	AccountEvents *RelationshipLinks `json:"account_events,omitempty"`
+
 	// ID of the master account related to this account
 	MasterAccount *RelationshipLinks `json:"master_account,omitempty"`
 }
@@ -27,8 +30,22 @@ type AccountRelationships struct {
 func AccountRelationshipsWithDefaults(defaults client.Defaults) *AccountRelationships {
 	return &AccountRelationships{
 
+		AccountEvents: RelationshipLinksWithDefaults(defaults),
+
 		MasterAccount: RelationshipLinksWithDefaults(defaults),
 	}
+}
+
+func (m *AccountRelationships) WithAccountEvents(accountEvents RelationshipLinks) *AccountRelationships {
+
+	m.AccountEvents = &accountEvents
+
+	return m
+}
+
+func (m *AccountRelationships) WithoutAccountEvents() *AccountRelationships {
+	m.AccountEvents = nil
+	return m
 }
 
 func (m *AccountRelationships) WithMasterAccount(masterAccount RelationshipLinks) *AccountRelationships {
@@ -47,6 +64,10 @@ func (m *AccountRelationships) WithoutMasterAccount() *AccountRelationships {
 func (m *AccountRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccountEvents(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMasterAccount(formats); err != nil {
 		res = append(res, err)
 	}
@@ -54,6 +75,24 @@ func (m *AccountRelationships) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AccountRelationships) validateAccountEvents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccountEvents) { // not required
+		return nil
+	}
+
+	if m.AccountEvents != nil {
+		if err := m.AccountEvents.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("account_events")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -35,6 +35,9 @@ type AccountEvent struct {
 	// Format: uuid
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
+	// relationships
+	Relationships *AccountEventRelationships `json:"relationships,omitempty"`
+
 	// Name of the resource type
 	// Required: true
 	// Pattern: ^[A-Za-z]*$
@@ -54,6 +57,8 @@ func AccountEventWithDefaults(defaults client.Defaults) *AccountEvent {
 		ID: defaults.GetStrfmtUUIDPtr("AccountEvent", "id"),
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("AccountEvent", "organisation_id"),
+
+		Relationships: AccountEventRelationshipsWithDefaults(defaults),
 
 		Type: defaults.GetStringPtr("AccountEvent", "type"),
 
@@ -97,6 +102,18 @@ func (m *AccountEvent) WithoutOrganisationID() *AccountEvent {
 	return m
 }
 
+func (m *AccountEvent) WithRelationships(relationships AccountEventRelationships) *AccountEvent {
+
+	m.Relationships = &relationships
+
+	return m
+}
+
+func (m *AccountEvent) WithoutRelationships() *AccountEvent {
+	m.Relationships = nil
+	return m
+}
+
 func (m *AccountEvent) WithType(typeVar string) *AccountEvent {
 
 	m.Type = &typeVar
@@ -134,6 +151,10 @@ func (m *AccountEvent) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrganisationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRelationships(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -190,6 +211,24 @@ func (m *AccountEvent) validateOrganisationID(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *AccountEvent) validateRelationships(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Relationships) { // not required
+		return nil
+	}
+
+	if m.Relationships != nil {
+		if err := m.Relationships.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships")
+			}
+			return err
+		}
 	}
 
 	return nil

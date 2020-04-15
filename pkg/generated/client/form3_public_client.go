@@ -13,10 +13,12 @@ import (
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/a_c_e"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/accounts"
+	"github.com/form3tech-oss/go-form3/pkg/generated/client/addressbook"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/audit"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/balances"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/claims"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/direct_debits"
+	"github.com/form3tech-oss/go-form3/pkg/generated/client/fx_api"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/mandates"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/oauth2"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/organisations"
@@ -77,6 +79,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.Accounts = accounts.New(transport, formats, defaults)
 
+	cli.Addressbook = addressbook.New(transport, formats, defaults)
+
 	cli.Audit = audit.New(transport, formats, defaults)
 
 	cli.Balances = balances.New(transport, formats, defaults)
@@ -84,6 +88,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.Claims = claims.New(transport, formats, defaults)
 
 	cli.DirectDebits = direct_debits.New(transport, formats, defaults)
+
+	cli.FxAPI = fx_api.New(transport, formats, defaults)
 
 	cli.Mandates = mandates.New(transport, formats, defaults)
 
@@ -151,6 +157,8 @@ type Form3Public struct {
 
 	Accounts *accounts.Client
 
+	Addressbook *addressbook.Client
+
 	Audit *audit.Client
 
 	Balances *balances.Client
@@ -158,6 +166,8 @@ type Form3Public struct {
 	Claims *claims.Client
 
 	DirectDebits *direct_debits.Client
+
+	FxAPI *fx_api.Client
 
 	Mandates *mandates.Client
 
@@ -188,6 +198,8 @@ func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
 
 	c.Accounts.SetTransport(transport)
 
+	c.Addressbook.SetTransport(transport)
+
 	c.Audit.SetTransport(transport)
 
 	c.Balances.SetTransport(transport)
@@ -195,6 +207,8 @@ func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
 	c.Claims.SetTransport(transport)
 
 	c.DirectDebits.SetTransport(transport)
+
+	c.FxAPI.SetTransport(transport)
 
 	c.Mandates.SetTransport(transport)
 
