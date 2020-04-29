@@ -34,6 +34,7 @@ type GetPaymentRequest struct {
 	/*ID      Payment Id      */
 
 	ID strfmt.UUID
+	Source string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -51,6 +52,13 @@ func (o *GetPaymentRequest) FromJson(j string) *GetPaymentRequest {
 func (o *GetPaymentRequest) WithID(id strfmt.UUID) *GetPaymentRequest {
 
 	o.ID = id
+
+	return o
+}
+
+func (o *GetPaymentRequest) WithSource(source string) *GetPaymentRequest {
+
+	o.Source = source
 
 	return o
 }
@@ -79,6 +87,12 @@ func (o *GetPaymentRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	// path param id
 	if err := r.SetPathParam("id", o.ID.String()); err != nil {
 		return err
+	}
+
+	if o.Source != "" {
+		if err := r.SetQueryParam("source", o.Source); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {
