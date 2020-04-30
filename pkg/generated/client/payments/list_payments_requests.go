@@ -174,6 +174,8 @@ type ListPaymentsRequest struct {
 
 	PageSize *int64
 
+	Source *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -512,6 +514,14 @@ func (o *ListPaymentsRequest) WithoutPageNumber() *ListPaymentsRequest {
 func (o *ListPaymentsRequest) WithPageSize(pageSize int64) *ListPaymentsRequest {
 
 	o.PageSize = &pageSize
+
+	return o
+}
+
+
+func (o *ListPaymentsRequest) WithSource(source string) *ListPaymentsRequest {
+
+	o.Source = &source
 
 	return o
 }
@@ -921,6 +931,12 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 			}
 		}
 
+	}
+
+	if o.Source != nil {
+		if err := r.SetQueryParam("source", *o.Source); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {
