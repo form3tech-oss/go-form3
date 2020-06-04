@@ -46,6 +46,13 @@ func (o *CreateDealReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 
+	case 409:
+		result := NewCreateDealConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 502:
 		result := NewCreateDealBadGateway()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -54,7 +61,14 @@ func (o *CreateDealReader) ReadResponse(response runtime.ClientResponse, consume
 		return nil, result
 
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewCreateDealDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -99,7 +113,7 @@ func NewCreateDealBadRequest() *CreateDealBadRequest {
 
 /*CreateDealBadRequest handles this case with default header values.
 
-bad request
+Bad Request
 */
 type CreateDealBadRequest struct {
 
@@ -133,7 +147,7 @@ func NewCreateDealForbidden() *CreateDealForbidden {
 
 /*CreateDealForbidden handles this case with default header values.
 
-forbidden
+Action Forbidden
 */
 type CreateDealForbidden struct {
 
@@ -160,6 +174,40 @@ func (o *CreateDealForbidden) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
+// NewCreateDealConflict creates a CreateDealConflict with default headers values
+func NewCreateDealConflict() *CreateDealConflict {
+	return &CreateDealConflict{}
+}
+
+/*CreateDealConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateDealConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateDealConflict) Error() string {
+	return fmt.Sprintf("[POST /fx/deals][%d] createDealConflict", 409)
+}
+
+func (o *CreateDealConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewCreateDealBadGateway creates a CreateDealBadGateway with default headers values
 func NewCreateDealBadGateway() *CreateDealBadGateway {
 	return &CreateDealBadGateway{}
@@ -167,7 +215,7 @@ func NewCreateDealBadGateway() *CreateDealBadGateway {
 
 /*CreateDealBadGateway handles this case with default header values.
 
-FX rates gateway issue
+Bad Gateway
 */
 type CreateDealBadGateway struct {
 
@@ -182,6 +230,48 @@ func (o *CreateDealBadGateway) Error() string {
 }
 
 func (o *CreateDealBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateDealDefault creates a CreateDealDefault with default headers values
+func NewCreateDealDefault(code int) *CreateDealDefault {
+	return &CreateDealDefault{
+		_statusCode: code,
+	}
+}
+
+/*CreateDealDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type CreateDealDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the create deal default response
+func (o *CreateDealDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *CreateDealDefault) Error() string {
+	return fmt.Sprintf("[POST /fx/deals][%d] CreateDeal default", o._statusCode)
+}
+
+func (o *CreateDealDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

@@ -23,14 +23,14 @@ type Relationships struct {
 	// contact
 	Contact *RelationshipsContactProperties `json:"contact,omitempty"`
 
+	// contact account
+	ContactAccount *RelationshipsContactAccountProperties `json:"contact_account,omitempty"`
+
 	// party
 	Party *RelationshipsPartyProperties `json:"party,omitempty"`
 
 	// party product
 	PartyProduct *RelationshipsPartyProductProperties `json:"party_product,omitempty"`
-
-	// product event
-	ProductEvent *RelationshipsPartyProductUpdatedEventProperties `json:"product_event,omitempty"`
 }
 
 func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
@@ -38,11 +38,11 @@ func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
 
 		Contact: RelationshipsContactPropertiesWithDefaults(defaults),
 
+		ContactAccount: RelationshipsContactAccountPropertiesWithDefaults(defaults),
+
 		Party: RelationshipsPartyPropertiesWithDefaults(defaults),
 
 		PartyProduct: RelationshipsPartyProductPropertiesWithDefaults(defaults),
-
-		ProductEvent: RelationshipsPartyProductUpdatedEventPropertiesWithDefaults(defaults),
 	}
 }
 
@@ -55,6 +55,18 @@ func (m *Relationships) WithContact(contact RelationshipsContactProperties) *Rel
 
 func (m *Relationships) WithoutContact() *Relationships {
 	m.Contact = nil
+	return m
+}
+
+func (m *Relationships) WithContactAccount(contactAccount RelationshipsContactAccountProperties) *Relationships {
+
+	m.ContactAccount = &contactAccount
+
+	return m
+}
+
+func (m *Relationships) WithoutContactAccount() *Relationships {
+	m.ContactAccount = nil
 	return m
 }
 
@@ -82,18 +94,6 @@ func (m *Relationships) WithoutPartyProduct() *Relationships {
 	return m
 }
 
-func (m *Relationships) WithProductEvent(productEvent RelationshipsPartyProductUpdatedEventProperties) *Relationships {
-
-	m.ProductEvent = &productEvent
-
-	return m
-}
-
-func (m *Relationships) WithoutProductEvent() *Relationships {
-	m.ProductEvent = nil
-	return m
-}
-
 // Validate validates this relationships
 func (m *Relationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -102,15 +102,15 @@ func (m *Relationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateContactAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateParty(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePartyProduct(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateProductEvent(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,6 +130,24 @@ func (m *Relationships) validateContact(formats strfmt.Registry) error {
 		if err := m.Contact.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("contact")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Relationships) validateContactAccount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ContactAccount) { // not required
+		return nil
+	}
+
+	if m.ContactAccount != nil {
+		if err := m.ContactAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("contact_account")
 			}
 			return err
 		}
@@ -166,24 +184,6 @@ func (m *Relationships) validatePartyProduct(formats strfmt.Registry) error {
 		if err := m.PartyProduct.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("party_product")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Relationships) validateProductEvent(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.ProductEvent) { // not required
-		return nil
-	}
-
-	if m.ProductEvent != nil {
-		if err := m.ProductEvent.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("product_event")
 			}
 			return err
 		}

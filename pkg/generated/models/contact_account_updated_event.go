@@ -16,35 +16,35 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PartyAccountCreation party account creation
-// swagger:model PartyAccountCreation
-type PartyAccountCreation struct {
+// ContactAccountUpdatedEvent contact account updated event
+// swagger:model ContactAccountUpdatedEvent
+type ContactAccountUpdatedEvent struct {
 
 	// data
-	Data *PartyAccount `json:"data,omitempty"`
+	Data *ContactAccount `json:"data,omitempty"`
 }
 
-func PartyAccountCreationWithDefaults(defaults client.Defaults) *PartyAccountCreation {
-	return &PartyAccountCreation{
+func ContactAccountUpdatedEventWithDefaults(defaults client.Defaults) *ContactAccountUpdatedEvent {
+	return &ContactAccountUpdatedEvent{
 
-		Data: PartyAccountWithDefaults(defaults),
+		Data: ContactAccountWithDefaults(defaults),
 	}
 }
 
-func (m *PartyAccountCreation) WithData(data PartyAccount) *PartyAccountCreation {
+func (m *ContactAccountUpdatedEvent) WithData(data ContactAccount) *ContactAccountUpdatedEvent {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *PartyAccountCreation) WithoutData() *PartyAccountCreation {
+func (m *ContactAccountUpdatedEvent) WithoutData() *ContactAccountUpdatedEvent {
 	m.Data = nil
 	return m
 }
 
-// Validate validates this party account creation
-func (m *PartyAccountCreation) Validate(formats strfmt.Registry) error {
+// Validate validates this contact account updated event
+func (m *ContactAccountUpdatedEvent) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -57,7 +57,7 @@ func (m *PartyAccountCreation) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PartyAccountCreation) validateData(formats strfmt.Registry) error {
+func (m *ContactAccountUpdatedEvent) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -76,7 +76,7 @@ func (m *PartyAccountCreation) validateData(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *PartyAccountCreation) MarshalBinary() ([]byte, error) {
+func (m *ContactAccountUpdatedEvent) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -84,15 +84,15 @@ func (m *PartyAccountCreation) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *PartyAccountCreation) UnmarshalBinary(b []byte) error {
-	var res PartyAccountCreation
+func (m *ContactAccountUpdatedEvent) UnmarshalBinary(b []byte) error {
+	var res ContactAccountUpdatedEvent
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *PartyAccountCreation) Json() string {
+func (m *ContactAccountUpdatedEvent) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

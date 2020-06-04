@@ -22,15 +22,18 @@ import (
 type Ace struct {
 
 	// attributes
-	Attributes *AceAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *AceAttributes `json:"attributes"`
 
 	// Unique resource ID
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// Unique ID of the organisation this resource is created by
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// Name of the resource type
 	// Pattern: ^[A-Za-z]*$
@@ -46,9 +49,9 @@ func AceWithDefaults(defaults client.Defaults) *Ace {
 
 		Attributes: AceAttributesWithDefaults(defaults),
 
-		ID: defaults.GetStrfmtUUID("Ace", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("Ace", "id"),
 
-		OrganisationID: defaults.GetStrfmtUUID("Ace", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("Ace", "organisation_id"),
 
 		Type: defaults.GetString("Ace", "type"),
 
@@ -70,15 +73,25 @@ func (m *Ace) WithoutAttributes() *Ace {
 
 func (m *Ace) WithID(id strfmt.UUID) *Ace {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *Ace) WithoutID() *Ace {
+	m.ID = nil
 	return m
 }
 
 func (m *Ace) WithOrganisationID(organisationID strfmt.UUID) *Ace {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *Ace) WithoutOrganisationID() *Ace {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -133,8 +146,8 @@ func (m *Ace) Validate(formats strfmt.Registry) error {
 
 func (m *Ace) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -151,8 +164,8 @@ func (m *Ace) validateAttributes(formats strfmt.Registry) error {
 
 func (m *Ace) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -164,8 +177,8 @@ func (m *Ace) validateID(formats strfmt.Registry) error {
 
 func (m *Ace) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {

@@ -21,17 +21,17 @@ import (
 type AccountEventRelationships struct {
 
 	// Account this event relates to
-	Account *RelationshipLinks `json:"account,omitempty"`
+	Account *RelationshipAccount `json:"account,omitempty"`
 }
 
 func AccountEventRelationshipsWithDefaults(defaults client.Defaults) *AccountEventRelationships {
 	return &AccountEventRelationships{
 
-		Account: RelationshipLinksWithDefaults(defaults),
+		Account: RelationshipAccountWithDefaults(defaults),
 	}
 }
 
-func (m *AccountEventRelationships) WithAccount(account RelationshipLinks) *AccountEventRelationships {
+func (m *AccountEventRelationships) WithAccount(account RelationshipAccount) *AccountEventRelationships {
 
 	m.Account = &account
 

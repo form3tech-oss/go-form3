@@ -39,6 +39,13 @@ func (o *ListDealsReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 
+	case 403:
+		result := NewListDealsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 502:
 		result := NewListDealsBadGateway()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -47,7 +54,14 @@ func (o *ListDealsReader) ReadResponse(response runtime.ClientResponse, consumer
 		return nil, result
 
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewListDealsDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -92,7 +106,7 @@ func NewListDealsBadRequest() *ListDealsBadRequest {
 
 /*ListDealsBadRequest handles this case with default header values.
 
-FX Deals bad request
+Bad Request
 */
 type ListDealsBadRequest struct {
 
@@ -119,6 +133,40 @@ func (o *ListDealsBadRequest) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
+// NewListDealsForbidden creates a ListDealsForbidden with default headers values
+func NewListDealsForbidden() *ListDealsForbidden {
+	return &ListDealsForbidden{}
+}
+
+/*ListDealsForbidden handles this case with default header values.
+
+Action Forbidden
+*/
+type ListDealsForbidden struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ListDealsForbidden) Error() string {
+	return fmt.Sprintf("[GET /fx/deals][%d] listDealsForbidden", 403)
+}
+
+func (o *ListDealsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewListDealsBadGateway creates a ListDealsBadGateway with default headers values
 func NewListDealsBadGateway() *ListDealsBadGateway {
 	return &ListDealsBadGateway{}
@@ -126,7 +174,7 @@ func NewListDealsBadGateway() *ListDealsBadGateway {
 
 /*ListDealsBadGateway handles this case with default header values.
 
-FX Deals gateway issue
+Bad Gateway
 */
 type ListDealsBadGateway struct {
 
@@ -141,6 +189,48 @@ func (o *ListDealsBadGateway) Error() string {
 }
 
 func (o *ListDealsBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListDealsDefault creates a ListDealsDefault with default headers values
+func NewListDealsDefault(code int) *ListDealsDefault {
+	return &ListDealsDefault{
+		_statusCode: code,
+	}
+}
+
+/*ListDealsDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type ListDealsDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the list deals default response
+func (o *ListDealsDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ListDealsDefault) Error() string {
+	return fmt.Sprintf("[GET /fx/deals][%d] ListDeals default", o._statusCode)
+}
+
+func (o *ListDealsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

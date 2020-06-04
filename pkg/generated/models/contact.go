@@ -22,7 +22,8 @@ import (
 type Contact struct {
 
 	// attributes
-	Attributes *ContactAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *ContactAttributes `json:"attributes"`
 
 	// created on
 	// Format: datetime
@@ -45,8 +46,13 @@ type Contact struct {
 	// relationships
 	Relationships *Relationships `json:"relationships,omitempty"`
 
+	// type
+	// Enum: [contacts]
+	Type string `json:"type,omitempty"`
+
 	// version
-	Version float64 `json:"version,omitempty"`
+	// Minimum: 0
+	Version *int64 `json:"version,omitempty"`
 }
 
 func ContactWithDefaults(defaults client.Defaults) *Contact {
@@ -64,7 +70,9 @@ func ContactWithDefaults(defaults client.Defaults) *Contact {
 
 		Relationships: RelationshipsWithDefaults(defaults),
 
-		Version: defaults.GetFloat64("Contact", "version"),
+		Type: defaults.GetString("Contact", "type"),
+
+		Version: defaults.GetInt64Ptr("Contact", "version"),
 	}
 }
 
@@ -130,10 +138,22 @@ func (m *Contact) WithoutRelationships() *Contact {
 	return m
 }
 
-func (m *Contact) WithVersion(version float64) *Contact {
+func (m *Contact) WithType(typeVar string) *Contact {
 
-	m.Version = version
+	m.Type = typeVar
 
+	return m
+}
+
+func (m *Contact) WithVersion(version int64) *Contact {
+
+	m.Version = &version
+
+	return m
+}
+
+func (m *Contact) WithoutVersion() *Contact {
+	m.Version = nil
 	return m
 }
 
@@ -165,6 +185,14 @@ func (m *Contact) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -173,8 +201,8 @@ func (m *Contact) Validate(formats strfmt.Registry) error {
 
 func (m *Contact) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -254,6 +282,59 @@ func (m *Contact) validateRelationships(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var contactTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["contacts"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		contactTypeTypePropEnum = append(contactTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// ContactTypeContacts captures enum value "contacts"
+	ContactTypeContacts string = "contacts"
+)
+
+// prop value enum
+func (m *Contact) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, contactTypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Contact) validateType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Contact) validateVersion(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Version) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {
+		return err
 	}
 
 	return nil

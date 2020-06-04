@@ -46,8 +46,29 @@ func (o *GetDealSubmissionReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetDealSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 502:
+		result := NewGetDealSubmissionBadGateway()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetDealSubmissionDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -92,7 +113,7 @@ func NewGetDealSubmissionBadRequest() *GetDealSubmissionBadRequest {
 
 /*GetDealSubmissionBadRequest handles this case with default header values.
 
-bad request
+Bad Request
 */
 type GetDealSubmissionBadRequest struct {
 
@@ -126,7 +147,7 @@ func NewGetDealSubmissionForbidden() *GetDealSubmissionForbidden {
 
 /*GetDealSubmissionForbidden handles this case with default header values.
 
-forbidden
+Action Forbidden
 */
 type GetDealSubmissionForbidden struct {
 
@@ -141,6 +162,116 @@ func (o *GetDealSubmissionForbidden) Error() string {
 }
 
 func (o *GetDealSubmissionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDealSubmissionNotFound creates a GetDealSubmissionNotFound with default headers values
+func NewGetDealSubmissionNotFound() *GetDealSubmissionNotFound {
+	return &GetDealSubmissionNotFound{}
+}
+
+/*GetDealSubmissionNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetDealSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetDealSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[GET /fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}][%d] getDealSubmissionNotFound", 404)
+}
+
+func (o *GetDealSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDealSubmissionBadGateway creates a GetDealSubmissionBadGateway with default headers values
+func NewGetDealSubmissionBadGateway() *GetDealSubmissionBadGateway {
+	return &GetDealSubmissionBadGateway{}
+}
+
+/*GetDealSubmissionBadGateway handles this case with default header values.
+
+Bad Gateway
+*/
+type GetDealSubmissionBadGateway struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetDealSubmissionBadGateway) Error() string {
+	return fmt.Sprintf("[GET /fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}][%d] getDealSubmissionBadGateway", 502)
+}
+
+func (o *GetDealSubmissionBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDealSubmissionDefault creates a GetDealSubmissionDefault with default headers values
+func NewGetDealSubmissionDefault(code int) *GetDealSubmissionDefault {
+	return &GetDealSubmissionDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetDealSubmissionDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type GetDealSubmissionDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the get deal submission default response
+func (o *GetDealSubmissionDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetDealSubmissionDefault) Error() string {
+	return fmt.Sprintf("[GET /fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}][%d] GetDealSubmission default", o._statusCode)
+}
+
+func (o *GetDealSubmissionDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

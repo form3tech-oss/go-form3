@@ -24,6 +24,9 @@ const (
 	// FXDealSubmissionStatusAccepted captures enum value "accepted"
 	FXDealSubmissionStatusAccepted FXDealSubmissionStatus = "accepted"
 
+	// FXDealSubmissionStatusWaitingForAction captures enum value "waiting_for_action"
+	FXDealSubmissionStatusWaitingForAction FXDealSubmissionStatus = "waiting_for_action"
+
 	// FXDealSubmissionStatusFailed captures enum value "failed"
 	FXDealSubmissionStatusFailed FXDealSubmissionStatus = "failed"
 )
@@ -33,7 +36,7 @@ var fXDealSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []FXDealSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","waiting_for_action","failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

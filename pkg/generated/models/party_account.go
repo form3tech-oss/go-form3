@@ -22,7 +22,8 @@ import (
 type PartyAccount struct {
 
 	// attributes
-	Attributes *PartyAccountAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *PartyAccountAttributes `json:"attributes"`
 
 	// created on
 	// Format: datetime
@@ -46,10 +47,12 @@ type PartyAccount struct {
 	Relationships *Relationships `json:"relationships,omitempty"`
 
 	// type
+	// Enum: [party_accounts]
 	Type string `json:"type,omitempty"`
 
 	// version
-	Version float64 `json:"version,omitempty"`
+	// Minimum: 0
+	Version *int64 `json:"version,omitempty"`
 }
 
 func PartyAccountWithDefaults(defaults client.Defaults) *PartyAccount {
@@ -69,7 +72,7 @@ func PartyAccountWithDefaults(defaults client.Defaults) *PartyAccount {
 
 		Type: defaults.GetString("PartyAccount", "type"),
 
-		Version: defaults.GetFloat64("PartyAccount", "version"),
+		Version: defaults.GetInt64Ptr("PartyAccount", "version"),
 	}
 }
 
@@ -142,10 +145,15 @@ func (m *PartyAccount) WithType(typeVar string) *PartyAccount {
 	return m
 }
 
-func (m *PartyAccount) WithVersion(version float64) *PartyAccount {
+func (m *PartyAccount) WithVersion(version int64) *PartyAccount {
 
-	m.Version = version
+	m.Version = &version
 
+	return m
+}
+
+func (m *PartyAccount) WithoutVersion() *PartyAccount {
+	m.Version = nil
 	return m
 }
 
@@ -177,6 +185,14 @@ func (m *PartyAccount) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -185,8 +201,8 @@ func (m *PartyAccount) Validate(formats strfmt.Registry) error {
 
 func (m *PartyAccount) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -266,6 +282,59 @@ func (m *PartyAccount) validateRelationships(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var partyAccountTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["party_accounts"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		partyAccountTypeTypePropEnum = append(partyAccountTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// PartyAccountTypePartyAccounts captures enum value "party_accounts"
+	PartyAccountTypePartyAccounts string = "party_accounts"
+)
+
+// prop value enum
+func (m *PartyAccount) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, partyAccountTypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PartyAccount) validateType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PartyAccount) validateVersion(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Version) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {
+		return err
 	}
 
 	return nil

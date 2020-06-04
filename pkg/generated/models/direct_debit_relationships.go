@@ -34,7 +34,7 @@ type DirectDebitRelationships struct {
 	DirectDebitSubmission *DirectDebitRelationshipsDirectDebitSubmission `json:"direct_debit_submission,omitempty"`
 
 	// mandate
-	Mandate *Mandate `json:"mandate,omitempty"`
+	Mandate *DirectDebitRelationshipsMandate `json:"mandate,omitempty"`
 }
 
 func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitRelationships {
@@ -48,7 +48,7 @@ func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebit
 
 		DirectDebitSubmission: DirectDebitRelationshipsDirectDebitSubmissionWithDefaults(defaults),
 
-		Mandate: MandateWithDefaults(defaults),
+		Mandate: DirectDebitRelationshipsMandateWithDefaults(defaults),
 	}
 }
 
@@ -100,7 +100,7 @@ func (m *DirectDebitRelationships) WithoutDirectDebitSubmission() *DirectDebitRe
 	return m
 }
 
-func (m *DirectDebitRelationships) WithMandate(mandate Mandate) *DirectDebitRelationships {
+func (m *DirectDebitRelationships) WithMandate(mandate DirectDebitRelationshipsMandate) *DirectDebitRelationships {
 
 	m.Mandate = &mandate
 
@@ -594,6 +594,92 @@ func (m *DirectDebitRelationshipsDirectDebitSubmission) UnmarshalBinary(b []byte
 	return nil
 }
 func (m *DirectDebitRelationshipsDirectDebitSubmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitRelationshipsMandate direct debit relationships mandate
+// swagger:model DirectDebitRelationshipsMandate
+type DirectDebitRelationshipsMandate struct {
+
+	// data
+	Data []*Mandate `json:"data"`
+}
+
+func DirectDebitRelationshipsMandateWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsMandate {
+	return &DirectDebitRelationshipsMandate{
+
+		Data: make([]*Mandate, 0),
+	}
+}
+
+func (m *DirectDebitRelationshipsMandate) WithData(data []*Mandate) *DirectDebitRelationshipsMandate {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this direct debit relationships mandate
+func (m *DirectDebitRelationshipsMandate) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitRelationshipsMandate) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("mandate" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitRelationshipsMandate) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitRelationshipsMandate) UnmarshalBinary(b []byte) error {
+	var res DirectDebitRelationshipsMandate
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitRelationshipsMandate) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

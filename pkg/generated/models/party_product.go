@@ -22,7 +22,8 @@ import (
 type PartyProduct struct {
 
 	// attributes
-	Attributes *PartyProductAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *PartyProductAttributes `json:"attributes"`
 
 	// created on
 	// Format: datetime
@@ -46,10 +47,12 @@ type PartyProduct struct {
 	Relationships *Relationships `json:"relationships,omitempty"`
 
 	// type
+	// Enum: [party_products]
 	Type string `json:"type,omitempty"`
 
 	// version
-	Version float64 `json:"version,omitempty"`
+	// Minimum: 0
+	Version *int64 `json:"version,omitempty"`
 }
 
 func PartyProductWithDefaults(defaults client.Defaults) *PartyProduct {
@@ -69,7 +72,7 @@ func PartyProductWithDefaults(defaults client.Defaults) *PartyProduct {
 
 		Type: defaults.GetString("PartyProduct", "type"),
 
-		Version: defaults.GetFloat64("PartyProduct", "version"),
+		Version: defaults.GetInt64Ptr("PartyProduct", "version"),
 	}
 }
 
@@ -142,10 +145,15 @@ func (m *PartyProduct) WithType(typeVar string) *PartyProduct {
 	return m
 }
 
-func (m *PartyProduct) WithVersion(version float64) *PartyProduct {
+func (m *PartyProduct) WithVersion(version int64) *PartyProduct {
 
-	m.Version = version
+	m.Version = &version
 
+	return m
+}
+
+func (m *PartyProduct) WithoutVersion() *PartyProduct {
+	m.Version = nil
 	return m
 }
 
@@ -177,6 +185,14 @@ func (m *PartyProduct) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -185,8 +201,8 @@ func (m *PartyProduct) Validate(formats strfmt.Registry) error {
 
 func (m *PartyProduct) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -266,6 +282,59 @@ func (m *PartyProduct) validateRelationships(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var partyProductTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["party_products"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		partyProductTypeTypePropEnum = append(partyProductTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// PartyProductTypePartyProducts captures enum value "party_products"
+	PartyProductTypePartyProducts string = "party_products"
+)
+
+// prop value enum
+func (m *PartyProduct) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, partyProductTypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PartyProduct) validateType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PartyProduct) validateVersion(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Version) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {
+		return err
 	}
 
 	return nil

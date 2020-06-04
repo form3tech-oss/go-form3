@@ -46,8 +46,36 @@ func (o *CreateDealSubmissionReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 
+	case 404:
+		result := NewCreateDealSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateDealSubmissionConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 502:
+		result := NewCreateDealSubmissionBadGateway()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewCreateDealSubmissionDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -92,7 +120,7 @@ func NewCreateDealSubmissionBadRequest() *CreateDealSubmissionBadRequest {
 
 /*CreateDealSubmissionBadRequest handles this case with default header values.
 
-bad request
+Bad Request
 */
 type CreateDealSubmissionBadRequest struct {
 
@@ -126,7 +154,7 @@ func NewCreateDealSubmissionForbidden() *CreateDealSubmissionForbidden {
 
 /*CreateDealSubmissionForbidden handles this case with default header values.
 
-forbidden
+Action Forbidden
 */
 type CreateDealSubmissionForbidden struct {
 
@@ -141,6 +169,150 @@ func (o *CreateDealSubmissionForbidden) Error() string {
 }
 
 func (o *CreateDealSubmissionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateDealSubmissionNotFound creates a CreateDealSubmissionNotFound with default headers values
+func NewCreateDealSubmissionNotFound() *CreateDealSubmissionNotFound {
+	return &CreateDealSubmissionNotFound{}
+}
+
+/*CreateDealSubmissionNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateDealSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateDealSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[POST /fx/deals/{fx_deal_id}/submissions][%d] createDealSubmissionNotFound", 404)
+}
+
+func (o *CreateDealSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateDealSubmissionConflict creates a CreateDealSubmissionConflict with default headers values
+func NewCreateDealSubmissionConflict() *CreateDealSubmissionConflict {
+	return &CreateDealSubmissionConflict{}
+}
+
+/*CreateDealSubmissionConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateDealSubmissionConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateDealSubmissionConflict) Error() string {
+	return fmt.Sprintf("[POST /fx/deals/{fx_deal_id}/submissions][%d] createDealSubmissionConflict", 409)
+}
+
+func (o *CreateDealSubmissionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateDealSubmissionBadGateway creates a CreateDealSubmissionBadGateway with default headers values
+func NewCreateDealSubmissionBadGateway() *CreateDealSubmissionBadGateway {
+	return &CreateDealSubmissionBadGateway{}
+}
+
+/*CreateDealSubmissionBadGateway handles this case with default header values.
+
+Bad Gateway
+*/
+type CreateDealSubmissionBadGateway struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateDealSubmissionBadGateway) Error() string {
+	return fmt.Sprintf("[POST /fx/deals/{fx_deal_id}/submissions][%d] createDealSubmissionBadGateway", 502)
+}
+
+func (o *CreateDealSubmissionBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateDealSubmissionDefault creates a CreateDealSubmissionDefault with default headers values
+func NewCreateDealSubmissionDefault(code int) *CreateDealSubmissionDefault {
+	return &CreateDealSubmissionDefault{
+		_statusCode: code,
+	}
+}
+
+/*CreateDealSubmissionDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type CreateDealSubmissionDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the create deal submission default response
+func (o *CreateDealSubmissionDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *CreateDealSubmissionDefault) Error() string {
+	return fmt.Sprintf("[POST /fx/deals/{fx_deal_id}/submissions][%d] CreateDealSubmission default", o._statusCode)
+}
+
+func (o *CreateDealSubmissionDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

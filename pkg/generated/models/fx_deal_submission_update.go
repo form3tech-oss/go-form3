@@ -33,8 +33,7 @@ type FxDealSubmissionUpdate struct {
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
 	// type
-	// Enum: [fx_deal_submissions]
-	Type string `json:"type,omitempty"`
+	Type FXDealSubmissionResourceType `json:"type,omitempty"`
 
 	// version
 	Version float64 `json:"version,omitempty"`
@@ -49,7 +48,7 @@ func FxDealSubmissionUpdateWithDefaults(defaults client.Defaults) *FxDealSubmiss
 
 		OrganisationID: defaults.GetStrfmtUUID("FxDealSubmissionUpdate", "organisation_id"),
 
-		Type: defaults.GetString("FxDealSubmissionUpdate", "type"),
+		// TODO Type: FXDealSubmissionResourceType,
 
 		Version: defaults.GetFloat64("FxDealSubmissionUpdate", "version"),
 	}
@@ -81,7 +80,7 @@ func (m *FxDealSubmissionUpdate) WithOrganisationID(organisationID strfmt.UUID) 
 	return m
 }
 
-func (m *FxDealSubmissionUpdate) WithType(typeVar string) *FxDealSubmissionUpdate {
+func (m *FxDealSubmissionUpdate) WithType(typeVar FXDealSubmissionResourceType) *FxDealSubmissionUpdate {
 
 	m.Type = typeVar
 
@@ -165,40 +164,16 @@ func (m *FxDealSubmissionUpdate) validateOrganisationID(formats strfmt.Registry)
 	return nil
 }
 
-var fxDealSubmissionUpdateTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["fx_deal_submissions"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		fxDealSubmissionUpdateTypeTypePropEnum = append(fxDealSubmissionUpdateTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// FxDealSubmissionUpdateTypeFxDealSubmissions captures enum value "fx_deal_submissions"
-	FxDealSubmissionUpdateTypeFxDealSubmissions string = "fx_deal_submissions"
-)
-
-// prop value enum
-func (m *FxDealSubmissionUpdate) validateTypeEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, fxDealSubmissionUpdateTypeTypePropEnum); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *FxDealSubmissionUpdate) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		}
 		return err
 	}
 

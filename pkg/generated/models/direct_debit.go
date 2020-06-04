@@ -386,7 +386,7 @@ type DirectDebitAttributes struct {
 
 	// Date on which the operation is processed by the scheme. Only used if different from `processing_date`.
 	// Format: date
-	SchemeProcessingDate strfmt.Date `json:"scheme_processing_date,omitempty"`
+	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
 	// This reference is used by the receiving party to identify whether the related DDI would have been electronic (AUDDIS) or paper‐based.
 	// Enum: [AUDDIS MIGRATING]
@@ -419,7 +419,7 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 
 		SchemePaymentType: defaults.GetString("DirectDebitAttributes", "scheme_payment_type"),
 
-		SchemeProcessingDate: defaults.GetStrfmtDate("DirectDebitAttributes", "scheme_processing_date"),
+		SchemeProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitAttributes", "scheme_processing_date"),
 
 		SchemeStatus: defaults.GetString("DirectDebitAttributes", "scheme_status"),
 
@@ -509,8 +509,13 @@ func (m *DirectDebitAttributes) WithSchemePaymentType(schemePaymentType string) 
 
 func (m *DirectDebitAttributes) WithSchemeProcessingDate(schemeProcessingDate strfmt.Date) *DirectDebitAttributes {
 
-	m.SchemeProcessingDate = schemeProcessingDate
+	m.SchemeProcessingDate = &schemeProcessingDate
 
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutSchemeProcessingDate() *DirectDebitAttributes {
+	m.SchemeProcessingDate = nil
 	return m
 }
 

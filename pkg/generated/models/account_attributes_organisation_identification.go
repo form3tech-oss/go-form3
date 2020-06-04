@@ -22,6 +22,9 @@ import (
 // swagger:model AccountAttributesOrganisationIdentification
 type AccountAttributesOrganisationIdentification struct {
 
+	// actors
+	Actors []*AccountAttributesOrganisationIdentificationActor `json:"actors"`
+
 	// address
 	Address []string `json:"address"`
 
@@ -34,16 +37,26 @@ type AccountAttributesOrganisationIdentification struct {
 	// Pattern: ^[A-Z]{2}$
 	Country string `json:"country,omitempty"`
 
-	// name
-	// Max Length: 40
+	// identification
+	// Max Length: 140
 	// Min Length: 1
-	Name string `json:"name,omitempty"`
+	Identification string `json:"identification,omitempty"`
+
+	// identification issuer
+	IdentificationIssuer string `json:"identification_issuer,omitempty"`
+
+	// identification scheme
+	// Max Length: 35
+	// Min Length: 1
+	IdentificationScheme string `json:"identification_scheme,omitempty"`
+
+	// identification scheme code
+	// Max Length: 35
+	// Min Length: 1
+	IdentificationSchemeCode string `json:"identification_scheme_code,omitempty"`
 
 	// registration number
 	RegistrationNumber string `json:"registration_number,omitempty"`
-
-	// representative
-	Representative *AccountAttributesOrganisationIdentificationRepresentative `json:"representative,omitempty"`
 
 	// ISO 3166-1 code used to identify the domicile of the account
 	// Pattern: ^[A-Z]{2}$
@@ -53,20 +66,33 @@ type AccountAttributesOrganisationIdentification struct {
 func AccountAttributesOrganisationIdentificationWithDefaults(defaults client.Defaults) *AccountAttributesOrganisationIdentification {
 	return &AccountAttributesOrganisationIdentification{
 
+		Actors: make([]*AccountAttributesOrganisationIdentificationActor, 0),
+
 		Address: make([]string, 0),
 
 		City: defaults.GetString("AccountAttributesOrganisationIdentification", "city"),
 
 		Country: defaults.GetString("AccountAttributesOrganisationIdentification", "country"),
 
-		Name: defaults.GetString("AccountAttributesOrganisationIdentification", "name"),
+		Identification: defaults.GetString("AccountAttributesOrganisationIdentification", "identification"),
+
+		IdentificationIssuer: defaults.GetString("AccountAttributesOrganisationIdentification", "identification_issuer"),
+
+		IdentificationScheme: defaults.GetString("AccountAttributesOrganisationIdentification", "identification_scheme"),
+
+		IdentificationSchemeCode: defaults.GetString("AccountAttributesOrganisationIdentification", "identification_scheme_code"),
 
 		RegistrationNumber: defaults.GetString("AccountAttributesOrganisationIdentification", "registration_number"),
 
-		Representative: AccountAttributesOrganisationIdentificationRepresentativeWithDefaults(defaults),
-
 		TaxResidency: defaults.GetString("AccountAttributesOrganisationIdentification", "tax_residency"),
 	}
+}
+
+func (m *AccountAttributesOrganisationIdentification) WithActors(actors []*AccountAttributesOrganisationIdentificationActor) *AccountAttributesOrganisationIdentification {
+
+	m.Actors = actors
+
+	return m
 }
 
 func (m *AccountAttributesOrganisationIdentification) WithAddress(address []string) *AccountAttributesOrganisationIdentification {
@@ -90,9 +116,30 @@ func (m *AccountAttributesOrganisationIdentification) WithCountry(country string
 	return m
 }
 
-func (m *AccountAttributesOrganisationIdentification) WithName(name string) *AccountAttributesOrganisationIdentification {
+func (m *AccountAttributesOrganisationIdentification) WithIdentification(identification string) *AccountAttributesOrganisationIdentification {
 
-	m.Name = name
+	m.Identification = identification
+
+	return m
+}
+
+func (m *AccountAttributesOrganisationIdentification) WithIdentificationIssuer(identificationIssuer string) *AccountAttributesOrganisationIdentification {
+
+	m.IdentificationIssuer = identificationIssuer
+
+	return m
+}
+
+func (m *AccountAttributesOrganisationIdentification) WithIdentificationScheme(identificationScheme string) *AccountAttributesOrganisationIdentification {
+
+	m.IdentificationScheme = identificationScheme
+
+	return m
+}
+
+func (m *AccountAttributesOrganisationIdentification) WithIdentificationSchemeCode(identificationSchemeCode string) *AccountAttributesOrganisationIdentification {
+
+	m.IdentificationSchemeCode = identificationSchemeCode
 
 	return m
 }
@@ -101,18 +148,6 @@ func (m *AccountAttributesOrganisationIdentification) WithRegistrationNumber(reg
 
 	m.RegistrationNumber = registrationNumber
 
-	return m
-}
-
-func (m *AccountAttributesOrganisationIdentification) WithRepresentative(representative AccountAttributesOrganisationIdentificationRepresentative) *AccountAttributesOrganisationIdentification {
-
-	m.Representative = &representative
-
-	return m
-}
-
-func (m *AccountAttributesOrganisationIdentification) WithoutRepresentative() *AccountAttributesOrganisationIdentification {
-	m.Representative = nil
 	return m
 }
 
@@ -127,6 +162,10 @@ func (m *AccountAttributesOrganisationIdentification) WithTaxResidency(taxReside
 func (m *AccountAttributesOrganisationIdentification) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateActors(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAddress(formats); err != nil {
 		res = append(res, err)
 	}
@@ -139,11 +178,15 @@ func (m *AccountAttributesOrganisationIdentification) Validate(formats strfmt.Re
 		res = append(res, err)
 	}
 
-	if err := m.validateName(formats); err != nil {
+	if err := m.validateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateRepresentative(formats); err != nil {
+	if err := m.validateIdentificationScheme(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIdentificationSchemeCode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -154,6 +197,31 @@ func (m *AccountAttributesOrganisationIdentification) Validate(formats strfmt.Re
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AccountAttributesOrganisationIdentification) validateActors(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Actors) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Actors); i++ {
+		if swag.IsZero(m.Actors[i]) { // not required
+			continue
+		}
+
+		if m.Actors[i] != nil {
+			if err := m.Actors[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("actors" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -208,36 +276,52 @@ func (m *AccountAttributesOrganisationIdentification) validateCountry(formats st
 	return nil
 }
 
-func (m *AccountAttributesOrganisationIdentification) validateName(formats strfmt.Registry) error {
+func (m *AccountAttributesOrganisationIdentification) validateIdentification(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Name) { // not required
+	if swag.IsZero(m.Identification) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("name", "body", string(m.Name), 1); err != nil {
+	if err := validate.MinLength("identification", "body", string(m.Identification), 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("name", "body", string(m.Name), 40); err != nil {
+	if err := validate.MaxLength("identification", "body", string(m.Identification), 140); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *AccountAttributesOrganisationIdentification) validateRepresentative(formats strfmt.Registry) error {
+func (m *AccountAttributesOrganisationIdentification) validateIdentificationScheme(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Representative) { // not required
+	if swag.IsZero(m.IdentificationScheme) { // not required
 		return nil
 	}
 
-	if m.Representative != nil {
-		if err := m.Representative.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("representative")
-			}
-			return err
-		}
+	if err := validate.MinLength("identification_scheme", "body", string(m.IdentificationScheme), 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("identification_scheme", "body", string(m.IdentificationScheme), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributesOrganisationIdentification) validateIdentificationSchemeCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.IdentificationSchemeCode) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 35); err != nil {
+		return err
 	}
 
 	return nil
@@ -274,133 +358,6 @@ func (m *AccountAttributesOrganisationIdentification) UnmarshalBinary(b []byte) 
 	return nil
 }
 func (m *AccountAttributesOrganisationIdentification) Json() string {
-	json, err := json.MarshalIndent(m, "  ", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(json)
-}
-
-// AccountAttributesOrganisationIdentificationRepresentative account attributes organisation identification representative
-// swagger:model AccountAttributesOrganisationIdentificationRepresentative
-type AccountAttributesOrganisationIdentificationRepresentative struct {
-
-	// birth date
-	// Format: date
-	BirthDate *strfmt.Date `json:"birth_date,omitempty"`
-
-	// name
-	// Max Length: 40
-	// Min Length: 1
-	Name string `json:"name,omitempty"`
-
-	// residency
-	Residency string `json:"residency,omitempty"`
-}
-
-func AccountAttributesOrganisationIdentificationRepresentativeWithDefaults(defaults client.Defaults) *AccountAttributesOrganisationIdentificationRepresentative {
-	return &AccountAttributesOrganisationIdentificationRepresentative{
-
-		BirthDate: defaults.GetStrfmtDatePtr("AccountAttributesOrganisationIdentificationRepresentative", "birth_date"),
-
-		Name: defaults.GetString("AccountAttributesOrganisationIdentificationRepresentative", "name"),
-
-		Residency: defaults.GetString("AccountAttributesOrganisationIdentificationRepresentative", "residency"),
-	}
-}
-
-func (m *AccountAttributesOrganisationIdentificationRepresentative) WithBirthDate(birthDate strfmt.Date) *AccountAttributesOrganisationIdentificationRepresentative {
-
-	m.BirthDate = &birthDate
-
-	return m
-}
-
-func (m *AccountAttributesOrganisationIdentificationRepresentative) WithoutBirthDate() *AccountAttributesOrganisationIdentificationRepresentative {
-	m.BirthDate = nil
-	return m
-}
-
-func (m *AccountAttributesOrganisationIdentificationRepresentative) WithName(name string) *AccountAttributesOrganisationIdentificationRepresentative {
-
-	m.Name = name
-
-	return m
-}
-
-func (m *AccountAttributesOrganisationIdentificationRepresentative) WithResidency(residency string) *AccountAttributesOrganisationIdentificationRepresentative {
-
-	m.Residency = residency
-
-	return m
-}
-
-// Validate validates this account attributes organisation identification representative
-func (m *AccountAttributesOrganisationIdentificationRepresentative) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateBirthDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AccountAttributesOrganisationIdentificationRepresentative) validateBirthDate(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.BirthDate) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("representative"+"."+"birth_date", "body", "date", m.BirthDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *AccountAttributesOrganisationIdentificationRepresentative) validateName(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Name) { // not required
-		return nil
-	}
-
-	if err := validate.MinLength("representative"+"."+"name", "body", string(m.Name), 1); err != nil {
-		return err
-	}
-
-	if err := validate.MaxLength("representative"+"."+"name", "body", string(m.Name), 40); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *AccountAttributesOrganisationIdentificationRepresentative) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *AccountAttributesOrganisationIdentificationRepresentative) UnmarshalBinary(b []byte) error {
-	var res AccountAttributesOrganisationIdentificationRepresentative
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-func (m *AccountAttributesOrganisationIdentificationRepresentative) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
