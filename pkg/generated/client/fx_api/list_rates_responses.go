@@ -39,6 +39,13 @@ func (o *ListRatesReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 
+	case 403:
+		result := NewListRatesForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 502:
 		result := NewListRatesBadGateway()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -47,7 +54,14 @@ func (o *ListRatesReader) ReadResponse(response runtime.ClientResponse, consumer
 		return nil, result
 
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewListRatesDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -92,7 +106,7 @@ func NewListRatesBadRequest() *ListRatesBadRequest {
 
 /*ListRatesBadRequest handles this case with default header values.
 
-FX rates bad request
+Bad Request
 */
 type ListRatesBadRequest struct {
 
@@ -119,6 +133,40 @@ func (o *ListRatesBadRequest) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
+// NewListRatesForbidden creates a ListRatesForbidden with default headers values
+func NewListRatesForbidden() *ListRatesForbidden {
+	return &ListRatesForbidden{}
+}
+
+/*ListRatesForbidden handles this case with default header values.
+
+Action Forbidden
+*/
+type ListRatesForbidden struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ListRatesForbidden) Error() string {
+	return fmt.Sprintf("[GET /fx/rates][%d] listRatesForbidden", 403)
+}
+
+func (o *ListRatesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewListRatesBadGateway creates a ListRatesBadGateway with default headers values
 func NewListRatesBadGateway() *ListRatesBadGateway {
 	return &ListRatesBadGateway{}
@@ -126,7 +174,7 @@ func NewListRatesBadGateway() *ListRatesBadGateway {
 
 /*ListRatesBadGateway handles this case with default header values.
 
-FX rates gateway issue
+Bad Gateway
 */
 type ListRatesBadGateway struct {
 
@@ -141,6 +189,48 @@ func (o *ListRatesBadGateway) Error() string {
 }
 
 func (o *ListRatesBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListRatesDefault creates a ListRatesDefault with default headers values
+func NewListRatesDefault(code int) *ListRatesDefault {
+	return &ListRatesDefault{
+		_statusCode: code,
+	}
+}
+
+/*ListRatesDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type ListRatesDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the list rates default response
+func (o *ListRatesDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ListRatesDefault) Error() string {
+	return fmt.Sprintf("[GET /fx/rates][%d] ListRates default", o._statusCode)
+}
+
+func (o *ListRatesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

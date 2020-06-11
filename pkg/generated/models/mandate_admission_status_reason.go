@@ -35,6 +35,12 @@ const (
 
 	// MandateAdmissionStatusReasonMandateCancelled captures enum value "mandate_cancelled"
 	MandateAdmissionStatusReasonMandateCancelled MandateAdmissionStatusReason = "mandate_cancelled"
+
+	// MandateAdmissionStatusReasonMandateExpired captures enum value "mandate_expired"
+	MandateAdmissionStatusReasonMandateExpired MandateAdmissionStatusReason = "mandate_expired"
+
+	// MandateAdmissionStatusReasonMandateFailed captures enum value "mandate_failed"
+	MandateAdmissionStatusReasonMandateFailed MandateAdmissionStatusReason = "mandate_failed"
 )
 
 // for schema
@@ -42,7 +48,7 @@ var mandateAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []MandateAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","mandate_cancelled"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","mandate_cancelled","mandate_expired","mandate_failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

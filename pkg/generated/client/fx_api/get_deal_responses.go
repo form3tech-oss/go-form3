@@ -46,8 +46,29 @@ func (o *GetDealReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetDealNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 502:
+		result := NewGetDealBadGateway()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetDealDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -92,7 +113,7 @@ func NewGetDealBadRequest() *GetDealBadRequest {
 
 /*GetDealBadRequest handles this case with default header values.
 
-bad request
+Bad Request
 */
 type GetDealBadRequest struct {
 
@@ -126,7 +147,7 @@ func NewGetDealForbidden() *GetDealForbidden {
 
 /*GetDealForbidden handles this case with default header values.
 
-forbidden
+Action Forbidden
 */
 type GetDealForbidden struct {
 
@@ -141,6 +162,116 @@ func (o *GetDealForbidden) Error() string {
 }
 
 func (o *GetDealForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDealNotFound creates a GetDealNotFound with default headers values
+func NewGetDealNotFound() *GetDealNotFound {
+	return &GetDealNotFound{}
+}
+
+/*GetDealNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetDealNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetDealNotFound) Error() string {
+	return fmt.Sprintf("[GET /fx/deals/{fx_deal_id}][%d] getDealNotFound", 404)
+}
+
+func (o *GetDealNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDealBadGateway creates a GetDealBadGateway with default headers values
+func NewGetDealBadGateway() *GetDealBadGateway {
+	return &GetDealBadGateway{}
+}
+
+/*GetDealBadGateway handles this case with default header values.
+
+Bad Gateway
+*/
+type GetDealBadGateway struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetDealBadGateway) Error() string {
+	return fmt.Sprintf("[GET /fx/deals/{fx_deal_id}][%d] getDealBadGateway", 502)
+}
+
+func (o *GetDealBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDealDefault creates a GetDealDefault with default headers values
+func NewGetDealDefault(code int) *GetDealDefault {
+	return &GetDealDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetDealDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type GetDealDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the get deal default response
+func (o *GetDealDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetDealDefault) Error() string {
+	return fmt.Sprintf("[GET /fx/deals/{fx_deal_id}][%d] GetDeal default", o._statusCode)
+}
+
+func (o *GetDealDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

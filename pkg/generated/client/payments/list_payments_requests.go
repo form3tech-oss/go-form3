@@ -53,6 +53,8 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 
 		FilterReference: c.Defaults.GetStringPtr("ListPayments", "filter[reference]"),
 
+		FilterRelationships: make([]string, 0),
+
 		FilterSchemeTransactionID: c.Defaults.GetStringPtr("ListPayments", "filter[scheme_transaction_id]"),
 
 		FilterSubmissionSchemeStatusCode: c.Defaults.GetStringPtr("ListPayments", "filter[submission.scheme_status_code]"),
@@ -141,6 +143,10 @@ type ListPaymentsRequest struct {
 	/*FilterReference*/
 
 	FilterReference *string
+
+	/*FilterRelationships      Filter for payments containing all of the requested relationships      */
+
+	FilterRelationships []string
 
 	/*FilterSchemeTransactionID*/
 
@@ -407,6 +413,20 @@ func (o *ListPaymentsRequest) WithFilterReference(filterReference string) *ListP
 func (o *ListPaymentsRequest) WithoutFilterReference() *ListPaymentsRequest {
 
 	o.FilterReference = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterRelationships(filterRelationships []string) *ListPaymentsRequest {
+
+	o.FilterRelationships = filterRelationships
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterRelationships() *ListPaymentsRequest {
+
+	o.FilterRelationships = nil
 
 	return o
 }
@@ -793,6 +813,14 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 			}
 		}
 
+	}
+
+	valuesFilterRelationships := o.FilterRelationships
+
+	joinedFilterRelationships := swag.JoinByFormat(valuesFilterRelationships, "csv")
+	// query array param filter[relationships]
+	if err := r.SetQueryParam("filter[relationships]", joinedFilterRelationships...); err != nil {
+		return err
 	}
 
 	if o.FilterSchemeTransactionID != nil {

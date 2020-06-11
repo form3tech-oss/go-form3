@@ -22,7 +22,8 @@ import (
 type Party struct {
 
 	// attributes
-	Attributes *PartyAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *PartyAttributes `json:"attributes"`
 
 	// created on
 	// Format: datetime
@@ -50,7 +51,8 @@ type Party struct {
 	Type string `json:"type,omitempty"`
 
 	// version
-	Version float64 `json:"version,omitempty"`
+	// Minimum: 0
+	Version *int64 `json:"version,omitempty"`
 }
 
 func PartyWithDefaults(defaults client.Defaults) *Party {
@@ -70,7 +72,7 @@ func PartyWithDefaults(defaults client.Defaults) *Party {
 
 		Type: defaults.GetString("Party", "type"),
 
-		Version: defaults.GetFloat64("Party", "version"),
+		Version: defaults.GetInt64Ptr("Party", "version"),
 	}
 }
 
@@ -143,10 +145,15 @@ func (m *Party) WithType(typeVar string) *Party {
 	return m
 }
 
-func (m *Party) WithVersion(version float64) *Party {
+func (m *Party) WithVersion(version int64) *Party {
 
-	m.Version = version
+	m.Version = &version
 
+	return m
+}
+
+func (m *Party) WithoutVersion() *Party {
+	m.Version = nil
 	return m
 }
 
@@ -182,6 +189,10 @@ func (m *Party) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -190,8 +201,8 @@ func (m *Party) Validate(formats strfmt.Registry) error {
 
 func (m *Party) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -310,6 +321,19 @@ func (m *Party) validateType(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Party) validateVersion(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Version) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {
 		return err
 	}
 

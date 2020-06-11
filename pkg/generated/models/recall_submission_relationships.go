@@ -20,6 +20,9 @@ import (
 // swagger:model RecallSubmissionRelationships
 type RecallSubmissionRelationships struct {
 
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
+
 	// recall
 	Recall *RelationshipRecalls `json:"recall,omitempty"`
 }
@@ -27,8 +30,22 @@ type RecallSubmissionRelationships struct {
 func RecallSubmissionRelationshipsWithDefaults(defaults client.Defaults) *RecallSubmissionRelationships {
 	return &RecallSubmissionRelationships{
 
+		Payment: RelationshipPaymentsWithDefaults(defaults),
+
 		Recall: RelationshipRecallsWithDefaults(defaults),
 	}
+}
+
+func (m *RecallSubmissionRelationships) WithPayment(payment RelationshipPayments) *RecallSubmissionRelationships {
+
+	m.Payment = &payment
+
+	return m
+}
+
+func (m *RecallSubmissionRelationships) WithoutPayment() *RecallSubmissionRelationships {
+	m.Payment = nil
+	return m
 }
 
 func (m *RecallSubmissionRelationships) WithRecall(recall RelationshipRecalls) *RecallSubmissionRelationships {
@@ -47,6 +64,10 @@ func (m *RecallSubmissionRelationships) WithoutRecall() *RecallSubmissionRelatio
 func (m *RecallSubmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePayment(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRecall(formats); err != nil {
 		res = append(res, err)
 	}
@@ -54,6 +75,24 @@ func (m *RecallSubmissionRelationships) Validate(formats strfmt.Registry) error 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RecallSubmissionRelationships) validatePayment(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Payment) { // not required
+		return nil
+	}
+
+	if m.Payment != nil {
+		if err := m.Payment.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("payment")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

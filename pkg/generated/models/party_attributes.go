@@ -34,11 +34,8 @@ type PartyAttributes struct {
 	// country
 	Country string `json:"country,omitempty"`
 
-	// country subdivision
-	CountrySubdivision string `json:"country_subdivision,omitempty"`
-
-	// districtname
-	Districtname string `json:"districtname,omitempty"`
+	// district
+	District string `json:"district,omitempty"`
 
 	// email address
 	EmailAddress string `json:"email_address,omitempty"`
@@ -54,11 +51,14 @@ type PartyAttributes struct {
 	Name []string `json:"name"`
 
 	// party type
-	// Enum: [company]
+	// Enum: [organisation]
 	PartyType string `json:"party_type,omitempty"`
 
-	// postcode
-	Postcode string `json:"postcode,omitempty"`
+	// post code
+	PostCode string `json:"post_code,omitempty"`
+
+	// province
+	Province string `json:"province,omitempty"`
 
 	// telephone number
 	TelephoneNumber string `json:"telephone_number,omitempty"`
@@ -75,9 +75,7 @@ func PartyAttributesWithDefaults(defaults client.Defaults) *PartyAttributes {
 
 		Country: defaults.GetString("PartyAttributes", "country"),
 
-		CountrySubdivision: defaults.GetString("PartyAttributes", "country_subdivision"),
-
-		Districtname: defaults.GetString("PartyAttributes", "districtname"),
+		District: defaults.GetString("PartyAttributes", "district"),
 
 		EmailAddress: defaults.GetString("PartyAttributes", "email_address"),
 
@@ -89,7 +87,9 @@ func PartyAttributesWithDefaults(defaults client.Defaults) *PartyAttributes {
 
 		PartyType: defaults.GetString("PartyAttributes", "party_type"),
 
-		Postcode: defaults.GetString("PartyAttributes", "postcode"),
+		PostCode: defaults.GetString("PartyAttributes", "post_code"),
+
+		Province: defaults.GetString("PartyAttributes", "province"),
 
 		TelephoneNumber: defaults.GetString("PartyAttributes", "telephone_number"),
 	}
@@ -123,16 +123,9 @@ func (m *PartyAttributes) WithCountry(country string) *PartyAttributes {
 	return m
 }
 
-func (m *PartyAttributes) WithCountrySubdivision(countrySubdivision string) *PartyAttributes {
+func (m *PartyAttributes) WithDistrict(district string) *PartyAttributes {
 
-	m.CountrySubdivision = countrySubdivision
-
-	return m
-}
-
-func (m *PartyAttributes) WithDistrictname(districtname string) *PartyAttributes {
-
-	m.Districtname = districtname
+	m.District = district
 
 	return m
 }
@@ -172,9 +165,16 @@ func (m *PartyAttributes) WithPartyType(partyType string) *PartyAttributes {
 	return m
 }
 
-func (m *PartyAttributes) WithPostcode(postcode string) *PartyAttributes {
+func (m *PartyAttributes) WithPostCode(postCode string) *PartyAttributes {
 
-	m.Postcode = postcode
+	m.PostCode = postCode
+
+	return m
+}
+
+func (m *PartyAttributes) WithProvince(province string) *PartyAttributes {
+
+	m.Province = province
 
 	return m
 }
@@ -292,7 +292,7 @@ var partyAttributesTypePartyTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["company"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["organisation"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -302,8 +302,8 @@ func init() {
 
 const (
 
-	// PartyAttributesPartyTypeCompany captures enum value "company"
-	PartyAttributesPartyTypeCompany string = "company"
+	// PartyAttributesPartyTypeOrganisation captures enum value "organisation"
+	PartyAttributesPartyTypeOrganisation string = "organisation"
 )
 
 // prop value enum

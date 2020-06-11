@@ -22,34 +22,46 @@ import (
 type DebtorPartyAccount struct {
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// type
+	// Required: true
 	// Enum: [contact_accounts]
-	Type string `json:"type,omitempty"`
+	Type *string `json:"type"`
 }
 
 func DebtorPartyAccountWithDefaults(defaults client.Defaults) *DebtorPartyAccount {
 	return &DebtorPartyAccount{
 
-		ID: defaults.GetStrfmtUUID("DebtorPartyAccount", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DebtorPartyAccount", "id"),
 
-		Type: defaults.GetString("DebtorPartyAccount", "type"),
+		Type: defaults.GetStringPtr("DebtorPartyAccount", "type"),
 	}
 }
 
 func (m *DebtorPartyAccount) WithID(id strfmt.UUID) *DebtorPartyAccount {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *DebtorPartyAccount) WithoutID() *DebtorPartyAccount {
+	m.ID = nil
 	return m
 }
 
 func (m *DebtorPartyAccount) WithType(typeVar string) *DebtorPartyAccount {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *DebtorPartyAccount) WithoutType() *DebtorPartyAccount {
+	m.Type = nil
 	return m
 }
 
@@ -73,8 +85,8 @@ func (m *DebtorPartyAccount) Validate(formats strfmt.Registry) error {
 
 func (m *DebtorPartyAccount) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -112,12 +124,12 @@ func (m *DebtorPartyAccount) validateTypeEnum(path, location string, value strin
 
 func (m *DebtorPartyAccount) validateType(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Type) { // not required
-		return nil
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

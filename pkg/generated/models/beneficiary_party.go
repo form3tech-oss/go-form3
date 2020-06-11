@@ -22,34 +22,46 @@ import (
 type BeneficiaryParty struct {
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// type
+	// Required: true
 	// Enum: [parties]
-	Type string `json:"type,omitempty"`
+	Type *string `json:"type"`
 }
 
 func BeneficiaryPartyWithDefaults(defaults client.Defaults) *BeneficiaryParty {
 	return &BeneficiaryParty{
 
-		ID: defaults.GetStrfmtUUID("BeneficiaryParty", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("BeneficiaryParty", "id"),
 
-		Type: defaults.GetString("BeneficiaryParty", "type"),
+		Type: defaults.GetStringPtr("BeneficiaryParty", "type"),
 	}
 }
 
 func (m *BeneficiaryParty) WithID(id strfmt.UUID) *BeneficiaryParty {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *BeneficiaryParty) WithoutID() *BeneficiaryParty {
+	m.ID = nil
 	return m
 }
 
 func (m *BeneficiaryParty) WithType(typeVar string) *BeneficiaryParty {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *BeneficiaryParty) WithoutType() *BeneficiaryParty {
+	m.Type = nil
 	return m
 }
 
@@ -73,8 +85,8 @@ func (m *BeneficiaryParty) Validate(formats strfmt.Registry) error {
 
 func (m *BeneficiaryParty) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -112,12 +124,12 @@ func (m *BeneficiaryParty) validateTypeEnum(path, location string, value string)
 
 func (m *BeneficiaryParty) validateType(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Type) { // not required
-		return nil
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

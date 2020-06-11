@@ -37,6 +37,9 @@ type FXDealSubmissionAttributes struct {
 	// Required: true
 	Status FXDealSubmissionStatus `json:"status"`
 
+	// status code
+	StatusCode FXDealSubmissionStatusCode `json:"status_code,omitempty"`
+
 	// status reason
 	// Required: true
 	StatusReason FXDealSubmissionStatusReason `json:"status_reason"`
@@ -52,6 +55,8 @@ func FXDealSubmissionAttributesWithDefaults(defaults client.Defaults) *FXDealSub
 		// TODO Reference: FXDealSubmissionReference,
 
 		// TODO Status: FXDealSubmissionStatus,
+
+		// TODO StatusCode: FXDealSubmissionStatusCode,
 
 		// TODO StatusReason: FXDealSubmissionStatusReason,
 
@@ -91,6 +96,13 @@ func (m *FXDealSubmissionAttributes) WithStatus(status FXDealSubmissionStatus) *
 	return m
 }
 
+func (m *FXDealSubmissionAttributes) WithStatusCode(statusCode FXDealSubmissionStatusCode) *FXDealSubmissionAttributes {
+
+	m.StatusCode = statusCode
+
+	return m
+}
+
 func (m *FXDealSubmissionAttributes) WithStatusReason(statusReason FXDealSubmissionStatusReason) *FXDealSubmissionAttributes {
 
 	m.StatusReason = statusReason
@@ -115,6 +127,10 @@ func (m *FXDealSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusCode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -175,6 +191,22 @@ func (m *FXDealSubmissionAttributes) validateStatus(formats strfmt.Registry) err
 	if err := m.Status.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("status")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *FXDealSubmissionAttributes) validateStatusCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.StatusCode) { // not required
+		return nil
+	}
+
+	if err := m.StatusCode.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("status_code")
 		}
 		return err
 	}

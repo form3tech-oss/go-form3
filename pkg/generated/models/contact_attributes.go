@@ -31,23 +31,20 @@ type ContactAttributes struct {
 	ContactMethod string `json:"contact_method,omitempty"`
 
 	// contact type
-	// Enum: [company person]
+	// Enum: [organisation private]
 	ContactType string `json:"contact_type,omitempty"`
 
 	// country
 	Country string `json:"country,omitempty"`
 
-	// country subdivision
-	CountrySubdivision string `json:"country_subdivision,omitempty"`
-
-	// districtname
-	Districtname string `json:"districtname,omitempty"`
+	// district
+	District string `json:"district,omitempty"`
 
 	// email address
 	EmailAddress string `json:"email_address,omitempty"`
 
 	// identification
-	Identification []string `json:"identification"`
+	Identification []string `json:"identification,omitempty"`
 
 	// identification type
 	IdentificationType string `json:"identification_type,omitempty"`
@@ -55,8 +52,11 @@ type ContactAttributes struct {
 	// name
 	Name []string `json:"name"`
 
-	// postcode
-	Postcode string `json:"postcode,omitempty"`
+	// post code
+	PostCode string `json:"post_code,omitempty"`
+
+	// province
+	Province string `json:"province,omitempty"`
 
 	// telephone number
 	TelephoneNumber string `json:"telephone_number,omitempty"`
@@ -75,9 +75,7 @@ func ContactAttributesWithDefaults(defaults client.Defaults) *ContactAttributes 
 
 		Country: defaults.GetString("ContactAttributes", "country"),
 
-		CountrySubdivision: defaults.GetString("ContactAttributes", "country_subdivision"),
-
-		Districtname: defaults.GetString("ContactAttributes", "districtname"),
+		District: defaults.GetString("ContactAttributes", "district"),
 
 		EmailAddress: defaults.GetString("ContactAttributes", "email_address"),
 
@@ -87,7 +85,9 @@ func ContactAttributesWithDefaults(defaults client.Defaults) *ContactAttributes 
 
 		Name: make([]string, 0),
 
-		Postcode: defaults.GetString("ContactAttributes", "postcode"),
+		PostCode: defaults.GetString("ContactAttributes", "post_code"),
+
+		Province: defaults.GetString("ContactAttributes", "province"),
 
 		TelephoneNumber: defaults.GetString("ContactAttributes", "telephone_number"),
 	}
@@ -128,16 +128,9 @@ func (m *ContactAttributes) WithCountry(country string) *ContactAttributes {
 	return m
 }
 
-func (m *ContactAttributes) WithCountrySubdivision(countrySubdivision string) *ContactAttributes {
+func (m *ContactAttributes) WithDistrict(district string) *ContactAttributes {
 
-	m.CountrySubdivision = countrySubdivision
-
-	return m
-}
-
-func (m *ContactAttributes) WithDistrictname(districtname string) *ContactAttributes {
-
-	m.Districtname = districtname
+	m.District = district
 
 	return m
 }
@@ -170,9 +163,16 @@ func (m *ContactAttributes) WithName(name []string) *ContactAttributes {
 	return m
 }
 
-func (m *ContactAttributes) WithPostcode(postcode string) *ContactAttributes {
+func (m *ContactAttributes) WithPostCode(postCode string) *ContactAttributes {
 
-	m.Postcode = postcode
+	m.PostCode = postCode
+
+	return m
+}
+
+func (m *ContactAttributes) WithProvince(province string) *ContactAttributes {
+
+	m.Province = province
 
 	return m
 }
@@ -202,7 +202,7 @@ var contactAttributesTypeContactTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["company","person"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["organisation","private"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -212,11 +212,11 @@ func init() {
 
 const (
 
-	// ContactAttributesContactTypeCompany captures enum value "company"
-	ContactAttributesContactTypeCompany string = "company"
+	// ContactAttributesContactTypeOrganisation captures enum value "organisation"
+	ContactAttributesContactTypeOrganisation string = "organisation"
 
-	// ContactAttributesContactTypePerson captures enum value "person"
-	ContactAttributesContactTypePerson string = "person"
+	// ContactAttributesContactTypePrivate captures enum value "private"
+	ContactAttributesContactTypePrivate string = "private"
 )
 
 // prop value enum

@@ -26,12 +26,12 @@ modify-swagger-file: download-swagger
 	yq d -i swagger/form3-swagger-updated.yaml definitions.ReportDetailsResponse.properties.links
 	# Links.properties.Self appears to be a duplicate of Links.properties.self
 	yq d -i swagger/form3-swagger-updated.yaml definitions.Links.properties.Self
+	# remove addressbook/health as codgenerator generates invalid code for it
+	yq d -i swagger/form3-swagger-updated.yaml paths./addressbook/health
 	# Delete anything to do with /participants/[open_banking_id]/open-banking/v3.1/accounts/name-verification
-	yq d -i swagger/form3-swagger-updated.yaml paths./participants/*
-	yq d -i swagger/form3-swagger-updated.yaml responses.OBNameVerification1
-	yq d -i swagger/form3-swagger-updated.yaml parameters.OBNameVerificationRequest1
-	yq d -i swagger/form3-swagger-updated.yaml parameters.Authorization
+	yq d -i swagger/form3-swagger-updated.yaml paths./openbanking/accounts/name-verification
 	yq d -i swagger/form3-swagger-updated.yaml definitions.Meta
+	yq d -i swagger/form3-swagger-updated.yaml responses.OBNameVerification1.schema.properties.Meta
 
 generate-client: modify-swagger-file
 	@rm -rf pkg/generated

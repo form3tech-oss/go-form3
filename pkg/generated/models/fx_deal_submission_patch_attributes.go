@@ -26,6 +26,9 @@ type FxDealSubmissionPatchAttributes struct {
 	// status
 	Status FXDealSubmissionStatus `json:"status,omitempty"`
 
+	// status code
+	StatusCode *string `json:"status_code,omitempty"`
+
 	// status reason
 	StatusReason *string `json:"status_reason,omitempty"`
 }
@@ -36,6 +39,8 @@ func FxDealSubmissionPatchAttributesWithDefaults(defaults client.Defaults) *FxDe
 		ProviderID: defaults.GetStringPtr("FxDealSubmissionPatchAttributes", "provider_id"),
 
 		// TODO Status: FXDealSubmissionStatus,
+
+		StatusCode: defaults.GetStringPtr("FxDealSubmissionPatchAttributes", "status_code"),
 
 		StatusReason: defaults.GetStringPtr("FxDealSubmissionPatchAttributes", "status_reason"),
 	}
@@ -57,6 +62,18 @@ func (m *FxDealSubmissionPatchAttributes) WithStatus(status FXDealSubmissionStat
 
 	m.Status = status
 
+	return m
+}
+
+func (m *FxDealSubmissionPatchAttributes) WithStatusCode(statusCode string) *FxDealSubmissionPatchAttributes {
+
+	m.StatusCode = &statusCode
+
+	return m
+}
+
+func (m *FxDealSubmissionPatchAttributes) WithoutStatusCode() *FxDealSubmissionPatchAttributes {
+	m.StatusCode = nil
 	return m
 }
 

@@ -53,8 +53,22 @@ func (o *ModifyDealSubmissionReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 
+	case 502:
+		result := NewModifyDealSubmissionBadGateway()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewModifyDealSubmissionDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -99,7 +113,7 @@ func NewModifyDealSubmissionBadRequest() *ModifyDealSubmissionBadRequest {
 
 /*ModifyDealSubmissionBadRequest handles this case with default header values.
 
-bad request
+Bad Request
 */
 type ModifyDealSubmissionBadRequest struct {
 
@@ -133,7 +147,7 @@ func NewModifyDealSubmissionForbidden() *ModifyDealSubmissionForbidden {
 
 /*ModifyDealSubmissionForbidden handles this case with default header values.
 
-forbidden
+Action Forbidden
 */
 type ModifyDealSubmissionForbidden struct {
 
@@ -167,7 +181,7 @@ func NewModifyDealSubmissionNotFound() *ModifyDealSubmissionNotFound {
 
 /*ModifyDealSubmissionNotFound handles this case with default header values.
 
-not found
+Not Found
 */
 type ModifyDealSubmissionNotFound struct {
 
@@ -182,6 +196,82 @@ func (o *ModifyDealSubmissionNotFound) Error() string {
 }
 
 func (o *ModifyDealSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyDealSubmissionBadGateway creates a ModifyDealSubmissionBadGateway with default headers values
+func NewModifyDealSubmissionBadGateway() *ModifyDealSubmissionBadGateway {
+	return &ModifyDealSubmissionBadGateway{}
+}
+
+/*ModifyDealSubmissionBadGateway handles this case with default header values.
+
+Bad Gateway
+*/
+type ModifyDealSubmissionBadGateway struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ModifyDealSubmissionBadGateway) Error() string {
+	return fmt.Sprintf("[PATCH /fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}][%d] modifyDealSubmissionBadGateway", 502)
+}
+
+func (o *ModifyDealSubmissionBadGateway) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyDealSubmissionDefault creates a ModifyDealSubmissionDefault with default headers values
+func NewModifyDealSubmissionDefault(code int) *ModifyDealSubmissionDefault {
+	return &ModifyDealSubmissionDefault{
+		_statusCode: code,
+	}
+}
+
+/*ModifyDealSubmissionDefault handles this case with default header values.
+
+Unexpected Error
+*/
+type ModifyDealSubmissionDefault struct {
+	_statusCode int
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// Code gets the status code for the modify deal submission default response
+func (o *ModifyDealSubmissionDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *ModifyDealSubmissionDefault) Error() string {
+	return fmt.Sprintf("[PATCH /fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}][%d] ModifyDealSubmission default", o._statusCode)
+}
+
+func (o *ModifyDealSubmissionDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

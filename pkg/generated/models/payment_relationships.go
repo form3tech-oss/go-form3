@@ -21,6 +21,24 @@ import (
 // swagger:model PaymentRelationships
 type PaymentRelationships struct {
 
+	// beneficiary
+	Beneficiary *PaymentRelationshipsBeneficiary `json:"beneficiary,omitempty"`
+
+	// beneficiary account
+	BeneficiaryAccount *PaymentRelationshipsBeneficiaryAccount `json:"beneficiary_account,omitempty"`
+
+	// debtor
+	Debtor *PaymentRelationshipsDebtor `json:"debtor,omitempty"`
+
+	// debtor account
+	DebtorAccount *PaymentRelationshipsDebtorAccount `json:"debtor_account,omitempty"`
+
+	// direct debit
+	DirectDebit *PaymentRelationshipsDirectDebit `json:"direct_debit,omitempty"`
+
+	// fx deal
+	FxDeal *PaymentRelationshipsFxDeal `json:"fx_deal,omitempty"`
+
 	// payment admission
 	PaymentAdmission *PaymentRelationshipsPaymentAdmission `json:"payment_admission,omitempty"`
 
@@ -43,6 +61,18 @@ type PaymentRelationships struct {
 func PaymentRelationshipsWithDefaults(defaults client.Defaults) *PaymentRelationships {
 	return &PaymentRelationships{
 
+		Beneficiary: PaymentRelationshipsBeneficiaryWithDefaults(defaults),
+
+		BeneficiaryAccount: PaymentRelationshipsBeneficiaryAccountWithDefaults(defaults),
+
+		Debtor: PaymentRelationshipsDebtorWithDefaults(defaults),
+
+		DebtorAccount: PaymentRelationshipsDebtorAccountWithDefaults(defaults),
+
+		DirectDebit: PaymentRelationshipsDirectDebitWithDefaults(defaults),
+
+		FxDeal: PaymentRelationshipsFxDealWithDefaults(defaults),
+
 		PaymentAdmission: PaymentRelationshipsPaymentAdmissionWithDefaults(defaults),
 
 		PaymentAdvice: PaymentRelationshipsPaymentAdviceWithDefaults(defaults),
@@ -55,6 +85,78 @@ func PaymentRelationshipsWithDefaults(defaults client.Defaults) *PaymentRelation
 
 		PaymentSubmission: PaymentRelationshipsPaymentSubmissionWithDefaults(defaults),
 	}
+}
+
+func (m *PaymentRelationships) WithBeneficiary(beneficiary PaymentRelationshipsBeneficiary) *PaymentRelationships {
+
+	m.Beneficiary = &beneficiary
+
+	return m
+}
+
+func (m *PaymentRelationships) WithoutBeneficiary() *PaymentRelationships {
+	m.Beneficiary = nil
+	return m
+}
+
+func (m *PaymentRelationships) WithBeneficiaryAccount(beneficiaryAccount PaymentRelationshipsBeneficiaryAccount) *PaymentRelationships {
+
+	m.BeneficiaryAccount = &beneficiaryAccount
+
+	return m
+}
+
+func (m *PaymentRelationships) WithoutBeneficiaryAccount() *PaymentRelationships {
+	m.BeneficiaryAccount = nil
+	return m
+}
+
+func (m *PaymentRelationships) WithDebtor(debtor PaymentRelationshipsDebtor) *PaymentRelationships {
+
+	m.Debtor = &debtor
+
+	return m
+}
+
+func (m *PaymentRelationships) WithoutDebtor() *PaymentRelationships {
+	m.Debtor = nil
+	return m
+}
+
+func (m *PaymentRelationships) WithDebtorAccount(debtorAccount PaymentRelationshipsDebtorAccount) *PaymentRelationships {
+
+	m.DebtorAccount = &debtorAccount
+
+	return m
+}
+
+func (m *PaymentRelationships) WithoutDebtorAccount() *PaymentRelationships {
+	m.DebtorAccount = nil
+	return m
+}
+
+func (m *PaymentRelationships) WithDirectDebit(directDebit PaymentRelationshipsDirectDebit) *PaymentRelationships {
+
+	m.DirectDebit = &directDebit
+
+	return m
+}
+
+func (m *PaymentRelationships) WithoutDirectDebit() *PaymentRelationships {
+	m.DirectDebit = nil
+	return m
+}
+
+func (m *PaymentRelationships) WithFxDeal(fxDeal PaymentRelationshipsFxDeal) *PaymentRelationships {
+
+	m.FxDeal = &fxDeal
+
+	return m
+}
+
+func (m *PaymentRelationships) WithoutFxDeal() *PaymentRelationships {
+	m.FxDeal = nil
+	return m
 }
 
 func (m *PaymentRelationships) WithPaymentAdmission(paymentAdmission PaymentRelationshipsPaymentAdmission) *PaymentRelationships {
@@ -133,6 +235,30 @@ func (m *PaymentRelationships) WithoutPaymentSubmission() *PaymentRelationships 
 func (m *PaymentRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateBeneficiary(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBeneficiaryAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtor(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDebtorAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDirectDebit(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFxDeal(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePaymentAdmission(formats); err != nil {
 		res = append(res, err)
 	}
@@ -160,6 +286,114 @@ func (m *PaymentRelationships) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PaymentRelationships) validateBeneficiary(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Beneficiary) { // not required
+		return nil
+	}
+
+	if m.Beneficiary != nil {
+		if err := m.Beneficiary.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentRelationships) validateBeneficiaryAccount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BeneficiaryAccount) { // not required
+		return nil
+	}
+
+	if m.BeneficiaryAccount != nil {
+		if err := m.BeneficiaryAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentRelationships) validateDebtor(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Debtor) { // not required
+		return nil
+	}
+
+	if m.Debtor != nil {
+		if err := m.Debtor.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("debtor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentRelationships) validateDebtorAccount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DebtorAccount) { // not required
+		return nil
+	}
+
+	if m.DebtorAccount != nil {
+		if err := m.DebtorAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("debtor_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentRelationships) validateDirectDebit(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DirectDebit) { // not required
+		return nil
+	}
+
+	if m.DirectDebit != nil {
+		if err := m.DirectDebit.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("direct_debit")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentRelationships) validateFxDeal(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FxDeal) { // not required
+		return nil
+	}
+
+	if m.FxDeal != nil {
+		if err := m.FxDeal.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("fx_deal")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -289,6 +523,522 @@ func (m *PaymentRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *PaymentRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentRelationshipsBeneficiary payment relationships beneficiary
+// swagger:model PaymentRelationshipsBeneficiary
+type PaymentRelationshipsBeneficiary struct {
+
+	// Array of beneficiary resources related to the payment
+	Data []*RelationshipData `json:"data"`
+}
+
+func PaymentRelationshipsBeneficiaryWithDefaults(defaults client.Defaults) *PaymentRelationshipsBeneficiary {
+	return &PaymentRelationshipsBeneficiary{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *PaymentRelationshipsBeneficiary) WithData(data []*RelationshipData) *PaymentRelationshipsBeneficiary {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this payment relationships beneficiary
+func (m *PaymentRelationshipsBeneficiary) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentRelationshipsBeneficiary) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("beneficiary" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentRelationshipsBeneficiary) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentRelationshipsBeneficiary) UnmarshalBinary(b []byte) error {
+	var res PaymentRelationshipsBeneficiary
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentRelationshipsBeneficiary) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentRelationshipsBeneficiaryAccount payment relationships beneficiary account
+// swagger:model PaymentRelationshipsBeneficiaryAccount
+type PaymentRelationshipsBeneficiaryAccount struct {
+
+	// Array of beneficiary account resources related to the payment
+	Data []*RelationshipData `json:"data"`
+}
+
+func PaymentRelationshipsBeneficiaryAccountWithDefaults(defaults client.Defaults) *PaymentRelationshipsBeneficiaryAccount {
+	return &PaymentRelationshipsBeneficiaryAccount{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *PaymentRelationshipsBeneficiaryAccount) WithData(data []*RelationshipData) *PaymentRelationshipsBeneficiaryAccount {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this payment relationships beneficiary account
+func (m *PaymentRelationshipsBeneficiaryAccount) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentRelationshipsBeneficiaryAccount) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("beneficiary_account" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentRelationshipsBeneficiaryAccount) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentRelationshipsBeneficiaryAccount) UnmarshalBinary(b []byte) error {
+	var res PaymentRelationshipsBeneficiaryAccount
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentRelationshipsBeneficiaryAccount) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentRelationshipsDebtor payment relationships debtor
+// swagger:model PaymentRelationshipsDebtor
+type PaymentRelationshipsDebtor struct {
+
+	// Array of debtor resources related to the payment
+	Data []*RelationshipData `json:"data"`
+}
+
+func PaymentRelationshipsDebtorWithDefaults(defaults client.Defaults) *PaymentRelationshipsDebtor {
+	return &PaymentRelationshipsDebtor{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *PaymentRelationshipsDebtor) WithData(data []*RelationshipData) *PaymentRelationshipsDebtor {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this payment relationships debtor
+func (m *PaymentRelationshipsDebtor) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentRelationshipsDebtor) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("debtor" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentRelationshipsDebtor) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentRelationshipsDebtor) UnmarshalBinary(b []byte) error {
+	var res PaymentRelationshipsDebtor
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentRelationshipsDebtor) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentRelationshipsDebtorAccount payment relationships debtor account
+// swagger:model PaymentRelationshipsDebtorAccount
+type PaymentRelationshipsDebtorAccount struct {
+
+	// Array of debtor account resources related to the payment
+	Data []*RelationshipData `json:"data"`
+}
+
+func PaymentRelationshipsDebtorAccountWithDefaults(defaults client.Defaults) *PaymentRelationshipsDebtorAccount {
+	return &PaymentRelationshipsDebtorAccount{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *PaymentRelationshipsDebtorAccount) WithData(data []*RelationshipData) *PaymentRelationshipsDebtorAccount {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this payment relationships debtor account
+func (m *PaymentRelationshipsDebtorAccount) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentRelationshipsDebtorAccount) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("debtor_account" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentRelationshipsDebtorAccount) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentRelationshipsDebtorAccount) UnmarshalBinary(b []byte) error {
+	var res PaymentRelationshipsDebtorAccount
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentRelationshipsDebtorAccount) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentRelationshipsDirectDebit payment relationships direct debit
+// swagger:model PaymentRelationshipsDirectDebit
+type PaymentRelationshipsDirectDebit struct {
+
+	// Array of Direct Debit resources related to the payment
+	Data []*RelationshipData `json:"data"`
+}
+
+func PaymentRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *PaymentRelationshipsDirectDebit {
+	return &PaymentRelationshipsDirectDebit{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *PaymentRelationshipsDirectDebit) WithData(data []*RelationshipData) *PaymentRelationshipsDirectDebit {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this payment relationships direct debit
+func (m *PaymentRelationshipsDirectDebit) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentRelationshipsDirectDebit) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("direct_debit" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentRelationshipsDirectDebit) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentRelationshipsDirectDebit) UnmarshalBinary(b []byte) error {
+	var res PaymentRelationshipsDirectDebit
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentRelationshipsDirectDebit) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentRelationshipsFxDeal payment relationships fx deal
+// swagger:model PaymentRelationshipsFxDeal
+type PaymentRelationshipsFxDeal struct {
+
+	// Array of FXDeal resources related to the payment
+	Data []*RelationshipData `json:"data"`
+}
+
+func PaymentRelationshipsFxDealWithDefaults(defaults client.Defaults) *PaymentRelationshipsFxDeal {
+	return &PaymentRelationshipsFxDeal{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *PaymentRelationshipsFxDeal) WithData(data []*RelationshipData) *PaymentRelationshipsFxDeal {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this payment relationships fx deal
+func (m *PaymentRelationshipsFxDeal) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentRelationshipsFxDeal) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("fx_deal" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentRelationshipsFxDeal) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentRelationshipsFxDeal) UnmarshalBinary(b []byte) error {
+	var res PaymentRelationshipsFxDeal
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentRelationshipsFxDeal) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

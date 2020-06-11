@@ -42,23 +42,24 @@ type AccountAttributesPrivateIdentification struct {
 	// Pattern: ^[A-Z]{2}$
 	Country string `json:"country,omitempty"`
 
-	// document number
-	DocumentNumber string `json:"document_number,omitempty"`
-
-	// Customer first name.
-	// Max Length: 40
+	// identification
+	// Max Length: 140
 	// Min Length: 1
-	FirstName string `json:"first_name,omitempty"`
+	Identification string `json:"identification,omitempty"`
 
-	// Customer last name.
-	// Max Length: 40
+	// identification issuer
 	// Min Length: 1
-	LastName string `json:"last_name,omitempty"`
+	IdentificationIssuer string `json:"identification_issuer,omitempty"`
 
-	// Customer title.
-	// Max Length: 40
+	// identification scheme
+	// Max Length: 35
 	// Min Length: 1
-	Title string `json:"title,omitempty"`
+	IdentificationScheme string `json:"identification_scheme,omitempty"`
+
+	// identification scheme code
+	// Max Length: 35
+	// Min Length: 1
+	IdentificationSchemeCode string `json:"identification_scheme_code,omitempty"`
 }
 
 func AccountAttributesPrivateIdentificationWithDefaults(defaults client.Defaults) *AccountAttributesPrivateIdentification {
@@ -74,13 +75,13 @@ func AccountAttributesPrivateIdentificationWithDefaults(defaults client.Defaults
 
 		Country: defaults.GetString("AccountAttributesPrivateIdentification", "country"),
 
-		DocumentNumber: defaults.GetString("AccountAttributesPrivateIdentification", "document_number"),
+		Identification: defaults.GetString("AccountAttributesPrivateIdentification", "identification"),
 
-		FirstName: defaults.GetString("AccountAttributesPrivateIdentification", "first_name"),
+		IdentificationIssuer: defaults.GetString("AccountAttributesPrivateIdentification", "identification_issuer"),
 
-		LastName: defaults.GetString("AccountAttributesPrivateIdentification", "last_name"),
+		IdentificationScheme: defaults.GetString("AccountAttributesPrivateIdentification", "identification_scheme"),
 
-		Title: defaults.GetString("AccountAttributesPrivateIdentification", "title"),
+		IdentificationSchemeCode: defaults.GetString("AccountAttributesPrivateIdentification", "identification_scheme_code"),
 	}
 }
 
@@ -124,30 +125,30 @@ func (m *AccountAttributesPrivateIdentification) WithCountry(country string) *Ac
 	return m
 }
 
-func (m *AccountAttributesPrivateIdentification) WithDocumentNumber(documentNumber string) *AccountAttributesPrivateIdentification {
+func (m *AccountAttributesPrivateIdentification) WithIdentification(identification string) *AccountAttributesPrivateIdentification {
 
-	m.DocumentNumber = documentNumber
-
-	return m
-}
-
-func (m *AccountAttributesPrivateIdentification) WithFirstName(firstName string) *AccountAttributesPrivateIdentification {
-
-	m.FirstName = firstName
+	m.Identification = identification
 
 	return m
 }
 
-func (m *AccountAttributesPrivateIdentification) WithLastName(lastName string) *AccountAttributesPrivateIdentification {
+func (m *AccountAttributesPrivateIdentification) WithIdentificationIssuer(identificationIssuer string) *AccountAttributesPrivateIdentification {
 
-	m.LastName = lastName
+	m.IdentificationIssuer = identificationIssuer
 
 	return m
 }
 
-func (m *AccountAttributesPrivateIdentification) WithTitle(title string) *AccountAttributesPrivateIdentification {
+func (m *AccountAttributesPrivateIdentification) WithIdentificationScheme(identificationScheme string) *AccountAttributesPrivateIdentification {
 
-	m.Title = title
+	m.IdentificationScheme = identificationScheme
+
+	return m
+}
+
+func (m *AccountAttributesPrivateIdentification) WithIdentificationSchemeCode(identificationSchemeCode string) *AccountAttributesPrivateIdentification {
+
+	m.IdentificationSchemeCode = identificationSchemeCode
 
 	return m
 }
@@ -176,15 +177,19 @@ func (m *AccountAttributesPrivateIdentification) Validate(formats strfmt.Registr
 		res = append(res, err)
 	}
 
-	if err := m.validateFirstName(formats); err != nil {
+	if err := m.validateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateLastName(formats); err != nil {
+	if err := m.validateIdentificationIssuer(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTitle(formats); err != nil {
+	if err := m.validateIdentificationScheme(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIdentificationSchemeCode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -271,51 +276,64 @@ func (m *AccountAttributesPrivateIdentification) validateCountry(formats strfmt.
 	return nil
 }
 
-func (m *AccountAttributesPrivateIdentification) validateFirstName(formats strfmt.Registry) error {
+func (m *AccountAttributesPrivateIdentification) validateIdentification(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.FirstName) { // not required
+	if swag.IsZero(m.Identification) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("first_name", "body", string(m.FirstName), 1); err != nil {
+	if err := validate.MinLength("identification", "body", string(m.Identification), 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("first_name", "body", string(m.FirstName), 40); err != nil {
+	if err := validate.MaxLength("identification", "body", string(m.Identification), 140); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *AccountAttributesPrivateIdentification) validateLastName(formats strfmt.Registry) error {
+func (m *AccountAttributesPrivateIdentification) validateIdentificationIssuer(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.LastName) { // not required
+	if swag.IsZero(m.IdentificationIssuer) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("last_name", "body", string(m.LastName), 1); err != nil {
-		return err
-	}
-
-	if err := validate.MaxLength("last_name", "body", string(m.LastName), 40); err != nil {
+	if err := validate.MinLength("identification_issuer", "body", string(m.IdentificationIssuer), 1); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *AccountAttributesPrivateIdentification) validateTitle(formats strfmt.Registry) error {
+func (m *AccountAttributesPrivateIdentification) validateIdentificationScheme(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Title) { // not required
+	if swag.IsZero(m.IdentificationScheme) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("title", "body", string(m.Title), 1); err != nil {
+	if err := validate.MinLength("identification_scheme", "body", string(m.IdentificationScheme), 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("title", "body", string(m.Title), 40); err != nil {
+	if err := validate.MaxLength("identification_scheme", "body", string(m.IdentificationScheme), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributesPrivateIdentification) validateIdentificationSchemeCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.IdentificationSchemeCode) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 35); err != nil {
 		return err
 	}
 

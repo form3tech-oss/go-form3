@@ -16,52 +16,52 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PartyAccountCreationResponse party account creation response
-// swagger:model PartyAccountCreationResponse
-type PartyAccountCreationResponse struct {
+// AccountEventDetailsResponse account event details response
+// swagger:model AccountEventDetailsResponse
+type AccountEventDetailsResponse struct {
 
 	// data
-	Data *PartyAccount `json:"data,omitempty"`
+	Data *AccountEvent `json:"data,omitempty"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
 
-func PartyAccountCreationResponseWithDefaults(defaults client.Defaults) *PartyAccountCreationResponse {
-	return &PartyAccountCreationResponse{
+func AccountEventDetailsResponseWithDefaults(defaults client.Defaults) *AccountEventDetailsResponse {
+	return &AccountEventDetailsResponse{
 
-		Data: PartyAccountWithDefaults(defaults),
+		Data: AccountEventWithDefaults(defaults),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *PartyAccountCreationResponse) WithData(data PartyAccount) *PartyAccountCreationResponse {
+func (m *AccountEventDetailsResponse) WithData(data AccountEvent) *AccountEventDetailsResponse {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *PartyAccountCreationResponse) WithoutData() *PartyAccountCreationResponse {
+func (m *AccountEventDetailsResponse) WithoutData() *AccountEventDetailsResponse {
 	m.Data = nil
 	return m
 }
 
-func (m *PartyAccountCreationResponse) WithLinks(links Links) *PartyAccountCreationResponse {
+func (m *AccountEventDetailsResponse) WithLinks(links Links) *AccountEventDetailsResponse {
 
 	m.Links = &links
 
 	return m
 }
 
-func (m *PartyAccountCreationResponse) WithoutLinks() *PartyAccountCreationResponse {
+func (m *AccountEventDetailsResponse) WithoutLinks() *AccountEventDetailsResponse {
 	m.Links = nil
 	return m
 }
 
-// Validate validates this party account creation response
-func (m *PartyAccountCreationResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this account event details response
+func (m *AccountEventDetailsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -78,7 +78,7 @@ func (m *PartyAccountCreationResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PartyAccountCreationResponse) validateData(formats strfmt.Registry) error {
+func (m *AccountEventDetailsResponse) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -96,7 +96,7 @@ func (m *PartyAccountCreationResponse) validateData(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *PartyAccountCreationResponse) validateLinks(formats strfmt.Registry) error {
+func (m *AccountEventDetailsResponse) validateLinks(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Links) { // not required
 		return nil
@@ -115,7 +115,7 @@ func (m *PartyAccountCreationResponse) validateLinks(formats strfmt.Registry) er
 }
 
 // MarshalBinary interface implementation
-func (m *PartyAccountCreationResponse) MarshalBinary() ([]byte, error) {
+func (m *AccountEventDetailsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -123,15 +123,15 @@ func (m *PartyAccountCreationResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *PartyAccountCreationResponse) UnmarshalBinary(b []byte) error {
-	var res PartyAccountCreationResponse
+func (m *AccountEventDetailsResponse) UnmarshalBinary(b []byte) error {
+	var res AccountEventDetailsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *PartyAccountCreationResponse) Json() string {
+func (m *AccountEventDetailsResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

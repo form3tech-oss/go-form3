@@ -33,11 +33,15 @@ type AccountAttributes struct {
 	// Pattern: ^[A-Z0-9]{0,64}$
 	AccountNumber string `json:"account_number,omitempty"`
 
-	// Alternative account names. Used for Confirmation of Payee matching.
+	// - deprecated - Alternative account names. Used for Confirmation of Payee matching.
 	// Max Items: 3
 	AlternativeBankAccountNames []string `json:"alternative_bank_account_names"`
 
-	// Primary account name. Used for Confirmation of Payee matching. Required if confirmation_of_payee_enabled is true for the organisation.
+	// Alternative names. Used for Confirmation of Payee matching.
+	// Max Items: 3
+	AlternativeNames []string `json:"alternative_names"`
+
+	// - deprecated - Primary account name. Used for Confirmation of Payee matching. Required if confirmation_of_payee_enabled is true for the organisation.
 	// Max Length: 140
 	// Min Length: 1
 	BankAccountName string `json:"bank_account_name,omitempty"`
@@ -79,6 +83,10 @@ type AccountAttributes struct {
 	// Is the account joint?
 	JointAccount *bool `json:"joint_account,omitempty"`
 
+	// Account holder names (for example title, first name, last name). Used for Confirmation of Payee matching.
+	// Max Items: 4
+	Name []string `json:"name"`
+
 	// organisation identification
 	OrganisationIdentification *AccountAttributesOrganisationIdentification `json:"organisation_identification,omitempty"`
 
@@ -114,6 +122,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 
 		AlternativeBankAccountNames: make([]string, 0),
 
+		AlternativeNames: make([]string, 0),
+
 		BankAccountName: defaults.GetString("AccountAttributes", "bank_account_name"),
 
 		BankID: defaults.GetString("AccountAttributes", "bank_id"),
@@ -133,6 +143,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 		Iban: defaults.GetString("AccountAttributes", "iban"),
 
 		JointAccount: defaults.GetBoolPtr("AccountAttributes", "joint_account"),
+
+		Name: make([]string, 0),
 
 		OrganisationIdentification: AccountAttributesOrganisationIdentificationWithDefaults(defaults),
 
@@ -182,6 +194,13 @@ func (m *AccountAttributes) WithAccountNumber(accountNumber string) *AccountAttr
 func (m *AccountAttributes) WithAlternativeBankAccountNames(alternativeBankAccountNames []string) *AccountAttributes {
 
 	m.AlternativeBankAccountNames = alternativeBankAccountNames
+
+	return m
+}
+
+func (m *AccountAttributes) WithAlternativeNames(alternativeNames []string) *AccountAttributes {
+
+	m.AlternativeNames = alternativeNames
 
 	return m
 }
@@ -266,6 +285,13 @@ func (m *AccountAttributes) WithoutJointAccount() *AccountAttributes {
 	return m
 }
 
+func (m *AccountAttributes) WithName(name []string) *AccountAttributes {
+
+	m.Name = name
+
+	return m
+}
+
 func (m *AccountAttributes) WithOrganisationIdentification(organisationIdentification AccountAttributesOrganisationIdentification) *AccountAttributes {
 
 	m.OrganisationIdentification = &organisationIdentification
@@ -339,6 +365,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAlternativeNames(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateBankAccountName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -372,6 +402,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateIban(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -476,6 +510,33 @@ func (m *AccountAttributes) validateAlternativeBankAccountNames(formats strfmt.R
 		}
 
 		if err := validate.MaxLength("alternative_bank_account_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeBankAccountNames[i]), 140); err != nil {
+			return err
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validateAlternativeNames(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AlternativeNames) { // not required
+		return nil
+	}
+
+	iAlternativeNamesSize := int64(len(m.AlternativeNames))
+
+	if err := validate.MaxItems("alternative_names", "body", iAlternativeNamesSize, 3); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.AlternativeNames); i++ {
+
+		if err := validate.MinLength("alternative_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeNames[i]), 1); err != nil {
+			return err
+		}
+
+		if err := validate.MaxLength("alternative_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeNames[i]), 140); err != nil {
 			return err
 		}
 
@@ -604,6 +665,33 @@ func (m *AccountAttributes) validateIban(formats strfmt.Registry) error {
 
 	if err := validate.Pattern("iban", "body", string(m.Iban), `^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$`); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validateName(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	iNameSize := int64(len(m.Name))
+
+	if err := validate.MaxItems("name", "body", iNameSize, 4); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Name); i++ {
+
+		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 1); err != nil {
+			return err
+		}
+
+		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 140); err != nil {
+			return err
+		}
+
 	}
 
 	return nil
