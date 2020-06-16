@@ -64,39 +64,6 @@ func (a *GetAuditEntryRequest) MustDo() *GetAuditEntryOK {
 }
 
 /*
-get audit health API
-*/
-func (a *GetAuditHealthRequest) Do() (*GetAuditHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetAuditHealth",
-		Method:             "GET",
-		PathPattern:        "/audit/entries/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetAuditHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetAuditHealthOK), nil
-
-}
-
-func (a *GetAuditHealthRequest) MustDo() *GetAuditHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list audit entries API
 */
 func (a *ListAuditEntriesRequest) Do() (*ListAuditEntriesOK, error) {

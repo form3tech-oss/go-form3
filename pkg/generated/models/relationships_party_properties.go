@@ -15,6 +15,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // RelationshipsPartyProperties relationships party properties
@@ -23,12 +24,26 @@ type RelationshipsPartyProperties struct {
 
 	// data
 	Data []*Party `json:"data"`
+
+	// The party which initiated this funding request
+	// Required: true
+	// Format: uuid
+	ID *strfmt.UUID `json:"id"`
+
+	// type
+	// Required: true
+	Type PartyResourceType `json:"type"`
 }
 
 func RelationshipsPartyPropertiesWithDefaults(defaults client.Defaults) *RelationshipsPartyProperties {
 	return &RelationshipsPartyProperties{
 
 		Data: make([]*Party, 0),
+
+		ID: defaults.GetStrfmtUUIDPtr("RelationshipsPartyProperties", "id"),
+
+		// TODO Type: PartyResourceType,
+
 	}
 }
 
@@ -39,11 +54,38 @@ func (m *RelationshipsPartyProperties) WithData(data []*Party) *RelationshipsPar
 	return m
 }
 
+func (m *RelationshipsPartyProperties) WithID(id strfmt.UUID) *RelationshipsPartyProperties {
+
+	m.ID = &id
+
+	return m
+}
+
+func (m *RelationshipsPartyProperties) WithoutID() *RelationshipsPartyProperties {
+	m.ID = nil
+	return m
+}
+
+func (m *RelationshipsPartyProperties) WithType(typeVar PartyResourceType) *RelationshipsPartyProperties {
+
+	m.Type = typeVar
+
+	return m
+}
+
 // Validate validates this relationships party properties
 func (m *RelationshipsPartyProperties) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +115,31 @@ func (m *RelationshipsPartyProperties) validateData(formats strfmt.Registry) err
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *RelationshipsPartyProperties) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RelationshipsPartyProperties) validateType(formats strfmt.Registry) error {
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		}
+		return err
 	}
 
 	return nil

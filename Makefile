@@ -33,6 +33,17 @@ modify-swagger-file: download-swagger
 	yq d -i swagger/form3-swagger-updated.yaml definitions.Meta
 	yq d -i swagger/form3-swagger-updated.yaml responses.OBNameVerification1.schema.properties.Meta
 
+	# remove paths that are missing a `response` property
+	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/mandates/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/payments/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./notification/subscriptions/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/directdebits/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./security/users/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./audit/entries/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/claims/health.get
+	yq d -i swagger/form3-swagger-updated.yaml paths./organisation/units/health.get
+
+
 generate-client: modify-swagger-file
 	@rm -rf pkg/generated
 	@mkdir pkg/generated

@@ -130,39 +130,6 @@ func (a *GetSubscriptionRequest) MustDo() *GetSubscriptionOK {
 }
 
 /*
-get subscriptions health API
-*/
-func (a *GetSubscriptionsHealthRequest) Do() (*GetSubscriptionsHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetSubscriptionsHealth",
-		Method:             "GET",
-		PathPattern:        "/notification/subscriptions/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetSubscriptionsHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetSubscriptionsHealthOK), nil
-
-}
-
-func (a *GetSubscriptionsHealthRequest) MustDo() *GetSubscriptionsHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list subscriptions API
 */
 func (a *ListSubscriptionsRequest) Do() (*ListSubscriptionsOK, error) {
