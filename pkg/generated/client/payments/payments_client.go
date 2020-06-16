@@ -1153,39 +1153,6 @@ func (a *GetPaymentSubmissionRequest) MustDo() *GetPaymentSubmissionOK {
 }
 
 /*
-get payments health API
-*/
-func (a *GetPaymentsHealthRequest) Do() (*GetPaymentsHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPaymentsHealth",
-		Method:             "GET",
-		PathPattern:        "/transaction/payments/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetPaymentsHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetPaymentsHealthOK), nil
-
-}
-
-func (a *GetPaymentsHealthRequest) MustDo() *GetPaymentsHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 get positions API
 */
 func (a *GetPositionsRequest) Do() (*GetPositionsOK, error) {

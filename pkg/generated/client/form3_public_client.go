@@ -18,6 +18,7 @@ import (
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/balances"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/claims"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/direct_debits"
+	"github.com/form3tech-oss/go-form3/pkg/generated/client/fundingrequest_api"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/fx_api"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/mandates"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/oauth2"
@@ -89,6 +90,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.Claims = claims.New(transport, formats, defaults)
 
 	cli.DirectDebits = direct_debits.New(transport, formats, defaults)
+
+	cli.FundingrequestAPI = fundingrequest_api.New(transport, formats, defaults)
 
 	cli.FxAPI = fx_api.New(transport, formats, defaults)
 
@@ -170,6 +173,8 @@ type Form3Public struct {
 
 	DirectDebits *direct_debits.Client
 
+	FundingrequestAPI *fundingrequest_api.Client
+
 	FxAPI *fx_api.Client
 
 	Mandates *mandates.Client
@@ -212,6 +217,8 @@ func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
 	c.Claims.SetTransport(transport)
 
 	c.DirectDebits.SetTransport(transport)
+
+	c.FundingrequestAPI.SetTransport(transport)
 
 	c.FxAPI.SetTransport(transport)
 

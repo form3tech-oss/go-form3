@@ -295,39 +295,6 @@ func (a *GetUserAcesRequest) MustDo() *GetUserAcesOK {
 }
 
 /*
-get users health API
-*/
-func (a *GetUsersHealthRequest) Do() (*GetUsersHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUsersHealth",
-		Method:             "GET",
-		PathPattern:        "/security/users/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetUsersHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUsersHealthOK), nil
-
-}
-
-func (a *GetUsersHealthRequest) MustDo() *GetUsersHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list user credentials API
 */
 func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {

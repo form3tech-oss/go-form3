@@ -295,39 +295,6 @@ func (a *GetClaimSubmissionRequest) MustDo() *GetClaimSubmissionOK {
 }
 
 /*
-get claims health API
-*/
-func (a *GetClaimsHealthRequest) Do() (*GetClaimsHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetClaimsHealth",
-		Method:             "GET",
-		PathPattern:        "/transaction/claims/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetClaimsHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetClaimsHealthOK), nil
-
-}
-
-func (a *GetClaimsHealthRequest) MustDo() *GetClaimsHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list claims API
 */
 func (a *ListClaimsRequest) Do() (*ListClaimsOK, error) {

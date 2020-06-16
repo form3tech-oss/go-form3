@@ -262,39 +262,6 @@ func (a *GetDirectDebitAdmissionRequest) MustDo() *GetDirectDebitAdmissionOK {
 }
 
 /*
-get direct debit health API
-*/
-func (a *GetDirectDebitHealthRequest) Do() (*GetDirectDebitHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetDirectDebitHealth",
-		Method:             "GET",
-		PathPattern:        "/transaction/directdebits/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetDirectDebitHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetDirectDebitHealthOK), nil
-
-}
-
-func (a *GetDirectDebitHealthRequest) MustDo() *GetDirectDebitHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 get direct debit return API
 */
 func (a *GetDirectDebitReturnRequest) Do() (*GetDirectDebitReturnOK, error) {

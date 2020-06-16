@@ -328,39 +328,6 @@ func (a *GetMandateSubmissionRequest) MustDo() *GetMandateSubmissionOK {
 }
 
 /*
-get mandates health API
-*/
-func (a *GetMandatesHealthRequest) Do() (*GetMandatesHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetMandatesHealth",
-		Method:             "GET",
-		PathPattern:        "/transaction/mandates/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetMandatesHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetMandatesHealthOK), nil
-
-}
-
-func (a *GetMandatesHealthRequest) MustDo() *GetMandatesHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list mandates API
 */
 func (a *ListMandatesRequest) Do() (*ListMandatesOK, error) {

@@ -15,6 +15,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // RelationshipsContactAccountProperties relationships contact account properties
@@ -23,12 +24,26 @@ type RelationshipsContactAccountProperties struct {
 
 	// data
 	Data []*ContactAccount `json:"data"`
+
+	// The contact account which initiated this funding request
+	// Required: true
+	// Format: uuid
+	ID *strfmt.UUID `json:"id"`
+
+	// type
+	// Required: true
+	Type ContactAccountResourceType `json:"type"`
 }
 
 func RelationshipsContactAccountPropertiesWithDefaults(defaults client.Defaults) *RelationshipsContactAccountProperties {
 	return &RelationshipsContactAccountProperties{
 
 		Data: make([]*ContactAccount, 0),
+
+		ID: defaults.GetStrfmtUUIDPtr("RelationshipsContactAccountProperties", "id"),
+
+		// TODO Type: ContactAccountResourceType,
+
 	}
 }
 
@@ -39,11 +54,38 @@ func (m *RelationshipsContactAccountProperties) WithData(data []*ContactAccount)
 	return m
 }
 
+func (m *RelationshipsContactAccountProperties) WithID(id strfmt.UUID) *RelationshipsContactAccountProperties {
+
+	m.ID = &id
+
+	return m
+}
+
+func (m *RelationshipsContactAccountProperties) WithoutID() *RelationshipsContactAccountProperties {
+	m.ID = nil
+	return m
+}
+
+func (m *RelationshipsContactAccountProperties) WithType(typeVar ContactAccountResourceType) *RelationshipsContactAccountProperties {
+
+	m.Type = typeVar
+
+	return m
+}
+
 // Validate validates this relationships contact account properties
 func (m *RelationshipsContactAccountProperties) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -73,6 +115,31 @@ func (m *RelationshipsContactAccountProperties) validateData(formats strfmt.Regi
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *RelationshipsContactAccountProperties) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RelationshipsContactAccountProperties) validateType(formats strfmt.Registry) error {
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		}
+		return err
 	}
 
 	return nil

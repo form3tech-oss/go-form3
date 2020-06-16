@@ -97,39 +97,6 @@ func (a *GetUnitRequest) MustDo() *GetUnitOK {
 }
 
 /*
-get units health API
-*/
-func (a *GetUnitsHealthRequest) Do() (*GetUnitsHealthOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetUnitsHealth",
-		Method:             "GET",
-		PathPattern:        "/organisation/units/health",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetUnitsHealthReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetUnitsHealthOK), nil
-
-}
-
-func (a *GetUnitsHealthRequest) MustDo() *GetUnitsHealthOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
 list units API
 */
 func (a *ListUnitsRequest) Do() (*ListUnitsOK, error) {
