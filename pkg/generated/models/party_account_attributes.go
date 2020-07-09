@@ -14,11 +14,15 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // PartyAccountAttributes party account attributes
 // swagger:model PartyAccountAttributes
 type PartyAccountAttributes struct {
+
+	// account labels
+	AccountLabels []string `json:"account_labels"`
 
 	// account name
 	AccountName string `json:"account_name,omitempty"`
@@ -40,10 +44,16 @@ type PartyAccountAttributes struct {
 
 	// currency
 	Currency string `json:"currency,omitempty"`
+
+	// IBAN of the account. Will be calculated from other fields if not supplied.
+	// Pattern: ^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$
+	Iban string `json:"iban,omitempty"`
 }
 
 func PartyAccountAttributesWithDefaults(defaults client.Defaults) *PartyAccountAttributes {
 	return &PartyAccountAttributes{
+
+		AccountLabels: make([]string, 0),
 
 		AccountName: defaults.GetString("PartyAccountAttributes", "account_name"),
 
@@ -58,7 +68,16 @@ func PartyAccountAttributesWithDefaults(defaults client.Defaults) *PartyAccountA
 		Country: defaults.GetString("PartyAccountAttributes", "country"),
 
 		Currency: defaults.GetString("PartyAccountAttributes", "currency"),
+
+		Iban: defaults.GetString("PartyAccountAttributes", "iban"),
 	}
+}
+
+func (m *PartyAccountAttributes) WithAccountLabels(accountLabels []string) *PartyAccountAttributes {
+
+	m.AccountLabels = accountLabels
+
+	return m
 }
 
 func (m *PartyAccountAttributes) WithAccountName(accountName string) *PartyAccountAttributes {
@@ -115,11 +134,22 @@ func (m *PartyAccountAttributes) WithCurrency(currency string) *PartyAccountAttr
 	return m
 }
 
+func (m *PartyAccountAttributes) WithIban(iban string) *PartyAccountAttributes {
+
+	m.Iban = iban
+
+	return m
+}
+
 // Validate validates this party account attributes
 func (m *PartyAccountAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAccountWith(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIban(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -142,6 +172,19 @@ func (m *PartyAccountAttributes) validateAccountWith(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *PartyAccountAttributes) validateIban(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Iban) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("iban", "body", string(m.Iban), `^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$`); err != nil {
+		return err
 	}
 
 	return nil

@@ -29,6 +29,9 @@ type Relationships struct {
 	// party
 	Party *RelationshipsPartyProperties `json:"party,omitempty"`
 
+	// party account
+	PartyAccount *RelationshipsPartyAccountProperties `json:"party_account,omitempty"`
+
 	// party product
 	PartyProduct *RelationshipsPartyProductProperties `json:"party_product,omitempty"`
 }
@@ -41,6 +44,8 @@ func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
 		ContactAccount: RelationshipsContactAccountPropertiesWithDefaults(defaults),
 
 		Party: RelationshipsPartyPropertiesWithDefaults(defaults),
+
+		PartyAccount: RelationshipsPartyAccountPropertiesWithDefaults(defaults),
 
 		PartyProduct: RelationshipsPartyProductPropertiesWithDefaults(defaults),
 	}
@@ -82,6 +87,18 @@ func (m *Relationships) WithoutParty() *Relationships {
 	return m
 }
 
+func (m *Relationships) WithPartyAccount(partyAccount RelationshipsPartyAccountProperties) *Relationships {
+
+	m.PartyAccount = &partyAccount
+
+	return m
+}
+
+func (m *Relationships) WithoutPartyAccount() *Relationships {
+	m.PartyAccount = nil
+	return m
+}
+
 func (m *Relationships) WithPartyProduct(partyProduct RelationshipsPartyProductProperties) *Relationships {
 
 	m.PartyProduct = &partyProduct
@@ -107,6 +124,10 @@ func (m *Relationships) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateParty(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePartyAccount(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -166,6 +187,24 @@ func (m *Relationships) validateParty(formats strfmt.Registry) error {
 		if err := m.Party.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("party")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Relationships) validatePartyAccount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PartyAccount) { // not required
+		return nil
+	}
+
+	if m.PartyAccount != nil {
+		if err := m.PartyAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("party_account")
 			}
 			return err
 		}

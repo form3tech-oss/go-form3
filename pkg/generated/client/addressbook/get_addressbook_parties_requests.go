@@ -23,6 +23,12 @@ func (c *Client) GetAddressbookParties() *GetAddressbookPartiesRequest {
 	)
 	return &GetAddressbookPartiesRequest{
 
+		FilterCustomerID: c.Defaults.GetStringPtr("GetAddressbookParties", "filter[customer_id]"),
+
+		FilterPartyProductProduct: c.Defaults.GetStringPtr("GetAddressbookParties", "filter[party_product.product]"),
+
+		FilterPartyProductStatus: c.Defaults.GetStringPtr("GetAddressbookParties", "filter[party_product.status]"),
+
 		PageNumber: c.Defaults.GetStringPtr("GetAddressbookParties", "page[number]"),
 
 		PageSize: &pageSizeDefault,
@@ -35,6 +41,18 @@ func (c *Client) GetAddressbookParties() *GetAddressbookPartiesRequest {
 }
 
 type GetAddressbookPartiesRequest struct {
+
+	/*FilterCustomerID      Filter parties by customer_id value      */
+
+	FilterCustomerID *string
+
+	/*FilterPartyProductProduct      Filter parties by related party products' product      */
+
+	FilterPartyProductProduct *string
+
+	/*FilterPartyProductStatus      Filter parties by related party products' status      */
+
+	FilterPartyProductStatus *string
 
 	/*PageNumber      Which page to select      */
 
@@ -53,6 +71,48 @@ type GetAddressbookPartiesRequest struct {
 }
 
 func (o *GetAddressbookPartiesRequest) FromJson(j string) *GetAddressbookPartiesRequest {
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithFilterCustomerID(filterCustomerID string) *GetAddressbookPartiesRequest {
+
+	o.FilterCustomerID = &filterCustomerID
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithoutFilterCustomerID() *GetAddressbookPartiesRequest {
+
+	o.FilterCustomerID = nil
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithFilterPartyProductProduct(filterPartyProductProduct string) *GetAddressbookPartiesRequest {
+
+	o.FilterPartyProductProduct = &filterPartyProductProduct
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithoutFilterPartyProductProduct() *GetAddressbookPartiesRequest {
+
+	o.FilterPartyProductProduct = nil
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithFilterPartyProductStatus(filterPartyProductStatus string) *GetAddressbookPartiesRequest {
+
+	o.FilterPartyProductStatus = &filterPartyProductStatus
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithoutFilterPartyProductStatus() *GetAddressbookPartiesRequest {
+
+	o.FilterPartyProductStatus = nil
 
 	return o
 }
@@ -105,6 +165,54 @@ func (o *GetAddressbookPartiesRequest) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
+
+	if o.FilterCustomerID != nil {
+
+		// query param filter[customer_id]
+		var qrFilterCustomerID string
+		if o.FilterCustomerID != nil {
+			qrFilterCustomerID = *o.FilterCustomerID
+		}
+		qFilterCustomerID := qrFilterCustomerID
+		if qFilterCustomerID != "" {
+			if err := r.SetQueryParam("filter[customer_id]", qFilterCustomerID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterPartyProductProduct != nil {
+
+		// query param filter[party_product.product]
+		var qrFilterPartyProductProduct string
+		if o.FilterPartyProductProduct != nil {
+			qrFilterPartyProductProduct = *o.FilterPartyProductProduct
+		}
+		qFilterPartyProductProduct := qrFilterPartyProductProduct
+		if qFilterPartyProductProduct != "" {
+			if err := r.SetQueryParam("filter[party_product.product]", qFilterPartyProductProduct); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterPartyProductStatus != nil {
+
+		// query param filter[party_product.status]
+		var qrFilterPartyProductStatus string
+		if o.FilterPartyProductStatus != nil {
+			qrFilterPartyProductStatus = *o.FilterPartyProductStatus
+		}
+		qFilterPartyProductStatus := qrFilterPartyProductStatus
+		if qFilterPartyProductStatus != "" {
+			if err := r.SetQueryParam("filter[party_product.status]", qFilterPartyProductStatus); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	if o.PageNumber != nil {
 
