@@ -21,8 +21,8 @@ type FXSupportedPartyProductType string
 
 const (
 
-	// FXSupportedPartyProductTypeInternationalPaymentsEbury captures enum value "international_payments_ebury"
-	FXSupportedPartyProductTypeInternationalPaymentsEbury FXSupportedPartyProductType = "international_payments_ebury"
+	// FXSupportedPartyProductTypeInternationalServicesEbury captures enum value "international_services_ebury"
+	FXSupportedPartyProductTypeInternationalServicesEbury FXSupportedPartyProductType = "international_services_ebury"
 )
 
 // for schema
@@ -30,7 +30,7 @@ var fXSupportedPartyProductTypeEnum []interface{}
 
 func init() {
 	var res []FXSupportedPartyProductType
-	if err := json.Unmarshal([]byte(`["international_payments_ebury"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["international_services_ebury"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

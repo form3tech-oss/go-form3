@@ -25,6 +25,7 @@ import (
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/organisations"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/participants"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/payments"
+	"github.com/form3tech-oss/go-form3/pkg/generated/client/query_api"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/reports"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/roles"
 	"github.com/form3tech-oss/go-form3/pkg/generated/client/scheme_messages"
@@ -77,7 +78,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli := new(Form3Public)
 	cli.Transport = transport
 
-	cli.ACE = a_c_e.New(transport, formats, defaults)
+	cli.Ace = a_c_e.New(transport, formats, defaults)
 
 	cli.Accounts = accounts.New(transport, formats, defaults)
 
@@ -104,6 +105,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.Participants = participants.New(transport, formats, defaults)
 
 	cli.Payments = payments.New(transport, formats, defaults)
+
+	cli.QueryAPI = query_api.New(transport, formats, defaults)
 
 	cli.Reports = reports.New(transport, formats, defaults)
 
@@ -159,7 +162,7 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // Form3Public is a client for form3 public
 type Form3Public struct {
-	ACE *a_c_e.Client
+	Ace *a_c_e.Client
 
 	Accounts *accounts.Client
 
@@ -187,6 +190,8 @@ type Form3Public struct {
 
 	Payments *payments.Client
 
+	QueryAPI *query_api.Client
+
 	Reports *reports.Client
 
 	Roles *roles.Client
@@ -204,7 +209,7 @@ type Form3Public struct {
 func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
-	c.ACE.SetTransport(transport)
+	c.Ace.SetTransport(transport)
 
 	c.Accounts.SetTransport(transport)
 
@@ -231,6 +236,8 @@ func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
 	c.Participants.SetTransport(transport)
 
 	c.Payments.SetTransport(transport)
+
+	c.QueryAPI.SetTransport(transport)
 
 	c.Reports.SetTransport(transport)
 

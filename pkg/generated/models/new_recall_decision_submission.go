@@ -22,7 +22,7 @@ import (
 type NewRecallDecisionSubmission struct {
 
 	// attributes
-	Attributes interface{} `json:"attributes,omitempty"`
+	Attributes *RecallDecisionSubmissionAttributes `json:"attributes,omitempty"`
 
 	// Unique resource ID
 	// Required: true
@@ -46,7 +46,7 @@ type NewRecallDecisionSubmission struct {
 func NewRecallDecisionSubmissionWithDefaults(defaults client.Defaults) *NewRecallDecisionSubmission {
 	return &NewRecallDecisionSubmission{
 
-		// TODO Attributes: interface{},
+		Attributes: RecallDecisionSubmissionAttributesWithDefaults(defaults),
 
 		ID: defaults.GetStrfmtUUIDPtr("NewRecallDecisionSubmission", "id"),
 
@@ -58,10 +58,15 @@ func NewRecallDecisionSubmissionWithDefaults(defaults client.Defaults) *NewRecal
 	}
 }
 
-func (m *NewRecallDecisionSubmission) WithAttributes(attributes interface{}) *NewRecallDecisionSubmission {
+func (m *NewRecallDecisionSubmission) WithAttributes(attributes RecallDecisionSubmissionAttributes) *NewRecallDecisionSubmission {
 
-	m.Attributes = attributes
+	m.Attributes = &attributes
 
+	return m
+}
+
+func (m *NewRecallDecisionSubmission) WithoutAttributes() *NewRecallDecisionSubmission {
+	m.Attributes = nil
 	return m
 }
 
@@ -112,6 +117,10 @@ func (m *NewRecallDecisionSubmission) WithoutVersion() *NewRecallDecisionSubmiss
 func (m *NewRecallDecisionSubmission) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAttributes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -131,6 +140,24 @@ func (m *NewRecallDecisionSubmission) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *NewRecallDecisionSubmission) validateAttributes(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Attributes) { // not required
+		return nil
+	}
+
+	if m.Attributes != nil {
+		if err := m.Attributes.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

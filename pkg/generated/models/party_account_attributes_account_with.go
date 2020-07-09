@@ -12,7 +12,9 @@ import (
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // PartyAccountAttributesAccountWith party account attributes account with
@@ -27,6 +29,10 @@ type PartyAccountAttributesAccountWith struct {
 
 	// bank name
 	BankName string `json:"bank_name,omitempty"`
+
+	// SWIFT BIC in either 8 or 11 character format
+	// Pattern: ^([A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5})$
+	Bic string `json:"bic,omitempty"`
 }
 
 func PartyAccountAttributesAccountWithWithDefaults(defaults client.Defaults) *PartyAccountAttributesAccountWith {
@@ -37,6 +43,8 @@ func PartyAccountAttributesAccountWithWithDefaults(defaults client.Defaults) *Pa
 		BankIDCode: defaults.GetString("PartyAccountAttributesAccountWith", "bank_id_code"),
 
 		BankName: defaults.GetString("PartyAccountAttributesAccountWith", "bank_name"),
+
+		Bic: defaults.GetString("PartyAccountAttributesAccountWith", "bic"),
 	}
 }
 
@@ -61,8 +69,37 @@ func (m *PartyAccountAttributesAccountWith) WithBankName(bankName string) *Party
 	return m
 }
 
+func (m *PartyAccountAttributesAccountWith) WithBic(bic string) *PartyAccountAttributesAccountWith {
+
+	m.Bic = bic
+
+	return m
+}
+
 // Validate validates this party account attributes account with
 func (m *PartyAccountAttributesAccountWith) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateBic(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PartyAccountAttributesAccountWith) validateBic(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Bic) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("bic", "body", string(m.Bic), `^([A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5})$`); err != nil {
+		return err
+	}
+
 	return nil
 }
 

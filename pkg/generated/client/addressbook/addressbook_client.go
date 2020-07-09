@@ -130,6 +130,72 @@ func (a *GetAddressbookPartiesIDAccountsPartyAccountIDRequest) MustDo() *GetAddr
 }
 
 /*
+get addressbook parties ID actors API
+*/
+func (a *GetAddressbookPartiesIDActorsRequest) Do() (*GetAddressbookPartiesIDActorsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetAddressbookPartiesIDActors",
+		Method:             "GET",
+		PathPattern:        "/addressbook/parties/{id}/actors",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetAddressbookPartiesIDActorsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetAddressbookPartiesIDActorsOK), nil
+
+}
+
+func (a *GetAddressbookPartiesIDActorsRequest) MustDo() *GetAddressbookPartiesIDActorsOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get addressbook parties ID actors party actor ID API
+*/
+func (a *GetAddressbookPartiesIDActorsPartyActorIDRequest) Do() (*GetAddressbookPartiesIDActorsPartyActorIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetAddressbookPartiesIDActorsPartyActorID",
+		Method:             "GET",
+		PathPattern:        "/addressbook/parties/{id}/actors/{party_actor_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetAddressbookPartiesIDActorsPartyActorIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetAddressbookPartiesIDActorsPartyActorIDOK), nil
+
+}
+
+func (a *GetAddressbookPartiesIDActorsPartyActorIDRequest) MustDo() *GetAddressbookPartiesIDActorsPartyActorIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 get addressbook parties ID contacts API
 */
 func (a *GetAddressbookPartiesIDContactsRequest) Do() (*GetAddressbookPartiesIDContactsOK, error) {
@@ -262,6 +328,39 @@ func (a *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest
 }
 
 /*
+patch addressbook parties ID actors party actor ID API
+*/
+func (a *PatchAddressbookPartiesIDActorsPartyActorIDRequest) Do() (*PatchAddressbookPartiesIDActorsPartyActorIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchAddressbookPartiesIDActorsPartyActorID",
+		Method:             "PATCH",
+		PathPattern:        "/addressbook/parties/{id}/actors/{party_actor_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchAddressbookPartiesIDActorsPartyActorIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchAddressbookPartiesIDActorsPartyActorIDOK), nil
+
+}
+
+func (a *PatchAddressbookPartiesIDActorsPartyActorIDRequest) MustDo() *PatchAddressbookPartiesIDActorsPartyActorIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 post addressbook parties API
 */
 func (a *PostAddressbookPartiesRequest) Do() (*PostAddressbookPartiesCreated, error) {
@@ -287,6 +386,39 @@ func (a *PostAddressbookPartiesRequest) Do() (*PostAddressbookPartiesCreated, er
 }
 
 func (a *PostAddressbookPartiesRequest) MustDo() *PostAddressbookPartiesCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+post addressbook parties ID actors API
+*/
+func (a *PostAddressbookPartiesIDActorsRequest) Do() (*PostAddressbookPartiesIDActorsCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostAddressbookPartiesIDActors",
+		Method:             "POST",
+		PathPattern:        "/addressbook/parties/{id}/actors",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PostAddressbookPartiesIDActorsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostAddressbookPartiesIDActorsCreated), nil
+
+}
+
+func (a *PostAddressbookPartiesIDActorsRequest) MustDo() *PostAddressbookPartiesIDActorsCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
