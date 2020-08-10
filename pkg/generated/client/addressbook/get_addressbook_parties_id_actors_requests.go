@@ -23,6 +23,8 @@ func (c *Client) GetAddressbookPartiesIDActors() *GetAddressbookPartiesIDActorsR
 	)
 	return &GetAddressbookPartiesIDActorsRequest{
 
+		FilterCustomerID: c.Defaults.GetStringPtr("GetAddressbookPartiesIDActors", "filter[customer_id]"),
+
 		ID: c.Defaults.GetStrfmtUUID("GetAddressbookPartiesIDActors", "id"),
 
 		PageNumber: c.Defaults.GetStringPtr("GetAddressbookPartiesIDActors", "page[number]"),
@@ -37,6 +39,10 @@ func (c *Client) GetAddressbookPartiesIDActors() *GetAddressbookPartiesIDActorsR
 }
 
 type GetAddressbookPartiesIDActorsRequest struct {
+
+	/*FilterCustomerID      Filter parties by customer_id value      */
+
+	FilterCustomerID *string
 
 	/*ID      Id of party      */
 
@@ -59,6 +65,20 @@ type GetAddressbookPartiesIDActorsRequest struct {
 }
 
 func (o *GetAddressbookPartiesIDActorsRequest) FromJson(j string) *GetAddressbookPartiesIDActorsRequest {
+
+	return o
+}
+
+func (o *GetAddressbookPartiesIDActorsRequest) WithFilterCustomerID(filterCustomerID string) *GetAddressbookPartiesIDActorsRequest {
+
+	o.FilterCustomerID = &filterCustomerID
+
+	return o
+}
+
+func (o *GetAddressbookPartiesIDActorsRequest) WithoutFilterCustomerID() *GetAddressbookPartiesIDActorsRequest {
+
+	o.FilterCustomerID = nil
 
 	return o
 }
@@ -118,6 +138,22 @@ func (o *GetAddressbookPartiesIDActorsRequest) WriteToRequest(r runtime.ClientRe
 		return err
 	}
 	var res []error
+
+	if o.FilterCustomerID != nil {
+
+		// query param filter[customer_id]
+		var qrFilterCustomerID string
+		if o.FilterCustomerID != nil {
+			qrFilterCustomerID = *o.FilterCustomerID
+		}
+		qFilterCustomerID := qrFilterCustomerID
+		if qFilterCustomerID != "" {
+			if err := r.SetQueryParam("filter[customer_id]", qFilterCustomerID); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", o.ID.String()); err != nil {

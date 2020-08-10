@@ -516,8 +516,8 @@ type PartyAttributesOrganisationIdentification struct {
 	// trading name
 	TradingName string `json:"trading_name,omitempty"`
 
-	// trading postcode
-	TradingPostcode string `json:"trading_postcode,omitempty"`
+	// trading post code
+	TradingPostCode string `json:"trading_post_code,omitempty"`
 }
 
 func PartyAttributesOrganisationIdentificationWithDefaults(defaults client.Defaults) *PartyAttributesOrganisationIdentification {
@@ -541,7 +541,7 @@ func PartyAttributesOrganisationIdentificationWithDefaults(defaults client.Defau
 
 		TradingName: defaults.GetString("PartyAttributesOrganisationIdentification", "trading_name"),
 
-		TradingPostcode: defaults.GetString("PartyAttributesOrganisationIdentification", "trading_postcode"),
+		TradingPostCode: defaults.GetString("PartyAttributesOrganisationIdentification", "trading_post_code"),
 	}
 }
 
@@ -608,9 +608,9 @@ func (m *PartyAttributesOrganisationIdentification) WithTradingName(tradingName 
 	return m
 }
 
-func (m *PartyAttributesOrganisationIdentification) WithTradingPostcode(tradingPostcode string) *PartyAttributesOrganisationIdentification {
+func (m *PartyAttributesOrganisationIdentification) WithTradingPostCode(tradingPostCode string) *PartyAttributesOrganisationIdentification {
 
-	m.TradingPostcode = tradingPostcode
+	m.TradingPostCode = tradingPostCode
 
 	return m
 }

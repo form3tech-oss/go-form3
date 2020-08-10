@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PaymentAdmissionStatusReason [Payment admission status reason](http://api-docs.form3.tech/api.html#enumerations-payment-admission-status-reasons)
+// PaymentAdmissionStatusReason [Payment admission status reason](https://api-docs.form3.tech/api.html#enumerations-payment-status-codes-payment-admission-status-reasons)
 // swagger:model PaymentAdmissionStatusReason
 type PaymentAdmissionStatusReason string
 

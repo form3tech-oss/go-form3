@@ -21,7 +21,19 @@ func (c *Client) ListSubscriptions() *ListSubscriptionsRequest {
 	var ()
 	return &ListSubscriptionsRequest{
 
+		FilterCallbackTransport: c.Defaults.GetStringPtr("ListSubscriptions", "filter[callback_transport]"),
+
+		FilterCallbackURISearchTerm: c.Defaults.GetStringPtr("ListSubscriptions", "filter[callback_uri_search_term]"),
+
+		FilterDeactivated: c.Defaults.GetBoolPtr("ListSubscriptions", "filter[deactivated]"),
+
 		FilterEventType: make([]string, 0),
+
+		FilterNotificationFilter: c.Defaults.GetBoolPtr("ListSubscriptions", "filter[notification_filter]"),
+
+		FilterOrganisationID: make([]strfmt.UUID, 0),
+
+		FilterRecordType: make([]string, 0),
 
 		PageNumber: c.Defaults.GetStringPtr("ListSubscriptions", "page[number]"),
 
@@ -36,9 +48,33 @@ func (c *Client) ListSubscriptions() *ListSubscriptionsRequest {
 
 type ListSubscriptionsRequest struct {
 
+	/*FilterCallbackTransport      Filter by callback_transport      */
+
+	FilterCallbackTransport *string
+
+	/*FilterCallbackURISearchTerm      Filter on callback_uri containing a search term      */
+
+	FilterCallbackURISearchTerm *string
+
+	/*FilterDeactivated      Filter by deactivated      */
+
+	FilterDeactivated *bool
+
 	/*FilterEventType      Filter by event type      */
 
 	FilterEventType []string
+
+	/*FilterNotificationFilter      Filter by existence of notification filters      */
+
+	FilterNotificationFilter *bool
+
+	/*FilterOrganisationID      Filter by organisation id      */
+
+	FilterOrganisationID []strfmt.UUID
+
+	/*FilterRecordType      Filter by record type      */
+
+	FilterRecordType []string
 
 	/*PageNumber      Which page to select      */
 
@@ -61,6 +97,48 @@ func (o *ListSubscriptionsRequest) FromJson(j string) *ListSubscriptionsRequest 
 	return o
 }
 
+func (o *ListSubscriptionsRequest) WithFilterCallbackTransport(filterCallbackTransport string) *ListSubscriptionsRequest {
+
+	o.FilterCallbackTransport = &filterCallbackTransport
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithoutFilterCallbackTransport() *ListSubscriptionsRequest {
+
+	o.FilterCallbackTransport = nil
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithFilterCallbackURISearchTerm(filterCallbackURISearchTerm string) *ListSubscriptionsRequest {
+
+	o.FilterCallbackURISearchTerm = &filterCallbackURISearchTerm
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithoutFilterCallbackURISearchTerm() *ListSubscriptionsRequest {
+
+	o.FilterCallbackURISearchTerm = nil
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithFilterDeactivated(filterDeactivated bool) *ListSubscriptionsRequest {
+
+	o.FilterDeactivated = &filterDeactivated
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithoutFilterDeactivated() *ListSubscriptionsRequest {
+
+	o.FilterDeactivated = nil
+
+	return o
+}
+
 func (o *ListSubscriptionsRequest) WithFilterEventType(filterEventType []string) *ListSubscriptionsRequest {
 
 	o.FilterEventType = filterEventType
@@ -71,6 +149,48 @@ func (o *ListSubscriptionsRequest) WithFilterEventType(filterEventType []string)
 func (o *ListSubscriptionsRequest) WithoutFilterEventType() *ListSubscriptionsRequest {
 
 	o.FilterEventType = nil
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithFilterNotificationFilter(filterNotificationFilter bool) *ListSubscriptionsRequest {
+
+	o.FilterNotificationFilter = &filterNotificationFilter
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithoutFilterNotificationFilter() *ListSubscriptionsRequest {
+
+	o.FilterNotificationFilter = nil
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithFilterOrganisationID(filterOrganisationID []strfmt.UUID) *ListSubscriptionsRequest {
+
+	o.FilterOrganisationID = filterOrganisationID
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithoutFilterOrganisationID() *ListSubscriptionsRequest {
+
+	o.FilterOrganisationID = nil
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithFilterRecordType(filterRecordType []string) *ListSubscriptionsRequest {
+
+	o.FilterRecordType = filterRecordType
+
+	return o
+}
+
+func (o *ListSubscriptionsRequest) WithoutFilterRecordType() *ListSubscriptionsRequest {
+
+	o.FilterRecordType = nil
 
 	return o
 }
@@ -124,11 +244,94 @@ func (o *ListSubscriptionsRequest) WriteToRequest(r runtime.ClientRequest, reg s
 	}
 	var res []error
 
+	if o.FilterCallbackTransport != nil {
+
+		// query param filter[callback_transport]
+		var qrFilterCallbackTransport string
+		if o.FilterCallbackTransport != nil {
+			qrFilterCallbackTransport = *o.FilterCallbackTransport
+		}
+		qFilterCallbackTransport := qrFilterCallbackTransport
+		if qFilterCallbackTransport != "" {
+			if err := r.SetQueryParam("filter[callback_transport]", qFilterCallbackTransport); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterCallbackURISearchTerm != nil {
+
+		// query param filter[callback_uri_search_term]
+		var qrFilterCallbackURISearchTerm string
+		if o.FilterCallbackURISearchTerm != nil {
+			qrFilterCallbackURISearchTerm = *o.FilterCallbackURISearchTerm
+		}
+		qFilterCallbackURISearchTerm := qrFilterCallbackURISearchTerm
+		if qFilterCallbackURISearchTerm != "" {
+			if err := r.SetQueryParam("filter[callback_uri_search_term]", qFilterCallbackURISearchTerm); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterDeactivated != nil {
+
+		// query param filter[deactivated]
+		var qrFilterDeactivated bool
+		if o.FilterDeactivated != nil {
+			qrFilterDeactivated = *o.FilterDeactivated
+		}
+		qFilterDeactivated := swag.FormatBool(qrFilterDeactivated)
+		if qFilterDeactivated != "" {
+			if err := r.SetQueryParam("filter[deactivated]", qFilterDeactivated); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	valuesFilterEventType := o.FilterEventType
 
 	joinedFilterEventType := swag.JoinByFormat(valuesFilterEventType, "csv")
 	// query array param filter[event_type]
 	if err := r.SetQueryParam("filter[event_type]", joinedFilterEventType...); err != nil {
+		return err
+	}
+
+	if o.FilterNotificationFilter != nil {
+
+		// query param filter[notification_filter]
+		var qrFilterNotificationFilter bool
+		if o.FilterNotificationFilter != nil {
+			qrFilterNotificationFilter = *o.FilterNotificationFilter
+		}
+		qFilterNotificationFilter := swag.FormatBool(qrFilterNotificationFilter)
+		if qFilterNotificationFilter != "" {
+			if err := r.SetQueryParam("filter[notification_filter]", qFilterNotificationFilter); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	var valuesFilterOrganisationID []string
+	for _, v := range o.FilterOrganisationID {
+		valuesFilterOrganisationID = append(valuesFilterOrganisationID, v.String())
+	}
+
+	joinedFilterOrganisationID := swag.JoinByFormat(valuesFilterOrganisationID, "csv")
+	// query array param filter[organisation_id]
+	if err := r.SetQueryParam("filter[organisation_id]", joinedFilterOrganisationID...); err != nil {
+		return err
+	}
+
+	valuesFilterRecordType := o.FilterRecordType
+
+	joinedFilterRecordType := swag.JoinByFormat(valuesFilterRecordType, "csv")
+	// query array param filter[record_type]
+	if err := r.SetQueryParam("filter[record_type]", joinedFilterRecordType...); err != nil {
 		return err
 	}
 

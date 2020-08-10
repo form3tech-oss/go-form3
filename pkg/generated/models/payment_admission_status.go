@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PaymentAdmissionStatus [Status of the admission](http://api-docs.form3.tech/api.html#enumerations-payment-admission-status)
+// PaymentAdmissionStatus [Status of the admission](https://api-docs.form3.tech/api.html#enumerations-payment-status-codes-admission-status)
 // swagger:model PaymentAdmissionStatus
 type PaymentAdmissionStatus string
 
