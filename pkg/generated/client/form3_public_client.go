@@ -78,7 +78,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli := new(Form3Public)
 	cli.Transport = transport
 
-	cli.Ace = a_c_e.New(transport, formats, defaults)
+	cli.ACE = a_c_e.New(transport, formats, defaults)
 
 	cli.Accounts = accounts.New(transport, formats, defaults)
 
@@ -162,7 +162,7 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // Form3Public is a client for form3 public
 type Form3Public struct {
-	Ace *a_c_e.Client
+	ACE *a_c_e.Client
 
 	Accounts *accounts.Client
 
@@ -209,7 +209,7 @@ type Form3Public struct {
 func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
-	c.Ace.SetTransport(transport)
+	c.ACE.SetTransport(transport)
 
 	c.Accounts.SetTransport(transport)
 
