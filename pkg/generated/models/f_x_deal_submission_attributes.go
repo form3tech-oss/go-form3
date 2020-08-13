@@ -25,9 +25,9 @@ type FXDealSubmissionAttributes struct {
 	// Required: true
 	ProviderID FXDealSubmissionProviderID `json:"provider_id"`
 
-	// purposes coded
+	// purpose coded
 	// Required: true
-	PurposesCoded FXDealSubmissionPurposesCoded `json:"purposes_coded"`
+	PurposeCoded FXDealSubmissionPurposeCoded `json:"purpose_coded"`
 
 	// reference
 	// Required: true
@@ -50,7 +50,7 @@ func FXDealSubmissionAttributesWithDefaults(defaults client.Defaults) *FXDealSub
 
 		// TODO ProviderID: FXDealSubmissionProviderID,
 
-		// TODO PurposesCoded: FXDealSubmissionPurposesCoded,
+		// TODO PurposeCoded: FXDealSubmissionPurposeCoded,
 
 		// TODO Reference: FXDealSubmissionReference,
 
@@ -70,9 +70,9 @@ func (m *FXDealSubmissionAttributes) WithProviderID(providerID FXDealSubmissionP
 	return m
 }
 
-func (m *FXDealSubmissionAttributes) WithPurposesCoded(purposesCoded FXDealSubmissionPurposesCoded) *FXDealSubmissionAttributes {
+func (m *FXDealSubmissionAttributes) WithPurposeCoded(purposeCoded FXDealSubmissionPurposeCoded) *FXDealSubmissionAttributes {
 
-	m.PurposesCoded = purposesCoded
+	m.PurposeCoded = purposeCoded
 
 	return m
 }
@@ -118,7 +118,7 @@ func (m *FXDealSubmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validatePurposesCoded(formats); err != nil {
+	if err := m.validatePurposeCoded(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -156,11 +156,11 @@ func (m *FXDealSubmissionAttributes) validateProviderID(formats strfmt.Registry)
 	return nil
 }
 
-func (m *FXDealSubmissionAttributes) validatePurposesCoded(formats strfmt.Registry) error {
+func (m *FXDealSubmissionAttributes) validatePurposeCoded(formats strfmt.Registry) error {
 
-	if err := m.PurposesCoded.Validate(formats); err != nil {
+	if err := m.PurposeCoded.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("purposes_coded")
+			return ve.ValidateName("purpose_coded")
 		}
 		return err
 	}

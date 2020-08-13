@@ -21,17 +21,17 @@ import (
 type ContactCreation struct {
 
 	// data
-	Data *Contact `json:"data,omitempty"`
+	Data *NewContact `json:"data,omitempty"`
 }
 
 func ContactCreationWithDefaults(defaults client.Defaults) *ContactCreation {
 	return &ContactCreation{
 
-		Data: ContactWithDefaults(defaults),
+		Data: NewContactWithDefaults(defaults),
 	}
 }
 
-func (m *ContactCreation) WithData(data Contact) *ContactCreation {
+func (m *ContactCreation) WithData(data NewContact) *ContactCreation {
 
 	m.Data = &data
 
