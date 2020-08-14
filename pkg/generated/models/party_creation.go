@@ -21,17 +21,17 @@ import (
 type PartyCreation struct {
 
 	// data
-	Data *Party `json:"data,omitempty"`
+	Data *NewParty `json:"data,omitempty"`
 }
 
 func PartyCreationWithDefaults(defaults client.Defaults) *PartyCreation {
 	return &PartyCreation{
 
-		Data: PartyWithDefaults(defaults),
+		Data: NewPartyWithDefaults(defaults),
 	}
 }
 
-func (m *PartyCreation) WithData(data Party) *PartyCreation {
+func (m *PartyCreation) WithData(data NewParty) *PartyCreation {
 
 	m.Data = &data
 

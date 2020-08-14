@@ -12,15 +12,15 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-// FXDealSubmissionPurposesCoded The purpose code of the FX Deal
-// swagger:model FXDealSubmissionPurposesCoded
-type FXDealSubmissionPurposesCoded string
+// FXDealSubmissionPurposeCoded The purpose code of the FX Deal
+// swagger:model FXDealSubmissionPurposeCoded
+type FXDealSubmissionPurposeCoded string
 
-// Validate validates this f x deal submission purposes coded
-func (m FXDealSubmissionPurposesCoded) Validate(formats strfmt.Registry) error {
+// Validate validates this f x deal submission purpose coded
+func (m FXDealSubmissionPurposeCoded) Validate(formats strfmt.Registry) error {
 	return nil
 }
-func (m *FXDealSubmissionPurposesCoded) Json() string {
+func (m *FXDealSubmissionPurposeCoded) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

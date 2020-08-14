@@ -20,9 +20,9 @@ import (
 // swagger:model NewFXDealSubmissionAttributes
 type NewFXDealSubmissionAttributes struct {
 
-	// purposes coded
+	// purpose coded
 	// Required: true
-	PurposesCoded FXDealSubmissionPurposesCoded `json:"purposes_coded"`
+	PurposeCoded FXDealSubmissionPurposeCoded `json:"purpose_coded"`
 
 	// reference
 	Reference *FXDealSubmissionReference `json:"reference,omitempty"`
@@ -31,16 +31,16 @@ type NewFXDealSubmissionAttributes struct {
 func NewFXDealSubmissionAttributesWithDefaults(defaults client.Defaults) *NewFXDealSubmissionAttributes {
 	return &NewFXDealSubmissionAttributes{
 
-		// TODO PurposesCoded: FXDealSubmissionPurposesCoded,
+		// TODO PurposeCoded: FXDealSubmissionPurposeCoded,
 
 		// TODO Reference: FXDealSubmissionReference,
 
 	}
 }
 
-func (m *NewFXDealSubmissionAttributes) WithPurposesCoded(purposesCoded FXDealSubmissionPurposesCoded) *NewFXDealSubmissionAttributes {
+func (m *NewFXDealSubmissionAttributes) WithPurposeCoded(purposeCoded FXDealSubmissionPurposeCoded) *NewFXDealSubmissionAttributes {
 
-	m.PurposesCoded = purposesCoded
+	m.PurposeCoded = purposeCoded
 
 	return m
 }
@@ -61,7 +61,7 @@ func (m *NewFXDealSubmissionAttributes) WithoutReference() *NewFXDealSubmissionA
 func (m *NewFXDealSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validatePurposesCoded(formats); err != nil {
+	if err := m.validatePurposeCoded(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,11 +75,11 @@ func (m *NewFXDealSubmissionAttributes) Validate(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *NewFXDealSubmissionAttributes) validatePurposesCoded(formats strfmt.Registry) error {
+func (m *NewFXDealSubmissionAttributes) validatePurposeCoded(formats strfmt.Registry) error {
 
-	if err := m.PurposesCoded.Validate(formats); err != nil {
+	if err := m.PurposeCoded.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("purposes_coded")
+			return ve.ValidateName("purpose_coded")
 		}
 		return err
 	}

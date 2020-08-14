@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -51,6 +52,9 @@ type PartyProductUpdatedEvent struct {
 	// Required: true
 	RecordType ResourceType `json:"record_type"`
 
+	// status items
+	StatusItems []*PartyProductStatusItem `json:"status_items"`
+
 	// user id
 	UserID string `json:"user_id,omitempty"`
 
@@ -74,6 +78,8 @@ func PartyProductUpdatedEventWithDefaults(defaults client.Defaults) *PartyProduc
 		ProductID: defaults.GetStrfmtUUID("PartyProductUpdatedEvent", "product_id"),
 
 		// TODO RecordType: ResourceType,
+
+		StatusItems: make([]*PartyProductStatusItem, 0),
 
 		UserID: defaults.GetString("PartyProductUpdatedEvent", "user_id"),
 
@@ -145,6 +151,13 @@ func (m *PartyProductUpdatedEvent) WithRecordType(recordType ResourceType) *Part
 	return m
 }
 
+func (m *PartyProductUpdatedEvent) WithStatusItems(statusItems []*PartyProductStatusItem) *PartyProductUpdatedEvent {
+
+	m.StatusItems = statusItems
+
+	return m
+}
+
 func (m *PartyProductUpdatedEvent) WithUserID(userID string) *PartyProductUpdatedEvent {
 
 	m.UserID = userID
@@ -188,6 +201,10 @@ func (m *PartyProductUpdatedEvent) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRecordType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusItems(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -312,6 +329,31 @@ func (m *PartyProductUpdatedEvent) validateRecordType(formats strfmt.Registry) e
 			return ve.ValidateName("record_type")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *PartyProductUpdatedEvent) validateStatusItems(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.StatusItems) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.StatusItems); i++ {
+		if swag.IsZero(m.StatusItems[i]) { // not required
+			continue
+		}
+
+		if m.StatusItems[i] != nil {
+			if err := m.StatusItems[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("status_items" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

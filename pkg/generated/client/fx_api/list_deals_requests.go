@@ -21,6 +21,10 @@ func (c *Client) ListDeals() *ListDealsRequest {
 	var ()
 	return &ListDealsRequest{
 
+		FilterCreatedOnFrom: c.Defaults.GetStrfmtDatePtr("ListDeals", "filter[created_on_from]"),
+
+		FilterCreatedOnTo: c.Defaults.GetStrfmtDatePtr("ListDeals", "filter[created_on_to]"),
+
 		FilterOrganisationID: make([]strfmt.UUID, 0),
 
 		FilterPartyID: c.Defaults.GetStrfmtUUIDPtr("ListDeals", "filter[party_id]"),
@@ -32,6 +36,10 @@ func (c *Client) ListDeals() *ListDealsRequest {
 		FilterSourceAmount: c.Defaults.GetStringPtr("ListDeals", "filter[source.amount]"),
 
 		FilterSourceCurrency: c.Defaults.GetStringPtr("ListDeals", "filter[source.currency]"),
+
+		FilterSubmissionCreatedOnFrom: c.Defaults.GetStrfmtDatePtr("ListDeals", "filter[submission.created_on_from]"),
+
+		FilterSubmissionCreatedOnTo: c.Defaults.GetStrfmtDatePtr("ListDeals", "filter[submission.created_on_to]"),
 
 		FilterSubmissionReference: c.Defaults.GetStringPtr("ListDeals", "filter[submission.reference]"),
 
@@ -56,6 +64,14 @@ func (c *Client) ListDeals() *ListDealsRequest {
 
 type ListDealsRequest struct {
 
+	/*FilterCreatedOnFrom      The created date from which, inclusively, to find FX Deals      */
+
+	FilterCreatedOnFrom *strfmt.Date
+
+	/*FilterCreatedOnTo      The created date until which, inclusively, to find FX Deals      */
+
+	FilterCreatedOnTo *strfmt.Date
+
 	/*FilterOrganisationID      The organisations to filter on      */
 
 	FilterOrganisationID []strfmt.UUID
@@ -79,6 +95,14 @@ type ListDealsRequest struct {
 	/*FilterSourceCurrency      The source currency, for example GBP      */
 
 	FilterSourceCurrency *string
+
+	/*FilterSubmissionCreatedOnFrom      The created date of the submission from which, inclusively, to find FX Deals      */
+
+	FilterSubmissionCreatedOnFrom *strfmt.Date
+
+	/*FilterSubmissionCreatedOnTo      The created date of the submission until which, inclusively, to find FX Deals      */
+
+	FilterSubmissionCreatedOnTo *strfmt.Date
 
 	/*FilterSubmissionReference      Reference of the FX Deal Submission associated to look for      */
 
@@ -117,6 +141,34 @@ type ListDealsRequest struct {
 }
 
 func (o *ListDealsRequest) FromJson(j string) *ListDealsRequest {
+
+	return o
+}
+
+func (o *ListDealsRequest) WithFilterCreatedOnFrom(filterCreatedOnFrom strfmt.Date) *ListDealsRequest {
+
+	o.FilterCreatedOnFrom = &filterCreatedOnFrom
+
+	return o
+}
+
+func (o *ListDealsRequest) WithoutFilterCreatedOnFrom() *ListDealsRequest {
+
+	o.FilterCreatedOnFrom = nil
+
+	return o
+}
+
+func (o *ListDealsRequest) WithFilterCreatedOnTo(filterCreatedOnTo strfmt.Date) *ListDealsRequest {
+
+	o.FilterCreatedOnTo = &filterCreatedOnTo
+
+	return o
+}
+
+func (o *ListDealsRequest) WithoutFilterCreatedOnTo() *ListDealsRequest {
+
+	o.FilterCreatedOnTo = nil
 
 	return o
 }
@@ -201,6 +253,34 @@ func (o *ListDealsRequest) WithFilterSourceCurrency(filterSourceCurrency string)
 func (o *ListDealsRequest) WithoutFilterSourceCurrency() *ListDealsRequest {
 
 	o.FilterSourceCurrency = nil
+
+	return o
+}
+
+func (o *ListDealsRequest) WithFilterSubmissionCreatedOnFrom(filterSubmissionCreatedOnFrom strfmt.Date) *ListDealsRequest {
+
+	o.FilterSubmissionCreatedOnFrom = &filterSubmissionCreatedOnFrom
+
+	return o
+}
+
+func (o *ListDealsRequest) WithoutFilterSubmissionCreatedOnFrom() *ListDealsRequest {
+
+	o.FilterSubmissionCreatedOnFrom = nil
+
+	return o
+}
+
+func (o *ListDealsRequest) WithFilterSubmissionCreatedOnTo(filterSubmissionCreatedOnTo strfmt.Date) *ListDealsRequest {
+
+	o.FilterSubmissionCreatedOnTo = &filterSubmissionCreatedOnTo
+
+	return o
+}
+
+func (o *ListDealsRequest) WithoutFilterSubmissionCreatedOnTo() *ListDealsRequest {
+
+	o.FilterSubmissionCreatedOnTo = nil
 
 	return o
 }
@@ -324,6 +404,38 @@ func (o *ListDealsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 	}
 	var res []error
 
+	if o.FilterCreatedOnFrom != nil {
+
+		// query param filter[created_on_from]
+		var qrFilterCreatedOnFrom strfmt.Date
+		if o.FilterCreatedOnFrom != nil {
+			qrFilterCreatedOnFrom = *o.FilterCreatedOnFrom
+		}
+		qFilterCreatedOnFrom := qrFilterCreatedOnFrom.String()
+		if qFilterCreatedOnFrom != "" {
+			if err := r.SetQueryParam("filter[created_on_from]", qFilterCreatedOnFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterCreatedOnTo != nil {
+
+		// query param filter[created_on_to]
+		var qrFilterCreatedOnTo strfmt.Date
+		if o.FilterCreatedOnTo != nil {
+			qrFilterCreatedOnTo = *o.FilterCreatedOnTo
+		}
+		qFilterCreatedOnTo := qrFilterCreatedOnTo.String()
+		if qFilterCreatedOnTo != "" {
+			if err := r.SetQueryParam("filter[created_on_to]", qFilterCreatedOnTo); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	var valuesFilterOrganisationID []string
 	for _, v := range o.FilterOrganisationID {
 		valuesFilterOrganisationID = append(valuesFilterOrganisationID, v.String())
@@ -409,6 +521,38 @@ func (o *ListDealsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		qFilterSourceCurrency := qrFilterSourceCurrency
 		if qFilterSourceCurrency != "" {
 			if err := r.SetQueryParam("filter[source.currency]", qFilterSourceCurrency); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterSubmissionCreatedOnFrom != nil {
+
+		// query param filter[submission.created_on_from]
+		var qrFilterSubmissionCreatedOnFrom strfmt.Date
+		if o.FilterSubmissionCreatedOnFrom != nil {
+			qrFilterSubmissionCreatedOnFrom = *o.FilterSubmissionCreatedOnFrom
+		}
+		qFilterSubmissionCreatedOnFrom := qrFilterSubmissionCreatedOnFrom.String()
+		if qFilterSubmissionCreatedOnFrom != "" {
+			if err := r.SetQueryParam("filter[submission.created_on_from]", qFilterSubmissionCreatedOnFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterSubmissionCreatedOnTo != nil {
+
+		// query param filter[submission.created_on_to]
+		var qrFilterSubmissionCreatedOnTo strfmt.Date
+		if o.FilterSubmissionCreatedOnTo != nil {
+			qrFilterSubmissionCreatedOnTo = *o.FilterSubmissionCreatedOnTo
+		}
+		qFilterSubmissionCreatedOnTo := qrFilterSubmissionCreatedOnTo.String()
+		if qFilterSubmissionCreatedOnTo != "" {
+			if err := r.SetQueryParam("filter[submission.created_on_to]", qFilterSubmissionCreatedOnTo); err != nil {
 				return err
 			}
 		}
