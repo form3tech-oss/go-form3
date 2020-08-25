@@ -28,13 +28,13 @@ type tokenBasedTransport struct {
 	underlyingTransport http.RoundTripper
 }
 
-type authJsonResponse struct {
+type authJSONResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
-func NewTokenBasedClientConfig(clientId, clientSecret string, hostUrl *url.URL) *TokenBasedClientConfig {
+func NewTokenBasedClientConfig(clientID, clientSecret string, hostUrl *url.URL) *TokenBasedClientConfig {
 	return &TokenBasedClientConfig{
-		clientID:            clientId,
+		clientID:            clientID,
 		clientSecret:        clientSecret,
 		hostURL:             hostUrl,
 		underlyingTransport: http.DefaultTransport,
@@ -61,7 +61,6 @@ func NewTokenBasedHttpClient(config *TokenBasedClientConfig) *http.Client {
 }
 
 func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-
 	if t.token != "" {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
 	}
@@ -77,7 +76,7 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 	}
 
 	res, err := t.underlyingTransport.RoundTrip(req)
-	if res != nil && (res.StatusCode == 401 || res.StatusCode == 403) {
+	if res != nil && (res.StatusCode == http.StatusUnauthorized || res.StatusCode == http.StatusForbidden) {
 		authRequest, err := http.NewRequest("POST", t.config.hostURL.String()+tokenBasedAuthEndpoint, nil)
 		if err != nil {
 			return nil, fmt.Errorf("could not build auth request, error: %v", err)
@@ -90,7 +89,7 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 		}
 		defer authResponse.Body.Close()
 
-		if authResponse.StatusCode != 200 {
+		if authResponse.StatusCode != http.StatusOK {
 			return nil, fmt.Errorf("non 200 status code getting token, status code: %d", authResponse.StatusCode)
 		}
 
@@ -99,7 +98,7 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 			return nil, fmt.Errorf("could not read auth response body, error: %v", err)
 		}
 
-		var authJson authJsonResponse
+		var authJson authJSONResponse
 		err = json.Unmarshal(authBody, &authJson)
 		if err != nil {
 			return nil, fmt.Errorf("could not parse auth json response, error: %v", err)
@@ -119,5 +118,4 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 	}
 
 	return res, err
-
 }
