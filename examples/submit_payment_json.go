@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/form3tech-oss/go-form3/pkg/form3"
 	"github.com/go-openapi/strfmt"
-	"time"
 )
 
 // Demonstrating different ways of creating payment resources
 func main() {
-
-	f3 := form3.New()
+	f3 := form3.NewFromEnv()
 	{
 		fmt.Println("Create using defaults: ")
 
@@ -51,5 +51,4 @@ func main() {
 
 		fmt.Println(p.Json())
 	}
-
 }

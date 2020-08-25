@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/form3tech-oss/go-form3/pkg/form3"
 	"github.com/form3tech-oss/go-form3/pkg/generated/models"
+
+	. "github.com/ahmetb/go-linq"
 )
-import . "github.com/ahmetb/go-linq"
 
 func main() {
-
-	f3 := form3.New()
+	f3 := form3.NewFromEnv()
 
 	payments := f3.Payments.ListPayments().
 		WithFilterAmount("2500.00").
@@ -34,5 +35,4 @@ func main() {
 		}).
 		SelectT(func(p *models.Payment) string { return p.Attributes.Amount }).
 		SumInts()
-
 }

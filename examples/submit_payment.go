@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/form3tech-oss/go-form3/pkg/form3"
 )
 
 func main() {
+	f3 := form3.NewFromEnv()
 
-	f3 := form3.New()
 	p := f3.Payments.CreatePayment()
 	p.Data.WithType("payments")
 	p.Data.Attributes.Reference = "123"
@@ -18,6 +19,7 @@ func main() {
 
 	fmt.Println(err)
 
-	f3.Payments.CreatePaymentSubmission().
+	response := f3.Payments.CreatePaymentSubmission().
 		WithID(*created.Data.ID).MustDo()
+	fmt.Printf("%+v", response)
 }

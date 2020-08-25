@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/form3tech-oss/go-form3/pkg/form3"
 )
 
 func main() {
-
-	f3 := form3.New()
+	f3 := form3.NewFromEnv()
 
 	payment, _ := f3.Payments.GetPayment().
 		WithID("87cb3e94-103f-4b91-8c31-c4bea0ee9cf5").
