@@ -1,1 +1,1 @@
-blank file to exclude examples/* from being included in vendoring
+dummy go.mod to exclude examples/* from being included in vendoring
