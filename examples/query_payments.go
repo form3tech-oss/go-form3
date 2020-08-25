@@ -6,7 +6,7 @@ import (
 	"github.com/form3tech-oss/go-form3/pkg/form3"
 	"github.com/form3tech-oss/go-form3/pkg/generated/models"
 
-	. "github.com/ahmetb/go-linq"
+	. "github.com/ahmetb/go-linq/v3"
 )
 
 func main() {

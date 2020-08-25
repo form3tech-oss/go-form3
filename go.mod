@@ -3,7 +3,6 @@ module github.com/form3tech-oss/go-form3
 go 1.14
 
 require (
-	github.com/ahmetb/go-linq v3.0.0+incompatible
 	github.com/asaskevich/govalidator v0.0.0-20200819183940-29e1ff8eb0bb // indirect
 	github.com/go-openapi/errors v0.19.6
 	github.com/go-openapi/runtime v0.19.20
