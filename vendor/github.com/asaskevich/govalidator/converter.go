@@ -10,7 +10,7 @@ import (
 // ToString convert the input to a string.
 func ToString(obj interface{}) string {
 	res := fmt.Sprintf("%v", obj)
-	return string(res)
+	return res
 }
 
 // ToJSON convert the input to a valid JSON string
@@ -47,11 +47,11 @@ func ToInt(value interface{}) (res int64, err error) {
 				res = 0
 			}
 		} else {
-			err = fmt.Errorf("math: square root of negative number %g", value)
+			err = fmt.Errorf("ToInt: invalid numeric format %g", value)
 			res = 0
 		}
 	default:
-		err = fmt.Errorf("math: square root of negative number %g", value)
+		err = fmt.Errorf("ToInt: unknown interface type %T", value)
 		res = 0
 	}
 

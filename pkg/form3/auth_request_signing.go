@@ -50,7 +50,6 @@ func NewRequestSigningHTTPClient(config *RequestSigningClientConfig) *http.Clien
 }
 
 func (t *requestSigningTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-
 	var headers []string
 	hasher := sha256.New()
 	dt := time.Now().UTC().Format(time.RFC1123)

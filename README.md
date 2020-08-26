@@ -11,7 +11,6 @@ This is ideal for:
 
 [gorun](https://github.com/erning/gorun) and [gore](https://github.com/motemen/gore) are highly recommended for running scripts and interactively developing scripts
 
-
 ## What's included
 
 A simple client with:
@@ -62,9 +61,9 @@ Run `gore -autoimport` then type commands interactively, with completion, histor
 
 ### Scripts
 
-`gorun cmd/sample_scripts/print_organisation_names.go`
+`go run examples/print_organisation_names.go`
 
-See [cmd/sample_scripts](cmd/sample_scripts/) for a small subset of sample scripts
+See [examples](examples/) for a small subset of sample scripts.
 
 ## Updating the Client
 
