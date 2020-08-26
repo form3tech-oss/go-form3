@@ -15,7 +15,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/form3tech-oss/go-form3/pkg/generated/models"
+	models "github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
 )
 
 // Client.CreatePaymentRecallDecisionSubmission creates a new CreatePaymentRecallDecisionSubmissionRequest object
