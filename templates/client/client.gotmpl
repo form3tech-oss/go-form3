@@ -22,8 +22,6 @@ import (
 
   {{ range .DefaultImports }}{{ printf "%q" .}}
   {{ end }}
-  {{ range $key, $value := .Imports }}{{ $key }} {{ printf "%q" $value }}
-  {{ end }}
 )
 
 // New creates a new {{ humanize .Name }} API client.

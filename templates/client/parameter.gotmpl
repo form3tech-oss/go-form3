@@ -16,8 +16,6 @@ import (
 
   {{ range .DefaultImports }}{{ printf "%q" .}}
   {{ end }}
-  {{ range $key, $value := .Imports }}{{ $key }} {{ printf "%q" $value }}
-  {{ end }}
 )
 
 // Client.{{ pascalize .Name }} creates a new {{ pascalize .Name }}Request object
@@ -39,7 +37,7 @@ func (c *Client) {{ pascalize .Name }}() *{{ pascalize .Name }}Request {
         {{ else if .IsArray }}
           {{ pascalize .Name}}: make({{ .GoType }}, 0),
         {{ else if .IsComplexObject }}
-          {{ stripPackage .GoType .Pkg}}: {{ if and (not .IsArray) (not .IsMap) (not .HasDiscriminator) (or .IsNullable  ) }}{{ end }}{{ .GoType }}WithDefaults(c.Defaults),
+          {{ dropPackage .GoType}}: {{ if and (not .IsArray) (not .IsMap) (not .HasDiscriminator) (or .IsNullable  ) }}{{ end }}{{ .GoType }}WithDefaults(c.Defaults),
         {{ else }}
           {{ pascalize .Name}}: c.Defaults.Get{{pascalize .GoType}}{{ if .IsNullable }}Ptr{{ end }}{{ if .IsArray }}Array{{ end }}("{{$.Name}}","{{.Name}}"),
         {{ end }}
@@ -77,7 +75,7 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) FromJson(j string) *{{ 
       		log.Fatal(err)
       	}
 
-        {{ .ReceiverName }}.{{ stripPackage .GoType .Pkg }} = &m
+        {{ .ReceiverName }}.{{ dropPackage .GoType }} = &m
       {{ end }}
   {{ end }}
 
@@ -90,7 +88,7 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) FromJson(j string) *{{ 
     func ({{ $.ReceiverName }} *{{ pascalize $.Name }}Request) With{{ pascalize .ID }}({{ varname .Name  }} {{ if and (not .IsArray) (not .IsMap) (not .HasDiscriminator) (not .IsStream) }}{{ end }}{{ if not .IsFileParam }}{{ .GoType }}{{ else }}runtime.NamedReadCloser{{ end }}) *{{ pascalize $.Name }}Request {
 
           {{ if and (eq "body" .Location) (not .IsStream) }}
-          {{ $.ReceiverName }}.{{ stripPackage .GoType .Pkg }} = &{{ varname .Name }}
+          {{ $.ReceiverName }}.{{ dropPackage .GoType }} = &{{ varname .Name }}
         {{ else if and .IsNullable (not .IsArray)}}
           {{ $.ReceiverName }}.{{ pascalize .ID }} = &{{ varname .Name }}
         {{ else }}
@@ -102,7 +100,7 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) FromJson(j string) *{{ 
     {{if .IsNullable}}
         func ({{ $.ReceiverName }} *{{ pascalize $.Name }}Request) Without{{ pascalize .ID }}() *{{ pascalize $.Name }}Request {
             {{ if eq "body" .Location }}
-                {{ $.ReceiverName }}.{{ stripPackage .GoType .Pkg }} = &{{ .GoType }}{}
+                {{ $.ReceiverName }}.{{ dropPackage .GoType }} = &{{ .GoType }}{}
           {{else}}
                {{ $.ReceiverName }}.{{ pascalize .ID }} = nil
            {{end}}
@@ -218,8 +216,8 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) WriteToRequest(r runtim
 
   {{if .IsBodyParam}}
   // ISBODYPARAM
-    {{ if or .Schema.IsInterface .Schema.IsStream (and .Schema.IsArray .Child) (and .Schema.IsMap .Child) (and .Schema.IsNullable (not .HasDiscriminator)) }} if {{ .ReceiverName }}.{{ stripPackage .GoType .ModelsPackage}} != nil { {{end}}
-    if err := r.SetBodyParam({{ .ReceiverName }}.{{ stripPackage .GoType .ModelsPackage}}); err != nil {
+    {{ if or .Schema.IsInterface .Schema.IsStream (and .Schema.IsArray .Child) (and .Schema.IsMap .Child) (and .Schema.IsNullable (not .HasDiscriminator)) }} if {{ .ReceiverName }}.{{ dropPackage .GoType }} != nil { {{end}}
+    if err := r.SetBodyParam({{ .ReceiverName }}.{{ dropPackage .GoType }}); err != nil {
       return err
     }
   {{ if or .Schema.IsInterface .Schema.IsStream (and .Schema.IsArray .Child) (and .Schema.IsMap .Child) (and .Schema.IsNullable (not .HasDiscriminator)) }} } {{end}}

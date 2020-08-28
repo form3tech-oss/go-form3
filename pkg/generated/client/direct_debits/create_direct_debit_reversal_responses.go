@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
 )
 
 // CreateDirectDebitReversalReader is a Reader for the CreateDirectDebitReversal structure.

@@ -1,18 +1,17 @@
-package form3_test
+package form3
 
 import (
 	"os"
 	"testing"
 
-	"github.com/form3tech-oss/go-form3/pkg/form3"
-	"github.com/form3tech-oss/go-form3/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 )
 
 func TestCreateSubscriptions(t *testing.T) {
-	f3 := form3.NewFromEnv()
+	f3 := NewFromEnv()
 
 	organisationId := strfmt.UUID(uuid.MustParse(os.Getenv("FORM3_ORGANISATION_ID")).String())
 	id := strfmt.UUID(uuid.New().String())

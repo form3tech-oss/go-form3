@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v2/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -21,17 +21,17 @@ import (
 type ProductEventNotification struct {
 
 	// data
-	Data *ProductEventAttributes `json:"data,omitempty"`
+	Data *ProductEvent `json:"data,omitempty"`
 }
 
 func ProductEventNotificationWithDefaults(defaults client.Defaults) *ProductEventNotification {
 	return &ProductEventNotification{
 
-		Data: ProductEventAttributesWithDefaults(defaults),
+		Data: ProductEventWithDefaults(defaults),
 	}
 }
 
-func (m *ProductEventNotification) WithData(data ProductEventAttributes) *ProductEventNotification {
+func (m *ProductEventNotification) WithData(data ProductEvent) *ProductEventNotification {
 
 	m.Data = &data
 
