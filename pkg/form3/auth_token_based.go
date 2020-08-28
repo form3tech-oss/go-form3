@@ -32,11 +32,11 @@ type authJSONResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
-func NewTokenBasedClientConfig(clientID, clientSecret string, hostUrl *url.URL) *TokenBasedClientConfig {
+func NewTokenBasedClientConfig(clientID, clientSecret string, hostURL *url.URL) *TokenBasedClientConfig {
 	return &TokenBasedClientConfig{
 		clientID:            clientID,
 		clientSecret:        clientSecret,
-		hostURL:             hostUrl,
+		hostURL:             hostURL,
 		underlyingTransport: http.DefaultTransport,
 	}
 }
@@ -51,7 +51,7 @@ func (c *TokenBasedClientConfig) WithUnderlyingTransport(underlyingTransport htt
 	return c
 }
 
-func NewTokenBasedHttpClient(config *TokenBasedClientConfig) *http.Client {
+func NewTokenBasedHTTPClient(config *TokenBasedClientConfig) *http.Client {
 	transport := &tokenBasedTransport{underlyingTransport: config.underlyingTransport, config: config}
 	transport.token = config.initialToken
 
@@ -77,7 +77,7 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 
 	res, err := t.underlyingTransport.RoundTrip(req)
 	if res != nil && (res.StatusCode == http.StatusUnauthorized || res.StatusCode == http.StatusForbidden) {
-		authRequest, err := http.NewRequest("POST", t.config.hostURL.String()+tokenBasedAuthEndpoint, nil)
+		authRequest, err := http.NewRequest(http.MethodPost, t.config.hostURL.String()+tokenBasedAuthEndpoint, nil)
 		if err != nil {
 			return nil, fmt.Errorf("could not build auth request, error: %v", err)
 		}
@@ -98,13 +98,13 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 			return nil, fmt.Errorf("could not read auth response body, error: %v", err)
 		}
 
-		var authJson authJSONResponse
-		err = json.Unmarshal(authBody, &authJson)
+		var authJSON authJSONResponse
+		err = json.Unmarshal(authBody, &authJSON)
 		if err != nil {
 			return nil, fmt.Errorf("could not parse auth json response, error: %v", err)
 		}
 
-		t.token = authJson.AccessToken
+		t.token = authJSON.AccessToken
 		req.Header.Del("Authorization")
 
 		retryRequest, err := http.NewRequest(req.Method, req.URL.String(), requestBodyClone)

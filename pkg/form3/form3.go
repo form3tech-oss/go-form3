@@ -63,7 +63,7 @@ func NewWithTokenBasedAuth(host, clientID, secret, orgID string) *F3 {
 	}
 
 	config := NewTokenBasedClientConfig(clientID, secret, u)
-	httpClient := NewTokenBasedHttpClient(config)
+	httpClient := NewTokenBasedHTTPClient(config)
 
 	return newF3(u, httpClient, orgID)
 }
@@ -91,7 +91,7 @@ func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
 
 	return &F3{
 		Form3PublicAPI: *pubClient,
-		Defaults:    defaults,
+		Defaults:       defaults,
 	}
 }
 
