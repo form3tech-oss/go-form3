@@ -1,5 +1,5 @@
 {{ define "fluentmodelSchemaType" }}
-  {{- if and (or ((len .AllOf) gt 0) .IsAnonymous) ( not .IsMap) }}
+  {{- if and (or (gt (len .AllOf) 0) .IsAnonymous) ( not .IsMap) }}
     {{- template "fluentmodelSchemaBody" . }}
   {{- else }}
     {{- if and (not .IsMap) .IsNullable (not .IsSuperAlias) }}*{{ end }}
@@ -9,7 +9,7 @@
 {{- end }}
 
 {{- define "fluentmodelDereffedSchemaType" }}
-  {{- if and (or ((len .AllOf) gt 0) .IsAnonymous) ( not .IsMap) }}
+  {{- if and (or (gt (len .AllOf) 0) .IsAnonymous) ( not .IsMap) }}
     {{- template "fluentmodelSchemaBody" . }}
   {{- else }}
     {{- .GoType }}
@@ -17,7 +17,7 @@
 {{- end }}
 
 {{- define "fluentmodelTypeSchemaType"}}
-  {{- if and (or ((len .AllOf) gt 0) .IsAnonymous) ( not .IsMap) }}
+  {{- if and (or (gt (len .AllOf) 0) .IsAnonymous) ( not .IsMap) }}
     {{- template "fluentmodelSchemaBody" . }}
   {{- else }}
     {{- if and (not .IsMap) .IsNullable (not .IsSuperAlias) }}*{{ end }}

@@ -8,7 +8,7 @@ package addressbook
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v2/pkg/client"
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -320,6 +320,72 @@ func (a *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest
 }
 
 func (a *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest) MustDo() *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get addressbook parties ID products product ID events API
+*/
+func (a *GetAddressbookPartiesIDProductsProductIDEventsRequest) Do() (*GetAddressbookPartiesIDProductsProductIDEventsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetAddressbookPartiesIDProductsProductIDEvents",
+		Method:             "GET",
+		PathPattern:        "/addressbook/parties/{id}/products/{product_id}/events",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetAddressbookPartiesIDProductsProductIDEventsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetAddressbookPartiesIDProductsProductIDEventsOK), nil
+
+}
+
+func (a *GetAddressbookPartiesIDProductsProductIDEventsRequest) MustDo() *GetAddressbookPartiesIDProductsProductIDEventsOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get addressbook parties ID products product ID events event ID API
+*/
+func (a *GetAddressbookPartiesIDProductsProductIDEventsEventIDRequest) Do() (*GetAddressbookPartiesIDProductsProductIDEventsEventIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetAddressbookPartiesIDProductsProductIDEventsEventID",
+		Method:             "GET",
+		PathPattern:        "/addressbook/parties/{id}/products/{product_id}/events/{event_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetAddressbookPartiesIDProductsProductIDEventsEventIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetAddressbookPartiesIDProductsProductIDEventsEventIDOK), nil
+
+}
+
+func (a *GetAddressbookPartiesIDProductsProductIDEventsEventIDRequest) MustDo() *GetAddressbookPartiesIDProductsProductIDEventsEventIDOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

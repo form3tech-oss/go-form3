@@ -10,30 +10,30 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/pkg/client"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/a_c_e"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/accounts"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/addressbook"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/audit"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/balances"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/claims"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/direct_debits"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/fundingrequest_api"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/fx_api"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/mandates"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/oauth2"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/organisations"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/participants"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/payments"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/query_api"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/reports"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/roles"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/scheme_messages"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/subscriptions"
-	"github.com/form3tech-oss/go-form3/pkg/generated/client/users"
+	"github.com/form3tech-oss/go-form3/v2/pkg/client"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/a_c_e"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/accounts"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/addressbook"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/audit"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/balances"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/claims"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/direct_debits"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/fundingrequest_api"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/fx_api"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/mandates"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/oauth2"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/organisations"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/participants"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/payments"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/query_api"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/reports"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/roles"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/scheme_messages"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/subscriptions"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/users"
 )
 
-// Default form3 public HTTP client.
+// Default form3 public API HTTP client.
 // var Default = NewHTTPClient(nil)
 
 const (
@@ -49,14 +49,14 @@ const (
 var DefaultSchemes = []string{"https"}
 
 /*
-// NewHTTPClient creates a new form3 public HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *Form3Public {
+// NewHTTPClient creates a new form3 public API HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *Form3PublicAPI {
   return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new form3 public HTTP client,
+// NewHTTPClientWithConfig creates a new form3 public API HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Form3Public {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Form3PublicAPI {
   // ensure nullable parameters have default
   if cfg == nil {
     cfg = DefaultTransportConfig()
@@ -68,17 +68,17 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *For
 }
 */
 
-// New creates a new form3 public client
-func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults client.Defaults) *Form3Public {
+// New creates a new form3 public API client
+func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults client.Defaults) *Form3PublicAPI {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(Form3Public)
+	cli := new(Form3PublicAPI)
 	cli.Transport = transport
 
-	cli.ACE = a_c_e.New(transport, formats, defaults)
+	cli.Ace = a_c_e.New(transport, formats, defaults)
 
 	cli.Accounts = accounts.New(transport, formats, defaults)
 
@@ -160,9 +160,9 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// Form3Public is a client for form3 public
-type Form3Public struct {
-	ACE *a_c_e.Client
+// Form3PublicAPI is a client for form3 public API
+type Form3PublicAPI struct {
+	Ace *a_c_e.Client
 
 	Accounts *accounts.Client
 
@@ -206,10 +206,10 @@ type Form3Public struct {
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *Form3Public) SetTransport(transport runtime.ClientTransport) {
+func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
-	c.ACE.SetTransport(transport)
+	c.Ace.SetTransport(transport)
 
 	c.Accounts.SetTransport(transport)
 

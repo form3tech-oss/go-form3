@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"os"
 
-	genClient "github.com/form3tech-oss/go-form3/pkg/generated/client"
+	genClient "github.com/form3tech-oss/go-form3/v2/pkg/generated/client"
 	rc "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
@@ -19,7 +19,7 @@ const (
 )
 
 type F3 struct {
-	genClient.Form3Public
+	genClient.Form3PublicAPI
 	Defaults *ClientDefaults
 }
 
@@ -63,7 +63,7 @@ func NewWithTokenBasedAuth(host, clientID, secret, orgID string) *F3 {
 	}
 
 	config := NewTokenBasedClientConfig(clientID, secret, u)
-	httpClient := NewTokenBasedHttpClient(config)
+	httpClient := NewTokenBasedHTTPClient(config)
 
 	return newF3(u, httpClient, orgID)
 }
@@ -90,8 +90,8 @@ func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
 	pubClient := genClient.New(rt, strfmt.Default, defaults)
 
 	return &F3{
-		Form3Public: *pubClient,
-		Defaults:    defaults,
+		Form3PublicAPI: *pubClient,
+		Defaults:       defaults,
 	}
 }
 

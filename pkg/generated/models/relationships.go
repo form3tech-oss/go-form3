@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v2/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -34,6 +34,9 @@ type Relationships struct {
 
 	// party product
 	PartyProduct *RelationshipsPartyProductProperties `json:"party_product,omitempty"`
+
+	// product events
+	ProductEvents *RelationshipsProductEventProperties `json:"product_events,omitempty"`
 }
 
 func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
@@ -48,6 +51,8 @@ func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
 		PartyAccount: RelationshipsPartyAccountPropertiesWithDefaults(defaults),
 
 		PartyProduct: RelationshipsPartyProductPropertiesWithDefaults(defaults),
+
+		ProductEvents: RelationshipsProductEventPropertiesWithDefaults(defaults),
 	}
 }
 
@@ -111,6 +116,18 @@ func (m *Relationships) WithoutPartyProduct() *Relationships {
 	return m
 }
 
+func (m *Relationships) WithProductEvents(productEvents RelationshipsProductEventProperties) *Relationships {
+
+	m.ProductEvents = &productEvents
+
+	return m
+}
+
+func (m *Relationships) WithoutProductEvents() *Relationships {
+	m.ProductEvents = nil
+	return m
+}
+
 // Validate validates this relationships
 func (m *Relationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -132,6 +149,10 @@ func (m *Relationships) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePartyProduct(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProductEvents(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -223,6 +244,24 @@ func (m *Relationships) validatePartyProduct(formats strfmt.Registry) error {
 		if err := m.PartyProduct.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("party_product")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Relationships) validateProductEvents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ProductEvents) { // not required
+		return nil
+	}
+
+	if m.ProductEvents != nil {
+		if err := m.ProductEvents.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("product_events")
 			}
 			return err
 		}

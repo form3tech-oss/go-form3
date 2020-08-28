@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := generate-client
 
-swagger_codegen_version := "v0.19.0"
+swagger_codegen_version := "v0.25.0"
 
 platform := $(shell uname)
 ifeq (${platform},Darwin)

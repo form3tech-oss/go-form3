@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/form3tech-oss/go-form3/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
 )
 
 // ListPaymentsReader is a Reader for the ListPayments structure.
