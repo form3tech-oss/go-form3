@@ -359,6 +359,12 @@ type DirectDebitAttributes struct {
 	// beneficiary party
 	BeneficiaryParty *DirectDebitAttributesBeneficiaryParty `json:"beneficiary_party,omitempty"`
 
+	// Category purpose in proprietary form. Specifies the high level purpose of the instruction. Cannot be used at the same time as `category_purpose_coded`.
+	CategoryPurpose string `json:"category_purpose,omitempty"`
+
+	// Category purpose in a coded form. Specifies the high level purpose of the instruction. Cannot be used at the same time as `category_purpose`.
+	CategoryPurposeCoded string `json:"category_purpose_coded,omitempty"`
+
 	// Unique identifier for organisations collecting payments
 	ClearingID string `json:"clearing_id,omitempty"`
 
@@ -368,8 +374,24 @@ type DirectDebitAttributes struct {
 	// debtor party
 	DebtorParty *DirectDebitAttributesDebtorParty `json:"debtor_party,omitempty"`
 
+	// Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain.
+	EndToEndReference string `json:"end_to_end_reference,omitempty"`
+
+	// Unique identification, as assigned by the initiating party to unambiguously identify the transaction. This identification is an point-to-point reference and is passed on, unchanged, throughout the entire chain. Cannot include leading, trailing or internal spaces.
+	InstructionID string `json:"instruction_id,omitempty"`
+
+	// Indicator notifying whether the underlying mandate is amended or not
+	MandateAmendmentIndicator bool `json:"mandate_amendment_indicator,omitempty"`
+
+	// Date on which the direct debit mandate has been signed by the debtor.
+	// Format: date
+	MandateSignatureDate strfmt.Date `json:"mandate_signature_date,omitempty"`
+
 	// Numeric reference field, see scheme specific descriptions for usage
 	NumericReference string `json:"numeric_reference,omitempty"`
+
+	// Purpose of the direct debit in a coded form
+	PaymentPurposeCoded string `json:"payment_purpose_coded,omitempty"`
 
 	// Clearing infrastructure through which the operation instruction is to be processed. Default for given organisation ID is used if left empty. Has to be a valid [scheme identifier](http://draft-api-docs.form3.tech/api.html#enumerations-schemes).
 	PaymentScheme string `json:"payment_scheme,omitempty"`
@@ -380,6 +402,9 @@ type DirectDebitAttributes struct {
 
 	// Payment reference for beneficiary use
 	Reference string `json:"reference,omitempty"`
+
+	// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts receivable system provided by the debtor for the beneficiary.
+	RemittanceInformation string `json:"remittance_information,omitempty"`
 
 	// The [scheme-specific payment type](#enumerations-scheme-payment-types)
 	SchemePaymentType string `json:"scheme_payment_type,omitempty"`
@@ -392,6 +417,18 @@ type DirectDebitAttributes struct {
 	// Enum: [AUDDIS MIGRATING]
 	SchemeStatus string `json:"scheme_status,omitempty"`
 
+	// Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain.
+	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
+
+	// structured reference
+	StructuredReference *DirectDebitAttributesStructuredReference `json:"structured_reference,omitempty"`
+
+	// ultimate beneficiary
+	UltimateBeneficiary *UltimateEntity `json:"ultimate_beneficiary,omitempty"`
+
+	// ultimate debtor
+	UltimateDebtor *UltimateEntity `json:"ultimate_debtor,omitempty"`
+
 	// The scheme-specific unique transaction ID. Populated by the scheme.
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
@@ -403,13 +440,27 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 
 		BeneficiaryParty: DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults),
 
+		CategoryPurpose: defaults.GetString("DirectDebitAttributes", "category_purpose"),
+
+		CategoryPurposeCoded: defaults.GetString("DirectDebitAttributes", "category_purpose_coded"),
+
 		ClearingID: defaults.GetString("DirectDebitAttributes", "clearing_id"),
 
 		Currency: defaults.GetString("DirectDebitAttributes", "currency"),
 
 		DebtorParty: DirectDebitAttributesDebtorPartyWithDefaults(defaults),
 
+		EndToEndReference: defaults.GetString("DirectDebitAttributes", "end_to_end_reference"),
+
+		InstructionID: defaults.GetString("DirectDebitAttributes", "instruction_id"),
+
+		MandateAmendmentIndicator: defaults.GetBool("DirectDebitAttributes", "mandate_amendment_indicator"),
+
+		MandateSignatureDate: defaults.GetStrfmtDate("DirectDebitAttributes", "mandate_signature_date"),
+
 		NumericReference: defaults.GetString("DirectDebitAttributes", "numeric_reference"),
+
+		PaymentPurposeCoded: defaults.GetString("DirectDebitAttributes", "payment_purpose_coded"),
 
 		PaymentScheme: defaults.GetString("DirectDebitAttributes", "payment_scheme"),
 
@@ -417,11 +468,21 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 
 		Reference: defaults.GetString("DirectDebitAttributes", "reference"),
 
+		RemittanceInformation: defaults.GetString("DirectDebitAttributes", "remittance_information"),
+
 		SchemePaymentType: defaults.GetString("DirectDebitAttributes", "scheme_payment_type"),
 
 		SchemeProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitAttributes", "scheme_processing_date"),
 
 		SchemeStatus: defaults.GetString("DirectDebitAttributes", "scheme_status"),
+
+		SchemeTransactionID: defaults.GetString("DirectDebitAttributes", "scheme_transaction_id"),
+
+		StructuredReference: DirectDebitAttributesStructuredReferenceWithDefaults(defaults),
+
+		UltimateBeneficiary: UltimateEntityWithDefaults(defaults),
+
+		UltimateDebtor: UltimateEntityWithDefaults(defaults),
 
 		UniqueSchemeID: defaults.GetString("DirectDebitAttributes", "unique_scheme_id"),
 	}
@@ -443,6 +504,20 @@ func (m *DirectDebitAttributes) WithBeneficiaryParty(beneficiaryParty DirectDebi
 
 func (m *DirectDebitAttributes) WithoutBeneficiaryParty() *DirectDebitAttributes {
 	m.BeneficiaryParty = nil
+	return m
+}
+
+func (m *DirectDebitAttributes) WithCategoryPurpose(categoryPurpose string) *DirectDebitAttributes {
+
+	m.CategoryPurpose = categoryPurpose
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithCategoryPurposeCoded(categoryPurposeCoded string) *DirectDebitAttributes {
+
+	m.CategoryPurposeCoded = categoryPurposeCoded
+
 	return m
 }
 
@@ -472,9 +547,44 @@ func (m *DirectDebitAttributes) WithoutDebtorParty() *DirectDebitAttributes {
 	return m
 }
 
+func (m *DirectDebitAttributes) WithEndToEndReference(endToEndReference string) *DirectDebitAttributes {
+
+	m.EndToEndReference = endToEndReference
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithInstructionID(instructionID string) *DirectDebitAttributes {
+
+	m.InstructionID = instructionID
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithMandateAmendmentIndicator(mandateAmendmentIndicator bool) *DirectDebitAttributes {
+
+	m.MandateAmendmentIndicator = mandateAmendmentIndicator
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithMandateSignatureDate(mandateSignatureDate strfmt.Date) *DirectDebitAttributes {
+
+	m.MandateSignatureDate = mandateSignatureDate
+
+	return m
+}
+
 func (m *DirectDebitAttributes) WithNumericReference(numericReference string) *DirectDebitAttributes {
 
 	m.NumericReference = numericReference
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithPaymentPurposeCoded(paymentPurposeCoded string) *DirectDebitAttributes {
+
+	m.PaymentPurposeCoded = paymentPurposeCoded
 
 	return m
 }
@@ -496,6 +606,13 @@ func (m *DirectDebitAttributes) WithProcessingDate(processingDate strfmt.Date) *
 func (m *DirectDebitAttributes) WithReference(reference string) *DirectDebitAttributes {
 
 	m.Reference = reference
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithRemittanceInformation(remittanceInformation string) *DirectDebitAttributes {
+
+	m.RemittanceInformation = remittanceInformation
 
 	return m
 }
@@ -526,6 +643,49 @@ func (m *DirectDebitAttributes) WithSchemeStatus(schemeStatus string) *DirectDeb
 	return m
 }
 
+func (m *DirectDebitAttributes) WithSchemeTransactionID(schemeTransactionID string) *DirectDebitAttributes {
+
+	m.SchemeTransactionID = schemeTransactionID
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithStructuredReference(structuredReference DirectDebitAttributesStructuredReference) *DirectDebitAttributes {
+
+	m.StructuredReference = &structuredReference
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutStructuredReference() *DirectDebitAttributes {
+	m.StructuredReference = nil
+	return m
+}
+
+func (m *DirectDebitAttributes) WithUltimateBeneficiary(ultimateBeneficiary UltimateEntity) *DirectDebitAttributes {
+
+	m.UltimateBeneficiary = &ultimateBeneficiary
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutUltimateBeneficiary() *DirectDebitAttributes {
+	m.UltimateBeneficiary = nil
+	return m
+}
+
+func (m *DirectDebitAttributes) WithUltimateDebtor(ultimateDebtor UltimateEntity) *DirectDebitAttributes {
+
+	m.UltimateDebtor = &ultimateDebtor
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutUltimateDebtor() *DirectDebitAttributes {
+	m.UltimateDebtor = nil
+	return m
+}
+
 func (m *DirectDebitAttributes) WithUniqueSchemeID(uniqueSchemeID string) *DirectDebitAttributes {
 
 	m.UniqueSchemeID = uniqueSchemeID
@@ -549,6 +709,10 @@ func (m *DirectDebitAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateMandateSignatureDate(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateProcessingDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -558,6 +722,18 @@ func (m *DirectDebitAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSchemeStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStructuredReference(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUltimateBeneficiary(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUltimateDebtor(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -611,6 +787,19 @@ func (m *DirectDebitAttributes) validateDebtorParty(formats strfmt.Registry) err
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributes) validateMandateSignatureDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.MandateSignatureDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"mandate_signature_date", "body", "date", m.MandateSignatureDate.String(), formats); err != nil {
+		return err
 	}
 
 	return nil
@@ -685,6 +874,60 @@ func (m *DirectDebitAttributes) validateSchemeStatus(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *DirectDebitAttributes) validateStructuredReference(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.StructuredReference) { // not required
+		return nil
+	}
+
+	if m.StructuredReference != nil {
+		if err := m.StructuredReference.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "structured_reference")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributes) validateUltimateBeneficiary(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UltimateBeneficiary) { // not required
+		return nil
+	}
+
+	if m.UltimateBeneficiary != nil {
+		if err := m.UltimateBeneficiary.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "ultimate_beneficiary")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributes) validateUltimateDebtor(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UltimateDebtor) { // not required
+		return nil
+	}
+
+	if m.UltimateDebtor != nil {
+		if err := m.UltimateDebtor.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "ultimate_debtor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *DirectDebitAttributes) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -734,6 +977,9 @@ type DirectDebitAttributesBeneficiaryParty struct {
 
 	// Country of the beneficiary address, ISO 3166 format country code
 	Country string `json:"country,omitempty"`
+
+	// Beneficiary name
+	Name string `json:"name,omitempty"`
 }
 
 func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesBeneficiaryParty {
@@ -752,6 +998,8 @@ func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults)
 		Address: make([]string, 0),
 
 		Country: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "country"),
+
+		Name: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "name"),
 	}
 }
 
@@ -805,6 +1053,13 @@ func (m *DirectDebitAttributesBeneficiaryParty) WithAddress(address []string) *D
 func (m *DirectDebitAttributesBeneficiaryParty) WithCountry(country string) *DirectDebitAttributesBeneficiaryParty {
 
 	m.Country = country
+
+	return m
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) WithName(name string) *DirectDebitAttributesBeneficiaryParty {
+
+	m.Name = name
 
 	return m
 }
@@ -907,6 +1162,24 @@ type DirectDebitAttributesDebtorParty struct {
 
 	// Country of debtor address. ISO 3166 format country code"
 	Country string `json:"country,omitempty"`
+
+	// Debtor name
+	Name string `json:"name,omitempty"`
+
+	// Organisation identification of a beneficiary, used in the case that the beneficiary is an organisation and not a private person
+	OrganisationIdentification string `json:"organisation_identification,omitempty"`
+
+	// The code that specifies the type of `organisation_identification`
+	OrganisationIdentificationCode string `json:"organisation_identification_code,omitempty"`
+
+	// Issuer of the `organisation_identification`
+	OrganisationIdentificationIssuer string `json:"organisation_identification_issuer,omitempty"`
+
+	// The code that specifies the scheme of `organisation_identification`
+	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
+
+	// private identification
+	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 }
 
 func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesDebtorParty {
@@ -923,6 +1196,18 @@ func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Dir
 		Address: make([]string, 0),
 
 		Country: defaults.GetString("DirectDebitAttributesDebtorParty", "country"),
+
+		Name: defaults.GetString("DirectDebitAttributesDebtorParty", "name"),
+
+		OrganisationIdentification: defaults.GetString("DirectDebitAttributesDebtorParty", "organisation_identification"),
+
+		OrganisationIdentificationCode: defaults.GetString("DirectDebitAttributesDebtorParty", "organisation_identification_code"),
+
+		OrganisationIdentificationIssuer: defaults.GetString("DirectDebitAttributesDebtorParty", "organisation_identification_issuer"),
+
+		OrganisationIdentificationScheme: defaults.GetString("DirectDebitAttributesDebtorParty", "organisation_identification_scheme"),
+
+		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 	}
 }
 
@@ -973,6 +1258,53 @@ func (m *DirectDebitAttributesDebtorParty) WithCountry(country string) *DirectDe
 	return m
 }
 
+func (m *DirectDebitAttributesDebtorParty) WithName(name string) *DirectDebitAttributesDebtorParty {
+
+	m.Name = name
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithOrganisationIdentification(organisationIdentification string) *DirectDebitAttributesDebtorParty {
+
+	m.OrganisationIdentification = organisationIdentification
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithOrganisationIdentificationCode(organisationIdentificationCode string) *DirectDebitAttributesDebtorParty {
+
+	m.OrganisationIdentificationCode = organisationIdentificationCode
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithOrganisationIdentificationIssuer(organisationIdentificationIssuer string) *DirectDebitAttributesDebtorParty {
+
+	m.OrganisationIdentificationIssuer = organisationIdentificationIssuer
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithOrganisationIdentificationScheme(organisationIdentificationScheme string) *DirectDebitAttributesDebtorParty {
+
+	m.OrganisationIdentificationScheme = organisationIdentificationScheme
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *DirectDebitAttributesDebtorParty {
+
+	m.PrivateIdentification = &privateIdentification
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithoutPrivateIdentification() *DirectDebitAttributesDebtorParty {
+	m.PrivateIdentification = nil
+	return m
+}
+
 // Validate validates this direct debit attributes debtor party
 func (m *DirectDebitAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -982,6 +1314,10 @@ func (m *DirectDebitAttributesDebtorParty) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateAccountWith(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrivateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1025,6 +1361,24 @@ func (m *DirectDebitAttributesDebtorParty) validateAccountWith(formats strfmt.Re
 	return nil
 }
 
+func (m *DirectDebitAttributesDebtorParty) validatePrivateIdentification(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PrivateIdentification) { // not required
+		return nil
+	}
+
+	if m.PrivateIdentification != nil {
+		if err := m.PrivateIdentification.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "debtor_party" + "." + "private_identification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *DirectDebitAttributesDebtorParty) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -1043,6 +1397,70 @@ func (m *DirectDebitAttributesDebtorParty) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *DirectDebitAttributesDebtorParty) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitAttributesStructuredReference direct debit attributes structured reference
+// swagger:model DirectDebitAttributesStructuredReference
+type DirectDebitAttributesStructuredReference struct {
+
+	// Issuer of remittance reference
+	Issuer string `json:"issuer,omitempty"`
+
+	// Unique reference to unambiguously refer to the payment originated by the creditor, this reference enables reconciliation by the creditor upon receipt of the amount of money.
+	Reference string `json:"reference,omitempty"`
+}
+
+func DirectDebitAttributesStructuredReferenceWithDefaults(defaults client.Defaults) *DirectDebitAttributesStructuredReference {
+	return &DirectDebitAttributesStructuredReference{
+
+		Issuer: defaults.GetString("DirectDebitAttributesStructuredReference", "issuer"),
+
+		Reference: defaults.GetString("DirectDebitAttributesStructuredReference", "reference"),
+	}
+}
+
+func (m *DirectDebitAttributesStructuredReference) WithIssuer(issuer string) *DirectDebitAttributesStructuredReference {
+
+	m.Issuer = issuer
+
+	return m
+}
+
+func (m *DirectDebitAttributesStructuredReference) WithReference(reference string) *DirectDebitAttributesStructuredReference {
+
+	m.Reference = reference
+
+	return m
+}
+
+// Validate validates this direct debit attributes structured reference
+func (m *DirectDebitAttributesStructuredReference) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitAttributesStructuredReference) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitAttributesStructuredReference) UnmarshalBinary(b []byte) error {
+	var res DirectDebitAttributesStructuredReference
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitAttributesStructuredReference) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
