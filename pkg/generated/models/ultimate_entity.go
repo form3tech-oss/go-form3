@@ -40,7 +40,7 @@ type UltimateEntity struct {
 	// Country of ultimate debtor/beneficiary address. ISO 3166 format country code
 	Country string `json:"country,omitempty"`
 
-	// Ultimate beneficiary name
+	// name
 	Name string `json:"name,omitempty"`
 
 	// Organisation identification of an ultimate debtor/beneficiary, in the case that the ultimate debtor/beneficiary is an organisation and not a private person.

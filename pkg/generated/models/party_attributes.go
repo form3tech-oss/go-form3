@@ -489,11 +489,11 @@ func (m *PartyAttributes) Json() string {
 // swagger:model PartyAttributesOrganisationIdentification
 type PartyAttributesOrganisationIdentification struct {
 
-	// aml industry classification
-	AmlIndustryClassification string `json:"aml_industry_classification,omitempty"`
-
 	// identification
 	Identification string `json:"identification,omitempty"`
+
+	// industry classifications
+	IndustryClassifications []*IndustryClassification `json:"industry_classifications"`
 
 	// organisation description
 	OrganisationDescription string `json:"organisation_description,omitempty"`
@@ -523,9 +523,9 @@ type PartyAttributesOrganisationIdentification struct {
 func PartyAttributesOrganisationIdentificationWithDefaults(defaults client.Defaults) *PartyAttributesOrganisationIdentification {
 	return &PartyAttributesOrganisationIdentification{
 
-		AmlIndustryClassification: defaults.GetString("PartyAttributesOrganisationIdentification", "aml_industry_classification"),
-
 		Identification: defaults.GetString("PartyAttributesOrganisationIdentification", "identification"),
+
+		IndustryClassifications: make([]*IndustryClassification, 0),
 
 		OrganisationDescription: defaults.GetString("PartyAttributesOrganisationIdentification", "organisation_description"),
 
@@ -545,16 +545,16 @@ func PartyAttributesOrganisationIdentificationWithDefaults(defaults client.Defau
 	}
 }
 
-func (m *PartyAttributesOrganisationIdentification) WithAmlIndustryClassification(amlIndustryClassification string) *PartyAttributesOrganisationIdentification {
+func (m *PartyAttributesOrganisationIdentification) WithIdentification(identification string) *PartyAttributesOrganisationIdentification {
 
-	m.AmlIndustryClassification = amlIndustryClassification
+	m.Identification = identification
 
 	return m
 }
 
-func (m *PartyAttributesOrganisationIdentification) WithIdentification(identification string) *PartyAttributesOrganisationIdentification {
+func (m *PartyAttributesOrganisationIdentification) WithIndustryClassifications(industryClassifications []*IndustryClassification) *PartyAttributesOrganisationIdentification {
 
-	m.Identification = identification
+	m.IndustryClassifications = industryClassifications
 
 	return m
 }
@@ -617,6 +617,40 @@ func (m *PartyAttributesOrganisationIdentification) WithTradingPostCode(tradingP
 
 // Validate validates this party attributes organisation identification
 func (m *PartyAttributesOrganisationIdentification) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateIndustryClassifications(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PartyAttributesOrganisationIdentification) validateIndustryClassifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.IndustryClassifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.IndustryClassifications); i++ {
+		if swag.IsZero(m.IndustryClassifications[i]) { // not required
+			continue
+		}
+
+		if m.IndustryClassifications[i] != nil {
+			if err := m.IndustryClassifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("organisation_identification" + "." + "industry_classifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -667,8 +701,8 @@ type PartyAttributesPartyActivity struct {
 	// origin of funds countries
 	OriginOfFundsCountries []string `json:"origin_of_funds_countries"`
 
-	// reason for fx
-	ReasonForFx []string `json:"reason_for_fx"`
+	// reasons for fx
+	ReasonsForFx []*ReasonForFX `json:"reasons_for_fx"`
 }
 
 func PartyAttributesPartyActivityWithDefaults(defaults client.Defaults) *PartyAttributesPartyActivity {
@@ -686,7 +720,7 @@ func PartyAttributesPartyActivityWithDefaults(defaults client.Defaults) *PartyAt
 
 		OriginOfFundsCountries: make([]string, 0),
 
-		ReasonForFx: make([]string, 0),
+		ReasonsForFx: make([]*ReasonForFX, 0),
 	}
 }
 
@@ -742,9 +776,9 @@ func (m *PartyAttributesPartyActivity) WithOriginOfFundsCountries(originOfFundsC
 	return m
 }
 
-func (m *PartyAttributesPartyActivity) WithReasonForFx(reasonForFx []string) *PartyAttributesPartyActivity {
+func (m *PartyAttributesPartyActivity) WithReasonsForFx(reasonsForFx []*ReasonForFX) *PartyAttributesPartyActivity {
 
-	m.ReasonForFx = reasonForFx
+	m.ReasonsForFx = reasonsForFx
 
 	return m
 }
@@ -758,6 +792,10 @@ func (m *PartyAttributesPartyActivity) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCurrencyUsage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReasonsForFx(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -798,6 +836,31 @@ func (m *PartyAttributesPartyActivity) validateCurrencyUsage(formats strfmt.Regi
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *PartyAttributesPartyActivity) validateReasonsForFx(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReasonsForFx) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ReasonsForFx); i++ {
+		if swag.IsZero(m.ReasonsForFx[i]) { // not required
+			continue
+		}
+
+		if m.ReasonsForFx[i] != nil {
+			if err := m.ReasonsForFx[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("party_activity" + "." + "reasons_for_fx" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
