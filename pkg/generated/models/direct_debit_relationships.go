@@ -24,6 +24,9 @@ type DirectDebitRelationships struct {
 	// direct debit admission
 	DirectDebitAdmission *DirectDebitRelationshipsDirectDebitAdmission `json:"direct_debit_admission,omitempty"`
 
+	// direct debit recall
+	DirectDebitRecall *DirectDebitRelationshipsDirectDebitRecall `json:"direct_debit_recall,omitempty"`
+
 	// direct debit return
 	DirectDebitReturn *DirectDebitRelationshipsDirectDebitReturn `json:"direct_debit_return,omitempty"`
 
@@ -41,6 +44,8 @@ func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebit
 	return &DirectDebitRelationships{
 
 		DirectDebitAdmission: DirectDebitRelationshipsDirectDebitAdmissionWithDefaults(defaults),
+
+		DirectDebitRecall: DirectDebitRelationshipsDirectDebitRecallWithDefaults(defaults),
 
 		DirectDebitReturn: DirectDebitRelationshipsDirectDebitReturnWithDefaults(defaults),
 
@@ -61,6 +66,18 @@ func (m *DirectDebitRelationships) WithDirectDebitAdmission(directDebitAdmission
 
 func (m *DirectDebitRelationships) WithoutDirectDebitAdmission() *DirectDebitRelationships {
 	m.DirectDebitAdmission = nil
+	return m
+}
+
+func (m *DirectDebitRelationships) WithDirectDebitRecall(directDebitRecall DirectDebitRelationshipsDirectDebitRecall) *DirectDebitRelationships {
+
+	m.DirectDebitRecall = &directDebitRecall
+
+	return m
+}
+
+func (m *DirectDebitRelationships) WithoutDirectDebitRecall() *DirectDebitRelationships {
+	m.DirectDebitRecall = nil
 	return m
 }
 
@@ -120,6 +137,10 @@ func (m *DirectDebitRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDirectDebitRecall(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDirectDebitReturn(formats); err != nil {
 		res = append(res, err)
 	}
@@ -152,6 +173,24 @@ func (m *DirectDebitRelationships) validateDirectDebitAdmission(formats strfmt.R
 		if err := m.DirectDebitAdmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("direct_debit_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitRelationships) validateDirectDebitRecall(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DirectDebitRecall) { // not required
+		return nil
+	}
+
+	if m.DirectDebitRecall != nil {
+		if err := m.DirectDebitRecall.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("direct_debit_recall")
 			}
 			return err
 		}
@@ -336,6 +375,92 @@ func (m *DirectDebitRelationshipsDirectDebitAdmission) UnmarshalBinary(b []byte)
 	return nil
 }
 func (m *DirectDebitRelationshipsDirectDebitAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitRelationshipsDirectDebitRecall direct debit relationships direct debit recall
+// swagger:model DirectDebitRelationshipsDirectDebitRecall
+type DirectDebitRelationshipsDirectDebitRecall struct {
+
+	// data
+	Data []*DirectDebitRecall `json:"data"`
+}
+
+func DirectDebitRelationshipsDirectDebitRecallWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitRecall {
+	return &DirectDebitRelationshipsDirectDebitRecall{
+
+		Data: make([]*DirectDebitRecall, 0),
+	}
+}
+
+func (m *DirectDebitRelationshipsDirectDebitRecall) WithData(data []*DirectDebitRecall) *DirectDebitRelationshipsDirectDebitRecall {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this direct debit relationships direct debit recall
+func (m *DirectDebitRelationshipsDirectDebitRecall) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitRelationshipsDirectDebitRecall) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("direct_debit_recall" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitRelationshipsDirectDebitRecall) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitRelationshipsDirectDebitRecall) UnmarshalBinary(b []byte) error {
+	var res DirectDebitRelationshipsDirectDebitRecall
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitRelationshipsDirectDebitRecall) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -21,7 +21,10 @@ import (
 type PartyProductAttributes struct {
 
 	// product
-	Product string `json:"product,omitempty"`
+	Product PartyProductType `json:"product,omitempty"`
+
+	// provider
+	Provider PartyProductProvider `json:"provider,omitempty"`
 
 	// status
 	Status PartyProductStatus `json:"status,omitempty"`
@@ -30,16 +33,25 @@ type PartyProductAttributes struct {
 func PartyProductAttributesWithDefaults(defaults client.Defaults) *PartyProductAttributes {
 	return &PartyProductAttributes{
 
-		Product: defaults.GetString("PartyProductAttributes", "product"),
+		// TODO Product: PartyProductType,
+
+		// TODO Provider: PartyProductProvider,
 
 		// TODO Status: PartyProductStatus,
 
 	}
 }
 
-func (m *PartyProductAttributes) WithProduct(product string) *PartyProductAttributes {
+func (m *PartyProductAttributes) WithProduct(product PartyProductType) *PartyProductAttributes {
 
 	m.Product = product
+
+	return m
+}
+
+func (m *PartyProductAttributes) WithProvider(provider PartyProductProvider) *PartyProductAttributes {
+
+	m.Provider = provider
 
 	return m
 }
@@ -55,6 +67,14 @@ func (m *PartyProductAttributes) WithStatus(status PartyProductStatus) *PartyPro
 func (m *PartyProductAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateProduct(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProvider(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -62,6 +82,38 @@ func (m *PartyProductAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PartyProductAttributes) validateProduct(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Product) { // not required
+		return nil
+	}
+
+	if err := m.Product.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("product")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *PartyProductAttributes) validateProvider(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Provider) { // not required
+		return nil
+	}
+
+	if err := m.Provider.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("provider")
+		}
+		return err
+	}
+
 	return nil
 }
 

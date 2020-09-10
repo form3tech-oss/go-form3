@@ -340,6 +340,12 @@ func (m *DirectDebitReturn) Json() string {
 // swagger:model DirectDebitReturnAttributes
 type DirectDebitReturnAttributes struct {
 
+	// charges amount
+	ChargesAmount *CurrencyAndAmount `json:"charges_amount,omitempty"`
+
+	// return amount
+	ReturnAmount *CurrencyAndAmount `json:"return_amount,omitempty"`
+
 	// return code
 	ReturnCode string `json:"return_code,omitempty"`
 
@@ -350,10 +356,38 @@ type DirectDebitReturnAttributes struct {
 func DirectDebitReturnAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnAttributes {
 	return &DirectDebitReturnAttributes{
 
+		ChargesAmount: CurrencyAndAmountWithDefaults(defaults),
+
+		ReturnAmount: CurrencyAndAmountWithDefaults(defaults),
+
 		ReturnCode: defaults.GetString("DirectDebitReturnAttributes", "return_code"),
 
 		SchemeTransactionID: defaults.GetString("DirectDebitReturnAttributes", "scheme_transaction_id"),
 	}
+}
+
+func (m *DirectDebitReturnAttributes) WithChargesAmount(chargesAmount CurrencyAndAmount) *DirectDebitReturnAttributes {
+
+	m.ChargesAmount = &chargesAmount
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithoutChargesAmount() *DirectDebitReturnAttributes {
+	m.ChargesAmount = nil
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithReturnAmount(returnAmount CurrencyAndAmount) *DirectDebitReturnAttributes {
+
+	m.ReturnAmount = &returnAmount
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithoutReturnAmount() *DirectDebitReturnAttributes {
+	m.ReturnAmount = nil
+	return m
 }
 
 func (m *DirectDebitReturnAttributes) WithReturnCode(returnCode string) *DirectDebitReturnAttributes {
@@ -372,6 +406,55 @@ func (m *DirectDebitReturnAttributes) WithSchemeTransactionID(schemeTransactionI
 
 // Validate validates this direct debit return attributes
 func (m *DirectDebitReturnAttributes) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateChargesAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReturnAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitReturnAttributes) validateChargesAmount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ChargesAmount) { // not required
+		return nil
+	}
+
+	if m.ChargesAmount != nil {
+		if err := m.ChargesAmount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "charges_amount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnAttributes) validateReturnAmount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReturnAmount) { // not required
+		return nil
+	}
+
+	if m.ReturnAmount != nil {
+		if err := m.ReturnAmount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "return_amount")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
