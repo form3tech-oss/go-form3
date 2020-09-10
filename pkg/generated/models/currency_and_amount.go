@@ -21,7 +21,7 @@ import (
 // swagger:model CurrencyAndAmount
 type CurrencyAndAmount struct {
 
-	// Amount that is being returned/kept. The sum of `recall-amount.amount` and `charges-amount.amount` have to equal the original payment amount.
+	// amount
 	// Pattern: ^[0-9.]{0,20}$
 	Amount string `json:"amount,omitempty"`
 

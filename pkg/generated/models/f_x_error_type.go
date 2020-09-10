@@ -21,9 +21,6 @@ type FXErrorType string
 
 const (
 
-	// FXErrorTypeAPIFxInvalidPartyID captures enum value "api.fx.invalid_party_id"
-	FXErrorTypeAPIFxInvalidPartyID FXErrorType = "api.fx.invalid_party_id"
-
 	// FXErrorTypeAPIFxTargetCurrencyNotAllowed captures enum value "api.fx.target_currency_not_allowed"
 	FXErrorTypeAPIFxTargetCurrencyNotAllowed FXErrorType = "api.fx.target_currency_not_allowed"
 
@@ -57,7 +54,7 @@ var fXErrorTypeEnum []interface{}
 
 func init() {
 	var res []FXErrorType
-	if err := json.Unmarshal([]byte(`["api.fx.invalid_party_id","api.fx.target_currency_not_allowed","api.fx.source_currency_not_allowed","api.fx.type_not_allowed","api.fx.amount_exceeds_maximum","api.fx.currency_not_allowed","api.fx.currency_not_equal","api.fx.expired_deal","api.fx.invalid_purpose","api.fx.gateway_issue"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["api.fx.target_currency_not_allowed","api.fx.source_currency_not_allowed","api.fx.type_not_allowed","api.fx.amount_exceeds_maximum","api.fx.currency_not_allowed","api.fx.currency_not_equal","api.fx.expired_deal","api.fx.invalid_purpose","api.fx.gateway_issue"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -526,6 +526,72 @@ func (a *GetDirectDebitSubmissionRequest) MustDo() *GetDirectDebitSubmissionOK {
 }
 
 /*
+get transaction directdebits ID recalls recall ID API
+*/
+func (a *GetTransactionDirectdebitsIDRecallsRecallIDRequest) Do() (*GetTransactionDirectdebitsIDRecallsRecallIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDRecallsRecallID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/recalls/{recallID}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDRecallsRecallIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDRecallsRecallIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDRecallsRecallIDRequest) MustDo() *GetTransactionDirectdebitsIDRecallsRecallIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction directdebits ID recalls recall ID admissions admission ID API
+*/
+func (a *GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest) Do() (*GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/recalls/{recallId}/admissions/{admissionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest) MustDo() *GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 list direct debits API
 */
 func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
@@ -551,6 +617,39 @@ func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
 }
 
 func (a *ListDirectDebitsRequest) MustDo() *ListDirectDebitsOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+post transaction directdebits ID recalls API
+*/
+func (a *PostTransactionDirectdebitsIDRecallsRequest) Do() (*PostTransactionDirectdebitsIDRecallsCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostTransactionDirectdebitsIDRecalls",
+		Method:             "POST",
+		PathPattern:        "/transaction/directdebits/{id}/recalls",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PostTransactionDirectdebitsIDRecallsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostTransactionDirectdebitsIDRecallsCreated), nil
+
+}
+
+func (a *PostTransactionDirectdebitsIDRecallsRequest) MustDo() *PostTransactionDirectdebitsIDRecallsCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
