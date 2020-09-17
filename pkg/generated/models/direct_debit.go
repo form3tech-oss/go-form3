@@ -980,6 +980,9 @@ type DirectDebitAttributesBeneficiaryParty struct {
 
 	// Beneficiary name
 	Name string `json:"name,omitempty"`
+
+	// private identification
+	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 }
 
 func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesBeneficiaryParty {
@@ -1000,6 +1003,8 @@ func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults)
 		Country: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "country"),
 
 		Name: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "name"),
+
+		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 	}
 }
 
@@ -1064,6 +1069,18 @@ func (m *DirectDebitAttributesBeneficiaryParty) WithName(name string) *DirectDeb
 	return m
 }
 
+func (m *DirectDebitAttributesBeneficiaryParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *DirectDebitAttributesBeneficiaryParty {
+
+	m.PrivateIdentification = &privateIdentification
+
+	return m
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) WithoutPrivateIdentification() *DirectDebitAttributesBeneficiaryParty {
+	m.PrivateIdentification = nil
+	return m
+}
+
 // Validate validates this direct debit attributes beneficiary party
 func (m *DirectDebitAttributesBeneficiaryParty) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -1073,6 +1090,10 @@ func (m *DirectDebitAttributesBeneficiaryParty) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateAccountWith(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrivateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1108,6 +1129,24 @@ func (m *DirectDebitAttributesBeneficiaryParty) validateAccountWith(formats strf
 		if err := m.AccountWith.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("attributes" + "." + "beneficiary_party" + "." + "account_with")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) validatePrivateIdentification(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PrivateIdentification) { // not required
+		return nil
+	}
+
+	if m.PrivateIdentification != nil {
+		if err := m.PrivateIdentification.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "beneficiary_party" + "." + "private_identification")
 			}
 			return err
 		}

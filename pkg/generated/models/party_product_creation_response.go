@@ -16,52 +16,52 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProductEventGetResponse product event get response
-// swagger:model ProductEventGetResponse
-type ProductEventGetResponse struct {
+// PartyProductCreationResponse party product creation response
+// swagger:model PartyProductCreationResponse
+type PartyProductCreationResponse struct {
 
 	// data
-	Data *ProductEvent `json:"data,omitempty"`
+	Data *PartyProduct `json:"data,omitempty"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
 
-func ProductEventGetResponseWithDefaults(defaults client.Defaults) *ProductEventGetResponse {
-	return &ProductEventGetResponse{
+func PartyProductCreationResponseWithDefaults(defaults client.Defaults) *PartyProductCreationResponse {
+	return &PartyProductCreationResponse{
 
-		Data: ProductEventWithDefaults(defaults),
+		Data: PartyProductWithDefaults(defaults),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *ProductEventGetResponse) WithData(data ProductEvent) *ProductEventGetResponse {
+func (m *PartyProductCreationResponse) WithData(data PartyProduct) *PartyProductCreationResponse {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *ProductEventGetResponse) WithoutData() *ProductEventGetResponse {
+func (m *PartyProductCreationResponse) WithoutData() *PartyProductCreationResponse {
 	m.Data = nil
 	return m
 }
 
-func (m *ProductEventGetResponse) WithLinks(links Links) *ProductEventGetResponse {
+func (m *PartyProductCreationResponse) WithLinks(links Links) *PartyProductCreationResponse {
 
 	m.Links = &links
 
 	return m
 }
 
-func (m *ProductEventGetResponse) WithoutLinks() *ProductEventGetResponse {
+func (m *PartyProductCreationResponse) WithoutLinks() *PartyProductCreationResponse {
 	m.Links = nil
 	return m
 }
 
-// Validate validates this product event get response
-func (m *ProductEventGetResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this party product creation response
+func (m *PartyProductCreationResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -78,7 +78,7 @@ func (m *ProductEventGetResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEventGetResponse) validateData(formats strfmt.Registry) error {
+func (m *PartyProductCreationResponse) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -96,7 +96,7 @@ func (m *ProductEventGetResponse) validateData(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEventGetResponse) validateLinks(formats strfmt.Registry) error {
+func (m *PartyProductCreationResponse) validateLinks(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Links) { // not required
 		return nil
@@ -115,7 +115,7 @@ func (m *ProductEventGetResponse) validateLinks(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *ProductEventGetResponse) MarshalBinary() ([]byte, error) {
+func (m *PartyProductCreationResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -123,15 +123,15 @@ func (m *ProductEventGetResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ProductEventGetResponse) UnmarshalBinary(b []byte) error {
-	var res ProductEventGetResponse
+func (m *PartyProductCreationResponse) UnmarshalBinary(b []byte) error {
+	var res PartyProductCreationResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ProductEventGetResponse) Json() string {
+func (m *PartyProductCreationResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

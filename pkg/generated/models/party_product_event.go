@@ -17,13 +17,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ProductEvent product event
-// swagger:model ProductEvent
-type ProductEvent struct {
+// PartyProductEvent party product event
+// swagger:model PartyProductEvent
+type PartyProductEvent struct {
 
 	// attributes
 	// Required: true
-	Attributes *ProductEventAttributes `json:"attributes"`
+	Attributes *PartyProductEventAttributes `json:"attributes"`
 
 	// created on
 	// Format: datetime
@@ -47,7 +47,7 @@ type ProductEvent struct {
 	Relationships *Relationships `json:"relationships,omitempty"`
 
 	// type
-	// Enum: [product_events]
+	// Enum: [party_product_events]
 	Type string `json:"type,omitempty"`
 
 	// version
@@ -55,110 +55,110 @@ type ProductEvent struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-func ProductEventWithDefaults(defaults client.Defaults) *ProductEvent {
-	return &ProductEvent{
+func PartyProductEventWithDefaults(defaults client.Defaults) *PartyProductEvent {
+	return &PartyProductEvent{
 
-		Attributes: ProductEventAttributesWithDefaults(defaults),
+		Attributes: PartyProductEventAttributesWithDefaults(defaults),
 
-		CreatedOn: defaults.GetStrfmtDateTime("ProductEvent", "created_on"),
+		CreatedOn: defaults.GetStrfmtDateTime("PartyProductEvent", "created_on"),
 
-		ID: defaults.GetStrfmtUUIDPtr("ProductEvent", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("PartyProductEvent", "id"),
 
-		ModifiedOn: defaults.GetStrfmtDateTime("ProductEvent", "modified_on"),
+		ModifiedOn: defaults.GetStrfmtDateTime("PartyProductEvent", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUIDPtr("ProductEvent", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("PartyProductEvent", "organisation_id"),
 
 		Relationships: RelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("ProductEvent", "type"),
+		Type: defaults.GetString("PartyProductEvent", "type"),
 
-		Version: defaults.GetInt64Ptr("ProductEvent", "version"),
+		Version: defaults.GetInt64Ptr("PartyProductEvent", "version"),
 	}
 }
 
-func (m *ProductEvent) WithAttributes(attributes ProductEventAttributes) *ProductEvent {
+func (m *PartyProductEvent) WithAttributes(attributes PartyProductEventAttributes) *PartyProductEvent {
 
 	m.Attributes = &attributes
 
 	return m
 }
 
-func (m *ProductEvent) WithoutAttributes() *ProductEvent {
+func (m *PartyProductEvent) WithoutAttributes() *PartyProductEvent {
 	m.Attributes = nil
 	return m
 }
 
-func (m *ProductEvent) WithCreatedOn(createdOn strfmt.DateTime) *ProductEvent {
+func (m *PartyProductEvent) WithCreatedOn(createdOn strfmt.DateTime) *PartyProductEvent {
 
 	m.CreatedOn = createdOn
 
 	return m
 }
 
-func (m *ProductEvent) WithID(id strfmt.UUID) *ProductEvent {
+func (m *PartyProductEvent) WithID(id strfmt.UUID) *PartyProductEvent {
 
 	m.ID = &id
 
 	return m
 }
 
-func (m *ProductEvent) WithoutID() *ProductEvent {
+func (m *PartyProductEvent) WithoutID() *PartyProductEvent {
 	m.ID = nil
 	return m
 }
 
-func (m *ProductEvent) WithModifiedOn(modifiedOn strfmt.DateTime) *ProductEvent {
+func (m *PartyProductEvent) WithModifiedOn(modifiedOn strfmt.DateTime) *PartyProductEvent {
 
 	m.ModifiedOn = modifiedOn
 
 	return m
 }
 
-func (m *ProductEvent) WithOrganisationID(organisationID strfmt.UUID) *ProductEvent {
+func (m *PartyProductEvent) WithOrganisationID(organisationID strfmt.UUID) *PartyProductEvent {
 
 	m.OrganisationID = &organisationID
 
 	return m
 }
 
-func (m *ProductEvent) WithoutOrganisationID() *ProductEvent {
+func (m *PartyProductEvent) WithoutOrganisationID() *PartyProductEvent {
 	m.OrganisationID = nil
 	return m
 }
 
-func (m *ProductEvent) WithRelationships(relationships Relationships) *ProductEvent {
+func (m *PartyProductEvent) WithRelationships(relationships Relationships) *PartyProductEvent {
 
 	m.Relationships = &relationships
 
 	return m
 }
 
-func (m *ProductEvent) WithoutRelationships() *ProductEvent {
+func (m *PartyProductEvent) WithoutRelationships() *PartyProductEvent {
 	m.Relationships = nil
 	return m
 }
 
-func (m *ProductEvent) WithType(typeVar string) *ProductEvent {
+func (m *PartyProductEvent) WithType(typeVar string) *PartyProductEvent {
 
 	m.Type = typeVar
 
 	return m
 }
 
-func (m *ProductEvent) WithVersion(version int64) *ProductEvent {
+func (m *PartyProductEvent) WithVersion(version int64) *PartyProductEvent {
 
 	m.Version = &version
 
 	return m
 }
 
-func (m *ProductEvent) WithoutVersion() *ProductEvent {
+func (m *PartyProductEvent) WithoutVersion() *PartyProductEvent {
 	m.Version = nil
 	return m
 }
 
-// Validate validates this product event
-func (m *ProductEvent) Validate(formats strfmt.Registry) error {
+// Validate validates this party product event
+func (m *PartyProductEvent) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAttributes(formats); err != nil {
@@ -199,7 +199,7 @@ func (m *ProductEvent) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateAttributes(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateAttributes(formats strfmt.Registry) error {
 
 	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
 		return err
@@ -217,7 +217,7 @@ func (m *ProductEvent) validateAttributes(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateCreatedOn(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateCreatedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedOn) { // not required
 		return nil
@@ -230,7 +230,7 @@ func (m *ProductEvent) validateCreatedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateID(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
@@ -243,7 +243,7 @@ func (m *ProductEvent) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateModifiedOn(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateModifiedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ModifiedOn) { // not required
 		return nil
@@ -256,7 +256,7 @@ func (m *ProductEvent) validateModifiedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateOrganisationID(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateOrganisationID(formats strfmt.Registry) error {
 
 	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
 		return err
@@ -269,7 +269,7 @@ func (m *ProductEvent) validateOrganisationID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateRelationships(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateRelationships(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Relationships) { // not required
 		return nil
@@ -287,33 +287,33 @@ func (m *ProductEvent) validateRelationships(formats strfmt.Registry) error {
 	return nil
 }
 
-var productEventTypeTypePropEnum []interface{}
+var partyProductEventTypeTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["product_events"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["party_product_events"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
-		productEventTypeTypePropEnum = append(productEventTypeTypePropEnum, v)
+		partyProductEventTypeTypePropEnum = append(partyProductEventTypeTypePropEnum, v)
 	}
 }
 
 const (
 
-	// ProductEventTypeProductEvents captures enum value "product_events"
-	ProductEventTypeProductEvents string = "product_events"
+	// PartyProductEventTypePartyProductEvents captures enum value "party_product_events"
+	PartyProductEventTypePartyProductEvents string = "party_product_events"
 )
 
 // prop value enum
-func (m *ProductEvent) validateTypeEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, productEventTypeTypePropEnum); err != nil {
+func (m *PartyProductEvent) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, partyProductEventTypeTypePropEnum); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (m *ProductEvent) validateType(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
@@ -327,7 +327,7 @@ func (m *ProductEvent) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEvent) validateVersion(formats strfmt.Registry) error {
+func (m *PartyProductEvent) validateVersion(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Version) { // not required
 		return nil
@@ -341,7 +341,7 @@ func (m *ProductEvent) validateVersion(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *ProductEvent) MarshalBinary() ([]byte, error) {
+func (m *PartyProductEvent) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -349,15 +349,15 @@ func (m *ProductEvent) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ProductEvent) UnmarshalBinary(b []byte) error {
-	var res ProductEvent
+func (m *PartyProductEvent) UnmarshalBinary(b []byte) error {
+	var res PartyProductEvent
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ProductEvent) Json() string {
+func (m *PartyProductEvent) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

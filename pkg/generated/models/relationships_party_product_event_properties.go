@@ -17,30 +17,30 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RelationshipsProductEventProperties relationships product event properties
-// swagger:model RelationshipsProductEventProperties
-type RelationshipsProductEventProperties struct {
+// RelationshipsPartyProductEventProperties relationships party product event properties
+// swagger:model RelationshipsPartyProductEventProperties
+type RelationshipsPartyProductEventProperties struct {
 
 	// data
-	Data []*ProductEvent `json:"data"`
+	Data []*PartyProductEvent `json:"data"`
 }
 
-func RelationshipsProductEventPropertiesWithDefaults(defaults client.Defaults) *RelationshipsProductEventProperties {
-	return &RelationshipsProductEventProperties{
+func RelationshipsPartyProductEventPropertiesWithDefaults(defaults client.Defaults) *RelationshipsPartyProductEventProperties {
+	return &RelationshipsPartyProductEventProperties{
 
-		Data: make([]*ProductEvent, 0),
+		Data: make([]*PartyProductEvent, 0),
 	}
 }
 
-func (m *RelationshipsProductEventProperties) WithData(data []*ProductEvent) *RelationshipsProductEventProperties {
+func (m *RelationshipsPartyProductEventProperties) WithData(data []*PartyProductEvent) *RelationshipsPartyProductEventProperties {
 
 	m.Data = data
 
 	return m
 }
 
-// Validate validates this relationships product event properties
-func (m *RelationshipsProductEventProperties) Validate(formats strfmt.Registry) error {
+// Validate validates this relationships party product event properties
+func (m *RelationshipsPartyProductEventProperties) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -53,7 +53,7 @@ func (m *RelationshipsProductEventProperties) Validate(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *RelationshipsProductEventProperties) validateData(formats strfmt.Registry) error {
+func (m *RelationshipsPartyProductEventProperties) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -79,7 +79,7 @@ func (m *RelationshipsProductEventProperties) validateData(formats strfmt.Regist
 }
 
 // MarshalBinary interface implementation
-func (m *RelationshipsProductEventProperties) MarshalBinary() ([]byte, error) {
+func (m *RelationshipsPartyProductEventProperties) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -87,15 +87,15 @@ func (m *RelationshipsProductEventProperties) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *RelationshipsProductEventProperties) UnmarshalBinary(b []byte) error {
-	var res RelationshipsProductEventProperties
+func (m *RelationshipsPartyProductEventProperties) UnmarshalBinary(b []byte) error {
+	var res RelationshipsPartyProductEventProperties
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *RelationshipsProductEventProperties) Json() string {
+func (m *RelationshipsPartyProductEventProperties) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

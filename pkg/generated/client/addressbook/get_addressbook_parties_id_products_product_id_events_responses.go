@@ -51,7 +51,7 @@ type GetAddressbookPartiesIDProductsProductIDEventsOK struct {
 	//Payload
 
 	// isStream: false
-	*models.ListProductEventsResponse
+	*models.ListPartyProductEventsResponse
 }
 
 func (o *GetAddressbookPartiesIDProductsProductIDEventsOK) Error() string {
@@ -60,11 +60,11 @@ func (o *GetAddressbookPartiesIDProductsProductIDEventsOK) Error() string {
 
 func (o *GetAddressbookPartiesIDProductsProductIDEventsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.ListProductEventsResponse = new(models.ListProductEventsResponse)
+	o.ListPartyProductEventsResponse = new(models.ListPartyProductEventsResponse)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.ListProductEventsResponse); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.ListPartyProductEventsResponse); err != nil && err != io.EOF {
 		return err
 	}
 
