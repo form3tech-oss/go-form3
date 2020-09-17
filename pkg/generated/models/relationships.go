@@ -32,11 +32,11 @@ type Relationships struct {
 	// party account
 	PartyAccount *RelationshipsPartyAccountProperties `json:"party_account,omitempty"`
 
-	// party product
-	PartyProduct *RelationshipsPartyProductProperties `json:"party_product,omitempty"`
+	// party product events
+	PartyProductEvents *RelationshipsPartyProductEventProperties `json:"party_product_events,omitempty"`
 
-	// product events
-	ProductEvents *RelationshipsProductEventProperties `json:"product_events,omitempty"`
+	// party products
+	PartyProducts *RelationshipsPartyProductProperties `json:"party_products,omitempty"`
 }
 
 func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
@@ -50,9 +50,9 @@ func RelationshipsWithDefaults(defaults client.Defaults) *Relationships {
 
 		PartyAccount: RelationshipsPartyAccountPropertiesWithDefaults(defaults),
 
-		PartyProduct: RelationshipsPartyProductPropertiesWithDefaults(defaults),
+		PartyProductEvents: RelationshipsPartyProductEventPropertiesWithDefaults(defaults),
 
-		ProductEvents: RelationshipsProductEventPropertiesWithDefaults(defaults),
+		PartyProducts: RelationshipsPartyProductPropertiesWithDefaults(defaults),
 	}
 }
 
@@ -104,27 +104,27 @@ func (m *Relationships) WithoutPartyAccount() *Relationships {
 	return m
 }
 
-func (m *Relationships) WithPartyProduct(partyProduct RelationshipsPartyProductProperties) *Relationships {
+func (m *Relationships) WithPartyProductEvents(partyProductEvents RelationshipsPartyProductEventProperties) *Relationships {
 
-	m.PartyProduct = &partyProduct
-
-	return m
-}
-
-func (m *Relationships) WithoutPartyProduct() *Relationships {
-	m.PartyProduct = nil
-	return m
-}
-
-func (m *Relationships) WithProductEvents(productEvents RelationshipsProductEventProperties) *Relationships {
-
-	m.ProductEvents = &productEvents
+	m.PartyProductEvents = &partyProductEvents
 
 	return m
 }
 
-func (m *Relationships) WithoutProductEvents() *Relationships {
-	m.ProductEvents = nil
+func (m *Relationships) WithoutPartyProductEvents() *Relationships {
+	m.PartyProductEvents = nil
+	return m
+}
+
+func (m *Relationships) WithPartyProducts(partyProducts RelationshipsPartyProductProperties) *Relationships {
+
+	m.PartyProducts = &partyProducts
+
+	return m
+}
+
+func (m *Relationships) WithoutPartyProducts() *Relationships {
+	m.PartyProducts = nil
 	return m
 }
 
@@ -148,11 +148,11 @@ func (m *Relationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validatePartyProduct(formats); err != nil {
+	if err := m.validatePartyProductEvents(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateProductEvents(formats); err != nil {
+	if err := m.validatePartyProducts(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -234,16 +234,16 @@ func (m *Relationships) validatePartyAccount(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Relationships) validatePartyProduct(formats strfmt.Registry) error {
+func (m *Relationships) validatePartyProductEvents(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.PartyProduct) { // not required
+	if swag.IsZero(m.PartyProductEvents) { // not required
 		return nil
 	}
 
-	if m.PartyProduct != nil {
-		if err := m.PartyProduct.Validate(formats); err != nil {
+	if m.PartyProductEvents != nil {
+		if err := m.PartyProductEvents.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("party_product")
+				return ve.ValidateName("party_product_events")
 			}
 			return err
 		}
@@ -252,16 +252,16 @@ func (m *Relationships) validatePartyProduct(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Relationships) validateProductEvents(formats strfmt.Registry) error {
+func (m *Relationships) validatePartyProducts(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ProductEvents) { // not required
+	if swag.IsZero(m.PartyProducts) { // not required
 		return nil
 	}
 
-	if m.ProductEvents != nil {
-		if err := m.ProductEvents.Validate(formats); err != nil {
+	if m.PartyProducts != nil {
+		if err := m.PartyProducts.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("product_events")
+				return ve.ValidateName("party_products")
 			}
 			return err
 		}

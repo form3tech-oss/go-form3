@@ -17,9 +17,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProductEventAttributes product event attributes
-// swagger:model ProductEventAttributes
-type ProductEventAttributes struct {
+// PartyProductEventAttributes party product event attributes
+// swagger:model PartyProductEventAttributes
+type PartyProductEventAttributes struct {
 
 	// provider status
 	ProviderStatus string `json:"provider_status,omitempty"`
@@ -31,40 +31,40 @@ type ProductEventAttributes struct {
 	Status string `json:"status,omitempty"`
 }
 
-func ProductEventAttributesWithDefaults(defaults client.Defaults) *ProductEventAttributes {
-	return &ProductEventAttributes{
+func PartyProductEventAttributesWithDefaults(defaults client.Defaults) *PartyProductEventAttributes {
+	return &PartyProductEventAttributes{
 
-		ProviderStatus: defaults.GetString("ProductEventAttributes", "provider_status"),
+		ProviderStatus: defaults.GetString("PartyProductEventAttributes", "provider_status"),
 
 		ProviderStatusItems: make([]*ProviderStatusItem, 0),
 
-		Status: defaults.GetString("ProductEventAttributes", "status"),
+		Status: defaults.GetString("PartyProductEventAttributes", "status"),
 	}
 }
 
-func (m *ProductEventAttributes) WithProviderStatus(providerStatus string) *ProductEventAttributes {
+func (m *PartyProductEventAttributes) WithProviderStatus(providerStatus string) *PartyProductEventAttributes {
 
 	m.ProviderStatus = providerStatus
 
 	return m
 }
 
-func (m *ProductEventAttributes) WithProviderStatusItems(providerStatusItems []*ProviderStatusItem) *ProductEventAttributes {
+func (m *PartyProductEventAttributes) WithProviderStatusItems(providerStatusItems []*ProviderStatusItem) *PartyProductEventAttributes {
 
 	m.ProviderStatusItems = providerStatusItems
 
 	return m
 }
 
-func (m *ProductEventAttributes) WithStatus(status string) *ProductEventAttributes {
+func (m *PartyProductEventAttributes) WithStatus(status string) *PartyProductEventAttributes {
 
 	m.Status = status
 
 	return m
 }
 
-// Validate validates this product event attributes
-func (m *ProductEventAttributes) Validate(formats strfmt.Registry) error {
+// Validate validates this party product event attributes
+func (m *PartyProductEventAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateProviderStatusItems(formats); err != nil {
@@ -77,7 +77,7 @@ func (m *ProductEventAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEventAttributes) validateProviderStatusItems(formats strfmt.Registry) error {
+func (m *PartyProductEventAttributes) validateProviderStatusItems(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ProviderStatusItems) { // not required
 		return nil
@@ -103,7 +103,7 @@ func (m *ProductEventAttributes) validateProviderStatusItems(formats strfmt.Regi
 }
 
 // MarshalBinary interface implementation
-func (m *ProductEventAttributes) MarshalBinary() ([]byte, error) {
+func (m *PartyProductEventAttributes) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,15 +111,15 @@ func (m *ProductEventAttributes) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ProductEventAttributes) UnmarshalBinary(b []byte) error {
-	var res ProductEventAttributes
+func (m *PartyProductEventAttributes) UnmarshalBinary(b []byte) error {
+	var res PartyProductEventAttributes
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ProductEventAttributes) Json() string {
+func (m *PartyProductEventAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

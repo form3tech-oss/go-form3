@@ -16,35 +16,35 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProductEventNotification product event notification
-// swagger:model ProductEventNotification
-type ProductEventNotification struct {
+// PartyProductCreatedEvent party product created event
+// swagger:model PartyProductCreatedEvent
+type PartyProductCreatedEvent struct {
 
 	// data
-	Data *ProductEvent `json:"data,omitempty"`
+	Data *PartyProductCreatedEventPartyProduct `json:"data,omitempty"`
 }
 
-func ProductEventNotificationWithDefaults(defaults client.Defaults) *ProductEventNotification {
-	return &ProductEventNotification{
+func PartyProductCreatedEventWithDefaults(defaults client.Defaults) *PartyProductCreatedEvent {
+	return &PartyProductCreatedEvent{
 
-		Data: ProductEventWithDefaults(defaults),
+		Data: PartyProductCreatedEventPartyProductWithDefaults(defaults),
 	}
 }
 
-func (m *ProductEventNotification) WithData(data ProductEvent) *ProductEventNotification {
+func (m *PartyProductCreatedEvent) WithData(data PartyProductCreatedEventPartyProduct) *PartyProductCreatedEvent {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *ProductEventNotification) WithoutData() *ProductEventNotification {
+func (m *PartyProductCreatedEvent) WithoutData() *PartyProductCreatedEvent {
 	m.Data = nil
 	return m
 }
 
-// Validate validates this product event notification
-func (m *ProductEventNotification) Validate(formats strfmt.Registry) error {
+// Validate validates this party product created event
+func (m *PartyProductCreatedEvent) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -57,7 +57,7 @@ func (m *ProductEventNotification) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ProductEventNotification) validateData(formats strfmt.Registry) error {
+func (m *PartyProductCreatedEvent) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -76,7 +76,7 @@ func (m *ProductEventNotification) validateData(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *ProductEventNotification) MarshalBinary() ([]byte, error) {
+func (m *PartyProductCreatedEvent) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -84,15 +84,15 @@ func (m *ProductEventNotification) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ProductEventNotification) UnmarshalBinary(b []byte) error {
-	var res ProductEventNotification
+func (m *PartyProductCreatedEvent) UnmarshalBinary(b []byte) error {
+	var res PartyProductCreatedEvent
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ProductEventNotification) Json() string {
+func (m *PartyProductCreatedEvent) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
