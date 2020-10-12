@@ -67,10 +67,23 @@ See [examples](examples/) for a small subset of sample scripts.
 
 ## Updating the Client
 
-Tasks in the `Make` file download and preprocess the latest API swagger version.
+### Pre-requisites
 
-* `make install-swagger` to install go-swagger if not already installed.
-* `make` to regenerate the client files.
+* [yq](https://github.com/mikefarah/yq) (:warning: the `python-yq` package is not compatible)
+  * macOS: `brew install yq`
+  * linux: `sudo add-apt-repository ppa:rmescandon/yq && sudo apt-get install yq`
+* Python 3:
+  * macOS: `brew install python`
+  * linux: `sudo apt-get install python3.8`
+* Python YAML package:
+  * `pip3 install pyyaml`
+
+### Regenerate client
+
+Tasks in the `Makefile` download and preprocess the latest API swagger version:
+
+1. `make install-swagger` to install go-swagger if not already installed.
+1. `make` to regenerate the client files.
 
 ## License
 Copyright 2019-2020 Form3 Financial Cloud
