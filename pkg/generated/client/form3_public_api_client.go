@@ -12,6 +12,7 @@ import (
 
 	"github.com/form3tech-oss/go-form3/v2/pkg/client"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/a_c_e"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/account_request"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/accounts"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/addressbook"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/audit"
@@ -79,6 +80,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.Transport = transport
 
 	cli.Ace = a_c_e.New(transport, formats, defaults)
+
+	cli.AccountRequest = account_request.New(transport, formats, defaults)
 
 	cli.Accounts = accounts.New(transport, formats, defaults)
 
@@ -164,6 +167,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type Form3PublicAPI struct {
 	Ace *a_c_e.Client
 
+	AccountRequest *account_request.Client
+
 	Accounts *accounts.Client
 
 	Addressbook *addressbook.Client
@@ -210,6 +215,8 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
 	c.Ace.SetTransport(transport)
+
+	c.AccountRequest.SetTransport(transport)
 
 	c.Accounts.SetTransport(transport)
 

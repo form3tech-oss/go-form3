@@ -176,6 +176,15 @@ const (
 
 	// ResourceTypeSchemeMessageAdmissions captures enum value "scheme_message_admissions"
 	ResourceTypeSchemeMessageAdmissions ResourceType = "scheme_message_admissions"
+
+	// ResourceTypeAccountRequests captures enum value "account_requests"
+	ResourceTypeAccountRequests ResourceType = "account_requests"
+
+	// ResourceTypeAccountRequestSubmissionValidations captures enum value "account_request_submission_validations"
+	ResourceTypeAccountRequestSubmissionValidations ResourceType = "account_request_submission_validations"
+
+	// ResourceTypeAccountRequestSubmissions captures enum value "account_request_submissions"
+	ResourceTypeAccountRequestSubmissions ResourceType = "account_request_submissions"
 )
 
 // for schema
@@ -183,7 +192,7 @@ var resourceTypeEnum []interface{}
 
 func init() {
 	var res []ResourceType
-	if err := json.Unmarshal([]byte(`["party_product_events","contacts","payment_advice_submissions","product_events","direct_debit","party_accounts","party_products","recall_submissions","contact_accounts","recall_submission_validations","recall_reversal_admissions","fx_deals","payment_submissions","scheme_messages","returns","account_routings","reversal_submissions","payments","recall_decisions","accounts","product_associations","recalls","recall_decision_admissions","payment_automatic_returns","reversal_submission_validations","parties","recall_reversals","return_submissions","bank_ids","reversals","return_admissions","limits","payment_admissions","direct_account","recall_decision_submissions","payment_advices","return_reversal_admissions","payment_batches","account_configurations","positions","return_submission_validations","recall_decision_submission_validations","payment_defaults","recall_admissions","return_reversals","reversal_admissions","payment_submission_validations","payment_advice_submission_validations","bics","account_events","party_actors","scheme_message_admissions"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["party_product_events","contacts","payment_advice_submissions","product_events","direct_debit","party_accounts","party_products","recall_submissions","contact_accounts","recall_submission_validations","recall_reversal_admissions","fx_deals","payment_submissions","scheme_messages","returns","account_routings","reversal_submissions","payments","recall_decisions","accounts","product_associations","recalls","recall_decision_admissions","payment_automatic_returns","reversal_submission_validations","parties","recall_reversals","return_submissions","bank_ids","reversals","return_admissions","limits","payment_admissions","direct_account","recall_decision_submissions","payment_advices","return_reversal_admissions","payment_batches","account_configurations","positions","return_submission_validations","recall_decision_submission_validations","payment_defaults","recall_admissions","return_reversals","reversal_admissions","payment_submission_validations","payment_advice_submission_validations","bics","account_events","party_actors","scheme_message_admissions","account_request_submission_validations","account_request_submissions","account_requests"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
