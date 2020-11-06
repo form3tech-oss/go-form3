@@ -25,9 +25,17 @@ type MandateReturn struct {
 	// attributes
 	Attributes *MandateReturnAttributes `json:"attributes,omitempty"`
 
+	// created on
+	// Format: date-time
+	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
+
 	// id
 	// Format: uuid
 	ID strfmt.UUID `json:"id,omitempty"`
+
+	// modified on
+	// Format: date-time
+	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
 	// Format: uuid
@@ -50,7 +58,11 @@ func MandateReturnWithDefaults(defaults client.Defaults) *MandateReturn {
 
 		Attributes: MandateReturnAttributesWithDefaults(defaults),
 
+		CreatedOn: defaults.GetStrfmtDateTimePtr("MandateReturn", "created_on"),
+
 		ID: defaults.GetStrfmtUUID("MandateReturn", "id"),
+
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("MandateReturn", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUID("MandateReturn", "organisation_id"),
 
@@ -74,10 +86,34 @@ func (m *MandateReturn) WithoutAttributes() *MandateReturn {
 	return m
 }
 
+func (m *MandateReturn) WithCreatedOn(createdOn strfmt.DateTime) *MandateReturn {
+
+	m.CreatedOn = &createdOn
+
+	return m
+}
+
+func (m *MandateReturn) WithoutCreatedOn() *MandateReturn {
+	m.CreatedOn = nil
+	return m
+}
+
 func (m *MandateReturn) WithID(id strfmt.UUID) *MandateReturn {
 
 	m.ID = id
 
+	return m
+}
+
+func (m *MandateReturn) WithModifiedOn(modifiedOn strfmt.DateTime) *MandateReturn {
+
+	m.ModifiedOn = &modifiedOn
+
+	return m
+}
+
+func (m *MandateReturn) WithoutModifiedOn() *MandateReturn {
+	m.ModifiedOn = nil
 	return m
 }
 
@@ -127,7 +163,15 @@ func (m *MandateReturn) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreatedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModifiedOn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,6 +215,19 @@ func (m *MandateReturn) validateAttributes(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MandateReturn) validateCreatedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreatedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_on", "body", "date-time", m.CreatedOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MandateReturn) validateID(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ID) { // not required
@@ -178,6 +235,19 @@ func (m *MandateReturn) validateID(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MandateReturn) validateModifiedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ModifiedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("modified_on", "body", "date-time", m.ModifiedOn.String(), formats); err != nil {
 		return err
 	}
 

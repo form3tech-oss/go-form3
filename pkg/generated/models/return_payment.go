@@ -355,6 +355,9 @@ type ReturnPaymentAttributes struct {
 	// Pattern: ^[0-9.]{0,20}$
 	Amount string `json:"amount,omitempty"`
 
+	// Unique identifier for organisations collecting payments
+	ClearingID string `json:"clearing_id,omitempty"`
+
 	// ISO currency code for transaction amount
 	Currency string `json:"currency,omitempty"`
 
@@ -383,6 +386,8 @@ func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymen
 
 		Amount: defaults.GetString("ReturnPaymentAttributes", "amount"),
 
+		ClearingID: defaults.GetString("ReturnPaymentAttributes", "clearing_id"),
+
 		Currency: defaults.GetString("ReturnPaymentAttributes", "currency"),
 
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("ReturnPaymentAttributes", "limit_breach_end_datetime"),
@@ -400,6 +405,13 @@ func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymen
 func (m *ReturnPaymentAttributes) WithAmount(amount string) *ReturnPaymentAttributes {
 
 	m.Amount = amount
+
+	return m
+}
+
+func (m *ReturnPaymentAttributes) WithClearingID(clearingID string) *ReturnPaymentAttributes {
+
+	m.ClearingID = clearingID
 
 	return m
 }

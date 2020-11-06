@@ -349,8 +349,8 @@ type DirectDebitReversalAttributes struct {
 	// The reason for the direct debit reversal. Has to be a valid [reversal reason code](http://api-docs.form3.tech/api.html#enumerations-reversal-reason-codes).
 	ReasonCode string `json:"reason_code,omitempty"`
 
-	// reversed amount
-	ReversedAmount *DirectDebitReversalAttributesReversedAmount `json:"reversed_amount,omitempty"`
+	// reversal amount
+	ReversalAmount *DirectDebitReversalAttributesReversalAmount `json:"reversal_amount,omitempty"`
 }
 
 func DirectDebitReversalAttributesWithDefaults(defaults client.Defaults) *DirectDebitReversalAttributes {
@@ -362,7 +362,7 @@ func DirectDebitReversalAttributesWithDefaults(defaults client.Defaults) *Direct
 
 		ReasonCode: defaults.GetString("DirectDebitReversalAttributes", "reason_code"),
 
-		ReversedAmount: DirectDebitReversalAttributesReversedAmountWithDefaults(defaults),
+		ReversalAmount: DirectDebitReversalAttributesReversalAmountWithDefaults(defaults),
 	}
 }
 
@@ -392,15 +392,15 @@ func (m *DirectDebitReversalAttributes) WithReasonCode(reasonCode string) *Direc
 	return m
 }
 
-func (m *DirectDebitReversalAttributes) WithReversedAmount(reversedAmount DirectDebitReversalAttributesReversedAmount) *DirectDebitReversalAttributes {
+func (m *DirectDebitReversalAttributes) WithReversalAmount(reversalAmount DirectDebitReversalAttributesReversalAmount) *DirectDebitReversalAttributes {
 
-	m.ReversedAmount = &reversedAmount
+	m.ReversalAmount = &reversalAmount
 
 	return m
 }
 
-func (m *DirectDebitReversalAttributes) WithoutReversedAmount() *DirectDebitReversalAttributes {
-	m.ReversedAmount = nil
+func (m *DirectDebitReversalAttributes) WithoutReversalAmount() *DirectDebitReversalAttributes {
+	m.ReversalAmount = nil
 	return m
 }
 
@@ -412,7 +412,7 @@ func (m *DirectDebitReversalAttributes) Validate(formats strfmt.Registry) error 
 		res = append(res, err)
 	}
 
-	if err := m.validateReversedAmount(formats); err != nil {
+	if err := m.validateReversalAmount(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -440,16 +440,16 @@ func (m *DirectDebitReversalAttributes) validateChargesAmount(formats strfmt.Reg
 	return nil
 }
 
-func (m *DirectDebitReversalAttributes) validateReversedAmount(formats strfmt.Registry) error {
+func (m *DirectDebitReversalAttributes) validateReversalAmount(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ReversedAmount) { // not required
+	if swag.IsZero(m.ReversalAmount) { // not required
 		return nil
 	}
 
-	if m.ReversedAmount != nil {
-		if err := m.ReversedAmount.Validate(formats); err != nil {
+	if m.ReversalAmount != nil {
+		if err := m.ReversalAmount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("attributes" + "." + "reversed_amount")
+				return ve.ValidateName("attributes" + "." + "reversal_amount")
 			}
 			return err
 		}
@@ -570,9 +570,9 @@ func (m *DirectDebitReversalAttributesChargesAmount) Json() string {
 	return string(json)
 }
 
-// DirectDebitReversalAttributesReversedAmount SEPA only
-// swagger:model DirectDebitReversalAttributesReversedAmount
-type DirectDebitReversalAttributesReversedAmount struct {
+// DirectDebitReversalAttributesReversalAmount SEPA only
+// swagger:model DirectDebitReversalAttributesReversalAmount
+type DirectDebitReversalAttributesReversalAmount struct {
 
 	// Full amount of the Direct Debit Reversal including charges
 	// Pattern: ^[0-9.]{0,20}$
@@ -582,31 +582,31 @@ type DirectDebitReversalAttributesReversedAmount struct {
 	Currency string `json:"currency,omitempty"`
 }
 
-func DirectDebitReversalAttributesReversedAmountWithDefaults(defaults client.Defaults) *DirectDebitReversalAttributesReversedAmount {
-	return &DirectDebitReversalAttributesReversedAmount{
+func DirectDebitReversalAttributesReversalAmountWithDefaults(defaults client.Defaults) *DirectDebitReversalAttributesReversalAmount {
+	return &DirectDebitReversalAttributesReversalAmount{
 
-		Amount: defaults.GetString("DirectDebitReversalAttributesReversedAmount", "amount"),
+		Amount: defaults.GetString("DirectDebitReversalAttributesReversalAmount", "amount"),
 
-		Currency: defaults.GetString("DirectDebitReversalAttributesReversedAmount", "currency"),
+		Currency: defaults.GetString("DirectDebitReversalAttributesReversalAmount", "currency"),
 	}
 }
 
-func (m *DirectDebitReversalAttributesReversedAmount) WithAmount(amount string) *DirectDebitReversalAttributesReversedAmount {
+func (m *DirectDebitReversalAttributesReversalAmount) WithAmount(amount string) *DirectDebitReversalAttributesReversalAmount {
 
 	m.Amount = amount
 
 	return m
 }
 
-func (m *DirectDebitReversalAttributesReversedAmount) WithCurrency(currency string) *DirectDebitReversalAttributesReversedAmount {
+func (m *DirectDebitReversalAttributesReversalAmount) WithCurrency(currency string) *DirectDebitReversalAttributesReversalAmount {
 
 	m.Currency = currency
 
 	return m
 }
 
-// Validate validates this direct debit reversal attributes reversed amount
-func (m *DirectDebitReversalAttributesReversedAmount) Validate(formats strfmt.Registry) error {
+// Validate validates this direct debit reversal attributes reversal amount
+func (m *DirectDebitReversalAttributesReversalAmount) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAmount(formats); err != nil {
@@ -619,13 +619,13 @@ func (m *DirectDebitReversalAttributesReversedAmount) Validate(formats strfmt.Re
 	return nil
 }
 
-func (m *DirectDebitReversalAttributesReversedAmount) validateAmount(formats strfmt.Registry) error {
+func (m *DirectDebitReversalAttributesReversalAmount) validateAmount(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"reversed_amount"+"."+"amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"reversal_amount"+"."+"amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
 		return err
 	}
 
@@ -633,7 +633,7 @@ func (m *DirectDebitReversalAttributesReversedAmount) validateAmount(formats str
 }
 
 // MarshalBinary interface implementation
-func (m *DirectDebitReversalAttributesReversedAmount) MarshalBinary() ([]byte, error) {
+func (m *DirectDebitReversalAttributesReversalAmount) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -641,15 +641,15 @@ func (m *DirectDebitReversalAttributesReversedAmount) MarshalBinary() ([]byte, e
 }
 
 // UnmarshalBinary interface implementation
-func (m *DirectDebitReversalAttributesReversedAmount) UnmarshalBinary(b []byte) error {
-	var res DirectDebitReversalAttributesReversedAmount
+func (m *DirectDebitReversalAttributesReversalAmount) UnmarshalBinary(b []byte) error {
+	var res DirectDebitReversalAttributesReversalAmount
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *DirectDebitReversalAttributesReversedAmount) Json() string {
+func (m *DirectDebitReversalAttributesReversalAmount) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

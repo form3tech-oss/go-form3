@@ -33,7 +33,7 @@ type PartyActorUpdate struct {
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
 	// type
-	// Enum: [parties]
+	// Enum: [party_actors]
 	Type string `json:"type,omitempty"`
 
 	// version
@@ -179,7 +179,7 @@ var partyActorUpdateTypeTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["parties"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["party_actors"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -189,8 +189,8 @@ func init() {
 
 const (
 
-	// PartyActorUpdateTypeParties captures enum value "parties"
-	PartyActorUpdateTypeParties string = "parties"
+	// PartyActorUpdateTypePartyActors captures enum value "party_actors"
+	PartyActorUpdateTypePartyActors string = "party_actors"
 )
 
 // prop value enum

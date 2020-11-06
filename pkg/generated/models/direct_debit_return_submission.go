@@ -25,9 +25,17 @@ type DirectDebitReturnSubmission struct {
 	// attributes
 	Attributes *DirectDebitReturnSubmissionAttributes `json:"attributes,omitempty"`
 
+	// created on
+	// Format: date-time
+	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
+
 	// id
 	// Format: uuid
 	ID strfmt.UUID `json:"id,omitempty"`
+
+	// modified on
+	// Format: date-time
+	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
 	// Format: uuid
@@ -50,7 +58,11 @@ func DirectDebitReturnSubmissionWithDefaults(defaults client.Defaults) *DirectDe
 
 		Attributes: DirectDebitReturnSubmissionAttributesWithDefaults(defaults),
 
+		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnSubmission", "created_on"),
+
 		ID: defaults.GetStrfmtUUID("DirectDebitReturnSubmission", "id"),
+
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnSubmission", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUID("DirectDebitReturnSubmission", "organisation_id"),
 
@@ -74,10 +86,34 @@ func (m *DirectDebitReturnSubmission) WithoutAttributes() *DirectDebitReturnSubm
 	return m
 }
 
+func (m *DirectDebitReturnSubmission) WithCreatedOn(createdOn strfmt.DateTime) *DirectDebitReturnSubmission {
+
+	m.CreatedOn = &createdOn
+
+	return m
+}
+
+func (m *DirectDebitReturnSubmission) WithoutCreatedOn() *DirectDebitReturnSubmission {
+	m.CreatedOn = nil
+	return m
+}
+
 func (m *DirectDebitReturnSubmission) WithID(id strfmt.UUID) *DirectDebitReturnSubmission {
 
 	m.ID = id
 
+	return m
+}
+
+func (m *DirectDebitReturnSubmission) WithModifiedOn(modifiedOn strfmt.DateTime) *DirectDebitReturnSubmission {
+
+	m.ModifiedOn = &modifiedOn
+
+	return m
+}
+
+func (m *DirectDebitReturnSubmission) WithoutModifiedOn() *DirectDebitReturnSubmission {
+	m.ModifiedOn = nil
 	return m
 }
 
@@ -127,7 +163,15 @@ func (m *DirectDebitReturnSubmission) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreatedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModifiedOn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,6 +215,19 @@ func (m *DirectDebitReturnSubmission) validateAttributes(formats strfmt.Registry
 	return nil
 }
 
+func (m *DirectDebitReturnSubmission) validateCreatedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreatedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_on", "body", "date-time", m.CreatedOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DirectDebitReturnSubmission) validateID(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ID) { // not required
@@ -178,6 +235,19 @@ func (m *DirectDebitReturnSubmission) validateID(formats strfmt.Registry) error 
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnSubmission) validateModifiedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ModifiedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("modified_on", "body", "date-time", m.ModifiedOn.String(), formats); err != nil {
 		return err
 	}
 

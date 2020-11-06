@@ -44,7 +44,7 @@ type PartyProductEvent struct {
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
-	Relationships *Relationships `json:"relationships,omitempty"`
+	Relationships *PartyProductEventRelationships `json:"relationships,omitempty"`
 
 	// type
 	// Enum: [party_product_events]
@@ -68,7 +68,7 @@ func PartyProductEventWithDefaults(defaults client.Defaults) *PartyProductEvent 
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("PartyProductEvent", "organisation_id"),
 
-		Relationships: RelationshipsWithDefaults(defaults),
+		Relationships: PartyProductEventRelationshipsWithDefaults(defaults),
 
 		Type: defaults.GetString("PartyProductEvent", "type"),
 
@@ -126,7 +126,7 @@ func (m *PartyProductEvent) WithoutOrganisationID() *PartyProductEvent {
 	return m
 }
 
-func (m *PartyProductEvent) WithRelationships(relationships Relationships) *PartyProductEvent {
+func (m *PartyProductEvent) WithRelationships(relationships PartyProductEventRelationships) *PartyProductEvent {
 
 	m.Relationships = &relationships
 

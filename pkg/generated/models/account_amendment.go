@@ -21,17 +21,17 @@ import (
 type AccountAmendment struct {
 
 	// data
-	Data *Account `json:"data,omitempty"`
+	Data *AccountUpdate `json:"data,omitempty"`
 }
 
 func AccountAmendmentWithDefaults(defaults client.Defaults) *AccountAmendment {
 	return &AccountAmendment{
 
-		Data: AccountWithDefaults(defaults),
+		Data: AccountUpdateWithDefaults(defaults),
 	}
 }
 
-func (m *AccountAmendment) WithData(data Account) *AccountAmendment {
+func (m *AccountAmendment) WithData(data AccountUpdate) *AccountAmendment {
 
 	m.Data = &data
 

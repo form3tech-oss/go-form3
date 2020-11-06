@@ -58,7 +58,7 @@ func NewGetAddressbookPartiesIDProductsProductIDOK() *GetAddressbookPartiesIDPro
 
 /*GetAddressbookPartiesIDProductsProductIDOK handles this case with default header values.
 
-get reponse
+get response
 */
 type GetAddressbookPartiesIDProductsProductIDOK struct {
 

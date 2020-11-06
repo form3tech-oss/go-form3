@@ -526,6 +526,72 @@ func (a *GetDirectDebitSubmissionRequest) MustDo() *GetDirectDebitSubmissionOK {
 }
 
 /*
+get transaction directdebits ID decisions decision ID API
+*/
+func (a *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest) Do() (*GetTransactionDirectdebitsIDDecisionsDecisionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDDecisionsDecisionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDDecisionsDecisionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDDecisionsDecisionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest) MustDo() *GetTransactionDirectdebitsIDDecisionsDecisionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction directdebits ID decisions decision ID submissions submission ID API
+*/
+func (a *GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDRequest) Do() (*GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionID",
+		Method:             "GET",
+		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}/submissions/{submissionId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK), nil
+
+}
+
+func (a *GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDRequest) MustDo() *GetTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 get transaction directdebits ID recalls recall ID API
 */
 func (a *GetTransactionDirectdebitsIDRecallsRecallIDRequest) Do() (*GetTransactionDirectdebitsIDRecallsRecallIDOK, error) {
@@ -617,6 +683,72 @@ func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
 }
 
 func (a *ListDirectDebitsRequest) MustDo() *ListDirectDebitsOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+post transaction directdebits ID decisions API
+*/
+func (a *PostTransactionDirectdebitsIDDecisionsRequest) Do() (*PostTransactionDirectdebitsIDDecisionsCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostTransactionDirectdebitsIDDecisions",
+		Method:             "POST",
+		PathPattern:        "/transaction/directdebits/{id}/decisions",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PostTransactionDirectdebitsIDDecisionsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostTransactionDirectdebitsIDDecisionsCreated), nil
+
+}
+
+func (a *PostTransactionDirectdebitsIDDecisionsRequest) MustDo() *PostTransactionDirectdebitsIDDecisionsCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+post transaction directdebits ID decisions decision ID submissions API
+*/
+func (a *PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsRequest) Do() (*PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissions",
+		Method:             "POST",
+		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}/submissions",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsCreated), nil
+
+}
+
+func (a *PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsRequest) MustDo() *PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

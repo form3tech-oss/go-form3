@@ -27,6 +27,8 @@ func (c *Client) GetAddressbookParties() *GetAddressbookPartiesRequest {
 
 		FilterPartyProductProduct: c.Defaults.GetStringPtr("GetAddressbookParties", "filter[party_product.product]"),
 
+		FilterPartyProductProvider: c.Defaults.GetStringPtr("GetAddressbookParties", "filter[party_product.provider]"),
+
 		FilterPartyProductStatus: c.Defaults.GetStringPtr("GetAddressbookParties", "filter[party_product.status]"),
 
 		PageNumber: c.Defaults.GetStringPtr("GetAddressbookParties", "page[number]"),
@@ -49,6 +51,10 @@ type GetAddressbookPartiesRequest struct {
 	/*FilterPartyProductProduct      Filter parties by related party products' product      */
 
 	FilterPartyProductProduct *string
+
+	/*FilterPartyProductProvider      Filter parties by related party products' provider      */
+
+	FilterPartyProductProvider *string
 
 	/*FilterPartyProductStatus      Filter parties by related party products' status      */
 
@@ -99,6 +105,20 @@ func (o *GetAddressbookPartiesRequest) WithFilterPartyProductProduct(filterParty
 func (o *GetAddressbookPartiesRequest) WithoutFilterPartyProductProduct() *GetAddressbookPartiesRequest {
 
 	o.FilterPartyProductProduct = nil
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithFilterPartyProductProvider(filterPartyProductProvider string) *GetAddressbookPartiesRequest {
+
+	o.FilterPartyProductProvider = &filterPartyProductProvider
+
+	return o
+}
+
+func (o *GetAddressbookPartiesRequest) WithoutFilterPartyProductProvider() *GetAddressbookPartiesRequest {
+
+	o.FilterPartyProductProvider = nil
 
 	return o
 }
@@ -192,6 +212,22 @@ func (o *GetAddressbookPartiesRequest) WriteToRequest(r runtime.ClientRequest, r
 		qFilterPartyProductProduct := qrFilterPartyProductProduct
 		if qFilterPartyProductProduct != "" {
 			if err := r.SetQueryParam("filter[party_product.product]", qFilterPartyProductProduct); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterPartyProductProvider != nil {
+
+		// query param filter[party_product.provider]
+		var qrFilterPartyProductProvider string
+		if o.FilterPartyProductProvider != nil {
+			qrFilterPartyProductProvider = *o.FilterPartyProductProvider
+		}
+		qFilterPartyProductProvider := qrFilterPartyProductProvider
+		if qFilterPartyProductProvider != "" {
+			if err := r.SetQueryParam("filter[party_product.provider]", qFilterPartyProductProvider); err != nil {
 				return err
 			}
 		}

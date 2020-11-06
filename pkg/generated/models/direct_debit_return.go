@@ -343,11 +343,21 @@ type DirectDebitReturnAttributes struct {
 	// charges amount
 	ChargesAmount *CurrencyAndAmount `json:"charges_amount,omitempty"`
 
+	// Unique identifier for organisations collecting payments
+	ClearingID string `json:"clearing_id,omitempty"`
+
+	// compensation amount
+	CompensationAmount *CurrencyAndAmount `json:"compensation_amount,omitempty"`
+
 	// return amount
 	ReturnAmount *CurrencyAndAmount `json:"return_amount,omitempty"`
 
 	// return code
 	ReturnCode string `json:"return_code,omitempty"`
+
+	// return initiator
+	// Enum: [BANK CUSTOMER]
+	ReturnInitiator string `json:"return_initiator,omitempty"`
 
 	// scheme transaction id
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
@@ -358,9 +368,15 @@ func DirectDebitReturnAttributesWithDefaults(defaults client.Defaults) *DirectDe
 
 		ChargesAmount: CurrencyAndAmountWithDefaults(defaults),
 
+		ClearingID: defaults.GetString("DirectDebitReturnAttributes", "clearing_id"),
+
+		CompensationAmount: CurrencyAndAmountWithDefaults(defaults),
+
 		ReturnAmount: CurrencyAndAmountWithDefaults(defaults),
 
 		ReturnCode: defaults.GetString("DirectDebitReturnAttributes", "return_code"),
+
+		ReturnInitiator: defaults.GetString("DirectDebitReturnAttributes", "return_initiator"),
 
 		SchemeTransactionID: defaults.GetString("DirectDebitReturnAttributes", "scheme_transaction_id"),
 	}
@@ -375,6 +391,25 @@ func (m *DirectDebitReturnAttributes) WithChargesAmount(chargesAmount CurrencyAn
 
 func (m *DirectDebitReturnAttributes) WithoutChargesAmount() *DirectDebitReturnAttributes {
 	m.ChargesAmount = nil
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithClearingID(clearingID string) *DirectDebitReturnAttributes {
+
+	m.ClearingID = clearingID
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithCompensationAmount(compensationAmount CurrencyAndAmount) *DirectDebitReturnAttributes {
+
+	m.CompensationAmount = &compensationAmount
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithoutCompensationAmount() *DirectDebitReturnAttributes {
+	m.CompensationAmount = nil
 	return m
 }
 
@@ -397,6 +432,13 @@ func (m *DirectDebitReturnAttributes) WithReturnCode(returnCode string) *DirectD
 	return m
 }
 
+func (m *DirectDebitReturnAttributes) WithReturnInitiator(returnInitiator string) *DirectDebitReturnAttributes {
+
+	m.ReturnInitiator = returnInitiator
+
+	return m
+}
+
 func (m *DirectDebitReturnAttributes) WithSchemeTransactionID(schemeTransactionID string) *DirectDebitReturnAttributes {
 
 	m.SchemeTransactionID = schemeTransactionID
@@ -412,7 +454,15 @@ func (m *DirectDebitReturnAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCompensationAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReturnAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReturnInitiator(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -440,6 +490,24 @@ func (m *DirectDebitReturnAttributes) validateChargesAmount(formats strfmt.Regis
 	return nil
 }
 
+func (m *DirectDebitReturnAttributes) validateCompensationAmount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CompensationAmount) { // not required
+		return nil
+	}
+
+	if m.CompensationAmount != nil {
+		if err := m.CompensationAmount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "compensation_amount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *DirectDebitReturnAttributes) validateReturnAmount(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ReturnAmount) { // not required
@@ -453,6 +521,49 @@ func (m *DirectDebitReturnAttributes) validateReturnAmount(formats strfmt.Regist
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var directDebitReturnAttributesTypeReturnInitiatorPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["BANK","CUSTOMER"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		directDebitReturnAttributesTypeReturnInitiatorPropEnum = append(directDebitReturnAttributesTypeReturnInitiatorPropEnum, v)
+	}
+}
+
+const (
+
+	// DirectDebitReturnAttributesReturnInitiatorBANK captures enum value "BANK"
+	DirectDebitReturnAttributesReturnInitiatorBANK string = "BANK"
+
+	// DirectDebitReturnAttributesReturnInitiatorCUSTOMER captures enum value "CUSTOMER"
+	DirectDebitReturnAttributesReturnInitiatorCUSTOMER string = "CUSTOMER"
+)
+
+// prop value enum
+func (m *DirectDebitReturnAttributes) validateReturnInitiatorEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, directDebitReturnAttributesTypeReturnInitiatorPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *DirectDebitReturnAttributes) validateReturnInitiator(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReturnInitiator) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateReturnInitiatorEnum("attributes"+"."+"return_initiator", "body", m.ReturnInitiator); err != nil {
+		return err
 	}
 
 	return nil

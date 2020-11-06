@@ -44,11 +44,10 @@ type Contact struct {
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
-	Relationships *Relationships `json:"relationships,omitempty"`
+	Relationships *ContactRelationships `json:"relationships,omitempty"`
 
 	// type
-	// Enum: [contacts]
-	Type string `json:"type,omitempty"`
+	Type ContactResourceType `json:"type,omitempty"`
 
 	// version
 	// Minimum: 0
@@ -68,9 +67,9 @@ func ContactWithDefaults(defaults client.Defaults) *Contact {
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("Contact", "organisation_id"),
 
-		Relationships: RelationshipsWithDefaults(defaults),
+		Relationships: ContactRelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("Contact", "type"),
+		// TODO Type: ContactResourceType,
 
 		Version: defaults.GetInt64Ptr("Contact", "version"),
 	}
@@ -126,7 +125,7 @@ func (m *Contact) WithoutOrganisationID() *Contact {
 	return m
 }
 
-func (m *Contact) WithRelationships(relationships Relationships) *Contact {
+func (m *Contact) WithRelationships(relationships ContactRelationships) *Contact {
 
 	m.Relationships = &relationships
 
@@ -138,7 +137,7 @@ func (m *Contact) WithoutRelationships() *Contact {
 	return m
 }
 
-func (m *Contact) WithType(typeVar string) *Contact {
+func (m *Contact) WithType(typeVar ContactResourceType) *Contact {
 
 	m.Type = typeVar
 
@@ -287,40 +286,16 @@ func (m *Contact) validateRelationships(formats strfmt.Registry) error {
 	return nil
 }
 
-var contactTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["contacts"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		contactTypeTypePropEnum = append(contactTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// ContactTypeContacts captures enum value "contacts"
-	ContactTypeContacts string = "contacts"
-)
-
-// prop value enum
-func (m *Contact) validateTypeEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, contactTypeTypePropEnum); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *Contact) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		}
 		return err
 	}
 

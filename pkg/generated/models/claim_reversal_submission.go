@@ -24,10 +24,18 @@ type ClaimReversalSubmission struct {
 	// attributes
 	Attributes *ClaimReversalSubmissionAttributes `json:"attributes,omitempty"`
 
+	// created on
+	// Format: date-time
+	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
+
 	// id
 	// Required: true
 	// Format: uuid
 	ID *strfmt.UUID `json:"id"`
+
+	// modified on
+	// Format: date-time
+	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
 	// Required: true
@@ -51,7 +59,11 @@ func ClaimReversalSubmissionWithDefaults(defaults client.Defaults) *ClaimReversa
 
 		Attributes: ClaimReversalSubmissionAttributesWithDefaults(defaults),
 
+		CreatedOn: defaults.GetStrfmtDateTimePtr("ClaimReversalSubmission", "created_on"),
+
 		ID: defaults.GetStrfmtUUIDPtr("ClaimReversalSubmission", "id"),
+
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("ClaimReversalSubmission", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("ClaimReversalSubmission", "organisation_id"),
 
@@ -75,6 +87,18 @@ func (m *ClaimReversalSubmission) WithoutAttributes() *ClaimReversalSubmission {
 	return m
 }
 
+func (m *ClaimReversalSubmission) WithCreatedOn(createdOn strfmt.DateTime) *ClaimReversalSubmission {
+
+	m.CreatedOn = &createdOn
+
+	return m
+}
+
+func (m *ClaimReversalSubmission) WithoutCreatedOn() *ClaimReversalSubmission {
+	m.CreatedOn = nil
+	return m
+}
+
 func (m *ClaimReversalSubmission) WithID(id strfmt.UUID) *ClaimReversalSubmission {
 
 	m.ID = &id
@@ -84,6 +108,18 @@ func (m *ClaimReversalSubmission) WithID(id strfmt.UUID) *ClaimReversalSubmissio
 
 func (m *ClaimReversalSubmission) WithoutID() *ClaimReversalSubmission {
 	m.ID = nil
+	return m
+}
+
+func (m *ClaimReversalSubmission) WithModifiedOn(modifiedOn strfmt.DateTime) *ClaimReversalSubmission {
+
+	m.ModifiedOn = &modifiedOn
+
+	return m
+}
+
+func (m *ClaimReversalSubmission) WithoutModifiedOn() *ClaimReversalSubmission {
+	m.ModifiedOn = nil
 	return m
 }
 
@@ -138,7 +174,15 @@ func (m *ClaimReversalSubmission) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreatedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModifiedOn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -182,6 +226,19 @@ func (m *ClaimReversalSubmission) validateAttributes(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *ClaimReversalSubmission) validateCreatedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreatedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_on", "body", "date-time", m.CreatedOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ClaimReversalSubmission) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
@@ -189,6 +246,19 @@ func (m *ClaimReversalSubmission) validateID(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ClaimReversalSubmission) validateModifiedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ModifiedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("modified_on", "body", "date-time", m.ModifiedOn.String(), formats); err != nil {
 		return err
 	}
 

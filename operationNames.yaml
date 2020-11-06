@@ -8,27 +8,6 @@
   path: paths./audit/entries/{record_type}/{id}.get.operationId
   value: GetAuditEntry
 - command: update
-  path: paths./fx/deals.get.operationId
-  value: ListDeals
-- command: update
-  path: paths./fx/deals.post.operationId
-  value: CreateDeal
-- command: update
-  path: paths./fx/deals/{fx_deal_id}.get.operationId
-  value: GetDeal
-- command: update
-  path: paths./fx/deals/{fx_deal_id}/submissions.post.operationId
-  value: CreateDealSubmission
-- command: update
-  path: paths./fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}.get.operationId
-  value: GetDealSubmission
-- command: update
-  path: paths./fx/deals/{fx_deal_id}/submissions/{fx_deal_submission_id}.patch.operationId
-  value: ModifyDealSubmission
-- command: update
-  path: paths./fx/rates.get.operationId
-  value: ListRates
-- command: update
   path: paths./notification/reports.get.operationId
   value: ListReports
 - command: update
