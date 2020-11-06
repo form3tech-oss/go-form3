@@ -354,12 +354,12 @@ type PaymentSubmissionAttributes struct {
 	// Time a payment was released from being held due to a limit breach
 	// Read Only: true
 	// Format: date-time
-	LimitBreachEndDatetime strfmt.DateTime `json:"limit_breach_end_datetime,omitempty"`
+	LimitBreachEndDatetime *strfmt.DateTime `json:"limit_breach_end_datetime,omitempty"`
 
 	// Start time a payment was held due to a limit breach
 	// Read Only: true
 	// Format: date-time
-	LimitBreachStartDatetime strfmt.DateTime `json:"limit_breach_start_datetime,omitempty"`
+	LimitBreachStartDatetime *strfmt.DateTime `json:"limit_breach_start_datetime,omitempty"`
 
 	// Details of the account to which funds are redirected (if applicable)
 	RedirectedAccountNumber string `json:"redirected_account_number,omitempty"`
@@ -401,9 +401,9 @@ type PaymentSubmissionAttributes struct {
 func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentSubmissionAttributes {
 	return &PaymentSubmissionAttributes{
 
-		LimitBreachEndDatetime: defaults.GetStrfmtDateTime("PaymentSubmissionAttributes", "limit_breach_end_datetime"),
+		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionAttributes", "limit_breach_end_datetime"),
 
-		LimitBreachStartDatetime: defaults.GetStrfmtDateTime("PaymentSubmissionAttributes", "limit_breach_start_datetime"),
+		LimitBreachStartDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionAttributes", "limit_breach_start_datetime"),
 
 		RedirectedAccountNumber: defaults.GetString("PaymentSubmissionAttributes", "redirected_account_number"),
 
@@ -429,15 +429,25 @@ func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentS
 
 func (m *PaymentSubmissionAttributes) WithLimitBreachEndDatetime(limitBreachEndDatetime strfmt.DateTime) *PaymentSubmissionAttributes {
 
-	m.LimitBreachEndDatetime = limitBreachEndDatetime
+	m.LimitBreachEndDatetime = &limitBreachEndDatetime
 
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithoutLimitBreachEndDatetime() *PaymentSubmissionAttributes {
+	m.LimitBreachEndDatetime = nil
 	return m
 }
 
 func (m *PaymentSubmissionAttributes) WithLimitBreachStartDatetime(limitBreachStartDatetime strfmt.DateTime) *PaymentSubmissionAttributes {
 
-	m.LimitBreachStartDatetime = limitBreachStartDatetime
+	m.LimitBreachStartDatetime = &limitBreachStartDatetime
 
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithoutLimitBreachStartDatetime() *PaymentSubmissionAttributes {
+	m.LimitBreachStartDatetime = nil
 	return m
 }
 

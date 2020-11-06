@@ -24,9 +24,17 @@ type MandateAdmission struct {
 	// attributes
 	Attributes *MandateAdmissionAttributes `json:"attributes,omitempty"`
 
+	// created on
+	// Format: date-time
+	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
+
 	// id
 	// Format: uuid
 	ID strfmt.UUID `json:"id,omitempty"`
+
+	// modified on
+	// Format: date-time
+	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
 	// Format: uuid
@@ -49,7 +57,11 @@ func MandateAdmissionWithDefaults(defaults client.Defaults) *MandateAdmission {
 
 		Attributes: MandateAdmissionAttributesWithDefaults(defaults),
 
+		CreatedOn: defaults.GetStrfmtDateTimePtr("MandateAdmission", "created_on"),
+
 		ID: defaults.GetStrfmtUUID("MandateAdmission", "id"),
+
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("MandateAdmission", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUID("MandateAdmission", "organisation_id"),
 
@@ -73,10 +85,34 @@ func (m *MandateAdmission) WithoutAttributes() *MandateAdmission {
 	return m
 }
 
+func (m *MandateAdmission) WithCreatedOn(createdOn strfmt.DateTime) *MandateAdmission {
+
+	m.CreatedOn = &createdOn
+
+	return m
+}
+
+func (m *MandateAdmission) WithoutCreatedOn() *MandateAdmission {
+	m.CreatedOn = nil
+	return m
+}
+
 func (m *MandateAdmission) WithID(id strfmt.UUID) *MandateAdmission {
 
 	m.ID = id
 
+	return m
+}
+
+func (m *MandateAdmission) WithModifiedOn(modifiedOn strfmt.DateTime) *MandateAdmission {
+
+	m.ModifiedOn = &modifiedOn
+
+	return m
+}
+
+func (m *MandateAdmission) WithoutModifiedOn() *MandateAdmission {
+	m.ModifiedOn = nil
 	return m
 }
 
@@ -126,7 +162,15 @@ func (m *MandateAdmission) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreatedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModifiedOn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -170,6 +214,19 @@ func (m *MandateAdmission) validateAttributes(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MandateAdmission) validateCreatedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreatedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_on", "body", "date-time", m.CreatedOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MandateAdmission) validateID(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ID) { // not required
@@ -177,6 +234,19 @@ func (m *MandateAdmission) validateID(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MandateAdmission) validateModifiedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ModifiedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("modified_on", "body", "date-time", m.ModifiedOn.String(), formats); err != nil {
 		return err
 	}
 

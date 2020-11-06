@@ -24,6 +24,9 @@ const (
 	// DirectDebitResourceTypeDirectDebits captures enum value "direct_debits"
 	DirectDebitResourceTypeDirectDebits DirectDebitResourceType = "direct_debits"
 
+	// DirectDebitResourceTypeDirectDebitStatus captures enum value "direct_debit_status"
+	DirectDebitResourceTypeDirectDebitStatus DirectDebitResourceType = "direct_debit_status"
+
 	// DirectDebitResourceTypeDirectDebitAdmissions captures enum value "direct_debit_admissions"
 	DirectDebitResourceTypeDirectDebitAdmissions DirectDebitResourceType = "direct_debit_admissions"
 
@@ -65,6 +68,15 @@ const (
 
 	// DirectDebitResourceTypeDirectDebitRecallAdmissions captures enum value "direct_debit_recall_admissions"
 	DirectDebitResourceTypeDirectDebitRecallAdmissions DirectDebitResourceType = "direct_debit_recall_admissions"
+
+	// DirectDebitResourceTypeDirectDebitDecisions captures enum value "direct_debit_decisions"
+	DirectDebitResourceTypeDirectDebitDecisions DirectDebitResourceType = "direct_debit_decisions"
+
+	// DirectDebitResourceTypeDirectDebitDecisionSubmissions captures enum value "direct_debit_decision_submissions"
+	DirectDebitResourceTypeDirectDebitDecisionSubmissions DirectDebitResourceType = "direct_debit_decision_submissions"
+
+	// DirectDebitResourceTypeDirectDebitDecisionSubmissionValidations captures enum value "direct_debit_decision_submission_validations"
+	DirectDebitResourceTypeDirectDebitDecisionSubmissionValidations DirectDebitResourceType = "direct_debit_decision_submission_validations"
 )
 
 // for schema
@@ -72,7 +84,7 @@ var directDebitResourceTypeEnum []interface{}
 
 func init() {
 	var res []DirectDebitResourceType
-	if err := json.Unmarshal([]byte(`["direct_debits","direct_debit_admissions","direct_debit_submissions","direct_debit_submission_validations","direct_debit_reversals","direct_debit_reversal_admissions","direct_debit_returns","direct_debit_return_admissions","direct_debit_return_submissions","direct_debit_return_submission_validations","direct_debit_return_reversals","direct_debit_return_reversal_admissions","direct_debit_automatic_returns","direct_debit_recalls","direct_debit_recall_admissions"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["direct_debits","direct_debit_status","direct_debit_admissions","direct_debit_submissions","direct_debit_submission_validations","direct_debit_reversals","direct_debit_reversal_admissions","direct_debit_returns","direct_debit_return_admissions","direct_debit_return_submissions","direct_debit_return_submission_validations","direct_debit_return_reversals","direct_debit_return_reversal_admissions","direct_debit_automatic_returns","direct_debit_recalls","direct_debit_recall_admissions","direct_debit_decisions","direct_debit_decision_submissions","direct_debit_decision_submission_validations"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

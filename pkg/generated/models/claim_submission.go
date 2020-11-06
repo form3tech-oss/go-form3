@@ -24,10 +24,18 @@ type ClaimSubmission struct {
 	// attributes
 	Attributes *ClaimSubmissionAttributes `json:"attributes,omitempty"`
 
+	// created on
+	// Format: date-time
+	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
+
 	// id
 	// Required: true
 	// Format: uuid
 	ID *strfmt.UUID `json:"id"`
+
+	// modified on
+	// Format: date-time
+	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
 	// Required: true
@@ -51,7 +59,11 @@ func ClaimSubmissionWithDefaults(defaults client.Defaults) *ClaimSubmission {
 
 		Attributes: ClaimSubmissionAttributesWithDefaults(defaults),
 
+		CreatedOn: defaults.GetStrfmtDateTimePtr("ClaimSubmission", "created_on"),
+
 		ID: defaults.GetStrfmtUUIDPtr("ClaimSubmission", "id"),
+
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("ClaimSubmission", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("ClaimSubmission", "organisation_id"),
 
@@ -75,6 +87,18 @@ func (m *ClaimSubmission) WithoutAttributes() *ClaimSubmission {
 	return m
 }
 
+func (m *ClaimSubmission) WithCreatedOn(createdOn strfmt.DateTime) *ClaimSubmission {
+
+	m.CreatedOn = &createdOn
+
+	return m
+}
+
+func (m *ClaimSubmission) WithoutCreatedOn() *ClaimSubmission {
+	m.CreatedOn = nil
+	return m
+}
+
 func (m *ClaimSubmission) WithID(id strfmt.UUID) *ClaimSubmission {
 
 	m.ID = &id
@@ -84,6 +108,18 @@ func (m *ClaimSubmission) WithID(id strfmt.UUID) *ClaimSubmission {
 
 func (m *ClaimSubmission) WithoutID() *ClaimSubmission {
 	m.ID = nil
+	return m
+}
+
+func (m *ClaimSubmission) WithModifiedOn(modifiedOn strfmt.DateTime) *ClaimSubmission {
+
+	m.ModifiedOn = &modifiedOn
+
+	return m
+}
+
+func (m *ClaimSubmission) WithoutModifiedOn() *ClaimSubmission {
+	m.ModifiedOn = nil
 	return m
 }
 
@@ -138,7 +174,15 @@ func (m *ClaimSubmission) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCreatedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModifiedOn(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -182,6 +226,19 @@ func (m *ClaimSubmission) validateAttributes(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ClaimSubmission) validateCreatedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreatedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("created_on", "body", "date-time", m.CreatedOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ClaimSubmission) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
@@ -189,6 +246,19 @@ func (m *ClaimSubmission) validateID(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ClaimSubmission) validateModifiedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ModifiedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("modified_on", "body", "date-time", m.ModifiedOn.String(), formats); err != nil {
 		return err
 	}
 

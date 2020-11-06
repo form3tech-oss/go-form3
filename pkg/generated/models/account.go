@@ -39,7 +39,7 @@ type Account struct {
 	Relationships *AccountRelationships `json:"relationships,omitempty"`
 
 	// Name of the resource type
-	// Pattern: ^[A-Za-z]*$
+	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
 
 	// Version number
@@ -233,7 +233,7 @@ func (m *Account) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z]*$`); err != nil {
+	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 

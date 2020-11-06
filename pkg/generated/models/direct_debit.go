@@ -385,7 +385,7 @@ type DirectDebitAttributes struct {
 
 	// Date on which the direct debit mandate has been signed by the debtor.
 	// Format: date
-	MandateSignatureDate strfmt.Date `json:"mandate_signature_date,omitempty"`
+	MandateSignatureDate *strfmt.Date `json:"mandate_signature_date,omitempty"`
 
 	// Numeric reference field, see scheme specific descriptions for usage
 	NumericReference string `json:"numeric_reference,omitempty"`
@@ -398,7 +398,7 @@ type DirectDebitAttributes struct {
 
 	// Date on which the operation is to be debited from the debtor account. Formatted according to ISO 8601 format: YYYY-MM-DD.
 	// Format: date
-	ProcessingDate strfmt.Date `json:"processing_date,omitempty"`
+	ProcessingDate *strfmt.Date `json:"processing_date,omitempty"`
 
 	// Payment reference for beneficiary use
 	Reference string `json:"reference,omitempty"`
@@ -456,7 +456,7 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 
 		MandateAmendmentIndicator: defaults.GetBool("DirectDebitAttributes", "mandate_amendment_indicator"),
 
-		MandateSignatureDate: defaults.GetStrfmtDate("DirectDebitAttributes", "mandate_signature_date"),
+		MandateSignatureDate: defaults.GetStrfmtDatePtr("DirectDebitAttributes", "mandate_signature_date"),
 
 		NumericReference: defaults.GetString("DirectDebitAttributes", "numeric_reference"),
 
@@ -464,7 +464,7 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 
 		PaymentScheme: defaults.GetString("DirectDebitAttributes", "payment_scheme"),
 
-		ProcessingDate: defaults.GetStrfmtDate("DirectDebitAttributes", "processing_date"),
+		ProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitAttributes", "processing_date"),
 
 		Reference: defaults.GetString("DirectDebitAttributes", "reference"),
 
@@ -570,8 +570,13 @@ func (m *DirectDebitAttributes) WithMandateAmendmentIndicator(mandateAmendmentIn
 
 func (m *DirectDebitAttributes) WithMandateSignatureDate(mandateSignatureDate strfmt.Date) *DirectDebitAttributes {
 
-	m.MandateSignatureDate = mandateSignatureDate
+	m.MandateSignatureDate = &mandateSignatureDate
 
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutMandateSignatureDate() *DirectDebitAttributes {
+	m.MandateSignatureDate = nil
 	return m
 }
 
@@ -598,8 +603,13 @@ func (m *DirectDebitAttributes) WithPaymentScheme(paymentScheme string) *DirectD
 
 func (m *DirectDebitAttributes) WithProcessingDate(processingDate strfmt.Date) *DirectDebitAttributes {
 
-	m.ProcessingDate = processingDate
+	m.ProcessingDate = &processingDate
 
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutProcessingDate() *DirectDebitAttributes {
+	m.ProcessingDate = nil
 	return m
 }
 

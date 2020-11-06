@@ -24,6 +24,9 @@ const (
 	// ReportAdmissionStatusDeliveryConfirmed captures enum value "delivery_confirmed"
 	ReportAdmissionStatusDeliveryConfirmed ReportAdmissionStatus = "delivery_confirmed"
 
+	// ReportAdmissionStatusConfirmed captures enum value "confirmed"
+	ReportAdmissionStatusConfirmed ReportAdmissionStatus = "confirmed"
+
 	// ReportAdmissionStatusFailed captures enum value "failed"
 	ReportAdmissionStatusFailed ReportAdmissionStatus = "failed"
 )
@@ -33,7 +36,7 @@ var reportAdmissionStatusEnum []interface{}
 
 func init() {
 	var res []ReportAdmissionStatus
-	if err := json.Unmarshal([]byte(`["delivery_confirmed","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["delivery_confirmed","confirmed","failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

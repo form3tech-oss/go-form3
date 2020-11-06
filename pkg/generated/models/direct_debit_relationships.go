@@ -24,6 +24,9 @@ type DirectDebitRelationships struct {
 	// direct debit admission
 	DirectDebitAdmission *DirectDebitRelationshipsDirectDebitAdmission `json:"direct_debit_admission,omitempty"`
 
+	// direct debit decision
+	DirectDebitDecision *DirectDebitRelationshipsDirectDebitDecision `json:"direct_debit_decision,omitempty"`
+
 	// direct debit recall
 	DirectDebitRecall *DirectDebitRelationshipsDirectDebitRecall `json:"direct_debit_recall,omitempty"`
 
@@ -44,6 +47,8 @@ func DirectDebitRelationshipsWithDefaults(defaults client.Defaults) *DirectDebit
 	return &DirectDebitRelationships{
 
 		DirectDebitAdmission: DirectDebitRelationshipsDirectDebitAdmissionWithDefaults(defaults),
+
+		DirectDebitDecision: DirectDebitRelationshipsDirectDebitDecisionWithDefaults(defaults),
 
 		DirectDebitRecall: DirectDebitRelationshipsDirectDebitRecallWithDefaults(defaults),
 
@@ -66,6 +71,18 @@ func (m *DirectDebitRelationships) WithDirectDebitAdmission(directDebitAdmission
 
 func (m *DirectDebitRelationships) WithoutDirectDebitAdmission() *DirectDebitRelationships {
 	m.DirectDebitAdmission = nil
+	return m
+}
+
+func (m *DirectDebitRelationships) WithDirectDebitDecision(directDebitDecision DirectDebitRelationshipsDirectDebitDecision) *DirectDebitRelationships {
+
+	m.DirectDebitDecision = &directDebitDecision
+
+	return m
+}
+
+func (m *DirectDebitRelationships) WithoutDirectDebitDecision() *DirectDebitRelationships {
+	m.DirectDebitDecision = nil
 	return m
 }
 
@@ -137,6 +154,10 @@ func (m *DirectDebitRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDirectDebitDecision(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDirectDebitRecall(formats); err != nil {
 		res = append(res, err)
 	}
@@ -173,6 +194,24 @@ func (m *DirectDebitRelationships) validateDirectDebitAdmission(formats strfmt.R
 		if err := m.DirectDebitAdmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("direct_debit_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitRelationships) validateDirectDebitDecision(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DirectDebitDecision) { // not required
+		return nil
+	}
+
+	if m.DirectDebitDecision != nil {
+		if err := m.DirectDebitDecision.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("direct_debit_decision")
 			}
 			return err
 		}
@@ -375,6 +414,92 @@ func (m *DirectDebitRelationshipsDirectDebitAdmission) UnmarshalBinary(b []byte)
 	return nil
 }
 func (m *DirectDebitRelationshipsDirectDebitAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitRelationshipsDirectDebitDecision direct debit relationships direct debit decision
+// swagger:model DirectDebitRelationshipsDirectDebitDecision
+type DirectDebitRelationshipsDirectDebitDecision struct {
+
+	// data
+	Data []*DirectDebitDecision `json:"data"`
+}
+
+func DirectDebitRelationshipsDirectDebitDecisionWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsDirectDebitDecision {
+	return &DirectDebitRelationshipsDirectDebitDecision{
+
+		Data: make([]*DirectDebitDecision, 0),
+	}
+}
+
+func (m *DirectDebitRelationshipsDirectDebitDecision) WithData(data []*DirectDebitDecision) *DirectDebitRelationshipsDirectDebitDecision {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this direct debit relationships direct debit decision
+func (m *DirectDebitRelationshipsDirectDebitDecision) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitRelationshipsDirectDebitDecision) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("direct_debit_decision" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitRelationshipsDirectDebitDecision) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitRelationshipsDirectDebitDecision) UnmarshalBinary(b []byte) error {
+	var res DirectDebitRelationshipsDirectDebitDecision
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitRelationshipsDirectDebitDecision) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -44,11 +44,10 @@ type ContactAccount struct {
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
-	Relationships *Relationships `json:"relationships,omitempty"`
+	Relationships *ContactAccountRelationships `json:"relationships,omitempty"`
 
 	// type
-	// Enum: [contact_accounts]
-	Type string `json:"type,omitempty"`
+	Type ContactAccountResourceType `json:"type,omitempty"`
 
 	// version
 	// Minimum: 0
@@ -68,9 +67,9 @@ func ContactAccountWithDefaults(defaults client.Defaults) *ContactAccount {
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("ContactAccount", "organisation_id"),
 
-		Relationships: RelationshipsWithDefaults(defaults),
+		Relationships: ContactAccountRelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("ContactAccount", "type"),
+		// TODO Type: ContactAccountResourceType,
 
 		Version: defaults.GetInt64Ptr("ContactAccount", "version"),
 	}
@@ -126,7 +125,7 @@ func (m *ContactAccount) WithoutOrganisationID() *ContactAccount {
 	return m
 }
 
-func (m *ContactAccount) WithRelationships(relationships Relationships) *ContactAccount {
+func (m *ContactAccount) WithRelationships(relationships ContactAccountRelationships) *ContactAccount {
 
 	m.Relationships = &relationships
 
@@ -138,7 +137,7 @@ func (m *ContactAccount) WithoutRelationships() *ContactAccount {
 	return m
 }
 
-func (m *ContactAccount) WithType(typeVar string) *ContactAccount {
+func (m *ContactAccount) WithType(typeVar ContactAccountResourceType) *ContactAccount {
 
 	m.Type = typeVar
 
@@ -287,40 +286,16 @@ func (m *ContactAccount) validateRelationships(formats strfmt.Registry) error {
 	return nil
 }
 
-var contactAccountTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["contact_accounts"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		contactAccountTypeTypePropEnum = append(contactAccountTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// ContactAccountTypeContactAccounts captures enum value "contact_accounts"
-	ContactAccountTypeContactAccounts string = "contact_accounts"
-)
-
-// prop value enum
-func (m *ContactAccount) validateTypeEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, contactAccountTypeTypePropEnum); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *ContactAccount) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		}
 		return err
 	}
 

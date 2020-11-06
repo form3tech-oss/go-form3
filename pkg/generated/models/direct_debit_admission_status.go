@@ -26,6 +26,9 @@ const (
 
 	// DirectDebitAdmissionStatusFailed captures enum value "failed"
 	DirectDebitAdmissionStatusFailed DirectDebitAdmissionStatus = "failed"
+
+	// DirectDebitAdmissionStatusPending captures enum value "pending"
+	DirectDebitAdmissionStatusPending DirectDebitAdmissionStatus = "pending"
 )
 
 // for schema
@@ -33,7 +36,7 @@ var directDebitAdmissionStatusEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatus
-	if err := json.Unmarshal([]byte(`["confirmed","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["confirmed","failed","pending"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

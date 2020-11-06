@@ -21,9 +21,6 @@ import (
 // swagger:model NewAdviceSubmission
 type NewAdviceSubmission struct {
 
-	// attributes
-	Attributes interface{} `json:"attributes,omitempty"`
-
 	// id
 	// Required: true
 	// Format: uuid
@@ -46,8 +43,6 @@ type NewAdviceSubmission struct {
 func NewAdviceSubmissionWithDefaults(defaults client.Defaults) *NewAdviceSubmission {
 	return &NewAdviceSubmission{
 
-		// TODO Attributes: interface{},
-
 		ID: defaults.GetStrfmtUUIDPtr("NewAdviceSubmission", "id"),
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("NewAdviceSubmission", "organisation_id"),
@@ -56,13 +51,6 @@ func NewAdviceSubmissionWithDefaults(defaults client.Defaults) *NewAdviceSubmiss
 
 		Version: defaults.GetInt64Ptr("NewAdviceSubmission", "version"),
 	}
-}
-
-func (m *NewAdviceSubmission) WithAttributes(attributes interface{}) *NewAdviceSubmission {
-
-	m.Attributes = attributes
-
-	return m
 }
 
 func (m *NewAdviceSubmission) WithID(id strfmt.UUID) *NewAdviceSubmission {

@@ -36,8 +36,7 @@ type NewContact struct {
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// type
-	// Enum: [contacts]
-	Type string `json:"type,omitempty"`
+	Type ContactResourceType `json:"type,omitempty"`
 }
 
 func NewContactWithDefaults(defaults client.Defaults) *NewContact {
@@ -49,7 +48,8 @@ func NewContactWithDefaults(defaults client.Defaults) *NewContact {
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("NewContact", "organisation_id"),
 
-		Type: defaults.GetString("NewContact", "type"),
+		// TODO Type: ContactResourceType,
+
 	}
 }
 
@@ -89,7 +89,7 @@ func (m *NewContact) WithoutOrganisationID() *NewContact {
 	return m
 }
 
-func (m *NewContact) WithType(typeVar string) *NewContact {
+func (m *NewContact) WithType(typeVar ContactResourceType) *NewContact {
 
 	m.Type = typeVar
 
@@ -166,40 +166,16 @@ func (m *NewContact) validateOrganisationID(formats strfmt.Registry) error {
 	return nil
 }
 
-var newContactTypeTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["contacts"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		newContactTypeTypePropEnum = append(newContactTypeTypePropEnum, v)
-	}
-}
-
-const (
-
-	// NewContactTypeContacts captures enum value "contacts"
-	NewContactTypeContacts string = "contacts"
-)
-
-// prop value enum
-func (m *NewContact) validateTypeEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, newContactTypeTypePropEnum); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *NewContact) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		}
 		return err
 	}
 

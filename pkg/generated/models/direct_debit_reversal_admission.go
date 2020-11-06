@@ -348,6 +348,9 @@ type DirectDebitReversalAdmissionAttributes struct {
 
 	// source gateway
 	SourceGateway string `json:"source_gateway,omitempty"`
+
+	// status
+	Status DirectDebitReversalAdmissionStatus `json:"status,omitempty"`
 }
 
 func DirectDebitReversalAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReversalAdmissionAttributes {
@@ -358,6 +361,9 @@ func DirectDebitReversalAdmissionAttributesWithDefaults(defaults client.Defaults
 		SchemeStatusCodeDescription: defaults.GetString("DirectDebitReversalAdmissionAttributes", "scheme_status_code_description"),
 
 		SourceGateway: defaults.GetString("DirectDebitReversalAdmissionAttributes", "source_gateway"),
+
+		// TODO Status: DirectDebitReversalAdmissionStatus,
+
 	}
 }
 
@@ -382,8 +388,40 @@ func (m *DirectDebitReversalAdmissionAttributes) WithSourceGateway(sourceGateway
 	return m
 }
 
+func (m *DirectDebitReversalAdmissionAttributes) WithStatus(status DirectDebitReversalAdmissionStatus) *DirectDebitReversalAdmissionAttributes {
+
+	m.Status = status
+
+	return m
+}
+
 // Validate validates this direct debit reversal admission attributes
 func (m *DirectDebitReversalAdmissionAttributes) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitReversalAdmissionAttributes) validateStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	if err := m.Status.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "status")
+		}
+		return err
+	}
+
 	return nil
 }
 
