@@ -38,7 +38,7 @@ go get -u github.com/google/uuid
 
 | Environment variable | Description                                   |
 |:---------------------|:----------------------------------------------|
-| FORM3_HOST           | Form 3 host e.g. api.form3.tech               |
+| FORM3_HOST           | Form 3 host e.g. https://api.form3.tech       |
 | FORM3_PUBLIC_KEY_ID  | Public key ID for request signing             |
 | FORM3_PRIVATE_KEY    | Private key in PEM format for request signing |
 | FORM3_ORGANISATION_ID| Organisation Id                               |
