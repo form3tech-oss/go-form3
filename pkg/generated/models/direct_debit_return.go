@@ -23,23 +23,26 @@ import (
 type DirectDebitReturn struct {
 
 	// attributes
-	Attributes *DirectDebitReturnAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *DirectDebitReturnAttributes `json:"attributes"`
 
 	// created on
 	// Format: date-time
 	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// modified on
 	// Format: date-time
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *DirectDebitReturnRelationships `json:"relationships,omitempty"`
@@ -60,11 +63,11 @@ func DirectDebitReturnWithDefaults(defaults client.Defaults) *DirectDebitReturn 
 
 		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturn", "created_on"),
 
-		ID: defaults.GetStrfmtUUID("DirectDebitReturn", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DirectDebitReturn", "id"),
 
 		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturn", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("DirectDebitReturn", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitReturn", "organisation_id"),
 
 		Relationships: DirectDebitReturnRelationshipsWithDefaults(defaults),
 
@@ -100,8 +103,13 @@ func (m *DirectDebitReturn) WithoutCreatedOn() *DirectDebitReturn {
 
 func (m *DirectDebitReturn) WithID(id strfmt.UUID) *DirectDebitReturn {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *DirectDebitReturn) WithoutID() *DirectDebitReturn {
+	m.ID = nil
 	return m
 }
 
@@ -119,8 +127,13 @@ func (m *DirectDebitReturn) WithoutModifiedOn() *DirectDebitReturn {
 
 func (m *DirectDebitReturn) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitReturn {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *DirectDebitReturn) WithoutOrganisationID() *DirectDebitReturn {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -199,8 +212,8 @@ func (m *DirectDebitReturn) Validate(formats strfmt.Registry) error {
 
 func (m *DirectDebitReturn) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -230,8 +243,8 @@ func (m *DirectDebitReturn) validateCreatedOn(formats strfmt.Registry) error {
 
 func (m *DirectDebitReturn) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -256,8 +269,8 @@ func (m *DirectDebitReturn) validateModifiedOn(formats strfmt.Registry) error {
 
 func (m *DirectDebitReturn) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {

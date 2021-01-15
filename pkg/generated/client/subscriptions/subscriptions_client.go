@@ -73,7 +73,7 @@ func (a *DeleteSubscriptionRequest) Do() (*DeleteSubscriptionNoContent, error) {
 		Method:             "DELETE",
 		PathPattern:        "/notification/subscriptions/{id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteSubscriptionReader{formats: a.formats},

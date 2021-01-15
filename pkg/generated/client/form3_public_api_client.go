@@ -23,6 +23,7 @@ import (
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/organisations"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/participants"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/payments"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/platformsecurityapi"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/query_api"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/reports"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/roles"
@@ -99,6 +100,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.Participants = participants.New(transport, formats, defaults)
 
 	cli.Payments = payments.New(transport, formats, defaults)
+
+	cli.Platformsecurityapi = platformsecurityapi.New(transport, formats, defaults)
 
 	cli.QueryAPI = query_api.New(transport, formats, defaults)
 
@@ -180,6 +183,8 @@ type Form3PublicAPI struct {
 
 	Payments *payments.Client
 
+	Platformsecurityapi *platformsecurityapi.Client
+
 	QueryAPI *query_api.Client
 
 	Reports *reports.Client
@@ -222,6 +227,8 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Participants.SetTransport(transport)
 
 	c.Payments.SetTransport(transport)
+
+	c.Platformsecurityapi.SetTransport(transport)
 
 	c.QueryAPI.SetTransport(transport)
 

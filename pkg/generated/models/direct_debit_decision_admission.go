@@ -17,13 +17,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DirectDebitAdmission direct debit admission
-// swagger:model DirectDebitAdmission
-type DirectDebitAdmission struct {
+// DirectDebitDecisionAdmission direct debit decision admission
+// swagger:model DirectDebitDecisionAdmission
+type DirectDebitDecisionAdmission struct {
 
 	// attributes
 	// Required: true
-	Attributes *DirectDebitAdmissionAttributes `json:"attributes"`
+	Attributes *DirectDebitDecisionAdmissionAttributes `json:"attributes"`
 
 	// created on
 	// Format: date-time
@@ -44,7 +44,7 @@ type DirectDebitAdmission struct {
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
-	Relationships *DirectDebitAdmissionRelationships `json:"relationships,omitempty"`
+	Relationships *DirectDebitDecisionAdmissionRelationships `json:"relationships,omitempty"`
 
 	// type
 	// Pattern: ^[A-Za-z_]*$
@@ -55,120 +55,120 @@ type DirectDebitAdmission struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-func DirectDebitAdmissionWithDefaults(defaults client.Defaults) *DirectDebitAdmission {
-	return &DirectDebitAdmission{
+func DirectDebitDecisionAdmissionWithDefaults(defaults client.Defaults) *DirectDebitDecisionAdmission {
+	return &DirectDebitDecisionAdmission{
 
-		Attributes: DirectDebitAdmissionAttributesWithDefaults(defaults),
+		Attributes: DirectDebitDecisionAdmissionAttributesWithDefaults(defaults),
 
-		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitAdmission", "created_on"),
+		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitDecisionAdmission", "created_on"),
 
-		ID: defaults.GetStrfmtUUIDPtr("DirectDebitAdmission", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DirectDebitDecisionAdmission", "id"),
 
-		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitAdmission", "modified_on"),
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitDecisionAdmission", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitAdmission", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitDecisionAdmission", "organisation_id"),
 
-		Relationships: DirectDebitAdmissionRelationshipsWithDefaults(defaults),
+		Relationships: DirectDebitDecisionAdmissionRelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("DirectDebitAdmission", "type"),
+		Type: defaults.GetString("DirectDebitDecisionAdmission", "type"),
 
-		Version: defaults.GetInt64Ptr("DirectDebitAdmission", "version"),
+		Version: defaults.GetInt64Ptr("DirectDebitDecisionAdmission", "version"),
 	}
 }
 
-func (m *DirectDebitAdmission) WithAttributes(attributes DirectDebitAdmissionAttributes) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithAttributes(attributes DirectDebitDecisionAdmissionAttributes) *DirectDebitDecisionAdmission {
 
 	m.Attributes = &attributes
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutAttributes() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutAttributes() *DirectDebitDecisionAdmission {
 	m.Attributes = nil
 	return m
 }
 
-func (m *DirectDebitAdmission) WithCreatedOn(createdOn strfmt.DateTime) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithCreatedOn(createdOn strfmt.DateTime) *DirectDebitDecisionAdmission {
 
 	m.CreatedOn = &createdOn
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutCreatedOn() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutCreatedOn() *DirectDebitDecisionAdmission {
 	m.CreatedOn = nil
 	return m
 }
 
-func (m *DirectDebitAdmission) WithID(id strfmt.UUID) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithID(id strfmt.UUID) *DirectDebitDecisionAdmission {
 
 	m.ID = &id
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutID() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutID() *DirectDebitDecisionAdmission {
 	m.ID = nil
 	return m
 }
 
-func (m *DirectDebitAdmission) WithModifiedOn(modifiedOn strfmt.DateTime) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithModifiedOn(modifiedOn strfmt.DateTime) *DirectDebitDecisionAdmission {
 
 	m.ModifiedOn = &modifiedOn
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutModifiedOn() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutModifiedOn() *DirectDebitDecisionAdmission {
 	m.ModifiedOn = nil
 	return m
 }
 
-func (m *DirectDebitAdmission) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitDecisionAdmission {
 
 	m.OrganisationID = &organisationID
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutOrganisationID() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutOrganisationID() *DirectDebitDecisionAdmission {
 	m.OrganisationID = nil
 	return m
 }
 
-func (m *DirectDebitAdmission) WithRelationships(relationships DirectDebitAdmissionRelationships) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithRelationships(relationships DirectDebitDecisionAdmissionRelationships) *DirectDebitDecisionAdmission {
 
 	m.Relationships = &relationships
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutRelationships() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutRelationships() *DirectDebitDecisionAdmission {
 	m.Relationships = nil
 	return m
 }
 
-func (m *DirectDebitAdmission) WithType(typeVar string) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithType(typeVar string) *DirectDebitDecisionAdmission {
 
 	m.Type = typeVar
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithVersion(version int64) *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithVersion(version int64) *DirectDebitDecisionAdmission {
 
 	m.Version = &version
 
 	return m
 }
 
-func (m *DirectDebitAdmission) WithoutVersion() *DirectDebitAdmission {
+func (m *DirectDebitDecisionAdmission) WithoutVersion() *DirectDebitDecisionAdmission {
 	m.Version = nil
 	return m
 }
 
-// Validate validates this direct debit admission
-func (m *DirectDebitAdmission) Validate(formats strfmt.Registry) error {
+// Validate validates this direct debit decision admission
+func (m *DirectDebitDecisionAdmission) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAttributes(formats); err != nil {
@@ -209,7 +209,7 @@ func (m *DirectDebitAdmission) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateAttributes(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateAttributes(formats strfmt.Registry) error {
 
 	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
 		return err
@@ -227,7 +227,7 @@ func (m *DirectDebitAdmission) validateAttributes(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateCreatedOn(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateCreatedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedOn) { // not required
 		return nil
@@ -240,7 +240,7 @@ func (m *DirectDebitAdmission) validateCreatedOn(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateID(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
@@ -253,7 +253,7 @@ func (m *DirectDebitAdmission) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateModifiedOn(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateModifiedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ModifiedOn) { // not required
 		return nil
@@ -266,7 +266,7 @@ func (m *DirectDebitAdmission) validateModifiedOn(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateOrganisationID(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateOrganisationID(formats strfmt.Registry) error {
 
 	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
 		return err
@@ -279,7 +279,7 @@ func (m *DirectDebitAdmission) validateOrganisationID(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateRelationships(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateRelationships(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Relationships) { // not required
 		return nil
@@ -297,7 +297,7 @@ func (m *DirectDebitAdmission) validateRelationships(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateType(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
@@ -310,7 +310,7 @@ func (m *DirectDebitAdmission) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DirectDebitAdmission) validateVersion(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmission) validateVersion(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Version) { // not required
 		return nil
@@ -324,7 +324,7 @@ func (m *DirectDebitAdmission) validateVersion(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *DirectDebitAdmission) MarshalBinary() ([]byte, error) {
+func (m *DirectDebitDecisionAdmission) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -332,15 +332,15 @@ func (m *DirectDebitAdmission) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *DirectDebitAdmission) UnmarshalBinary(b []byte) error {
-	var res DirectDebitAdmission
+func (m *DirectDebitDecisionAdmission) UnmarshalBinary(b []byte) error {
+	var res DirectDebitDecisionAdmission
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *DirectDebitAdmission) Json() string {
+func (m *DirectDebitDecisionAdmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
@@ -348,81 +348,69 @@ func (m *DirectDebitAdmission) Json() string {
 	return string(json)
 }
 
-// DirectDebitAdmissionAttributes direct debit admission attributes
-// swagger:model DirectDebitAdmissionAttributes
-type DirectDebitAdmissionAttributes struct {
+// DirectDebitDecisionAdmissionAttributes direct debit decision admission attributes
+// swagger:model DirectDebitDecisionAdmissionAttributes
+type DirectDebitDecisionAdmissionAttributes struct {
 
 	// admission datetime
 	// Read Only: true
 	// Format: date-time
 	AdmissionDatetime strfmt.DateTime `json:"admission_datetime,omitempty"`
 
-	// scheme status code
-	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
-
-	// scheme status code description
-	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
+	// source gateway
+	SourceGateway string `json:"source_gateway,omitempty"`
 
 	// status
-	Status DirectDebitAdmissionStatus `json:"status,omitempty"`
+	Status DirectDebitDecisionAdmissionStatus `json:"status,omitempty"`
 
 	// status reason
-	StatusReason DirectDebitAdmissionStatusReason `json:"status_reason,omitempty"`
+	StatusReason DirectDebitDecisionAdmissionStatusReason `json:"status_reason,omitempty"`
 }
 
-func DirectDebitAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitAdmissionAttributes {
-	return &DirectDebitAdmissionAttributes{
+func DirectDebitDecisionAdmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitDecisionAdmissionAttributes {
+	return &DirectDebitDecisionAdmissionAttributes{
 
-		AdmissionDatetime: defaults.GetStrfmtDateTime("DirectDebitAdmissionAttributes", "admission_datetime"),
+		AdmissionDatetime: defaults.GetStrfmtDateTime("DirectDebitDecisionAdmissionAttributes", "admission_datetime"),
 
-		SchemeStatusCode: defaults.GetString("DirectDebitAdmissionAttributes", "scheme_status_code"),
+		SourceGateway: defaults.GetString("DirectDebitDecisionAdmissionAttributes", "source_gateway"),
 
-		SchemeStatusCodeDescription: defaults.GetString("DirectDebitAdmissionAttributes", "scheme_status_code_description"),
+		// TODO Status: DirectDebitDecisionAdmissionStatus,
 
-		// TODO Status: DirectDebitAdmissionStatus,
-
-		// TODO StatusReason: DirectDebitAdmissionStatusReason,
+		// TODO StatusReason: DirectDebitDecisionAdmissionStatusReason,
 
 	}
 }
 
-func (m *DirectDebitAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *DirectDebitAdmissionAttributes {
+func (m *DirectDebitDecisionAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *DirectDebitDecisionAdmissionAttributes {
 
 	m.AdmissionDatetime = admissionDatetime
 
 	return m
 }
 
-func (m *DirectDebitAdmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitAdmissionAttributes {
+func (m *DirectDebitDecisionAdmissionAttributes) WithSourceGateway(sourceGateway string) *DirectDebitDecisionAdmissionAttributes {
 
-	m.SchemeStatusCode = schemeStatusCode
-
-	return m
-}
-
-func (m *DirectDebitAdmissionAttributes) WithSchemeStatusCodeDescription(schemeStatusCodeDescription string) *DirectDebitAdmissionAttributes {
-
-	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
+	m.SourceGateway = sourceGateway
 
 	return m
 }
 
-func (m *DirectDebitAdmissionAttributes) WithStatus(status DirectDebitAdmissionStatus) *DirectDebitAdmissionAttributes {
+func (m *DirectDebitDecisionAdmissionAttributes) WithStatus(status DirectDebitDecisionAdmissionStatus) *DirectDebitDecisionAdmissionAttributes {
 
 	m.Status = status
 
 	return m
 }
 
-func (m *DirectDebitAdmissionAttributes) WithStatusReason(statusReason DirectDebitAdmissionStatusReason) *DirectDebitAdmissionAttributes {
+func (m *DirectDebitDecisionAdmissionAttributes) WithStatusReason(statusReason DirectDebitDecisionAdmissionStatusReason) *DirectDebitDecisionAdmissionAttributes {
 
 	m.StatusReason = statusReason
 
 	return m
 }
 
-// Validate validates this direct debit admission attributes
-func (m *DirectDebitAdmissionAttributes) Validate(formats strfmt.Registry) error {
+// Validate validates this direct debit decision admission attributes
+func (m *DirectDebitDecisionAdmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdmissionDatetime(formats); err != nil {
@@ -443,7 +431,7 @@ func (m *DirectDebitAdmissionAttributes) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *DirectDebitAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.AdmissionDatetime) { // not required
 		return nil
@@ -456,7 +444,7 @@ func (m *DirectDebitAdmissionAttributes) validateAdmissionDatetime(formats strfm
 	return nil
 }
 
-func (m *DirectDebitAdmissionAttributes) validateStatus(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmissionAttributes) validateStatus(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -472,7 +460,7 @@ func (m *DirectDebitAdmissionAttributes) validateStatus(formats strfmt.Registry)
 	return nil
 }
 
-func (m *DirectDebitAdmissionAttributes) validateStatusReason(formats strfmt.Registry) error {
+func (m *DirectDebitDecisionAdmissionAttributes) validateStatusReason(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.StatusReason) { // not required
 		return nil
@@ -489,7 +477,7 @@ func (m *DirectDebitAdmissionAttributes) validateStatusReason(formats strfmt.Reg
 }
 
 // MarshalBinary interface implementation
-func (m *DirectDebitAdmissionAttributes) MarshalBinary() ([]byte, error) {
+func (m *DirectDebitDecisionAdmissionAttributes) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -497,15 +485,15 @@ func (m *DirectDebitAdmissionAttributes) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *DirectDebitAdmissionAttributes) UnmarshalBinary(b []byte) error {
-	var res DirectDebitAdmissionAttributes
+func (m *DirectDebitDecisionAdmissionAttributes) UnmarshalBinary(b []byte) error {
+	var res DirectDebitDecisionAdmissionAttributes
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *DirectDebitAdmissionAttributes) Json() string {
+func (m *DirectDebitDecisionAdmissionAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

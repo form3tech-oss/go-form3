@@ -30,16 +30,18 @@ type DirectDebitReturnReversal struct {
 	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// modified on
 	// Format: date-time
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *DirectDebitReturnReversalRelationships `json:"relationships,omitempty"`
@@ -60,11 +62,11 @@ func DirectDebitReturnReversalWithDefaults(defaults client.Defaults) *DirectDebi
 
 		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnReversal", "created_on"),
 
-		ID: defaults.GetStrfmtUUID("DirectDebitReturnReversal", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DirectDebitReturnReversal", "id"),
 
 		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnReversal", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("DirectDebitReturnReversal", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitReturnReversal", "organisation_id"),
 
 		Relationships: DirectDebitReturnReversalRelationshipsWithDefaults(defaults),
 
@@ -95,8 +97,13 @@ func (m *DirectDebitReturnReversal) WithoutCreatedOn() *DirectDebitReturnReversa
 
 func (m *DirectDebitReturnReversal) WithID(id strfmt.UUID) *DirectDebitReturnReversal {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *DirectDebitReturnReversal) WithoutID() *DirectDebitReturnReversal {
+	m.ID = nil
 	return m
 }
 
@@ -114,8 +121,13 @@ func (m *DirectDebitReturnReversal) WithoutModifiedOn() *DirectDebitReturnRevers
 
 func (m *DirectDebitReturnReversal) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitReturnReversal {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *DirectDebitReturnReversal) WithoutOrganisationID() *DirectDebitReturnReversal {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -203,8 +215,8 @@ func (m *DirectDebitReturnReversal) validateCreatedOn(formats strfmt.Registry) e
 
 func (m *DirectDebitReturnReversal) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -229,8 +241,8 @@ func (m *DirectDebitReturnReversal) validateModifiedOn(formats strfmt.Registry) 
 
 func (m *DirectDebitReturnReversal) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {

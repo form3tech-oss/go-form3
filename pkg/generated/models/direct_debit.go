@@ -381,7 +381,10 @@ type DirectDebitAttributes struct {
 	InstructionID string `json:"instruction_id,omitempty"`
 
 	// Indicator notifying whether the underlying mandate is amended or not
-	MandateAmendmentIndicator bool `json:"mandate_amendment_indicator,omitempty"`
+	MandateAmendmentIndicator *bool `json:"mandate_amendment_indicator,omitempty"`
+
+	// Original mandate id.
+	MandateID string `json:"mandate_id,omitempty"`
 
 	// Date on which the direct debit mandate has been signed by the debtor.
 	// Format: date
@@ -454,7 +457,9 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 
 		InstructionID: defaults.GetString("DirectDebitAttributes", "instruction_id"),
 
-		MandateAmendmentIndicator: defaults.GetBool("DirectDebitAttributes", "mandate_amendment_indicator"),
+		MandateAmendmentIndicator: defaults.GetBoolPtr("DirectDebitAttributes", "mandate_amendment_indicator"),
+
+		MandateID: defaults.GetString("DirectDebitAttributes", "mandate_id"),
 
 		MandateSignatureDate: defaults.GetStrfmtDatePtr("DirectDebitAttributes", "mandate_signature_date"),
 
@@ -563,7 +568,19 @@ func (m *DirectDebitAttributes) WithInstructionID(instructionID string) *DirectD
 
 func (m *DirectDebitAttributes) WithMandateAmendmentIndicator(mandateAmendmentIndicator bool) *DirectDebitAttributes {
 
-	m.MandateAmendmentIndicator = mandateAmendmentIndicator
+	m.MandateAmendmentIndicator = &mandateAmendmentIndicator
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutMandateAmendmentIndicator() *DirectDebitAttributes {
+	m.MandateAmendmentIndicator = nil
+	return m
+}
+
+func (m *DirectDebitAttributes) WithMandateID(mandateID string) *DirectDebitAttributes {
+
+	m.MandateID = mandateID
 
 	return m
 }

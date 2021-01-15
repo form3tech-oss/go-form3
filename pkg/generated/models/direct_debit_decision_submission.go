@@ -23,8 +23,7 @@ import (
 type DirectDebitDecisionSubmission struct {
 
 	// attributes
-	// Required: true
-	Attributes *DirectDebitDecisionSubmissionAttributes `json:"attributes"`
+	Attributes *DirectDebitDecisionSubmissionAttributes `json:"attributes,omitempty"`
 
 	// created on
 	// Format: date-time
@@ -212,8 +211,8 @@ func (m *DirectDebitDecisionSubmission) Validate(formats strfmt.Registry) error 
 
 func (m *DirectDebitDecisionSubmission) validateAttributes(formats strfmt.Registry) error {
 
-	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
-		return err
+	if swag.IsZero(m.Attributes) { // not required
+		return nil
 	}
 
 	if m.Attributes != nil {
