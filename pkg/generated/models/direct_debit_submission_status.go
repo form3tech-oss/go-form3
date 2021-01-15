@@ -36,6 +36,9 @@ const (
 	// DirectDebitSubmissionStatusSubmitted captures enum value "submitted"
 	DirectDebitSubmissionStatusSubmitted DirectDebitSubmissionStatus = "submitted"
 
+	// DirectDebitSubmissionStatusPending captures enum value "pending"
+	DirectDebitSubmissionStatusPending DirectDebitSubmissionStatus = "pending"
+
 	// DirectDebitSubmissionStatusValidationPending captures enum value "validation_pending"
 	DirectDebitSubmissionStatusValidationPending DirectDebitSubmissionStatus = "validation_pending"
 
@@ -51,7 +54,7 @@ var directDebitSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []DirectDebitSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","released_to_gateway","delivery_confirmed","delivery_failed","submitted","validation_pending","validation_passed","queued_for_delivery"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","released_to_gateway","delivery_confirmed","delivery_failed","submitted","pending","validation_pending","validation_passed","queued_for_delivery"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

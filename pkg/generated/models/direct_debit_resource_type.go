@@ -42,6 +42,12 @@ const (
 	// DirectDebitResourceTypeDirectDebitReversalAdmissions captures enum value "direct_debit_reversal_admissions"
 	DirectDebitResourceTypeDirectDebitReversalAdmissions DirectDebitResourceType = "direct_debit_reversal_admissions"
 
+	// DirectDebitResourceTypeDirectDebitReversalSubmissions captures enum value "direct_debit_reversal_submissions"
+	DirectDebitResourceTypeDirectDebitReversalSubmissions DirectDebitResourceType = "direct_debit_reversal_submissions"
+
+	// DirectDebitResourceTypeDirectDebitReversalSubmissionValidations captures enum value "direct_debit_reversal_submission_validations"
+	DirectDebitResourceTypeDirectDebitReversalSubmissionValidations DirectDebitResourceType = "direct_debit_reversal_submission_validations"
+
 	// DirectDebitResourceTypeDirectDebitReturns captures enum value "direct_debit_returns"
 	DirectDebitResourceTypeDirectDebitReturns DirectDebitResourceType = "direct_debit_returns"
 
@@ -69,8 +75,17 @@ const (
 	// DirectDebitResourceTypeDirectDebitRecallAdmissions captures enum value "direct_debit_recall_admissions"
 	DirectDebitResourceTypeDirectDebitRecallAdmissions DirectDebitResourceType = "direct_debit_recall_admissions"
 
+	// DirectDebitResourceTypeDirectDebitRecallSubmissions captures enum value "direct_debit_recall_submissions"
+	DirectDebitResourceTypeDirectDebitRecallSubmissions DirectDebitResourceType = "direct_debit_recall_submissions"
+
+	// DirectDebitResourceTypeDirectDebitRecallSubmissionValidations captures enum value "direct_debit_recall_submission_validations"
+	DirectDebitResourceTypeDirectDebitRecallSubmissionValidations DirectDebitResourceType = "direct_debit_recall_submission_validations"
+
 	// DirectDebitResourceTypeDirectDebitDecisions captures enum value "direct_debit_decisions"
 	DirectDebitResourceTypeDirectDebitDecisions DirectDebitResourceType = "direct_debit_decisions"
+
+	// DirectDebitResourceTypeDirectDebitDecisionAdmissions captures enum value "direct_debit_decision_admissions"
+	DirectDebitResourceTypeDirectDebitDecisionAdmissions DirectDebitResourceType = "direct_debit_decision_admissions"
 
 	// DirectDebitResourceTypeDirectDebitDecisionSubmissions captures enum value "direct_debit_decision_submissions"
 	DirectDebitResourceTypeDirectDebitDecisionSubmissions DirectDebitResourceType = "direct_debit_decision_submissions"
@@ -84,7 +99,7 @@ var directDebitResourceTypeEnum []interface{}
 
 func init() {
 	var res []DirectDebitResourceType
-	if err := json.Unmarshal([]byte(`["direct_debits","direct_debit_status","direct_debit_admissions","direct_debit_submissions","direct_debit_submission_validations","direct_debit_reversals","direct_debit_reversal_admissions","direct_debit_returns","direct_debit_return_admissions","direct_debit_return_submissions","direct_debit_return_submission_validations","direct_debit_return_reversals","direct_debit_return_reversal_admissions","direct_debit_automatic_returns","direct_debit_recalls","direct_debit_recall_admissions","direct_debit_decisions","direct_debit_decision_submissions","direct_debit_decision_submission_validations"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["direct_debits","direct_debit_status","direct_debit_admissions","direct_debit_submissions","direct_debit_submission_validations","direct_debit_reversals","direct_debit_reversal_admissions","direct_debit_reversal_submissions","direct_debit_reversal_submission_validations","direct_debit_returns","direct_debit_return_admissions","direct_debit_return_submissions","direct_debit_return_submission_validations","direct_debit_return_reversals","direct_debit_return_reversal_admissions","direct_debit_automatic_returns","direct_debit_recalls","direct_debit_recall_admissions","direct_debit_recall_submissions","direct_debit_recall_submission_validations","direct_debit_decisions","direct_debit_decision_admissions","direct_debit_decision_submissions","direct_debit_decision_submission_validations"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

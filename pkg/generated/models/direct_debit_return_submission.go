@@ -30,16 +30,18 @@ type DirectDebitReturnSubmission struct {
 	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// modified on
 	// Format: date-time
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *DirectDebitReturnSubmissionRelationships `json:"relationships,omitempty"`
@@ -60,11 +62,11 @@ func DirectDebitReturnSubmissionWithDefaults(defaults client.Defaults) *DirectDe
 
 		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnSubmission", "created_on"),
 
-		ID: defaults.GetStrfmtUUID("DirectDebitReturnSubmission", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DirectDebitReturnSubmission", "id"),
 
 		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnSubmission", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("DirectDebitReturnSubmission", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitReturnSubmission", "organisation_id"),
 
 		Relationships: DirectDebitReturnSubmissionRelationshipsWithDefaults(defaults),
 
@@ -100,8 +102,13 @@ func (m *DirectDebitReturnSubmission) WithoutCreatedOn() *DirectDebitReturnSubmi
 
 func (m *DirectDebitReturnSubmission) WithID(id strfmt.UUID) *DirectDebitReturnSubmission {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *DirectDebitReturnSubmission) WithoutID() *DirectDebitReturnSubmission {
+	m.ID = nil
 	return m
 }
 
@@ -119,8 +126,13 @@ func (m *DirectDebitReturnSubmission) WithoutModifiedOn() *DirectDebitReturnSubm
 
 func (m *DirectDebitReturnSubmission) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitReturnSubmission {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *DirectDebitReturnSubmission) WithoutOrganisationID() *DirectDebitReturnSubmission {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -230,8 +242,8 @@ func (m *DirectDebitReturnSubmission) validateCreatedOn(formats strfmt.Registry)
 
 func (m *DirectDebitReturnSubmission) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -256,8 +268,8 @@ func (m *DirectDebitReturnSubmission) validateModifiedOn(formats strfmt.Registry
 
 func (m *DirectDebitReturnSubmission) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {

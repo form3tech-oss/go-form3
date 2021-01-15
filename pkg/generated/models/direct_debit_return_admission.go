@@ -22,23 +22,26 @@ import (
 type DirectDebitReturnAdmission struct {
 
 	// attributes
-	Attributes *DirectDebitReturnAdmissionAttributes `json:"attributes,omitempty"`
+	// Required: true
+	Attributes *DirectDebitReturnAdmissionAttributes `json:"attributes"`
 
 	// created on
 	// Format: date-time
 	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// modified on
 	// Format: date-time
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *DirectDebitReturnAdmissionRelationships `json:"relationships,omitempty"`
@@ -59,11 +62,11 @@ func DirectDebitReturnAdmissionWithDefaults(defaults client.Defaults) *DirectDeb
 
 		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnAdmission", "created_on"),
 
-		ID: defaults.GetStrfmtUUID("DirectDebitReturnAdmission", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DirectDebitReturnAdmission", "id"),
 
 		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReturnAdmission", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("DirectDebitReturnAdmission", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitReturnAdmission", "organisation_id"),
 
 		Relationships: DirectDebitReturnAdmissionRelationshipsWithDefaults(defaults),
 
@@ -99,8 +102,13 @@ func (m *DirectDebitReturnAdmission) WithoutCreatedOn() *DirectDebitReturnAdmiss
 
 func (m *DirectDebitReturnAdmission) WithID(id strfmt.UUID) *DirectDebitReturnAdmission {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *DirectDebitReturnAdmission) WithoutID() *DirectDebitReturnAdmission {
+	m.ID = nil
 	return m
 }
 
@@ -118,8 +126,13 @@ func (m *DirectDebitReturnAdmission) WithoutModifiedOn() *DirectDebitReturnAdmis
 
 func (m *DirectDebitReturnAdmission) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitReturnAdmission {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *DirectDebitReturnAdmission) WithoutOrganisationID() *DirectDebitReturnAdmission {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -198,8 +211,8 @@ func (m *DirectDebitReturnAdmission) Validate(formats strfmt.Registry) error {
 
 func (m *DirectDebitReturnAdmission) validateAttributes(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attributes) { // not required
-		return nil
+	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
+		return err
 	}
 
 	if m.Attributes != nil {
@@ -229,8 +242,8 @@ func (m *DirectDebitReturnAdmission) validateCreatedOn(formats strfmt.Registry) 
 
 func (m *DirectDebitReturnAdmission) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -255,8 +268,8 @@ func (m *DirectDebitReturnAdmission) validateModifiedOn(formats strfmt.Registry)
 
 func (m *DirectDebitReturnAdmission) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
