@@ -32,6 +32,9 @@ const (
 
 	// DirectDebitAdmissionStatusReasonUnknownAccountnumber captures enum value "unknown_accountnumber"
 	DirectDebitAdmissionStatusReasonUnknownAccountnumber DirectDebitAdmissionStatusReason = "unknown_accountnumber"
+
+	// DirectDebitAdmissionStatusReasonPendingSettlement captures enum value "pending_settlement"
+	DirectDebitAdmissionStatusReasonPendingSettlement DirectDebitAdmissionStatusReason = "pending_settlement"
 )
 
 // for schema
@@ -39,7 +42,7 @@ var directDebitAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","pending_settlement"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

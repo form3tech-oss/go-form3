@@ -30,16 +30,18 @@ type DirectDebitReversal struct {
 	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
 
 	// id
+	// Required: true
 	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
+	ID *strfmt.UUID `json:"id"`
 
 	// modified on
 	// Format: date-time
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *DirectDebitReversalRelationships `json:"relationships,omitempty"`
@@ -60,11 +62,11 @@ func DirectDebitReversalWithDefaults(defaults client.Defaults) *DirectDebitRever
 
 		CreatedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReversal", "created_on"),
 
-		ID: defaults.GetStrfmtUUID("DirectDebitReversal", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("DirectDebitReversal", "id"),
 
 		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitReversal", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("DirectDebitReversal", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitReversal", "organisation_id"),
 
 		Relationships: DirectDebitReversalRelationshipsWithDefaults(defaults),
 
@@ -100,8 +102,13 @@ func (m *DirectDebitReversal) WithoutCreatedOn() *DirectDebitReversal {
 
 func (m *DirectDebitReversal) WithID(id strfmt.UUID) *DirectDebitReversal {
 
-	m.ID = id
+	m.ID = &id
 
+	return m
+}
+
+func (m *DirectDebitReversal) WithoutID() *DirectDebitReversal {
+	m.ID = nil
 	return m
 }
 
@@ -119,8 +126,13 @@ func (m *DirectDebitReversal) WithoutModifiedOn() *DirectDebitReversal {
 
 func (m *DirectDebitReversal) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitReversal {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *DirectDebitReversal) WithoutOrganisationID() *DirectDebitReversal {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -230,8 +242,8 @@ func (m *DirectDebitReversal) validateCreatedOn(formats strfmt.Registry) error {
 
 func (m *DirectDebitReversal) validateID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ID) { // not required
-		return nil
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
@@ -256,8 +268,8 @@ func (m *DirectDebitReversal) validateModifiedOn(formats strfmt.Registry) error 
 
 func (m *DirectDebitReversal) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
@@ -666,6 +678,9 @@ type DirectDebitReversalRelationships struct {
 
 	// direct debit reversal admission
 	DirectDebitReversalAdmission *DirectDebitReversalRelationshipsDirectDebitReversalAdmission `json:"direct_debit_reversal_admission,omitempty"`
+
+	// direct debit reversal submission
+	DirectDebitReversalSubmission *DirectDebitReversalRelationshipsDirectDebitReversalSubmission `json:"direct_debit_reversal_submission,omitempty"`
 }
 
 func DirectDebitReversalRelationshipsWithDefaults(defaults client.Defaults) *DirectDebitReversalRelationships {
@@ -674,6 +689,8 @@ func DirectDebitReversalRelationshipsWithDefaults(defaults client.Defaults) *Dir
 		DirectDebit: DirectDebitReversalRelationshipsDirectDebitWithDefaults(defaults),
 
 		DirectDebitReversalAdmission: DirectDebitReversalRelationshipsDirectDebitReversalAdmissionWithDefaults(defaults),
+
+		DirectDebitReversalSubmission: DirectDebitReversalRelationshipsDirectDebitReversalSubmissionWithDefaults(defaults),
 	}
 }
 
@@ -701,6 +718,18 @@ func (m *DirectDebitReversalRelationships) WithoutDirectDebitReversalAdmission()
 	return m
 }
 
+func (m *DirectDebitReversalRelationships) WithDirectDebitReversalSubmission(directDebitReversalSubmission DirectDebitReversalRelationshipsDirectDebitReversalSubmission) *DirectDebitReversalRelationships {
+
+	m.DirectDebitReversalSubmission = &directDebitReversalSubmission
+
+	return m
+}
+
+func (m *DirectDebitReversalRelationships) WithoutDirectDebitReversalSubmission() *DirectDebitReversalRelationships {
+	m.DirectDebitReversalSubmission = nil
+	return m
+}
+
 // Validate validates this direct debit reversal relationships
 func (m *DirectDebitReversalRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -710,6 +739,10 @@ func (m *DirectDebitReversalRelationships) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateDirectDebitReversalAdmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDirectDebitReversalSubmission(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -747,6 +780,24 @@ func (m *DirectDebitReversalRelationships) validateDirectDebitReversalAdmission(
 		if err := m.DirectDebitReversalAdmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("relationships" + "." + "direct_debit_reversal_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReversalRelationships) validateDirectDebitReversalSubmission(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DirectDebitReversalSubmission) { // not required
+		return nil
+	}
+
+	if m.DirectDebitReversalSubmission != nil {
+		if err := m.DirectDebitReversalSubmission.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "direct_debit_reversal_submission")
 			}
 			return err
 		}
@@ -945,6 +996,92 @@ func (m *DirectDebitReversalRelationshipsDirectDebitReversalAdmission) Unmarshal
 	return nil
 }
 func (m *DirectDebitReversalRelationshipsDirectDebitReversalAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// DirectDebitReversalRelationshipsDirectDebitReversalSubmission direct debit reversal relationships direct debit reversal submission
+// swagger:model DirectDebitReversalRelationshipsDirectDebitReversalSubmission
+type DirectDebitReversalRelationshipsDirectDebitReversalSubmission struct {
+
+	// data
+	Data []*DirectDebitReversalSubmission `json:"data"`
+}
+
+func DirectDebitReversalRelationshipsDirectDebitReversalSubmissionWithDefaults(defaults client.Defaults) *DirectDebitReversalRelationshipsDirectDebitReversalSubmission {
+	return &DirectDebitReversalRelationshipsDirectDebitReversalSubmission{
+
+		Data: make([]*DirectDebitReversalSubmission, 0),
+	}
+}
+
+func (m *DirectDebitReversalRelationshipsDirectDebitReversalSubmission) WithData(data []*DirectDebitReversalSubmission) *DirectDebitReversalRelationshipsDirectDebitReversalSubmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this direct debit reversal relationships direct debit reversal submission
+func (m *DirectDebitReversalRelationshipsDirectDebitReversalSubmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DirectDebitReversalRelationshipsDirectDebitReversalSubmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "direct_debit_reversal_submission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DirectDebitReversalRelationshipsDirectDebitReversalSubmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DirectDebitReversalRelationshipsDirectDebitReversalSubmission) UnmarshalBinary(b []byte) error {
+	var res DirectDebitReversalRelationshipsDirectDebitReversalSubmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *DirectDebitReversalRelationshipsDirectDebitReversalSubmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
