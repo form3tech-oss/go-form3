@@ -1,378 +1,354 @@
-- command: update
-  path: paths./audit/entries/health.get.operationId
-  value: GetAuditHealth
-- command: update
-  path: paths./audit/entries/{record_type}.get.operationId
-  value: ListAuditEntries
-- command: update
-  path: paths./audit/entries/{record_type}/{id}.get.operationId
-  value: GetAuditEntry
-- command: update
-  path: paths./notification/reports.get.operationId
-  value: ListReports
-- command: update
-  path: paths./notification/reports/{id}.get.operationId
-  value: GetReport
-- command: update
-  path: paths./notification/reports/{id}/admissions/{admissionId}.get.operationId
-  value: GetReportAdmission
-- command: update
-  path: paths./notification/schememessages.get.operationId
-  value: ListSchemeMessages
-- command: update
-  path: paths./notification/schememessages/{id}.get.operationId
-  value: GetSchemeMessage
-- command: update
-  path: paths./notification/schememessages/{id}/admissions/{admissionId}.get.operationId
-  value: GetSchemeMessageAdmission
-- command: update
-  path: paths./notification/subscriptions.get.operationId
-  value: ListSubscriptions
-- command: update
-  path: paths./notification/subscriptions.post.operationId
-  value: CreateSubscription
-- command: update
-  path: paths./notification/subscriptions/health.get.operationId
-  value: GetSubscriptionsHealth
-- command: update
-  path: paths./notification/subscriptions/{id}.delete.operationId
-  value: DeleteSubscription
-- command: update
-  path: paths./notification/subscriptions/{id}.get.operationId
-  value: GetSubscription
-- command: update
-  path: paths./notification/subscriptions/{id}.patch.operationId
-  value: ModifySubscription
-- command: update
-  path: paths./oauth2/token.post.operationId
-  value: CreateOauthToken
-- command: update
-  path: paths./organisation/accounts.get.operationId
-  value: ListAccounts
-- command: update
-  path: paths./organisation/accounts.post.operationId
-  value: CreateAccount
-- command: update
-  path: paths./organisation/accounts/{id}.delete.operationId
-  value: DeleteAccount
-- command: update
-  path: paths./organisation/accounts/{id}.get.operationId
-  value: GetAccount
-- command: update
-  path: paths./organisation/accounts/{id}.patch.operationId
-  value: ModifyAccount
-- command: update
-  path: paths./organisation/accounts/{id}/events.get.operationId
-  value: ListAccountEvents
-- command: update
-  path: paths./organisation/balances.get.operationId
-  value: GetBalances
-- command: update
-  path: paths./organisation/positions.get.operationId
-  value: GetPositions
-- command: update
-  path: paths./organisation/units.get.operationId
-  value: ListUnits
-- command: update
-  path: paths./organisation/units.post.operationId
-  value: CreateUnit
-- command: update
-  path: paths./organisation/units/health.get.operationId
-  value: GetUnitsHealth
-- command: update
-  path: paths./organisation/units/{id}.get.operationId
-  value: GetUnit
-- command: update
-  path: paths./organisation/units/{id}.patch.operationId
-  value: ModifyUnit
-# - command: update
-#   path: paths./participants/[open_banking_id]/open-banking/v3.1/accounts/name-verification.post.operationId
-#   value: CreateAccountNameVerification
-- command: update
-  path: paths./security/roles.get.operationId
-  value: ListRoles
-- command: update
-  path: paths./security/roles.post.operationId
-  value: CreateRoles
-- command: update
-  path: paths./security/roles/{role_id}.delete.operationId
-  value: DeleteRole
-- command: update
-  path: paths./security/roles/{role_id}.get.operationId
-  value: GetRole
-- command: update
-  path: paths./security/roles/{role_id}/aces.get.operationId
-  value: ListAces
-- command: update
-  path: paths./security/roles/{role_id}/aces.post.operationId
-  value: CreateAce
-- command: update
-  path: paths./security/roles/{role_id}/aces/{ace_id}.delete.operationId
-  value: DeleteAce
-- command: update
-  path: paths./security/roles/{role_id}/aces/{ace_id}.get.operationId
-  value: GetAce
-- command: update
-  path: paths./security/users.get.operationId
-  value: ListUsers
-- command: update
-  path: paths./security/users.post.operationId
-  value: CreateUser
-- command: update
-  path: paths./security/users/health.get.operationId
-  value: GetUsersHealth
-- command: update
-  path: paths./security/users/{user_id}.delete.operationId
-  value: DeleteUser
-- command: update
-  path: paths./security/users/{user_id}.get.operationId
-  value: GetUser
-- command: update
-  path: paths./security/users/{user_id}.patch.operationId
-  value: ModifyUser
-- command: update
-  path: paths./security/users/{user_id}/aces.get.operationId
-  value: GetUserAces
-- command: update
-  path: paths./security/users/{user_id}/credentials.get.operationId
-  value: ListUserCredentials
-- command: update
-  path: paths./security/users/{user_id}/credentials.post.operationId
-  value: CreateUserCredentials
-- command: update
-  path: paths./security/users/{user_id}/credentials/{client_id}.delete.operationId
-  value: DeleteUserCredential
-- command: update
-  path: paths./security/users/{user_id}/roles.get.operationId
-  value: ListUserRoles
-- command: update
-  path: paths./security/users/{user_id}/roles/{role_id}.delete.operationId
-  value: DeleteUserRole
-- command: update
-  path: paths./security/users/{user_id}/roles/{role_id}.post.operationId
-  value: CreateUserRole
-- command: update
-  path: paths./transaction/claims.get.operationId
-  value: ListClaims
-- command: update
-  path: paths./transaction/claims.post.operationId
-  value: CreateClaim
-- command: update
-  path: paths./transaction/claims/health.get.operationId
-  value: GetClaimsHealth
-- command: update
-  path: paths./transaction/claims/{id}.get.operationId
-  value: GetClaim
-- command: update
-  path: paths./transaction/claims/{id}/reversals.post.operationId
-  value: CreateClaimReversal
-- command: update
-  path: paths./transaction/claims/{id}/reversals/{reversalId}.get.operationId
-  value: GetClaimReversal
-- command: update
-  path: paths./transaction/claims/{id}/reversals/{reversalId}/submissions.post.operationId
-  value: CreateClaimReversalSubmission
-- command: update
-  path: paths./transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}.get.operationId
-  value: GetClaimReversalSubmission
-- command: update
-  path: paths./transaction/claims/{id}/submissions.post.operationId
-  value: CreateClaimSubmission
-- command: update
-  path: paths./transaction/claims/{id}/submissions/{submissionId}.get.operationId
-  value: GetClaimSubmission
-- command: update
-  path: paths./transaction/directdebits.get.operationId
-  value: ListDirectDebits
-- command: update
-  path: paths./transaction/directdebits.post.operationId
-  value: CreateDirectDebit
-- command: update
-  path: paths./transaction/directdebits/health.get.operationId
-  value: GetDirectDebitHealth
-- command: update
-  path: paths./transaction/directdebits/{id}.get.operationId
-  value: GetDirectDebit
-- command: update
-  path: paths./transaction/directdebits/{id}/admissions/{admissionId}.get.operationId
-  value: GetDirectDebitAdmission
-- command: update
-  path: paths./transaction/directdebits/{id}/returns.post.operationId
-  value: CreateDirectDebitReturn
-- command: update
-  path: paths./transaction/directdebits/{id}/returns/{returnId}.get.operationId
-  value: GetDirectDebitReturn
-- command: update
-  path: paths./transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}.get.operationId
-  value: GetDirectDebitReturnAdmission
-- command: update
-  path: paths./transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}.get.operationId
-  value: GetDirectDebitReturnReversal
-- command: update
-  path: paths./transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}.get.operationId
-  value: GetDirectDebitReturnReversalAdmission
-- command: update
-  path: paths./transaction/directdebits/{id}/returns/{returnId}/submissions.post.operationId
-  value: CreateDirectDebitReturnSubmission
-- command: update
-  path: paths./transaction/directdebits/{id}/returns/{returnId}/submissions/{submissionId}.get.operationId
-  value: GetDirectDebitReturnSubmission
-- command: update
-  path: paths./transaction/directdebits/{id}/reversals.post.operationId
-  value: CreateDirectDebitReversal
-- command: update
-  path: paths./transaction/directdebits/{id}/reversals/{reversalId}.get.operationId
-  value: GetDirectDebitReversal
-- command: update
-  path: paths./transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}.get.operationId
-  value: GetDirectDebitReversalAdmission
-- command: update
-  path: paths./transaction/directdebits/{id}/submissions.post.operationId
-  value: CreateDirectDebitSubmission
-- command: update
-  path: paths./transaction/directdebits/{id}/submissions/{submissionId}.get.operationId
-  value: GetDirectDebitSubmission
-- command: update
-  path: paths./transaction/mandates.get.operationId
-  value: ListMandates
-- command: update
-  path: paths./transaction/mandates.post.operationId
-  value: CreateMandate
-- command: update
-  path: paths./transaction/mandates/health.get.operationId
-  value: GetMandatesHealth
-- command: update
-  path: paths./transaction/mandates/{id}.get.operationId
-  value: GetMandate
-- command: update
-  path: paths./transaction/mandates/{id}.patch.operationId
-  value: ModifyMandate
-- command: update
-  path: paths./transaction/mandates/{id}/admissions/{admissionId}.get.operationId
-  value: GetMandateAdmission
-- command: update
-  path: paths./transaction/mandates/{id}/returns.post.operationId
-  value: CreateMandateReturn
-- command: update
-  path: paths./transaction/mandates/{id}/returns/{returnId}.get.operationId
-  value: GetMandateReturn
-- command: update
-  path: paths./transaction/mandates/{id}/returns/{returnId}/submissions.post.operationId
-  value: CreateMandateReturnSubmission
-- command: update
-  path: paths./transaction/mandates/{id}/returns/{returnId}/submissions/{submissionId}.get.operationId
-  value: GetMandateReturnSubmission
-- command: update
-  path: paths./transaction/mandates/{id}/submissions.post.operationId
-  value: CreateMandateSubmission
-- command: update
-  path: paths./transaction/mandates/{id}/submissions/{submissionId}.get.operationId
-  value: GetMandateSubmission
-- command: update
-  path: paths./transaction/payments.get.operationId
-  value: ListPayments
-- command: update
-  path: paths./transaction/payments.post.operationId
-  value: CreatePayment
-- command: update
-  path: paths./transaction/payments/health.get.operationId
-  value: GetPaymentsHealth
-- command: update
-  path: paths./transaction/payments/{id}.get.operationId
-  value: GetPayment
-- command: update
-  path: paths./transaction/payments/{id}/admissions/{admissionId}.get.operationId
-  value: GetPaymentAdmission
-- command: update
-  path: paths./transaction/payments/{id}/advices.post.operationId
-  value: CreatePaymentAdvice
-- command: update
-  path: paths./transaction/payments/{id}/advices/{adviceId}.get.operationId
-  value: GetPaymentAdvice
-- command: update
-  path: paths./transaction/payments/{id}/advices/{adviceId}/submissions.post.operationId
-  value: CreatePaymentAdviceSubmission
-- command: update
-  path: paths./transaction/payments/{id}/advices/{adviceId}/submissions/{submissionId}.get.operationId
-  value: GetPaymentAdviceSubmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls.post.operationId
-  value: CreatePaymentRecall
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}.get.operationId
-  value: GetPaymentRecall
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/admissions/{admissionId}.get.operationId
-  value: GetPaymentRecallAdmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/decisions.post.operationId
-  value: CreatePaymentRecallDecision
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}.get.operationId
-  value: GetPaymentRecallDecision
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/admissions/{admissionId}.get.operationId
-  value: GetPaymentRecallDecisionAdmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/submissions.post.operationId
-  value: CreatePaymentRecallDecisionSubmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/submissions/{submissionId}.get.operationId
-  value: GetPaymentRecallDecisionSubmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/reversals/{reversalId}.get.operationId
-  value: GetPaymentRecallReversal
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/reversals/{reversalId}/admissions/{admissionId}.get.operationId
-  value: GetPaymentRecallReversalAdmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/submissions.post.operationId
-  value: CreatePaymentRecallSubmission
-- command: update
-  path: paths./transaction/payments/{id}/recalls/{recallId}/submissions/{submissionId}.get.operationId
-  value: GetPaymentRecallSubmission
-- command: update
-  path: paths./transaction/payments/{id}/returns.post.operationId
-  value: CreatePaymentReturn
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}.get.operationId
-  value: GetPaymentReturn
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}/admissions/{admissionId}.get.operationId
-  value: GetPaymentReturnAdmission
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}/reversals.post.operationId
-  value: CreatePaymentReturnReversal
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}/reversals/{reversalId}.get.operationId
-  value: GetPaymentReturnReversal
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}.get.operationId
-  value: GetPaymentReturnReversalAdmission
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}/submissions.post.operationId
-  value: CreatePaymentReturnSubmission
-- command: update
-  path: paths./transaction/payments/{id}/returns/{returnId}/submissions/{submissionId}.get.operationId
-  value: GetPaymentReturnSubmission
-- command: update
-  path: paths./transaction/payments/{id}/reversals.post.operationId
-  value: CreatePaymentReversal
-- command: update
-  path: paths./transaction/payments/{id}/reversals/{reversalId}.get.operationId
-  value: GetPaymentReversal
-- command: update
-  path: paths./transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}.get.operationId
-  value: GetPaymentReversalAdmission
-- command: update
-  path: paths./transaction/payments/{id}/reversals/{reversalId}/submissions.post.operationId
-  value: CreatePaymentReversalSubmission
-- command: update
-  path: paths./transaction/payments/{id}/reversals/{reversalId}/submissions/{submissionId}.get.operationId
-  value: GetPaymentReversalSubmission
-- command: update
-  path: paths./transaction/payments/{id}/submissions.post.operationId
-  value: CreatePaymentSubmission
-- command: update
-  path: paths./transaction/payments/{id}/submissions/{submissionId}.get.operationId
-  value: GetPaymentSubmission
+paths:
+  /audit/entries/{record_type}:
+    get:
+      operationId: ListAuditEntries
+  /audit/entries/{record_type}/{id}:
+    get:
+      operationId: GetAuditEntry
+  /audit/entries/health:
+    get:
+      operationId: GetAuditHealth
+  /notification/reports:
+    get:
+      operationId: ListReports
+  /notification/reports/{id}:
+    get:
+      operationId: GetReport
+  /notification/reports/{id}/admissions/{admissionId}:
+    get:
+      operationId: GetReportAdmission
+  /notification/schememessages:
+    get:
+      operationId: ListSchemeMessages
+  /notification/schememessages/{id}:
+    get:
+      operationId: GetSchemeMessage
+  /notification/schememessages/{id}/admissions/{admissionId}:
+    get:
+      operationId: GetSchemeMessageAdmission
+  /notification/subscriptions:
+    get:
+      operationId: ListSubscriptions
+    post:
+      operationId: CreateSubscription
+  /notification/subscriptions/{id}:
+    delete:
+      operationId: DeleteSubscription
+    get:
+      operationId: GetSubscription
+    patch:
+      operationId: ModifySubscription
+  /notification/subscriptions/health:
+    get:
+      operationId: GetSubscriptionsHealth
+  /oauth2/token:
+    post:
+      operationId: CreateOauthToken
+  /organisation/accounts:
+    get:
+      operationId: ListAccounts
+    post:
+      operationId: CreateAccount
+  /organisation/accounts/{id}:
+    delete:
+      operationId: DeleteAccount
+    get:
+      operationId: GetAccount
+    patch:
+      operationId: ModifyAccount
+  /organisation/accounts/{id}/events:
+    get:
+      operationId: ListAccountEvents
+  /organisation/balances:
+    get:
+      operationId: GetBalances
+  /organisation/positions:
+    get:
+      operationId: GetPositions
+  /organisation/units:
+    get:
+      operationId: ListUnits
+    post:
+      operationId: CreateUnit
+  /organisation/units/{id}:
+    get:
+      operationId: GetUnit
+    patch:
+      operationId: ModifyUnit
+  /organisation/units/health:
+    get:
+      operationId: GetUnitsHealth
+  /security/roles:
+    get:
+      operationId: ListRoles
+    post:
+      operationId: CreateRoles
+  /security/roles/{role_id}:
+    delete:
+      operationId: DeleteRole
+    get:
+      operationId: GetRole
+  /security/roles/{role_id}/aces:
+    get:
+      operationId: ListAces
+    post:
+      operationId: CreateAce
+  /security/roles/{role_id}/aces/{ace_id}:
+    delete:
+      operationId: DeleteAce
+    get:
+      operationId: GetAce
+  /security/users:
+    get:
+      operationId: ListUsers
+    post:
+      operationId: CreateUser
+  /security/users/{user_id}:
+    delete:
+      operationId: DeleteUser
+    get:
+      operationId: GetUser
+    patch:
+      operationId: ModifyUser
+  /security/users/{user_id}/aces:
+    get:
+      operationId: GetUserAces
+  /security/users/{user_id}/credentials:
+    get:
+      operationId: ListUserCredentials
+    post:
+      operationId: CreateUserCredentials
+  /security/users/{user_id}/credentials/{client_id}:
+    delete:
+      operationId: DeleteUserCredential
+  /security/users/{user_id}/roles:
+    get:
+      operationId: ListUserRoles
+  /security/users/{user_id}/roles/{role_id}:
+    delete:
+      operationId: DeleteUserRole
+    post:
+      operationId: CreateUserRole
+  /security/users/health:
+    get:
+      operationId: GetUsersHealth
+  /transaction/claims:
+    get:
+      operationId: ListClaims
+    post:
+      operationId: CreateClaim
+  /transaction/claims/{id}:
+    get:
+      operationId: GetClaim
+  /transaction/claims/{id}/reversals:
+    post:
+      operationId: CreateClaimReversal
+  /transaction/claims/{id}/reversals/{reversalId}:
+    get:
+      operationId: GetClaimReversal
+  /transaction/claims/{id}/reversals/{reversalId}/submissions:
+    post:
+      operationId: CreateClaimReversalSubmission
+  /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}:
+    get:
+      operationId: GetClaimReversalSubmission
+  /transaction/claims/{id}/submissions:
+    post:
+      operationId: CreateClaimSubmission
+  /transaction/claims/{id}/submissions/{submissionId}:
+    get:
+      operationId: GetClaimSubmission
+  /transaction/claims/health:
+    get:
+      operationId: GetClaimsHealth
+  /transaction/directdebits:
+    get:
+      operationId: ListDirectDebits
+    post:
+      operationId: CreateDirectDebit
+  /transaction/directdebits/{id}:
+    get:
+      operationId: GetDirectDebit
+  /transaction/directdebits/{id}/admissions/{admissionId}:
+    get:
+      operationId: GetDirectDebitAdmission
+  /transaction/directdebits/{id}/returns:
+    post:
+      operationId: CreateDirectDebitReturn
+  /transaction/directdebits/{id}/returns/{returnId}:
+    get:
+      operationId: GetDirectDebitReturn
+  /transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}:
+    get:
+      operationId: GetDirectDebitReturnAdmission
+  /transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}:
+    get:
+      operationId: GetDirectDebitReturnReversal
+  /transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}:
+    get:
+      operationId: GetDirectDebitReturnReversalAdmission
+  /transaction/directdebits/{id}/returns/{returnId}/submissions:
+    post:
+      operationId: CreateDirectDebitReturnSubmission
+  /transaction/directdebits/{id}/returns/{returnId}/submissions/{submissionId}:
+    get:
+      operationId: GetDirectDebitReturnSubmission
+  /transaction/directdebits/{id}/reversals:
+    post:
+      operationId: CreateDirectDebitReversal
+  /transaction/directdebits/{id}/reversals/{reversalId}:
+    get:
+      operationId: GetDirectDebitReversal
+  /transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}:
+    get:
+      operationId: GetDirectDebitReversalAdmission
+  /transaction/directdebits/{id}/submissions:
+    post:
+      operationId: CreateDirectDebitSubmission
+  /transaction/directdebits/{id}/submissions/{submissionId}:
+    get:
+      operationId: GetDirectDebitSubmission
+  /transaction/directdebits/health:
+    get:
+      operationId: GetDirectDebitHealth
+  /transaction/mandates:
+    get:
+      operationId: ListMandates
+    post:
+      operationId: CreateMandate
+  /transaction/mandates/{id}:
+    get:
+      operationId: GetMandate
+    patch:
+      operationId: ModifyMandate
+  /transaction/mandates/{id}/admissions/{admissionId}:
+    get:
+      operationId: GetMandateAdmission
+  /transaction/mandates/{id}/returns:
+    post:
+      operationId: CreateMandateReturn
+  /transaction/mandates/{id}/returns/{returnId}:
+    get:
+      operationId: GetMandateReturn
+  /transaction/mandates/{id}/returns/{returnId}/submissions:
+    post:
+      operationId: CreateMandateReturnSubmission
+  /transaction/mandates/{id}/returns/{returnId}/submissions/{submissionId}:
+    get:
+      operationId: GetMandateReturnSubmission
+  /transaction/mandates/{id}/submissions:
+    post:
+      operationId: CreateMandateSubmission
+  /transaction/mandates/{id}/submissions/{submissionId}:
+    get:
+      operationId: GetMandateSubmission
+  /transaction/mandates/health:
+    get:
+      operationId: GetMandatesHealth
+  /transaction/payments:
+    get:
+      operationId: ListPayments
+    post:
+      operationId: CreatePayment
+  /transaction/payments/{id}:
+    get:
+      operationId: GetPayment
+  /transaction/payments/{id}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentAdmission
+  /transaction/payments/{id}/advices:
+    post:
+      operationId: CreatePaymentAdvice
+  /transaction/payments/{id}/advices/{adviceId}:
+    get:
+      operationId: GetPaymentAdvice
+  /transaction/payments/{id}/advices/{adviceId}/submissions:
+    post:
+      operationId: CreatePaymentAdviceSubmission
+  /transaction/payments/{id}/advices/{adviceId}/submissions/{submissionId}:
+    get:
+      operationId: GetPaymentAdviceSubmission
+  /transaction/payments/{id}/recalls:
+    post:
+      operationId: CreatePaymentRecall
+  /transaction/payments/{id}/recalls/{recallId}:
+    get:
+      operationId: GetPaymentRecall
+  /transaction/payments/{id}/recalls/{recallId}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentRecallAdmission
+  /transaction/payments/{id}/recalls/{recallId}/decisions:
+    post:
+      operationId: CreatePaymentRecallDecision
+  /transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}:
+    get:
+      operationId: GetPaymentRecallDecision
+  /transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentRecallDecisionAdmission
+  /transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/submissions:
+    post:
+      operationId: CreatePaymentRecallDecisionSubmission
+  /transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}/submissions/{submissionId}:
+    get:
+      operationId: GetPaymentRecallDecisionSubmission
+  /transaction/payments/{id}/recalls/{recallId}/reversals/{reversalId}:
+    get:
+      operationId: GetPaymentRecallReversal
+  /transaction/payments/{id}/recalls/{recallId}/reversals/{reversalId}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentRecallReversalAdmission
+  /transaction/payments/{id}/recalls/{recallId}/submissions:
+    post:
+      operationId: CreatePaymentRecallSubmission
+  /transaction/payments/{id}/recalls/{recallId}/submissions/{submissionId}:
+    get:
+      operationId: GetPaymentRecallSubmission
+  /transaction/payments/{id}/returns:
+    post:
+      operationId: CreatePaymentReturn
+  /transaction/payments/{id}/returns/{returnId}:
+    get:
+      operationId: GetPaymentReturn
+  /transaction/payments/{id}/returns/{returnId}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentReturnAdmission
+  /transaction/payments/{id}/returns/{returnId}/reversals:
+    post:
+      operationId: CreatePaymentReturnReversal
+  /transaction/payments/{id}/returns/{returnId}/reversals/{reversalId}:
+    get:
+      operationId: GetPaymentReturnReversal
+  /transaction/payments/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentReturnReversalAdmission
+  /transaction/payments/{id}/returns/{returnId}/submissions:
+    post:
+      operationId: CreatePaymentReturnSubmission
+  /transaction/payments/{id}/returns/{returnId}/submissions/{submissionId}:
+    get:
+      operationId: GetPaymentReturnSubmission
+  /transaction/payments/{id}/reversals:
+    post:
+      operationId: CreatePaymentReversal
+  /transaction/payments/{id}/reversals/{reversalId}:
+    get:
+      operationId: GetPaymentReversal
+  /transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}:
+    get:
+      operationId: GetPaymentReversalAdmission
+  /transaction/payments/{id}/reversals/{reversalId}/submissions:
+    post:
+      operationId: CreatePaymentReversalSubmission
+  /transaction/payments/{id}/reversals/{reversalId}/submissions/{submissionId}:
+    get:
+      operationId: GetPaymentReversalSubmission
+  /transaction/payments/{id}/submissions:
+    post:
+      operationId: CreatePaymentSubmission
+  /transaction/payments/{id}/submissions/{submissionId}:
+    get:
+      operationId: GetPaymentSubmission
+  /transaction/payments/health:
+    get:
+      operationId: GetPaymentsHealth

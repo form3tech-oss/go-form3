@@ -35,11 +35,11 @@ func (c *Client) GetDirectDebitReturnAdmission() *GetDirectDebitReturnAdmissionR
 
 type GetDirectDebitReturnAdmissionRequest struct {
 
-	/*AdmissionID      Admission Id      */
+	/*AdmissionID      Direct Debit Admission Id      */
 
 	AdmissionID strfmt.UUID
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 

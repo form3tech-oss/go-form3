@@ -33,7 +33,7 @@ func (c *Client) GetDirectDebitReturn() *GetDirectDebitReturnRequest {
 
 type GetDirectDebitReturnRequest struct {
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 

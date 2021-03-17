@@ -35,7 +35,7 @@ func (c *Client) GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionI
 
 type GetTransactionDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest struct {
 
-	/*AdmissionID      Admission Id      */
+	/*AdmissionID      Direct Debit Admission Id      */
 
 	AdmissionID strfmt.UUID
 

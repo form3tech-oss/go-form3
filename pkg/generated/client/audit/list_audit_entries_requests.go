@@ -27,6 +27,8 @@ func (c *Client) ListAuditEntries() *ListAuditEntriesRequest {
 
 		FilterOrganisationID: make([]strfmt.UUID, 0),
 
+		PageAfter: c.Defaults.GetStringPtr("ListAuditEntries", "page[after]"),
+
 		PageNumber: c.Defaults.GetInt64Ptr("ListAuditEntries", "page[number]"),
 
 		PageSize: c.Defaults.GetInt64Ptr("ListAuditEntries", "page[size]"),
@@ -53,6 +55,10 @@ type ListAuditEntriesRequest struct {
 	/*FilterOrganisationID      Filter by organisation id      */
 
 	FilterOrganisationID []strfmt.UUID
+
+	/*PageAfter      Cursor for next page (this is a base64-encoded UUID continuation token returned from the application and should not be manually generated)      */
+
+	PageAfter *string
 
 	/*PageNumber      Which page to select      */
 
@@ -117,6 +123,20 @@ func (o *ListAuditEntriesRequest) WithFilterOrganisationID(filterOrganisationID 
 func (o *ListAuditEntriesRequest) WithoutFilterOrganisationID() *ListAuditEntriesRequest {
 
 	o.FilterOrganisationID = nil
+
+	return o
+}
+
+func (o *ListAuditEntriesRequest) WithPageAfter(pageAfter string) *ListAuditEntriesRequest {
+
+	o.PageAfter = &pageAfter
+
+	return o
+}
+
+func (o *ListAuditEntriesRequest) WithoutPageAfter() *ListAuditEntriesRequest {
+
+	o.PageAfter = nil
 
 	return o
 }
@@ -218,6 +238,22 @@ func (o *ListAuditEntriesRequest) WriteToRequest(r runtime.ClientRequest, reg st
 	// query array param filter[organisation_id]
 	if err := r.SetQueryParam("filter[organisation_id]", joinedFilterOrganisationID...); err != nil {
 		return err
+	}
+
+	if o.PageAfter != nil {
+
+		// query param page[after]
+		var qrPageAfter string
+		if o.PageAfter != nil {
+			qrPageAfter = *o.PageAfter
+		}
+		qPageAfter := qrPageAfter
+		if qPageAfter != "" {
+			if err := r.SetQueryParam("page[after]", qPageAfter); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if o.PageNumber != nil {

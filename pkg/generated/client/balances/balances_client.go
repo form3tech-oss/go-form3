@@ -40,7 +40,7 @@ func (a *GetBalancesRequest) Do() (*GetBalancesOK, error) {
 		Method:             "GET",
 		PathPattern:        "/organisation/balances",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetBalancesReader{formats: a.formats},

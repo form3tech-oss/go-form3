@@ -41,7 +41,7 @@ type CreateDirectDebitReversalRequest struct {
 
 	*models.DirectDebitReversalCreation
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 
