@@ -44,6 +44,9 @@ const (
 
 	// DirectDebitRecallSubmissionStatusQueuedForDelivery captures enum value "queued_for_delivery"
 	DirectDebitRecallSubmissionStatusQueuedForDelivery DirectDebitRecallSubmissionStatus = "queued_for_delivery"
+
+	// DirectDebitRecallSubmissionStatusPending captures enum value "pending"
+	DirectDebitRecallSubmissionStatusPending DirectDebitRecallSubmissionStatus = "pending"
 )
 
 // for schema
@@ -51,7 +54,7 @@ var directDebitRecallSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []DirectDebitRecallSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","released_to_gateway","delivery_confirmed","delivery_failed","submitted","validation_pending","validation_passed","queued_for_delivery"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","released_to_gateway","delivery_confirmed","delivery_failed","submitted","validation_pending","validation_passed","queued_for_delivery","pending"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

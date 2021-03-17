@@ -33,11 +33,11 @@ func (c *Client) GetDirectDebitSubmission() *GetDirectDebitSubmissionRequest {
 
 type GetDirectDebitSubmissionRequest struct {
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 
-	/*SubmissionID      Submission Id      */
+	/*SubmissionID      Direct Debit decision submission id      */
 
 	SubmissionID strfmt.UUID
 

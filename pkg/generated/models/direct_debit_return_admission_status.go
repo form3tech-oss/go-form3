@@ -24,6 +24,9 @@ const (
 	// DirectDebitReturnAdmissionStatusConfirmed captures enum value "confirmed"
 	DirectDebitReturnAdmissionStatusConfirmed DirectDebitReturnAdmissionStatus = "confirmed"
 
+	// DirectDebitReturnAdmissionStatusPending captures enum value "pending"
+	DirectDebitReturnAdmissionStatusPending DirectDebitReturnAdmissionStatus = "pending"
+
 	// DirectDebitReturnAdmissionStatusFailed captures enum value "failed"
 	DirectDebitReturnAdmissionStatusFailed DirectDebitReturnAdmissionStatus = "failed"
 )
@@ -33,7 +36,7 @@ var directDebitReturnAdmissionStatusEnum []interface{}
 
 func init() {
 	var res []DirectDebitReturnAdmissionStatus
-	if err := json.Unmarshal([]byte(`["confirmed","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["confirmed","pending","failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

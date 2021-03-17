@@ -35,15 +35,15 @@ func (c *Client) GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmiss
 
 type GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest struct {
 
-	/*AdmissionID      Admission Id      */
+	/*AdmissionID      Direct Debit Admission Id      */
 
 	AdmissionID strfmt.UUID
 
-	/*DecisionID      Decision Id      */
+	/*DecisionID      Direct Debit decision id      */
 
 	DecisionID strfmt.UUID
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 

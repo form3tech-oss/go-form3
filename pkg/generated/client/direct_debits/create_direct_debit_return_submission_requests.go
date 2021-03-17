@@ -43,7 +43,7 @@ type CreateDirectDebitReturnSubmissionRequest struct {
 
 	*models.DirectDebitReturnSubmissionCreation
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 

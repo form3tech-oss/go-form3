@@ -20,28 +20,28 @@ download-swagger:
 
 modify-swagger-file: download-swagger
 	# Add an operation name (operationId) to each endpoint
-	yq w swagger/form3-swagger-raw.yaml -s operationNames.yaml > swagger/form3-swagger-updated.yaml
+	yq eval-all 'select(fi==0) * select(fi==1)' swagger/form3-swagger-raw.yaml operationNames.yaml > swagger/form3-swagger-updated.yaml
 	# Delete the ReportDetailsResponse links property (and its definition)
-	yq d -i swagger/form3-swagger-updated.yaml definitions.ReportLinks
-	yq d -i swagger/form3-swagger-updated.yaml definitions.ReportDetailsResponse.properties.links
+	yq eval 'del(.definitions.ReportLinks)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.definitions.ReportDetailsResponse.properties.links)' -i swagger/form3-swagger-updated.yaml
 	# Links.properties.Self appears to be a duplicate of Links.properties.self
-	yq d -i swagger/form3-swagger-updated.yaml definitions.Links.properties.Self
+	yq eval 'del(.definitions.Links.properties.Self)' -i swagger/form3-swagger-updated.yaml
 	# remove addressbook/health as codgenerator generates invalid code for it
-	yq d -i swagger/form3-swagger-updated.yaml paths./addressbook/health
+	yq eval 'del(.paths./addressbook/health)' -i swagger/form3-swagger-updated.yaml
 	# Delete anything to do with /participants/[open_banking_id]/open-banking/v3.1/accounts/name-verification
-	yq d -i swagger/form3-swagger-updated.yaml paths./openbanking/accounts/name-verification
-	yq d -i swagger/form3-swagger-updated.yaml definitions.Meta
-	yq d -i swagger/form3-swagger-updated.yaml responses.OBNameVerification1.schema.properties.Meta
+	yq eval 'del(.paths./openbanking/accounts/name-verification)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.definitions.Meta)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.responses.OBNameVerification1.schema.properties.Meta)' -i swagger/form3-swagger-updated.yaml
 
 	# remove paths that are missing a `response` property
-	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/mandates/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/payments/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./notification/subscriptions/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/directdebits/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./security/users/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./audit/entries/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./transaction/claims/health.get
-	yq d -i swagger/form3-swagger-updated.yaml paths./organisation/units/health.get
+	yq eval 'del(.paths./transaction/mandates/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./transaction/payments/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./notification/subscriptions/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./transaction/directdebits/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./security/users/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./audit/entries/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./transaction/claims/health.get)' -i swagger/form3-swagger-updated.yaml
+	yq eval 'del(.paths./organisation/units/health.get)' -i swagger/form3-swagger-updated.yaml
 
 
 generate-client: modify-swagger-file
