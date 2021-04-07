@@ -47,7 +47,7 @@ type PostTransactionDirectdebitsIDDecisionsDecisionIDSubmissionsRequest struct {
 
 	DecisionID strfmt.UUID
 
-	/*ID      Direct Debit id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 

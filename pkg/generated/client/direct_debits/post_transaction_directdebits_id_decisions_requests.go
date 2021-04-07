@@ -41,7 +41,7 @@ type PostTransactionDirectdebitsIDDecisionsRequest struct {
 
 	*models.DirectDebitDecisionCreation
 
-	/*ID      Direct Debit id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 

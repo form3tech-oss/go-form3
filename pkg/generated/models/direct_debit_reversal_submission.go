@@ -352,6 +352,12 @@ func (m *DirectDebitReversalSubmission) Json() string {
 // swagger:model DirectDebitReversalSubmissionAttributes
 type DirectDebitReversalSubmissionAttributes struct {
 
+	// scheme status code
+	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
+
+	// scheme status code description
+	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
+
 	// status
 	Status DirectDebitReversalSubmissionStatus `json:"status,omitempty"`
 
@@ -372,6 +378,10 @@ type DirectDebitReversalSubmissionAttributes struct {
 func DirectDebitReversalSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReversalSubmissionAttributes {
 	return &DirectDebitReversalSubmissionAttributes{
 
+		SchemeStatusCode: defaults.GetString("DirectDebitReversalSubmissionAttributes", "scheme_status_code"),
+
+		SchemeStatusCodeDescription: defaults.GetString("DirectDebitReversalSubmissionAttributes", "scheme_status_code_description"),
+
 		// TODO Status: DirectDebitReversalSubmissionStatus,
 
 		StatusReason: defaults.GetString("DirectDebitReversalSubmissionAttributes", "status_reason"),
@@ -380,6 +390,20 @@ func DirectDebitReversalSubmissionAttributesWithDefaults(defaults client.Default
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("DirectDebitReversalSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *DirectDebitReversalSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitReversalSubmissionAttributes {
+
+	m.SchemeStatusCode = schemeStatusCode
+
+	return m
+}
+
+func (m *DirectDebitReversalSubmissionAttributes) WithSchemeStatusCodeDescription(schemeStatusCodeDescription string) *DirectDebitReversalSubmissionAttributes {
+
+	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
+
+	return m
 }
 
 func (m *DirectDebitReversalSubmissionAttributes) WithStatus(status DirectDebitReversalSubmissionStatus) *DirectDebitReversalSubmissionAttributes {

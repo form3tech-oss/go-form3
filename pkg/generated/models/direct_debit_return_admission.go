@@ -369,10 +369,7 @@ type DirectDebitReturnAdmissionAttributes struct {
 
 	// settlement date
 	// Format: date
-	SettlementDate strfmt.Date `json:"settlement_date,omitempty"`
-
-	// source gateway
-	SourceGateway string `json:"source_gateway,omitempty"`
+	SettlementDate *strfmt.Date `json:"settlement_date,omitempty"`
 
 	// status
 	Status DirectDebitReturnAdmissionStatus `json:"status,omitempty"`
@@ -389,9 +386,7 @@ func DirectDebitReturnAdmissionAttributesWithDefaults(defaults client.Defaults) 
 
 		SettlementCycle: defaults.GetInt64Ptr("DirectDebitReturnAdmissionAttributes", "settlement_cycle"),
 
-		SettlementDate: defaults.GetStrfmtDate("DirectDebitReturnAdmissionAttributes", "settlement_date"),
-
-		SourceGateway: defaults.GetString("DirectDebitReturnAdmissionAttributes", "source_gateway"),
+		SettlementDate: defaults.GetStrfmtDatePtr("DirectDebitReturnAdmissionAttributes", "settlement_date"),
 
 		// TODO Status: DirectDebitReturnAdmissionStatus,
 
@@ -433,15 +428,13 @@ func (m *DirectDebitReturnAdmissionAttributes) WithoutSettlementCycle() *DirectD
 
 func (m *DirectDebitReturnAdmissionAttributes) WithSettlementDate(settlementDate strfmt.Date) *DirectDebitReturnAdmissionAttributes {
 
-	m.SettlementDate = settlementDate
+	m.SettlementDate = &settlementDate
 
 	return m
 }
 
-func (m *DirectDebitReturnAdmissionAttributes) WithSourceGateway(sourceGateway string) *DirectDebitReturnAdmissionAttributes {
-
-	m.SourceGateway = sourceGateway
-
+func (m *DirectDebitReturnAdmissionAttributes) WithoutSettlementDate() *DirectDebitReturnAdmissionAttributes {
+	m.SettlementDate = nil
 	return m
 }
 

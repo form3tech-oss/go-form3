@@ -35,7 +35,7 @@ func (c *Client) GetDirectDebitReturnSubmission() *GetDirectDebitReturnSubmissio
 
 type GetDirectDebitReturnSubmissionRequest struct {
 
-	/*ID      DirectDebit Id      */
+	/*ID      Direct Debit Id      */
 
 	ID strfmt.UUID
 
@@ -43,7 +43,7 @@ type GetDirectDebitReturnSubmissionRequest struct {
 
 	ReturnID strfmt.UUID
 
-	/*SubmissionID      Submission Id      */
+	/*SubmissionID      Direct Debit decision submission id      */
 
 	SubmissionID strfmt.UUID
 

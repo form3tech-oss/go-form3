@@ -22,7 +22,7 @@ func (c *Client) GetTransactionDirectdebitsIDRecallsRecallID() *GetTransactionDi
 
 		ID: c.Defaults.GetStrfmtUUID("GetTransactionDirectdebitsIDRecallsRecallID", "id"),
 
-		RecallID: c.Defaults.GetStrfmtUUID("GetTransactionDirectdebitsIDRecallsRecallID", "recallID"),
+		RecallID: c.Defaults.GetStrfmtUUID("GetTransactionDirectdebitsIDRecallsRecallID", "recallId"),
 
 		timeout: cr.DefaultTimeout,
 
@@ -94,8 +94,8 @@ func (o *GetTransactionDirectdebitsIDRecallsRecallIDRequest) WriteToRequest(r ru
 		return err
 	}
 
-	// path param recallID
-	if err := r.SetPathParam("recallID", o.RecallID.String()); err != nil {
+	// path param recallId
+	if err := r.SetPathParam("recallId", o.RecallID.String()); err != nil {
 		return err
 	}
 

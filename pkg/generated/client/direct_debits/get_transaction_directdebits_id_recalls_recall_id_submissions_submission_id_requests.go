@@ -43,7 +43,7 @@ type GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest s
 
 	RecallID strfmt.UUID
 
-	/*SubmissionID      Submission Id      */
+	/*SubmissionID      Direct Debit decision submission id      */
 
 	SubmissionID strfmt.UUID
 

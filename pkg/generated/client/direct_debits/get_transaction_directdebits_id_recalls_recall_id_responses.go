@@ -55,7 +55,7 @@ type GetTransactionDirectdebitsIDRecallsRecallIDOK struct {
 }
 
 func (o *GetTransactionDirectdebitsIDRecallsRecallIDOK) Error() string {
-	return fmt.Sprintf("[GET /transaction/directdebits/{id}/recalls/{recallID}][%d] getTransactionDirectdebitsIdRecallsRecallIdOK", 200)
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/recalls/{recallId}][%d] getTransactionDirectdebitsIdRecallsRecallIdOK", 200)
 }
 
 func (o *GetTransactionDirectdebitsIDRecallsRecallIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
