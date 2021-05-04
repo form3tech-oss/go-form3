@@ -98,6 +98,10 @@ func (*ClientDefaults) GetFloat64Ptr(objectName, attributeName string) *float64 
 	return nil
 }
 
+func (*ClientDefaults) GetMapStringInterface(objectName, attributeName string) map[string]interface{} {
+	return nil
+}
+
 func NewClientDefaults() *ClientDefaults {
 	return &ClientDefaults{}
 }
