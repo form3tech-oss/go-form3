@@ -29,4 +29,6 @@ type Defaults interface {
 
 	GetFloat64(objectName, attributeName string) float64
 	GetFloat64Ptr(objectName, attributeName string) *float64
+
+	GetMapStringInterface(objectName, attributeName string) map[string]interface{}
 }

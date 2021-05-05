@@ -87,3 +87,7 @@ func (*EmptyDefaults) GetFloat64(objectName, attributeName string) float64 {
 func (*EmptyDefaults) GetFloat64Ptr(objectName, attributeName string) *float64 {
 	return nil
 }
+
+func (*EmptyDefaults) GetMapStringInterface(objectName, attributeName string) map[string]interface{} {
+	return nil
+}
