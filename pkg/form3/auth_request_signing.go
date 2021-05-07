@@ -18,11 +18,18 @@ type RequestSigningClientConfig struct {
 	pubKeyID            string
 	privateKey          *rsa.PrivateKey
 	underlyingTransport http.RoundTripper
+	retryPolicy         *RetryPolicyConfig
 }
 
 type requestSigningTransport struct {
 	config              *RequestSigningClientConfig
 	underlyingTransport http.RoundTripper
+}
+
+type RetryPolicyConfig struct {
+	retries         int
+	incrementalTime bool
+	sleepTime       time.Duration
 }
 
 func NewRequestSigningClientConfig(pubKeyID string, privateKey *rsa.PrivateKey) *RequestSigningClientConfig {
@@ -35,6 +42,11 @@ func NewRequestSigningClientConfig(pubKeyID string, privateKey *rsa.PrivateKey) 
 
 func (c *RequestSigningClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *RequestSigningClientConfig {
 	c.underlyingTransport = underlyingTransport
+	return c
+}
+
+func (c *RequestSigningClientConfig) WithRetryPolicyConfig(underlyingTransport http.RoundTripper, retryPolicyConfig *RetryPolicyConfig) *RequestSigningClientConfig {
+	c.retryPolicy = retryPolicyConfig
 	return c
 }
 
@@ -125,5 +137,29 @@ content-length: %d`,
 		),
 	)
 
-	return t.underlyingTransport.RoundTrip(req)
+	return t.roundTripWithRetries(req, t.config.retryPolicy.retries, t.config.retryPolicy.sleepTime)
+}
+
+func (t *requestSigningTransport) roundTripWithRetries(req *http.Request, retries int, sleep time.Duration) (*http.Response, error) {
+	resp, err := t.underlyingTransport.RoundTrip(req)
+
+	if err != nil { // retry algorithm
+		if retries == 0 {
+			return nil, err // No further attempts left
+		}
+
+		time.Sleep(sleep)
+
+		var newSleepTime time.Duration
+
+		if t.config.retryPolicy.incrementalTime {
+			newSleepTime = sleep * 2
+		} else {
+			newSleepTime = sleep
+		}
+
+		return t.roundTripWithRetries(req, retries-1, newSleepTime)
+	}
+
+	return resp, nil
 }
