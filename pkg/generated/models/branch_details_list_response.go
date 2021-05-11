@@ -15,54 +15,49 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
-// ParticipantResponse participant response
-// swagger:model ParticipantResponse
-type ParticipantResponse struct {
+// BranchDetailsListResponse branch details list response
+// swagger:model BranchDetailsListResponse
+type BranchDetailsListResponse struct {
 
 	// data
-	// Required: true
-	// Max Items: 1
-	// Min Items: 1
-	Data []*Participant `json:"data"`
+	Data []*Branch `json:"data"`
 
 	// links
-	// Required: true
-	Links *ParticipantLinks `json:"links"`
+	Links *Links `json:"links,omitempty"`
 }
 
-func ParticipantResponseWithDefaults(defaults client.Defaults) *ParticipantResponse {
-	return &ParticipantResponse{
+func BranchDetailsListResponseWithDefaults(defaults client.Defaults) *BranchDetailsListResponse {
+	return &BranchDetailsListResponse{
 
-		Data: make([]*Participant, 0),
+		Data: make([]*Branch, 0),
 
-		Links: ParticipantLinksWithDefaults(defaults),
+		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *ParticipantResponse) WithData(data []*Participant) *ParticipantResponse {
+func (m *BranchDetailsListResponse) WithData(data []*Branch) *BranchDetailsListResponse {
 
 	m.Data = data
 
 	return m
 }
 
-func (m *ParticipantResponse) WithLinks(links ParticipantLinks) *ParticipantResponse {
+func (m *BranchDetailsListResponse) WithLinks(links Links) *BranchDetailsListResponse {
 
 	m.Links = &links
 
 	return m
 }
 
-func (m *ParticipantResponse) WithoutLinks() *ParticipantResponse {
+func (m *BranchDetailsListResponse) WithoutLinks() *BranchDetailsListResponse {
 	m.Links = nil
 	return m
 }
 
-// Validate validates this participant response
-func (m *ParticipantResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this branch details list response
+func (m *BranchDetailsListResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -79,20 +74,10 @@ func (m *ParticipantResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ParticipantResponse) validateData(formats strfmt.Registry) error {
+func (m *BranchDetailsListResponse) validateData(formats strfmt.Registry) error {
 
-	if err := validate.Required("data", "body", m.Data); err != nil {
-		return err
-	}
-
-	iDataSize := int64(len(m.Data))
-
-	if err := validate.MinItems("data", "body", iDataSize, 1); err != nil {
-		return err
-	}
-
-	if err := validate.MaxItems("data", "body", iDataSize, 1); err != nil {
-		return err
+	if swag.IsZero(m.Data) { // not required
+		return nil
 	}
 
 	for i := 0; i < len(m.Data); i++ {
@@ -114,10 +99,10 @@ func (m *ParticipantResponse) validateData(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ParticipantResponse) validateLinks(formats strfmt.Registry) error {
+func (m *BranchDetailsListResponse) validateLinks(formats strfmt.Registry) error {
 
-	if err := validate.Required("links", "body", m.Links); err != nil {
-		return err
+	if swag.IsZero(m.Links) { // not required
+		return nil
 	}
 
 	if m.Links != nil {
@@ -133,7 +118,7 @@ func (m *ParticipantResponse) validateLinks(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *ParticipantResponse) MarshalBinary() ([]byte, error) {
+func (m *BranchDetailsListResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -141,15 +126,15 @@ func (m *ParticipantResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ParticipantResponse) UnmarshalBinary(b []byte) error {
-	var res ParticipantResponse
+func (m *BranchDetailsListResponse) UnmarshalBinary(b []byte) error {
+	var res BranchDetailsListResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ParticipantResponse) Json() string {
+func (m *BranchDetailsListResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

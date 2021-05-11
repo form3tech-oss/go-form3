@@ -42,9 +42,6 @@ type OrganisationIdentification struct {
 	// Min Length: 1
 	Identification string `json:"identification,omitempty"`
 
-	// Issuer of 'identification'.
-	RegistrationNumber string `json:"registration_number,omitempty"`
-
 	// ISO 3166-1 code used to identify the domicile of the account
 	// Pattern: ^[A-Z]{2}$
 	TaxResidency string `json:"tax_residency,omitempty"`
@@ -62,8 +59,6 @@ func OrganisationIdentificationWithDefaults(defaults client.Defaults) *Organisat
 		Country: defaults.GetString("OrganisationIdentification", "country"),
 
 		Identification: defaults.GetString("OrganisationIdentification", "identification"),
-
-		RegistrationNumber: defaults.GetString("OrganisationIdentification", "registration_number"),
 
 		TaxResidency: defaults.GetString("OrganisationIdentification", "tax_residency"),
 	}
@@ -100,13 +95,6 @@ func (m *OrganisationIdentification) WithCountry(country string) *OrganisationId
 func (m *OrganisationIdentification) WithIdentification(identification string) *OrganisationIdentification {
 
 	m.Identification = identification
-
-	return m
-}
-
-func (m *OrganisationIdentification) WithRegistrationNumber(registrationNumber string) *OrganisationIdentification {
-
-	m.RegistrationNumber = registrationNumber
 
 	return m
 }

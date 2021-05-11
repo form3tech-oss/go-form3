@@ -284,6 +284,9 @@ func (m *AccountUpdate) Json() string {
 // swagger:model AccountUpdateAttributes
 type AccountUpdateAttributes struct {
 
+	// acceptance qualifier
+	AcceptanceQualifier AcceptanceQualifier `json:"acceptance_qualifier,omitempty"`
+
 	// Is the account business or personal?
 	// Enum: [Personal Business]
 	AccountClassification string `json:"account_classification,omitempty"`
@@ -354,14 +357,25 @@ type AccountUpdateAttributes struct {
 	// private identification
 	PrivateIdentification *AccountAttributesPrivateIdentification `json:"private_identification,omitempty"`
 
+	// Accounting system or service. It will be added to each payment received to an account.
+	// Max Length: 35
+	ProcessingService string `json:"processing_service,omitempty"`
+
+	// When set will apply a validation mask on the payment reference to each payment received to an account.
+	// Max Length: 35
+	ReferenceMask string `json:"reference_mask,omitempty"`
+
 	// Secondary identification, e.g. building society roll number. Used for Confirmation of Payee.
 	// Max Length: 140
 	// Min Length: 1
 	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 
 	// Current status of the account
-	// Enum: [pending failed confirmed]
+	// Enum: [pending failed confirmed closed]
 	Status string `json:"status,omitempty"`
+
+	// status reason
+	StatusReason StatusReason `json:"status_reason,omitempty"`
 
 	// Indicates whether the account has been switched using the Current Account Switch Service.
 	Switched bool `json:"switched,omitempty"`
@@ -370,10 +384,19 @@ type AccountUpdateAttributes struct {
 	// Max Length: 40
 	// Min Length: 1
 	Title string `json:"title,omitempty"`
+
+	// All purpose field to store specific data for the associated account. It will be added to each payment received to an account.
+	// Max Length: 35
+	UserDefinedInformation string `json:"user_defined_information,omitempty"`
+
+	// validation type
+	ValidationType ValidationType `json:"validation_type,omitempty"`
 }
 
 func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdateAttributes {
 	return &AccountUpdateAttributes{
+
+		// TODO AcceptanceQualifier: AcceptanceQualifier,
 
 		AccountClassification: defaults.GetString("AccountUpdateAttributes", "account_classification"),
 
@@ -411,14 +434,32 @@ func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdat
 
 		PrivateIdentification: AccountAttributesPrivateIdentificationWithDefaults(defaults),
 
+		ProcessingService: defaults.GetString("AccountUpdateAttributes", "processing_service"),
+
+		ReferenceMask: defaults.GetString("AccountUpdateAttributes", "reference_mask"),
+
 		SecondaryIdentification: defaults.GetString("AccountUpdateAttributes", "secondary_identification"),
 
 		Status: defaults.GetString("AccountUpdateAttributes", "status"),
 
+		// TODO StatusReason: StatusReason,
+
 		Switched: defaults.GetBool("AccountUpdateAttributes", "switched"),
 
 		Title: defaults.GetString("AccountUpdateAttributes", "title"),
+
+		UserDefinedInformation: defaults.GetString("AccountUpdateAttributes", "user_defined_information"),
+
+		// TODO ValidationType: ValidationType,
+
 	}
+}
+
+func (m *AccountUpdateAttributes) WithAcceptanceQualifier(acceptanceQualifier AcceptanceQualifier) *AccountUpdateAttributes {
+
+	m.AcceptanceQualifier = acceptanceQualifier
+
+	return m
 }
 
 func (m *AccountUpdateAttributes) WithAccountClassification(accountClassification string) *AccountUpdateAttributes {
@@ -557,6 +598,20 @@ func (m *AccountUpdateAttributes) WithoutPrivateIdentification() *AccountUpdateA
 	return m
 }
 
+func (m *AccountUpdateAttributes) WithProcessingService(processingService string) *AccountUpdateAttributes {
+
+	m.ProcessingService = processingService
+
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithReferenceMask(referenceMask string) *AccountUpdateAttributes {
+
+	m.ReferenceMask = referenceMask
+
+	return m
+}
+
 func (m *AccountUpdateAttributes) WithSecondaryIdentification(secondaryIdentification string) *AccountUpdateAttributes {
 
 	m.SecondaryIdentification = secondaryIdentification
@@ -567,6 +622,13 @@ func (m *AccountUpdateAttributes) WithSecondaryIdentification(secondaryIdentific
 func (m *AccountUpdateAttributes) WithStatus(status string) *AccountUpdateAttributes {
 
 	m.Status = status
+
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithStatusReason(statusReason StatusReason) *AccountUpdateAttributes {
+
+	m.StatusReason = statusReason
 
 	return m
 }
@@ -585,9 +647,27 @@ func (m *AccountUpdateAttributes) WithTitle(title string) *AccountUpdateAttribut
 	return m
 }
 
+func (m *AccountUpdateAttributes) WithUserDefinedInformation(userDefinedInformation string) *AccountUpdateAttributes {
+
+	m.UserDefinedInformation = userDefinedInformation
+
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithValidationType(validationType ValidationType) *AccountUpdateAttributes {
+
+	m.ValidationType = validationType
+
+	return m
+}
+
 // Validate validates this account update attributes
 func (m *AccountUpdateAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAcceptanceQualifier(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateAccountClassification(formats); err != nil {
 		res = append(res, err)
@@ -653,6 +733,14 @@ func (m *AccountUpdateAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateProcessingService(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferenceMask(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSecondaryIdentification(formats); err != nil {
 		res = append(res, err)
 	}
@@ -661,13 +749,41 @@ func (m *AccountUpdateAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStatusReason(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTitle(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserDefinedInformation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValidationType(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AccountUpdateAttributes) validateAcceptanceQualifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AcceptanceQualifier) { // not required
+		return nil
+	}
+
+	if err := m.AcceptanceQualifier.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "acceptance_qualifier")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -969,6 +1085,32 @@ func (m *AccountUpdateAttributes) validatePrivateIdentification(formats strfmt.R
 	return nil
 }
 
+func (m *AccountUpdateAttributes) validateProcessingService(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ProcessingService) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"processing_service", "body", string(m.ProcessingService), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountUpdateAttributes) validateReferenceMask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReferenceMask) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"reference_mask", "body", string(m.ReferenceMask), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *AccountUpdateAttributes) validateSecondaryIdentification(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.SecondaryIdentification) { // not required
@@ -990,7 +1132,7 @@ var accountUpdateAttributesTypeStatusPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["pending","failed","confirmed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["pending","failed","confirmed","closed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -1008,6 +1150,9 @@ const (
 
 	// AccountUpdateAttributesStatusConfirmed captures enum value "confirmed"
 	AccountUpdateAttributesStatusConfirmed string = "confirmed"
+
+	// AccountUpdateAttributesStatusClosed captures enum value "closed"
+	AccountUpdateAttributesStatusClosed string = "closed"
 )
 
 // prop value enum
@@ -1032,6 +1177,22 @@ func (m *AccountUpdateAttributes) validateStatus(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *AccountUpdateAttributes) validateStatusReason(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.StatusReason) { // not required
+		return nil
+	}
+
+	if err := m.StatusReason.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "status_reason")
+		}
+		return err
+	}
+
+	return nil
+}
+
 func (m *AccountUpdateAttributes) validateTitle(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Title) { // not required
@@ -1043,6 +1204,35 @@ func (m *AccountUpdateAttributes) validateTitle(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MaxLength("attributes"+"."+"title", "body", string(m.Title), 40); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountUpdateAttributes) validateUserDefinedInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserDefinedInformation) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"user_defined_information", "body", string(m.UserDefinedInformation), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountUpdateAttributes) validateValidationType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ValidationType) { // not required
+		return nil
+	}
+
+	if err := m.ValidationType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "validation_type")
+		}
 		return err
 	}
 

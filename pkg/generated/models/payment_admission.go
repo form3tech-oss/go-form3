@@ -588,12 +588,17 @@ type PaymentAdmissionRelationships struct {
 
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
+
+	// tasks
+	Tasks *RelationshipTasks `json:"tasks,omitempty"`
 }
 
 func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdmissionRelationships {
 	return &PaymentAdmissionRelationships{
 
 		Payment: RelationshipPaymentsWithDefaults(defaults),
+
+		Tasks: RelationshipTasksWithDefaults(defaults),
 	}
 }
 
@@ -609,11 +614,27 @@ func (m *PaymentAdmissionRelationships) WithoutPayment() *PaymentAdmissionRelati
 	return m
 }
 
+func (m *PaymentAdmissionRelationships) WithTasks(tasks RelationshipTasks) *PaymentAdmissionRelationships {
+
+	m.Tasks = &tasks
+
+	return m
+}
+
+func (m *PaymentAdmissionRelationships) WithoutTasks() *PaymentAdmissionRelationships {
+	m.Tasks = nil
+	return m
+}
+
 // Validate validates this payment admission relationships
 func (m *PaymentAdmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePayment(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTasks(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -633,6 +654,24 @@ func (m *PaymentAdmissionRelationships) validatePayment(formats strfmt.Registry)
 		if err := m.Payment.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("relationships" + "." + "payment")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentAdmissionRelationships) validateTasks(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Tasks) { // not required
+		return nil
+	}
+
+	if m.Tasks != nil {
+		if err := m.Tasks.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "tasks")
 			}
 			return err
 		}
