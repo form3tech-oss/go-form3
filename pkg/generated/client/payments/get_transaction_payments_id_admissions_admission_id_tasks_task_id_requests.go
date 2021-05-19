@@ -43,7 +43,7 @@ type GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest struct {
 
 	ID strfmt.UUID
 
-	/*TaskID      Task Id      */
+	/*TaskID      Payment Admission Task Id      */
 
 	TaskID strfmt.UUID
 

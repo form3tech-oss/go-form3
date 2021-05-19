@@ -51,7 +51,7 @@ type GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK struct {
 	//Payload
 
 	// isStream: false
-	*models.TaskListResponse
+	*models.PaymentAdmissionTaskListResponse
 }
 
 func (o *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK) Error() string {
@@ -60,11 +60,11 @@ func (o *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK) Error() string {
 
 func (o *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.TaskListResponse = new(models.TaskListResponse)
+	o.PaymentAdmissionTaskListResponse = new(models.PaymentAdmissionTaskListResponse)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.TaskListResponse); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.PaymentAdmissionTaskListResponse); err != nil && err != io.EOF {
 		return err
 	}
 

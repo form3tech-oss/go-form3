@@ -17,30 +17,30 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RelationshipTask relationship task
-// swagger:model RelationshipTask
-type RelationshipTask struct {
+// RelationshipPaymentAdmissionTasks relationship payment admission tasks
+// swagger:model RelationshipPaymentAdmissionTasks
+type RelationshipPaymentAdmissionTasks struct {
 
 	// data
-	Data []*Task `json:"data"`
+	Data []*PaymentAdmissionTask `json:"data"`
 }
 
-func RelationshipTaskWithDefaults(defaults client.Defaults) *RelationshipTask {
-	return &RelationshipTask{
+func RelationshipPaymentAdmissionTasksWithDefaults(defaults client.Defaults) *RelationshipPaymentAdmissionTasks {
+	return &RelationshipPaymentAdmissionTasks{
 
-		Data: make([]*Task, 0),
+		Data: make([]*PaymentAdmissionTask, 0),
 	}
 }
 
-func (m *RelationshipTask) WithData(data []*Task) *RelationshipTask {
+func (m *RelationshipPaymentAdmissionTasks) WithData(data []*PaymentAdmissionTask) *RelationshipPaymentAdmissionTasks {
 
 	m.Data = data
 
 	return m
 }
 
-// Validate validates this relationship task
-func (m *RelationshipTask) Validate(formats strfmt.Registry) error {
+// Validate validates this relationship payment admission tasks
+func (m *RelationshipPaymentAdmissionTasks) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -53,7 +53,7 @@ func (m *RelationshipTask) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *RelationshipTask) validateData(formats strfmt.Registry) error {
+func (m *RelationshipPaymentAdmissionTasks) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -79,7 +79,7 @@ func (m *RelationshipTask) validateData(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *RelationshipTask) MarshalBinary() ([]byte, error) {
+func (m *RelationshipPaymentAdmissionTasks) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -87,15 +87,15 @@ func (m *RelationshipTask) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *RelationshipTask) UnmarshalBinary(b []byte) error {
-	var res RelationshipTask
+func (m *RelationshipPaymentAdmissionTasks) UnmarshalBinary(b []byte) error {
+	var res RelationshipPaymentAdmissionTasks
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *RelationshipTask) Json() string {
+func (m *RelationshipPaymentAdmissionTasks) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

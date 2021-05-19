@@ -44,14 +44,14 @@ func NewGetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK() *GetTransac
 
 /*GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK handles this case with default header values.
 
-Task Details details
+Payment Admission Task Details details
 */
 type GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK struct {
 
 	//Payload
 
 	// isStream: false
-	*models.TaskDetailsResponse
+	*models.PaymentAdmissionTaskDetailsResponse
 }
 
 func (o *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK) Error() string {
@@ -60,11 +60,11 @@ func (o *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK) Error() str
 
 func (o *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.TaskDetailsResponse = new(models.TaskDetailsResponse)
+	o.PaymentAdmissionTaskDetailsResponse = new(models.PaymentAdmissionTaskDetailsResponse)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.TaskDetailsResponse); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.PaymentAdmissionTaskDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
 

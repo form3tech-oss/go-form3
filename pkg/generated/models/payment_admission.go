@@ -590,7 +590,7 @@ type PaymentAdmissionRelationships struct {
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
 	// tasks
-	Tasks *RelationshipTasks `json:"tasks,omitempty"`
+	Tasks *RelationshipPaymentAdmissionTasks `json:"tasks,omitempty"`
 }
 
 func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdmissionRelationships {
@@ -598,7 +598,7 @@ func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *Paymen
 
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		Tasks: RelationshipTasksWithDefaults(defaults),
+		Tasks: RelationshipPaymentAdmissionTasksWithDefaults(defaults),
 	}
 }
 
@@ -614,7 +614,7 @@ func (m *PaymentAdmissionRelationships) WithoutPayment() *PaymentAdmissionRelati
 	return m
 }
 
-func (m *PaymentAdmissionRelationships) WithTasks(tasks RelationshipTasks) *PaymentAdmissionRelationships {
+func (m *PaymentAdmissionRelationships) WithTasks(tasks RelationshipPaymentAdmissionTasks) *PaymentAdmissionRelationships {
 
 	m.Tasks = &tasks
 

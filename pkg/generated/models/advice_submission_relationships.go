@@ -22,12 +22,17 @@ type AdviceSubmissionRelationships struct {
 
 	// advice
 	Advice *RelationshipAdvices `json:"advice,omitempty"`
+
+	// payment
+	Payment *RelationshipPayments `json:"payment,omitempty"`
 }
 
 func AdviceSubmissionRelationshipsWithDefaults(defaults client.Defaults) *AdviceSubmissionRelationships {
 	return &AdviceSubmissionRelationships{
 
 		Advice: RelationshipAdvicesWithDefaults(defaults),
+
+		Payment: RelationshipPaymentsWithDefaults(defaults),
 	}
 }
 
@@ -43,11 +48,27 @@ func (m *AdviceSubmissionRelationships) WithoutAdvice() *AdviceSubmissionRelatio
 	return m
 }
 
+func (m *AdviceSubmissionRelationships) WithPayment(payment RelationshipPayments) *AdviceSubmissionRelationships {
+
+	m.Payment = &payment
+
+	return m
+}
+
+func (m *AdviceSubmissionRelationships) WithoutPayment() *AdviceSubmissionRelationships {
+	m.Payment = nil
+	return m
+}
+
 // Validate validates this advice submission relationships
 func (m *AdviceSubmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdvice(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePayment(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,6 +88,24 @@ func (m *AdviceSubmissionRelationships) validateAdvice(formats strfmt.Registry) 
 		if err := m.Advice.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("advice")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *AdviceSubmissionRelationships) validatePayment(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Payment) { // not required
+		return nil
+	}
+
+	if m.Payment != nil {
+		if err := m.Payment.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("payment")
 			}
 			return err
 		}

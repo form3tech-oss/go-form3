@@ -51,14 +51,14 @@ func NewPatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDCreated() *Pat
 
 /*PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDCreated handles this case with default header values.
 
-Task creation response
+Payment Admission Task creation response
 */
 type PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDCreated struct {
 
 	//Payload
 
 	// isStream: false
-	*models.TaskDetailsResponse
+	*models.PaymentAdmissionTaskDetailsResponse
 }
 
 func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDCreated) Error() string {
@@ -67,11 +67,11 @@ func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDCreated) Erro
 
 func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.TaskDetailsResponse = new(models.TaskDetailsResponse)
+	o.PaymentAdmissionTaskDetailsResponse = new(models.PaymentAdmissionTaskDetailsResponse)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.TaskDetailsResponse); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.PaymentAdmissionTaskDetailsResponse); err != nil && err != io.EOF {
 		return err
 	}
 

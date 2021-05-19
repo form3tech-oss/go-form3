@@ -17,47 +17,47 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TaskListResponse task list response
-// swagger:model TaskListResponse
-type TaskListResponse struct {
+// PaymentAdmissionTaskListResponse payment admission task list response
+// swagger:model PaymentAdmissionTaskListResponse
+type PaymentAdmissionTaskListResponse struct {
 
 	// data
-	Data []*Task `json:"data"`
+	Data []*PaymentAdmissionTask `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
 }
 
-func TaskListResponseWithDefaults(defaults client.Defaults) *TaskListResponse {
-	return &TaskListResponse{
+func PaymentAdmissionTaskListResponseWithDefaults(defaults client.Defaults) *PaymentAdmissionTaskListResponse {
+	return &PaymentAdmissionTaskListResponse{
 
-		Data: make([]*Task, 0),
+		Data: make([]*PaymentAdmissionTask, 0),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *TaskListResponse) WithData(data []*Task) *TaskListResponse {
+func (m *PaymentAdmissionTaskListResponse) WithData(data []*PaymentAdmissionTask) *PaymentAdmissionTaskListResponse {
 
 	m.Data = data
 
 	return m
 }
 
-func (m *TaskListResponse) WithLinks(links Links) *TaskListResponse {
+func (m *PaymentAdmissionTaskListResponse) WithLinks(links Links) *PaymentAdmissionTaskListResponse {
 
 	m.Links = &links
 
 	return m
 }
 
-func (m *TaskListResponse) WithoutLinks() *TaskListResponse {
+func (m *PaymentAdmissionTaskListResponse) WithoutLinks() *PaymentAdmissionTaskListResponse {
 	m.Links = nil
 	return m
 }
 
-// Validate validates this task list response
-func (m *TaskListResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this payment admission task list response
+func (m *PaymentAdmissionTaskListResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -74,7 +74,7 @@ func (m *TaskListResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *TaskListResponse) validateData(formats strfmt.Registry) error {
+func (m *PaymentAdmissionTaskListResponse) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -99,7 +99,7 @@ func (m *TaskListResponse) validateData(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *TaskListResponse) validateLinks(formats strfmt.Registry) error {
+func (m *PaymentAdmissionTaskListResponse) validateLinks(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Links) { // not required
 		return nil
@@ -118,7 +118,7 @@ func (m *TaskListResponse) validateLinks(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *TaskListResponse) MarshalBinary() ([]byte, error) {
+func (m *PaymentAdmissionTaskListResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -126,15 +126,15 @@ func (m *TaskListResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *TaskListResponse) UnmarshalBinary(b []byte) error {
-	var res TaskListResponse
+func (m *PaymentAdmissionTaskListResponse) UnmarshalBinary(b []byte) error {
+	var res PaymentAdmissionTaskListResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *TaskListResponse) Json() string {
+func (m *PaymentAdmissionTaskListResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

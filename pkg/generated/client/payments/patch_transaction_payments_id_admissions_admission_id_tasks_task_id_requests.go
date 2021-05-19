@@ -24,7 +24,7 @@ func (c *Client) PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskID() *P
 	var ()
 	return &PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest{
 
-		TaskAmendment: models.TaskAmendmentWithDefaults(c.Defaults),
+		PaymentAdmissionTaskAmendment: models.PaymentAdmissionTaskAmendmentWithDefaults(c.Defaults),
 
 		AdmissionID: c.Defaults.GetStrfmtUUID("PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskID", "admissionId"),
 
@@ -41,9 +41,9 @@ func (c *Client) PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskID() *P
 
 type PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest struct {
 
-	/*TaskPatchRequest*/
+	/*PaymentAdmissionTaskPatchRequest*/
 
-	*models.TaskAmendment
+	*models.PaymentAdmissionTaskAmendment
 
 	/*AdmissionID      Admission Id      */
 
@@ -53,7 +53,7 @@ type PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest struct {
 
 	ID strfmt.UUID
 
-	/*TaskID      Task Id      */
+	/*TaskID      Payment Admission Task Id      */
 
 	TaskID strfmt.UUID
 
@@ -67,26 +67,26 @@ type PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest struct {
 
 func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) FromJson(j string) *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest {
 
-	var m models.TaskAmendment
+	var m models.PaymentAdmissionTaskAmendment
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
 		log.Fatal(err)
 	}
 
-	o.TaskAmendment = &m
+	o.PaymentAdmissionTaskAmendment = &m
 
 	return o
 }
 
-func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) WithTaskPatchRequest(taskPatchRequest models.TaskAmendment) *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest {
+func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) WithPaymentAdmissionTaskPatchRequest(paymentAdmissionTaskPatchRequest models.PaymentAdmissionTaskAmendment) *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest {
 
-	o.TaskAmendment = &taskPatchRequest
+	o.PaymentAdmissionTaskAmendment = &paymentAdmissionTaskPatchRequest
 
 	return o
 }
 
-func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) WithoutTaskPatchRequest() *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest {
+func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) WithoutPaymentAdmissionTaskPatchRequest() *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest {
 
-	o.TaskAmendment = &models.TaskAmendment{}
+	o.PaymentAdmissionTaskAmendment = &models.PaymentAdmissionTaskAmendment{}
 
 	return o
 }
@@ -134,8 +134,8 @@ func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) Writ
 	var res []error
 
 	// ISBODYPARAM
-	if o.TaskAmendment != nil {
-		if err := r.SetBodyParam(o.TaskAmendment); err != nil {
+	if o.PaymentAdmissionTaskAmendment != nil {
+		if err := r.SetBodyParam(o.PaymentAdmissionTaskAmendment); err != nil {
 			return err
 		}
 	}

@@ -16,35 +16,35 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TaskAmendment task amendment
-// swagger:model TaskAmendment
-type TaskAmendment struct {
+// PaymentAdmissionTaskAmendment payment admission task amendment
+// swagger:model PaymentAdmissionTaskAmendment
+type PaymentAdmissionTaskAmendment struct {
 
 	// data
-	Data *TaskUpdate `json:"data,omitempty"`
+	Data *PaymentAdmissionTaskUpdate `json:"data,omitempty"`
 }
 
-func TaskAmendmentWithDefaults(defaults client.Defaults) *TaskAmendment {
-	return &TaskAmendment{
+func PaymentAdmissionTaskAmendmentWithDefaults(defaults client.Defaults) *PaymentAdmissionTaskAmendment {
+	return &PaymentAdmissionTaskAmendment{
 
-		Data: TaskUpdateWithDefaults(defaults),
+		Data: PaymentAdmissionTaskUpdateWithDefaults(defaults),
 	}
 }
 
-func (m *TaskAmendment) WithData(data TaskUpdate) *TaskAmendment {
+func (m *PaymentAdmissionTaskAmendment) WithData(data PaymentAdmissionTaskUpdate) *PaymentAdmissionTaskAmendment {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *TaskAmendment) WithoutData() *TaskAmendment {
+func (m *PaymentAdmissionTaskAmendment) WithoutData() *PaymentAdmissionTaskAmendment {
 	m.Data = nil
 	return m
 }
 
-// Validate validates this task amendment
-func (m *TaskAmendment) Validate(formats strfmt.Registry) error {
+// Validate validates this payment admission task amendment
+func (m *PaymentAdmissionTaskAmendment) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -57,7 +57,7 @@ func (m *TaskAmendment) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *TaskAmendment) validateData(formats strfmt.Registry) error {
+func (m *PaymentAdmissionTaskAmendment) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -76,7 +76,7 @@ func (m *TaskAmendment) validateData(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *TaskAmendment) MarshalBinary() ([]byte, error) {
+func (m *PaymentAdmissionTaskAmendment) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -84,15 +84,15 @@ func (m *TaskAmendment) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *TaskAmendment) UnmarshalBinary(b []byte) error {
-	var res TaskAmendment
+func (m *PaymentAdmissionTaskAmendment) UnmarshalBinary(b []byte) error {
+	var res PaymentAdmissionTaskAmendment
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *TaskAmendment) Json() string {
+func (m *PaymentAdmissionTaskAmendment) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
