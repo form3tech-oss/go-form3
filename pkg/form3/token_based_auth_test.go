@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/go-openapi/strfmt"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -20,5 +21,5 @@ func TestTokenBasedAuth(t *testing.T) {
 
 	resp, err := req.Do()
 	require.Nil(t, err)
-	require.Equal(t, resp.Data.ID.String(), os.Getenv("FORM3_CLIENT_ID"))
+	assert.Equal(t, resp.Data.ID.String(), os.Getenv("FORM3_CLIENT_ID"))
 }

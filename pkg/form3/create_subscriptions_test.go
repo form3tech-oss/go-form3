@@ -34,9 +34,9 @@ func TestCreateSubscriptions(t *testing.T) {
 	})
 
 	resp, err := req.Do()
-	require.Nil(t, err)
+	require.NoError(t, err)
 	require.Equal(t, id.String(), resp.Data.ID.String())
 
 	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(0).Do()
-	require.Nil(t, err)
+	require.NoError(t, err)
 }
