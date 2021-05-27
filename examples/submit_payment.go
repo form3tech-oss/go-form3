@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	f3 := form3.NewFromEnv()
+	f3, _ := form3.NewFromEnv()
 
 	p := f3.Payments.CreatePayment()
 	p.Data.WithType("payments")

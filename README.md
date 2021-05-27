@@ -51,7 +51,7 @@ go get -u github.com/google/uuid
 Run `gore -autoimport` then type commands interactively, with completion, history, and more. Gore will compile and run your script after each line, printing the output to the screen. Scripts can be output using `:print` and reset with `:clear`. Use `:help` for more details or [github](https://github.com/motemen/gore).
 
 ```go
-    f3 := form3.NewFromEnv()
+    f3, _ := form3.NewFromEnv()
 	units := f3.Organisations.GetOrganisationUnits().MustDo()
 	for _, unit := range units.Data {
 		fmt.Printf("%s - %s\n", unit.ID, unit.Attributes.Name)

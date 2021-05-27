@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	f3 := form3.NewFromEnv()
+	f3, _ := form3.NewFromEnv()
 	units := f3.Subscriptions.ListSubscriptions().MustDo()
 
 	for _, sub := range units.Data {

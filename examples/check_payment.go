@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	f3 := form3.NewFromEnv()
+	f3, _ := form3.NewFromEnv()
 
 	payment, _ := f3.Payments.GetPayment().
 		WithID("87cb3e94-103f-4b91-8c31-c4bea0ee9cf5").

@@ -5,6 +5,8 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
+	"errors"
+	"fmt"
 	"net/http"
 	"net/url"
 	"os"
@@ -18,63 +20,106 @@ const (
 	ReqMimeType = "application/vnd.api+json"
 )
 
+var ErrPEMDecode = errors.New("failed to decode PEM block containing private key")
+
+type ErrMissingEnvVariable struct {
+	env string
+}
+
+func (e *ErrMissingEnvVariable) Error() string {
+	return fmt.Sprintf("missing environment variable %s", e.env)
+}
+
 type F3 struct {
 	genClient.Form3PublicAPI
 	Defaults *ClientDefaults
 }
 
-func New(host, pubKeyID string, privateKey *rsa.PrivateKey, orgID string) *F3 {
+func New(host, pubKeyID string, privateKey *rsa.PrivateKey, orgID string) (*F3, error) {
 	u, err := url.Parse(host)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	config := NewRequestSigningClientConfig(pubKeyID, privateKey)
 	httpClient := NewRequestSigningHTTPClient(config)
 
-	return newF3(u, httpClient, orgID)
+	return newF3(u, httpClient, orgID), nil
 }
 
-func NewFromEnv() *F3 {
-	privKeyInPEM := getEnv("FORM3_PRIVATE_KEY")
+func NewFromEnv() (*F3, error) {
+	privKeyInPEM, err := getEnv("FORM3_PRIVATE_KEY")
+	if err != nil {
+		return nil, err
+	}
 
 	block, _ := pem.Decode([]byte(privKeyInPEM))
 	if block == nil || block.Type != "RSA PRIVATE KEY" {
-		panic("failed to decode PEM block containing private key")
+		return nil, ErrPEMDecode
 	}
 
 	privateKey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
-		panic(err)
+		return nil, fmt.Errorf("could not parse private key: %w", err)
+	}
+
+	host, err := getEnv("FORM3_HOST")
+	if err != nil {
+		return nil, err
+	}
+
+	publicKeyID, err := getEnv("FORM3_PUBLIC_KEY_ID")
+	if err != nil {
+		return nil, err
+	}
+
+	organisationID, err := getEnv("FORM3_ORGANISATION_ID")
+	if err != nil {
+		return nil, err
 	}
 
 	return New(
-		getEnv("FORM3_HOST"),
-		getEnv("FORM3_PUBLIC_KEY_ID"),
+		host,
+		publicKeyID,
 		privateKey,
-		getEnv("FORM3_ORGANISATION_ID"),
+		organisationID,
 	)
 }
 
-func NewWithTokenBasedAuth(host, clientID, secret, orgID string) *F3 {
+func NewWithTokenBasedAuth(host, clientID, secret, orgID string) (*F3, error) {
 	u, err := url.Parse(host)
 	if err != nil {
-		panic(err)
+		return nil, fmt.Errorf("failed to parse URL: %w", err)
 	}
 
 	config := NewTokenBasedClientConfig(clientID, secret, u)
 	httpClient := NewTokenBasedHTTPClient(config)
 
-	return newF3(u, httpClient, orgID)
+	return newF3(u, httpClient, orgID), nil
 }
 
-func NewWithTokenBasedAuthFromEnv() *F3 {
-	return NewWithTokenBasedAuth(
-		getEnv("FORM3_HOST"),
-		getEnv("FORM3_CLIENT_ID"),
-		getEnv("FORM3_CLIENT_SECRET"),
-		getEnv("FORM3_ORGANISATION_ID"),
-	)
+func NewWithTokenBasedAuthFromEnv() (*F3, error) {
+	host, err := getEnv("FORM3_HOST")
+	if err != nil {
+		return nil, err
+	}
+
+	clientID, err := getEnv("FORM3_CLIENT_ID")
+	if err != nil {
+		return nil, err
+	}
+
+	clientSecret, err := getEnv("FORM3_CLIENT_SECRET")
+	if err != nil {
+		return nil, err
+	}
+
+	organisationID, err := getEnv("FORM3_ORGANISATION_ID")
+	if err != nil {
+		return nil, err
+	}
+
+	return NewWithTokenBasedAuth(host, clientID, clientSecret, organisationID)
 }
 
 func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
@@ -95,10 +140,10 @@ func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
 	}
 }
 
-func getEnv(name string) string {
+func getEnv(name string) (string, error) {
 	env, ok := os.LookupEnv(name)
 	if !ok {
-		panic("Missing required environment variable " + name)
+		return "", &ErrMissingEnvVariable{env: env}
 	}
-	return env
+	return env, nil
 }

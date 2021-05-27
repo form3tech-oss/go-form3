@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	f3 := form3.NewFromEnv()
+	f3, _ := form3.NewFromEnv()
 
 	payments := f3.Payments.ListPayments().
 		WithFilterAmount("2500.00").
