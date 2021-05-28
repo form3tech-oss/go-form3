@@ -143,7 +143,8 @@ func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
 func getEnv(name string) (string, error) {
 	env, ok := os.LookupEnv(name)
 	if !ok {
-		return "", &ErrMissingEnvVariable{env: env}
+		return "", &ErrMissingEnvVariable{env: name}
 	}
+
 	return env, nil
 }

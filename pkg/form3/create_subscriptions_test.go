@@ -8,6 +8,7 @@ import (
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -37,7 +38,7 @@ func TestCreateSubscriptions(t *testing.T) {
 
 	resp, err := req.Do()
 	require.NoError(t, err)
-	require.Equal(t, id.String(), resp.Data.ID.String())
+	assert.Equal(t, id.String(), resp.Data.ID.String())
 
 	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(0).Do()
 	require.NoError(t, err)
