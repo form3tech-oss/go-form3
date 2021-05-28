@@ -74,11 +74,11 @@ date: %s`,
 		req.Body != nil {
 		body, err := ioutil.ReadAll(req.Body)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error reading request body: %w", err)
 		}
 
 		if _, err := hasher.Write(body); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error hashing: %w", err)
 		}
 		digest := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
 
@@ -96,12 +96,11 @@ content-length: %d`,
 		req.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", ReqMimeType)
 		req.Header.Set("Digest", digest)
-
 	}
 
 	hasher.Reset()
 	if _, err := hasher.Write([]byte(msgToSign)); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error hashing: %w", err)
 	}
 	hashedMsgToSign := hasher.Sum(nil)
 
