@@ -13,6 +13,7 @@ import (
 	"github.com/form3tech-oss/go-form3/v2/pkg/client"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/a_c_e"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/account_amendment"
+	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/account_identification"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/account_request"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/account_validation"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/accounts"
@@ -24,7 +25,6 @@ import (
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/mandates"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/oauth2"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/organisations"
-	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/participants"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/payments"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/platformsecurityapi"
 	"github.com/form3tech-oss/go-form3/v2/pkg/generated/client/query_api"
@@ -84,6 +84,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.AccountAmendment = account_amendment.New(transport, formats, defaults)
 
+	cli.AccountIdentification = account_identification.New(transport, formats, defaults)
+
 	cli.AccountRequest = account_request.New(transport, formats, defaults)
 
 	cli.AccountValidation = account_validation.New(transport, formats, defaults)
@@ -105,8 +107,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.Oauth2 = oauth2.New(transport, formats, defaults)
 
 	cli.Organisations = organisations.New(transport, formats, defaults)
-
-	cli.Participants = participants.New(transport, formats, defaults)
 
 	cli.Payments = payments.New(transport, formats, defaults)
 
@@ -172,6 +172,8 @@ type Form3PublicAPI struct {
 
 	AccountAmendment *account_amendment.Client
 
+	AccountIdentification *account_identification.Client
+
 	AccountRequest *account_request.Client
 
 	AccountValidation *account_validation.Client
@@ -193,8 +195,6 @@ type Form3PublicAPI struct {
 	Oauth2 *oauth2.Client
 
 	Organisations *organisations.Client
-
-	Participants *participants.Client
 
 	Payments *payments.Client
 
@@ -223,6 +223,8 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.AccountAmendment.SetTransport(transport)
 
+	c.AccountIdentification.SetTransport(transport)
+
 	c.AccountRequest.SetTransport(transport)
 
 	c.AccountValidation.SetTransport(transport)
@@ -244,8 +246,6 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Oauth2.SetTransport(transport)
 
 	c.Organisations.SetTransport(transport)
-
-	c.Participants.SetTransport(transport)
 
 	c.Payments.SetTransport(transport)
 

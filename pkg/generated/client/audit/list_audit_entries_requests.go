@@ -80,9 +80,9 @@ type ListAuditEntriesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListAuditEntriesRequest) FromJson(j string) *ListAuditEntriesRequest {
+func (o *ListAuditEntriesRequest) FromJson(j string) (*ListAuditEntriesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListAuditEntriesRequest) WithFilterActionTimeFrom(filterActionTimeFrom strfmt.DateTime) *ListAuditEntriesRequest {

@@ -5,7 +5,7 @@ package users
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,16 +47,16 @@ type CreateUserRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateUserRequest) FromJson(j string) *CreateUserRequest {
+func (o *CreateUserRequest) FromJson(j string) (*CreateUserRequest, error) {
 
 	var m models.UserCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.UserCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateUserRequest) WithUserCreationRequest(userCreationRequest models.UserCreation) *CreateUserRequest {

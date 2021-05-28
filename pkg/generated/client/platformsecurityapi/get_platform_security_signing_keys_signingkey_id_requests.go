@@ -43,9 +43,9 @@ type GetPlatformSecuritySigningKeysSigningkeyIDRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPlatformSecuritySigningKeysSigningkeyIDRequest) FromJson(j string) *GetPlatformSecuritySigningKeysSigningkeyIDRequest {
+func (o *GetPlatformSecuritySigningKeysSigningkeyIDRequest) FromJson(j string) (*GetPlatformSecuritySigningKeysSigningkeyIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetPlatformSecuritySigningKeysSigningkeyIDRequest) WithSigningkeyID(signingkeyID strfmt.UUID) *GetPlatformSecuritySigningKeysSigningkeyIDRequest {

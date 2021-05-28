@@ -49,9 +49,9 @@ type GetReportRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetReportRequest) FromJson(j string) *GetReportRequest {
+func (o *GetReportRequest) FromJson(j string) (*GetReportRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetReportRequest) WithAccept(accept string) *GetReportRequest {

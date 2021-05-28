@@ -42,6 +42,9 @@ type MandateAttributesBeneficiaryParty struct {
 
 	// country
 	Country string `json:"country,omitempty"`
+
+	// private identification
+	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 }
 
 func MandateAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *MandateAttributesBeneficiaryParty {
@@ -60,6 +63,8 @@ func MandateAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Ma
 		Address: make([]string, 0),
 
 		Country: defaults.GetString("MandateAttributesBeneficiaryParty", "country"),
+
+		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 	}
 }
 
@@ -117,6 +122,18 @@ func (m *MandateAttributesBeneficiaryParty) WithCountry(country string) *Mandate
 	return m
 }
 
+func (m *MandateAttributesBeneficiaryParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *MandateAttributesBeneficiaryParty {
+
+	m.PrivateIdentification = &privateIdentification
+
+	return m
+}
+
+func (m *MandateAttributesBeneficiaryParty) WithoutPrivateIdentification() *MandateAttributesBeneficiaryParty {
+	m.PrivateIdentification = nil
+	return m
+}
+
 // Validate validates this mandate attributes beneficiary party
 func (m *MandateAttributesBeneficiaryParty) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -130,6 +147,10 @@ func (m *MandateAttributesBeneficiaryParty) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateAccountWith(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrivateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -178,6 +199,24 @@ func (m *MandateAttributesBeneficiaryParty) validateAccountWith(formats strfmt.R
 		if err := m.AccountWith.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("account_with")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *MandateAttributesBeneficiaryParty) validatePrivateIdentification(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PrivateIdentification) { // not required
+		return nil
+	}
+
+	if m.PrivateIdentification != nil {
+		if err := m.PrivateIdentification.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("private_identification")
 			}
 			return err
 		}

@@ -5,7 +5,7 @@ package payments
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,16 +47,16 @@ type CreatePaymentRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreatePaymentRequest) FromJson(j string) *CreatePaymentRequest {
+func (o *CreatePaymentRequest) FromJson(j string) (*CreatePaymentRequest, error) {
 
 	var m models.PaymentCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.PaymentCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreatePaymentRequest) WithPaymentCreationRequest(paymentCreationRequest models.PaymentCreation) *CreatePaymentRequest {

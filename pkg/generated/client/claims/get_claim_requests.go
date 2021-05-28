@@ -43,9 +43,9 @@ type GetClaimRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetClaimRequest) FromJson(j string) *GetClaimRequest {
+func (o *GetClaimRequest) FromJson(j string) (*GetClaimRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetClaimRequest) WithID(id strfmt.UUID) *GetClaimRequest {

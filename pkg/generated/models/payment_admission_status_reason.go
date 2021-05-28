@@ -32,6 +32,9 @@ const (
 
 	// PaymentAdmissionStatusReasonUnknownAccountnumber captures enum value "unknown_accountnumber"
 	PaymentAdmissionStatusReasonUnknownAccountnumber PaymentAdmissionStatusReason = "unknown_accountnumber"
+
+	// PaymentAdmissionStatusReasonCustomerCheckFailed captures enum value "customer_check_failed"
+	PaymentAdmissionStatusReasonCustomerCheckFailed PaymentAdmissionStatusReason = "customer_check_failed"
 )
 
 // for schema
@@ -39,7 +42,7 @@ var paymentAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []PaymentAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","customer_check_failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

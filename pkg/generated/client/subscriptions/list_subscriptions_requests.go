@@ -92,9 +92,9 @@ type ListSubscriptionsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListSubscriptionsRequest) FromJson(j string) *ListSubscriptionsRequest {
+func (o *ListSubscriptionsRequest) FromJson(j string) (*ListSubscriptionsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListSubscriptionsRequest) WithFilterCallbackTransport(filterCallbackTransport string) *ListSubscriptionsRequest {

@@ -15,54 +15,49 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
-// ParticipantResponse participant response
-// swagger:model ParticipantResponse
-type ParticipantResponse struct {
+// AccountIdentificationListResponse account identification list response
+// swagger:model AccountIdentificationListResponse
+type AccountIdentificationListResponse struct {
 
 	// data
-	// Required: true
-	// Max Items: 1
-	// Min Items: 1
-	Data []*Participant `json:"data"`
+	Data []*AccountIdentification `json:"data"`
 
 	// links
-	// Required: true
-	Links *ParticipantLinks `json:"links"`
+	Links *Links `json:"links,omitempty"`
 }
 
-func ParticipantResponseWithDefaults(defaults client.Defaults) *ParticipantResponse {
-	return &ParticipantResponse{
+func AccountIdentificationListResponseWithDefaults(defaults client.Defaults) *AccountIdentificationListResponse {
+	return &AccountIdentificationListResponse{
 
-		Data: make([]*Participant, 0),
+		Data: make([]*AccountIdentification, 0),
 
-		Links: ParticipantLinksWithDefaults(defaults),
+		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *ParticipantResponse) WithData(data []*Participant) *ParticipantResponse {
+func (m *AccountIdentificationListResponse) WithData(data []*AccountIdentification) *AccountIdentificationListResponse {
 
 	m.Data = data
 
 	return m
 }
 
-func (m *ParticipantResponse) WithLinks(links ParticipantLinks) *ParticipantResponse {
+func (m *AccountIdentificationListResponse) WithLinks(links Links) *AccountIdentificationListResponse {
 
 	m.Links = &links
 
 	return m
 }
 
-func (m *ParticipantResponse) WithoutLinks() *ParticipantResponse {
+func (m *AccountIdentificationListResponse) WithoutLinks() *AccountIdentificationListResponse {
 	m.Links = nil
 	return m
 }
 
-// Validate validates this participant response
-func (m *ParticipantResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this account identification list response
+func (m *AccountIdentificationListResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -79,20 +74,10 @@ func (m *ParticipantResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ParticipantResponse) validateData(formats strfmt.Registry) error {
+func (m *AccountIdentificationListResponse) validateData(formats strfmt.Registry) error {
 
-	if err := validate.Required("data", "body", m.Data); err != nil {
-		return err
-	}
-
-	iDataSize := int64(len(m.Data))
-
-	if err := validate.MinItems("data", "body", iDataSize, 1); err != nil {
-		return err
-	}
-
-	if err := validate.MaxItems("data", "body", iDataSize, 1); err != nil {
-		return err
+	if swag.IsZero(m.Data) { // not required
+		return nil
 	}
 
 	for i := 0; i < len(m.Data); i++ {
@@ -114,10 +99,10 @@ func (m *ParticipantResponse) validateData(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ParticipantResponse) validateLinks(formats strfmt.Registry) error {
+func (m *AccountIdentificationListResponse) validateLinks(formats strfmt.Registry) error {
 
-	if err := validate.Required("links", "body", m.Links); err != nil {
-		return err
+	if swag.IsZero(m.Links) { // not required
+		return nil
 	}
 
 	if m.Links != nil {
@@ -133,7 +118,7 @@ func (m *ParticipantResponse) validateLinks(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *ParticipantResponse) MarshalBinary() ([]byte, error) {
+func (m *AccountIdentificationListResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -141,15 +126,15 @@ func (m *ParticipantResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ParticipantResponse) UnmarshalBinary(b []byte) error {
-	var res ParticipantResponse
+func (m *AccountIdentificationListResponse) UnmarshalBinary(b []byte) error {
+	var res AccountIdentificationListResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ParticipantResponse) Json() string {
+func (m *AccountIdentificationListResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

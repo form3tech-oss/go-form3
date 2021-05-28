@@ -43,9 +43,9 @@ type ListAcesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListAcesRequest) FromJson(j string) *ListAcesRequest {
+func (o *ListAcesRequest) FromJson(j string) (*ListAcesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListAcesRequest) WithRoleID(roleID strfmt.UUID) *ListAcesRequest {

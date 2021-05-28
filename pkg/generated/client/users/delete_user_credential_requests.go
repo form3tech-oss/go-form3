@@ -49,9 +49,9 @@ type DeleteUserCredentialRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *DeleteUserCredentialRequest) FromJson(j string) *DeleteUserCredentialRequest {
+func (o *DeleteUserCredentialRequest) FromJson(j string) (*DeleteUserCredentialRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *DeleteUserCredentialRequest) WithClientID(clientID string) *DeleteUserCredentialRequest {

@@ -5,7 +5,7 @@ package mandates
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type ModifyMandateRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ModifyMandateRequest) FromJson(j string) *ModifyMandateRequest {
+func (o *ModifyMandateRequest) FromJson(j string) (*ModifyMandateRequest, error) {
 
 	var m models.MandateAmendment
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.MandateAmendment = &m
 
-	return o
+	return o, nil
 }
 
 func (o *ModifyMandateRequest) WithMandateAmendment(mandateAmendment models.MandateAmendment) *ModifyMandateRequest {

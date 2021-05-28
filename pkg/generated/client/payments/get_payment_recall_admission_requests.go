@@ -55,9 +55,9 @@ type GetPaymentRecallAdmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPaymentRecallAdmissionRequest) FromJson(j string) *GetPaymentRecallAdmissionRequest {
+func (o *GetPaymentRecallAdmissionRequest) FromJson(j string) (*GetPaymentRecallAdmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetPaymentRecallAdmissionRequest) WithAdmissionID(admissionID strfmt.UUID) *GetPaymentRecallAdmissionRequest {

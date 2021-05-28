@@ -49,9 +49,9 @@ type GetPaymentSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPaymentSubmissionRequest) FromJson(j string) *GetPaymentSubmissionRequest {
+func (o *GetPaymentSubmissionRequest) FromJson(j string) (*GetPaymentSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetPaymentSubmissionRequest) WithID(id strfmt.UUID) *GetPaymentSubmissionRequest {

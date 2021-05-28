@@ -55,9 +55,9 @@ type GetUserAcesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetUserAcesRequest) FromJson(j string) *GetUserAcesRequest {
+func (o *GetUserAcesRequest) FromJson(j string) (*GetUserAcesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetUserAcesRequest) WithFilterAction(filterAction string) *GetUserAcesRequest {

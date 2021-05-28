@@ -49,9 +49,9 @@ type DeleteAceRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *DeleteAceRequest) FromJson(j string) *DeleteAceRequest {
+func (o *DeleteAceRequest) FromJson(j string) (*DeleteAceRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *DeleteAceRequest) WithAceID(aceID strfmt.UUID) *DeleteAceRequest {

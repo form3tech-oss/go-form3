@@ -43,9 +43,9 @@ type ListUserRolesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListUserRolesRequest) FromJson(j string) *ListUserRolesRequest {
+func (o *ListUserRolesRequest) FromJson(j string) (*ListUserRolesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListUserRolesRequest) WithUserID(userID strfmt.UUID) *ListUserRolesRequest {

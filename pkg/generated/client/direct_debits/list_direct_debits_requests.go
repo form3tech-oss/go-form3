@@ -206,9 +206,9 @@ type ListDirectDebitsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListDirectDebitsRequest) FromJson(j string) *ListDirectDebitsRequest {
+func (o *ListDirectDebitsRequest) FromJson(j string) (*ListDirectDebitsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListDirectDebitsRequest) WithFilterAdmissionAdmissionDateFrom(filterAdmissionAdmissionDateFrom strfmt.DateTime) *ListDirectDebitsRequest {

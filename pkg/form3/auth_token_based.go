@@ -42,7 +42,7 @@ func NewTokenBasedClientConfig(clientID, clientSecret string, hostURL *url.URL) 
 	}
 }
 
-func (c *TokenBasedClientConfig) WithinitialToken(token string) *TokenBasedClientConfig {
+func (c *TokenBasedClientConfig) WithInitialToken(token string) *TokenBasedClientConfig {
 	c.initialToken = token
 	return c
 }

@@ -5,7 +5,7 @@ package query_api
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type PostTransactionQueriesQueryIDResponsesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *PostTransactionQueriesQueryIDResponsesRequest) FromJson(j string) *PostTransactionQueriesQueryIDResponsesRequest {
+func (o *PostTransactionQueriesQueryIDResponsesRequest) FromJson(j string) (*PostTransactionQueriesQueryIDResponsesRequest, error) {
 
 	var m models.QueryResponseCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.QueryResponseCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *PostTransactionQueriesQueryIDResponsesRequest) WithCreationRequest(creationRequest models.QueryResponseCreation) *PostTransactionQueriesQueryIDResponsesRequest {

@@ -43,9 +43,9 @@ type GetDirectDebitRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetDirectDebitRequest) FromJson(j string) *GetDirectDebitRequest {
+func (o *GetDirectDebitRequest) FromJson(j string) (*GetDirectDebitRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetDirectDebitRequest) WithID(id strfmt.UUID) *GetDirectDebitRequest {

@@ -49,9 +49,9 @@ type GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest) FromJson(j string) *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest {
+func (o *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest) FromJson(j string) (*GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest) WithQueryAdmissionID(queryAdmissionID strfmt.UUID) *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest {

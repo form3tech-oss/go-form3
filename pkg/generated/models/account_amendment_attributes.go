@@ -22,9 +22,6 @@ import (
 // swagger:model AccountAmendmentAttributes
 type AccountAmendmentAttributes struct {
 
-	// A free-format reference that can be used to link this account to an external system.
-	CustomerID string `json:"customer_id,omitempty"`
-
 	// Reason for modification.
 	// Min Length: 1
 	ModifyReason string `json:"modify_reason,omitempty"`
@@ -43,8 +40,6 @@ type AccountAmendmentAttributes struct {
 func AccountAmendmentAttributesWithDefaults(defaults client.Defaults) *AccountAmendmentAttributes {
 	return &AccountAmendmentAttributes{
 
-		CustomerID: defaults.GetString("AccountAmendmentAttributes", "customer_id"),
-
 		ModifyReason: defaults.GetString("AccountAmendmentAttributes", "modify_reason"),
 
 		Name: make([]string, 0),
@@ -53,13 +48,6 @@ func AccountAmendmentAttributesWithDefaults(defaults client.Defaults) *AccountAm
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 	}
-}
-
-func (m *AccountAmendmentAttributes) WithCustomerID(customerID string) *AccountAmendmentAttributes {
-
-	m.CustomerID = customerID
-
-	return m
 }
 
 func (m *AccountAmendmentAttributes) WithModifyReason(modifyReason string) *AccountAmendmentAttributes {

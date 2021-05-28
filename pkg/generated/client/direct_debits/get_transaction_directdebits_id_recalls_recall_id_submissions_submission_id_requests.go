@@ -55,9 +55,9 @@ type GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest s
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest) FromJson(j string) *GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest {
+func (o *GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest) FromJson(j string) (*GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest) WithID(id strfmt.UUID) *GetTransactionDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest {

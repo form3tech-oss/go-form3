@@ -5,7 +5,7 @@ package mandates
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type CreateMandateSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateMandateSubmissionRequest) FromJson(j string) *CreateMandateSubmissionRequest {
+func (o *CreateMandateSubmissionRequest) FromJson(j string) (*CreateMandateSubmissionRequest, error) {
 
 	var m models.MandateSubmissionCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.MandateSubmissionCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateMandateSubmissionRequest) WithMandateSubmissionCreationRequest(mandateSubmissionCreationRequest models.MandateSubmissionCreation) *CreateMandateSubmissionRequest {

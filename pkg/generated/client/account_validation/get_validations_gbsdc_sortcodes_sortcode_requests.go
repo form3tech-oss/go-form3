@@ -43,9 +43,9 @@ type GetValidationsGbsdcSortcodesSortcodeRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetValidationsGbsdcSortcodesSortcodeRequest) FromJson(j string) *GetValidationsGbsdcSortcodesSortcodeRequest {
+func (o *GetValidationsGbsdcSortcodesSortcodeRequest) FromJson(j string) (*GetValidationsGbsdcSortcodesSortcodeRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetValidationsGbsdcSortcodesSortcodeRequest) WithSortcode(sortcode string) *GetValidationsGbsdcSortcodesSortcodeRequest {

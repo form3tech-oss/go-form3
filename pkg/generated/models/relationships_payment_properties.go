@@ -28,7 +28,7 @@ type RelationshipsPaymentProperties struct {
 
 	// type
 	// Required: true
-	Type PaymentResourceType `json:"type"`
+	Type *PaymentResourceType `json:"type"`
 }
 
 func RelationshipsPaymentPropertiesWithDefaults(defaults client.Defaults) *RelationshipsPaymentProperties {
@@ -55,8 +55,13 @@ func (m *RelationshipsPaymentProperties) WithoutID() *RelationshipsPaymentProper
 
 func (m *RelationshipsPaymentProperties) WithType(typeVar PaymentResourceType) *RelationshipsPaymentProperties {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *RelationshipsPaymentProperties) WithoutType() *RelationshipsPaymentProperties {
+	m.Type = nil
 	return m
 }
 
@@ -93,11 +98,17 @@ func (m *RelationshipsPaymentProperties) validateID(formats strfmt.Registry) err
 
 func (m *RelationshipsPaymentProperties) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

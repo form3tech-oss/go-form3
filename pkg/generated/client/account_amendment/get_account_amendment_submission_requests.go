@@ -49,9 +49,9 @@ type GetAccountAmendmentSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetAccountAmendmentSubmissionRequest) FromJson(j string) *GetAccountAmendmentSubmissionRequest {
+func (o *GetAccountAmendmentSubmissionRequest) FromJson(j string) (*GetAccountAmendmentSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAccountAmendmentSubmissionRequest) WithID(id strfmt.UUID) *GetAccountAmendmentSubmissionRequest {

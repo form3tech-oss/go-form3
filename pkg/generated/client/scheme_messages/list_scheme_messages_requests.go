@@ -82,9 +82,9 @@ type ListSchemeMessagesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListSchemeMessagesRequest) FromJson(j string) *ListSchemeMessagesRequest {
+func (o *ListSchemeMessagesRequest) FromJson(j string) (*ListSchemeMessagesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListSchemeMessagesRequest) WithFilterAdmissionAdmissionDateFrom(filterAdmissionAdmissionDateFrom strfmt.DateTime) *ListSchemeMessagesRequest {

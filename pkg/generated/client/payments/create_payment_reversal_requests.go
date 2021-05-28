@@ -5,7 +5,7 @@ package payments
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type CreatePaymentReversalRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreatePaymentReversalRequest) FromJson(j string) *CreatePaymentReversalRequest {
+func (o *CreatePaymentReversalRequest) FromJson(j string) (*CreatePaymentReversalRequest, error) {
 
 	var m models.ReversalCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.ReversalCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreatePaymentReversalRequest) WithReversalCreationRequest(reversalCreationRequest models.ReversalCreation) *CreatePaymentReversalRequest {

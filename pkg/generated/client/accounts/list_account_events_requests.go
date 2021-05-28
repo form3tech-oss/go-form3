@@ -56,9 +56,9 @@ type ListAccountEventsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListAccountEventsRequest) FromJson(j string) *ListAccountEventsRequest {
+func (o *ListAccountEventsRequest) FromJson(j string) (*ListAccountEventsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListAccountEventsRequest) WithID(id strfmt.UUID) *ListAccountEventsRequest {

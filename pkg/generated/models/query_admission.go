@@ -23,7 +23,7 @@ type QueryAdmission struct {
 
 	// type
 	// Required: true
-	Type QueryAdmissionResourceType `json:"type"`
+	Type *QueryAdmissionResourceType `json:"type"`
 
 	// id
 	// Required: true
@@ -80,8 +80,13 @@ func QueryAdmissionWithDefaults(defaults client.Defaults) *QueryAdmission {
 
 func (m *QueryAdmission) WithType(typeVar QueryAdmissionResourceType) *QueryAdmission {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *QueryAdmission) WithoutType() *QueryAdmission {
+	m.Type = nil
 	return m
 }
 
@@ -203,11 +208,17 @@ func (m *QueryAdmission) Validate(formats strfmt.Registry) error {
 
 func (m *QueryAdmission) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -49,9 +49,9 @@ type DeleteUserRoleRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *DeleteUserRoleRequest) FromJson(j string) *DeleteUserRoleRequest {
+func (o *DeleteUserRoleRequest) FromJson(j string) (*DeleteUserRoleRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *DeleteUserRoleRequest) WithRoleID(roleID strfmt.UUID) *DeleteUserRoleRequest {

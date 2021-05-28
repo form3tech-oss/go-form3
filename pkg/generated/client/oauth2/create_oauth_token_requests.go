@@ -43,9 +43,9 @@ type CreateOauthTokenRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateOauthTokenRequest) FromJson(j string) *CreateOauthTokenRequest {
+func (o *CreateOauthTokenRequest) FromJson(j string) (*CreateOauthTokenRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *CreateOauthTokenRequest) WithGrantType(grantType string) *CreateOauthTokenRequest {

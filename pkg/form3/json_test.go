@@ -16,7 +16,8 @@ func TestPaymentFromJsonFile(t *testing.T) {
 	j, err := ioutil.ReadFile("payment.json")
 	require.NoError(t, err)
 
-	p := f3.Payments.CreatePayment().FromJson(string(j))
+	p, err := f3.Payments.CreatePayment().FromJson(string(j))
+	require.NoError(t, err)
 	assert.Equal(t, "603.00", p.Data.Attributes.Amount)
 }
 
@@ -27,7 +28,9 @@ func TestPaymentToJson(t *testing.T) {
 	j, err := ioutil.ReadFile("payment.json")
 	require.NoError(t, err)
 
-	p := f3.Payments.CreatePayment().FromJson(string(j))
-	p2 := f3.Payments.CreatePayment().FromJson(p.Json())
+	p, err := f3.Payments.CreatePayment().FromJson(string(j))
+	require.NoError(t, err)
+
+	p2, err := f3.Payments.CreatePayment().FromJson(p.Json())
 	assert.Equal(t, p, p2)
 }

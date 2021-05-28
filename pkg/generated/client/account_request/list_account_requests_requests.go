@@ -101,9 +101,9 @@ type ListAccountRequestsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListAccountRequestsRequest) FromJson(j string) *ListAccountRequestsRequest {
+func (o *ListAccountRequestsRequest) FromJson(j string) (*ListAccountRequestsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListAccountRequestsRequest) WithFilterAccountNumber(filterAccountNumber string) *ListAccountRequestsRequest {

@@ -23,7 +23,7 @@ type Query struct {
 
 	// type
 	// Required: true
-	Type QueryResourceType `json:"type"`
+	Type *QueryResourceType `json:"type"`
 
 	// id
 	// Required: true
@@ -80,8 +80,13 @@ func QueryWithDefaults(defaults client.Defaults) *Query {
 
 func (m *Query) WithType(typeVar QueryResourceType) *Query {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *Query) WithoutType() *Query {
+	m.Type = nil
 	return m
 }
 
@@ -203,11 +208,17 @@ func (m *Query) Validate(formats strfmt.Registry) error {
 
 func (m *Query) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

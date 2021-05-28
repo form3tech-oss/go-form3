@@ -5,7 +5,7 @@ package claims
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type CreateClaimSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateClaimSubmissionRequest) FromJson(j string) *CreateClaimSubmissionRequest {
+func (o *CreateClaimSubmissionRequest) FromJson(j string) (*CreateClaimSubmissionRequest, error) {
 
 	var m models.ClaimSubmissionCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.ClaimSubmissionCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateClaimSubmissionRequest) WithClaimSubmissionCreationRequest(claimSubmissionCreationRequest models.ClaimSubmissionCreation) *CreateClaimSubmissionRequest {

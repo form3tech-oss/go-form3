@@ -62,9 +62,9 @@ type GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest str
 	formats   strfmt.Registry
 }
 
-func (o *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest) FromJson(j string) *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest {
+func (o *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest) FromJson(j string) (*GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest) WithContactAccountID(contactAccountID strfmt.UUID) *GetAddressbookPartiesIDContactsContactIDAccountsContactAccountIDRequest {

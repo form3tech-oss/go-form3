@@ -110,9 +110,9 @@ type GetTransactionQueriesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionQueriesRequest) FromJson(j string) *GetTransactionQueriesRequest {
+func (o *GetTransactionQueriesRequest) FromJson(j string) (*GetTransactionQueriesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionQueriesRequest) WithFilterAutoHandled(filterAutoHandled bool) *GetTransactionQueriesRequest {

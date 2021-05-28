@@ -5,7 +5,7 @@ package direct_debits
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -59,16 +59,16 @@ type PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest) FromJson(j string) *PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest {
+func (o *PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest) FromJson(j string) (*PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest, error) {
 
 	var m models.DirectDebitDecisionAdmissionCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.DirectDebitDecisionAdmissionCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest) WithDirectDebitAdmissionSubmissionCreationRequest(directDebitAdmissionSubmissionCreationRequest models.DirectDebitDecisionAdmissionCreation) *PostTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsRequest {

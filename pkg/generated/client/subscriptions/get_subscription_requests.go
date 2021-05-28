@@ -43,9 +43,9 @@ type GetSubscriptionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetSubscriptionRequest) FromJson(j string) *GetSubscriptionRequest {
+func (o *GetSubscriptionRequest) FromJson(j string) (*GetSubscriptionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetSubscriptionRequest) WithID(id strfmt.UUID) *GetSubscriptionRequest {

@@ -49,9 +49,9 @@ type GetClaimReversalRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetClaimReversalRequest) FromJson(j string) *GetClaimReversalRequest {
+func (o *GetClaimReversalRequest) FromJson(j string) (*GetClaimReversalRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetClaimReversalRequest) WithID(id strfmt.UUID) *GetClaimReversalRequest {

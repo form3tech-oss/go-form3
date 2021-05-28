@@ -43,9 +43,9 @@ type GetUserRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetUserRequest) FromJson(j string) *GetUserRequest {
+func (o *GetUserRequest) FromJson(j string) (*GetUserRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetUserRequest) WithUserID(userID strfmt.UUID) *GetUserRequest {

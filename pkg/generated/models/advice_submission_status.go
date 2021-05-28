@@ -41,6 +41,9 @@ const (
 
 	// AdviceSubmissionStatusValidationPending captures enum value "validation_pending"
 	AdviceSubmissionStatusValidationPending AdviceSubmissionStatus = "validation_pending"
+
+	// AdviceSubmissionStatusValidationPassed captures enum value "validation_passed"
+	AdviceSubmissionStatusValidationPassed AdviceSubmissionStatus = "validation_passed"
 )
 
 // for schema
@@ -48,7 +51,7 @@ var adviceSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []AdviceSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","released_to_gateway","queued_for_delivery","delivery_confirmed","delivery_failed","submitted","validation_pending"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","released_to_gateway","queued_for_delivery","delivery_confirmed","delivery_failed","submitted","validation_pending","validation_passed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

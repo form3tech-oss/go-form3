@@ -61,9 +61,9 @@ type GetPaymentRecallDecisionSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPaymentRecallDecisionSubmissionRequest) FromJson(j string) *GetPaymentRecallDecisionSubmissionRequest {
+func (o *GetPaymentRecallDecisionSubmissionRequest) FromJson(j string) (*GetPaymentRecallDecisionSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetPaymentRecallDecisionSubmissionRequest) WithDecisionID(decisionID strfmt.UUID) *GetPaymentRecallDecisionSubmissionRequest {
