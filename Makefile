@@ -11,17 +11,17 @@ else
 swagger_binary := "swagger_linux_amd64"
 endif
 
-PHONY: install-swagger
+.PHONY: install-swagger
 install-swagger:
 	@curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger
 
-PHONY: download-swagger
+.PHONY: download-swagger
 download-swagger:
 	@mkdir -p swagger
 	curl -s https://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
 	./scripts/extract_paths.py swagger/form3-swagger-raw.yaml swagger/paths.yaml
 
-PHONY: modify-swagger-file
+.PHONY: modify-swagger-file
 modify-swagger-file: download-swagger
 	# Add an operation name (operationId) to each endpoint
 	yq eval-all 'select(fi==0) * select(fi==1)' swagger/form3-swagger-raw.yaml operationNames.yaml > swagger/form3-swagger-updated.yaml
@@ -48,16 +48,16 @@ modify-swagger-file: download-swagger
 	yq eval 'del(.paths./organisation/units/health.get)' -i swagger/form3-swagger-updated.yaml
 
 
-PHONY: generate-client
+.PHONY: generate-client
 generate-client: modify-swagger-file
 	@rm -rf pkg/generated
 	@mkdir pkg/generated
 	swagger generate client -f swagger/form3-swagger-updated.yaml -t pkg/generated/ -T templates -C templates/layout.yaml
 
-PHONY: goimports
+.PHONY: goimports
 goimports:
 	goimports -w $(GOFMT_FILES)
 
-PHONY: test
+.PHONY: test
 test:
 	go test -v -race -cover ./pkg/form3
