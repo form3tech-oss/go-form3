@@ -48,9 +48,10 @@ func TestMTLS(t *testing.T) {
 
 	transport := &http.Transport{
 		TLSClientConfig: &tls.Config{
-			Certificates:       []tls.Certificate{cert},
-			RootCAs:            nil,
-			InsecureSkipVerify: true, // required because we're listening on an IP address as opposed to a domain name
+			Certificates: []tls.Certificate{cert},
+			RootCAs:      nil,
+			// #nosec G402
+			InsecureSkipVerify: true,
 		},
 	}
 

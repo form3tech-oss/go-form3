@@ -48,6 +48,7 @@ func (c *TokenClientConfig) WithInitialToken(token string) *TokenClientConfig {
 	return c
 }
 
+
 func (c *TokenClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *TokenClientConfig {
 	c.underlyingTransport = underlyingTransport
 

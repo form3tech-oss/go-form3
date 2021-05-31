@@ -130,7 +130,7 @@ func NewF3(u *url.URL, c *http.Client, orgID string) *F3 {
 
 	defaults := NewClientDefaults()
 	orgUUID := strfmt.UUID(orgID)
-	defaults.OrganisationId = &orgUUID
+	defaults.OrganisationID = &orgUUID
 
 	pubClient := genClient.New(rt, strfmt.Default, defaults)
 

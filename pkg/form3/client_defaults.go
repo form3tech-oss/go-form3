@@ -6,27 +6,30 @@ import (
 )
 
 type ClientDefaults struct {
-	OrganisationId *strfmt.UUID
+	OrganisationID *strfmt.UUID
 }
 
 func (d *ClientDefaults) GetStrfmtUUID(objectName, attributeName string) strfmt.UUID {
 	var a strfmt.UUID
-	if "organisation_id" == attributeName && d.OrganisationId != nil {
-		a = *d.OrganisationId
-	} else if "id" == attributeName {
+	if attributeName == "organisation_id" && d.OrganisationID != nil {
+		a = *d.OrganisationID
+	} else if attributeName == "id" {
 		a = strfmt.UUID(uuid.Must(uuid.NewRandom()).String())
 	}
+
 	return a
 }
 
 func (d *ClientDefaults) GetStrfmtUUIDPtr(objectName, attributeName string) *strfmt.UUID {
-	if "organisation_id" == attributeName {
-		return d.OrganisationId
+	if attributeName == "organisation_id" {
+		return d.OrganisationID
 	}
-	if "id" == attributeName {
+
+	if attributeName == "id" {
 		u := strfmt.UUID(uuid.Must(uuid.NewRandom()).String())
 		return &u
 	}
+
 	return nil
 }
 
