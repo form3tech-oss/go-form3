@@ -1,6 +1,8 @@
-# Form 3 Go Client
+![Form3 logotype](form3.png)
 
-A simple go client for the Form 3 REST APIs built with custom operation names and swagger templates for a cleaner interface.
+# Form3 Go client library
+
+A simple go client library for the [Form3 REST APIs](https://api-docs.form3.tech/api.html) built with custom operation names and swagger templates for a cleaner interface.
 
 This is ideal for:
 
@@ -13,15 +15,15 @@ This is ideal for:
 
 ## What's included
 
-A simple client with:
+A simple client library with:
 
-- Automatic authentication and re-authentication based on environment variables (use `f3 creds` to set them)
+- Automatic authentication and re-authentication based on environment variables
 - Pre-populated request objects with configurable defaults
 - Sensible operation naming
-- A fluent api with reduced repetition compared with vanilla swagger-go generated clients
+- A fluent API with reduced repetition compared with vanilla swagger-go generated clients
 - All the power and flexibility of Go!
 
-## Getting Started
+## Getting started
 
 For interactive use with [gore](https://github.com/motemen/gore)
 ```go
@@ -34,21 +36,21 @@ go get -u github.com/k0kubun/pp
 go get -u github.com/google/uuid
 ```
 
-### Required Environment Variables
+### Environment variables
 
 | Environment variable | Description                                   |
 |:---------------------|:----------------------------------------------|
-| FORM3_HOST           | Form 3 host e.g. api.form3.tech               |
+| FORM3_HOST           | Form3 host URL e.g. https://api.form3.tech    |
 | FORM3_PUBLIC_KEY_ID  | Public key ID for request signing             |
 | FORM3_PRIVATE_KEY    | Private key in PEM format for request signing |
-| FORM3_ORGANISATION_ID| Organisation Id                               |
+| FORM3_ORGANISATION_ID| Organisation ID                               |
 | DEBUG                | Output full HTTP calls and responses          |
-| FORM3_CLIENT_ID      | Client id for token based auth (deprecated)   |
+| FORM3_CLIENT_ID      | Client ID for token based auth (deprecated)   |
 | FORM3_CLIENT_SECRET  | Secret for token based auth (deprecated)      |
 
-### Local Tests
+### Local interactive testing
 
-Run `gore -autoimport` then type commands interactively, with completion, history, and more. Gore will compile and run your script after each line, printing the output to the screen. Scripts can be output using `:print` and reset with `:clear`. Use `:help` for more details or [github](https://github.com/motemen/gore).
+Run `gore -autoimport` then type commands interactively, with completion, history, and more. Gore will compile and run your script after each line, printing the output to the screen. Scripts can be output using `:print` and reset with `:clear`. Use `:help` for more details or go to [motemen/gore](https://github.com/motemen/gore).
 
 ```go
     f3, _ := form3.NewFromEnv()
@@ -65,7 +67,7 @@ Run `gore -autoimport` then type commands interactively, with completion, histor
 
 See [examples](examples/) for a small subset of sample scripts.
 
-## Updating the Client
+## Updating the client
 
 ### Pre-requisites
 
@@ -86,6 +88,7 @@ Tasks in the `Makefile` download and preprocess the latest API swagger version:
 1. `make` to regenerate the client files.
 
 ## License
+
 Copyright 2019-2021 Form3 Financial Cloud
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
