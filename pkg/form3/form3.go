@@ -44,7 +44,7 @@ func New(host, pubKeyID string, privateKey *rsa.PrivateKey, orgID string) (*F3, 
 	config := NewRequestSigningClientConfig(pubKeyID, privateKey)
 	httpClient := NewRequestSigningHTTPClient(config)
 
-	return newF3(u, httpClient, orgID), nil
+	return NewF3(u, httpClient, orgID), nil
 }
 
 func NewFromEnv() (*F3, error) {
@@ -95,7 +95,7 @@ func NewWithTokenAuth(host, clientID, secret, orgID string) (*F3, error) {
 	config := NewTokenClientConfig(clientID, secret, u)
 	httpClient := NewTokenHTTPClient(config)
 
-	return newF3(u, httpClient, orgID), nil
+	return NewF3(u, httpClient, orgID), nil
 }
 
 func NewWithTokenAuthFromEnv() (*F3, error) {
@@ -122,7 +122,7 @@ func NewWithTokenAuthFromEnv() (*F3, error) {
 	return NewWithTokenAuth(host, clientID, clientSecret, organisationID)
 }
 
-func newF3(u *url.URL, c *http.Client, orgID string) *F3 {
+func NewF3(u *url.URL, c *http.Client, orgID string) *F3 {
 	c.Transport = &addUserAgent{c.Transport}
 
 	rt := rc.NewWithClient(u.Host, "/v1", []string{u.Scheme}, c)

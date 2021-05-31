@@ -2,7 +2,6 @@ package form3
 
 import (
 	"bytes"
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -51,17 +50,6 @@ func (c *TokenClientConfig) WithInitialToken(token string) *TokenClientConfig {
 
 func (c *TokenClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *TokenClientConfig {
 	c.underlyingTransport = underlyingTransport
-
-	return c
-}
-
-func (c *TokenClientConfig) WithCertificates(certificates []tls.Certificate) *TokenClientConfig {
-	c.underlyingTransport = &http.Transport{
-		TLSClientConfig: &tls.Config{
-			Certificates: certificates,
-			RootCAs:      nil,
-		},
-	}
 
 	return c
 }
