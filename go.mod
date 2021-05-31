@@ -1,6 +1,6 @@
 module github.com/form3tech-oss/go-form3/v2
 
-go 1.14
+go 1.16
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200819183940-29e1ff8eb0bb // indirect
