@@ -10,12 +10,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTokenBasedAuth(t *testing.T) {
+func TestTokenAuth(t *testing.T) {
 	if os.Getenv("FORM3_CLIENT_ID") == "" || os.Getenv("FORM3_CLIENT_SECRET") == "" {
 		t.Skip("WARN: FORM3_CLIENT_ID or FORM3_CLIENT_SECRET not set, skipping test")
 	}
 
-	f3, err := form3.NewWithTokenBasedAuthFromEnv()
+	f3, err := form3.NewWithTokenAuthFromEnv()
 	require.NoError(t, err)
 
 	req := f3.Users.GetUser()

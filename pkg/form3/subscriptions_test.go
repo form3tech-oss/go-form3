@@ -43,3 +43,12 @@ func TestCreateSubscriptions(t *testing.T) {
 	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(0).Do()
 	require.NoError(t, err)
 }
+
+func TestListSubscriptions(t *testing.T) {
+	f3, err := form3.NewFromEnv()
+	require.NoError(t, err)
+
+	units, err := f3.Subscriptions.ListSubscriptions().Do()
+	require.Nil(t, err)
+	assert.NotNil(t, units.Data)
+}

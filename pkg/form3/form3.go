@@ -38,7 +38,7 @@ type F3 struct {
 func New(host, pubKeyID string, privateKey *rsa.PrivateKey, orgID string) (*F3, error) {
 	u, err := url.Parse(host)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse URL: %w", err)
 	}
 
 	config := NewRequestSigningClientConfig(pubKeyID, privateKey)
@@ -86,19 +86,19 @@ func NewFromEnv() (*F3, error) {
 	)
 }
 
-func NewWithTokenBasedAuth(host, clientID, secret, orgID string) (*F3, error) {
+func NewWithTokenAuth(host, clientID, secret, orgID string) (*F3, error) {
 	u, err := url.Parse(host)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse URL: %w", err)
 	}
 
-	config := NewTokenBasedClientConfig(clientID, secret, u)
-	httpClient := NewTokenBasedHTTPClient(config)
+	config := NewTokenClientConfig(clientID, secret, u)
+	httpClient := NewTokenHTTPClient(config)
 
 	return newF3(u, httpClient, orgID), nil
 }
 
-func NewWithTokenBasedAuthFromEnv() (*F3, error) {
+func NewWithTokenAuthFromEnv() (*F3, error) {
 	host, err := getEnv("FORM3_HOST")
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func NewWithTokenBasedAuthFromEnv() (*F3, error) {
 		return nil, err
 	}
 
-	return NewWithTokenBasedAuth(host, clientID, clientSecret, organisationID)
+	return NewWithTokenAuth(host, clientID, clientSecret, organisationID)
 }
 
 func newF3(u *url.URL, c *http.Client, orgID string) *F3 {

@@ -2,6 +2,7 @@ package form3
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -12,10 +13,10 @@ import (
 
 const (
 	// #nosec G101
-	tokenBasedAuthEndpoint = "/v1/oauth2/token"
+	tokenAuthEndpoint = "/v1/oauth2/token"
 )
 
-type TokenBasedClientConfig struct {
+type TokenClientConfig struct {
 	clientID            string
 	clientSecret        string
 	hostURL             *url.URL
@@ -23,8 +24,8 @@ type TokenBasedClientConfig struct {
 	underlyingTransport http.RoundTripper
 }
 
-type tokenBasedTransport struct {
-	config              *TokenBasedClientConfig
+type tokenTransport struct {
+	config              *TokenClientConfig
 	token               string
 	underlyingTransport http.RoundTripper
 }
@@ -33,8 +34,8 @@ type authJSONResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
-func NewTokenBasedClientConfig(clientID, clientSecret string, hostURL *url.URL) *TokenBasedClientConfig {
-	return &TokenBasedClientConfig{
+func NewTokenClientConfig(clientID, clientSecret string, hostURL *url.URL) *TokenClientConfig {
+	return &TokenClientConfig{
 		clientID:            clientID,
 		clientSecret:        clientSecret,
 		hostURL:             hostURL,
@@ -42,18 +43,31 @@ func NewTokenBasedClientConfig(clientID, clientSecret string, hostURL *url.URL) 
 	}
 }
 
-func (c *TokenBasedClientConfig) WithInitialToken(token string) *TokenBasedClientConfig {
+func (c *TokenClientConfig) WithInitialToken(token string) *TokenClientConfig {
 	c.initialToken = token
+
 	return c
 }
 
-func (c *TokenBasedClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *TokenBasedClientConfig {
+func (c *TokenClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *TokenClientConfig {
 	c.underlyingTransport = underlyingTransport
+
 	return c
 }
 
-func NewTokenBasedHTTPClient(config *TokenBasedClientConfig) *http.Client {
-	transport := &tokenBasedTransport{underlyingTransport: config.underlyingTransport, config: config}
+func (c *TokenClientConfig) WithCertificates(certificates []tls.Certificate) *TokenClientConfig {
+	c.underlyingTransport = &http.Transport{
+		TLSClientConfig: &tls.Config{
+			Certificates: certificates,
+			RootCAs:      nil,
+		},
+	}
+
+	return c
+}
+
+func NewTokenHTTPClient(config *TokenClientConfig) *http.Client {
+	transport := &tokenTransport{underlyingTransport: config.underlyingTransport, config: config}
 	transport.token = config.initialToken
 
 	h := &http.Client{Transport: transport}
@@ -61,7 +75,7 @@ func NewTokenBasedHTTPClient(config *TokenBasedClientConfig) *http.Client {
 	return h
 }
 
-func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+func (t *tokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	if t.token != "" {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
 	}
@@ -80,7 +94,7 @@ func (t *tokenBasedTransport) RoundTrip(req *http.Request) (*http.Response, erro
 
 	res, err := t.underlyingTransport.RoundTrip(req)
 	if res != nil && (res.StatusCode == http.StatusUnauthorized || res.StatusCode == http.StatusForbidden) {
-		authRequest, err := http.NewRequest(http.MethodPost, t.config.hostURL.String()+tokenBasedAuthEndpoint, nil)
+		authRequest, err := http.NewRequest(http.MethodPost, t.config.hostURL.String()+tokenAuthEndpoint, nil)
 		if err != nil {
 			return nil, fmt.Errorf("could not build auth request, error: %w", err)
 		}
