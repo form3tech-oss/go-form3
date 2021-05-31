@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/form3tech-oss/go-form3/pkg/form3"
+	"github.com/form3tech-oss/go-form3/v2/pkg/form3"
 	"github.com/go-openapi/strfmt"
 )
 

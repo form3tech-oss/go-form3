@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/form3tech-oss/go-form3/pkg/form3"
+	"github.com/form3tech-oss/go-form3/v2/pkg/form3"
 )
 
 func main() {
