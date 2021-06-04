@@ -17,7 +17,7 @@ import (
 
 const (
 	ReqMimeType = "application/vnd.api+json"
-	UserAgent   = "go-form3-client/1.0"
+	UserAgent   = "go-form3-client"
 )
 
 var ErrPEMDecode = errors.New("failed to decode PEM block containing private key")
