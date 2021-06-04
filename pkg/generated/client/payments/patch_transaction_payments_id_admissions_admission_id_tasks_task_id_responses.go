@@ -39,6 +39,13 @@ func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDReader) ReadR
 		}
 		return nil, result
 
+	case 409:
+		result := NewPatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -100,6 +107,40 @@ func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDBadRequest) E
 }
 
 func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict creates a PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict with default headers values
+func NewPatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict() *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict {
+	return &PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict{}
+}
+
+/*PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict handles this case with default header values.
+
+Conflict
+*/
+type PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict) Error() string {
+	return fmt.Sprintf("[PATCH /transaction/payments/{id}/admissions/{admissionId}/tasks/{taskId}][%d] patchTransactionPaymentsIdAdmissionsAdmissionIdTasksTaskIdConflict", 409)
+}
+
+func (o *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

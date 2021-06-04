@@ -48,7 +48,7 @@ type GetOrganisationAccountsAccountIDIdentificationsRequest struct {
 
 	FilterOrganisationID []strfmt.UUID
 
-	/*FilterSecondaryIdentification      Filter by Filter to only include specified secondary_identification      */
+	/*FilterSecondaryIdentification      Filter to only include account identifications with specified secondary_identification      */
 
 	FilterSecondaryIdentification []string
 
