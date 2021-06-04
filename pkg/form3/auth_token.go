@@ -7,107 +7,116 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"net/url"
+
+	"github.com/google/uuid"
 )
 
-const (
-	// #nosec G101
-	tokenAuthEndpoint = "/v1/oauth2/token"
-)
-
-type TokenClientConfig struct {
-	clientID            string
-	clientSecret        string
-	hostURL             *url.URL
-	initialToken        string
-	underlyingTransport http.RoundTripper
-}
-
-type tokenTransport struct {
-	config              *TokenClientConfig
-	token               string
-	underlyingTransport http.RoundTripper
-}
+// #nosec G101
+const tokenBasedAuthEndpoint = "/v1/oauth2/token"
 
 type authJSONResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
-func NewTokenClientConfig(clientID, clientSecret string, hostURL *url.URL) *TokenClientConfig {
-	return &TokenClientConfig{
-		clientID:            clientID,
-		clientSecret:        clientSecret,
-		hostURL:             hostURL,
-		underlyingTransport: http.DefaultTransport,
+type TokenOption func(*TokenTransport)
+
+type TokenTransport struct {
+	clientSecret        string
+	clientID            uuid.UUID
+	token               string
+	underlyingTransport http.RoundTripper
+}
+
+// Deprecated: token based authentication is deprecated and will be removed at
+// some point in the future in favour of request signing.
+func WithClientID(clientID uuid.UUID) TokenOption {
+	return func(t *TokenTransport) {
+		t.clientID = clientID
 	}
 }
 
-func (c *TokenClientConfig) WithInitialToken(token string) *TokenClientConfig {
-	c.initialToken = token
-
-	return c
+// Deprecated: token based authentication is deprecated and will be removed at
+// some point in the future in favour of request signing.
+func WithClientSecret(secret string) TokenOption {
+	return func(t *TokenTransport) {
+		t.clientSecret = secret
+	}
 }
 
-
-func (c *TokenClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *TokenClientConfig {
-	c.underlyingTransport = underlyingTransport
-
-	return c
+// Deprecated: token based authentication is deprecated and will be removed at
+// some point in the future in favour of request signing.
+func WithInitialToken(token string) TokenOption {
+	return func(t *TokenTransport) {
+		t.token = token
+	}
 }
 
-func NewTokenHTTPClient(config *TokenClientConfig) *http.Client {
-	transport := &tokenTransport{underlyingTransport: config.underlyingTransport, config: config}
-	transport.token = config.initialToken
-
-	h := &http.Client{Transport: transport}
-
-	return h
+// Deprecated: token based authentication is deprecated and will be removed at
+// some point in the future in favour of request signing.
+func WithUnderlyingTokenTransport(tr http.RoundTripper) TokenOption {
+	return func(t *TokenTransport) {
+		t.underlyingTransport = tr
+	}
 }
 
-func (t *tokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+// Deprecated: token based authentication is deprecated and will be removed at
+// some point in the future in favour of request signing.
+func NewTokenTransport(opts ...TokenOption) *TokenTransport {
+	t := &TokenTransport{
+		underlyingTransport: http.DefaultTransport,
+	}
+
+	for _, opt := range opts {
+		opt(t)
+	}
+
+	return t
+}
+
+func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.Header.Add("User-Agent", UserAgent)
+
 	if t.token != "" {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
 	}
 
 	var requestBodyClone io.Reader
-
 	if req.Body != nil {
 		originalRequestBody, err := ioutil.ReadAll(req.Body)
 		if err != nil {
-			return nil, fmt.Errorf("could read request body: %w", err)
+			return nil, fmt.Errorf("could not read original request body: %w", err)
 		}
-
 		req.Body = ioutil.NopCloser(bytes.NewBuffer(originalRequestBody))
 		requestBodyClone = bytes.NewBuffer(originalRequestBody)
 	}
 
 	res, err := t.underlyingTransport.RoundTrip(req)
 	if res != nil && (res.StatusCode == http.StatusUnauthorized || res.StatusCode == http.StatusForbidden) {
-		authRequest, err := http.NewRequest(http.MethodPost, t.config.hostURL.String()+tokenAuthEndpoint, nil)
+		authRequest, err := http.NewRequest(http.MethodPost, req.URL.Scheme+"://"+req.URL.Host+tokenBasedAuthEndpoint, nil)
 		if err != nil {
-			return nil, fmt.Errorf("could not build auth request, error: %w", err)
+			return nil, fmt.Errorf("could not build auth request: %w", err)
 		}
-		authRequest.SetBasicAuth(t.config.clientID, t.config.clientSecret)
+		authRequest.SetBasicAuth(t.clientID.String(), t.clientSecret)
 
 		authResponse, err := t.underlyingTransport.RoundTrip(authRequest)
 		if err != nil {
-			return nil, fmt.Errorf("error authenticating, error: %w", err)
+			return nil, fmt.Errorf("error authenticating: %w", err)
 		}
 		defer authResponse.Body.Close()
 
 		if authResponse.StatusCode != http.StatusOK {
-			return nil, fmt.Errorf("non 200 status code getting token, got status code: %d", authResponse.StatusCode)
+			return nil, fmt.Errorf("non 200 status code getting token, status code: %d", authResponse.StatusCode)
 		}
 
 		authBody, err := ioutil.ReadAll(authResponse.Body)
 		if err != nil {
-			return nil, fmt.Errorf("could not read auth response body, error: %w", err)
+			return nil, fmt.Errorf("could not read auth response body: %w", err)
 		}
 
 		var authJSON authJSONResponse
 		err = json.Unmarshal(authBody, &authJSON)
 		if err != nil {
-			return nil, fmt.Errorf("could not parse auth json response, error: %w", err)
+			return nil, fmt.Errorf("could not parse auth json response: %w", err)
 		}
 
 		t.token = authJSON.AccessToken
@@ -115,9 +124,8 @@ func (t *tokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 
 		retryRequest, err := http.NewRequest(req.Method, req.URL.String(), requestBodyClone)
 		if err != nil {
-			return nil, fmt.Errorf("could not build authenticated request, error: %w", err)
+			return nil, fmt.Errorf("could not build authenticated request: %w", err)
 		}
-
 		retryRequest.Header = req.Header
 		retryRequest.Header.Add("Authorization", fmt.Sprintf("Bearer %s", t.token))
 

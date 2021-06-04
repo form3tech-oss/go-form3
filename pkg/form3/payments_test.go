@@ -13,11 +13,12 @@ func TestQueryPayments(t *testing.T) {
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
-	_, err = f3.Payments.ListPayments().
+	p, err := f3.Payments.ListPayments().
 		WithFilterAmount("2500.00").
 		WithoutFilterOrganisationID().
 		Do()
 	assert.Nil(t, err)
+	assert.NotEmpty(t, p.Data)
 }
 
 func TestPaymentFromJsonFile(t *testing.T) {

@@ -16,20 +16,20 @@ func TestCreateSubscriptions(t *testing.T) {
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
-	organisationId := strfmt.UUID(uuid.MustParse(os.Getenv("FORM3_ORGANISATION_ID")).String())
+	organisationID := strfmt.UUID(uuid.MustParse(os.Getenv("FORM3_ORGANISATION_ID")).String())
 	id := strfmt.UUID(uuid.New().String())
 	transport := "http"
-	callbackUri := "https://google.com/callback"
+	callbackURI := "https://webhook.site/db28eac0-d0a5-4078-b9be-0e4617471b01"
 	eventType := "created"
 	recordType := "PaymentSubmission"
 
 	req := f3.Subscriptions.CreateSubscription()
 	req.WithData(models.Subscription{
 		ID:             &id,
-		OrganisationID: &organisationId,
+		OrganisationID: &organisationID,
 		Attributes: &models.SubscriptionAttributes{
 			CallbackTransport: &transport,
-			CallbackURI:       &callbackUri,
+			CallbackURI:       &callbackURI,
 			UserID:            strfmt.UUID(uuid.New().String()),
 			EventType:         &eventType,
 			RecordType:        &recordType,
