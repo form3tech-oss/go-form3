@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // QueryAdmissionAttributes query admission attributes
@@ -22,7 +23,7 @@ type QueryAdmissionAttributes struct {
 
 	// status
 	// Required: true
-	Status QueryAdmissionStatus `json:"status"`
+	Status *QueryAdmissionStatus `json:"status"`
 
 	// status reason
 	StatusReason string `json:"status_reason,omitempty"`
@@ -39,8 +40,13 @@ func QueryAdmissionAttributesWithDefaults(defaults client.Defaults) *QueryAdmiss
 
 func (m *QueryAdmissionAttributes) WithStatus(status QueryAdmissionStatus) *QueryAdmissionAttributes {
 
-	m.Status = status
+	m.Status = &status
 
+	return m
+}
+
+func (m *QueryAdmissionAttributes) WithoutStatus() *QueryAdmissionAttributes {
+	m.Status = nil
 	return m
 }
 
@@ -67,11 +73,17 @@ func (m *QueryAdmissionAttributes) Validate(formats strfmt.Registry) error {
 
 func (m *QueryAdmissionAttributes) validateStatus(formats strfmt.Registry) error {
 
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("status")
-		}
+	if err := validate.Required("status", "body", m.Status); err != nil {
 		return err
+	}
+
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			}
+			return err
+		}
 	}
 
 	return nil

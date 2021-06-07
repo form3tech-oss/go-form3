@@ -49,9 +49,9 @@ type GetSchemeMessageAdmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetSchemeMessageAdmissionRequest) FromJson(j string) *GetSchemeMessageAdmissionRequest {
+func (o *GetSchemeMessageAdmissionRequest) FromJson(j string) (*GetSchemeMessageAdmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetSchemeMessageAdmissionRequest) WithAdmissionID(admissionID strfmt.UUID) *GetSchemeMessageAdmissionRequest {

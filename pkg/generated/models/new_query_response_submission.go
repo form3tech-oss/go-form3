@@ -36,7 +36,7 @@ type NewQueryResponseSubmission struct {
 
 	// type
 	// Required: true
-	Type QueryResponseSubmissionResourceType `json:"type"`
+	Type *QueryResponseSubmissionResourceType `json:"type"`
 }
 
 func NewQueryResponseSubmissionWithDefaults(defaults client.Defaults) *NewQueryResponseSubmission {
@@ -91,8 +91,13 @@ func (m *NewQueryResponseSubmission) WithoutOrganisationID() *NewQueryResponseSu
 
 func (m *NewQueryResponseSubmission) WithType(typeVar QueryResponseSubmissionResourceType) *NewQueryResponseSubmission {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *NewQueryResponseSubmission) WithoutType() *NewQueryResponseSubmission {
+	m.Type = nil
 	return m
 }
 
@@ -168,11 +173,17 @@ func (m *NewQueryResponseSubmission) validateOrganisationID(formats strfmt.Regis
 
 func (m *NewQueryResponseSubmission) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

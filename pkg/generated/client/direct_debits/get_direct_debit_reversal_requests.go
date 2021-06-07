@@ -49,9 +49,9 @@ type GetDirectDebitReversalRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetDirectDebitReversalRequest) FromJson(j string) *GetDirectDebitReversalRequest {
+func (o *GetDirectDebitReversalRequest) FromJson(j string) (*GetDirectDebitReversalRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetDirectDebitReversalRequest) WithID(id strfmt.UUID) *GetDirectDebitReversalRequest {

@@ -1,0 +1,36 @@
+{
+  "data": {
+    "type": "payments",
+    "id": "758ea5e2-3725-48c7-8ef1-2a6d045f2037",
+    "version": 0,
+    "attributes": {
+      "amount": "603.00",
+      "beneficiary_party": {
+        "account_name": "Mrs Receiving Test",
+        "account_number": "12345678",
+        "account_number_code": "BBAN",
+        "account_type": 1,
+        "account_with": {
+          "bank_id": "123456",
+          "bank_id_code": "GBDSC"
+        },
+        "country": "GB"
+      },
+      "currency": "GBP",
+      "debtor_party": {
+        "account_name": "Mr Sending Test",
+        "account_number": "87654321",
+        "account_number_code": "BBAN",
+        "account_with": {
+          "bank_id": "333333",
+          "bank_id_code": "GBDSC"
+        },
+        "country": "GB"
+      },
+      "numeric_reference": "0001",
+      "reference": "ref2",
+      "scheme_payment_type": "Credit",
+      "payment_scheme": "Bacs"
+    }
+  }
+}

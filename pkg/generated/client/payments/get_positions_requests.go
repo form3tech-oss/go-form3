@@ -36,9 +36,9 @@ type GetPositionsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPositionsRequest) FromJson(j string) *GetPositionsRequest {
+func (o *GetPositionsRequest) FromJson(j string) (*GetPositionsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 //////////////////

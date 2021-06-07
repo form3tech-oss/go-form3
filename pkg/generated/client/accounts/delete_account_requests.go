@@ -50,9 +50,9 @@ type DeleteAccountRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *DeleteAccountRequest) FromJson(j string) *DeleteAccountRequest {
+func (o *DeleteAccountRequest) FromJson(j string) (*DeleteAccountRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *DeleteAccountRequest) WithID(id strfmt.UUID) *DeleteAccountRequest {

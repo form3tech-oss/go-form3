@@ -17,7 +17,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Links Links relevant to the payload
+// Links links
 // swagger:model Links
 type Links struct {
 

@@ -5,7 +5,7 @@ package addressbook
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,16 +47,16 @@ type PostAddressbookPartiesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *PostAddressbookPartiesRequest) FromJson(j string) *PostAddressbookPartiesRequest {
+func (o *PostAddressbookPartiesRequest) FromJson(j string) (*PostAddressbookPartiesRequest, error) {
 
 	var m models.PartyCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.PartyCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *PostAddressbookPartiesRequest) WithCreationRequest(creationRequest models.PartyCreation) *PostAddressbookPartiesRequest {

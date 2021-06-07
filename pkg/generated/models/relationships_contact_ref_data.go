@@ -28,7 +28,7 @@ type RelationshipsContactRefData struct {
 
 	// type
 	// Required: true
-	Type ContactResourceType `json:"type"`
+	Type *ContactResourceType `json:"type"`
 }
 
 func RelationshipsContactRefDataWithDefaults(defaults client.Defaults) *RelationshipsContactRefData {
@@ -55,8 +55,13 @@ func (m *RelationshipsContactRefData) WithoutID() *RelationshipsContactRefData {
 
 func (m *RelationshipsContactRefData) WithType(typeVar ContactResourceType) *RelationshipsContactRefData {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *RelationshipsContactRefData) WithoutType() *RelationshipsContactRefData {
+	m.Type = nil
 	return m
 }
 
@@ -93,11 +98,17 @@ func (m *RelationshipsContactRefData) validateID(formats strfmt.Registry) error 
 
 func (m *RelationshipsContactRefData) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -152,9 +152,9 @@ type ListClaimsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListClaimsRequest) FromJson(j string) *ListClaimsRequest {
+func (o *ListClaimsRequest) FromJson(j string) (*ListClaimsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListClaimsRequest) WithFilterBeneficiaryPartyAccountNumber(filterBeneficiaryPartyAccountNumber string) *ListClaimsRequest {

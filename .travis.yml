@@ -1,7 +1,6 @@
 language: go
 go:
-- stable
-- master
+- 1.16.x
 before_install:
 - openssl aes-256-cbc -K $encrypted_0fb5a69e10c8_key -iv $encrypted_0fb5a69e10c8_iv
   -in private.key.enc -out private.key -d

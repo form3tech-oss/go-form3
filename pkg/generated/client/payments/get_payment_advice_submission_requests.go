@@ -55,9 +55,9 @@ type GetPaymentAdviceSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPaymentAdviceSubmissionRequest) FromJson(j string) *GetPaymentAdviceSubmissionRequest {
+func (o *GetPaymentAdviceSubmissionRequest) FromJson(j string) (*GetPaymentAdviceSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetPaymentAdviceSubmissionRequest) WithAdviceID(adviceID strfmt.UUID) *GetPaymentAdviceSubmissionRequest {

@@ -1186,6 +1186,72 @@ func (a *GetPositionsRequest) MustDo() *GetPositionsOK {
 }
 
 /*
+get transaction payments ID admissions admission ID tasks API
+*/
+func (a *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksRequest) Do() (*GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionPaymentsIDAdmissionsAdmissionIDTasks",
+		Method:             "GET",
+		PathPattern:        "/transaction/payments/{id}/admissions/{admissionId}/tasks",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionPaymentsIDAdmissionsAdmissionIDTasksReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK), nil
+
+}
+
+func (a *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksRequest) MustDo() *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get transaction payments ID admissions admission ID tasks task ID API
+*/
+func (a *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) Do() (*GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskID",
+		Method:             "GET",
+		PathPattern:        "/transaction/payments/{id}/admissions/{admissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK), nil
+
+}
+
+func (a *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) MustDo() *GetTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 list payments API
 */
 func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
@@ -1211,6 +1277,39 @@ func (a *ListPaymentsRequest) Do() (*ListPaymentsOK, error) {
 }
 
 func (a *ListPaymentsRequest) MustDo() *ListPaymentsOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+patch transaction payments ID admissions admission ID tasks task ID API
+*/
+func (a *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) Do() (*PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskID",
+		Method:             "PATCH",
+		PathPattern:        "/transaction/payments/{id}/admissions/{admissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK), nil
+
+}
+
+func (a *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) MustDo() *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

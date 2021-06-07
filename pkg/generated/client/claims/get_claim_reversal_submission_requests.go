@@ -55,9 +55,9 @@ type GetClaimReversalSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetClaimReversalSubmissionRequest) FromJson(j string) *GetClaimReversalSubmissionRequest {
+func (o *GetClaimReversalSubmissionRequest) FromJson(j string) (*GetClaimReversalSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetClaimReversalSubmissionRequest) WithID(id strfmt.UUID) *GetClaimReversalSubmissionRequest {

@@ -43,9 +43,9 @@ type CreateUserCredentialsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateUserCredentialsRequest) FromJson(j string) *CreateUserCredentialsRequest {
+func (o *CreateUserCredentialsRequest) FromJson(j string) (*CreateUserCredentialsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *CreateUserCredentialsRequest) WithUserID(userID strfmt.UUID) *CreateUserCredentialsRequest {

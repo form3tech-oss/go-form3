@@ -50,9 +50,9 @@ type ListUnitsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListUnitsRequest) FromJson(j string) *ListUnitsRequest {
+func (o *ListUnitsRequest) FromJson(j string) (*ListUnitsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListUnitsRequest) WithFilterChildOrganisationID(filterChildOrganisationID strfmt.UUID) *ListUnitsRequest {

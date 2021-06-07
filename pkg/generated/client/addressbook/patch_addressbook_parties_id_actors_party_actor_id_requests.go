@@ -5,7 +5,7 @@ package addressbook
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -59,16 +59,16 @@ type PatchAddressbookPartiesIDActorsPartyActorIDRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *PatchAddressbookPartiesIDActorsPartyActorIDRequest) FromJson(j string) *PatchAddressbookPartiesIDActorsPartyActorIDRequest {
+func (o *PatchAddressbookPartiesIDActorsPartyActorIDRequest) FromJson(j string) (*PatchAddressbookPartiesIDActorsPartyActorIDRequest, error) {
 
 	var m models.PartyActorAmendment
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.PartyActorAmendment = &m
 
-	return o
+	return o, nil
 }
 
 func (o *PatchAddressbookPartiesIDActorsPartyActorIDRequest) WithID(id strfmt.UUID) *PatchAddressbookPartiesIDActorsPartyActorIDRequest {

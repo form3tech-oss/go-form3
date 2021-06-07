@@ -8,11 +8,11 @@ func NewEmptyDefaults() *EmptyDefaults {
 	return &EmptyDefaults{}
 }
 
-type EmptyDefaults struct {
-}
+type EmptyDefaults struct{}
 
 func (*EmptyDefaults) GetStrfmtUUID(objectName, attributeName string) strfmt.UUID {
 	var a strfmt.UUID
+
 	return a
 }
 
@@ -22,6 +22,7 @@ func (d *EmptyDefaults) GetStrfmtUUIDPtr(objectName, attributeName string) *strf
 
 func (*EmptyDefaults) GetStrfmtDateTime(objectName, attributeName string) strfmt.DateTime {
 	var a strfmt.DateTime
+
 	return a
 }
 
@@ -31,6 +32,7 @@ func (*EmptyDefaults) GetStrfmtDateTimePtr(objectName, attributeName string) *st
 
 func (*EmptyDefaults) GetStrfmtDate(objectName, attributeName string) strfmt.Date {
 	var a strfmt.Date
+
 	return a
 }
 
@@ -40,6 +42,7 @@ func (*EmptyDefaults) GetStrfmtDatePtr(objectName, attributeName string) *strfmt
 
 func (*EmptyDefaults) GetStrfmtURI(objectName, attributeName string) strfmt.URI {
 	var a strfmt.URI
+
 	return a
 }
 
@@ -53,6 +56,7 @@ func (*EmptyDefaults) GetString(objectName, attributeName string) string {
 
 func (*EmptyDefaults) GetStringArray(objectName, attributeName string) []string {
 	var a []string
+
 	return a
 }
 

@@ -55,9 +55,9 @@ type GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryRespons
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest) FromJson(j string) *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest {
+func (o *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest) FromJson(j string) (*GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest) WithQueryID(queryID strfmt.UUID) *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest {

@@ -33,7 +33,7 @@ type SchemeMessageAttributes struct {
 
 	// payment scheme
 	// Required: true
-	PaymentScheme PaymentScheme `json:"payment_scheme"`
+	PaymentScheme *PaymentScheme `json:"payment_scheme"`
 
 	// scheme message type
 	// Required: true
@@ -74,8 +74,13 @@ func (m *SchemeMessageAttributes) WithEntries(entries []*SchemeMessageEntryItem)
 
 func (m *SchemeMessageAttributes) WithPaymentScheme(paymentScheme PaymentScheme) *SchemeMessageAttributes {
 
-	m.PaymentScheme = paymentScheme
+	m.PaymentScheme = &paymentScheme
 
+	return m
+}
+
+func (m *SchemeMessageAttributes) WithoutPaymentScheme() *SchemeMessageAttributes {
+	m.PaymentScheme = nil
 	return m
 }
 
@@ -164,11 +169,17 @@ func (m *SchemeMessageAttributes) validateEntries(formats strfmt.Registry) error
 
 func (m *SchemeMessageAttributes) validatePaymentScheme(formats strfmt.Registry) error {
 
-	if err := m.PaymentScheme.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("payment_scheme")
-		}
+	if err := validate.Required("payment_scheme", "body", m.PaymentScheme); err != nil {
 		return err
+	}
+
+	if m.PaymentScheme != nil {
+		if err := m.PaymentScheme.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("payment_scheme")
+			}
+			return err
+		}
 	}
 
 	return nil

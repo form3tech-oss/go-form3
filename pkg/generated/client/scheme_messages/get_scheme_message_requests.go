@@ -43,9 +43,9 @@ type GetSchemeMessageRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetSchemeMessageRequest) FromJson(j string) *GetSchemeMessageRequest {
+func (o *GetSchemeMessageRequest) FromJson(j string) (*GetSchemeMessageRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetSchemeMessageRequest) WithID(id strfmt.UUID) *GetSchemeMessageRequest {

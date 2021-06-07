@@ -5,7 +5,7 @@ package claims
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -59,16 +59,16 @@ type CreateClaimReversalSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateClaimReversalSubmissionRequest) FromJson(j string) *CreateClaimReversalSubmissionRequest {
+func (o *CreateClaimReversalSubmissionRequest) FromJson(j string) (*CreateClaimReversalSubmissionRequest, error) {
 
 	var m models.ClaimReversalSubmissionCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.ClaimReversalSubmissionCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateClaimReversalSubmissionRequest) WithClaimReversalSubmissionCreationRequest(claimReversalSubmissionCreationRequest models.ClaimReversalSubmissionCreation) *CreateClaimReversalSubmissionRequest {

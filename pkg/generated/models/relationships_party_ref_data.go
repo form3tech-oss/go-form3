@@ -28,7 +28,7 @@ type RelationshipsPartyRefData struct {
 
 	// type
 	// Required: true
-	Type PartyResourceType `json:"type"`
+	Type *PartyResourceType `json:"type"`
 }
 
 func RelationshipsPartyRefDataWithDefaults(defaults client.Defaults) *RelationshipsPartyRefData {
@@ -55,8 +55,13 @@ func (m *RelationshipsPartyRefData) WithoutID() *RelationshipsPartyRefData {
 
 func (m *RelationshipsPartyRefData) WithType(typeVar PartyResourceType) *RelationshipsPartyRefData {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *RelationshipsPartyRefData) WithoutType() *RelationshipsPartyRefData {
+	m.Type = nil
 	return m
 }
 
@@ -93,11 +98,17 @@ func (m *RelationshipsPartyRefData) validateID(formats strfmt.Registry) error {
 
 func (m *RelationshipsPartyRefData) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -55,9 +55,9 @@ type GetMandateReturnSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetMandateReturnSubmissionRequest) FromJson(j string) *GetMandateReturnSubmissionRequest {
+func (o *GetMandateReturnSubmissionRequest) FromJson(j string) (*GetMandateReturnSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetMandateReturnSubmissionRequest) WithID(id strfmt.UUID) *GetMandateReturnSubmissionRequest {

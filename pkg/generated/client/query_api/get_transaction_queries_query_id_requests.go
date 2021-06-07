@@ -43,9 +43,9 @@ type GetTransactionQueriesQueryIDRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionQueriesQueryIDRequest) FromJson(j string) *GetTransactionQueriesQueryIDRequest {
+func (o *GetTransactionQueriesQueryIDRequest) FromJson(j string) (*GetTransactionQueriesQueryIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionQueriesQueryIDRequest) WithQueryID(queryID strfmt.UUID) *GetTransactionQueriesQueryIDRequest {

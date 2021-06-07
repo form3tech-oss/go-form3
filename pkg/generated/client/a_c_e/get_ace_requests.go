@@ -49,9 +49,9 @@ type GetAceRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetAceRequest) FromJson(j string) *GetAceRequest {
+func (o *GetAceRequest) FromJson(j string) (*GetAceRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAceRequest) WithAceID(aceID strfmt.UUID) *GetAceRequest {

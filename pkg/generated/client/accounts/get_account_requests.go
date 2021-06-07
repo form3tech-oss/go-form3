@@ -43,9 +43,9 @@ type GetAccountRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetAccountRequest) FromJson(j string) *GetAccountRequest {
+func (o *GetAccountRequest) FromJson(j string) (*GetAccountRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAccountRequest) WithID(id strfmt.UUID) *GetAccountRequest {

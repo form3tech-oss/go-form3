@@ -5,7 +5,7 @@ package organisations
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type ModifyUnitRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ModifyUnitRequest) FromJson(j string) *ModifyUnitRequest {
+func (o *ModifyUnitRequest) FromJson(j string) (*ModifyUnitRequest, error) {
 
 	var m models.OrganisationUpdate
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.OrganisationUpdate = &m
 
-	return o
+	return o, nil
 }
 
 func (o *ModifyUnitRequest) WithOrganisationUpdateRequest(organisationUpdateRequest models.OrganisationUpdate) *ModifyUnitRequest {

@@ -36,9 +36,9 @@ type GetBalancesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetBalancesRequest) FromJson(j string) *GetBalancesRequest {
+func (o *GetBalancesRequest) FromJson(j string) (*GetBalancesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 //////////////////

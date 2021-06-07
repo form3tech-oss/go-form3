@@ -12,44 +12,51 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
-type RequestSigningClientConfig struct {
-	pubKeyID            string
+type RequestSigningOption func(*RequestSigningTransport)
+
+type RequestSigningTransport struct {
+	pubKeyID            uuid.UUID
 	privateKey          *rsa.PrivateKey
 	underlyingTransport http.RoundTripper
 }
 
-type requestSigningTransport struct {
-	config              *RequestSigningClientConfig
-	underlyingTransport http.RoundTripper
+func WithPrivateKey(key *rsa.PrivateKey) RequestSigningOption {
+	return func(t *RequestSigningTransport) {
+		t.privateKey = key
+	}
 }
 
-func NewRequestSigningClientConfig(pubKeyID string, privateKey *rsa.PrivateKey) *RequestSigningClientConfig {
-	return &RequestSigningClientConfig{
-		pubKeyID:            pubKeyID,
-		privateKey:          privateKey,
+func WithPublicKeyID(keyID uuid.UUID) RequestSigningOption {
+	return func(t *RequestSigningTransport) {
+		t.pubKeyID = keyID
+	}
+}
+
+func WithUnderlyingRequestSigningTransport(tr http.RoundTripper) RequestSigningOption {
+	return func(t *RequestSigningTransport) {
+		t.underlyingTransport = tr
+	}
+}
+
+func NewRequestSigningTransport(opts ...RequestSigningOption) *RequestSigningTransport {
+	t := &RequestSigningTransport{
 		underlyingTransport: http.DefaultTransport,
 	}
-}
 
-func (c *RequestSigningClientConfig) WithUnderlyingTransport(underlyingTransport http.RoundTripper) *RequestSigningClientConfig {
-	c.underlyingTransport = underlyingTransport
-	return c
-}
-
-func NewRequestSigningHTTPClient(config *RequestSigningClientConfig) *http.Client {
-	transport := &requestSigningTransport{
-		underlyingTransport: config.underlyingTransport,
-		config:              config,
+	for _, opt := range opts {
+		opt(t)
 	}
 
-	h := &http.Client{Transport: transport}
-
-	return h
+	return t
 }
 
-func (t *requestSigningTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+func (t *RequestSigningTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req.Header.Add("User-Agent", UserAgent)
+
 	var headers []string
 	hasher := sha256.New()
 	dt := time.Now().UTC().Format(time.RFC1123)
@@ -74,11 +81,11 @@ date: %s`,
 		req.Body != nil {
 		body, err := ioutil.ReadAll(req.Body)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error reading request body: %w", err)
 		}
 
 		if _, err := hasher.Write(body); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("error hashing: %w", err)
 		}
 		digest := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
 
@@ -96,20 +103,19 @@ content-length: %d`,
 		req.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 		req.Header.Set("Content-Type", ReqMimeType)
 		req.Header.Set("Digest", digest)
-
 	}
 
 	hasher.Reset()
 	if _, err := hasher.Write([]byte(msgToSign)); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error hashing: %w", err)
 	}
 	hashedMsgToSign := hasher.Sum(nil)
 
 	signature, err := rsa.SignPKCS1v15(
 		rand.Reader,
-		t.config.privateKey,
+		t.privateKey,
 		crypto.SHA256,
-		hashedMsgToSign[:],
+		hashedMsgToSign,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to sign message %s: %w", msgToSign, err)
@@ -119,7 +125,7 @@ content-length: %d`,
 		"Authorization",
 		fmt.Sprintf(
 			`Signature keyId="%s",algorithm="rsa-sha256",headers="%s", signature="%s"`,
-			t.config.pubKeyID,
+			t.pubKeyID,
 			strings.Join(headers, " "),
 			base64.StdEncoding.EncodeToString(signature),
 		),

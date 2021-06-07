@@ -5,7 +5,7 @@ package accounts
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type ModifyAccountRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ModifyAccountRequest) FromJson(j string) *ModifyAccountRequest {
+func (o *ModifyAccountRequest) FromJson(j string) (*ModifyAccountRequest, error) {
 
 	var m models.AccountAmendment
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.AccountAmendment = &m
 
-	return o
+	return o, nil
 }
 
 func (o *ModifyAccountRequest) WithAccountAmendRequest(accountAmendRequest models.AccountAmendment) *ModifyAccountRequest {

@@ -28,7 +28,7 @@ type RelationshipsQueryProperties struct {
 
 	// type
 	// Required: true
-	Type QueryResourceType `json:"type"`
+	Type *QueryResourceType `json:"type"`
 }
 
 func RelationshipsQueryPropertiesWithDefaults(defaults client.Defaults) *RelationshipsQueryProperties {
@@ -55,8 +55,13 @@ func (m *RelationshipsQueryProperties) WithoutID() *RelationshipsQueryProperties
 
 func (m *RelationshipsQueryProperties) WithType(typeVar QueryResourceType) *RelationshipsQueryProperties {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *RelationshipsQueryProperties) WithoutType() *RelationshipsQueryProperties {
+	m.Type = nil
 	return m
 }
 
@@ -93,11 +98,17 @@ func (m *RelationshipsQueryProperties) validateID(formats strfmt.Registry) error
 
 func (m *RelationshipsQueryProperties) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

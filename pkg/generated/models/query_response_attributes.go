@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // QueryResponseAttributes query response attributes
@@ -22,7 +23,7 @@ type QueryResponseAttributes struct {
 
 	// answer
 	// Required: true
-	Answer QueryResponseAnswer `json:"answer"`
+	Answer *QueryResponseAnswer `json:"answer"`
 
 	// compensation amount
 	CompensationAmount string `json:"compensation_amount,omitempty"`
@@ -44,8 +45,13 @@ func QueryResponseAttributesWithDefaults(defaults client.Defaults) *QueryRespons
 
 func (m *QueryResponseAttributes) WithAnswer(answer QueryResponseAnswer) *QueryResponseAttributes {
 
-	m.Answer = answer
+	m.Answer = &answer
 
+	return m
+}
+
+func (m *QueryResponseAttributes) WithoutAnswer() *QueryResponseAttributes {
+	m.Answer = nil
 	return m
 }
 
@@ -79,11 +85,17 @@ func (m *QueryResponseAttributes) Validate(formats strfmt.Registry) error {
 
 func (m *QueryResponseAttributes) validateAnswer(formats strfmt.Registry) error {
 
-	if err := m.Answer.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("answer")
-		}
+	if err := validate.Required("answer", "body", m.Answer); err != nil {
 		return err
+	}
+
+	if m.Answer != nil {
+		if err := m.Answer.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("answer")
+			}
+			return err
+		}
 	}
 
 	return nil

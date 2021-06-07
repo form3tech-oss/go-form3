@@ -5,7 +5,7 @@ package a_c_e
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type CreateAceRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateAceRequest) FromJson(j string) *CreateAceRequest {
+func (o *CreateAceRequest) FromJson(j string) (*CreateAceRequest, error) {
 
 	var m models.AceCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.AceCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateAceRequest) WithACECreationRequest(aCECreationRequest models.AceCreation) *CreateAceRequest {

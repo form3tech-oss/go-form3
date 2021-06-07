@@ -5,7 +5,7 @@ package roles
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,16 +47,16 @@ type CreateRolesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateRolesRequest) FromJson(j string) *CreateRolesRequest {
+func (o *CreateRolesRequest) FromJson(j string) (*CreateRolesRequest, error) {
 
 	var m models.RoleCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.RoleCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateRolesRequest) WithRoleCreationRequest(roleCreationRequest models.RoleCreation) *CreateRolesRequest {

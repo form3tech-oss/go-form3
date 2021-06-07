@@ -63,23 +63,23 @@ type {{ pascalize .Name }}Request struct {
   Context context.Context
   HTTPClient *http.Client
 
-	transport runtime.ClientTransport
-	formats   strfmt.Registry
+  transport runtime.ClientTransport
+  formats   strfmt.Registry
 }
 
-func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) FromJson(j string) *{{ pascalize .Name }}Request {
+func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) FromJson(j string) (*{{ pascalize .Name }}Request, error) {
     {{ range .Params }}
       {{ if and (eq "body" .Location) (not .IsStream) }}
         var m {{ .GoType }}
-      	if err := json.Unmarshal([]byte(j), &m); err != nil {
-      		log.Fatal(err)
-      	}
+        if err := json.Unmarshal([]byte(j), &m); err != nil {
+            return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
+        }
 
         {{ .ReceiverName }}.{{ dropPackage .GoType }} = &m
       {{ end }}
-  {{ end }}
+    {{ end }}
 
-    return {{ .ReceiverName }}
+    return {{ .ReceiverName }}, nil
 }
 
 

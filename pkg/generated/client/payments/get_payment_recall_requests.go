@@ -49,9 +49,9 @@ type GetPaymentRecallRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPaymentRecallRequest) FromJson(j string) *GetPaymentRecallRequest {
+func (o *GetPaymentRecallRequest) FromJson(j string) (*GetPaymentRecallRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetPaymentRecallRequest) WithID(id strfmt.UUID) *GetPaymentRecallRequest {

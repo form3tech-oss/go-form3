@@ -23,7 +23,7 @@ type SigningKeysResponseData struct {
 
 	// type
 	// Required: true
-	Type SigningKeysResourceType `json:"type"`
+	Type *SigningKeysResourceType `json:"type"`
 
 	// id
 	// Required: true
@@ -73,8 +73,13 @@ func SigningKeysResponseDataWithDefaults(defaults client.Defaults) *SigningKeysR
 
 func (m *SigningKeysResponseData) WithType(typeVar SigningKeysResourceType) *SigningKeysResponseData {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *SigningKeysResponseData) WithoutType() *SigningKeysResponseData {
+	m.Type = nil
 	return m
 }
 
@@ -180,11 +185,17 @@ func (m *SigningKeysResponseData) Validate(formats strfmt.Registry) error {
 
 func (m *SigningKeysResponseData) validateType(formats strfmt.Registry) error {
 
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		}
+	if err := validate.Required("type", "body", m.Type); err != nil {
 		return err
+	}
+
+	if m.Type != nil {
+		if err := m.Type.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("type")
+			}
+			return err
+		}
 	}
 
 	return nil

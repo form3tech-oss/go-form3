@@ -5,7 +5,7 @@ package subscriptions
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -53,16 +53,16 @@ type ModifySubscriptionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ModifySubscriptionRequest) FromJson(j string) *ModifySubscriptionRequest {
+func (o *ModifySubscriptionRequest) FromJson(j string) (*ModifySubscriptionRequest, error) {
 
 	var m models.SubscriptionAmendment
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.SubscriptionAmendment = &m
 
-	return o
+	return o, nil
 }
 
 func (o *ModifySubscriptionRequest) WithSubscriptionUpdateRequest(subscriptionUpdateRequest models.SubscriptionAmendment) *ModifySubscriptionRequest {

@@ -100,9 +100,9 @@ type ListReportsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListReportsRequest) FromJson(j string) *ListReportsRequest {
+func (o *ListReportsRequest) FromJson(j string) (*ListReportsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListReportsRequest) WithFilterCreatedOnAfter(filterCreatedOnAfter strfmt.DateTime) *ListReportsRequest {

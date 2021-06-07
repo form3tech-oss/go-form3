@@ -43,9 +43,9 @@ type GetMandateRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetMandateRequest) FromJson(j string) *GetMandateRequest {
+func (o *GetMandateRequest) FromJson(j string) (*GetMandateRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetMandateRequest) WithID(id strfmt.UUID) *GetMandateRequest {

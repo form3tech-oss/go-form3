@@ -368,7 +368,7 @@ type PaymentAdmissionAttributes struct {
 
 	// Date on which the payment will be settled
 	// Format: date
-	SettlementDate strfmt.Date `json:"settlement_date,omitempty"`
+	SettlementDate *strfmt.Date `json:"settlement_date,omitempty"`
 
 	// status
 	Status PaymentAdmissionStatus `json:"status,omitempty"`
@@ -388,7 +388,7 @@ func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAd
 
 		SettlementCycle: defaults.GetInt64Ptr("PaymentAdmissionAttributes", "settlement_cycle"),
 
-		SettlementDate: defaults.GetStrfmtDate("PaymentAdmissionAttributes", "settlement_date"),
+		SettlementDate: defaults.GetStrfmtDatePtr("PaymentAdmissionAttributes", "settlement_date"),
 
 		// TODO Status: PaymentAdmissionStatus,
 
@@ -437,8 +437,13 @@ func (m *PaymentAdmissionAttributes) WithoutSettlementCycle() *PaymentAdmissionA
 
 func (m *PaymentAdmissionAttributes) WithSettlementDate(settlementDate strfmt.Date) *PaymentAdmissionAttributes {
 
-	m.SettlementDate = settlementDate
+	m.SettlementDate = &settlementDate
 
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithoutSettlementDate() *PaymentAdmissionAttributes {
+	m.SettlementDate = nil
 	return m
 }
 
@@ -588,12 +593,17 @@ type PaymentAdmissionRelationships struct {
 
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
+
+	// payment admission task
+	PaymentAdmissionTask *RelationshipPaymentAdmissionTasks `json:"payment_admission_task,omitempty"`
 }
 
 func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdmissionRelationships {
 	return &PaymentAdmissionRelationships{
 
 		Payment: RelationshipPaymentsWithDefaults(defaults),
+
+		PaymentAdmissionTask: RelationshipPaymentAdmissionTasksWithDefaults(defaults),
 	}
 }
 
@@ -609,11 +619,27 @@ func (m *PaymentAdmissionRelationships) WithoutPayment() *PaymentAdmissionRelati
 	return m
 }
 
+func (m *PaymentAdmissionRelationships) WithPaymentAdmissionTask(paymentAdmissionTask RelationshipPaymentAdmissionTasks) *PaymentAdmissionRelationships {
+
+	m.PaymentAdmissionTask = &paymentAdmissionTask
+
+	return m
+}
+
+func (m *PaymentAdmissionRelationships) WithoutPaymentAdmissionTask() *PaymentAdmissionRelationships {
+	m.PaymentAdmissionTask = nil
+	return m
+}
+
 // Validate validates this payment admission relationships
 func (m *PaymentAdmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validatePayment(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePaymentAdmissionTask(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -633,6 +659,24 @@ func (m *PaymentAdmissionRelationships) validatePayment(formats strfmt.Registry)
 		if err := m.Payment.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("relationships" + "." + "payment")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentAdmissionRelationships) validatePaymentAdmissionTask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PaymentAdmissionTask) { // not required
+		return nil
+	}
+
+	if m.PaymentAdmissionTask != nil {
+		if err := m.PaymentAdmissionTask.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "payment_admission_task")
 			}
 			return err
 		}

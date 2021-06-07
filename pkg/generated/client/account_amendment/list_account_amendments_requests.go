@@ -77,9 +77,9 @@ type ListAccountAmendmentsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListAccountAmendmentsRequest) FromJson(j string) *ListAccountAmendmentsRequest {
+func (o *ListAccountAmendmentsRequest) FromJson(j string) (*ListAccountAmendmentsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListAccountAmendmentsRequest) WithFilterAccountID(filterAccountID strfmt.UUID) *ListAccountAmendmentsRequest {

@@ -36,9 +36,9 @@ type GetPlatformSecuritySigningKeysRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetPlatformSecuritySigningKeysRequest) FromJson(j string) *GetPlatformSecuritySigningKeysRequest {
+func (o *GetPlatformSecuritySigningKeysRequest) FromJson(j string) (*GetPlatformSecuritySigningKeysRequest, error) {
 
-	return o
+	return o, nil
 }
 
 //////////////////

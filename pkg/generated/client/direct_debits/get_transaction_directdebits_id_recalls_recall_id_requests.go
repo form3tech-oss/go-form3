@@ -49,9 +49,9 @@ type GetTransactionDirectdebitsIDRecallsRecallIDRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionDirectdebitsIDRecallsRecallIDRequest) FromJson(j string) *GetTransactionDirectdebitsIDRecallsRecallIDRequest {
+func (o *GetTransactionDirectdebitsIDRecallsRecallIDRequest) FromJson(j string) (*GetTransactionDirectdebitsIDRecallsRecallIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionDirectdebitsIDRecallsRecallIDRequest) WithID(id strfmt.UUID) *GetTransactionDirectdebitsIDRecallsRecallIDRequest {

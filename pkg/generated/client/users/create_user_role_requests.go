@@ -49,9 +49,9 @@ type CreateUserRoleRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateUserRoleRequest) FromJson(j string) *CreateUserRoleRequest {
+func (o *CreateUserRoleRequest) FromJson(j string) (*CreateUserRoleRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *CreateUserRoleRequest) WithRoleID(roleID strfmt.UUID) *CreateUserRoleRequest {

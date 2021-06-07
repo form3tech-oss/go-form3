@@ -49,9 +49,9 @@ type GetDirectDebitSubmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetDirectDebitSubmissionRequest) FromJson(j string) *GetDirectDebitSubmissionRequest {
+func (o *GetDirectDebitSubmissionRequest) FromJson(j string) (*GetDirectDebitSubmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetDirectDebitSubmissionRequest) WithID(id strfmt.UUID) *GetDirectDebitSubmissionRequest {

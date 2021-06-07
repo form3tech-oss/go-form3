@@ -76,9 +76,9 @@ type GetAddressbookPartiesRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetAddressbookPartiesRequest) FromJson(j string) *GetAddressbookPartiesRequest {
+func (o *GetAddressbookPartiesRequest) FromJson(j string) (*GetAddressbookPartiesRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAddressbookPartiesRequest) WithFilterCustomerID(filterCustomerID string) *GetAddressbookPartiesRequest {

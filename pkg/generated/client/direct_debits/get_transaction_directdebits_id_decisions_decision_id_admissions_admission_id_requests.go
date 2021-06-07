@@ -55,9 +55,9 @@ type GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest) FromJson(j string) *GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest {
+func (o *GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest) FromJson(j string) (*GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest) WithAdmissionID(admissionID strfmt.UUID) *GetTransactionDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest {

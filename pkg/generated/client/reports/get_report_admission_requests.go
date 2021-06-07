@@ -49,9 +49,9 @@ type GetReportAdmissionRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetReportAdmissionRequest) FromJson(j string) *GetReportAdmissionRequest {
+func (o *GetReportAdmissionRequest) FromJson(j string) (*GetReportAdmissionRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetReportAdmissionRequest) WithAdmissionID(admissionID strfmt.UUID) *GetReportAdmissionRequest {

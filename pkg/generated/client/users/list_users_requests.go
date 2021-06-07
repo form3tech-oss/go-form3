@@ -50,9 +50,9 @@ type ListUsersRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListUsersRequest) FromJson(j string) *ListUsersRequest {
+func (o *ListUsersRequest) FromJson(j string) (*ListUsersRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListUsersRequest) WithPageNumber(pageNumber int64) *ListUsersRequest {

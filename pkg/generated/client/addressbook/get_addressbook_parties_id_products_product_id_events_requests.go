@@ -64,9 +64,9 @@ type GetAddressbookPartiesIDProductsProductIDEventsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetAddressbookPartiesIDProductsProductIDEventsRequest) FromJson(j string) *GetAddressbookPartiesIDProductsProductIDEventsRequest {
+func (o *GetAddressbookPartiesIDProductsProductIDEventsRequest) FromJson(j string) (*GetAddressbookPartiesIDProductsProductIDEventsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAddressbookPartiesIDProductsProductIDEventsRequest) WithID(id strfmt.UUID) *GetAddressbookPartiesIDProductsProductIDEventsRequest {

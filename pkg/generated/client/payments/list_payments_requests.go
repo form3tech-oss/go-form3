@@ -188,9 +188,9 @@ type ListPaymentsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListPaymentsRequest) FromJson(j string) *ListPaymentsRequest {
+func (o *ListPaymentsRequest) FromJson(j string) (*ListPaymentsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListPaymentsRequest) WithFilterAdmissionAdmissionDateFrom(filterAdmissionAdmissionDateFrom strfmt.DateTime) *ListPaymentsRequest {

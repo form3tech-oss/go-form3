@@ -5,7 +5,7 @@ package account_request
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -47,16 +47,16 @@ type CreateAccountRequestRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *CreateAccountRequestRequest) FromJson(j string) *CreateAccountRequestRequest {
+func (o *CreateAccountRequestRequest) FromJson(j string) (*CreateAccountRequestRequest, error) {
 
 	var m models.AccountRequestCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("could not unmarshal JSON: %w", err)
 	}
 
 	o.AccountRequestCreation = &m
 
-	return o
+	return o, nil
 }
 
 func (o *CreateAccountRequestRequest) WithAccountRequestCreationBody(accountRequestCreationBody models.AccountRequestCreation) *CreateAccountRequestRequest {

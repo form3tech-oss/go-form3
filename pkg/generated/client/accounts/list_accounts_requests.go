@@ -92,9 +92,9 @@ type ListAccountsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *ListAccountsRequest) FromJson(j string) *ListAccountsRequest {
+func (o *ListAccountsRequest) FromJson(j string) (*ListAccountsRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *ListAccountsRequest) WithFilterAccountNumber(filterAccountNumber []string) *ListAccountsRequest {

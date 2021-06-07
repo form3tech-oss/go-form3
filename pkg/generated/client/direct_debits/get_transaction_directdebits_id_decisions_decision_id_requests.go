@@ -49,9 +49,9 @@ type GetTransactionDirectdebitsIDDecisionsDecisionIDRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest) FromJson(j string) *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest {
+func (o *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest) FromJson(j string) (*GetTransactionDirectdebitsIDDecisionsDecisionIDRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest) WithDecisionID(decisionID strfmt.UUID) *GetTransactionDirectdebitsIDDecisionsDecisionIDRequest {

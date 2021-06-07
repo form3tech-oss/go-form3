@@ -49,9 +49,9 @@ type GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest stru
 	formats   strfmt.Registry
 }
 
-func (o *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest) FromJson(j string) *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest {
+func (o *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest) FromJson(j string) (*GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest) WithAccountnumber(accountnumber string) *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest {

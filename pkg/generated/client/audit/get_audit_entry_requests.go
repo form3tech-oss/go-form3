@@ -49,9 +49,9 @@ type GetAuditEntryRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetAuditEntryRequest) FromJson(j string) *GetAuditEntryRequest {
+func (o *GetAuditEntryRequest) FromJson(j string) (*GetAuditEntryRequest, error) {
 
-	return o
+	return o, nil
 }
 
 func (o *GetAuditEntryRequest) WithID(id strfmt.UUID) *GetAuditEntryRequest {
