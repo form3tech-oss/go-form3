@@ -36,13 +36,14 @@ if err != nil {
     log.Fatal(err)
 }
 
-uu, err := uuid.Parse(os.Getenv("FORM3_ORGANISATION_ID"))
+o, err := uuid.Parse(os.Getenv("FORM3_ORGANISATION_ID"))
 if err != nil {
     log.Fatal(err)
 }
 
 f3, err := form3.New(
     form3.WithBaseURL(*u),
+    form3.WithOrganisationID(o),
     form3.WithRequestSigningTransport(
         form3.NewRequestSigningTransport(
             form3.WithPrivateKey(privKey),
