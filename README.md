@@ -57,7 +57,7 @@ if err != nil {
 ### Environment variables
 
 The following environment variables need to be set when constructing the client
-using `form3.NewFromEnv`
+using `form3.NewFromEnv`.
 
 | Environment variable   | Description                                   |
 |:-----------------------|:----------------------------------------------|
