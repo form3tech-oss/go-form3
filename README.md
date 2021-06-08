@@ -25,19 +25,51 @@ A simple client library with:
 
 For interactive usage we recommend using [gore](https://github.com/motemen/gore).
 
+Note that the usage of client IDs and secrets is deprecated but still supported using `form3.WithTokenTransport`.
+Mutual TLS (not yet available in all environments) is supported using `form3.NewMTLSTransport`.
+
+### Example usage
+
+```go
+u, err := url.Parse(ts.URL)
+if err != nil {
+    log.Fatal(err)
+}
+
+o, err := uuid.Parse(os.Getenv("FORM3_ORGANISATION_ID"))
+if err != nil {
+    log.Fatal(err)
+}
+
+f3, err := form3.New(
+    form3.WithBaseURL(*u),
+    form3.WithOrganisationID(o),
+    form3.WithRequestSigningTransport(
+        form3.NewRequestSigningTransport(
+            form3.WithPrivateKey(privKey),
+            form3.WithPublicKeyID(pubKeyID))))
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+
 ### Environment variables
 
-| Environment variable | Description                                   |
-|:---------------------|:----------------------------------------------|
-| FORM3_HOST           | Form3 host URL, e.g. https://api.form3.tech   |
-| FORM3_PUBLIC_KEY_ID  | Public key ID for request signing             |
-| FORM3_PRIVATE_KEY    | Private key in PEM format for request signing |
-| FORM3_ORGANISATION_ID| Organisation ID                               |
-| DEBUG                | Output full HTTP calls and responses          |
-| FORM3_CLIENT_ID      | Client ID for token based auth (deprecated)   |
-| FORM3_CLIENT_SECRET  | Secret for token based auth (deprecated)      |
+The following environment variables need to be set when constructing the client
+using `form3.NewFromEnv`.
+
+| Environment variable   | Description                                   |
+|:-----------------------|:----------------------------------------------|
+| `FORM3_HOST`           | Form3 host URL, e.g. https://api.form3.tech   |
+| `FORM3_PUBLIC_KEY_ID`  | Public key ID for request signing             |
+| `FORM3_PRIVATE_KEY`    | Private key in PEM format for request signing |
+| `FORM3_ORGANISATION_ID`| Organisation ID                               |
+| `DEBUG`                | Output full HTTP calls and responses          |
 
 ## Updating the client
+
+The client is generated using `go-swagger`.
 
 ### Prerequisites
 
