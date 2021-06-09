@@ -3,7 +3,7 @@ go:
   - 1.16.x
 script:
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
-  - FORM3_PRIVATE_KEY=$(cat private.key) make test
+  - FORM3_PRIVATE_KEY=$(cat private.key)
 env:
   global:
   - FORM3_HOST=https://symphony.api.env.staging-form3.tech
