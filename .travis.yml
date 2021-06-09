@@ -1,9 +1,10 @@
 language: go
 go:
-- 1.16.x
+  - 1.16.x
 script:
-- FORM3_PRIVATE_KEY=$(cat private.key) make test
-- bash ./travis/run_on_pull_requests
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
+  - FORM3_PRIVATE_KEY=$(cat private.key) make test
 env:
   global:
   - FORM3_HOST=https://symphony.api.env.staging-form3.tech
