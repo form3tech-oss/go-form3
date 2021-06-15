@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v3/pkg/generated/models"
 )
 
 // ListSubscriptionsReader is a Reader for the ListSubscriptions structure.

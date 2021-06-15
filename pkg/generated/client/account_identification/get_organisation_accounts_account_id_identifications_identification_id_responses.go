@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v3/pkg/generated/models"
 )
 
 // GetOrganisationAccountsAccountIDIdentificationsIdentificationIDReader is a Reader for the GetOrganisationAccountsAccountIDIdentificationsIdentificationID structure.
@@ -25,8 +25,8 @@ type GetOrganisationAccountsAccountIDIdentificationsIdentificationIDReader struc
 func (o *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
-	case 201:
-		result := NewGetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated()
+	case 200:
+		result := NewGetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -37,16 +37,16 @@ func (o *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDReader) 
 	}
 }
 
-// NewGetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated creates a GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated with default headers values
-func NewGetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated() *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated {
-	return &GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated{}
+// NewGetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK creates a GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK with default headers values
+func NewGetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK() *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK {
+	return &GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK{}
 }
 
-/*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated handles this case with default header values.
+/*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK handles this case with default header values.
 
 Account Identification response
 */
-type GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated struct {
+type GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK struct {
 
 	//Payload
 
@@ -54,11 +54,11 @@ type GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated stru
 	*models.AccountIdentificationResponse
 }
 
-func (o *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated) Error() string {
-	return fmt.Sprintf("[GET /organisation/accounts/{account_id}/identifications/{identification_id}][%d] getOrganisationAccountsAccountIdIdentificationsIdentificationIdCreated", 201)
+func (o *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK) Error() string {
+	return fmt.Sprintf("[GET /organisation/accounts/{account_id}/identifications/{identification_id}][%d] getOrganisationAccountsAccountIdIdentificationsIdentificationIdOK", 200)
 }
 
-func (o *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.AccountIdentificationResponse = new(models.AccountIdentificationResponse)
 

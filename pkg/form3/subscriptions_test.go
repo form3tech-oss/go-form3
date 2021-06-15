@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/form3tech-oss/go-form3/v2/pkg/form3"
-	"github.com/form3tech-oss/go-form3/v2/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v3/pkg/form3"
+	"github.com/form3tech-oss/go-form3/v3/pkg/generated/models"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
