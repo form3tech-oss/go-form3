@@ -8,7 +8,7 @@ package account_identification
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v2/pkg/client"
+	"github.com/form3tech-oss/go-form3/v3/pkg/client"
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
@@ -99,7 +99,7 @@ func (a *GetOrganisationAccountsAccountIDIdentificationsRequest) MustDo() *GetOr
 /*
 get organisation accounts account ID identifications identification ID API
 */
-func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) Do() (*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated, error) {
+func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) Do() (*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "GetOrganisationAccountsAccountIDIdentificationsIdentificationID",
@@ -117,11 +117,11 @@ func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated), nil
+	return result.(*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK), nil
 
 }
 
-func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) MustDo() *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDCreated {
+func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) MustDo() *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
