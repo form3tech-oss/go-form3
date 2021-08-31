@@ -43,10 +43,9 @@ type PrivateIdentification struct {
 	Country string `json:"country,omitempty"`
 
 	// Private Identification of an debtor/beneficiary or ultimate debtor/beneficiary
-	// Required: true
 	// Max Length: 140
 	// Min Length: 1
-	Identification string `json:"identification"`
+	Identification string `json:"identification,omitempty"`
 
 	// Issuer of the `identification`
 	IdentificationIssuer string `json:"identification_issuer,omitempty"`
@@ -262,8 +261,8 @@ func (m *PrivateIdentification) validateCountry(formats strfmt.Registry) error {
 
 func (m *PrivateIdentification) validateIdentification(formats strfmt.Registry) error {
 
-	if err := validate.RequiredString("identification", "body", string(m.Identification)); err != nil {
-		return err
+	if swag.IsZero(m.Identification) { // not required
+		return nil
 	}
 
 	if err := validate.MinLength("identification", "body", string(m.Identification), 1); err != nil {

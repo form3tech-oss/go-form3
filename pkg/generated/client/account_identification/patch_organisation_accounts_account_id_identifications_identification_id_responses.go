@@ -32,6 +32,13 @@ func (o *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDReader
 		}
 		return result, nil
 
+	case 409:
+		result := NewPatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -65,6 +72,40 @@ func (o *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDOK) re
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.AccountIdentificationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict creates a PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict with default headers values
+func NewPatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict() *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict {
+	return &PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict{}
+}
+
+/*PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict handles this case with default header values.
+
+Account Identification update error, constraint violation of secondary identification
+*/
+type PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict) Error() string {
+	return fmt.Sprintf("[PATCH /organisation/accounts/{account_id}/identifications/{identification_id}][%d] patchOrganisationAccountsAccountIdIdentificationsIdentificationIdConflict", 409)
+}
+
+func (o *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

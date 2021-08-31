@@ -35,6 +35,21 @@ const (
 
 	// DirectDebitAdmissionStatusReasonPendingSettlement captures enum value "pending_settlement"
 	DirectDebitAdmissionStatusReasonPendingSettlement DirectDebitAdmissionStatusReason = "pending_settlement"
+
+	// DirectDebitAdmissionStatusReasonSettlementFailed captures enum value "settlement_failed"
+	DirectDebitAdmissionStatusReasonSettlementFailed DirectDebitAdmissionStatusReason = "settlement_failed"
+
+	// DirectDebitAdmissionStatusReasonDuplication captures enum value "duplication"
+	DirectDebitAdmissionStatusReasonDuplication DirectDebitAdmissionStatusReason = "duplication"
+
+	// DirectDebitAdmissionStatusReasonNotAllowedAmount captures enum value "not_allowed_amount"
+	DirectDebitAdmissionStatusReasonNotAllowedAmount DirectDebitAdmissionStatusReason = "not_allowed_amount"
+
+	// DirectDebitAdmissionStatusReasonMandateCancelled captures enum value "mandate_cancelled"
+	DirectDebitAdmissionStatusReasonMandateCancelled DirectDebitAdmissionStatusReason = "mandate_cancelled"
+
+	// DirectDebitAdmissionStatusReasonNoInstruction captures enum value "no_instruction"
+	DirectDebitAdmissionStatusReasonNoInstruction DirectDebitAdmissionStatusReason = "no_instruction"
 )
 
 // for schema
@@ -42,7 +57,7 @@ var directDebitAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","pending_settlement"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -37,6 +37,9 @@ type UltimateEntity struct {
 	// Ultimate debtor/beneficiary birth province
 	BirthProvince string `json:"birth_province,omitempty"`
 
+	// City/Town of the Beneficiary address
+	City string `json:"city,omitempty"`
+
 	// Country of ultimate debtor/beneficiary address. ISO 3166 format country code
 	Country string `json:"country,omitempty"`
 
@@ -71,6 +74,8 @@ func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 		BirthDate: defaults.GetStrfmtDatePtr("UltimateEntity", "birth_date"),
 
 		BirthProvince: defaults.GetString("UltimateEntity", "birth_province"),
+
+		City: defaults.GetString("UltimateEntity", "city"),
 
 		Country: defaults.GetString("UltimateEntity", "country"),
 
@@ -124,6 +129,13 @@ func (m *UltimateEntity) WithoutBirthDate() *UltimateEntity {
 func (m *UltimateEntity) WithBirthProvince(birthProvince string) *UltimateEntity {
 
 	m.BirthProvince = birthProvince
+
+	return m
+}
+
+func (m *UltimateEntity) WithCity(city string) *UltimateEntity {
+
+	m.City = city
 
 	return m
 }

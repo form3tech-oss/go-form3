@@ -21,9 +21,6 @@ type StatusReason string
 
 const (
 
-	// StatusReasonUnspecified captures enum value "unspecified"
-	StatusReasonUnspecified StatusReason = "unspecified"
-
 	// StatusReasonClosed captures enum value "closed"
 	StatusReasonClosed StatusReason = "closed"
 
@@ -39,8 +36,14 @@ const (
 	// StatusReasonDeceased captures enum value "deceased"
 	StatusReasonDeceased StatusReason = "deceased"
 
-	// StatusReasonBusinessReason captures enum value "business_reason"
-	StatusReasonBusinessReason StatusReason = "business_reason"
+	// StatusReasonBusinessReasons captures enum value "business_reasons"
+	StatusReasonBusinessReasons StatusReason = "business_reasons"
+
+	// StatusReasonBeneficiarySensitivities captures enum value "beneficiary_sensitivities"
+	StatusReasonBeneficiarySensitivities StatusReason = "beneficiary_sensitivities"
+
+	// StatusReasonTermsAndConditions captures enum value "terms_and_conditions"
+	StatusReasonTermsAndConditions StatusReason = "terms_and_conditions"
 
 	// StatusReasonNone captures enum value "none"
 	StatusReasonNone StatusReason = "none"
@@ -51,7 +54,7 @@ var statusReasonEnum []interface{}
 
 func init() {
 	var res []StatusReason
-	if err := json.Unmarshal([]byte(`["unspecified","closed","stopped","currency","transferred","deceased","business_reason","none"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["closed","stopped","currency","transferred","deceased","business_reasons","beneficiary_sensitivities","terms_and_conditions","none"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

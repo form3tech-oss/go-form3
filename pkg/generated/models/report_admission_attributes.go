@@ -31,9 +31,6 @@ type ReportAdmissionAttributes struct {
 	// scheme status code description
 	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
 
-	// source gateway
-	SourceGateway string `json:"source_gateway,omitempty"`
-
 	// status
 	Status ReportAdmissionStatus `json:"status,omitempty"`
 }
@@ -46,8 +43,6 @@ func ReportAdmissionAttributesWithDefaults(defaults client.Defaults) *ReportAdmi
 		SchemeStatusCode: defaults.GetString("ReportAdmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("ReportAdmissionAttributes", "scheme_status_code_description"),
-
-		SourceGateway: defaults.GetString("ReportAdmissionAttributes", "source_gateway"),
 
 		// TODO Status: ReportAdmissionStatus,
 
@@ -71,13 +66,6 @@ func (m *ReportAdmissionAttributes) WithSchemeStatusCode(schemeStatusCode string
 func (m *ReportAdmissionAttributes) WithSchemeStatusCodeDescription(schemeStatusCodeDescription string) *ReportAdmissionAttributes {
 
 	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
-
-	return m
-}
-
-func (m *ReportAdmissionAttributes) WithSourceGateway(sourceGateway string) *ReportAdmissionAttributes {
-
-	m.SourceGateway = sourceGateway
 
 	return m
 }

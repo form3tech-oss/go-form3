@@ -31,9 +31,6 @@ type SchemeMessageAdmissionAttributes struct {
 	// scheme status code description
 	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
 
-	// source gateway
-	SourceGateway string `json:"source_gateway,omitempty"`
-
 	// status
 	Status SchemeMessageAdmissionStatus `json:"status,omitempty"`
 }
@@ -46,8 +43,6 @@ func SchemeMessageAdmissionAttributesWithDefaults(defaults client.Defaults) *Sch
 		SchemeStatusCode: defaults.GetString("SchemeMessageAdmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("SchemeMessageAdmissionAttributes", "scheme_status_code_description"),
-
-		SourceGateway: defaults.GetString("SchemeMessageAdmissionAttributes", "source_gateway"),
 
 		// TODO Status: SchemeMessageAdmissionStatus,
 
@@ -71,13 +66,6 @@ func (m *SchemeMessageAdmissionAttributes) WithSchemeStatusCode(schemeStatusCode
 func (m *SchemeMessageAdmissionAttributes) WithSchemeStatusCodeDescription(schemeStatusCodeDescription string) *SchemeMessageAdmissionAttributes {
 
 	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
-
-	return m
-}
-
-func (m *SchemeMessageAdmissionAttributes) WithSourceGateway(sourceGateway string) *SchemeMessageAdmissionAttributes {
-
-	m.SourceGateway = sourceGateway
 
 	return m
 }

@@ -341,7 +341,7 @@ type MandateSubmissionAttributes struct {
 
 	// last payment date
 	// Format: date
-	LastPaymentDate strfmt.Date `json:"last_payment_date,omitempty"`
+	LastPaymentDate *strfmt.Date `json:"last_payment_date,omitempty"`
 
 	// original mandate
 	OriginalMandate *MandateAttributes `json:"original_mandate,omitempty"`
@@ -366,7 +366,7 @@ type MandateSubmissionAttributes struct {
 func MandateSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateSubmissionAttributes {
 	return &MandateSubmissionAttributes{
 
-		LastPaymentDate: defaults.GetStrfmtDate("MandateSubmissionAttributes", "last_payment_date"),
+		LastPaymentDate: defaults.GetStrfmtDatePtr("MandateSubmissionAttributes", "last_payment_date"),
 
 		OriginalMandate: MandateAttributesWithDefaults(defaults),
 
@@ -384,8 +384,13 @@ func MandateSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateS
 
 func (m *MandateSubmissionAttributes) WithLastPaymentDate(lastPaymentDate strfmt.Date) *MandateSubmissionAttributes {
 
-	m.LastPaymentDate = lastPaymentDate
+	m.LastPaymentDate = &lastPaymentDate
 
+	return m
+}
+
+func (m *MandateSubmissionAttributes) WithoutLastPaymentDate() *MandateSubmissionAttributes {
+	m.LastPaymentDate = nil
 	return m
 }
 

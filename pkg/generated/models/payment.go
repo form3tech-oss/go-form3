@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v3/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -352,6 +353,9 @@ func (m *Payment) Json() string {
 // swagger:model PaymentAttributes
 type PaymentAttributes struct {
 
+	// Block to represent a Financial Institution/agent in the payment chain
+	Agents []*Agent `json:"agents,omitempty"`
+
 	// Amount of money moved between the instructing agent and instructed agent
 	// Pattern: ^[0-9.]{0,20}$
 	Amount string `json:"amount,omitempty"`
@@ -474,6 +478,8 @@ type PaymentAttributes struct {
 func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes {
 	return &PaymentAttributes{
 
+		Agents: make([]*Agent, 0),
+
 		Amount: defaults.GetString("PaymentAttributes", "amount"),
 
 		BatchBookingIndicator: defaults.GetString("PaymentAttributes", "batch_booking_indicator"),
@@ -550,6 +556,13 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 
 		UniqueSchemeID: defaults.GetString("PaymentAttributes", "unique_scheme_id"),
 	}
+}
+
+func (m *PaymentAttributes) WithAgents(agents []*Agent) *PaymentAttributes {
+
+	m.Agents = agents
+
+	return m
 }
 
 func (m *PaymentAttributes) WithAmount(amount string) *PaymentAttributes {
@@ -897,6 +910,10 @@ func (m *PaymentAttributes) WithUniqueSchemeID(uniqueSchemeID string) *PaymentAt
 func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAgents(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAmount(formats); err != nil {
 		res = append(res, err)
 	}
@@ -964,6 +981,31 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PaymentAttributes) validateAgents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Agents) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Agents); i++ {
+		if swag.IsZero(m.Agents[i]) { // not required
+			continue
+		}
+
+		if m.Agents[i] != nil {
+			if err := m.Agents[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "agents" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -1295,6 +1337,9 @@ type PaymentAttributesBeneficiaryParty struct {
 	// Beneficiary birth province
 	BirthProvince string `json:"birth_province,omitempty"`
 
+	// City/Town of the Beneficiary address
+	City string `json:"city,omitempty"`
+
 	// Country of the beneficiary address, ISO 3166 format country code
 	Country string `json:"country,omitempty"`
 
@@ -1342,6 +1387,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		BirthDate: defaults.GetStrfmtDatePtr("PaymentAttributesBeneficiaryParty", "birth_date"),
 
 		BirthProvince: defaults.GetString("PaymentAttributesBeneficiaryParty", "birth_province"),
+
+		City: defaults.GetString("PaymentAttributesBeneficiaryParty", "city"),
 
 		Country: defaults.GetString("PaymentAttributesBeneficiaryParty", "country"),
 
@@ -1437,6 +1484,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithoutBirthDate() *PaymentAttribute
 func (m *PaymentAttributesBeneficiaryParty) WithBirthProvince(birthProvince string) *PaymentAttributesBeneficiaryParty {
 
 	m.BirthProvince = birthProvince
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithCity(city string) *PaymentAttributesBeneficiaryParty {
+
+	m.City = city
 
 	return m
 }
@@ -1650,6 +1704,9 @@ type PaymentAttributesDebtorParty struct {
 	// Debtor birth province
 	BirthProvince string `json:"birth_province,omitempty"`
 
+	// City/Town of the Debtor address
+	City string `json:"city,omitempty"`
+
 	// Country of debtor address. ISO 3166 format country code"
 	Country string `json:"country,omitempty"`
 
@@ -1698,6 +1755,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 		BirthDate: defaults.GetStrfmtDatePtr("PaymentAttributesDebtorParty", "birth_date"),
 
 		BirthProvince: defaults.GetString("PaymentAttributesDebtorParty", "birth_province"),
+
+		City: defaults.GetString("PaymentAttributesDebtorParty", "city"),
 
 		Country: defaults.GetString("PaymentAttributesDebtorParty", "country"),
 
@@ -1788,6 +1847,13 @@ func (m *PaymentAttributesDebtorParty) WithoutBirthDate() *PaymentAttributesDebt
 func (m *PaymentAttributesDebtorParty) WithBirthProvince(birthProvince string) *PaymentAttributesDebtorParty {
 
 	m.BirthProvince = birthProvince
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithCity(city string) *PaymentAttributesDebtorParty {
+
+	m.City = city
 
 	return m
 }

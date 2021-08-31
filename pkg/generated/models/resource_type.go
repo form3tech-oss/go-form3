@@ -21,194 +21,179 @@ type ResourceType string
 
 const (
 
-	// ResourceTypeReversals captures enum value "reversals"
-	ResourceTypeReversals ResourceType = "reversals"
-
-	// ResourceTypeAccounts captures enum value "accounts"
-	ResourceTypeAccounts ResourceType = "accounts"
-
-	// ResourceTypePaymentAdvices captures enum value "payment_advices"
-	ResourceTypePaymentAdvices ResourceType = "payment_advices"
-
-	// ResourceTypePartyProductEvents captures enum value "party_product_events"
-	ResourceTypePartyProductEvents ResourceType = "party_product_events"
-
-	// ResourceTypeDirectAccount captures enum value "direct_account"
-	ResourceTypeDirectAccount ResourceType = "direct_account"
-
-	// ResourceTypeRecallDecisionSubmissions captures enum value "recall_decision_submissions"
-	ResourceTypeRecallDecisionSubmissions ResourceType = "recall_decision_submissions"
-
-	// ResourceTypeAccountAmendments captures enum value "account_amendments"
-	ResourceTypeAccountAmendments ResourceType = "account_amendments"
-
-	// ResourceTypeAccountRequestSubmissions captures enum value "account_request_submissions"
-	ResourceTypeAccountRequestSubmissions ResourceType = "account_request_submissions"
-
-	// ResourceTypeAccountAmendmentSubmissionValidations captures enum value "account_amendment_submission_validations"
-	ResourceTypeAccountAmendmentSubmissionValidations ResourceType = "account_amendment_submission_validations"
-
-	// ResourceTypePartyAccounts captures enum value "party_accounts"
-	ResourceTypePartyAccounts ResourceType = "party_accounts"
-
-	// ResourceTypeBranchIdentifications captures enum value "branch_identifications"
-	ResourceTypeBranchIdentifications ResourceType = "branch_identifications"
-
-	// ResourceTypeParties captures enum value "parties"
-	ResourceTypeParties ResourceType = "parties"
-
-	// ResourceTypeReturnReversals captures enum value "return_reversals"
-	ResourceTypeReturnReversals ResourceType = "return_reversals"
-
-	// ResourceTypeRecallReversals captures enum value "recall_reversals"
-	ResourceTypeRecallReversals ResourceType = "recall_reversals"
-
-	// ResourceTypeReversalSubmissionValidations captures enum value "reversal_submission_validations"
-	ResourceTypeReversalSubmissionValidations ResourceType = "reversal_submission_validations"
-
-	// ResourceTypeAccountRequestSubmissionValidations captures enum value "account_request_submission_validations"
-	ResourceTypeAccountRequestSubmissionValidations ResourceType = "account_request_submission_validations"
-
-	// ResourceTypeSchemeMessages captures enum value "scheme_messages"
-	ResourceTypeSchemeMessages ResourceType = "scheme_messages"
-
-	// ResourceTypeRecallDecisionAdmissions captures enum value "recall_decision_admissions"
-	ResourceTypeRecallDecisionAdmissions ResourceType = "recall_decision_admissions"
-
-	// ResourceTypeReturnAdmissions captures enum value "return_admissions"
-	ResourceTypeReturnAdmissions ResourceType = "return_admissions"
-
-	// ResourceTypePaymentAutomaticReturns captures enum value "payment_automatic_returns"
-	ResourceTypePaymentAutomaticReturns ResourceType = "payment_automatic_returns"
-
-	// ResourceTypeProductAssociations captures enum value "product_associations"
-	ResourceTypeProductAssociations ResourceType = "product_associations"
-
-	// ResourceTypeRecallSubmissions captures enum value "recall_submissions"
-	ResourceTypeRecallSubmissions ResourceType = "recall_submissions"
-
-	// ResourceTypeRecallAdmissions captures enum value "recall_admissions"
-	ResourceTypeRecallAdmissions ResourceType = "recall_admissions"
-
 	// ResourceTypeAccountConfigurations captures enum value "account_configurations"
 	ResourceTypeAccountConfigurations ResourceType = "account_configurations"
-
-	// ResourceTypePaymentAdmissionTasks captures enum value "payment_admission_tasks"
-	ResourceTypePaymentAdmissionTasks ResourceType = "payment_admission_tasks"
-
-	// ResourceTypeReturnSubmissionValidations captures enum value "return_submission_validations"
-	ResourceTypeReturnSubmissionValidations ResourceType = "return_submission_validations"
-
-	// ResourceTypePartyProductUpdatedEvents captures enum value "party_product_updated_events"
-	ResourceTypePartyProductUpdatedEvents ResourceType = "party_product_updated_events"
-
-	// ResourceTypeReturnReversalAdmissions captures enum value "return_reversal_admissions"
-	ResourceTypeReturnReversalAdmissions ResourceType = "return_reversal_admissions"
-
-	// ResourceTypePositions captures enum value "positions"
-	ResourceTypePositions ResourceType = "positions"
-
-	// ResourceTypeAccountIdentifications captures enum value "account_identifications"
-	ResourceTypeAccountIdentifications ResourceType = "account_identifications"
-
-	// ResourceTypeAccountIndirects captures enum value "account_indirects"
-	ResourceTypeAccountIndirects ResourceType = "account_indirects"
-
-	// ResourceTypeReturns captures enum value "returns"
-	ResourceTypeReturns ResourceType = "returns"
-
-	// ResourceTypePartyActors captures enum value "party_actors"
-	ResourceTypePartyActors ResourceType = "party_actors"
-
-	// ResourceTypeFxDeals captures enum value "fx_deals"
-	ResourceTypeFxDeals ResourceType = "fx_deals"
-
-	// ResourceTypePaymentSubmissionValidations captures enum value "payment_submission_validations"
-	ResourceTypePaymentSubmissionValidations ResourceType = "payment_submission_validations"
-
-	// ResourceTypeRecallSubmissionValidations captures enum value "recall_submission_validations"
-	ResourceTypeRecallSubmissionValidations ResourceType = "recall_submission_validations"
-
-	// ResourceTypeRecallDecisionSubmissionValidations captures enum value "recall_decision_submission_validations"
-	ResourceTypeRecallDecisionSubmissionValidations ResourceType = "recall_decision_submission_validations"
-
-	// ResourceTypePaymentAdviceSubmissionValidations captures enum value "payment_advice_submission_validations"
-	ResourceTypePaymentAdviceSubmissionValidations ResourceType = "payment_advice_submission_validations"
-
-	// ResourceTypeReturnSubmissions captures enum value "return_submissions"
-	ResourceTypeReturnSubmissions ResourceType = "return_submissions"
-
-	// ResourceTypeLimits captures enum value "limits"
-	ResourceTypeLimits ResourceType = "limits"
-
-	// ResourceTypePaymentAdviceSubmissions captures enum value "payment_advice_submissions"
-	ResourceTypePaymentAdviceSubmissions ResourceType = "payment_advice_submissions"
-
-	// ResourceTypeContacts captures enum value "contacts"
-	ResourceTypeContacts ResourceType = "contacts"
-
-	// ResourceTypeBankIds captures enum value "bank_ids"
-	ResourceTypeBankIds ResourceType = "bank_ids"
-
-	// ResourceTypeAccountRequests captures enum value "account_requests"
-	ResourceTypeAccountRequests ResourceType = "account_requests"
-
-	// ResourceTypeAccountRoutings captures enum value "account_routings"
-	ResourceTypeAccountRoutings ResourceType = "account_routings"
-
-	// ResourceTypeAccountAmendmentSubmissions captures enum value "account_amendment_submissions"
-	ResourceTypeAccountAmendmentSubmissions ResourceType = "account_amendment_submissions"
-
-	// ResourceTypeContactAccounts captures enum value "contact_accounts"
-	ResourceTypeContactAccounts ResourceType = "contact_accounts"
-
-	// ResourceTypePartyProducts captures enum value "party_products"
-	ResourceTypePartyProducts ResourceType = "party_products"
-
-	// ResourceTypeRecalls captures enum value "recalls"
-	ResourceTypeRecalls ResourceType = "recalls"
-
-	// ResourceTypeDirectDebit captures enum value "direct_debit"
-	ResourceTypeDirectDebit ResourceType = "direct_debit"
-
-	// ResourceTypePaymentDefaults captures enum value "payment_defaults"
-	ResourceTypePaymentDefaults ResourceType = "payment_defaults"
-
-	// ResourceTypeSchemeMessageAdmissions captures enum value "scheme_message_admissions"
-	ResourceTypeSchemeMessageAdmissions ResourceType = "scheme_message_admissions"
-
-	// ResourceTypeRecallReversalAdmissions captures enum value "recall_reversal_admissions"
-	ResourceTypeRecallReversalAdmissions ResourceType = "recall_reversal_admissions"
-
-	// ResourceTypePaymentSubmissions captures enum value "payment_submissions"
-	ResourceTypePaymentSubmissions ResourceType = "payment_submissions"
 
 	// ResourceTypeReversalAdmissions captures enum value "reversal_admissions"
 	ResourceTypeReversalAdmissions ResourceType = "reversal_admissions"
 
-	// ResourceTypeBranches captures enum value "branches"
-	ResourceTypeBranches ResourceType = "branches"
+	// ResourceTypeParties captures enum value "parties"
+	ResourceTypeParties ResourceType = "parties"
 
-	// ResourceTypeRecallDecisions captures enum value "recall_decisions"
-	ResourceTypeRecallDecisions ResourceType = "recall_decisions"
+	// ResourceTypeRecallAdmissions captures enum value "recall_admissions"
+	ResourceTypeRecallAdmissions ResourceType = "recall_admissions"
 
-	// ResourceTypeBics captures enum value "bics"
-	ResourceTypeBics ResourceType = "bics"
+	// ResourceTypePaymentAutomaticReturns captures enum value "payment_automatic_returns"
+	ResourceTypePaymentAutomaticReturns ResourceType = "payment_automatic_returns"
+
+	// ResourceTypeSchemeMessageAdmissions captures enum value "scheme_message_admissions"
+	ResourceTypeSchemeMessageAdmissions ResourceType = "scheme_message_admissions"
+
+	// ResourceTypeAccountAmendmentSubmissionValidations captures enum value "account_amendment_submission_validations"
+	ResourceTypeAccountAmendmentSubmissionValidations ResourceType = "account_amendment_submission_validations"
+
+	// ResourceTypeAccountIndirects captures enum value "account_indirects"
+	ResourceTypeAccountIndirects ResourceType = "account_indirects"
+
+	// ResourceTypeReturnSubmissions captures enum value "return_submissions"
+	ResourceTypeReturnSubmissions ResourceType = "return_submissions"
+
+	// ResourceTypeDirectDebit captures enum value "direct_debit"
+	ResourceTypeDirectDebit ResourceType = "direct_debit"
+
+	// ResourceTypeAccounts captures enum value "accounts"
+	ResourceTypeAccounts ResourceType = "accounts"
+
+	// ResourceTypeBranchIdentifications captures enum value "branch_identifications"
+	ResourceTypeBranchIdentifications ResourceType = "branch_identifications"
+
+	// ResourceTypePositions captures enum value "positions"
+	ResourceTypePositions ResourceType = "positions"
+
+	// ResourceTypeReturnReversals captures enum value "return_reversals"
+	ResourceTypeReturnReversals ResourceType = "return_reversals"
+
+	// ResourceTypeContactAccounts captures enum value "contact_accounts"
+	ResourceTypeContactAccounts ResourceType = "contact_accounts"
+
+	// ResourceTypeAccountIdentifications captures enum value "account_identifications"
+	ResourceTypeAccountIdentifications ResourceType = "account_identifications"
+
+	// ResourceTypeLimits captures enum value "limits"
+	ResourceTypeLimits ResourceType = "limits"
+
+	// ResourceTypeRecallReversalAdmissions captures enum value "recall_reversal_admissions"
+	ResourceTypeRecallReversalAdmissions ResourceType = "recall_reversal_admissions"
 
 	// ResourceTypeReversalSubmissions captures enum value "reversal_submissions"
 	ResourceTypeReversalSubmissions ResourceType = "reversal_submissions"
 
+	// ResourceTypeRecallReversals captures enum value "recall_reversals"
+	ResourceTypeRecallReversals ResourceType = "recall_reversals"
+
 	// ResourceTypePaymentBatches captures enum value "payment_batches"
 	ResourceTypePaymentBatches ResourceType = "payment_batches"
 
-	// ResourceTypePayments captures enum value "payments"
-	ResourceTypePayments ResourceType = "payments"
+	// ResourceTypeBics captures enum value "bics"
+	ResourceTypeBics ResourceType = "bics"
+
+	// ResourceTypePaymentAdmissions captures enum value "payment_admissions"
+	ResourceTypePaymentAdmissions ResourceType = "payment_admissions"
+
+	// ResourceTypePaymentAdviceSubmissionValidations captures enum value "payment_advice_submission_validations"
+	ResourceTypePaymentAdviceSubmissionValidations ResourceType = "payment_advice_submission_validations"
+
+	// ResourceTypeRecallSubmissionValidations captures enum value "recall_submission_validations"
+	ResourceTypeRecallSubmissionValidations ResourceType = "recall_submission_validations"
+
+	// ResourceTypeRecallDecisionSubmissions captures enum value "recall_decision_submissions"
+	ResourceTypeRecallDecisionSubmissions ResourceType = "recall_decision_submissions"
+
+	// ResourceTypeReversals captures enum value "reversals"
+	ResourceTypeReversals ResourceType = "reversals"
+
+	// ResourceTypeRecallSubmissions captures enum value "recall_submissions"
+	ResourceTypeRecallSubmissions ResourceType = "recall_submissions"
+
+	// ResourceTypeRecallDecisionAdmissions captures enum value "recall_decision_admissions"
+	ResourceTypeRecallDecisionAdmissions ResourceType = "recall_decision_admissions"
+
+	// ResourceTypeBankIds captures enum value "bank_ids"
+	ResourceTypeBankIds ResourceType = "bank_ids"
+
+	// ResourceTypeSchemeMessages captures enum value "scheme_messages"
+	ResourceTypeSchemeMessages ResourceType = "scheme_messages"
+
+	// ResourceTypeAccountAmendmentSubmissions captures enum value "account_amendment_submissions"
+	ResourceTypeAccountAmendmentSubmissions ResourceType = "account_amendment_submissions"
+
+	// ResourceTypeAccountRequestSubmissionValidations captures enum value "account_request_submission_validations"
+	ResourceTypeAccountRequestSubmissionValidations ResourceType = "account_request_submission_validations"
 
 	// ResourceTypeAccountEvents captures enum value "account_events"
 	ResourceTypeAccountEvents ResourceType = "account_events"
 
-	// ResourceTypePaymentAdmissions captures enum value "payment_admissions"
-	ResourceTypePaymentAdmissions ResourceType = "payment_admissions"
+	// ResourceTypeRecallDecisions captures enum value "recall_decisions"
+	ResourceTypeRecallDecisions ResourceType = "recall_decisions"
+
+	// ResourceTypeFxDeals captures enum value "fx_deals"
+	ResourceTypeFxDeals ResourceType = "fx_deals"
+
+	// ResourceTypeAccountRequestSubmissions captures enum value "account_request_submissions"
+	ResourceTypeAccountRequestSubmissions ResourceType = "account_request_submissions"
+
+	// ResourceTypeReturnAdmissions captures enum value "return_admissions"
+	ResourceTypeReturnAdmissions ResourceType = "return_admissions"
+
+	// ResourceTypeReturnSubmissionValidations captures enum value "return_submission_validations"
+	ResourceTypeReturnSubmissionValidations ResourceType = "return_submission_validations"
+
+	// ResourceTypeReversalSubmissionValidations captures enum value "reversal_submission_validations"
+	ResourceTypeReversalSubmissionValidations ResourceType = "reversal_submission_validations"
+
+	// ResourceTypeRecalls captures enum value "recalls"
+	ResourceTypeRecalls ResourceType = "recalls"
+
+	// ResourceTypePaymentSubmissionValidations captures enum value "payment_submission_validations"
+	ResourceTypePaymentSubmissionValidations ResourceType = "payment_submission_validations"
+
+	// ResourceTypeDirectAccount captures enum value "direct_account"
+	ResourceTypeDirectAccount ResourceType = "direct_account"
+
+	// ResourceTypePaymentAdviceSubmissions captures enum value "payment_advice_submissions"
+	ResourceTypePaymentAdviceSubmissions ResourceType = "payment_advice_submissions"
+
+	// ResourceTypeReturns captures enum value "returns"
+	ResourceTypeReturns ResourceType = "returns"
+
+	// ResourceTypePayments captures enum value "payments"
+	ResourceTypePayments ResourceType = "payments"
+
+	// ResourceTypeReturnReversalAdmissions captures enum value "return_reversal_admissions"
+	ResourceTypeReturnReversalAdmissions ResourceType = "return_reversal_admissions"
+
+	// ResourceTypeAccountAmendments captures enum value "account_amendments"
+	ResourceTypeAccountAmendments ResourceType = "account_amendments"
+
+	// ResourceTypePaymentAdmissionTasks captures enum value "payment_admission_tasks"
+	ResourceTypePaymentAdmissionTasks ResourceType = "payment_admission_tasks"
+
+	// ResourceTypeAccountRoutings captures enum value "account_routings"
+	ResourceTypeAccountRoutings ResourceType = "account_routings"
+
+	// ResourceTypePaymentAdvices captures enum value "payment_advices"
+	ResourceTypePaymentAdvices ResourceType = "payment_advices"
+
+	// ResourceTypeRecallDecisionSubmissionValidations captures enum value "recall_decision_submission_validations"
+	ResourceTypeRecallDecisionSubmissionValidations ResourceType = "recall_decision_submission_validations"
+
+	// ResourceTypePartyAccounts captures enum value "party_accounts"
+	ResourceTypePartyAccounts ResourceType = "party_accounts"
+
+	// ResourceTypeBranches captures enum value "branches"
+	ResourceTypeBranches ResourceType = "branches"
+
+	// ResourceTypePaymentSubmissions captures enum value "payment_submissions"
+	ResourceTypePaymentSubmissions ResourceType = "payment_submissions"
+
+	// ResourceTypePaymentDefaults captures enum value "payment_defaults"
+	ResourceTypePaymentDefaults ResourceType = "payment_defaults"
+
+	// ResourceTypeContacts captures enum value "contacts"
+	ResourceTypeContacts ResourceType = "contacts"
+
+	// ResourceTypeAccountRequests captures enum value "account_requests"
+	ResourceTypeAccountRequests ResourceType = "account_requests"
 )
 
 // for schema
@@ -216,7 +201,7 @@ var resourceTypeEnum []interface{}
 
 func init() {
 	var res []ResourceType
-	if err := json.Unmarshal([]byte(`["reversals","accounts","payment_advices","party_product_events","direct_account","recall_decision_submissions","account_amendments","account_request_submissions","account_amendment_submission_validations","party_accounts","branch_identifications","parties","return_reversals","recall_reversals","reversal_submission_validations","account_request_submission_validations","scheme_messages","recall_decision_admissions","return_admissions","payment_automatic_returns","product_associations","recall_submissions","recall_admissions","account_configurations","payment_admission_tasks","return_submission_validations","party_product_updated_events","return_reversal_admissions","positions","account_identifications","account_indirects","returns","party_actors","fx_deals","payment_submission_validations","recall_submission_validations","recall_decision_submission_validations","payment_advice_submission_validations","return_submissions","limits","payment_advice_submissions","contacts","bank_ids","account_requests","account_routings","account_amendment_submissions","contact_accounts","party_products","recalls","direct_debit","payment_defaults","scheme_message_admissions","recall_reversal_admissions","payment_submissions","reversal_admissions","branches","recall_decisions","bics","reversal_submissions","payment_batches","payments","account_events","payment_admissions"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["account_configurations","reversal_admissions","parties","recall_admissions","payment_automatic_returns","scheme_message_admissions","account_amendment_submission_validations","account_indirects","return_submissions","direct_debit","accounts","branch_identifications","positions","return_reversals","contact_accounts","account_identifications","limits","recall_reversal_admissions","reversal_submissions","recall_reversals","payment_batches","bics","payment_admissions","payment_advice_submission_validations","recall_submission_validations","recall_decision_submissions","reversals","recall_submissions","recall_decision_admissions","bank_ids","scheme_messages","account_amendment_submissions","account_request_submission_validations","account_events","recall_decisions","fx_deals","account_request_submissions","return_admissions","return_submission_validations","reversal_submission_validations","recalls","payment_submission_validations","direct_account","payment_advice_submissions","returns","payments","return_reversal_admissions","account_amendments","payment_admission_tasks","account_routings","payment_advices","recall_decision_submission_validations","party_accounts","branches","payment_submissions","payment_defaults","contacts","account_requests"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
