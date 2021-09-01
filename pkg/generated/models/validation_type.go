@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ValidationType optional validation to apply to the branch
+// ValidationType optional validation to apply to the account
 // swagger:model ValidationType
 type ValidationType string
 

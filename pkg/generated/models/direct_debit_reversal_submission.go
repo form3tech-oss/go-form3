@@ -352,6 +352,9 @@ func (m *DirectDebitReversalSubmission) Json() string {
 // swagger:model DirectDebitReversalSubmissionAttributes
 type DirectDebitReversalSubmissionAttributes struct {
 
+	// destination gateway
+	DestinationGateway string `json:"destination_gateway,omitempty"`
+
 	// scheme status code
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -378,6 +381,8 @@ type DirectDebitReversalSubmissionAttributes struct {
 func DirectDebitReversalSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReversalSubmissionAttributes {
 	return &DirectDebitReversalSubmissionAttributes{
 
+		DestinationGateway: defaults.GetString("DirectDebitReversalSubmissionAttributes", "destination_gateway"),
+
 		SchemeStatusCode: defaults.GetString("DirectDebitReversalSubmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("DirectDebitReversalSubmissionAttributes", "scheme_status_code_description"),
@@ -390,6 +395,13 @@ func DirectDebitReversalSubmissionAttributesWithDefaults(defaults client.Default
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("DirectDebitReversalSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *DirectDebitReversalSubmissionAttributes) WithDestinationGateway(destinationGateway string) *DirectDebitReversalSubmissionAttributes {
+
+	m.DestinationGateway = destinationGateway
+
+	return m
 }
 
 func (m *DirectDebitReversalSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitReversalSubmissionAttributes {

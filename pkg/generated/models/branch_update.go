@@ -251,7 +251,7 @@ type BranchUpdateAttributes struct {
 	ReferenceMask ReferenceMask `json:"reference_mask,omitempty"`
 
 	// validation type
-	ValidationType ValidationType `json:"validation_type,omitempty"`
+	ValidationType BranchValidationType `json:"validation_type,omitempty"`
 }
 
 func BranchUpdateAttributesWithDefaults(defaults client.Defaults) *BranchUpdateAttributes {
@@ -261,7 +261,7 @@ func BranchUpdateAttributesWithDefaults(defaults client.Defaults) *BranchUpdateA
 
 		// TODO ReferenceMask: ReferenceMask,
 
-		// TODO ValidationType: ValidationType,
+		// TODO ValidationType: BranchValidationType,
 
 	}
 }
@@ -280,7 +280,7 @@ func (m *BranchUpdateAttributes) WithReferenceMask(referenceMask ReferenceMask) 
 	return m
 }
 
-func (m *BranchUpdateAttributes) WithValidationType(validationType ValidationType) *BranchUpdateAttributes {
+func (m *BranchUpdateAttributes) WithValidationType(validationType BranchValidationType) *BranchUpdateAttributes {
 
 	m.ValidationType = validationType
 

@@ -32,6 +32,13 @@ func (o *PostOrganisationAccountsAccountIDIdentificationsReader) ReadResponse(re
 		}
 		return result, nil
 
+	case 409:
+		result := NewPostOrganisationAccountsAccountIDIdentificationsConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -65,6 +72,40 @@ func (o *PostOrganisationAccountsAccountIDIdentificationsCreated) readResponse(r
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.AccountIdentificationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostOrganisationAccountsAccountIDIdentificationsConflict creates a PostOrganisationAccountsAccountIDIdentificationsConflict with default headers values
+func NewPostOrganisationAccountsAccountIDIdentificationsConflict() *PostOrganisationAccountsAccountIDIdentificationsConflict {
+	return &PostOrganisationAccountsAccountIDIdentificationsConflict{}
+}
+
+/*PostOrganisationAccountsAccountIDIdentificationsConflict handles this case with default header values.
+
+Account Identification creation error, constraint violation of secondary identification
+*/
+type PostOrganisationAccountsAccountIDIdentificationsConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *PostOrganisationAccountsAccountIDIdentificationsConflict) Error() string {
+	return fmt.Sprintf("[POST /organisation/accounts/{account_id}/identifications][%d] postOrganisationAccountsAccountIdIdentificationsConflict", 409)
+}
+
+func (o *PostOrganisationAccountsAccountIDIdentificationsConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -29,11 +29,16 @@ type BranchAttributes struct {
 	// Pattern: ^[A-Z0-9]{1,11}$
 	BankID *string `json:"bank_id"`
 
+	// ISO 20022 code used to identify the type of bank ID being used
+	// Required: true
+	// Pattern: ^[A-Z]{0,16}$
+	BankIDCode *string `json:"bank_id_code"`
+
 	// if present – has effect of making secondary reference in payment mandatory
 	ReferenceMask string `json:"reference_mask,omitempty"`
 
 	// validation type
-	ValidationType ValidationType `json:"validation_type,omitempty"`
+	ValidationType BranchValidationType `json:"validation_type,omitempty"`
 }
 
 func BranchAttributesWithDefaults(defaults client.Defaults) *BranchAttributes {
@@ -43,9 +48,11 @@ func BranchAttributesWithDefaults(defaults client.Defaults) *BranchAttributes {
 
 		BankID: defaults.GetStringPtr("BranchAttributes", "bank_id"),
 
+		BankIDCode: defaults.GetStringPtr("BranchAttributes", "bank_id_code"),
+
 		ReferenceMask: defaults.GetString("BranchAttributes", "reference_mask"),
 
-		// TODO ValidationType: ValidationType,
+		// TODO ValidationType: BranchValidationType,
 
 	}
 }
@@ -69,6 +76,18 @@ func (m *BranchAttributes) WithoutBankID() *BranchAttributes {
 	return m
 }
 
+func (m *BranchAttributes) WithBankIDCode(bankIDCode string) *BranchAttributes {
+
+	m.BankIDCode = &bankIDCode
+
+	return m
+}
+
+func (m *BranchAttributes) WithoutBankIDCode() *BranchAttributes {
+	m.BankIDCode = nil
+	return m
+}
+
 func (m *BranchAttributes) WithReferenceMask(referenceMask string) *BranchAttributes {
 
 	m.ReferenceMask = referenceMask
@@ -76,7 +95,7 @@ func (m *BranchAttributes) WithReferenceMask(referenceMask string) *BranchAttrib
 	return m
 }
 
-func (m *BranchAttributes) WithValidationType(validationType ValidationType) *BranchAttributes {
+func (m *BranchAttributes) WithValidationType(validationType BranchValidationType) *BranchAttributes {
 
 	m.ValidationType = validationType
 
@@ -92,6 +111,10 @@ func (m *BranchAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateBankID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankIDCode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -128,6 +151,19 @@ func (m *BranchAttributes) validateBankID(formats strfmt.Registry) error {
 	}
 
 	if err := validate.Pattern("bank_id", "body", string(*m.BankID), `^[A-Z0-9]{1,11}$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BranchAttributes) validateBankIDCode(formats strfmt.Registry) error {
+
+	if err := validate.Required("bank_id_code", "body", m.BankIDCode); err != nil {
+		return err
+	}
+
+	if err := validate.Pattern("bank_id_code", "body", string(*m.BankIDCode), `^[A-Z]{0,16}$`); err != nil {
 		return err
 	}
 

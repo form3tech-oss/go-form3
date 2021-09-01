@@ -39,6 +39,13 @@ func (o *CreateMandateReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 
+	case 409:
+		result := NewCreateMandateConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -100,6 +107,40 @@ func (o *CreateMandateBadRequest) Error() string {
 }
 
 func (o *CreateMandateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateMandateConflict creates a CreateMandateConflict with default headers values
+func NewCreateMandateConflict() *CreateMandateConflict {
+	return &CreateMandateConflict{}
+}
+
+/*CreateMandateConflict handles this case with default header values.
+
+Mandate creation conflict Error
+*/
+type CreateMandateConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateMandateConflict) Error() string {
+	return fmt.Sprintf("[POST /transaction/mandates][%d] createMandateConflict", 409)
+}
+
+func (o *CreateMandateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

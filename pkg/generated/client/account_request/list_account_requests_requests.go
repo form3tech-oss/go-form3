@@ -30,6 +30,8 @@ func (c *Client) ListAccountRequests() *ListAccountRequestsRequest {
 
 		FilterBic: c.Defaults.GetStringPtr("ListAccountRequests", "filter[bic]"),
 
+		FilterCountry: c.Defaults.GetStringPtr("ListAccountRequests", "filter[country]"),
+
 		FilterIban: c.Defaults.GetStringPtr("ListAccountRequests", "filter[iban]"),
 
 		FilterOrganisationID: c.Defaults.GetStrfmtUUIDPtr("ListAccountRequests", "filter[organisation_id]"),
@@ -64,6 +66,10 @@ type ListAccountRequestsRequest struct {
 	/*FilterBic      Filter by BIC      */
 
 	FilterBic *string
+
+	/*FilterCountry      Filter by country ISO 3166-1 alpha-2      */
+
+	FilterCountry *string
 
 	/*FilterIban      Filter by IBAN      */
 
@@ -144,6 +150,20 @@ func (o *ListAccountRequestsRequest) WithFilterBic(filterBic string) *ListAccoun
 func (o *ListAccountRequestsRequest) WithoutFilterBic() *ListAccountRequestsRequest {
 
 	o.FilterBic = nil
+
+	return o
+}
+
+func (o *ListAccountRequestsRequest) WithFilterCountry(filterCountry string) *ListAccountRequestsRequest {
+
+	o.FilterCountry = &filterCountry
+
+	return o
+}
+
+func (o *ListAccountRequestsRequest) WithoutFilterCountry() *ListAccountRequestsRequest {
+
+	o.FilterCountry = nil
 
 	return o
 }
@@ -309,6 +329,22 @@ func (o *ListAccountRequestsRequest) WriteToRequest(r runtime.ClientRequest, reg
 		qFilterBic := qrFilterBic
 		if qFilterBic != "" {
 			if err := r.SetQueryParam("filter[bic]", qFilterBic); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterCountry != nil {
+
+		// query param filter[country]
+		var qrFilterCountry string
+		if o.FilterCountry != nil {
+			qrFilterCountry = *o.FilterCountry
+		}
+		qFilterCountry := qrFilterCountry
+		if qFilterCountry != "" {
+			if err := r.SetQueryParam("filter[country]", qFilterCountry); err != nil {
 				return err
 			}
 		}

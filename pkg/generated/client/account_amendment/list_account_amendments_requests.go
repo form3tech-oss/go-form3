@@ -28,6 +28,8 @@ func (c *Client) ListAccountAmendments() *ListAccountAmendmentsRequest {
 
 		FilterOrganisationID: c.Defaults.GetStrfmtUUIDPtr("ListAccountAmendments", "filter[organisation_id]"),
 
+		FilterSubmissionStatus: c.Defaults.GetStringPtr("ListAccountAmendments", "filter[submission.status]"),
+
 		FilterSubmissionSubmissionDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListAccountAmendments", "filter[submission.submission_date_from]"),
 
 		FilterSubmissionSubmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListAccountAmendments", "filter[submission.submission_date_to]"),
@@ -52,6 +54,10 @@ type ListAccountAmendmentsRequest struct {
 	/*FilterOrganisationID      Filter by organisationID      */
 
 	FilterOrganisationID *strfmt.UUID
+
+	/*FilterSubmissionStatus      Filter account request submission status      */
+
+	FilterSubmissionStatus *string
 
 	/*FilterSubmissionSubmissionDateFrom      Filter account amendments submission by date from      */
 
@@ -106,6 +112,20 @@ func (o *ListAccountAmendmentsRequest) WithFilterOrganisationID(filterOrganisati
 func (o *ListAccountAmendmentsRequest) WithoutFilterOrganisationID() *ListAccountAmendmentsRequest {
 
 	o.FilterOrganisationID = nil
+
+	return o
+}
+
+func (o *ListAccountAmendmentsRequest) WithFilterSubmissionStatus(filterSubmissionStatus string) *ListAccountAmendmentsRequest {
+
+	o.FilterSubmissionStatus = &filterSubmissionStatus
+
+	return o
+}
+
+func (o *ListAccountAmendmentsRequest) WithoutFilterSubmissionStatus() *ListAccountAmendmentsRequest {
+
+	o.FilterSubmissionStatus = nil
 
 	return o
 }
@@ -213,6 +233,22 @@ func (o *ListAccountAmendmentsRequest) WriteToRequest(r runtime.ClientRequest, r
 		qFilterOrganisationID := qrFilterOrganisationID.String()
 		if qFilterOrganisationID != "" {
 			if err := r.SetQueryParam("filter[organisation_id]", qFilterOrganisationID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterSubmissionStatus != nil {
+
+		// query param filter[submission.status]
+		var qrFilterSubmissionStatus string
+		if o.FilterSubmissionStatus != nil {
+			qrFilterSubmissionStatus = *o.FilterSubmissionStatus
+		}
+		qFilterSubmissionStatus := qrFilterSubmissionStatus
+		if qFilterSubmissionStatus != "" {
+			if err := r.SetQueryParam("filter[submission.status]", qFilterSubmissionStatus); err != nil {
 				return err
 			}
 		}

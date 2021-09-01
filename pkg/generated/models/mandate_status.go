@@ -21,20 +21,17 @@ type MandateStatus string
 
 const (
 
-	// MandateStatusPending captures enum value "pending"
-	MandateStatusPending MandateStatus = "pending"
+	// MandateStatusLive captures enum value "live"
+	MandateStatusLive MandateStatus = "live"
 
-	// MandateStatusSubmitted captures enum value "submitted"
-	MandateStatusSubmitted MandateStatus = "submitted"
+	// MandateStatusInvalid captures enum value "invalid"
+	MandateStatusInvalid MandateStatus = "invalid"
 
-	// MandateStatusActive captures enum value "active"
-	MandateStatusActive MandateStatus = "active"
+	// MandateStatusExpired captures enum value "expired"
+	MandateStatusExpired MandateStatus = "expired"
 
 	// MandateStatusCancelled captures enum value "cancelled"
 	MandateStatusCancelled MandateStatus = "cancelled"
-
-	// MandateStatusFailed captures enum value "failed"
-	MandateStatusFailed MandateStatus = "failed"
 )
 
 // for schema
@@ -42,7 +39,7 @@ var mandateStatusEnum []interface{}
 
 func init() {
 	var res []MandateStatus
-	if err := json.Unmarshal([]byte(`["pending","submitted","active","cancelled","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["live","invalid","expired","cancelled"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

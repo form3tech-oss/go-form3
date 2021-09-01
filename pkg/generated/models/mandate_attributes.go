@@ -60,8 +60,14 @@ type MandateAttributes struct {
 	// Format: date
 	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
+	// source
+	Source *string `json:"source,omitempty"`
+
 	// status
-	Status MandateStatus `json:"status,omitempty"`
+	Status *MandateStatus `json:"status,omitempty"`
+
+	// status reason
+	StatusReason *string `json:"status_reason,omitempty"`
 
 	// unique scheme id
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
@@ -94,7 +100,11 @@ func MandateAttributesWithDefaults(defaults client.Defaults) *MandateAttributes 
 
 		SchemeProcessingDate: defaults.GetStrfmtDatePtr("MandateAttributes", "scheme_processing_date"),
 
+		Source: defaults.GetStringPtr("MandateAttributes", "source"),
+
 		// TODO Status: MandateStatus,
+
+		StatusReason: defaults.GetStringPtr("MandateAttributes", "status_reason"),
 
 		UniqueSchemeID: defaults.GetString("MandateAttributes", "unique_scheme_id"),
 	}
@@ -204,10 +214,39 @@ func (m *MandateAttributes) WithoutSchemeProcessingDate() *MandateAttributes {
 	return m
 }
 
+func (m *MandateAttributes) WithSource(source string) *MandateAttributes {
+
+	m.Source = &source
+
+	return m
+}
+
+func (m *MandateAttributes) WithoutSource() *MandateAttributes {
+	m.Source = nil
+	return m
+}
+
 func (m *MandateAttributes) WithStatus(status MandateStatus) *MandateAttributes {
 
-	m.Status = status
+	m.Status = &status
 
+	return m
+}
+
+func (m *MandateAttributes) WithoutStatus() *MandateAttributes {
+	m.Status = nil
+	return m
+}
+
+func (m *MandateAttributes) WithStatusReason(statusReason string) *MandateAttributes {
+
+	m.StatusReason = &statusReason
+
+	return m
+}
+
+func (m *MandateAttributes) WithoutStatusReason() *MandateAttributes {
+	m.StatusReason = nil
 	return m
 }
 
@@ -353,11 +392,13 @@ func (m *MandateAttributes) validateStatus(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("status")
+	if m.Status != nil {
+		if err := m.Status.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("status")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil

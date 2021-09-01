@@ -23,7 +23,7 @@ type SubscriptionAttributes struct {
 
 	// callback transport
 	// Required: true
-	// Enum: [http email queue]
+	// Enum: [http queue]
 	CallbackTransport *string `json:"callback_transport"`
 
 	// callback uri
@@ -175,7 +175,7 @@ var subscriptionAttributesTypeCallbackTransportPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["http","email","queue"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["http","queue"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -187,9 +187,6 @@ const (
 
 	// SubscriptionAttributesCallbackTransportHTTP captures enum value "http"
 	SubscriptionAttributesCallbackTransportHTTP string = "http"
-
-	// SubscriptionAttributesCallbackTransportEmail captures enum value "email"
-	SubscriptionAttributesCallbackTransportEmail string = "email"
 
 	// SubscriptionAttributesCallbackTransportQueue captures enum value "queue"
 	SubscriptionAttributesCallbackTransportQueue string = "queue"

@@ -49,6 +49,10 @@ type AccountRequestAttributes struct {
 	// Pattern: ^[A-Z]{2}$
 	Country string `json:"country"`
 
+	// A free-format reference that can be used to link this account to an external system
+	// Pattern: ^[a-zA-Z0-9-$@., ]{0,256}$
+	CustomerID string `json:"customer_id,omitempty"`
+
 	// IBAN of the account. Will be calculated from other fields if not supplied.
 	// Pattern: ^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$
 	Iban string `json:"iban,omitempty"`
@@ -78,6 +82,8 @@ func AccountRequestAttributesWithDefaults(defaults client.Defaults) *AccountRequ
 		Bic: defaults.GetString("AccountRequestAttributes", "bic"),
 
 		Country: defaults.GetString("AccountRequestAttributes", "country"),
+
+		CustomerID: defaults.GetString("AccountRequestAttributes", "customer_id"),
 
 		Iban: defaults.GetString("AccountRequestAttributes", "iban"),
 
@@ -127,6 +133,13 @@ func (m *AccountRequestAttributes) WithBic(bic string) *AccountRequestAttributes
 func (m *AccountRequestAttributes) WithCountry(country string) *AccountRequestAttributes {
 
 	m.Country = country
+
+	return m
+}
+
+func (m *AccountRequestAttributes) WithCustomerID(customerID string) *AccountRequestAttributes {
+
+	m.CustomerID = customerID
 
 	return m
 }
@@ -194,6 +207,10 @@ func (m *AccountRequestAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCountry(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCustomerID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -291,6 +308,19 @@ func (m *AccountRequestAttributes) validateCountry(formats strfmt.Registry) erro
 	}
 
 	if err := validate.Pattern("country", "body", string(m.Country), `^[A-Z]{2}$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountRequestAttributes) validateCustomerID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CustomerID) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("customer_id", "body", string(m.CustomerID), `^[a-zA-Z0-9-$@., ]{0,256}$`); err != nil {
 		return err
 	}
 

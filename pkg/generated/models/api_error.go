@@ -27,6 +27,9 @@ type APIError struct {
 
 	// error message
 	ErrorMessage string `json:"error_message,omitempty"`
+
+	// error type
+	ErrorType *string `json:"error_type,omitempty"`
 }
 
 func APIErrorWithDefaults(defaults client.Defaults) *APIError {
@@ -35,6 +38,8 @@ func APIErrorWithDefaults(defaults client.Defaults) *APIError {
 		ErrorCode: defaults.GetStrfmtUUID("ApiError", "error_code"),
 
 		ErrorMessage: defaults.GetString("ApiError", "error_message"),
+
+		ErrorType: defaults.GetStringPtr("ApiError", "error_type"),
 	}
 }
 
@@ -49,6 +54,18 @@ func (m *APIError) WithErrorMessage(errorMessage string) *APIError {
 
 	m.ErrorMessage = errorMessage
 
+	return m
+}
+
+func (m *APIError) WithErrorType(errorType string) *APIError {
+
+	m.ErrorType = &errorType
+
+	return m
+}
+
+func (m *APIError) WithoutErrorType() *APIError {
+	m.ErrorType = nil
 	return m
 }
 

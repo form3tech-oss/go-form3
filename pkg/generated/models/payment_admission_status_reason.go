@@ -38,6 +38,39 @@ const (
 
 	// PaymentAdmissionStatusReasonSchemeTimeout captures enum value "scheme_timeout"
 	PaymentAdmissionStatusReasonSchemeTimeout PaymentAdmissionStatusReason = "scheme_timeout"
+
+	// PaymentAdmissionStatusReasonIncorrectReferenceValidationType captures enum value "incorrect_reference_validation_type"
+	PaymentAdmissionStatusReasonIncorrectReferenceValidationType PaymentAdmissionStatusReason = "incorrect_reference_validation_type"
+
+	// PaymentAdmissionStatusReasonIncorrectReferenceSecondaryIdentification captures enum value "incorrect_reference_secondary_identification"
+	PaymentAdmissionStatusReasonIncorrectReferenceSecondaryIdentification PaymentAdmissionStatusReason = "incorrect_reference_secondary_identification"
+
+	// PaymentAdmissionStatusReasonIncorrectReferenceReferenceMask captures enum value "incorrect_reference_reference_mask"
+	PaymentAdmissionStatusReasonIncorrectReferenceReferenceMask PaymentAdmissionStatusReason = "incorrect_reference_reference_mask"
+
+	// PaymentAdmissionStatusReasonAccountClosed captures enum value "account_closed"
+	PaymentAdmissionStatusReasonAccountClosed PaymentAdmissionStatusReason = "account_closed"
+
+	// PaymentAdmissionStatusReasonAccountClosedBusinessReasons captures enum value "account_closed_business_reasons"
+	PaymentAdmissionStatusReasonAccountClosedBusinessReasons PaymentAdmissionStatusReason = "account_closed_business_reasons"
+
+	// PaymentAdmissionStatusReasonAccountClosedStopped captures enum value "account_closed_stopped"
+	PaymentAdmissionStatusReasonAccountClosedStopped PaymentAdmissionStatusReason = "account_closed_stopped"
+
+	// PaymentAdmissionStatusReasonAccountClosedCurrency captures enum value "account_closed_currency"
+	PaymentAdmissionStatusReasonAccountClosedCurrency PaymentAdmissionStatusReason = "account_closed_currency"
+
+	// PaymentAdmissionStatusReasonAccountClosedTransferred captures enum value "account_closed_transferred"
+	PaymentAdmissionStatusReasonAccountClosedTransferred PaymentAdmissionStatusReason = "account_closed_transferred"
+
+	// PaymentAdmissionStatusReasonAccountClosedBeneficiaryDeceased captures enum value "account_closed_beneficiary_deceased"
+	PaymentAdmissionStatusReasonAccountClosedBeneficiaryDeceased PaymentAdmissionStatusReason = "account_closed_beneficiary_deceased"
+
+	// PaymentAdmissionStatusReasonAccountClosedBeneficiarySensitivities captures enum value "account_closed_beneficiary_sensitivities"
+	PaymentAdmissionStatusReasonAccountClosedBeneficiarySensitivities PaymentAdmissionStatusReason = "account_closed_beneficiary_sensitivities"
+
+	// PaymentAdmissionStatusReasonAccountClosedTermsAndConditions captures enum value "account_closed_terms_and_conditions"
+	PaymentAdmissionStatusReasonAccountClosedTermsAndConditions PaymentAdmissionStatusReason = "account_closed_terms_and_conditions"
 )
 
 // for schema
@@ -45,7 +78,7 @@ var paymentAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []PaymentAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","customer_check_failed","scheme_timeout"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","customer_check_failed","scheme_timeout","incorrect_reference_validation_type","incorrect_reference_secondary_identification","incorrect_reference_reference_mask","account_closed","account_closed_business_reasons","account_closed_stopped","account_closed_currency","account_closed_transferred","account_closed_beneficiary_deceased","account_closed_beneficiary_sensitivities","account_closed_terms_and_conditions"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
