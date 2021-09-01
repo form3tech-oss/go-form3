@@ -27,7 +27,7 @@ func TestMTLS(t *testing.T) {
 	u, err := url.Parse(ts.URL)
 	require.NoError(t, err)
 
-	cert, err := tls.LoadX509KeyPair("../../test/client.crt", "../../test/ca.key")
+	cert, err := tls.LoadX509KeyPair("../../test/client.crt", "../../test/client.key")
 	require.NoError(t, err)
 
 	uu, err := uuid.Parse("9cdc44af-479c-45a7-9973-07b5b8608d11")
@@ -54,7 +54,7 @@ func NewLocalHTTPSTestServer(t *testing.T, handler http.Handler) *httptest.Serve
 
 	ts := httptest.NewUnstartedServer(handler)
 
-	cert, err := tls.LoadX509KeyPair("../../test/server.crt", "../../test/ca.key")
+	cert, err := tls.LoadX509KeyPair("../../test/server.crt", "../../test/server.key")
 	require.NoError(t, err)
 
 	caCert, err := ioutil.ReadFile("../../test/root.crt")
