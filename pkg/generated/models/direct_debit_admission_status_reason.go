@@ -50,6 +50,24 @@ const (
 
 	// DirectDebitAdmissionStatusReasonNoInstruction captures enum value "no_instruction"
 	DirectDebitAdmissionStatusReasonNoInstruction DirectDebitAdmissionStatusReason = "no_instruction"
+
+	// DirectDebitAdmissionStatusReasonAccountTransferredToNewPsp captures enum value "account_transferred_to_new_psp"
+	DirectDebitAdmissionStatusReasonAccountTransferredToNewPsp DirectDebitAdmissionStatusReason = "account_transferred_to_new_psp"
+
+	// DirectDebitAdmissionStatusReasonPayingBankCancellation captures enum value "paying_bank_cancellation"
+	DirectDebitAdmissionStatusReasonPayingBankCancellation DirectDebitAdmissionStatusReason = "paying_bank_cancellation"
+
+	// DirectDebitAdmissionStatusReasonCancelledByPayer captures enum value "cancelled_by_payer"
+	DirectDebitAdmissionStatusReasonCancelledByPayer DirectDebitAdmissionStatusReason = "cancelled_by_payer"
+
+	// DirectDebitAdmissionStatusReasonPayerDeceased captures enum value "payer_deceased"
+	DirectDebitAdmissionStatusReasonPayerDeceased DirectDebitAdmissionStatusReason = "payer_deceased"
+
+	// DirectDebitAdmissionStatusReasonAccountClosed captures enum value "account_closed"
+	DirectDebitAdmissionStatusReasonAccountClosed DirectDebitAdmissionStatusReason = "account_closed"
+
+	// DirectDebitAdmissionStatusReasonSchemeStatusInvalid captures enum value "scheme_status_invalid"
+	DirectDebitAdmissionStatusReasonSchemeStatusInvalid DirectDebitAdmissionStatusReason = "scheme_status_invalid"
 )
 
 // for schema
@@ -57,7 +75,7 @@ var directDebitAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

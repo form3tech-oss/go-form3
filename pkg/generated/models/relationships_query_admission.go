@@ -22,17 +22,17 @@ import (
 type RelationshipsQueryAdmission struct {
 
 	// data
-	Data []*RelationshipsQueryAdmissionProperties `json:"data"`
+	Data []*QueryAdmission `json:"data"`
 }
 
 func RelationshipsQueryAdmissionWithDefaults(defaults client.Defaults) *RelationshipsQueryAdmission {
 	return &RelationshipsQueryAdmission{
 
-		Data: make([]*RelationshipsQueryAdmissionProperties, 0),
+		Data: make([]*QueryAdmission, 0),
 	}
 }
 
-func (m *RelationshipsQueryAdmission) WithData(data []*RelationshipsQueryAdmissionProperties) *RelationshipsQueryAdmission {
+func (m *RelationshipsQueryAdmission) WithData(data []*QueryAdmission) *RelationshipsQueryAdmission {
 
 	m.Data = data
 

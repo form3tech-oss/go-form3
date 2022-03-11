@@ -33,11 +33,19 @@ func (c *Client) GetTransactionQueries() *GetTransactionQueriesRequest {
 
 		FilterPaymentAdmissionID: c.Defaults.GetStrfmtUUIDPtr("GetTransactionQueries", "filter[payment_admission.id]"),
 
+		FilterPaymentSubmissionID: c.Defaults.GetStrfmtUUIDPtr("GetTransactionQueries", "filter[payment_submission.id]"),
+
 		FilterProcessingDateFrom: c.Defaults.GetStrfmtDatePtr("GetTransactionQueries", "filter[processing_date_from]"),
 
 		FilterProcessingDateTo: c.Defaults.GetStrfmtDatePtr("GetTransactionQueries", "filter[processing_date_to]"),
 
+		FilterQueryID: c.Defaults.GetStrfmtUUIDPtr("GetTransactionQueries", "filter[query.id]"),
+
 		FilterQueryType: c.Defaults.GetStringPtr("GetTransactionQueries", "filter[query_type]"),
+
+		FilterRecallID: c.Defaults.GetStrfmtUUIDPtr("GetTransactionQueries", "filter[recall.id]"),
+
+		FilterRecallSubmissionID: c.Defaults.GetStrfmtUUIDPtr("GetTransactionQueries", "filter[recall_submission.id]"),
 
 		FilterStatus: c.Defaults.GetStringPtr("GetTransactionQueries", "filter[status]"),
 
@@ -78,6 +86,10 @@ type GetTransactionQueriesRequest struct {
 
 	FilterPaymentAdmissionID *strfmt.UUID
 
+	/*FilterPaymentSubmissionID      Find all queries with a certain payment submission id.      */
+
+	FilterPaymentSubmissionID *strfmt.UUID
+
 	/*FilterProcessingDateFrom      Find all queries from a certain value date.      */
 
 	FilterProcessingDateFrom *strfmt.Date
@@ -86,9 +98,21 @@ type GetTransactionQueriesRequest struct {
 
 	FilterProcessingDateTo *strfmt.Date
 
+	/*FilterQueryID      Find all queries with a certain query id.      */
+
+	FilterQueryID *strfmt.UUID
+
 	/*FilterQueryType      Find all queries for a given query type      */
 
 	FilterQueryType *string
+
+	/*FilterRecallID      Find all queries with a certain recall id.      */
+
+	FilterRecallID *strfmt.UUID
+
+	/*FilterRecallSubmissionID      Find all queries with a certain recall submission id.      */
+
+	FilterRecallSubmissionID *strfmt.UUID
 
 	/*FilterStatus      Find all queries for a given status      */
 
@@ -199,6 +223,20 @@ func (o *GetTransactionQueriesRequest) WithoutFilterPaymentAdmissionID() *GetTra
 	return o
 }
 
+func (o *GetTransactionQueriesRequest) WithFilterPaymentSubmissionID(filterPaymentSubmissionID strfmt.UUID) *GetTransactionQueriesRequest {
+
+	o.FilterPaymentSubmissionID = &filterPaymentSubmissionID
+
+	return o
+}
+
+func (o *GetTransactionQueriesRequest) WithoutFilterPaymentSubmissionID() *GetTransactionQueriesRequest {
+
+	o.FilterPaymentSubmissionID = nil
+
+	return o
+}
+
 func (o *GetTransactionQueriesRequest) WithFilterProcessingDateFrom(filterProcessingDateFrom strfmt.Date) *GetTransactionQueriesRequest {
 
 	o.FilterProcessingDateFrom = &filterProcessingDateFrom
@@ -227,6 +265,20 @@ func (o *GetTransactionQueriesRequest) WithoutFilterProcessingDateTo() *GetTrans
 	return o
 }
 
+func (o *GetTransactionQueriesRequest) WithFilterQueryID(filterQueryID strfmt.UUID) *GetTransactionQueriesRequest {
+
+	o.FilterQueryID = &filterQueryID
+
+	return o
+}
+
+func (o *GetTransactionQueriesRequest) WithoutFilterQueryID() *GetTransactionQueriesRequest {
+
+	o.FilterQueryID = nil
+
+	return o
+}
+
 func (o *GetTransactionQueriesRequest) WithFilterQueryType(filterQueryType string) *GetTransactionQueriesRequest {
 
 	o.FilterQueryType = &filterQueryType
@@ -237,6 +289,34 @@ func (o *GetTransactionQueriesRequest) WithFilterQueryType(filterQueryType strin
 func (o *GetTransactionQueriesRequest) WithoutFilterQueryType() *GetTransactionQueriesRequest {
 
 	o.FilterQueryType = nil
+
+	return o
+}
+
+func (o *GetTransactionQueriesRequest) WithFilterRecallID(filterRecallID strfmt.UUID) *GetTransactionQueriesRequest {
+
+	o.FilterRecallID = &filterRecallID
+
+	return o
+}
+
+func (o *GetTransactionQueriesRequest) WithoutFilterRecallID() *GetTransactionQueriesRequest {
+
+	o.FilterRecallID = nil
+
+	return o
+}
+
+func (o *GetTransactionQueriesRequest) WithFilterRecallSubmissionID(filterRecallSubmissionID strfmt.UUID) *GetTransactionQueriesRequest {
+
+	o.FilterRecallSubmissionID = &filterRecallSubmissionID
+
+	return o
+}
+
+func (o *GetTransactionQueriesRequest) WithoutFilterRecallSubmissionID() *GetTransactionQueriesRequest {
+
+	o.FilterRecallSubmissionID = nil
 
 	return o
 }
@@ -395,6 +475,22 @@ func (o *GetTransactionQueriesRequest) WriteToRequest(r runtime.ClientRequest, r
 
 	}
 
+	if o.FilterPaymentSubmissionID != nil {
+
+		// query param filter[payment_submission.id]
+		var qrFilterPaymentSubmissionID strfmt.UUID
+		if o.FilterPaymentSubmissionID != nil {
+			qrFilterPaymentSubmissionID = *o.FilterPaymentSubmissionID
+		}
+		qFilterPaymentSubmissionID := qrFilterPaymentSubmissionID.String()
+		if qFilterPaymentSubmissionID != "" {
+			if err := r.SetQueryParam("filter[payment_submission.id]", qFilterPaymentSubmissionID); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	if o.FilterProcessingDateFrom != nil {
 
 		// query param filter[processing_date_from]
@@ -427,6 +523,22 @@ func (o *GetTransactionQueriesRequest) WriteToRequest(r runtime.ClientRequest, r
 
 	}
 
+	if o.FilterQueryID != nil {
+
+		// query param filter[query.id]
+		var qrFilterQueryID strfmt.UUID
+		if o.FilterQueryID != nil {
+			qrFilterQueryID = *o.FilterQueryID
+		}
+		qFilterQueryID := qrFilterQueryID.String()
+		if qFilterQueryID != "" {
+			if err := r.SetQueryParam("filter[query.id]", qFilterQueryID); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	if o.FilterQueryType != nil {
 
 		// query param filter[query_type]
@@ -437,6 +549,38 @@ func (o *GetTransactionQueriesRequest) WriteToRequest(r runtime.ClientRequest, r
 		qFilterQueryType := qrFilterQueryType
 		if qFilterQueryType != "" {
 			if err := r.SetQueryParam("filter[query_type]", qFilterQueryType); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterRecallID != nil {
+
+		// query param filter[recall.id]
+		var qrFilterRecallID strfmt.UUID
+		if o.FilterRecallID != nil {
+			qrFilterRecallID = *o.FilterRecallID
+		}
+		qFilterRecallID := qrFilterRecallID.String()
+		if qFilterRecallID != "" {
+			if err := r.SetQueryParam("filter[recall.id]", qFilterRecallID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterRecallSubmissionID != nil {
+
+		// query param filter[recall_submission.id]
+		var qrFilterRecallSubmissionID strfmt.UUID
+		if o.FilterRecallSubmissionID != nil {
+			qrFilterRecallSubmissionID = *o.FilterRecallSubmissionID
+		}
+		qFilterRecallSubmissionID := qrFilterRecallSubmissionID.String()
+		if qFilterRecallSubmissionID != "" {
+			if err := r.SetQueryParam("filter[recall_submission.id]", qFilterRecallSubmissionID); err != nil {
 				return err
 			}
 		}

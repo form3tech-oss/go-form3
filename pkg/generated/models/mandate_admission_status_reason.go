@@ -44,6 +44,15 @@ const (
 
 	// MandateAdmissionStatusReasonUnknownInstruction captures enum value "unknown_instruction"
 	MandateAdmissionStatusReasonUnknownInstruction MandateAdmissionStatusReason = "unknown_instruction"
+
+	// MandateAdmissionStatusReasonPayerReferenceNotUnique captures enum value "payer_reference_not_unique"
+	MandateAdmissionStatusReasonPayerReferenceNotUnique MandateAdmissionStatusReason = "payer_reference_not_unique"
+
+	// MandateAdmissionStatusReasonInvalidReference captures enum value "invalid_reference"
+	MandateAdmissionStatusReasonInvalidReference MandateAdmissionStatusReason = "invalid_reference"
+
+	// MandateAdmissionStatusReasonNotEligibleForReinstatementByOriginator captures enum value "not_eligible_for_reinstatement_by_originator"
+	MandateAdmissionStatusReasonNotEligibleForReinstatementByOriginator MandateAdmissionStatusReason = "not_eligible_for_reinstatement_by_originator"
 )
 
 // for schema
@@ -51,7 +60,7 @@ var mandateAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []MandateAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","mandate_cancelled","mandate_expired","mandate_failed","unknown_instruction"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","mandate_cancelled","mandate_expired","mandate_failed","unknown_instruction","payer_reference_not_unique","invalid_reference","not_eligible_for_reinstatement_by_originator"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

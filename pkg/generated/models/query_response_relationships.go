@@ -21,22 +21,27 @@ import (
 type QueryResponseRelationships struct {
 
 	// query
-	Query *RelationshipsQuery `json:"query,omitempty"`
+	Query *RelationshipsFullQuery `json:"query,omitempty"`
 
-	// query submission
-	QuerySubmission *RelationshipQuerySubmission `json:"query_submission,omitempty"`
+	// query response admission
+	QueryResponseAdmission *RelationshipQueryResponseAdmission `json:"query_response_admission,omitempty"`
+
+	// query response submission
+	QueryResponseSubmission *RelationshipQueryResponseSubmission `json:"query_response_submission,omitempty"`
 }
 
 func QueryResponseRelationshipsWithDefaults(defaults client.Defaults) *QueryResponseRelationships {
 	return &QueryResponseRelationships{
 
-		Query: RelationshipsQueryWithDefaults(defaults),
+		Query: RelationshipsFullQueryWithDefaults(defaults),
 
-		QuerySubmission: RelationshipQuerySubmissionWithDefaults(defaults),
+		QueryResponseAdmission: RelationshipQueryResponseAdmissionWithDefaults(defaults),
+
+		QueryResponseSubmission: RelationshipQueryResponseSubmissionWithDefaults(defaults),
 	}
 }
 
-func (m *QueryResponseRelationships) WithQuery(query RelationshipsQuery) *QueryResponseRelationships {
+func (m *QueryResponseRelationships) WithQuery(query RelationshipsFullQuery) *QueryResponseRelationships {
 
 	m.Query = &query
 
@@ -48,15 +53,27 @@ func (m *QueryResponseRelationships) WithoutQuery() *QueryResponseRelationships 
 	return m
 }
 
-func (m *QueryResponseRelationships) WithQuerySubmission(querySubmission RelationshipQuerySubmission) *QueryResponseRelationships {
+func (m *QueryResponseRelationships) WithQueryResponseAdmission(queryResponseAdmission RelationshipQueryResponseAdmission) *QueryResponseRelationships {
 
-	m.QuerySubmission = &querySubmission
+	m.QueryResponseAdmission = &queryResponseAdmission
 
 	return m
 }
 
-func (m *QueryResponseRelationships) WithoutQuerySubmission() *QueryResponseRelationships {
-	m.QuerySubmission = nil
+func (m *QueryResponseRelationships) WithoutQueryResponseAdmission() *QueryResponseRelationships {
+	m.QueryResponseAdmission = nil
+	return m
+}
+
+func (m *QueryResponseRelationships) WithQueryResponseSubmission(queryResponseSubmission RelationshipQueryResponseSubmission) *QueryResponseRelationships {
+
+	m.QueryResponseSubmission = &queryResponseSubmission
+
+	return m
+}
+
+func (m *QueryResponseRelationships) WithoutQueryResponseSubmission() *QueryResponseRelationships {
+	m.QueryResponseSubmission = nil
 	return m
 }
 
@@ -68,7 +85,11 @@ func (m *QueryResponseRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateQuerySubmission(formats); err != nil {
+	if err := m.validateQueryResponseAdmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQueryResponseSubmission(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -96,16 +117,34 @@ func (m *QueryResponseRelationships) validateQuery(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *QueryResponseRelationships) validateQuerySubmission(formats strfmt.Registry) error {
+func (m *QueryResponseRelationships) validateQueryResponseAdmission(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.QuerySubmission) { // not required
+	if swag.IsZero(m.QueryResponseAdmission) { // not required
 		return nil
 	}
 
-	if m.QuerySubmission != nil {
-		if err := m.QuerySubmission.Validate(formats); err != nil {
+	if m.QueryResponseAdmission != nil {
+		if err := m.QueryResponseAdmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("query_submission")
+				return ve.ValidateName("query_response_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryResponseRelationships) validateQueryResponseSubmission(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.QueryResponseSubmission) { // not required
+		return nil
+	}
+
+	if m.QueryResponseSubmission != nil {
+		if err := m.QueryResponseSubmission.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("query_response_submission")
 			}
 			return err
 		}

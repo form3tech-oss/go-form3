@@ -29,7 +29,7 @@ type AccountAttributes struct {
 	// Enum: [Personal Business]
 	AccountClassification *string `json:"account_classification,omitempty"`
 
-	// Is the account opted out of account matching, e.g. CoP?
+	// - deprecated - Is the account opted out of account matching, e.g. CoP?
 	AccountMatchingOptOut *bool `json:"account_matching_opt_out,omitempty"`
 
 	// Account number of the account. A unique number will automatically be generated if not provided.
@@ -90,13 +90,17 @@ type AccountAttributes struct {
 	// Max Items: 4
 	Name []string `json:"name"`
 
+	// Describes the status of the account for name matching via CoP. The value determines the code with which Form3 responds to matched CoP requests to this account.
+	// Enum: [supported switched opted_out not_supported]
+	NameMatchingStatus *string `json:"name_matching_status,omitempty"`
+
 	// organisation identification
 	OrganisationIdentification *AccountAttributesOrganisationIdentification `json:"organisation_identification,omitempty"`
 
 	// private identification
 	PrivateIdentification *AccountAttributesPrivateIdentification `json:"private_identification,omitempty"`
 
-	// Accounting system or service. It will be added to each payment received to an account.
+	// - deprecated - Accounting system or service. It will be added to each payment received to an account.
 	// Max Length: 35
 	ProcessingService string `json:"processing_service,omitempty"`
 
@@ -116,7 +120,7 @@ type AccountAttributes struct {
 	// status reason
 	StatusReason StatusReason `json:"status_reason,omitempty"`
 
-	// Indicates whether the account has been switched using the Current Account Switch Service.
+	// - deprecated - Indicates whether the account has been switched using the Current Account Switch Service.
 	Switched *bool `json:"switched,omitempty"`
 
 	// - deprecated - Customer title.
@@ -124,7 +128,11 @@ type AccountAttributes struct {
 	// Min Length: 1
 	Title string `json:"title,omitempty"`
 
-	// All purpose field to store specific data for the associated account. It will be added to each payment received to an account.
+	// All purpose list of key-value pairs to store specific data for the associated account. It will be added to each payment received to an account.
+	// Max Items: 5
+	UserDefinedData []*UserDefinedData `json:"user_defined_data,omitempty"`
+
+	// - deprecated - All purpose field to store specific data for the associated account. It will be added to each payment received to an account.
 	// Max Length: 35
 	UserDefinedInformation string `json:"user_defined_information,omitempty"`
 
@@ -169,6 +177,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 
 		Name: make([]string, 0),
 
+		NameMatchingStatus: defaults.GetStringPtr("AccountAttributes", "name_matching_status"),
+
 		OrganisationIdentification: AccountAttributesOrganisationIdentificationWithDefaults(defaults),
 
 		PrivateIdentification: AccountAttributesPrivateIdentificationWithDefaults(defaults),
@@ -186,6 +196,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 		Switched: defaults.GetBoolPtr("AccountAttributes", "switched"),
 
 		Title: defaults.GetString("AccountAttributes", "title"),
+
+		UserDefinedData: make([]*UserDefinedData, 0),
 
 		UserDefinedInformation: defaults.GetString("AccountAttributes", "user_defined_information"),
 
@@ -333,6 +345,18 @@ func (m *AccountAttributes) WithName(name []string) *AccountAttributes {
 	return m
 }
 
+func (m *AccountAttributes) WithNameMatchingStatus(nameMatchingStatus string) *AccountAttributes {
+
+	m.NameMatchingStatus = &nameMatchingStatus
+
+	return m
+}
+
+func (m *AccountAttributes) WithoutNameMatchingStatus() *AccountAttributes {
+	m.NameMatchingStatus = nil
+	return m
+}
+
 func (m *AccountAttributes) WithOrganisationIdentification(organisationIdentification AccountAttributesOrganisationIdentification) *AccountAttributes {
 
 	m.OrganisationIdentification = &organisationIdentification
@@ -407,6 +431,13 @@ func (m *AccountAttributes) WithoutSwitched() *AccountAttributes {
 func (m *AccountAttributes) WithTitle(title string) *AccountAttributes {
 
 	m.Title = title
+
+	return m
+}
+
+func (m *AccountAttributes) WithUserDefinedData(userDefinedData []*UserDefinedData) *AccountAttributes {
+
+	m.UserDefinedData = userDefinedData
 
 	return m
 }
@@ -489,6 +520,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateNameMatchingStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateOrganisationIdentification(formats); err != nil {
 		res = append(res, err)
 	}
@@ -518,6 +553,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTitle(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserDefinedData(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -813,6 +852,55 @@ func (m *AccountAttributes) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+var accountAttributesTypeNameMatchingStatusPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["supported","switched","opted_out","not_supported"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		accountAttributesTypeNameMatchingStatusPropEnum = append(accountAttributesTypeNameMatchingStatusPropEnum, v)
+	}
+}
+
+const (
+
+	// AccountAttributesNameMatchingStatusSupported captures enum value "supported"
+	AccountAttributesNameMatchingStatusSupported string = "supported"
+
+	// AccountAttributesNameMatchingStatusSwitched captures enum value "switched"
+	AccountAttributesNameMatchingStatusSwitched string = "switched"
+
+	// AccountAttributesNameMatchingStatusOptedOut captures enum value "opted_out"
+	AccountAttributesNameMatchingStatusOptedOut string = "opted_out"
+
+	// AccountAttributesNameMatchingStatusNotSupported captures enum value "not_supported"
+	AccountAttributesNameMatchingStatusNotSupported string = "not_supported"
+)
+
+// prop value enum
+func (m *AccountAttributes) validateNameMatchingStatusEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, accountAttributesTypeNameMatchingStatusPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *AccountAttributes) validateNameMatchingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.NameMatchingStatus) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateNameMatchingStatusEnum("name_matching_status", "body", *m.NameMatchingStatus); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *AccountAttributes) validateOrganisationIdentification(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.OrganisationIdentification) { // not required
@@ -969,6 +1057,37 @@ func (m *AccountAttributes) validateTitle(formats strfmt.Registry) error {
 
 	if err := validate.MaxLength("title", "body", string(m.Title), 40); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validateUserDefinedData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserDefinedData) { // not required
+		return nil
+	}
+
+	iUserDefinedDataSize := int64(len(m.UserDefinedData))
+
+	if err := validate.MaxItems("user_defined_data", "body", iUserDefinedDataSize, 5); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.UserDefinedData); i++ {
+		if swag.IsZero(m.UserDefinedData[i]) { // not required
+			continue
+		}
+
+		if m.UserDefinedData[i] != nil {
+			if err := m.UserDefinedData[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("user_defined_data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

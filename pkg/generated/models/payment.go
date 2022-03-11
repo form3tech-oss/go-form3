@@ -459,6 +459,9 @@ type PaymentAttributes struct {
 	// senders correspondent
 	SendersCorrespondent *SendersCorrespondentAccountHoldingEntity `json:"senders_correspondent,omitempty"`
 
+	// settlement
+	Settlement *Settlement `json:"settlement,omitempty"`
+
 	// structured reference
 	StructuredReference *PaymentAttributesStructuredReference `json:"structured_reference,omitempty"`
 
@@ -545,6 +548,8 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 		SchemeTransactionID: defaults.GetString("PaymentAttributes", "scheme_transaction_id"),
 
 		SendersCorrespondent: SendersCorrespondentAccountHoldingEntityWithDefaults(defaults),
+
+		Settlement: SettlementWithDefaults(defaults),
 
 		StructuredReference: PaymentAttributesStructuredReferenceWithDefaults(defaults),
 
@@ -851,6 +856,18 @@ func (m *PaymentAttributes) WithoutSendersCorrespondent() *PaymentAttributes {
 	return m
 }
 
+func (m *PaymentAttributes) WithSettlement(settlement Settlement) *PaymentAttributes {
+
+	m.Settlement = &settlement
+
+	return m
+}
+
+func (m *PaymentAttributes) WithoutSettlement() *PaymentAttributes {
+	m.Settlement = nil
+	return m
+}
+
 func (m *PaymentAttributes) WithStructuredReference(structuredReference PaymentAttributesStructuredReference) *PaymentAttributes {
 
 	m.StructuredReference = &structuredReference
@@ -959,6 +976,10 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSendersCorrespondent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSettlement(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1197,6 +1218,24 @@ func (m *PaymentAttributes) validateSendersCorrespondent(formats strfmt.Registry
 		if err := m.SendersCorrespondent.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("attributes" + "." + "senders_correspondent")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributes) validateSettlement(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Settlement) { // not required
+		return nil
+	}
+
+	if m.Settlement != nil {
+		if err := m.Settlement.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "settlement")
 			}
 			return err
 		}

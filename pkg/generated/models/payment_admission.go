@@ -591,6 +591,9 @@ func (m *PaymentAdmissionAttributes) Json() string {
 // swagger:model PaymentAdmissionRelationships
 type PaymentAdmissionRelationships struct {
 
+	// beneficiary account
+	BeneficiaryAccount *RelationshipPaymentAdmissionBeneficiaryAccount `json:"beneficiary_account,omitempty"`
+
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
@@ -601,10 +604,24 @@ type PaymentAdmissionRelationships struct {
 func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *PaymentAdmissionRelationships {
 	return &PaymentAdmissionRelationships{
 
+		BeneficiaryAccount: RelationshipPaymentAdmissionBeneficiaryAccountWithDefaults(defaults),
+
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
 		PaymentAdmissionTask: RelationshipPaymentAdmissionTasksWithDefaults(defaults),
 	}
+}
+
+func (m *PaymentAdmissionRelationships) WithBeneficiaryAccount(beneficiaryAccount RelationshipPaymentAdmissionBeneficiaryAccount) *PaymentAdmissionRelationships {
+
+	m.BeneficiaryAccount = &beneficiaryAccount
+
+	return m
+}
+
+func (m *PaymentAdmissionRelationships) WithoutBeneficiaryAccount() *PaymentAdmissionRelationships {
+	m.BeneficiaryAccount = nil
+	return m
 }
 
 func (m *PaymentAdmissionRelationships) WithPayment(payment RelationshipPayments) *PaymentAdmissionRelationships {
@@ -635,6 +652,10 @@ func (m *PaymentAdmissionRelationships) WithoutPaymentAdmissionTask() *PaymentAd
 func (m *PaymentAdmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateBeneficiaryAccount(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePayment(formats); err != nil {
 		res = append(res, err)
 	}
@@ -646,6 +667,24 @@ func (m *PaymentAdmissionRelationships) Validate(formats strfmt.Registry) error 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PaymentAdmissionRelationships) validateBeneficiaryAccount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BeneficiaryAccount) { // not required
+		return nil
+	}
+
+	if m.BeneficiaryAccount != nil {
+		if err := m.BeneficiaryAccount.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "beneficiary_account")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

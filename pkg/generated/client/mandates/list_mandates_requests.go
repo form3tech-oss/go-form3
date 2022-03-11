@@ -61,6 +61,10 @@ func (c *Client) ListMandates() *ListMandatesRequest {
 
 		FilterSchemeProcessingDateTo: c.Defaults.GetStrfmtDatePtr("ListMandates", "filter[scheme_processing_date_to]"),
 
+		FilterStatus: c.Defaults.GetStringPtr("ListMandates", "filter[status]"),
+
+		FilterStatusReason: c.Defaults.GetStringPtr("ListMandates", "filter[status_reason]"),
+
 		FilterSubmissionSubmissionDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListMandates", "filter[submission.submission_date_from]"),
 
 		FilterSubmissionSubmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListMandates", "filter[submission.submission_date_to]"),
@@ -159,6 +163,14 @@ type ListMandatesRequest struct {
 	/*FilterSchemeProcessingDateTo*/
 
 	FilterSchemeProcessingDateTo *strfmt.Date
+
+	/*FilterStatus      Filter by mandate status      */
+
+	FilterStatus *string
+
+	/*FilterStatusReason      Filter by mandate status reason      */
+
+	FilterStatusReason *string
 
 	/*FilterSubmissionSubmissionDateFrom*/
 
@@ -469,6 +481,34 @@ func (o *ListMandatesRequest) WithFilterSchemeProcessingDateTo(filterSchemeProce
 func (o *ListMandatesRequest) WithoutFilterSchemeProcessingDateTo() *ListMandatesRequest {
 
 	o.FilterSchemeProcessingDateTo = nil
+
+	return o
+}
+
+func (o *ListMandatesRequest) WithFilterStatus(filterStatus string) *ListMandatesRequest {
+
+	o.FilterStatus = &filterStatus
+
+	return o
+}
+
+func (o *ListMandatesRequest) WithoutFilterStatus() *ListMandatesRequest {
+
+	o.FilterStatus = nil
+
+	return o
+}
+
+func (o *ListMandatesRequest) WithFilterStatusReason(filterStatusReason string) *ListMandatesRequest {
+
+	o.FilterStatusReason = &filterStatusReason
+
+	return o
+}
+
+func (o *ListMandatesRequest) WithoutFilterStatusReason() *ListMandatesRequest {
+
+	o.FilterStatusReason = nil
 
 	return o
 }
@@ -873,6 +913,38 @@ func (o *ListMandatesRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qFilterSchemeProcessingDateTo := qrFilterSchemeProcessingDateTo.String()
 		if qFilterSchemeProcessingDateTo != "" {
 			if err := r.SetQueryParam("filter[scheme_processing_date_to]", qFilterSchemeProcessingDateTo); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterStatus != nil {
+
+		// query param filter[status]
+		var qrFilterStatus string
+		if o.FilterStatus != nil {
+			qrFilterStatus = *o.FilterStatus
+		}
+		qFilterStatus := qrFilterStatus
+		if qFilterStatus != "" {
+			if err := r.SetQueryParam("filter[status]", qFilterStatus); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterStatusReason != nil {
+
+		// query param filter[status_reason]
+		var qrFilterStatusReason string
+		if o.FilterStatusReason != nil {
+			qrFilterStatusReason = *o.FilterStatusReason
+		}
+		qFilterStatusReason := qrFilterStatusReason
+		if qFilterStatusReason != "" {
+			if err := r.SetQueryParam("filter[status_reason]", qFilterStatusReason); err != nil {
 				return err
 			}
 		}

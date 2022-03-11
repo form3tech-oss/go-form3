@@ -53,8 +53,7 @@ type QueryAdmission struct {
 	Attributes *QueryAdmissionAttributes `json:"attributes"`
 
 	// relationships
-	// Required: true
-	Relationships *QueryAdmissionRelationships `json:"relationships"`
+	Relationships *QueryAdmissionRelationships `json:"relationships,omitempty"`
 }
 
 func QueryAdmissionWithDefaults(defaults client.Defaults) *QueryAdmission {
@@ -309,8 +308,8 @@ func (m *QueryAdmission) validateAttributes(formats strfmt.Registry) error {
 
 func (m *QueryAdmission) validateRelationships(formats strfmt.Registry) error {
 
-	if err := validate.Required("relationships", "body", m.Relationships); err != nil {
-		return err
+	if swag.IsZero(m.Relationships) { // not required
+		return nil
 	}
 
 	if m.Relationships != nil {

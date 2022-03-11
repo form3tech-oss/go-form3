@@ -87,7 +87,7 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}Request) FromJson(j string) (*{{
     {{ if not .IsStream }}
     func ({{ $.ReceiverName }} *{{ pascalize $.Name }}Request) With{{ pascalize .ID }}({{ varname .Name  }} {{ if and (not .IsArray) (not .IsMap) (not .HasDiscriminator) (not .IsStream) }}{{ end }}{{ if not .IsFileParam }}{{ .GoType }}{{ else }}runtime.NamedReadCloser{{ end }}) *{{ pascalize $.Name }}Request {
 
-          {{ if and (eq "body" .Location) (not .IsStream) }}
+        {{ if and (eq "body" .Location) (not .IsStream) }}
           {{ $.ReceiverName }}.{{ dropPackage .GoType }} = &{{ varname .Name }}
         {{ else if and .IsNullable (not .IsArray)}}
           {{ $.ReceiverName }}.{{ pascalize .ID }} = &{{ varname .Name }}

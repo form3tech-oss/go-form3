@@ -53,8 +53,7 @@ type QueryResponseSubmission struct {
 	Attributes *QueryResponseSubmissionAttributes `json:"attributes"`
 
 	// relationships
-	// Required: true
-	Relationships *QueryResponseSubmissionRelationships `json:"relationships"`
+	Relationships *QueryResponseSubmissionRelationships `json:"relationships,omitempty"`
 }
 
 func QueryResponseSubmissionWithDefaults(defaults client.Defaults) *QueryResponseSubmission {
@@ -309,8 +308,8 @@ func (m *QueryResponseSubmission) validateAttributes(formats strfmt.Registry) er
 
 func (m *QueryResponseSubmission) validateRelationships(formats strfmt.Registry) error {
 
-	if err := validate.Required("relationships", "body", m.Relationships); err != nil {
-		return err
+	if swag.IsZero(m.Relationships) { // not required
+		return nil
 	}
 
 	if m.Relationships != nil {

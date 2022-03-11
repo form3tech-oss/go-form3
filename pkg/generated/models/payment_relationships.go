@@ -33,9 +33,6 @@ type PaymentRelationships struct {
 	// debtor account
 	DebtorAccount *PaymentRelationshipsDebtorAccount `json:"debtor_account,omitempty"`
 
-	// direct debit
-	DirectDebit *PaymentRelationshipsDirectDebit `json:"direct_debit,omitempty"`
-
 	// fx deal
 	FxDeal *PaymentRelationshipsFxDeal `json:"fx_deal,omitempty"`
 
@@ -68,8 +65,6 @@ func PaymentRelationshipsWithDefaults(defaults client.Defaults) *PaymentRelation
 		Debtor: PaymentRelationshipsDebtorWithDefaults(defaults),
 
 		DebtorAccount: PaymentRelationshipsDebtorAccountWithDefaults(defaults),
-
-		DirectDebit: PaymentRelationshipsDirectDebitWithDefaults(defaults),
 
 		FxDeal: PaymentRelationshipsFxDealWithDefaults(defaults),
 
@@ -132,18 +127,6 @@ func (m *PaymentRelationships) WithDebtorAccount(debtorAccount PaymentRelationsh
 
 func (m *PaymentRelationships) WithoutDebtorAccount() *PaymentRelationships {
 	m.DebtorAccount = nil
-	return m
-}
-
-func (m *PaymentRelationships) WithDirectDebit(directDebit PaymentRelationshipsDirectDebit) *PaymentRelationships {
-
-	m.DirectDebit = &directDebit
-
-	return m
-}
-
-func (m *PaymentRelationships) WithoutDirectDebit() *PaymentRelationships {
-	m.DirectDebit = nil
 	return m
 }
 
@@ -251,10 +234,6 @@ func (m *PaymentRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateDirectDebit(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateFxDeal(formats); err != nil {
 		res = append(res, err)
 	}
@@ -353,24 +332,6 @@ func (m *PaymentRelationships) validateDebtorAccount(formats strfmt.Registry) er
 		if err := m.DebtorAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("debtor_account")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PaymentRelationships) validateDirectDebit(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.DirectDebit) { // not required
-		return nil
-	}
-
-	if m.DirectDebit != nil {
-		if err := m.DirectDebit.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("direct_debit")
 			}
 			return err
 		}
@@ -867,92 +828,6 @@ func (m *PaymentRelationshipsDebtorAccount) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *PaymentRelationshipsDebtorAccount) Json() string {
-	json, err := json.MarshalIndent(m, "  ", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(json)
-}
-
-// PaymentRelationshipsDirectDebit payment relationships direct debit
-// swagger:model PaymentRelationshipsDirectDebit
-type PaymentRelationshipsDirectDebit struct {
-
-	// Array of Direct Debit resources related to the payment
-	Data []*RelationshipData `json:"data"`
-}
-
-func PaymentRelationshipsDirectDebitWithDefaults(defaults client.Defaults) *PaymentRelationshipsDirectDebit {
-	return &PaymentRelationshipsDirectDebit{
-
-		Data: make([]*RelationshipData, 0),
-	}
-}
-
-func (m *PaymentRelationshipsDirectDebit) WithData(data []*RelationshipData) *PaymentRelationshipsDirectDebit {
-
-	m.Data = data
-
-	return m
-}
-
-// Validate validates this payment relationships direct debit
-func (m *PaymentRelationshipsDirectDebit) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateData(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PaymentRelationshipsDirectDebit) validateData(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Data) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Data); i++ {
-		if swag.IsZero(m.Data[i]) { // not required
-			continue
-		}
-
-		if m.Data[i] != nil {
-			if err := m.Data[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("direct_debit" + "." + "data" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PaymentRelationshipsDirectDebit) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PaymentRelationshipsDirectDebit) UnmarshalBinary(b []byte) error {
-	var res PaymentRelationshipsDirectDebit
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-func (m *PaymentRelationshipsDirectDebit) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
