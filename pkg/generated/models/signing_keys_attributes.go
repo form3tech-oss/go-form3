@@ -28,9 +28,6 @@ type SigningKeysAttributes struct {
 	// certificate
 	Certificate *string `json:"certificate,omitempty"`
 
-	// certificate csr
-	CertificateCsr *string `json:"certificate-csr,omitempty"`
-
 	// status
 	// Enum: [pending_activation active expired revoked]
 	Status *string `json:"status,omitempty"`
@@ -50,8 +47,6 @@ func SigningKeysAttributesWithDefaults(defaults client.Defaults) *SigningKeysAtt
 		PublicKey: defaults.GetStringPtr("SigningKeysAttributes", "public_key"),
 
 		Certificate: defaults.GetStringPtr("SigningKeysAttributes", "certificate"),
-
-		CertificateCsr: defaults.GetStringPtr("SigningKeysAttributes", "certificate-csr"),
 
 		Status: defaults.GetStringPtr("SigningKeysAttributes", "status"),
 
@@ -82,18 +77,6 @@ func (m *SigningKeysAttributes) WithCertificate(certificate string) *SigningKeys
 
 func (m *SigningKeysAttributes) WithoutCertificate() *SigningKeysAttributes {
 	m.Certificate = nil
-	return m
-}
-
-func (m *SigningKeysAttributes) WithCertificateCsr(certificateCsr string) *SigningKeysAttributes {
-
-	m.CertificateCsr = &certificateCsr
-
-	return m
-}
-
-func (m *SigningKeysAttributes) WithoutCertificateCsr() *SigningKeysAttributes {
-	m.CertificateCsr = nil
 	return m
 }
 

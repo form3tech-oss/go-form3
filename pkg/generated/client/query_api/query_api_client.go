@@ -262,6 +262,39 @@ func (a *GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDRequest) MustDo
 }
 
 /*
+post transaction queries API
+*/
+func (a *PostTransactionQueriesRequest) Do() (*PostTransactionQueriesCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostTransactionQueries",
+		Method:             "POST",
+		PathPattern:        "/transaction/queries",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PostTransactionQueriesReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostTransactionQueriesCreated), nil
+
+}
+
+func (a *PostTransactionQueriesRequest) MustDo() *PostTransactionQueriesCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 post transaction queries query ID responses API
 */
 func (a *PostTransactionQueriesQueryIDResponsesRequest) Do() (*PostTransactionQueriesQueryIDResponsesCreated, error) {

@@ -14,7 +14,7 @@ func TestQueryPayments(t *testing.T) {
 	require.NoError(t, err)
 
 	p, err := f3.Payments.ListPayments().
-		WithFilterAmount("2500.00").
+		WithFilterAmount("600.00").
 		WithoutFilterOrganisationID().
 		Do()
 	assert.Nil(t, err)
