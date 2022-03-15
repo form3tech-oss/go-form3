@@ -27,6 +27,12 @@ const (
 	// QueryResponseAnswerRejected captures enum value "rejected"
 	QueryResponseAnswerRejected QueryResponseAnswer = "rejected"
 
+	// QueryResponseAnswerAlreadyApplied captures enum value "already_applied"
+	QueryResponseAnswerAlreadyApplied QueryResponseAnswer = "already_applied"
+
+	// QueryResponseAnswerModifiedAsRequested captures enum value "modified_as_requested"
+	QueryResponseAnswerModifiedAsRequested QueryResponseAnswer = "modified_as_requested"
+
 	// QueryResponseAnswerTransactionNotReceived captures enum value "transaction_not_received"
 	QueryResponseAnswerTransactionNotReceived QueryResponseAnswer = "transaction_not_received"
 
@@ -36,11 +42,11 @@ const (
 	// QueryResponseAnswerTransactionReturned captures enum value "transaction_returned"
 	QueryResponseAnswerTransactionReturned QueryResponseAnswer = "transaction_returned"
 
-	// QueryResponseAnswerAlreadyApplied captures enum value "already_applied"
-	QueryResponseAnswerAlreadyApplied QueryResponseAnswer = "already_applied"
+	// QueryResponseAnswerTransactionNotProcessed captures enum value "transaction_not_processed"
+	QueryResponseAnswerTransactionNotProcessed QueryResponseAnswer = "transaction_not_processed"
 
-	// QueryResponseAnswerModifiedAsRequested captures enum value "modified_as_requested"
-	QueryResponseAnswerModifiedAsRequested QueryResponseAnswer = "modified_as_requested"
+	// QueryResponseAnswerRejectedRegulatoryReason captures enum value "rejected_regulatory_reason"
+	QueryResponseAnswerRejectedRegulatoryReason QueryResponseAnswer = "rejected_regulatory_reason"
 )
 
 // for schema
@@ -48,7 +54,7 @@ var queryResponseAnswerEnum []interface{}
 
 func init() {
 	var res []QueryResponseAnswer
-	if err := json.Unmarshal([]byte(`["accepted","rejected","transaction_not_received","transaction_rejected","transaction_returned","already_applied","modified_as_requested"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","rejected","already_applied","modified_as_requested","transaction_not_received","transaction_rejected","transaction_returned","transaction_not_processed","rejected_regulatory_reason"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

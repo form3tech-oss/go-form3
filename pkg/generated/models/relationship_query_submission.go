@@ -22,17 +22,17 @@ import (
 type RelationshipQuerySubmission struct {
 
 	// data
-	Data []*NewQueryResponseSubmission `json:"data"`
+	Data []*RelationshipsQuerySubmissionProperties `json:"data"`
 }
 
 func RelationshipQuerySubmissionWithDefaults(defaults client.Defaults) *RelationshipQuerySubmission {
 	return &RelationshipQuerySubmission{
 
-		Data: make([]*NewQueryResponseSubmission, 0),
+		Data: make([]*RelationshipsQuerySubmissionProperties, 0),
 	}
 }
 
-func (m *RelationshipQuerySubmission) WithData(data []*NewQueryResponseSubmission) *RelationshipQuerySubmission {
+func (m *RelationshipQuerySubmission) WithData(data []*RelationshipsQuerySubmissionProperties) *RelationshipQuerySubmission {
 
 	m.Data = data
 

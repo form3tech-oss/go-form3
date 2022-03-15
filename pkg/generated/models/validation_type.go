@@ -24,6 +24,9 @@ const (
 	// ValidationTypeCard captures enum value "card"
 	ValidationTypeCard ValidationType = "card"
 
+	// ValidationTypeMandatoryReference captures enum value "mandatory_reference"
+	ValidationTypeMandatoryReference ValidationType = "mandatory_reference"
+
 	// ValidationTypeNone captures enum value "none"
 	ValidationTypeNone ValidationType = "none"
 )
@@ -33,7 +36,7 @@ var validationTypeEnum []interface{}
 
 func init() {
 	var res []ValidationType
-	if err := json.Unmarshal([]byte(`["card","none"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["card","mandatory_reference","none"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

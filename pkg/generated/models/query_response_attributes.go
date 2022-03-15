@@ -14,7 +14,6 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // QueryResponseAttributes query response attributes
@@ -23,7 +22,13 @@ type QueryResponseAttributes struct {
 
 	// answer
 	// Required: true
-	Answer *QueryResponseAnswer `json:"answer"`
+	Answer QueryResponseAnswer `json:"answer"`
+
+	// charges
+	Charges *QueryResponseCharges `json:"charges,omitempty"`
+
+	// compensation
+	Compensation *QueryResponseCompensation `json:"compensation,omitempty"`
 
 	// compensation amount
 	CompensationAmount string `json:"compensation_amount,omitempty"`
@@ -37,6 +42,10 @@ func QueryResponseAttributesWithDefaults(defaults client.Defaults) *QueryRespons
 
 		// TODO Answer: QueryResponseAnswer,
 
+		Charges: QueryResponseChargesWithDefaults(defaults),
+
+		Compensation: QueryResponseCompensationWithDefaults(defaults),
+
 		CompensationAmount: defaults.GetString("QueryResponseAttributes", "compensation_amount"),
 
 		Currency: defaults.GetString("QueryResponseAttributes", "currency"),
@@ -45,13 +54,32 @@ func QueryResponseAttributesWithDefaults(defaults client.Defaults) *QueryRespons
 
 func (m *QueryResponseAttributes) WithAnswer(answer QueryResponseAnswer) *QueryResponseAttributes {
 
-	m.Answer = &answer
+	m.Answer = answer
 
 	return m
 }
 
-func (m *QueryResponseAttributes) WithoutAnswer() *QueryResponseAttributes {
-	m.Answer = nil
+func (m *QueryResponseAttributes) WithCharges(charges QueryResponseCharges) *QueryResponseAttributes {
+
+	m.Charges = &charges
+
+	return m
+}
+
+func (m *QueryResponseAttributes) WithoutCharges() *QueryResponseAttributes {
+	m.Charges = nil
+	return m
+}
+
+func (m *QueryResponseAttributes) WithCompensation(compensation QueryResponseCompensation) *QueryResponseAttributes {
+
+	m.Compensation = &compensation
+
+	return m
+}
+
+func (m *QueryResponseAttributes) WithoutCompensation() *QueryResponseAttributes {
+	m.Compensation = nil
 	return m
 }
 
@@ -77,6 +105,14 @@ func (m *QueryResponseAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCharges(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCompensation(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -85,14 +121,44 @@ func (m *QueryResponseAttributes) Validate(formats strfmt.Registry) error {
 
 func (m *QueryResponseAttributes) validateAnswer(formats strfmt.Registry) error {
 
-	if err := validate.Required("answer", "body", m.Answer); err != nil {
+	if err := m.Answer.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("answer")
+		}
 		return err
 	}
 
-	if m.Answer != nil {
-		if err := m.Answer.Validate(formats); err != nil {
+	return nil
+}
+
+func (m *QueryResponseAttributes) validateCharges(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Charges) { // not required
+		return nil
+	}
+
+	if m.Charges != nil {
+		if err := m.Charges.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("answer")
+				return ve.ValidateName("charges")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryResponseAttributes) validateCompensation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Compensation) { // not required
+		return nil
+	}
+
+	if m.Compensation != nil {
+		if err := m.Compensation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("compensation")
 			}
 			return err
 		}

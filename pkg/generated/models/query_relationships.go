@@ -26,11 +26,26 @@ type QueryRelationships struct {
 	// payment admission
 	PaymentAdmission *RelationshipsPaymentAdmission `json:"payment_admission,omitempty"`
 
+	// payment submission
+	PaymentSubmission *RelationshipsPaymentSubmission `json:"payment_submission,omitempty"`
+
+	// query
+	Query *RelationshipsQuery `json:"query,omitempty"`
+
 	// query admission
 	QueryAdmission *RelationshipsQueryAdmission `json:"query_admission,omitempty"`
 
 	// query response
-	QueryResponse *RelationshipsQueryResponse `json:"query_response,omitempty"`
+	QueryResponse *RelationshipsFullQueryResponse `json:"query_response,omitempty"`
+
+	// query submission
+	QuerySubmission *RelationshipsQuerySubmission `json:"query_submission,omitempty"`
+
+	// recall
+	Recall *RelationshipsPaymentRecall `json:"recall,omitempty"`
+
+	// recall submission
+	RecallSubmission *RelationshipsPaymentRecallSubmission `json:"recall_submission,omitempty"`
 }
 
 func QueryRelationshipsWithDefaults(defaults client.Defaults) *QueryRelationships {
@@ -40,9 +55,19 @@ func QueryRelationshipsWithDefaults(defaults client.Defaults) *QueryRelationship
 
 		PaymentAdmission: RelationshipsPaymentAdmissionWithDefaults(defaults),
 
+		PaymentSubmission: RelationshipsPaymentSubmissionWithDefaults(defaults),
+
+		Query: RelationshipsQueryWithDefaults(defaults),
+
 		QueryAdmission: RelationshipsQueryAdmissionWithDefaults(defaults),
 
-		QueryResponse: RelationshipsQueryResponseWithDefaults(defaults),
+		QueryResponse: RelationshipsFullQueryResponseWithDefaults(defaults),
+
+		QuerySubmission: RelationshipsQuerySubmissionWithDefaults(defaults),
+
+		Recall: RelationshipsPaymentRecallWithDefaults(defaults),
+
+		RecallSubmission: RelationshipsPaymentRecallSubmissionWithDefaults(defaults),
 	}
 }
 
@@ -70,6 +95,30 @@ func (m *QueryRelationships) WithoutPaymentAdmission() *QueryRelationships {
 	return m
 }
 
+func (m *QueryRelationships) WithPaymentSubmission(paymentSubmission RelationshipsPaymentSubmission) *QueryRelationships {
+
+	m.PaymentSubmission = &paymentSubmission
+
+	return m
+}
+
+func (m *QueryRelationships) WithoutPaymentSubmission() *QueryRelationships {
+	m.PaymentSubmission = nil
+	return m
+}
+
+func (m *QueryRelationships) WithQuery(query RelationshipsQuery) *QueryRelationships {
+
+	m.Query = &query
+
+	return m
+}
+
+func (m *QueryRelationships) WithoutQuery() *QueryRelationships {
+	m.Query = nil
+	return m
+}
+
 func (m *QueryRelationships) WithQueryAdmission(queryAdmission RelationshipsQueryAdmission) *QueryRelationships {
 
 	m.QueryAdmission = &queryAdmission
@@ -82,7 +131,7 @@ func (m *QueryRelationships) WithoutQueryAdmission() *QueryRelationships {
 	return m
 }
 
-func (m *QueryRelationships) WithQueryResponse(queryResponse RelationshipsQueryResponse) *QueryRelationships {
+func (m *QueryRelationships) WithQueryResponse(queryResponse RelationshipsFullQueryResponse) *QueryRelationships {
 
 	m.QueryResponse = &queryResponse
 
@@ -91,6 +140,42 @@ func (m *QueryRelationships) WithQueryResponse(queryResponse RelationshipsQueryR
 
 func (m *QueryRelationships) WithoutQueryResponse() *QueryRelationships {
 	m.QueryResponse = nil
+	return m
+}
+
+func (m *QueryRelationships) WithQuerySubmission(querySubmission RelationshipsQuerySubmission) *QueryRelationships {
+
+	m.QuerySubmission = &querySubmission
+
+	return m
+}
+
+func (m *QueryRelationships) WithoutQuerySubmission() *QueryRelationships {
+	m.QuerySubmission = nil
+	return m
+}
+
+func (m *QueryRelationships) WithRecall(recall RelationshipsPaymentRecall) *QueryRelationships {
+
+	m.Recall = &recall
+
+	return m
+}
+
+func (m *QueryRelationships) WithoutRecall() *QueryRelationships {
+	m.Recall = nil
+	return m
+}
+
+func (m *QueryRelationships) WithRecallSubmission(recallSubmission RelationshipsPaymentRecallSubmission) *QueryRelationships {
+
+	m.RecallSubmission = &recallSubmission
+
+	return m
+}
+
+func (m *QueryRelationships) WithoutRecallSubmission() *QueryRelationships {
+	m.RecallSubmission = nil
 	return m
 }
 
@@ -106,11 +191,31 @@ func (m *QueryRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePaymentSubmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQuery(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateQueryAdmission(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateQueryResponse(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQuerySubmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRecall(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRecallSubmission(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -156,6 +261,42 @@ func (m *QueryRelationships) validatePaymentAdmission(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *QueryRelationships) validatePaymentSubmission(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PaymentSubmission) { // not required
+		return nil
+	}
+
+	if m.PaymentSubmission != nil {
+		if err := m.PaymentSubmission.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("payment_submission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryRelationships) validateQuery(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Query) { // not required
+		return nil
+	}
+
+	if m.Query != nil {
+		if err := m.Query.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("query")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *QueryRelationships) validateQueryAdmission(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.QueryAdmission) { // not required
@@ -184,6 +325,60 @@ func (m *QueryRelationships) validateQueryResponse(formats strfmt.Registry) erro
 		if err := m.QueryResponse.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("query_response")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryRelationships) validateQuerySubmission(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.QuerySubmission) { // not required
+		return nil
+	}
+
+	if m.QuerySubmission != nil {
+		if err := m.QuerySubmission.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("query_submission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryRelationships) validateRecall(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Recall) { // not required
+		return nil
+	}
+
+	if m.Recall != nil {
+		if err := m.Recall.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("recall")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryRelationships) validateRecallSubmission(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RecallSubmission) { // not required
+		return nil
+	}
+
+	if m.RecallSubmission != nil {
+		if err := m.RecallSubmission.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("recall_submission")
 			}
 			return err
 		}

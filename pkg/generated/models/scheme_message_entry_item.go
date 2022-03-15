@@ -26,7 +26,7 @@ type SchemeMessageEntryItem struct {
 	Key string `json:"key"`
 
 	// value
-	Value string `json:"value,omitempty"`
+	Value string `json:"value"`
 }
 
 func SchemeMessageEntryItemWithDefaults(defaults client.Defaults) *SchemeMessageEntryItem {

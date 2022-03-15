@@ -22,8 +22,7 @@ import (
 type QueryAttributes struct {
 
 	// auto handled
-	// Required: true
-	AutoHandled *bool `json:"auto_handled"`
+	AutoHandled *bool `json:"auto_handled,omitempty"`
 
 	// message id
 	MessageID string `json:"message_id,omitempty"`
@@ -34,7 +33,7 @@ type QueryAttributes struct {
 
 	// query type
 	// Required: true
-	// Enum: [claim_non_receipt modify_payment]
+	// Enum: [claim_non_receipt modify_payment status_request]
 	QueryType *string `json:"query_type"`
 
 	// scheme transaction id
@@ -43,6 +42,9 @@ type QueryAttributes struct {
 	// status
 	// Enum: [pending closed]
 	Status string `json:"status,omitempty"`
+
+	// unstructured message
+	UnstructuredMessage *string `json:"unstructured_message,omitempty"`
 }
 
 func QueryAttributesWithDefaults(defaults client.Defaults) *QueryAttributes {
@@ -59,6 +61,8 @@ func QueryAttributesWithDefaults(defaults client.Defaults) *QueryAttributes {
 		SchemeTransactionID: defaults.GetString("QueryAttributes", "scheme_transaction_id"),
 
 		Status: defaults.GetString("QueryAttributes", "status"),
+
+		UnstructuredMessage: defaults.GetStringPtr("QueryAttributes", "unstructured_message"),
 	}
 }
 
@@ -119,13 +123,21 @@ func (m *QueryAttributes) WithStatus(status string) *QueryAttributes {
 	return m
 }
 
+func (m *QueryAttributes) WithUnstructuredMessage(unstructuredMessage string) *QueryAttributes {
+
+	m.UnstructuredMessage = &unstructuredMessage
+
+	return m
+}
+
+func (m *QueryAttributes) WithoutUnstructuredMessage() *QueryAttributes {
+	m.UnstructuredMessage = nil
+	return m
+}
+
 // Validate validates this query attributes
 func (m *QueryAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateAutoHandled(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateProcessingDate(formats); err != nil {
 		res = append(res, err)
@@ -142,15 +154,6 @@ func (m *QueryAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *QueryAttributes) validateAutoHandled(formats strfmt.Registry) error {
-
-	if err := validate.Required("auto_handled", "body", m.AutoHandled); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -171,7 +174,7 @@ var queryAttributesTypeQueryTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["claim_non_receipt","modify_payment"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["claim_non_receipt","modify_payment","status_request"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -186,6 +189,9 @@ const (
 
 	// QueryAttributesQueryTypeModifyPayment captures enum value "modify_payment"
 	QueryAttributesQueryTypeModifyPayment string = "modify_payment"
+
+	// QueryAttributesQueryTypeStatusRequest captures enum value "status_request"
+	QueryAttributesQueryTypeStatusRequest string = "status_request"
 )
 
 // prop value enum

@@ -41,6 +41,8 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 
 		FilterDebtorPartyBankID: c.Defaults.GetStringPtr("ListPayments", "filter[debtor_party.bank_id]"),
 
+		FilterNotRelationships: make([]string, 0),
+
 		FilterOrganisationID: make([]strfmt.UUID, 0),
 
 		FilterPaymentScheme: c.Defaults.GetStringPtr("ListPayments", "filter[payment_scheme]"),
@@ -119,6 +121,10 @@ type ListPaymentsRequest struct {
 	/*FilterDebtorPartyBankID*/
 
 	FilterDebtorPartyBankID *string
+
+	/*FilterNotRelationships      Filter for payments containing none of the requested relationships      */
+
+	FilterNotRelationships []string
 
 	/*FilterOrganisationID      Filter by organisation id      */
 
@@ -329,6 +335,20 @@ func (o *ListPaymentsRequest) WithFilterDebtorPartyBankID(filterDebtorPartyBankI
 func (o *ListPaymentsRequest) WithoutFilterDebtorPartyBankID() *ListPaymentsRequest {
 
 	o.FilterDebtorPartyBankID = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterNotRelationships(filterNotRelationships []string) *ListPaymentsRequest {
+
+	o.FilterNotRelationships = filterNotRelationships
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterNotRelationships() *ListPaymentsRequest {
+
+	o.FilterNotRelationships = nil
 
 	return o
 }
@@ -724,6 +744,14 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	}
 
+	valuesFilterNotRelationships := o.FilterNotRelationships
+
+	joinedFilterNotRelationships := swag.JoinByFormat(valuesFilterNotRelationships, "csv")
+	// query array param filter[not_relationships]
+	if err := r.SetQueryParam("filter[not_relationships]", joinedFilterNotRelationships...); err != nil {
+		return err
+	}
+
 	var valuesFilterOrganisationID []string
 	for _, v := range o.FilterOrganisationID {
 		valuesFilterOrganisationID = append(valuesFilterOrganisationID, v.String())
@@ -817,7 +845,7 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	valuesFilterRelationships := o.FilterRelationships
 
-	joinedFilterRelationships := swag.JoinByFormat(valuesFilterRelationships, "csv")
+	joinedFilterRelationships := swag.JoinByFormat(valuesFilterRelationships, "")
 	// query array param filter[relationships]
 	if err := r.SetQueryParam("filter[relationships]", joinedFilterRelationships...); err != nil {
 		return err

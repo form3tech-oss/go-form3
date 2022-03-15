@@ -24,6 +24,9 @@ const (
 	// BranchValidationTypeCard captures enum value "card"
 	BranchValidationTypeCard BranchValidationType = "card"
 
+	// BranchValidationTypeMandatoryReference captures enum value "mandatory_reference"
+	BranchValidationTypeMandatoryReference BranchValidationType = "mandatory_reference"
+
 	// BranchValidationTypeAccountModCheck captures enum value "account_mod_check"
 	BranchValidationTypeAccountModCheck BranchValidationType = "account_mod_check"
 
@@ -36,7 +39,7 @@ var branchValidationTypeEnum []interface{}
 
 func init() {
 	var res []BranchValidationType
-	if err := json.Unmarshal([]byte(`["card","account_mod_check","none"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["card","mandatory_reference","account_mod_check","none"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

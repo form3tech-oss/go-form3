@@ -29,6 +29,9 @@ type MandateRelationships struct {
 
 	// mandate submission
 	MandateSubmission *MandateRelationshipsMandateSubmission `json:"mandate_submission,omitempty"`
+
+	// most recent collection
+	MostRecentCollection *MandateRelationshipsMostRecentCollection `json:"most_recent_collection,omitempty"`
 }
 
 func MandateRelationshipsWithDefaults(defaults client.Defaults) *MandateRelationships {
@@ -39,6 +42,8 @@ func MandateRelationshipsWithDefaults(defaults client.Defaults) *MandateRelation
 		MandateReturn: MandateRelationshipsMandateReturnWithDefaults(defaults),
 
 		MandateSubmission: MandateRelationshipsMandateSubmissionWithDefaults(defaults),
+
+		MostRecentCollection: MandateRelationshipsMostRecentCollectionWithDefaults(defaults),
 	}
 }
 
@@ -78,6 +83,18 @@ func (m *MandateRelationships) WithoutMandateSubmission() *MandateRelationships 
 	return m
 }
 
+func (m *MandateRelationships) WithMostRecentCollection(mostRecentCollection MandateRelationshipsMostRecentCollection) *MandateRelationships {
+
+	m.MostRecentCollection = &mostRecentCollection
+
+	return m
+}
+
+func (m *MandateRelationships) WithoutMostRecentCollection() *MandateRelationships {
+	m.MostRecentCollection = nil
+	return m
+}
+
 // Validate validates this mandate relationships
 func (m *MandateRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -91,6 +108,10 @@ func (m *MandateRelationships) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMandateSubmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMostRecentCollection(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,6 +167,24 @@ func (m *MandateRelationships) validateMandateSubmission(formats strfmt.Registry
 		if err := m.MandateSubmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mandate_submission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *MandateRelationships) validateMostRecentCollection(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.MostRecentCollection) { // not required
+		return nil
+	}
+
+	if m.MostRecentCollection != nil {
+		if err := m.MostRecentCollection.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("most_recent_collection")
 			}
 			return err
 		}
@@ -430,6 +469,90 @@ func (m *MandateRelationshipsMandateSubmission) UnmarshalBinary(b []byte) error 
 	return nil
 }
 func (m *MandateRelationshipsMandateSubmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// MandateRelationshipsMostRecentCollection mandate relationships most recent collection
+// swagger:model MandateRelationshipsMostRecentCollection
+type MandateRelationshipsMostRecentCollection struct {
+
+	// data
+	Data *MostRecentCollection `json:"data,omitempty"`
+}
+
+func MandateRelationshipsMostRecentCollectionWithDefaults(defaults client.Defaults) *MandateRelationshipsMostRecentCollection {
+	return &MandateRelationshipsMostRecentCollection{
+
+		Data: MostRecentCollectionWithDefaults(defaults),
+	}
+}
+
+func (m *MandateRelationshipsMostRecentCollection) WithData(data MostRecentCollection) *MandateRelationshipsMostRecentCollection {
+
+	m.Data = &data
+
+	return m
+}
+
+func (m *MandateRelationshipsMostRecentCollection) WithoutData() *MandateRelationshipsMostRecentCollection {
+	m.Data = nil
+	return m
+}
+
+// Validate validates this mandate relationships most recent collection
+func (m *MandateRelationshipsMostRecentCollection) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MandateRelationshipsMostRecentCollection) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	if m.Data != nil {
+		if err := m.Data.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("most_recent_collection" + "." + "data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *MandateRelationshipsMostRecentCollection) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *MandateRelationshipsMostRecentCollection) UnmarshalBinary(b []byte) error {
+	var res MandateRelationshipsMostRecentCollection
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *MandateRelationshipsMostRecentCollection) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
