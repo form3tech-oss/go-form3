@@ -2,10 +2,6 @@
 github.com/PuerkitoBio/purell
 # github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578
 github.com/PuerkitoBio/urlesc
-# github.com/ahmetb/go-linq v3.0.0+incompatible
-## explicit
-# github.com/ahmetb/go-linq/v3 v3.1.0
-## explicit
 # github.com/asaskevich/govalidator v0.0.0-20200819183940-29e1ff8eb0bb
 ## explicit
 github.com/asaskevich/govalidator
@@ -66,8 +62,7 @@ github.com/pmezard/go-difflib/difflib
 ## explicit
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
-# go.mongodb.org/mongo-driver v1.4.0
-## explicit
+# go.mongodb.org/mongo-driver v1.3.4
 go.mongodb.org/mongo-driver/bson
 go.mongodb.org/mongo-driver/bson/bsoncodec
 go.mongodb.org/mongo-driver/bson/bsonoptions
