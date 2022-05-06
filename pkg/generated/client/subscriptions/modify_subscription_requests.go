@@ -15,7 +15,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/models"
 )
 
 // Client.ModifySubscription creates a new ModifySubscriptionRequest object

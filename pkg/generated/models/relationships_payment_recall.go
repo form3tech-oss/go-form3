@@ -10,7 +10,7 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v4/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"

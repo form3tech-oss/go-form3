@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/models"
 )
 
 // PostTransactionDirectdebitsIDRecallsReader is a Reader for the PostTransactionDirectdebitsIDRecalls structure.
