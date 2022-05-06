@@ -21,22 +21,22 @@ import (
 type QueryResponseSubmissionRelationships struct {
 
 	// query
-	Query *RelationshipsQuery `json:"query,omitempty"`
+	Query *RelationshipsFullQuery `json:"query,omitempty"`
 
 	// query response
-	QueryResponse *RelationshipsQueryResponse `json:"query_response,omitempty"`
+	QueryResponse *RelationshipsFullQueryResponse `json:"query_response,omitempty"`
 }
 
 func QueryResponseSubmissionRelationshipsWithDefaults(defaults client.Defaults) *QueryResponseSubmissionRelationships {
 	return &QueryResponseSubmissionRelationships{
 
-		Query: RelationshipsQueryWithDefaults(defaults),
+		Query: RelationshipsFullQueryWithDefaults(defaults),
 
-		QueryResponse: RelationshipsQueryResponseWithDefaults(defaults),
+		QueryResponse: RelationshipsFullQueryResponseWithDefaults(defaults),
 	}
 }
 
-func (m *QueryResponseSubmissionRelationships) WithQuery(query RelationshipsQuery) *QueryResponseSubmissionRelationships {
+func (m *QueryResponseSubmissionRelationships) WithQuery(query RelationshipsFullQuery) *QueryResponseSubmissionRelationships {
 
 	m.Query = &query
 
@@ -48,7 +48,7 @@ func (m *QueryResponseSubmissionRelationships) WithoutQuery() *QueryResponseSubm
 	return m
 }
 
-func (m *QueryResponseSubmissionRelationships) WithQueryResponse(queryResponse RelationshipsQueryResponse) *QueryResponseSubmissionRelationships {
+func (m *QueryResponseSubmissionRelationships) WithQueryResponse(queryResponse RelationshipsFullQueryResponse) *QueryResponseSubmissionRelationships {
 
 	m.QueryResponse = &queryResponse
 

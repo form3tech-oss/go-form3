@@ -23,17 +23,17 @@ type QueryAdmissionRelationships struct {
 
 	// query
 	// Required: true
-	Query *RelationshipsQuery `json:"query"`
+	Query *RelationshipsFullQuery `json:"query"`
 }
 
 func QueryAdmissionRelationshipsWithDefaults(defaults client.Defaults) *QueryAdmissionRelationships {
 	return &QueryAdmissionRelationships{
 
-		Query: RelationshipsQueryWithDefaults(defaults),
+		Query: RelationshipsFullQueryWithDefaults(defaults),
 	}
 }
 
-func (m *QueryAdmissionRelationships) WithQuery(query RelationshipsQuery) *QueryAdmissionRelationships {
+func (m *QueryAdmissionRelationships) WithQuery(query RelationshipsFullQuery) *QueryAdmissionRelationships {
 
 	m.Query = &query
 

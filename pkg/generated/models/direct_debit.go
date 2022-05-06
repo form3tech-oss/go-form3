@@ -412,7 +412,7 @@ type DirectDebitAttributes struct {
 	// The [scheme-specific payment type](#enumerations-scheme-payment-types)
 	SchemePaymentType string `json:"scheme_payment_type,omitempty"`
 
-	// Date on which the operation is processed by the scheme. Only used if different from `processing_date`.
+	// Date on which the operation is processed by the scheme. Formatted according to ISO 8601 format: YYYY-MM-DD. Only used if different from `processing_date`.
 	// Format: date
 	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 

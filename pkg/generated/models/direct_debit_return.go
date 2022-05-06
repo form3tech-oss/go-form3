@@ -362,6 +362,10 @@ type DirectDebitReturnAttributes struct {
 	// compensation amount
 	CompensationAmount *CurrencyAndAmount `json:"compensation_amount,omitempty"`
 
+	// Date on which the operation is to be debited from the debtor account. Formatted according to ISO 8601 format: YYYY-MM-DD.
+	// Format: date
+	ProcessingDate *strfmt.Date `json:"processing_date,omitempty"`
+
 	// return amount
 	ReturnAmount *CurrencyAndAmount `json:"return_amount,omitempty"`
 
@@ -371,6 +375,10 @@ type DirectDebitReturnAttributes struct {
 	// return initiator
 	// Enum: [BANK CUSTOMER]
 	ReturnInitiator string `json:"return_initiator,omitempty"`
+
+	// Date on which the operation is processed by the scheme. Formatted according to ISO 8601 format: YYYY-MM-DD. Only used if different from `processing_date`.
+	// Format: date
+	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
 	// scheme transaction id
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
@@ -385,11 +393,15 @@ func DirectDebitReturnAttributesWithDefaults(defaults client.Defaults) *DirectDe
 
 		CompensationAmount: CurrencyAndAmountWithDefaults(defaults),
 
+		ProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitReturnAttributes", "processing_date"),
+
 		ReturnAmount: CurrencyAndAmountWithDefaults(defaults),
 
 		ReturnCode: defaults.GetString("DirectDebitReturnAttributes", "return_code"),
 
 		ReturnInitiator: defaults.GetString("DirectDebitReturnAttributes", "return_initiator"),
+
+		SchemeProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitReturnAttributes", "scheme_processing_date"),
 
 		SchemeTransactionID: defaults.GetString("DirectDebitReturnAttributes", "scheme_transaction_id"),
 	}
@@ -426,6 +438,18 @@ func (m *DirectDebitReturnAttributes) WithoutCompensationAmount() *DirectDebitRe
 	return m
 }
 
+func (m *DirectDebitReturnAttributes) WithProcessingDate(processingDate strfmt.Date) *DirectDebitReturnAttributes {
+
+	m.ProcessingDate = &processingDate
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithoutProcessingDate() *DirectDebitReturnAttributes {
+	m.ProcessingDate = nil
+	return m
+}
+
 func (m *DirectDebitReturnAttributes) WithReturnAmount(returnAmount CurrencyAndAmount) *DirectDebitReturnAttributes {
 
 	m.ReturnAmount = &returnAmount
@@ -452,6 +476,18 @@ func (m *DirectDebitReturnAttributes) WithReturnInitiator(returnInitiator string
 	return m
 }
 
+func (m *DirectDebitReturnAttributes) WithSchemeProcessingDate(schemeProcessingDate strfmt.Date) *DirectDebitReturnAttributes {
+
+	m.SchemeProcessingDate = &schemeProcessingDate
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithoutSchemeProcessingDate() *DirectDebitReturnAttributes {
+	m.SchemeProcessingDate = nil
+	return m
+}
+
 func (m *DirectDebitReturnAttributes) WithSchemeTransactionID(schemeTransactionID string) *DirectDebitReturnAttributes {
 
 	m.SchemeTransactionID = schemeTransactionID
@@ -471,11 +507,19 @@ func (m *DirectDebitReturnAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateProcessingDate(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReturnAmount(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateReturnInitiator(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeProcessingDate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -516,6 +560,19 @@ func (m *DirectDebitReturnAttributes) validateCompensationAmount(formats strfmt.
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnAttributes) validateProcessingDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ProcessingDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"processing_date", "body", "date", m.ProcessingDate.String(), formats); err != nil {
+		return err
 	}
 
 	return nil
@@ -576,6 +633,19 @@ func (m *DirectDebitReturnAttributes) validateReturnInitiator(formats strfmt.Reg
 
 	// value enum
 	if err := m.validateReturnInitiatorEnum("attributes"+"."+"return_initiator", "body", m.ReturnInitiator); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnAttributes) validateSchemeProcessingDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeProcessingDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"scheme_processing_date", "body", "date", m.SchemeProcessingDate.String(), formats); err != nil {
 		return err
 	}
 
