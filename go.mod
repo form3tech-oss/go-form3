@@ -2,6 +2,8 @@ module github.com/form3tech-oss/go-form3/v4
 
 go 1.16
 
+replace github.com/mailru/easyjson => github.com/form3tech-oss/easyjson v0.7.7
+
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200819183940-29e1ff8eb0bb // indirect
 	github.com/go-openapi/errors v0.19.6
