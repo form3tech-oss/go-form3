@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v4/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -23,17 +23,17 @@ type QueryAdmissionRelationships struct {
 
 	// query
 	// Required: true
-	Query *RelationshipsQuery `json:"query"`
+	Query *RelationshipsFullQuery `json:"query"`
 }
 
 func QueryAdmissionRelationshipsWithDefaults(defaults client.Defaults) *QueryAdmissionRelationships {
 	return &QueryAdmissionRelationships{
 
-		Query: RelationshipsQueryWithDefaults(defaults),
+		Query: RelationshipsFullQueryWithDefaults(defaults),
 	}
 }
 
-func (m *QueryAdmissionRelationships) WithQuery(query RelationshipsQuery) *QueryAdmissionRelationships {
+func (m *QueryAdmissionRelationships) WithQuery(query RelationshipsFullQuery) *QueryAdmissionRelationships {
 
 	m.Query = &query
 

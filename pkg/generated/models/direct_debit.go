@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v4/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -412,7 +412,7 @@ type DirectDebitAttributes struct {
 	// The [scheme-specific payment type](#enumerations-scheme-payment-types)
 	SchemePaymentType string `json:"scheme_payment_type,omitempty"`
 
-	// Date on which the operation is processed by the scheme. Only used if different from `processing_date`.
+	// Date on which the operation is processed by the scheme. Formatted according to ISO 8601 format: YYYY-MM-DD. Only used if different from `processing_date`.
 	// Format: date
 	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
