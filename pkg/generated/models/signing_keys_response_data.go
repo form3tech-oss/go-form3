@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v4/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -32,7 +32,7 @@ type SigningKeysResponseData struct {
 
 	// version
 	// Required: true
-	Version *float64 `json:"version"`
+	Version *int64 `json:"version"`
 
 	// organisation id
 	// Required: true
@@ -59,7 +59,7 @@ func SigningKeysResponseDataWithDefaults(defaults client.Defaults) *SigningKeysR
 
 		ID: defaults.GetStrfmtUUIDPtr("SigningKeysResponseData", "id"),
 
-		Version: defaults.GetFloat64Ptr("SigningKeysResponseData", "version"),
+		Version: defaults.GetInt64Ptr("SigningKeysResponseData", "version"),
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("SigningKeysResponseData", "organisation_id"),
 
@@ -95,7 +95,7 @@ func (m *SigningKeysResponseData) WithoutID() *SigningKeysResponseData {
 	return m
 }
 
-func (m *SigningKeysResponseData) WithVersion(version float64) *SigningKeysResponseData {
+func (m *SigningKeysResponseData) WithVersion(version int64) *SigningKeysResponseData {
 
 	m.Version = &version
 

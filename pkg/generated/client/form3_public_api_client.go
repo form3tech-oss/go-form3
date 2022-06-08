@@ -10,29 +10,30 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/client"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/a_c_e"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/account_amendment"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/account_identification"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/account_request"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/account_validation"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/accounts"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/audit"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/balances"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/claims"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/direct_debits"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/go_subscription_api"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/mandates"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/oauth2"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/organisations"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/payments"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/platformsecurityapi"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/query_api"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/reports"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/roles"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/scheme_messages"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/subscriptions"
-	"github.com/form3tech-oss/go-form3/v3/pkg/generated/client/users"
+	"github.com/form3tech-oss/go-form3/v4/pkg/client"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/a_c_e"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/account_amendment"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/account_identification"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/account_request"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/account_validation"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/accounts"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/audit"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/balances"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/claims"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/direct_debits"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/go_subscription_api"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/mandates"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/metrics_api"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/oauth2"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/organisations"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/payments"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/platformsecurityapi"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/query_api"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/reports"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/roles"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/scheme_messages"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/subscriptions"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/users"
 )
 
 // Default form3 public API HTTP client.
@@ -103,6 +104,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.GoSubscriptionAPI = go_subscription_api.New(transport, formats, defaults)
 
 	cli.Mandates = mandates.New(transport, formats, defaults)
+
+	cli.MetricsAPI = metrics_api.New(transport, formats, defaults)
 
 	cli.Oauth2 = oauth2.New(transport, formats, defaults)
 
@@ -192,6 +195,8 @@ type Form3PublicAPI struct {
 
 	Mandates *mandates.Client
 
+	MetricsAPI *metrics_api.Client
+
 	Oauth2 *oauth2.Client
 
 	Organisations *organisations.Client
@@ -242,6 +247,8 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.GoSubscriptionAPI.SetTransport(transport)
 
 	c.Mandates.SetTransport(transport)
+
+	c.MetricsAPI.SetTransport(transport)
 
 	c.Oauth2.SetTransport(transport)
 

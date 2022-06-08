@@ -10,7 +10,7 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v3/pkg/client"
+	"github.com/form3tech-oss/go-form3/v4/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -355,6 +355,10 @@ type DirectDebitReversalAttributes struct {
 	// charges amount
 	ChargesAmount *DirectDebitReversalAttributesChargesAmount `json:"charges_amount,omitempty"`
 
+	// Date on which the operation is to be debited from the debtor account. Formatted according to ISO 8601 format: YYYY-MM-DD.
+	// Format: date
+	ProcessingDate *strfmt.Date `json:"processing_date,omitempty"`
+
 	// Further explanation of the reason given in reason_code. Only evaluated for certain reason codes.
 	Reason string `json:"reason,omitempty"`
 
@@ -363,6 +367,10 @@ type DirectDebitReversalAttributes struct {
 
 	// reversal amount
 	ReversalAmount *DirectDebitReversalAttributesReversalAmount `json:"reversal_amount,omitempty"`
+
+	// Date on which the operation is processed by the scheme. Formatted according to ISO 8601 format: YYYY-MM-DD. Only used if different from `processing_date`.
+	// Format: date
+	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 }
 
 func DirectDebitReversalAttributesWithDefaults(defaults client.Defaults) *DirectDebitReversalAttributes {
@@ -370,11 +378,15 @@ func DirectDebitReversalAttributesWithDefaults(defaults client.Defaults) *Direct
 
 		ChargesAmount: DirectDebitReversalAttributesChargesAmountWithDefaults(defaults),
 
+		ProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitReversalAttributes", "processing_date"),
+
 		Reason: defaults.GetString("DirectDebitReversalAttributes", "reason"),
 
 		ReasonCode: defaults.GetString("DirectDebitReversalAttributes", "reason_code"),
 
 		ReversalAmount: DirectDebitReversalAttributesReversalAmountWithDefaults(defaults),
+
+		SchemeProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitReversalAttributes", "scheme_processing_date"),
 	}
 }
 
@@ -387,6 +399,18 @@ func (m *DirectDebitReversalAttributes) WithChargesAmount(chargesAmount DirectDe
 
 func (m *DirectDebitReversalAttributes) WithoutChargesAmount() *DirectDebitReversalAttributes {
 	m.ChargesAmount = nil
+	return m
+}
+
+func (m *DirectDebitReversalAttributes) WithProcessingDate(processingDate strfmt.Date) *DirectDebitReversalAttributes {
+
+	m.ProcessingDate = &processingDate
+
+	return m
+}
+
+func (m *DirectDebitReversalAttributes) WithoutProcessingDate() *DirectDebitReversalAttributes {
+	m.ProcessingDate = nil
 	return m
 }
 
@@ -416,6 +440,18 @@ func (m *DirectDebitReversalAttributes) WithoutReversalAmount() *DirectDebitReve
 	return m
 }
 
+func (m *DirectDebitReversalAttributes) WithSchemeProcessingDate(schemeProcessingDate strfmt.Date) *DirectDebitReversalAttributes {
+
+	m.SchemeProcessingDate = &schemeProcessingDate
+
+	return m
+}
+
+func (m *DirectDebitReversalAttributes) WithoutSchemeProcessingDate() *DirectDebitReversalAttributes {
+	m.SchemeProcessingDate = nil
+	return m
+}
+
 // Validate validates this direct debit reversal attributes
 func (m *DirectDebitReversalAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -424,7 +460,15 @@ func (m *DirectDebitReversalAttributes) Validate(formats strfmt.Registry) error 
 		res = append(res, err)
 	}
 
+	if err := m.validateProcessingDate(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReversalAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeProcessingDate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -452,6 +496,19 @@ func (m *DirectDebitReversalAttributes) validateChargesAmount(formats strfmt.Reg
 	return nil
 }
 
+func (m *DirectDebitReversalAttributes) validateProcessingDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ProcessingDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"processing_date", "body", "date", m.ProcessingDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DirectDebitReversalAttributes) validateReversalAmount(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ReversalAmount) { // not required
@@ -465,6 +522,19 @@ func (m *DirectDebitReversalAttributes) validateReversalAmount(formats strfmt.Re
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReversalAttributes) validateSchemeProcessingDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeProcessingDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"scheme_processing_date", "body", "date", m.SchemeProcessingDate.String(), formats); err != nil {
+		return err
 	}
 
 	return nil
