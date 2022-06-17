@@ -11,9 +11,12 @@ else
 swagger_binary := "swagger_linux_amd64"
 endif
 
+./bin/swagger:
+	@mkdir -p bin
+	@curl -o ./bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x ./bin/swagger
+
 .PHONY: install-swagger
-install-swagger:
-	@curl -o /usr/local/bin/swagger -L'#' https://github.com/go-swagger/go-swagger/releases/download/${swagger_codegen_version}/${swagger_binary} && chmod +x /usr/local/bin/swagger
+install-swagger: ./bin/swagger
 
 .PHONY: download-swagger
 download-swagger:
@@ -22,7 +25,7 @@ download-swagger:
 	./scripts/extract_paths.py swagger/form3-swagger-raw.yaml swagger/paths.yaml
 
 .PHONY: modify-swagger-file
-modify-swagger-file: download-swagger
+modify-swagger-file: download-swagger install-swagger
 	# Add an operation name (operationId) to each endpoint
 	yq eval-all 'select(fi==0) * select(fi==1)' swagger/form3-swagger-raw.yaml operationNames.yaml > swagger/form3-swagger-updated.yaml
 	# Delete the ReportDetailsResponse links property (and its definition)
@@ -52,7 +55,7 @@ modify-swagger-file: download-swagger
 generate-client: modify-swagger-file
 	@rm -rf pkg/generated
 	@mkdir pkg/generated
-	swagger generate client -f swagger/form3-swagger-updated.yaml -t pkg/generated/ -T templates -C templates/layout.yaml
+	./bin/swagger generate client -f swagger/form3-swagger-updated.yaml -t pkg/generated/ -T templates -C templates/layout.yaml
 
 .PHONY: goimports
 goimports:
