@@ -98,7 +98,7 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 	assert.Equal(t, true, updateResp.Data.Attributes.Deactivated)
 
 	//delete
-	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(0).Do()
+	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(version + 1).Do()
 	require.NoError(t, err)
 }
 
