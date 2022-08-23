@@ -82,14 +82,16 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 	// update
 	updateReq := f3.Subscriptions.ModifySubscription()
 	version := int64(0)
-	updateReq.WithData(models.SubscriptionUpdate{
-		ID:             &id,
-		OrganisationID: &organisationID,
-		Attributes: &models.SubscriptionUpdateAttributes{
-			Deactivated: true,
-		},
-		Version: &version,
-	})
+	updateReq.
+		WithID(id).
+		WithData(models.SubscriptionUpdate{
+			ID:             &id,
+			OrganisationID: &organisationID,
+			Attributes: &models.SubscriptionUpdateAttributes{
+				Deactivated: true,
+			},
+			Version: &version,
+		})
 	updateResp, err := updateReq.Do()
 	require.NoError(t, err)
 	assert.Equal(t, id.String(), updateResp.Data.ID.String())
