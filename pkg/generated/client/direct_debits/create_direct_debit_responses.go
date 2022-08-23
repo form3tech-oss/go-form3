@@ -39,6 +39,13 @@ func (o *CreateDirectDebitReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 
+	case 409:
+		result := NewCreateDirectDebitConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -100,6 +107,40 @@ func (o *CreateDirectDebitBadRequest) Error() string {
 }
 
 func (o *CreateDirectDebitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateDirectDebitConflict creates a CreateDirectDebitConflict with default headers values
+func NewCreateDirectDebitConflict() *CreateDirectDebitConflict {
+	return &CreateDirectDebitConflict{}
+}
+
+/*CreateDirectDebitConflict handles this case with default header values.
+
+Direct Debit creation conflict error
+*/
+type CreateDirectDebitConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateDirectDebitConflict) Error() string {
+	return fmt.Sprintf("[POST /transaction/directdebits][%d] createDirectDebitConflict", 409)
+}
+
+func (o *CreateDirectDebitConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

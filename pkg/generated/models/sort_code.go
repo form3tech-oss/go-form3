@@ -472,6 +472,10 @@ type SortCodeAttributesSupportedSchemesBACS struct {
 	// accepts payments
 	AcceptsPayments *bool `json:"accepts_payments,omitempty"`
 
+	// account switching
+	// Enum: [full partial ineligible]
+	AccountSwitching string `json:"account_switching,omitempty"`
+
 	// allowed transactions
 	AllowedTransactions []TransactionGroupCode `json:"allowed_transactions"`
 
@@ -483,6 +487,8 @@ func SortCodeAttributesSupportedSchemesBACSWithDefaults(defaults client.Defaults
 	return &SortCodeAttributesSupportedSchemesBACS{
 
 		AcceptsPayments: defaults.GetBoolPtr("SortCodeAttributesSupportedSchemesBACS", "accepts_payments"),
+
+		AccountSwitching: defaults.GetString("SortCodeAttributesSupportedSchemesBACS", "account_switching"),
 
 		AllowedTransactions: make([]TransactionGroupCode, 0),
 
@@ -499,6 +505,13 @@ func (m *SortCodeAttributesSupportedSchemesBACS) WithAcceptsPayments(acceptsPaym
 
 func (m *SortCodeAttributesSupportedSchemesBACS) WithoutAcceptsPayments() *SortCodeAttributesSupportedSchemesBACS {
 	m.AcceptsPayments = nil
+	return m
+}
+
+func (m *SortCodeAttributesSupportedSchemesBACS) WithAccountSwitching(accountSwitching string) *SortCodeAttributesSupportedSchemesBACS {
+
+	m.AccountSwitching = accountSwitching
+
 	return m
 }
 
@@ -520,6 +533,10 @@ func (m *SortCodeAttributesSupportedSchemesBACS) WithServiceStatus(serviceStatus
 func (m *SortCodeAttributesSupportedSchemesBACS) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccountSwitching(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAllowedTransactions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -527,6 +544,52 @@ func (m *SortCodeAttributesSupportedSchemesBACS) Validate(formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+var sortCodeAttributesSupportedSchemesBACSTypeAccountSwitchingPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["full","partial","ineligible"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		sortCodeAttributesSupportedSchemesBACSTypeAccountSwitchingPropEnum = append(sortCodeAttributesSupportedSchemesBACSTypeAccountSwitchingPropEnum, v)
+	}
+}
+
+const (
+
+	// SortCodeAttributesSupportedSchemesBACSAccountSwitchingFull captures enum value "full"
+	SortCodeAttributesSupportedSchemesBACSAccountSwitchingFull string = "full"
+
+	// SortCodeAttributesSupportedSchemesBACSAccountSwitchingPartial captures enum value "partial"
+	SortCodeAttributesSupportedSchemesBACSAccountSwitchingPartial string = "partial"
+
+	// SortCodeAttributesSupportedSchemesBACSAccountSwitchingIneligible captures enum value "ineligible"
+	SortCodeAttributesSupportedSchemesBACSAccountSwitchingIneligible string = "ineligible"
+)
+
+// prop value enum
+func (m *SortCodeAttributesSupportedSchemesBACS) validateAccountSwitchingEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, sortCodeAttributesSupportedSchemesBACSTypeAccountSwitchingPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *SortCodeAttributesSupportedSchemesBACS) validateAccountSwitching(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccountSwitching) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateAccountSwitchingEnum("attributes"+"."+"supported_schemes"+"."+"BACS"+"."+"account_switching", "body", m.AccountSwitching); err != nil {
+		return err
+	}
+
 	return nil
 }
 

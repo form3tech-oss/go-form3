@@ -18,7 +18,6 @@ import (
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/account_validation"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/accounts"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/audit"
-	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/balances"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/claims"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/direct_debits"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/go_subscription_api"
@@ -31,8 +30,10 @@ import (
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/query_api"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/reports"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/roles"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/scheme_file_api"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/scheme_messages"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/subscriptions"
+	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/transaction_file_api"
 	"github.com/form3tech-oss/go-form3/v4/pkg/generated/client/users"
 )
 
@@ -95,8 +96,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.Audit = audit.New(transport, formats, defaults)
 
-	cli.Balances = balances.New(transport, formats, defaults)
-
 	cli.Claims = claims.New(transport, formats, defaults)
 
 	cli.DirectDebits = direct_debits.New(transport, formats, defaults)
@@ -121,9 +120,13 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.Roles = roles.New(transport, formats, defaults)
 
+	cli.SchemeFileAPI = scheme_file_api.New(transport, formats, defaults)
+
 	cli.SchemeMessages = scheme_messages.New(transport, formats, defaults)
 
 	cli.Subscriptions = subscriptions.New(transport, formats, defaults)
+
+	cli.TransactionFileAPI = transaction_file_api.New(transport, formats, defaults)
 
 	cli.Users = users.New(transport, formats, defaults)
 
@@ -185,8 +188,6 @@ type Form3PublicAPI struct {
 
 	Audit *audit.Client
 
-	Balances *balances.Client
-
 	Claims *claims.Client
 
 	DirectDebits *direct_debits.Client
@@ -211,9 +212,13 @@ type Form3PublicAPI struct {
 
 	Roles *roles.Client
 
+	SchemeFileAPI *scheme_file_api.Client
+
 	SchemeMessages *scheme_messages.Client
 
 	Subscriptions *subscriptions.Client
+
+	TransactionFileAPI *transaction_file_api.Client
 
 	Users *users.Client
 
@@ -237,8 +242,6 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Accounts.SetTransport(transport)
 
 	c.Audit.SetTransport(transport)
-
-	c.Balances.SetTransport(transport)
 
 	c.Claims.SetTransport(transport)
 
@@ -264,9 +267,13 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.Roles.SetTransport(transport)
 
+	c.SchemeFileAPI.SetTransport(transport)
+
 	c.SchemeMessages.SetTransport(transport)
 
 	c.Subscriptions.SetTransport(transport)
+
+	c.TransactionFileAPI.SetTransport(transport)
 
 	c.Users.SetTransport(transport)
 

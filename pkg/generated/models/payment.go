@@ -1360,6 +1360,9 @@ type PaymentAttributesBeneficiaryParty struct {
 	// account with
 	AccountWith *BeneficiaryDebtorAccountHoldingEntity `json:"account_with,omitempty"`
 
+	// Additional address line of the beneficiary address
+	AdditionalAddressLine string `json:"additional_address_line,omitempty"`
+
 	// Beneficiary address
 	Address []string `json:"address,omitempty"`
 
@@ -1375,6 +1378,9 @@ type PaymentAttributesBeneficiaryParty struct {
 
 	// Beneficiary birth province
 	BirthProvince string `json:"birth_province,omitempty"`
+
+	// Building number of the beneficiary address
+	BuildingNumber string `json:"building_number,omitempty"`
 
 	// City/Town of the Beneficiary address
 	City string `json:"city,omitempty"`
@@ -1397,8 +1403,17 @@ type PaymentAttributesBeneficiaryParty struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Post code of the beneficiary address
+	PostCode string `json:"post_code,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
+
+	// Province of the beneficiary address
+	Province string `json:"province,omitempty"`
+
+	// Street name of the beneficiary address
+	StreetName string `json:"street_name,omitempty"`
 
 	// Beneficiary phone number
 	TelephoneNumber string `json:"telephone_number,omitempty"`
@@ -1417,6 +1432,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 
 		AccountWith: BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults),
 
+		AdditionalAddressLine: defaults.GetString("PaymentAttributesBeneficiaryParty", "additional_address_line"),
+
 		Address: make([]string, 0),
 
 		BirthCity: defaults.GetString("PaymentAttributesBeneficiaryParty", "birth_city"),
@@ -1426,6 +1443,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		BirthDate: defaults.GetStrfmtDatePtr("PaymentAttributesBeneficiaryParty", "birth_date"),
 
 		BirthProvince: defaults.GetString("PaymentAttributesBeneficiaryParty", "birth_province"),
+
+		BuildingNumber: defaults.GetString("PaymentAttributesBeneficiaryParty", "building_number"),
 
 		City: defaults.GetString("PaymentAttributesBeneficiaryParty", "city"),
 
@@ -1441,7 +1460,13 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 
 		OrganisationIdentificationScheme: defaults.GetString("PaymentAttributesBeneficiaryParty", "organisation_identification_scheme"),
 
+		PostCode: defaults.GetString("PaymentAttributesBeneficiaryParty", "post_code"),
+
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
+
+		Province: defaults.GetString("PaymentAttributesBeneficiaryParty", "province"),
+
+		StreetName: defaults.GetString("PaymentAttributesBeneficiaryParty", "street_name"),
 
 		TelephoneNumber: defaults.GetString("PaymentAttributesBeneficiaryParty", "telephone_number"),
 	}
@@ -1487,6 +1512,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithoutAccountWith() *PaymentAttribu
 	return m
 }
 
+func (m *PaymentAttributesBeneficiaryParty) WithAdditionalAddressLine(additionalAddressLine string) *PaymentAttributesBeneficiaryParty {
+
+	m.AdditionalAddressLine = additionalAddressLine
+
+	return m
+}
+
 func (m *PaymentAttributesBeneficiaryParty) WithAddress(address []string) *PaymentAttributesBeneficiaryParty {
 
 	m.Address = address
@@ -1523,6 +1555,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithoutBirthDate() *PaymentAttribute
 func (m *PaymentAttributesBeneficiaryParty) WithBirthProvince(birthProvince string) *PaymentAttributesBeneficiaryParty {
 
 	m.BirthProvince = birthProvince
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithBuildingNumber(buildingNumber string) *PaymentAttributesBeneficiaryParty {
+
+	m.BuildingNumber = buildingNumber
 
 	return m
 }
@@ -1576,6 +1615,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithOrganisationIdentificationScheme
 	return m
 }
 
+func (m *PaymentAttributesBeneficiaryParty) WithPostCode(postCode string) *PaymentAttributesBeneficiaryParty {
+
+	m.PostCode = postCode
+
+	return m
+}
+
 func (m *PaymentAttributesBeneficiaryParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *PaymentAttributesBeneficiaryParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1585,6 +1631,20 @@ func (m *PaymentAttributesBeneficiaryParty) WithPrivateIdentification(privateIde
 
 func (m *PaymentAttributesBeneficiaryParty) WithoutPrivateIdentification() *PaymentAttributesBeneficiaryParty {
 	m.PrivateIdentification = nil
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithProvince(province string) *PaymentAttributesBeneficiaryParty {
+
+	m.Province = province
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithStreetName(streetName string) *PaymentAttributesBeneficiaryParty {
+
+	m.StreetName = streetName
+
 	return m
 }
 
@@ -1727,6 +1787,9 @@ type PaymentAttributesDebtorParty struct {
 	// account with
 	AccountWith *BeneficiaryDebtorAccountHoldingEntity `json:"account_with,omitempty"`
 
+	// Additional address line of the Debtor address
+	AdditionalAddressLine string `json:"additional_address_line,omitempty"`
+
 	// Debtor address
 	Address []string `json:"address,omitempty"`
 
@@ -1742,6 +1805,9 @@ type PaymentAttributesDebtorParty struct {
 
 	// Debtor birth province
 	BirthProvince string `json:"birth_province,omitempty"`
+
+	// Building number of the Debtor address
+	BuildingNumber string `json:"building_number,omitempty"`
 
 	// City/Town of the Debtor address
 	City string `json:"city,omitempty"`
@@ -1770,8 +1836,17 @@ type PaymentAttributesDebtorParty struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Post code of the Debtor address
+	PostCode string `json:"post_code,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
+
+	// Province of the Debtor address
+	Province string `json:"province,omitempty"`
+
+	// Street name of the Debtor address
+	StreetName string `json:"street_name,omitempty"`
 }
 
 func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *PaymentAttributesDebtorParty {
@@ -1785,6 +1860,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 
 		AccountWith: BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults),
 
+		AdditionalAddressLine: defaults.GetString("PaymentAttributesDebtorParty", "additional_address_line"),
+
 		Address: make([]string, 0),
 
 		BirthCity: defaults.GetString("PaymentAttributesDebtorParty", "birth_city"),
@@ -1794,6 +1871,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 		BirthDate: defaults.GetStrfmtDatePtr("PaymentAttributesDebtorParty", "birth_date"),
 
 		BirthProvince: defaults.GetString("PaymentAttributesDebtorParty", "birth_province"),
+
+		BuildingNumber: defaults.GetString("PaymentAttributesDebtorParty", "building_number"),
 
 		City: defaults.GetString("PaymentAttributesDebtorParty", "city"),
 
@@ -1813,7 +1892,13 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 
 		OrganisationIdentificationScheme: defaults.GetString("PaymentAttributesDebtorParty", "organisation_identification_scheme"),
 
+		PostCode: defaults.GetString("PaymentAttributesDebtorParty", "post_code"),
+
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
+
+		Province: defaults.GetString("PaymentAttributesDebtorParty", "province"),
+
+		StreetName: defaults.GetString("PaymentAttributesDebtorParty", "street_name"),
 	}
 }
 
@@ -1847,6 +1932,13 @@ func (m *PaymentAttributesDebtorParty) WithAccountWith(accountWith BeneficiaryDe
 
 func (m *PaymentAttributesDebtorParty) WithoutAccountWith() *PaymentAttributesDebtorParty {
 	m.AccountWith = nil
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithAdditionalAddressLine(additionalAddressLine string) *PaymentAttributesDebtorParty {
+
+	m.AdditionalAddressLine = additionalAddressLine
+
 	return m
 }
 
@@ -1886,6 +1978,13 @@ func (m *PaymentAttributesDebtorParty) WithoutBirthDate() *PaymentAttributesDebt
 func (m *PaymentAttributesDebtorParty) WithBirthProvince(birthProvince string) *PaymentAttributesDebtorParty {
 
 	m.BirthProvince = birthProvince
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithBuildingNumber(buildingNumber string) *PaymentAttributesDebtorParty {
+
+	m.BuildingNumber = buildingNumber
 
 	return m
 }
@@ -1953,6 +2052,13 @@ func (m *PaymentAttributesDebtorParty) WithOrganisationIdentificationScheme(orga
 	return m
 }
 
+func (m *PaymentAttributesDebtorParty) WithPostCode(postCode string) *PaymentAttributesDebtorParty {
+
+	m.PostCode = postCode
+
+	return m
+}
+
 func (m *PaymentAttributesDebtorParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *PaymentAttributesDebtorParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1962,6 +2068,20 @@ func (m *PaymentAttributesDebtorParty) WithPrivateIdentification(privateIdentifi
 
 func (m *PaymentAttributesDebtorParty) WithoutPrivateIdentification() *PaymentAttributesDebtorParty {
 	m.PrivateIdentification = nil
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithProvince(province string) *PaymentAttributesDebtorParty {
+
+	m.Province = province
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithStreetName(streetName string) *PaymentAttributesDebtorParty {
+
+	m.StreetName = streetName
+
 	return m
 }
 

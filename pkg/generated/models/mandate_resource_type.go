@@ -47,6 +47,9 @@ const (
 
 	// MandateResourceTypeMandateManagements captures enum value "mandate_managements"
 	MandateResourceTypeMandateManagements MandateResourceType = "mandate_managements"
+
+	// MandateResourceTypeMandateSubmissionsWithFinalState captures enum value "mandate_submissions_with_final_state"
+	MandateResourceTypeMandateSubmissionsWithFinalState MandateResourceType = "mandate_submissions_with_final_state"
 )
 
 // for schema
@@ -54,7 +57,7 @@ var mandateResourceTypeEnum []interface{}
 
 func init() {
 	var res []MandateResourceType
-	if err := json.Unmarshal([]byte(`["mandates","mandate_admissions","mandate_returns","mandate_return_submissions","mandate_return_submission_validations","mandate_submissions","mandate_submission_validations","mandate_automatic_returns","mandate_managements"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["mandates","mandate_admissions","mandate_returns","mandate_return_submissions","mandate_return_submission_validations","mandate_submissions","mandate_submission_validations","mandate_automatic_returns","mandate_managements","mandate_submissions_with_final_state"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

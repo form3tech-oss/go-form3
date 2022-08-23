@@ -23,12 +23,17 @@ type ReportRelationships struct {
 
 	// report admission
 	ReportAdmission *ReportRelationshipsReportAdmission `json:"report_admission,omitempty"`
+
+	// transaction file
+	TransactionFile *ThinRelationship `json:"transaction_file,omitempty"`
 }
 
 func ReportRelationshipsWithDefaults(defaults client.Defaults) *ReportRelationships {
 	return &ReportRelationships{
 
 		ReportAdmission: ReportRelationshipsReportAdmissionWithDefaults(defaults),
+
+		TransactionFile: ThinRelationshipWithDefaults(defaults),
 	}
 }
 
@@ -44,11 +49,27 @@ func (m *ReportRelationships) WithoutReportAdmission() *ReportRelationships {
 	return m
 }
 
+func (m *ReportRelationships) WithTransactionFile(transactionFile ThinRelationship) *ReportRelationships {
+
+	m.TransactionFile = &transactionFile
+
+	return m
+}
+
+func (m *ReportRelationships) WithoutTransactionFile() *ReportRelationships {
+	m.TransactionFile = nil
+	return m
+}
+
 // Validate validates this report relationships
 func (m *ReportRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateReportAdmission(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTransactionFile(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -68,6 +89,24 @@ func (m *ReportRelationships) validateReportAdmission(formats strfmt.Registry) e
 		if err := m.ReportAdmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("report_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReportRelationships) validateTransactionFile(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TransactionFile) { // not required
+		return nil
+	}
+
+	if m.TransactionFile != nil {
+		if err := m.TransactionFile.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("transaction_file")
 			}
 			return err
 		}
