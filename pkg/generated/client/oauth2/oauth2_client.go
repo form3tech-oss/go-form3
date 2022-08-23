@@ -8,7 +8,7 @@ package oauth2
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v4/pkg/client"
+	"github.com/form3tech-oss/go-form3/v5/pkg/client"
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
