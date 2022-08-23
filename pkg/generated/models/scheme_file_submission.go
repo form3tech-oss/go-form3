@@ -50,8 +50,7 @@ type SchemeFileSubmission struct {
 	ModifiedOn strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// attributes
-	// Required: true
-	Attributes *SchemeFileSubmissionAttributes `json:"attributes"`
+	Attributes *SchemeFileSubmissionAttributes `json:"attributes,omitempty"`
 
 	// relationships
 	// Read Only: true
@@ -309,8 +308,8 @@ func (m *SchemeFileSubmission) validateModifiedOn(formats strfmt.Registry) error
 
 func (m *SchemeFileSubmission) validateAttributes(formats strfmt.Registry) error {
 
-	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
-		return err
+	if swag.IsZero(m.Attributes) { // not required
+		return nil
 	}
 
 	if m.Attributes != nil {

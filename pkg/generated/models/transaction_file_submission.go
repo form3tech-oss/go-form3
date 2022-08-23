@@ -51,8 +51,7 @@ type TransactionFileSubmission struct {
 	ModifiedOn strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// attributes
-	// Required: true
-	Attributes *TransactionFileSubmissionAttributes `json:"attributes"`
+	Attributes *TransactionFileSubmissionAttributes `json:"attributes,omitempty"`
 
 	// relationships
 	// Read Only: true
@@ -310,8 +309,8 @@ func (m *TransactionFileSubmission) validateModifiedOn(formats strfmt.Registry) 
 
 func (m *TransactionFileSubmission) validateAttributes(formats strfmt.Registry) error {
 
-	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
-		return err
+	if swag.IsZero(m.Attributes) { // not required
+		return nil
 	}
 
 	if m.Attributes != nil {
