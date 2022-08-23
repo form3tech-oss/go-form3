@@ -18,7 +18,7 @@ func TestCreateSubscriptions(t *testing.T) {
 
 	organisationID := strfmt.UUID(uuid.MustParse(os.Getenv("FORM3_ORGANISATION_ID")).String())
 	id := strfmt.UUID(uuid.New().String())
-	transport := "http"
+	transport := models.CallbackTransportHTTP
 	callbackURI := "https://webhook.site/db28eac0-d0a5-4078-b9be-0e4617471b01"
 	eventType := "created"
 	recordType := "PaymentSubmission"
@@ -28,8 +28,8 @@ func TestCreateSubscriptions(t *testing.T) {
 		ID:             &id,
 		OrganisationID: &organisationID,
 		Attributes: &models.SubscriptionAttributes{
-			CallbackTransport: &transport,
-			CallbackURI:       &callbackURI,
+			CallbackTransport: transport,
+			CallbackURI:       callbackURI,
 			UserID:            strfmt.UUID(uuid.New().String()),
 			EventType:         &eventType,
 			RecordType:        &recordType,
