@@ -18,7 +18,7 @@ func TestCreateSubscriptionsDeprecatedCallbackUriParams(t *testing.T) {
 	eventType := "created"
 	recordType := "PaymentSubmission"
 
-	testCreateSubscriptions(t, &models.SubscriptionAttributes{
+	testCreateAndUpdateSubscriptions(t, &models.SubscriptionAttributes{
 		CallbackTransport: transport,
 		CallbackURI:       callbackURI,
 		UserID:            strfmt.UUID(uuid.New().String()),
@@ -33,7 +33,7 @@ func TestCreateSubscriptionsNewCallbackUriParams(t *testing.T) {
 	eventType := "created"
 	recordType := "PaymentSubmission"
 
-	testCreateSubscriptions(t, &models.SubscriptionAttributes{
+	testCreateAndUpdateSubscriptions(t, &models.SubscriptionAttributes{
 		CallbackUris: []*models.CallbackURI{{
 			CallbackTransport: &transport,
 			CallbackURI:       &callbackURI,
@@ -50,7 +50,7 @@ func TestCreateSubscriptionsNewCallbackUriParamsHttpAwsPrivate(t *testing.T) {
 	eventType := "created"
 	recordType := "PaymentSubmission"
 
-	testCreateSubscriptions(t, &models.SubscriptionAttributes{
+	testCreateAndUpdateSubscriptions(t, &models.SubscriptionAttributes{
 		CallbackUris: []*models.CallbackURI{{
 			CallbackTransport: &transport,
 			CallbackURI:       &callbackURI,
@@ -61,23 +61,39 @@ func TestCreateSubscriptionsNewCallbackUriParamsHttpAwsPrivate(t *testing.T) {
 	})
 }
 
-func testCreateSubscriptions(t *testing.T, attributes *models.SubscriptionAttributes) {
+func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.SubscriptionAttributes) {
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
 	organisationID := strfmt.UUID(uuid.MustParse(os.Getenv("FORM3_ORGANISATION_ID")).String())
 	id := strfmt.UUID(uuid.New().String())
+
+	// create
 	req := f3.Subscriptions.CreateSubscription()
 	req.WithData(models.Subscription{
 		ID:             &id,
 		OrganisationID: &organisationID,
 		Attributes:     attributes,
 	})
-
 	resp, err := req.Do()
 	require.NoError(t, err)
 	assert.Equal(t, id.String(), resp.Data.ID.String())
 
+	// update
+	updateReq := f3.Subscriptions.ModifySubscription()
+	updateReq.WithData(models.SubscriptionUpdate{
+		ID:             &id,
+		OrganisationID: &organisationID,
+		Attributes: &models.SubscriptionUpdateAttributes{
+			Deactivated: true,
+		},
+	})
+	updateResp, err := updateReq.Do()
+	require.NoError(t, err)
+	assert.Equal(t, id.String(), updateResp.Data.ID.String())
+	assert.Equal(t, true, updateResp.Data.Attributes.Deactivated)
+
+	//delete
 	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(0).Do()
 	require.NoError(t, err)
 }
