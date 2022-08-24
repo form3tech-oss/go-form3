@@ -21,17 +21,17 @@ import (
 type SchemeFileSubmissionRelationships struct {
 
 	// scheme file
-	SchemeFile *ThinRelationship `json:"scheme_file,omitempty"`
+	SchemeFile *SchemeFile `json:"scheme_file,omitempty"`
 }
 
 func SchemeFileSubmissionRelationshipsWithDefaults(defaults client.Defaults) *SchemeFileSubmissionRelationships {
 	return &SchemeFileSubmissionRelationships{
 
-		SchemeFile: ThinRelationshipWithDefaults(defaults),
+		SchemeFile: SchemeFileWithDefaults(defaults),
 	}
 }
 
-func (m *SchemeFileSubmissionRelationships) WithSchemeFile(schemeFile ThinRelationship) *SchemeFileSubmissionRelationships {
+func (m *SchemeFileSubmissionRelationships) WithSchemeFile(schemeFile SchemeFile) *SchemeFileSubmissionRelationships {
 
 	m.SchemeFile = &schemeFile
 

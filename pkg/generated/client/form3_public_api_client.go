@@ -21,6 +21,7 @@ import (
 	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/claims"
 	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/direct_debits"
 	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/go_subscription_api"
+	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/lhv_gateway"
 	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/mandates"
 	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/metrics_api"
 	"github.com/form3tech-oss/go-form3/v5/pkg/generated/client/oauth2"
@@ -101,6 +102,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 	cli.DirectDebits = direct_debits.New(transport, formats, defaults)
 
 	cli.GoSubscriptionAPI = go_subscription_api.New(transport, formats, defaults)
+
+	cli.LhvGateway = lhv_gateway.New(transport, formats, defaults)
 
 	cli.Mandates = mandates.New(transport, formats, defaults)
 
@@ -194,6 +197,8 @@ type Form3PublicAPI struct {
 
 	GoSubscriptionAPI *go_subscription_api.Client
 
+	LhvGateway *lhv_gateway.Client
+
 	Mandates *mandates.Client
 
 	MetricsAPI *metrics_api.Client
@@ -248,6 +253,8 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 	c.DirectDebits.SetTransport(transport)
 
 	c.GoSubscriptionAPI.SetTransport(transport)
+
+	c.LhvGateway.SetTransport(transport)
 
 	c.Mandates.SetTransport(transport)
 

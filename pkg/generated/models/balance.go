@@ -28,11 +28,16 @@ type Balance struct {
 	// Format: uuid
 	ID strfmt.UUID `json:"id,omitempty"`
 
+	// modified on
+	// Format: date-time
+	ModifiedOn strfmt.DateTime `json:"modified_on,omitempty"`
+
 	// Unique ID of the organisation this resource is created by
 	// Format: uuid
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
 	// Name of the resource type
+	// Enum: [lhvgateway_balances]
 	Type string `json:"type,omitempty"`
 
 	// Version number
@@ -46,6 +51,8 @@ func BalanceWithDefaults(defaults client.Defaults) *Balance {
 		Attributes: BalanceAttributesWithDefaults(defaults),
 
 		ID: defaults.GetStrfmtUUID("Balance", "id"),
+
+		ModifiedOn: defaults.GetStrfmtDateTime("Balance", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUID("Balance", "organisation_id"),
 
@@ -70,6 +77,13 @@ func (m *Balance) WithoutAttributes() *Balance {
 func (m *Balance) WithID(id strfmt.UUID) *Balance {
 
 	m.ID = id
+
+	return m
+}
+
+func (m *Balance) WithModifiedOn(modifiedOn strfmt.DateTime) *Balance {
+
+	m.ModifiedOn = modifiedOn
 
 	return m
 }
@@ -112,7 +126,15 @@ func (m *Balance) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateModifiedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateOrganisationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -157,6 +179,19 @@ func (m *Balance) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Balance) validateModifiedOn(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ModifiedOn) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("modified_on", "body", "date-time", m.ModifiedOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Balance) validateOrganisationID(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.OrganisationID) { // not required
@@ -164,6 +199,46 @@ func (m *Balance) validateOrganisationID(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var balanceTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["lhvgateway_balances"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		balanceTypeTypePropEnum = append(balanceTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// BalanceTypeLhvgatewayBalances captures enum value "lhvgateway_balances"
+	BalanceTypeLhvgatewayBalances string = "lhvgateway_balances"
+)
+
+// prop value enum
+func (m *Balance) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, balanceTypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Balance) validateType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
 		return err
 	}
 
