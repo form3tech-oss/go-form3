@@ -15,7 +15,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v4/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v5/pkg/generated/models"
 )
 
 // Client.CreateClaim creates a new CreateClaimRequest object
