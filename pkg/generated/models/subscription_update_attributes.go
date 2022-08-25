@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v4/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -21,13 +22,15 @@ import (
 // swagger:model SubscriptionUpdateAttributes
 type SubscriptionUpdateAttributes struct {
 
-	// callback transport
-	// Enum: [http queue]
-	CallbackTransport string `json:"callback_transport,omitempty"`
+	// Deprecated. Please use callback_uris instead
+	CallbackTransport CallbackTransport `json:"callback_transport,omitempty"`
 
-	// callback uri
+	// Deprecated. Please use callback_uris instead
 	// Pattern: ^[A-Za-z0-9 .,@:\&\?=\/\-_]*$
 	CallbackURI string `json:"callback_uri,omitempty"`
+
+	// callback uris
+	CallbackUris []*CallbackURI `json:"callback_uris"`
 
 	// deactivated
 	Deactivated bool `json:"deactivated,omitempty"`
@@ -52,9 +55,11 @@ type SubscriptionUpdateAttributes struct {
 func SubscriptionUpdateAttributesWithDefaults(defaults client.Defaults) *SubscriptionUpdateAttributes {
 	return &SubscriptionUpdateAttributes{
 
-		CallbackTransport: defaults.GetString("SubscriptionUpdateAttributes", "callback_transport"),
+		// TODO CallbackTransport: CallbackTransport,
 
 		CallbackURI: defaults.GetString("SubscriptionUpdateAttributes", "callback_uri"),
+
+		CallbackUris: make([]*CallbackURI, 0),
 
 		Deactivated: defaults.GetBool("SubscriptionUpdateAttributes", "deactivated"),
 
@@ -68,7 +73,7 @@ func SubscriptionUpdateAttributesWithDefaults(defaults client.Defaults) *Subscri
 	}
 }
 
-func (m *SubscriptionUpdateAttributes) WithCallbackTransport(callbackTransport string) *SubscriptionUpdateAttributes {
+func (m *SubscriptionUpdateAttributes) WithCallbackTransport(callbackTransport CallbackTransport) *SubscriptionUpdateAttributes {
 
 	m.CallbackTransport = callbackTransport
 
@@ -78,6 +83,13 @@ func (m *SubscriptionUpdateAttributes) WithCallbackTransport(callbackTransport s
 func (m *SubscriptionUpdateAttributes) WithCallbackURI(callbackURI string) *SubscriptionUpdateAttributes {
 
 	m.CallbackURI = callbackURI
+
+	return m
+}
+
+func (m *SubscriptionUpdateAttributes) WithCallbackUris(callbackUris []*CallbackURI) *SubscriptionUpdateAttributes {
+
+	m.CallbackUris = callbackUris
 
 	return m
 }
@@ -129,6 +141,10 @@ func (m *SubscriptionUpdateAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCallbackUris(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEventType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -147,43 +163,16 @@ func (m *SubscriptionUpdateAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var subscriptionUpdateAttributesTypeCallbackTransportPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["http","queue"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		subscriptionUpdateAttributesTypeCallbackTransportPropEnum = append(subscriptionUpdateAttributesTypeCallbackTransportPropEnum, v)
-	}
-}
-
-const (
-
-	// SubscriptionUpdateAttributesCallbackTransportHTTP captures enum value "http"
-	SubscriptionUpdateAttributesCallbackTransportHTTP string = "http"
-
-	// SubscriptionUpdateAttributesCallbackTransportQueue captures enum value "queue"
-	SubscriptionUpdateAttributesCallbackTransportQueue string = "queue"
-)
-
-// prop value enum
-func (m *SubscriptionUpdateAttributes) validateCallbackTransportEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, subscriptionUpdateAttributesTypeCallbackTransportPropEnum); err != nil {
-		return err
-	}
-	return nil
-}
-
 func (m *SubscriptionUpdateAttributes) validateCallbackTransport(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CallbackTransport) { // not required
 		return nil
 	}
 
-	// value enum
-	if err := m.validateCallbackTransportEnum("callback_transport", "body", m.CallbackTransport); err != nil {
+	if err := m.CallbackTransport.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("callback_transport")
+		}
 		return err
 	}
 
@@ -198,6 +187,31 @@ func (m *SubscriptionUpdateAttributes) validateCallbackURI(formats strfmt.Regist
 
 	if err := validate.Pattern("callback_uri", "body", string(m.CallbackURI), `^[A-Za-z0-9 .,@:\&\?=\/\-_]*$`); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *SubscriptionUpdateAttributes) validateCallbackUris(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CallbackUris) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.CallbackUris); i++ {
+		if swag.IsZero(m.CallbackUris[i]) { // not required
+			continue
+		}
+
+		if m.CallbackUris[i] != nil {
+			if err := m.CallbackUris[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("callback_uris" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
