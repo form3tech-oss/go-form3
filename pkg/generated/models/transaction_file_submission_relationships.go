@@ -21,17 +21,17 @@ import (
 type TransactionFileSubmissionRelationships struct {
 
 	// transaction file
-	TransactionFile *ThinRelationship `json:"transaction_file,omitempty"`
+	TransactionFile *ThinRelationships `json:"transaction_file,omitempty"`
 }
 
 func TransactionFileSubmissionRelationshipsWithDefaults(defaults client.Defaults) *TransactionFileSubmissionRelationships {
 	return &TransactionFileSubmissionRelationships{
 
-		TransactionFile: ThinRelationshipWithDefaults(defaults),
+		TransactionFile: ThinRelationshipsWithDefaults(defaults),
 	}
 }
 
-func (m *TransactionFileSubmissionRelationships) WithTransactionFile(transactionFile ThinRelationship) *TransactionFileSubmissionRelationships {
+func (m *TransactionFileSubmissionRelationships) WithTransactionFile(transactionFile ThinRelationships) *TransactionFileSubmissionRelationships {
 
 	m.TransactionFile = &transactionFile
 

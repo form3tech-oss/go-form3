@@ -31,19 +31,19 @@ type Client struct {
 // range of operations
 
 /*
-get validations gbsdc sortcodes sortcode API
+get validations gbdsc sortcodes sortcode API
 */
-func (a *GetValidationsGbsdcSortcodesSortcodeRequest) Do() (*GetValidationsGbsdcSortcodesSortcodeOK, error) {
+func (a *GetValidationsGbdscSortcodesSortcodeRequest) Do() (*GetValidationsGbdscSortcodesSortcodeOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetValidationsGbsdcSortcodesSortcode",
+		ID:                 "GetValidationsGbdscSortcodesSortcode",
 		Method:             "GET",
-		PathPattern:        "/validations/gbsdc/sortcodes/{sortcode}",
+		PathPattern:        "/validations/gbdsc/sortcodes/{sortcode}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetValidationsGbsdcSortcodesSortcodeReader{formats: a.formats},
+		Reader:             &GetValidationsGbdscSortcodesSortcodeReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -51,11 +51,11 @@ func (a *GetValidationsGbsdcSortcodesSortcodeRequest) Do() (*GetValidationsGbsdc
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetValidationsGbsdcSortcodesSortcodeOK), nil
+	return result.(*GetValidationsGbdscSortcodesSortcodeOK), nil
 
 }
 
-func (a *GetValidationsGbsdcSortcodesSortcodeRequest) MustDo() *GetValidationsGbsdcSortcodesSortcodeOK {
+func (a *GetValidationsGbdscSortcodesSortcodeRequest) MustDo() *GetValidationsGbdscSortcodesSortcodeOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -64,19 +64,19 @@ func (a *GetValidationsGbsdcSortcodesSortcodeRequest) MustDo() *GetValidationsGb
 }
 
 /*
-get validations gbsdc sortcodes sortcode accountnumbers accountnumber API
+get validations gbdsc sortcodes sortcode accountnumbers accountnumber API
 */
-func (a *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest) Do() (*GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberOK, error) {
+func (a *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberRequest) Do() (*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumber",
+		ID:                 "GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumber",
 		Method:             "GET",
-		PathPattern:        "/validations/gbsdc/sortcodes/{sortcode}/accountnumbers/{accountnumber}",
+		PathPattern:        "/validations/gbdsc/sortcodes/{sortcode}/accountnumbers/{accountnumber}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberReader{formats: a.formats},
+		Reader:             &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -84,11 +84,11 @@ func (a *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberOK), nil
+	return result.(*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK), nil
 
 }
 
-func (a *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberRequest) MustDo() *GetValidationsGbsdcSortcodesSortcodeAccountnumbersAccountnumberOK {
+func (a *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberRequest) MustDo() *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

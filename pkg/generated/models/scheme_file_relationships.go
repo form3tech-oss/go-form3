@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -21,17 +22,17 @@ import (
 type SchemeFileRelationships struct {
 
 	// scheme file submission
-	SchemeFileSubmission *SchemeFileSubmission `json:"scheme_file_submission,omitempty"`
+	SchemeFileSubmission *SchemeFileRelationshipsSchemeFileSubmission `json:"scheme_file_submission,omitempty"`
 }
 
 func SchemeFileRelationshipsWithDefaults(defaults client.Defaults) *SchemeFileRelationships {
 	return &SchemeFileRelationships{
 
-		SchemeFileSubmission: SchemeFileSubmissionWithDefaults(defaults),
+		SchemeFileSubmission: SchemeFileRelationshipsSchemeFileSubmissionWithDefaults(defaults),
 	}
 }
 
-func (m *SchemeFileRelationships) WithSchemeFileSubmission(schemeFileSubmission SchemeFileSubmission) *SchemeFileRelationships {
+func (m *SchemeFileRelationships) WithSchemeFileSubmission(schemeFileSubmission SchemeFileRelationshipsSchemeFileSubmission) *SchemeFileRelationships {
 
 	m.SchemeFileSubmission = &schemeFileSubmission
 
@@ -93,6 +94,92 @@ func (m *SchemeFileRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *SchemeFileRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// SchemeFileRelationshipsSchemeFileSubmission scheme file relationships scheme file submission
+// swagger:model SchemeFileRelationshipsSchemeFileSubmission
+type SchemeFileRelationshipsSchemeFileSubmission struct {
+
+	// data
+	Data []*SchemeFileSubmission `json:"data"`
+}
+
+func SchemeFileRelationshipsSchemeFileSubmissionWithDefaults(defaults client.Defaults) *SchemeFileRelationshipsSchemeFileSubmission {
+	return &SchemeFileRelationshipsSchemeFileSubmission{
+
+		Data: make([]*SchemeFileSubmission, 0),
+	}
+}
+
+func (m *SchemeFileRelationshipsSchemeFileSubmission) WithData(data []*SchemeFileSubmission) *SchemeFileRelationshipsSchemeFileSubmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this scheme file relationships scheme file submission
+func (m *SchemeFileRelationshipsSchemeFileSubmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SchemeFileRelationshipsSchemeFileSubmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("scheme_file_submission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SchemeFileRelationshipsSchemeFileSubmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SchemeFileRelationshipsSchemeFileSubmission) UnmarshalBinary(b []byte) error {
+	var res SchemeFileRelationshipsSchemeFileSubmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *SchemeFileRelationshipsSchemeFileSubmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -248,6 +248,10 @@ type ReturnSubmissionUpdateAttributes struct {
 	// Details of the bank to which funds are redirected (if applicable)
 	RedirectedBankID string `json:"redirected_bank_id,omitempty"`
 
+	// Route taken for a return
+	// Enum: [on_us]
+	Route string `json:"route,omitempty"`
+
 	// Scheme-specific status (if submission has been submitted to a scheme)
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -276,6 +280,8 @@ func ReturnSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *Ret
 
 		RedirectedBankID: defaults.GetString("ReturnSubmissionUpdateAttributes", "redirected_bank_id"),
 
+		Route: defaults.GetString("ReturnSubmissionUpdateAttributes", "route"),
+
 		SchemeStatusCode: defaults.GetString("ReturnSubmissionUpdateAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("ReturnSubmissionUpdateAttributes", "scheme_status_code_description"),
@@ -300,6 +306,13 @@ func (m *ReturnSubmissionUpdateAttributes) WithRedirectedAccountNumber(redirecte
 func (m *ReturnSubmissionUpdateAttributes) WithRedirectedBankID(redirectedBankID string) *ReturnSubmissionUpdateAttributes {
 
 	m.RedirectedBankID = redirectedBankID
+
+	return m
+}
+
+func (m *ReturnSubmissionUpdateAttributes) WithRoute(route string) *ReturnSubmissionUpdateAttributes {
+
+	m.Route = route
 
 	return m
 }
@@ -360,6 +373,10 @@ func (m *ReturnSubmissionUpdateAttributes) WithStatusReason(statusReason string)
 func (m *ReturnSubmissionUpdateAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSettlementCycle(formats); err != nil {
 		res = append(res, err)
 	}
@@ -375,6 +392,46 @@ func (m *ReturnSubmissionUpdateAttributes) Validate(formats strfmt.Registry) err
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+var returnSubmissionUpdateAttributesTypeRoutePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		returnSubmissionUpdateAttributesTypeRoutePropEnum = append(returnSubmissionUpdateAttributesTypeRoutePropEnum, v)
+	}
+}
+
+const (
+
+	// ReturnSubmissionUpdateAttributesRouteOnUs captures enum value "on_us"
+	ReturnSubmissionUpdateAttributesRouteOnUs string = "on_us"
+)
+
+// prop value enum
+func (m *ReturnSubmissionUpdateAttributes) validateRouteEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, returnSubmissionUpdateAttributesTypeRoutePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ReturnSubmissionUpdateAttributes) validateRoute(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Route) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateRouteEnum("attributes"+"."+"route", "body", m.Route); err != nil {
+		return err
+	}
+
 	return nil
 }
 
