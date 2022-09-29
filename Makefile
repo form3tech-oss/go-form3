@@ -21,7 +21,7 @@ install-swagger: ./bin/swagger
 .PHONY: download-swagger
 download-swagger:
 	@mkdir -p swagger
-	curl -s https://api-docs.form3.tech/assets/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
+	curl -s https://www.api-docs.form3.tech/assets/swagger/form3-swagger.yaml -o swagger/form3-swagger-raw.yaml
 	./scripts/extract_paths.py swagger/form3-swagger-raw.yaml swagger/paths.yaml
 
 .PHONY: modify-swagger-file
