@@ -26,6 +26,9 @@ const (
 
 	// PaymentSchemeSEPAINSTANT captures enum value "SEPAINSTANT"
 	PaymentSchemeSEPAINSTANT PaymentScheme = "SEPAINSTANT"
+
+	// PaymentSchemeTCHRTP captures enum value "TCHRTP"
+	PaymentSchemeTCHRTP PaymentScheme = "TCHRTP"
 )
 
 // for schema
@@ -33,7 +36,7 @@ var paymentSchemeEnum []interface{}
 
 func init() {
 	var res []PaymentScheme
-	if err := json.Unmarshal([]byte(`["FPS","SEPAINSTANT"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["FPS","SEPAINSTANT","TCHRTP"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

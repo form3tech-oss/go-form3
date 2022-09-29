@@ -21,6 +21,13 @@ import (
 // swagger:model BalanceAttributes
 type BalanceAttributes struct {
 
+	// account number
+	AccountNumber string `json:"account_number,omitempty"`
+
+	// account number code
+	// Enum: [IBAN]
+	AccountNumberCode string `json:"account_number_code,omitempty"`
+
 	// Amount of funds
 	Amount string `json:"amount,omitempty"`
 
@@ -38,6 +45,10 @@ type BalanceAttributes struct {
 func BalanceAttributesWithDefaults(defaults client.Defaults) *BalanceAttributes {
 	return &BalanceAttributes{
 
+		AccountNumber: defaults.GetString("BalanceAttributes", "account_number"),
+
+		AccountNumberCode: defaults.GetString("BalanceAttributes", "account_number_code"),
+
 		Amount: defaults.GetString("BalanceAttributes", "amount"),
 
 		Currency: defaults.GetString("BalanceAttributes", "currency"),
@@ -46,6 +57,20 @@ func BalanceAttributesWithDefaults(defaults client.Defaults) *BalanceAttributes 
 
 		HoldingInstitution: defaults.GetString("BalanceAttributes", "holding_institution"),
 	}
+}
+
+func (m *BalanceAttributes) WithAccountNumber(accountNumber string) *BalanceAttributes {
+
+	m.AccountNumber = accountNumber
+
+	return m
+}
+
+func (m *BalanceAttributes) WithAccountNumberCode(accountNumberCode string) *BalanceAttributes {
+
+	m.AccountNumberCode = accountNumberCode
+
+	return m
 }
 
 func (m *BalanceAttributes) WithAmount(amount string) *BalanceAttributes {
@@ -80,6 +105,10 @@ func (m *BalanceAttributes) WithHoldingInstitution(holdingInstitution string) *B
 func (m *BalanceAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccountNumberCode(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCurrency(formats); err != nil {
 		res = append(res, err)
 	}
@@ -87,6 +116,46 @@ func (m *BalanceAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+var balanceAttributesTypeAccountNumberCodePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["IBAN"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		balanceAttributesTypeAccountNumberCodePropEnum = append(balanceAttributesTypeAccountNumberCodePropEnum, v)
+	}
+}
+
+const (
+
+	// BalanceAttributesAccountNumberCodeIBAN captures enum value "IBAN"
+	BalanceAttributesAccountNumberCodeIBAN string = "IBAN"
+)
+
+// prop value enum
+func (m *BalanceAttributes) validateAccountNumberCodeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, balanceAttributesTypeAccountNumberCodePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *BalanceAttributes) validateAccountNumberCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccountNumberCode) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateAccountNumberCodeEnum("account_number_code", "body", m.AccountNumberCode); err != nil {
+		return err
+	}
+
 	return nil
 }
 

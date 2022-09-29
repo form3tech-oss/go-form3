@@ -21,6 +21,9 @@ import (
 // swagger:model UltimateEntity
 type UltimateEntity struct {
 
+	// Additional address line of the debtor/beneficiary address
+	AdditionalAddressLine string `json:"additional_address_line,omitempty"`
+
 	// Ultimate debtor/beneficiary address
 	Address []string `json:"address,omitempty"`
 
@@ -36,6 +39,9 @@ type UltimateEntity struct {
 
 	// Ultimate debtor/beneficiary birth province
 	BirthProvince string `json:"birth_province,omitempty"`
+
+	// Building number of the debtor/beneficiary address
+	BuildingNumber string `json:"building_number,omitempty"`
 
 	// City/Town of the Beneficiary address
 	City string `json:"city,omitempty"`
@@ -58,12 +64,23 @@ type UltimateEntity struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Post code of the debtor/beneficiary address
+	PostCode string `json:"post_code,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
+
+	// Province of the debtor/beneficiary address
+	Province string `json:"province,omitempty"`
+
+	// Street name of the debtor/beneficiary address
+	StreetName string `json:"street_name,omitempty"`
 }
 
 func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 	return &UltimateEntity{
+
+		AdditionalAddressLine: defaults.GetString("UltimateEntity", "additional_address_line"),
 
 		Address: make([]string, 0),
 
@@ -74,6 +91,8 @@ func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 		BirthDate: defaults.GetStrfmtDatePtr("UltimateEntity", "birth_date"),
 
 		BirthProvince: defaults.GetString("UltimateEntity", "birth_province"),
+
+		BuildingNumber: defaults.GetString("UltimateEntity", "building_number"),
 
 		City: defaults.GetString("UltimateEntity", "city"),
 
@@ -89,8 +108,21 @@ func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 
 		OrganisationIdentificationScheme: defaults.GetString("UltimateEntity", "organisation_identification_scheme"),
 
+		PostCode: defaults.GetString("UltimateEntity", "post_code"),
+
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
+
+		Province: defaults.GetString("UltimateEntity", "province"),
+
+		StreetName: defaults.GetString("UltimateEntity", "street_name"),
 	}
+}
+
+func (m *UltimateEntity) WithAdditionalAddressLine(additionalAddressLine string) *UltimateEntity {
+
+	m.AdditionalAddressLine = additionalAddressLine
+
+	return m
 }
 
 func (m *UltimateEntity) WithAddress(address []string) *UltimateEntity {
@@ -129,6 +161,13 @@ func (m *UltimateEntity) WithoutBirthDate() *UltimateEntity {
 func (m *UltimateEntity) WithBirthProvince(birthProvince string) *UltimateEntity {
 
 	m.BirthProvince = birthProvince
+
+	return m
+}
+
+func (m *UltimateEntity) WithBuildingNumber(buildingNumber string) *UltimateEntity {
+
+	m.BuildingNumber = buildingNumber
 
 	return m
 }
@@ -182,6 +221,13 @@ func (m *UltimateEntity) WithOrganisationIdentificationScheme(organisationIdenti
 	return m
 }
 
+func (m *UltimateEntity) WithPostCode(postCode string) *UltimateEntity {
+
+	m.PostCode = postCode
+
+	return m
+}
+
 func (m *UltimateEntity) WithPrivateIdentification(privateIdentification PrivateIdentification) *UltimateEntity {
 
 	m.PrivateIdentification = &privateIdentification
@@ -191,6 +237,20 @@ func (m *UltimateEntity) WithPrivateIdentification(privateIdentification Private
 
 func (m *UltimateEntity) WithoutPrivateIdentification() *UltimateEntity {
 	m.PrivateIdentification = nil
+	return m
+}
+
+func (m *UltimateEntity) WithProvince(province string) *UltimateEntity {
+
+	m.Province = province
+
+	return m
+}
+
+func (m *UltimateEntity) WithStreetName(streetName string) *UltimateEntity {
+
+	m.StreetName = streetName
+
 	return m
 }
 

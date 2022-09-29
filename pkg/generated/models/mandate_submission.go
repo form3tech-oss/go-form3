@@ -346,6 +346,18 @@ type MandateSubmissionAttributes struct {
 	// original mandate
 	OriginalMandate *MandateAttributes `json:"original_mandate,omitempty"`
 
+	// scheme file id
+	// Max Length: 3
+	// Min Length: 3
+	// Pattern: ^[0-9]{3}$
+	SchemeFileID *string `json:"scheme_file_id,omitempty"`
+
+	// scheme submission id
+	// Max Length: 6
+	// Min Length: 6
+	// Pattern: ^[0-9a-zA-Z]{6}$
+	SchemeSubmissionID *string `json:"scheme_submission_id,omitempty"`
+
 	// status
 	Status MandateSubmissionStatus `json:"status,omitempty"`
 
@@ -369,6 +381,10 @@ func MandateSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateS
 		LastPaymentDate: defaults.GetStrfmtDatePtr("MandateSubmissionAttributes", "last_payment_date"),
 
 		OriginalMandate: MandateAttributesWithDefaults(defaults),
+
+		SchemeFileID: defaults.GetStringPtr("MandateSubmissionAttributes", "scheme_file_id"),
+
+		SchemeSubmissionID: defaults.GetStringPtr("MandateSubmissionAttributes", "scheme_submission_id"),
 
 		// TODO Status: MandateSubmissionStatus,
 
@@ -403,6 +419,30 @@ func (m *MandateSubmissionAttributes) WithOriginalMandate(originalMandate Mandat
 
 func (m *MandateSubmissionAttributes) WithoutOriginalMandate() *MandateSubmissionAttributes {
 	m.OriginalMandate = nil
+	return m
+}
+
+func (m *MandateSubmissionAttributes) WithSchemeFileID(schemeFileID string) *MandateSubmissionAttributes {
+
+	m.SchemeFileID = &schemeFileID
+
+	return m
+}
+
+func (m *MandateSubmissionAttributes) WithoutSchemeFileID() *MandateSubmissionAttributes {
+	m.SchemeFileID = nil
+	return m
+}
+
+func (m *MandateSubmissionAttributes) WithSchemeSubmissionID(schemeSubmissionID string) *MandateSubmissionAttributes {
+
+	m.SchemeSubmissionID = &schemeSubmissionID
+
+	return m
+}
+
+func (m *MandateSubmissionAttributes) WithoutSchemeSubmissionID() *MandateSubmissionAttributes {
+	m.SchemeSubmissionID = nil
 	return m
 }
 
@@ -458,6 +498,14 @@ func (m *MandateSubmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSchemeFileID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeSubmissionID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -502,6 +550,48 @@ func (m *MandateSubmissionAttributes) validateOriginalMandate(formats strfmt.Reg
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *MandateSubmissionAttributes) validateSchemeFileID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeFileID) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), 3); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), 3); err != nil {
+		return err
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), `^[0-9]{3}$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MandateSubmissionAttributes) validateSchemeSubmissionID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeSubmissionID) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), 6); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), 6); err != nil {
+		return err
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), `^[0-9a-zA-Z]{6}$`); err != nil {
+		return err
 	}
 
 	return nil

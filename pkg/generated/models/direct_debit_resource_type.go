@@ -92,6 +92,9 @@ const (
 
 	// DirectDebitResourceTypeDirectDebitDecisionSubmissionValidations captures enum value "direct_debit_decision_submission_validations"
 	DirectDebitResourceTypeDirectDebitDecisionSubmissionValidations DirectDebitResourceType = "direct_debit_decision_submission_validations"
+
+	// DirectDebitResourceTypeDirectDebitSubmissionsWithFinalState captures enum value "direct_debit_submissions_with_final_state"
+	DirectDebitResourceTypeDirectDebitSubmissionsWithFinalState DirectDebitResourceType = "direct_debit_submissions_with_final_state"
 )
 
 // for schema
@@ -99,7 +102,7 @@ var directDebitResourceTypeEnum []interface{}
 
 func init() {
 	var res []DirectDebitResourceType
-	if err := json.Unmarshal([]byte(`["direct_debits","direct_debit_status","direct_debit_admissions","direct_debit_submissions","direct_debit_submission_validations","direct_debit_reversals","direct_debit_reversal_admissions","direct_debit_reversal_submissions","direct_debit_reversal_submission_validations","direct_debit_returns","direct_debit_return_admissions","direct_debit_return_submissions","direct_debit_return_submission_validations","direct_debit_return_reversals","direct_debit_return_reversal_admissions","direct_debit_automatic_returns","direct_debit_recalls","direct_debit_recall_admissions","direct_debit_recall_submissions","direct_debit_recall_submission_validations","direct_debit_decisions","direct_debit_decision_admissions","direct_debit_decision_submissions","direct_debit_decision_submission_validations"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["direct_debits","direct_debit_status","direct_debit_admissions","direct_debit_submissions","direct_debit_submission_validations","direct_debit_reversals","direct_debit_reversal_admissions","direct_debit_reversal_submissions","direct_debit_reversal_submission_validations","direct_debit_returns","direct_debit_return_admissions","direct_debit_return_submissions","direct_debit_return_submission_validations","direct_debit_return_reversals","direct_debit_return_reversal_admissions","direct_debit_automatic_returns","direct_debit_recalls","direct_debit_recall_admissions","direct_debit_recall_submissions","direct_debit_recall_submission_validations","direct_debit_decisions","direct_debit_decision_admissions","direct_debit_decision_submissions","direct_debit_decision_submission_validations","direct_debit_submissions_with_final_state"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
