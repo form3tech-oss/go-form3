@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"os"
 
-	genClient "github.com/form3tech-oss/go-form3/v5/pkg/generated/client"
+	genClient "github.com/form3tech-oss/go-form3/v6/pkg/generated/client"
 	rc "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"

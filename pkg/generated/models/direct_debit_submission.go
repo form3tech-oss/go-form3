@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v5/pkg/client"
+	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -351,11 +351,19 @@ func (m *DirectDebitSubmission) Json() string {
 // swagger:model DirectDebitSubmissionAttributes
 type DirectDebitSubmissionAttributes struct {
 
+	// scheme file id
+	// Pattern: ^[0-9]{3}$
+	SchemeFileID *string `json:"scheme_file_id,omitempty"`
+
 	// Scheme-specific status (if submission has been submitted to a scheme)
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
 	// [Description](http://api-docs.form3.tech/api.html#enumerations-scheme-status-codes-for-bacs) of `scheme_status_code`
 	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
+
+	// scheme submission id
+	// Pattern: ^[0-9a-zA-Z]{6}$
+	SchemeSubmissionID *string `json:"scheme_submission_id,omitempty"`
 
 	// Status of the submission
 	Status DirectDebitSubmissionStatus `json:"status,omitempty"`
@@ -377,9 +385,13 @@ type DirectDebitSubmissionAttributes struct {
 func DirectDebitSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitSubmissionAttributes {
 	return &DirectDebitSubmissionAttributes{
 
+		SchemeFileID: defaults.GetStringPtr("DirectDebitSubmissionAttributes", "scheme_file_id"),
+
 		SchemeStatusCode: defaults.GetString("DirectDebitSubmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("DirectDebitSubmissionAttributes", "scheme_status_code_description"),
+
+		SchemeSubmissionID: defaults.GetStringPtr("DirectDebitSubmissionAttributes", "scheme_submission_id"),
 
 		// TODO Status: DirectDebitSubmissionStatus,
 
@@ -389,6 +401,18 @@ func DirectDebitSubmissionAttributesWithDefaults(defaults client.Defaults) *Dire
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("DirectDebitSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *DirectDebitSubmissionAttributes) WithSchemeFileID(schemeFileID string) *DirectDebitSubmissionAttributes {
+
+	m.SchemeFileID = &schemeFileID
+
+	return m
+}
+
+func (m *DirectDebitSubmissionAttributes) WithoutSchemeFileID() *DirectDebitSubmissionAttributes {
+	m.SchemeFileID = nil
+	return m
 }
 
 func (m *DirectDebitSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitSubmissionAttributes {
@@ -402,6 +426,18 @@ func (m *DirectDebitSubmissionAttributes) WithSchemeStatusCodeDescription(scheme
 
 	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
 
+	return m
+}
+
+func (m *DirectDebitSubmissionAttributes) WithSchemeSubmissionID(schemeSubmissionID string) *DirectDebitSubmissionAttributes {
+
+	m.SchemeSubmissionID = &schemeSubmissionID
+
+	return m
+}
+
+func (m *DirectDebitSubmissionAttributes) WithoutSchemeSubmissionID() *DirectDebitSubmissionAttributes {
+	m.SchemeSubmissionID = nil
 	return m
 }
 
@@ -437,6 +473,14 @@ func (m *DirectDebitSubmissionAttributes) WithTransactionStartDatetime(transacti
 func (m *DirectDebitSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateSchemeFileID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeSubmissionID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -452,6 +496,32 @@ func (m *DirectDebitSubmissionAttributes) Validate(formats strfmt.Registry) erro
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *DirectDebitSubmissionAttributes) validateSchemeFileID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeFileID) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), `^[0-9]{3}$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DirectDebitSubmissionAttributes) validateSchemeSubmissionID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeSubmissionID) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), `^[0-9a-zA-Z]{6}$`); err != nil {
+		return err
+	}
+
 	return nil
 }
 

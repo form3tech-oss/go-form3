@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v5/pkg/client"
+	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -367,6 +367,10 @@ type PaymentSubmissionAttributes struct {
 	// Details of the bank to which funds are redirected (if applicable)
 	RedirectedBankID string `json:"redirected_bank_id,omitempty"`
 
+	// Route taken for an outbound payment
+	// Enum: [on_us]
+	Route string `json:"route,omitempty"`
+
 	// Scheme-specific status (if submission has been submitted to a scheme)
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -408,6 +412,8 @@ func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentS
 		RedirectedAccountNumber: defaults.GetString("PaymentSubmissionAttributes", "redirected_account_number"),
 
 		RedirectedBankID: defaults.GetString("PaymentSubmissionAttributes", "redirected_bank_id"),
+
+		Route: defaults.GetString("PaymentSubmissionAttributes", "route"),
 
 		SchemeStatusCode: defaults.GetString("PaymentSubmissionAttributes", "scheme_status_code"),
 
@@ -461,6 +467,13 @@ func (m *PaymentSubmissionAttributes) WithRedirectedAccountNumber(redirectedAcco
 func (m *PaymentSubmissionAttributes) WithRedirectedBankID(redirectedBankID string) *PaymentSubmissionAttributes {
 
 	m.RedirectedBankID = redirectedBankID
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithRoute(route string) *PaymentSubmissionAttributes {
+
+	m.Route = route
 
 	return m
 }
@@ -543,6 +556,10 @@ func (m *PaymentSubmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSettlementCycle(formats); err != nil {
 		res = append(res, err)
 	}
@@ -589,6 +606,46 @@ func (m *PaymentSubmissionAttributes) validateLimitBreachStartDatetime(formats s
 	}
 
 	if err := validate.FormatOf("attributes"+"."+"limit_breach_start_datetime", "body", "date-time", m.LimitBreachStartDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var paymentSubmissionAttributesTypeRoutePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		paymentSubmissionAttributesTypeRoutePropEnum = append(paymentSubmissionAttributesTypeRoutePropEnum, v)
+	}
+}
+
+const (
+
+	// PaymentSubmissionAttributesRouteOnUs captures enum value "on_us"
+	PaymentSubmissionAttributesRouteOnUs string = "on_us"
+)
+
+// prop value enum
+func (m *PaymentSubmissionAttributes) validateRouteEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, paymentSubmissionAttributesTypeRoutePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PaymentSubmissionAttributes) validateRoute(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Route) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateRouteEnum("attributes"+"."+"route", "body", m.Route); err != nil {
 		return err
 	}
 
