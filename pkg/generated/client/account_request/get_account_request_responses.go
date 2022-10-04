@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/form3tech-oss/go-form3/v5/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
 )
 
 // GetAccountRequestReader is a Reader for the GetAccountRequest structure.
