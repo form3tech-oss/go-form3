@@ -356,6 +356,10 @@ type PaymentAdmissionAttributes struct {
 	// Format: date-time
 	AdmissionDatetime *strfmt.DateTime `json:"admission_datetime,omitempty"`
 
+	// Route taken for an outbound payment
+	// Enum: [on_us]
+	Route string `json:"route,omitempty"`
+
 	// Refers to individual scheme where applicable
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -382,6 +386,8 @@ func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAd
 
 		AdmissionDatetime: defaults.GetStrfmtDateTimePtr("PaymentAdmissionAttributes", "admission_datetime"),
 
+		Route: defaults.GetString("PaymentAdmissionAttributes", "route"),
+
 		SchemeStatusCode: defaults.GetString("PaymentAdmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("PaymentAdmissionAttributes", "scheme_status_code_description"),
@@ -406,6 +412,13 @@ func (m *PaymentAdmissionAttributes) WithAdmissionDatetime(admissionDatetime str
 
 func (m *PaymentAdmissionAttributes) WithoutAdmissionDatetime() *PaymentAdmissionAttributes {
 	m.AdmissionDatetime = nil
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithRoute(route string) *PaymentAdmissionAttributes {
+
+	m.Route = route
+
 	return m
 }
 
@@ -469,6 +482,10 @@ func (m *PaymentAdmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSettlementCycle(formats); err != nil {
 		res = append(res, err)
 	}
@@ -498,6 +515,46 @@ func (m *PaymentAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Re
 	}
 
 	if err := validate.FormatOf("attributes"+"."+"admission_datetime", "body", "date-time", m.AdmissionDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var paymentAdmissionAttributesTypeRoutePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		paymentAdmissionAttributesTypeRoutePropEnum = append(paymentAdmissionAttributesTypeRoutePropEnum, v)
+	}
+}
+
+const (
+
+	// PaymentAdmissionAttributesRouteOnUs captures enum value "on_us"
+	PaymentAdmissionAttributesRouteOnUs string = "on_us"
+)
+
+// prop value enum
+func (m *PaymentAdmissionAttributes) validateRouteEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, paymentAdmissionAttributesTypeRoutePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PaymentAdmissionAttributes) validateRoute(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Route) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateRouteEnum("attributes"+"."+"route", "body", m.Route); err != nil {
 		return err
 	}
 

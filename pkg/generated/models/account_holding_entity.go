@@ -14,20 +14,25 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// AccountHoldingEntity account holding entity
+// AccountHoldingEntity Information about the financial institution servicing the account.
 // swagger:model AccountHoldingEntity
 type AccountHoldingEntity struct {
 
 	// Financial institution address
 	BankAddress []string `json:"bank_address,omitempty"`
 
-	// Financial institution identification
-	BankID string `json:"bank_id,omitempty"`
+	// bank id
+	// Required: true
+	// Pattern: ^[A-Z0-9]{0,16}$
+	BankID *string `json:"bank_id"`
 
-	// bank id code
-	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
+	// ISO 20022 code used to identify the type of bank ID being used
+	// Required: true
+	// Enum: [GBDSC]
+	BankIDCode *BankIDCode `json:"bank_id_code"`
 
 	// Financial institution name
 	BankName string `json:"bank_name,omitempty"`
@@ -41,7 +46,7 @@ func AccountHoldingEntityWithDefaults(defaults client.Defaults) *AccountHoldingE
 
 		BankAddress: make([]string, 0),
 
-		BankID: defaults.GetString("AccountHoldingEntity", "bank_id"),
+		BankID: defaults.GetStringPtr("AccountHoldingEntity", "bank_id"),
 
 		// TODO BankIDCode: BankIDCode,
 
@@ -60,15 +65,25 @@ func (m *AccountHoldingEntity) WithBankAddress(bankAddress []string) *AccountHol
 
 func (m *AccountHoldingEntity) WithBankID(bankID string) *AccountHoldingEntity {
 
-	m.BankID = bankID
+	m.BankID = &bankID
 
+	return m
+}
+
+func (m *AccountHoldingEntity) WithoutBankID() *AccountHoldingEntity {
+	m.BankID = nil
 	return m
 }
 
 func (m *AccountHoldingEntity) WithBankIDCode(bankIDCode BankIDCode) *AccountHoldingEntity {
 
-	m.BankIDCode = bankIDCode
+	m.BankIDCode = &bankIDCode
 
+	return m
+}
+
+func (m *AccountHoldingEntity) WithoutBankIDCode() *AccountHoldingEntity {
+	m.BankIDCode = nil
 	return m
 }
 
@@ -90,6 +105,10 @@ func (m *AccountHoldingEntity) WithBankPartyID(bankPartyID string) *AccountHoldi
 func (m *AccountHoldingEntity) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateBankID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateBankIDCode(formats); err != nil {
 		res = append(res, err)
 	}
@@ -100,17 +119,58 @@ func (m *AccountHoldingEntity) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *AccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error {
+func (m *AccountHoldingEntity) validateBankID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.BankIDCode) { // not required
-		return nil
+	if err := validate.Required("bank_id", "body", m.BankID); err != nil {
+		return err
 	}
 
-	if err := m.BankIDCode.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("bank_id_code")
-		}
+	if err := validate.Pattern("bank_id", "body", string(*m.BankID), `^[A-Z0-9]{0,16}$`); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+var accountHoldingEntityTypeBankIDCodePropEnum []interface{}
+
+func init() {
+	var res []BankIDCode
+	if err := json.Unmarshal([]byte(`["GBDSC"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		accountHoldingEntityTypeBankIDCodePropEnum = append(accountHoldingEntityTypeBankIDCodePropEnum, v)
+	}
+}
+
+const (
+
+	// AccountHoldingEntityBankIDCodeGBDSC captures enum value "GBDSC"
+	AccountHoldingEntityBankIDCodeGBDSC BankIDCode = "GBDSC"
+)
+
+// prop value enum
+func (m *AccountHoldingEntity) validateBankIDCodeEnum(path, location string, value BankIDCode) error {
+	if err := validate.Enum(path, location, value, accountHoldingEntityTypeBankIDCodePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *AccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error {
+
+	if err := validate.Required("bank_id_code", "body", m.BankIDCode); err != nil {
+		return err
+	}
+
+	if m.BankIDCode != nil {
+		if err := m.BankIDCode.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("bank_id_code")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -356,6 +356,10 @@ type ReturnAdmissionAttributes struct {
 	// Format: date-time
 	AdmissionDatetime strfmt.DateTime `json:"admission_datetime,omitempty"`
 
+	// Route taken for a return
+	// Enum: [on_us]
+	Route string `json:"route,omitempty"`
+
 	// Refer to individual scheme where applicable
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -385,6 +389,8 @@ func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmi
 
 		AdmissionDatetime: defaults.GetStrfmtDateTime("ReturnAdmissionAttributes", "admission_datetime"),
 
+		Route: defaults.GetString("ReturnAdmissionAttributes", "route"),
+
 		SchemeStatusCode: defaults.GetString("ReturnAdmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("ReturnAdmissionAttributes", "scheme_status_code_description"),
@@ -404,6 +410,13 @@ func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmi
 func (m *ReturnAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *ReturnAdmissionAttributes {
 
 	m.AdmissionDatetime = admissionDatetime
+
+	return m
+}
+
+func (m *ReturnAdmissionAttributes) WithRoute(route string) *ReturnAdmissionAttributes {
+
+	m.Route = route
 
 	return m
 }
@@ -475,6 +488,10 @@ func (m *ReturnAdmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSettlementCycle(formats); err != nil {
 		res = append(res, err)
 	}
@@ -500,6 +517,46 @@ func (m *ReturnAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Reg
 	}
 
 	if err := validate.FormatOf("attributes"+"."+"admission_datetime", "body", "date-time", m.AdmissionDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var returnAdmissionAttributesTypeRoutePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		returnAdmissionAttributesTypeRoutePropEnum = append(returnAdmissionAttributesTypeRoutePropEnum, v)
+	}
+}
+
+const (
+
+	// ReturnAdmissionAttributesRouteOnUs captures enum value "on_us"
+	ReturnAdmissionAttributesRouteOnUs string = "on_us"
+)
+
+// prop value enum
+func (m *ReturnAdmissionAttributes) validateRouteEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, returnAdmissionAttributesTypeRoutePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ReturnAdmissionAttributes) validateRoute(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Route) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateRouteEnum("attributes"+"."+"route", "body", m.Route); err != nil {
 		return err
 	}
 

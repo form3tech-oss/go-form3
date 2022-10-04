@@ -76,7 +76,7 @@ type ListReportsRequest struct {
 
 	FilterReportSource *string
 
-	/*FilterReportType      Filter bu ReportType      */
+	/*FilterReportType      Filter by ReportType      */
 
 	FilterReportType *string
 

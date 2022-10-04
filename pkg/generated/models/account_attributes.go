@@ -123,6 +123,9 @@ type AccountAttributes struct {
 	// - deprecated - Indicates whether the account has been switched using the Current Account Switch Service.
 	Switched *bool `json:"switched,omitempty"`
 
+	// switched account details
+	SwitchedAccountDetails *SwitchedAccountDetails `json:"switched_account_details,omitempty"`
+
 	// - deprecated - Customer title.
 	// Max Length: 40
 	// Min Length: 1
@@ -194,6 +197,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 		// TODO StatusReason: StatusReason,
 
 		Switched: defaults.GetBoolPtr("AccountAttributes", "switched"),
+
+		SwitchedAccountDetails: SwitchedAccountDetailsWithDefaults(defaults),
 
 		Title: defaults.GetString("AccountAttributes", "title"),
 
@@ -428,6 +433,18 @@ func (m *AccountAttributes) WithoutSwitched() *AccountAttributes {
 	return m
 }
 
+func (m *AccountAttributes) WithSwitchedAccountDetails(switchedAccountDetails SwitchedAccountDetails) *AccountAttributes {
+
+	m.SwitchedAccountDetails = &switchedAccountDetails
+
+	return m
+}
+
+func (m *AccountAttributes) WithoutSwitchedAccountDetails() *AccountAttributes {
+	m.SwitchedAccountDetails = nil
+	return m
+}
+
 func (m *AccountAttributes) WithTitle(title string) *AccountAttributes {
 
 	m.Title = title
@@ -549,6 +566,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatusReason(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSwitchedAccountDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1040,6 +1061,24 @@ func (m *AccountAttributes) validateStatusReason(formats strfmt.Registry) error 
 			return ve.ValidateName("status_reason")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validateSwitchedAccountDetails(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SwitchedAccountDetails) { // not required
+		return nil
+	}
+
+	if m.SwitchedAccountDetails != nil {
+		if err := m.SwitchedAccountDetails.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("switched_account_details")
+			}
+			return err
+		}
 	}
 
 	return nil
