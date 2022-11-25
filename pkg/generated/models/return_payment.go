@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -382,6 +383,10 @@ type ReturnPaymentAttributes struct {
 
 	// settlement
 	Settlement *Settlement `json:"settlement,omitempty"`
+
+	// All purpose list of key-value pairs specific data stored on the return.
+	// Max Items: 5
+	UserDefinedData []*UserDefinedData `json:"user_defined_data"`
 }
 
 func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymentAttributes {
@@ -404,6 +409,8 @@ func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymen
 		SchemeTransactionID: defaults.GetString("ReturnPaymentAttributes", "scheme_transaction_id"),
 
 		Settlement: SettlementWithDefaults(defaults),
+
+		UserDefinedData: make([]*UserDefinedData, 0),
 	}
 }
 
@@ -490,6 +497,13 @@ func (m *ReturnPaymentAttributes) WithoutSettlement() *ReturnPaymentAttributes {
 	return m
 }
 
+func (m *ReturnPaymentAttributes) WithUserDefinedData(userDefinedData []*UserDefinedData) *ReturnPaymentAttributes {
+
+	m.UserDefinedData = userDefinedData
+
+	return m
+}
+
 // Validate validates this return payment attributes
 func (m *ReturnPaymentAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -507,6 +521,10 @@ func (m *ReturnPaymentAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSettlement(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserDefinedData(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -568,6 +586,37 @@ func (m *ReturnPaymentAttributes) validateSettlement(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ReturnPaymentAttributes) validateUserDefinedData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserDefinedData) { // not required
+		return nil
+	}
+
+	iUserDefinedDataSize := int64(len(m.UserDefinedData))
+
+	if err := validate.MaxItems("attributes"+"."+"user_defined_data", "body", iUserDefinedDataSize, 5); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.UserDefinedData); i++ {
+		if swag.IsZero(m.UserDefinedData[i]) { // not required
+			continue
+		}
+
+		if m.UserDefinedData[i] != nil {
+			if err := m.UserDefinedData[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "user_defined_data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

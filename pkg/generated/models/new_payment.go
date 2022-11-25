@@ -17,9 +17,9 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Payment payment
-// swagger:model Payment
-type Payment struct {
+// NewPayment new payment
+// swagger:model NewPayment
+type NewPayment struct {
 
 	// attributes
 	// Required: true
@@ -44,7 +44,7 @@ type Payment struct {
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
-	Relationships *PaymentRelationships `json:"relationships,omitempty"`
+	Relationships *NewPaymentRelationships `json:"relationships,omitempty"`
 
 	// Name of the resource type
 	// Pattern: ^[A-Za-z_]*$
@@ -55,120 +55,120 @@ type Payment struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-func PaymentWithDefaults(defaults client.Defaults) *Payment {
-	return &Payment{
+func NewPaymentWithDefaults(defaults client.Defaults) *NewPayment {
+	return &NewPayment{
 
 		Attributes: PaymentAttributesWithDefaults(defaults),
 
-		CreatedOn: defaults.GetStrfmtDateTimePtr("Payment", "created_on"),
+		CreatedOn: defaults.GetStrfmtDateTimePtr("NewPayment", "created_on"),
 
-		ID: defaults.GetStrfmtUUIDPtr("Payment", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("NewPayment", "id"),
 
-		ModifiedOn: defaults.GetStrfmtDateTimePtr("Payment", "modified_on"),
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("NewPayment", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUIDPtr("Payment", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("NewPayment", "organisation_id"),
 
-		Relationships: PaymentRelationshipsWithDefaults(defaults),
+		Relationships: NewPaymentRelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("Payment", "type"),
+		Type: defaults.GetString("NewPayment", "type"),
 
-		Version: defaults.GetInt64Ptr("Payment", "version"),
+		Version: defaults.GetInt64Ptr("NewPayment", "version"),
 	}
 }
 
-func (m *Payment) WithAttributes(attributes PaymentAttributes) *Payment {
+func (m *NewPayment) WithAttributes(attributes PaymentAttributes) *NewPayment {
 
 	m.Attributes = &attributes
 
 	return m
 }
 
-func (m *Payment) WithoutAttributes() *Payment {
+func (m *NewPayment) WithoutAttributes() *NewPayment {
 	m.Attributes = nil
 	return m
 }
 
-func (m *Payment) WithCreatedOn(createdOn strfmt.DateTime) *Payment {
+func (m *NewPayment) WithCreatedOn(createdOn strfmt.DateTime) *NewPayment {
 
 	m.CreatedOn = &createdOn
 
 	return m
 }
 
-func (m *Payment) WithoutCreatedOn() *Payment {
+func (m *NewPayment) WithoutCreatedOn() *NewPayment {
 	m.CreatedOn = nil
 	return m
 }
 
-func (m *Payment) WithID(id strfmt.UUID) *Payment {
+func (m *NewPayment) WithID(id strfmt.UUID) *NewPayment {
 
 	m.ID = &id
 
 	return m
 }
 
-func (m *Payment) WithoutID() *Payment {
+func (m *NewPayment) WithoutID() *NewPayment {
 	m.ID = nil
 	return m
 }
 
-func (m *Payment) WithModifiedOn(modifiedOn strfmt.DateTime) *Payment {
+func (m *NewPayment) WithModifiedOn(modifiedOn strfmt.DateTime) *NewPayment {
 
 	m.ModifiedOn = &modifiedOn
 
 	return m
 }
 
-func (m *Payment) WithoutModifiedOn() *Payment {
+func (m *NewPayment) WithoutModifiedOn() *NewPayment {
 	m.ModifiedOn = nil
 	return m
 }
 
-func (m *Payment) WithOrganisationID(organisationID strfmt.UUID) *Payment {
+func (m *NewPayment) WithOrganisationID(organisationID strfmt.UUID) *NewPayment {
 
 	m.OrganisationID = &organisationID
 
 	return m
 }
 
-func (m *Payment) WithoutOrganisationID() *Payment {
+func (m *NewPayment) WithoutOrganisationID() *NewPayment {
 	m.OrganisationID = nil
 	return m
 }
 
-func (m *Payment) WithRelationships(relationships PaymentRelationships) *Payment {
+func (m *NewPayment) WithRelationships(relationships NewPaymentRelationships) *NewPayment {
 
 	m.Relationships = &relationships
 
 	return m
 }
 
-func (m *Payment) WithoutRelationships() *Payment {
+func (m *NewPayment) WithoutRelationships() *NewPayment {
 	m.Relationships = nil
 	return m
 }
 
-func (m *Payment) WithType(typeVar string) *Payment {
+func (m *NewPayment) WithType(typeVar string) *NewPayment {
 
 	m.Type = typeVar
 
 	return m
 }
 
-func (m *Payment) WithVersion(version int64) *Payment {
+func (m *NewPayment) WithVersion(version int64) *NewPayment {
 
 	m.Version = &version
 
 	return m
 }
 
-func (m *Payment) WithoutVersion() *Payment {
+func (m *NewPayment) WithoutVersion() *NewPayment {
 	m.Version = nil
 	return m
 }
 
-// Validate validates this payment
-func (m *Payment) Validate(formats strfmt.Registry) error {
+// Validate validates this new payment
+func (m *NewPayment) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAttributes(formats); err != nil {
@@ -209,7 +209,7 @@ func (m *Payment) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateAttributes(formats strfmt.Registry) error {
+func (m *NewPayment) validateAttributes(formats strfmt.Registry) error {
 
 	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
 		return err
@@ -227,7 +227,7 @@ func (m *Payment) validateAttributes(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateCreatedOn(formats strfmt.Registry) error {
+func (m *NewPayment) validateCreatedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedOn) { // not required
 		return nil
@@ -240,7 +240,7 @@ func (m *Payment) validateCreatedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateID(formats strfmt.Registry) error {
+func (m *NewPayment) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
@@ -253,7 +253,7 @@ func (m *Payment) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateModifiedOn(formats strfmt.Registry) error {
+func (m *NewPayment) validateModifiedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ModifiedOn) { // not required
 		return nil
@@ -266,7 +266,7 @@ func (m *Payment) validateModifiedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateOrganisationID(formats strfmt.Registry) error {
+func (m *NewPayment) validateOrganisationID(formats strfmt.Registry) error {
 
 	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
 		return err
@@ -279,7 +279,7 @@ func (m *Payment) validateOrganisationID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateRelationships(formats strfmt.Registry) error {
+func (m *NewPayment) validateRelationships(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Relationships) { // not required
 		return nil
@@ -297,7 +297,7 @@ func (m *Payment) validateRelationships(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateType(formats strfmt.Registry) error {
+func (m *NewPayment) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
@@ -310,7 +310,7 @@ func (m *Payment) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateVersion(formats strfmt.Registry) error {
+func (m *NewPayment) validateVersion(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Version) { // not required
 		return nil
@@ -324,7 +324,7 @@ func (m *Payment) validateVersion(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *Payment) MarshalBinary() ([]byte, error) {
+func (m *NewPayment) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -332,15 +332,15 @@ func (m *Payment) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Payment) UnmarshalBinary(b []byte) error {
-	var res Payment
+func (m *NewPayment) UnmarshalBinary(b []byte) error {
+	var res NewPayment
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *Payment) Json() string {
+func (m *NewPayment) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

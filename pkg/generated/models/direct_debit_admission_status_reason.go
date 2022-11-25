@@ -27,6 +27,9 @@ const (
 	// DirectDebitAdmissionStatusReasonInvalidBeneficiaryDetails captures enum value "invalid_beneficiary_details"
 	DirectDebitAdmissionStatusReasonInvalidBeneficiaryDetails DirectDebitAdmissionStatusReason = "invalid_beneficiary_details"
 
+	// DirectDebitAdmissionStatusReasonInvalidTransaction captures enum value "invalid_transaction"
+	DirectDebitAdmissionStatusReasonInvalidTransaction DirectDebitAdmissionStatusReason = "invalid_transaction"
+
 	// DirectDebitAdmissionStatusReasonBankidNotProvisioned captures enum value "bankid_not_provisioned"
 	DirectDebitAdmissionStatusReasonBankidNotProvisioned DirectDebitAdmissionStatusReason = "bankid_not_provisioned"
 
@@ -75,7 +78,7 @@ var directDebitAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","invalid_transaction","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

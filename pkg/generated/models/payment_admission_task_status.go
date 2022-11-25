@@ -29,6 +29,9 @@ const (
 
 	// PaymentAdmissionTaskStatusPending captures enum value "pending"
 	PaymentAdmissionTaskStatusPending PaymentAdmissionTaskStatus = "pending"
+
+	// PaymentAdmissionTaskStatusOnHold captures enum value "on_hold"
+	PaymentAdmissionTaskStatusOnHold PaymentAdmissionTaskStatus = "on_hold"
 )
 
 // for schema
@@ -36,7 +39,7 @@ var paymentAdmissionTaskStatusEnum []interface{}
 
 func init() {
 	var res []PaymentAdmissionTaskStatus
-	if err := json.Unmarshal([]byte(`["completed","failed","pending"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["completed","failed","pending","on_hold"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -17,19 +17,18 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Payment payment
-// swagger:model Payment
-type Payment struct {
+// NameVerificationSubmission name verification submission
+// swagger:model NameVerificationSubmission
+type NameVerificationSubmission struct {
 
 	// attributes
-	// Required: true
-	Attributes *PaymentAttributes `json:"attributes"`
+	Attributes *NameVerificationSubmissionAttributes `json:"attributes,omitempty"`
 
 	// created on
 	// Format: date-time
 	CreatedOn *strfmt.DateTime `json:"created_on,omitempty"`
 
-	// Unique resource ID
+	// id
 	// Required: true
 	// Format: uuid
 	ID *strfmt.UUID `json:"id"`
@@ -38,137 +37,137 @@ type Payment struct {
 	// Format: date-time
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
-	// Unique ID of the organisation this resource is created by
+	// organisation id
 	// Required: true
 	// Format: uuid
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
-	Relationships *PaymentRelationships `json:"relationships,omitempty"`
+	Relationships *NameVerificationSubmissionRelationships `json:"relationships,omitempty"`
 
-	// Name of the resource type
+	// type
 	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
 
-	// Version number
+	// version
 	// Minimum: 0
 	Version *int64 `json:"version,omitempty"`
 }
 
-func PaymentWithDefaults(defaults client.Defaults) *Payment {
-	return &Payment{
+func NameVerificationSubmissionWithDefaults(defaults client.Defaults) *NameVerificationSubmission {
+	return &NameVerificationSubmission{
 
-		Attributes: PaymentAttributesWithDefaults(defaults),
+		Attributes: NameVerificationSubmissionAttributesWithDefaults(defaults),
 
-		CreatedOn: defaults.GetStrfmtDateTimePtr("Payment", "created_on"),
+		CreatedOn: defaults.GetStrfmtDateTimePtr("NameVerificationSubmission", "created_on"),
 
-		ID: defaults.GetStrfmtUUIDPtr("Payment", "id"),
+		ID: defaults.GetStrfmtUUIDPtr("NameVerificationSubmission", "id"),
 
-		ModifiedOn: defaults.GetStrfmtDateTimePtr("Payment", "modified_on"),
+		ModifiedOn: defaults.GetStrfmtDateTimePtr("NameVerificationSubmission", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUIDPtr("Payment", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("NameVerificationSubmission", "organisation_id"),
 
-		Relationships: PaymentRelationshipsWithDefaults(defaults),
+		Relationships: NameVerificationSubmissionRelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("Payment", "type"),
+		Type: defaults.GetString("NameVerificationSubmission", "type"),
 
-		Version: defaults.GetInt64Ptr("Payment", "version"),
+		Version: defaults.GetInt64Ptr("NameVerificationSubmission", "version"),
 	}
 }
 
-func (m *Payment) WithAttributes(attributes PaymentAttributes) *Payment {
+func (m *NameVerificationSubmission) WithAttributes(attributes NameVerificationSubmissionAttributes) *NameVerificationSubmission {
 
 	m.Attributes = &attributes
 
 	return m
 }
 
-func (m *Payment) WithoutAttributes() *Payment {
+func (m *NameVerificationSubmission) WithoutAttributes() *NameVerificationSubmission {
 	m.Attributes = nil
 	return m
 }
 
-func (m *Payment) WithCreatedOn(createdOn strfmt.DateTime) *Payment {
+func (m *NameVerificationSubmission) WithCreatedOn(createdOn strfmt.DateTime) *NameVerificationSubmission {
 
 	m.CreatedOn = &createdOn
 
 	return m
 }
 
-func (m *Payment) WithoutCreatedOn() *Payment {
+func (m *NameVerificationSubmission) WithoutCreatedOn() *NameVerificationSubmission {
 	m.CreatedOn = nil
 	return m
 }
 
-func (m *Payment) WithID(id strfmt.UUID) *Payment {
+func (m *NameVerificationSubmission) WithID(id strfmt.UUID) *NameVerificationSubmission {
 
 	m.ID = &id
 
 	return m
 }
 
-func (m *Payment) WithoutID() *Payment {
+func (m *NameVerificationSubmission) WithoutID() *NameVerificationSubmission {
 	m.ID = nil
 	return m
 }
 
-func (m *Payment) WithModifiedOn(modifiedOn strfmt.DateTime) *Payment {
+func (m *NameVerificationSubmission) WithModifiedOn(modifiedOn strfmt.DateTime) *NameVerificationSubmission {
 
 	m.ModifiedOn = &modifiedOn
 
 	return m
 }
 
-func (m *Payment) WithoutModifiedOn() *Payment {
+func (m *NameVerificationSubmission) WithoutModifiedOn() *NameVerificationSubmission {
 	m.ModifiedOn = nil
 	return m
 }
 
-func (m *Payment) WithOrganisationID(organisationID strfmt.UUID) *Payment {
+func (m *NameVerificationSubmission) WithOrganisationID(organisationID strfmt.UUID) *NameVerificationSubmission {
 
 	m.OrganisationID = &organisationID
 
 	return m
 }
 
-func (m *Payment) WithoutOrganisationID() *Payment {
+func (m *NameVerificationSubmission) WithoutOrganisationID() *NameVerificationSubmission {
 	m.OrganisationID = nil
 	return m
 }
 
-func (m *Payment) WithRelationships(relationships PaymentRelationships) *Payment {
+func (m *NameVerificationSubmission) WithRelationships(relationships NameVerificationSubmissionRelationships) *NameVerificationSubmission {
 
 	m.Relationships = &relationships
 
 	return m
 }
 
-func (m *Payment) WithoutRelationships() *Payment {
+func (m *NameVerificationSubmission) WithoutRelationships() *NameVerificationSubmission {
 	m.Relationships = nil
 	return m
 }
 
-func (m *Payment) WithType(typeVar string) *Payment {
+func (m *NameVerificationSubmission) WithType(typeVar string) *NameVerificationSubmission {
 
 	m.Type = typeVar
 
 	return m
 }
 
-func (m *Payment) WithVersion(version int64) *Payment {
+func (m *NameVerificationSubmission) WithVersion(version int64) *NameVerificationSubmission {
 
 	m.Version = &version
 
 	return m
 }
 
-func (m *Payment) WithoutVersion() *Payment {
+func (m *NameVerificationSubmission) WithoutVersion() *NameVerificationSubmission {
 	m.Version = nil
 	return m
 }
 
-// Validate validates this payment
-func (m *Payment) Validate(formats strfmt.Registry) error {
+// Validate validates this name verification submission
+func (m *NameVerificationSubmission) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAttributes(formats); err != nil {
@@ -209,10 +208,10 @@ func (m *Payment) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateAttributes(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateAttributes(formats strfmt.Registry) error {
 
-	if err := validate.Required("attributes", "body", m.Attributes); err != nil {
-		return err
+	if swag.IsZero(m.Attributes) { // not required
+		return nil
 	}
 
 	if m.Attributes != nil {
@@ -227,7 +226,7 @@ func (m *Payment) validateAttributes(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateCreatedOn(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateCreatedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedOn) { // not required
 		return nil
@@ -240,7 +239,7 @@ func (m *Payment) validateCreatedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateID(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateID(formats strfmt.Registry) error {
 
 	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
@@ -253,7 +252,7 @@ func (m *Payment) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateModifiedOn(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateModifiedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ModifiedOn) { // not required
 		return nil
@@ -266,7 +265,7 @@ func (m *Payment) validateModifiedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateOrganisationID(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateOrganisationID(formats strfmt.Registry) error {
 
 	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
 		return err
@@ -279,7 +278,7 @@ func (m *Payment) validateOrganisationID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateRelationships(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateRelationships(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Relationships) { // not required
 		return nil
@@ -297,7 +296,7 @@ func (m *Payment) validateRelationships(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateType(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
@@ -310,7 +309,7 @@ func (m *Payment) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Payment) validateVersion(formats strfmt.Registry) error {
+func (m *NameVerificationSubmission) validateVersion(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Version) { // not required
 		return nil
@@ -324,7 +323,7 @@ func (m *Payment) validateVersion(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *Payment) MarshalBinary() ([]byte, error) {
+func (m *NameVerificationSubmission) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -332,15 +331,15 @@ func (m *Payment) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Payment) UnmarshalBinary(b []byte) error {
-	var res Payment
+func (m *NameVerificationSubmission) UnmarshalBinary(b []byte) error {
+	var res NameVerificationSubmission
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *Payment) Json() string {
+func (m *NameVerificationSubmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

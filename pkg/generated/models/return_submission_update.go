@@ -34,6 +34,9 @@ type ReturnSubmissionUpdate struct {
 	// Format: uuid
 	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
+	// relationships
+	Relationships *ReturnSubmissionUpdateRelationships `json:"relationships,omitempty"`
+
 	// Name of the resource type
 	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
@@ -51,6 +54,8 @@ func ReturnSubmissionUpdateWithDefaults(defaults client.Defaults) *ReturnSubmiss
 		ID: defaults.GetStrfmtUUIDPtr("ReturnSubmissionUpdate", "id"),
 
 		OrganisationID: defaults.GetStrfmtUUIDPtr("ReturnSubmissionUpdate", "organisation_id"),
+
+		Relationships: ReturnSubmissionUpdateRelationshipsWithDefaults(defaults),
 
 		Type: defaults.GetString("ReturnSubmissionUpdate", "type"),
 
@@ -94,6 +99,18 @@ func (m *ReturnSubmissionUpdate) WithoutOrganisationID() *ReturnSubmissionUpdate
 	return m
 }
 
+func (m *ReturnSubmissionUpdate) WithRelationships(relationships ReturnSubmissionUpdateRelationships) *ReturnSubmissionUpdate {
+
+	m.Relationships = &relationships
+
+	return m
+}
+
+func (m *ReturnSubmissionUpdate) WithoutRelationships() *ReturnSubmissionUpdate {
+	m.Relationships = nil
+	return m
+}
+
 func (m *ReturnSubmissionUpdate) WithType(typeVar string) *ReturnSubmissionUpdate {
 
 	m.Type = typeVar
@@ -126,6 +143,10 @@ func (m *ReturnSubmissionUpdate) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrganisationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRelationships(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -182,6 +203,24 @@ func (m *ReturnSubmissionUpdate) validateOrganisationID(formats strfmt.Registry)
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ReturnSubmissionUpdate) validateRelationships(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Relationships) { // not required
+		return nil
+	}
+
+	if m.Relationships != nil {
+		if err := m.Relationships.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships")
+			}
+			return err
+		}
 	}
 
 	return nil
