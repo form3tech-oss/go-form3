@@ -432,6 +432,9 @@ type ReversalAdmissionRelationships struct {
 
 	// reversal
 	Reversal *RelationshipReversals `json:"reversal,omitempty"`
+
+	// reversal admission task
+	ReversalAdmissionTask *RelationshipLinks `json:"reversal_admission_task,omitempty"`
 }
 
 func ReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReversalAdmissionRelationships {
@@ -440,6 +443,8 @@ func ReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *Rever
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
 		Reversal: RelationshipReversalsWithDefaults(defaults),
+
+		ReversalAdmissionTask: RelationshipLinksWithDefaults(defaults),
 	}
 }
 
@@ -467,6 +472,18 @@ func (m *ReversalAdmissionRelationships) WithoutReversal() *ReversalAdmissionRel
 	return m
 }
 
+func (m *ReversalAdmissionRelationships) WithReversalAdmissionTask(reversalAdmissionTask RelationshipLinks) *ReversalAdmissionRelationships {
+
+	m.ReversalAdmissionTask = &reversalAdmissionTask
+
+	return m
+}
+
+func (m *ReversalAdmissionRelationships) WithoutReversalAdmissionTask() *ReversalAdmissionRelationships {
+	m.ReversalAdmissionTask = nil
+	return m
+}
+
 // Validate validates this reversal admission relationships
 func (m *ReversalAdmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -476,6 +493,10 @@ func (m *ReversalAdmissionRelationships) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateReversal(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReversalAdmissionTask(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -513,6 +534,24 @@ func (m *ReversalAdmissionRelationships) validateReversal(formats strfmt.Registr
 		if err := m.Reversal.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("relationships" + "." + "reversal")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReversalAdmissionRelationships) validateReversalAdmissionTask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReversalAdmissionTask) { // not required
+		return nil
+	}
+
+	if m.ReversalAdmissionTask != nil {
+		if err := m.ReversalAdmissionTask.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "reversal_admission_task")
 			}
 			return err
 		}

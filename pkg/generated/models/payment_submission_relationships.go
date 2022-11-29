@@ -23,6 +23,9 @@ type PaymentSubmissionRelationships struct {
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
+	// payment submission task
+	PaymentSubmissionTask *RelationshipLinks `json:"payment_submission_task,omitempty"`
+
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
@@ -31,6 +34,8 @@ func PaymentSubmissionRelationshipsWithDefaults(defaults client.Defaults) *Payme
 	return &PaymentSubmissionRelationships{
 
 		Payment: RelationshipPaymentsWithDefaults(defaults),
+
+		PaymentSubmissionTask: RelationshipLinksWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
@@ -45,6 +50,18 @@ func (m *PaymentSubmissionRelationships) WithPayment(payment RelationshipPayment
 
 func (m *PaymentSubmissionRelationships) WithoutPayment() *PaymentSubmissionRelationships {
 	m.Payment = nil
+	return m
+}
+
+func (m *PaymentSubmissionRelationships) WithPaymentSubmissionTask(paymentSubmissionTask RelationshipLinks) *PaymentSubmissionRelationships {
+
+	m.PaymentSubmissionTask = &paymentSubmissionTask
+
+	return m
+}
+
+func (m *PaymentSubmissionRelationships) WithoutPaymentSubmissionTask() *PaymentSubmissionRelationships {
+	m.PaymentSubmissionTask = nil
 	return m
 }
 
@@ -68,6 +85,10 @@ func (m *PaymentSubmissionRelationships) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
+	if err := m.validatePaymentSubmissionTask(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateValidations(formats); err != nil {
 		res = append(res, err)
 	}
@@ -88,6 +109,24 @@ func (m *PaymentSubmissionRelationships) validatePayment(formats strfmt.Registry
 		if err := m.Payment.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("payment")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionRelationships) validatePaymentSubmissionTask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PaymentSubmissionTask) { // not required
+		return nil
+	}
+
+	if m.PaymentSubmissionTask != nil {
+		if err := m.PaymentSubmissionTask.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("payment_submission_task")
 			}
 			return err
 		}

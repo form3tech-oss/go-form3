@@ -51,6 +51,8 @@ func (c *Client) ListDirectDebits() *ListDirectDebitsRequest {
 
 		FilterModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListDirectDebits", "filter[modified_date_to]"),
 
+		FilterNotRelationships: make([]string, 0),
+
 		FilterOrganisationID: make([]strfmt.UUID, 0),
 
 		FilterPaymentScheme: c.Defaults.GetStringPtr("ListDirectDebits", "filter[payment_scheme]"),
@@ -63,6 +65,8 @@ func (c *Client) ListDirectDebits() *ListDirectDebitsRequest {
 
 		FilterReference: c.Defaults.GetStringPtr("ListDirectDebits", "filter[reference]"),
 
+		FilterRelationships: make([]string, 0),
+
 		FilterSubmissionSchemeStatusCode: c.Defaults.GetStringPtr("ListDirectDebits", "filter[submission.scheme_status_code]"),
 
 		FilterSubmissionStatus: c.Defaults.GetStringPtr("ListDirectDebits", "filter[submission.status]"),
@@ -72,6 +76,10 @@ func (c *Client) ListDirectDebits() *ListDirectDebitsRequest {
 		FilterSubmissionSubmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListDirectDebits", "filter[submission.submission_date_to]"),
 
 		FilterUniqueSchemeID: c.Defaults.GetStringPtr("ListDirectDebits", "filter[unique_scheme_id]"),
+
+		PageAfter: c.Defaults.GetStringPtr("ListDirectDebits", "page[after]"),
+
+		PageBefore: c.Defaults.GetStringPtr("ListDirectDebits", "page[before]"),
 
 		PageNumber: c.Defaults.GetStringPtr("ListDirectDebits", "page[number]"),
 
@@ -146,6 +154,10 @@ type ListDirectDebitsRequest struct {
 
 	FilterModifiedDateTo *strfmt.DateTime
 
+	/*FilterNotRelationships      Filter for direct debits containing none of the requested relationships      */
+
+	FilterNotRelationships []string
+
 	/*FilterOrganisationID      Filter by organisation id      */
 
 	FilterOrganisationID []strfmt.UUID
@@ -170,6 +182,10 @@ type ListDirectDebitsRequest struct {
 
 	FilterReference *string
 
+	/*FilterRelationships      Filter for direct debits containing all of the requested relationships      */
+
+	FilterRelationships []string
+
 	/*FilterSubmissionSchemeStatusCode      Filter by submission scheme status code      */
 
 	FilterSubmissionSchemeStatusCode *string
@@ -189,6 +205,14 @@ type ListDirectDebitsRequest struct {
 	/*FilterUniqueSchemeID      Filter by unique scheme id      */
 
 	FilterUniqueSchemeID *string
+
+	/*PageAfter      Cursor for next page (this is a base64-encoded UUID continuation token returned from the application and should not be manually generated, unless requesting the first page, where the value should be set to "start").      */
+
+	PageAfter *string
+
+	/*PageBefore      Cursor for previous page (this is a base64-encoded UUID continuation token returned from the application and should not be manually generated, unless requesting the last page, where the value should be set to "end").      */
+
+	PageBefore *string
 
 	/*PageNumber      Which page to select      */
 
@@ -421,6 +445,20 @@ func (o *ListDirectDebitsRequest) WithoutFilterModifiedDateTo() *ListDirectDebit
 	return o
 }
 
+func (o *ListDirectDebitsRequest) WithFilterNotRelationships(filterNotRelationships []string) *ListDirectDebitsRequest {
+
+	o.FilterNotRelationships = filterNotRelationships
+
+	return o
+}
+
+func (o *ListDirectDebitsRequest) WithoutFilterNotRelationships() *ListDirectDebitsRequest {
+
+	o.FilterNotRelationships = nil
+
+	return o
+}
+
 func (o *ListDirectDebitsRequest) WithFilterOrganisationID(filterOrganisationID []strfmt.UUID) *ListDirectDebitsRequest {
 
 	o.FilterOrganisationID = filterOrganisationID
@@ -505,6 +543,20 @@ func (o *ListDirectDebitsRequest) WithoutFilterReference() *ListDirectDebitsRequ
 	return o
 }
 
+func (o *ListDirectDebitsRequest) WithFilterRelationships(filterRelationships []string) *ListDirectDebitsRequest {
+
+	o.FilterRelationships = filterRelationships
+
+	return o
+}
+
+func (o *ListDirectDebitsRequest) WithoutFilterRelationships() *ListDirectDebitsRequest {
+
+	o.FilterRelationships = nil
+
+	return o
+}
+
 func (o *ListDirectDebitsRequest) WithFilterSubmissionSchemeStatusCode(filterSubmissionSchemeStatusCode string) *ListDirectDebitsRequest {
 
 	o.FilterSubmissionSchemeStatusCode = &filterSubmissionSchemeStatusCode
@@ -571,6 +623,34 @@ func (o *ListDirectDebitsRequest) WithFilterUniqueSchemeID(filterUniqueSchemeID 
 func (o *ListDirectDebitsRequest) WithoutFilterUniqueSchemeID() *ListDirectDebitsRequest {
 
 	o.FilterUniqueSchemeID = nil
+
+	return o
+}
+
+func (o *ListDirectDebitsRequest) WithPageAfter(pageAfter string) *ListDirectDebitsRequest {
+
+	o.PageAfter = &pageAfter
+
+	return o
+}
+
+func (o *ListDirectDebitsRequest) WithoutPageAfter() *ListDirectDebitsRequest {
+
+	o.PageAfter = nil
+
+	return o
+}
+
+func (o *ListDirectDebitsRequest) WithPageBefore(pageBefore string) *ListDirectDebitsRequest {
+
+	o.PageBefore = &pageBefore
+
+	return o
+}
+
+func (o *ListDirectDebitsRequest) WithoutPageBefore() *ListDirectDebitsRequest {
+
+	o.PageBefore = nil
 
 	return o
 }
@@ -864,6 +944,14 @@ func (o *ListDirectDebitsRequest) WriteToRequest(r runtime.ClientRequest, reg st
 
 	}
 
+	valuesFilterNotRelationships := o.FilterNotRelationships
+
+	joinedFilterNotRelationships := swag.JoinByFormat(valuesFilterNotRelationships, "")
+	// query array param filter[not_relationships]
+	if err := r.SetQueryParam("filter[not_relationships]", joinedFilterNotRelationships...); err != nil {
+		return err
+	}
+
 	var valuesFilterOrganisationID []string
 	for _, v := range o.FilterOrganisationID {
 		valuesFilterOrganisationID = append(valuesFilterOrganisationID, v.String())
@@ -955,6 +1043,14 @@ func (o *ListDirectDebitsRequest) WriteToRequest(r runtime.ClientRequest, reg st
 
 	}
 
+	valuesFilterRelationships := o.FilterRelationships
+
+	joinedFilterRelationships := swag.JoinByFormat(valuesFilterRelationships, "")
+	// query array param filter[relationships]
+	if err := r.SetQueryParam("filter[relationships]", joinedFilterRelationships...); err != nil {
+		return err
+	}
+
 	if o.FilterSubmissionSchemeStatusCode != nil {
 
 		// query param filter[submission.scheme_status_code]
@@ -1029,6 +1125,38 @@ func (o *ListDirectDebitsRequest) WriteToRequest(r runtime.ClientRequest, reg st
 		qFilterUniqueSchemeID := qrFilterUniqueSchemeID
 		if qFilterUniqueSchemeID != "" {
 			if err := r.SetQueryParam("filter[unique_scheme_id]", qFilterUniqueSchemeID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.PageAfter != nil {
+
+		// query param page[after]
+		var qrPageAfter string
+		if o.PageAfter != nil {
+			qrPageAfter = *o.PageAfter
+		}
+		qPageAfter := qrPageAfter
+		if qPageAfter != "" {
+			if err := r.SetQueryParam("page[after]", qPageAfter); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.PageBefore != nil {
+
+		// query param page[before]
+		var qrPageBefore string
+		if o.PageBefore != nil {
+			qrPageBefore = *o.PageBefore
+		}
+		qPageBefore := qrPageBefore
+		if qPageBefore != "" {
+			if err := r.SetQueryParam("page[before]", qPageBefore); err != nil {
 				return err
 			}
 		}

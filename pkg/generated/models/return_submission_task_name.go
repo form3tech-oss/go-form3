@@ -12,15 +12,15 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-// PaymentAdmissionTaskName Identifies the payment admission task to be executed
-// swagger:model PaymentAdmissionTaskName
-type PaymentAdmissionTaskName string
+// ReturnSubmissionTaskName Identifies the return submission task to be executed
+// swagger:model ReturnSubmissionTaskName
+type ReturnSubmissionTaskName string
 
-// Validate validates this payment admission task name
-func (m PaymentAdmissionTaskName) Validate(formats strfmt.Registry) error {
+// Validate validates this return submission task name
+func (m ReturnSubmissionTaskName) Validate(formats strfmt.Registry) error {
 	return nil
 }
-func (m *PaymentAdmissionTaskName) Json() string {
+func (m *ReturnSubmissionTaskName) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

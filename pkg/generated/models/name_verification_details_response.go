@@ -16,35 +16,35 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PaymentCreation payment creation
-// swagger:model PaymentCreation
-type PaymentCreation struct {
+// NameVerificationDetailsResponse name verification details response
+// swagger:model NameVerificationDetailsResponse
+type NameVerificationDetailsResponse struct {
 
 	// data
-	Data *NewPayment `json:"data,omitempty"`
+	Data *NameVerification `json:"data,omitempty"`
 }
 
-func PaymentCreationWithDefaults(defaults client.Defaults) *PaymentCreation {
-	return &PaymentCreation{
+func NameVerificationDetailsResponseWithDefaults(defaults client.Defaults) *NameVerificationDetailsResponse {
+	return &NameVerificationDetailsResponse{
 
-		Data: NewPaymentWithDefaults(defaults),
+		Data: NameVerificationWithDefaults(defaults),
 	}
 }
 
-func (m *PaymentCreation) WithData(data NewPayment) *PaymentCreation {
+func (m *NameVerificationDetailsResponse) WithData(data NameVerification) *NameVerificationDetailsResponse {
 
 	m.Data = &data
 
 	return m
 }
 
-func (m *PaymentCreation) WithoutData() *PaymentCreation {
+func (m *NameVerificationDetailsResponse) WithoutData() *NameVerificationDetailsResponse {
 	m.Data = nil
 	return m
 }
 
-// Validate validates this payment creation
-func (m *PaymentCreation) Validate(formats strfmt.Registry) error {
+// Validate validates this name verification details response
+func (m *NameVerificationDetailsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -57,7 +57,7 @@ func (m *PaymentCreation) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PaymentCreation) validateData(formats strfmt.Registry) error {
+func (m *NameVerificationDetailsResponse) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -76,7 +76,7 @@ func (m *PaymentCreation) validateData(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *PaymentCreation) MarshalBinary() ([]byte, error) {
+func (m *NameVerificationDetailsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -84,15 +84,15 @@ func (m *PaymentCreation) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *PaymentCreation) UnmarshalBinary(b []byte) error {
-	var res PaymentCreation
+func (m *NameVerificationDetailsResponse) UnmarshalBinary(b []byte) error {
+	var res NameVerificationDetailsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *PaymentCreation) Json() string {
+func (m *NameVerificationDetailsResponse) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

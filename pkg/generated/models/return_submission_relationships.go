@@ -26,6 +26,9 @@ type ReturnSubmissionRelationships struct {
 	// payment return
 	PaymentReturn *RelationshipReturns `json:"payment_return,omitempty"`
 
+	// return submission task
+	ReturnSubmissionTask *RelationshipLinks `json:"return_submission_task,omitempty"`
+
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
 }
@@ -36,6 +39,8 @@ func ReturnSubmissionRelationshipsWithDefaults(defaults client.Defaults) *Return
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
 		PaymentReturn: RelationshipReturnsWithDefaults(defaults),
+
+		ReturnSubmissionTask: RelationshipLinksWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
@@ -65,6 +70,18 @@ func (m *ReturnSubmissionRelationships) WithoutPaymentReturn() *ReturnSubmission
 	return m
 }
 
+func (m *ReturnSubmissionRelationships) WithReturnSubmissionTask(returnSubmissionTask RelationshipLinks) *ReturnSubmissionRelationships {
+
+	m.ReturnSubmissionTask = &returnSubmissionTask
+
+	return m
+}
+
+func (m *ReturnSubmissionRelationships) WithoutReturnSubmissionTask() *ReturnSubmissionRelationships {
+	m.ReturnSubmissionTask = nil
+	return m
+}
+
 func (m *ReturnSubmissionRelationships) WithValidations(validations RelationshipLinks) *ReturnSubmissionRelationships {
 
 	m.Validations = &validations
@@ -86,6 +103,10 @@ func (m *ReturnSubmissionRelationships) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validatePaymentReturn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReturnSubmissionTask(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -127,6 +148,24 @@ func (m *ReturnSubmissionRelationships) validatePaymentReturn(formats strfmt.Reg
 		if err := m.PaymentReturn.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("payment_return")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReturnSubmissionRelationships) validateReturnSubmissionTask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReturnSubmissionTask) { // not required
+		return nil
+	}
+
+	if m.ReturnSubmissionTask != nil {
+		if err := m.ReturnSubmissionTask.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("return_submission_task")
 			}
 			return err
 		}
