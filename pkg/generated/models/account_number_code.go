@@ -21,11 +21,11 @@ type AccountNumberCode string
 
 const (
 
-	// AccountNumberCodeIBAN captures enum value "IBAN"
-	AccountNumberCodeIBAN AccountNumberCode = "IBAN"
-
 	// AccountNumberCodeBBAN captures enum value "BBAN"
 	AccountNumberCodeBBAN AccountNumberCode = "BBAN"
+
+	// AccountNumberCodeIBAN captures enum value "IBAN"
+	AccountNumberCodeIBAN AccountNumberCode = "IBAN"
 )
 
 // for schema
@@ -33,7 +33,7 @@ var accountNumberCodeEnum []interface{}
 
 func init() {
 	var res []AccountNumberCode
-	if err := json.Unmarshal([]byte(`["IBAN","BBAN"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["BBAN","IBAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

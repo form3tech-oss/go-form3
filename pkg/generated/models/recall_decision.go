@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -351,6 +352,9 @@ func (m *RecallDecision) Json() string {
 // swagger:model RecallDecisionAttributes
 type RecallDecisionAttributes struct {
 
+	// agents
+	Agents []*RecallDecisionAttributesAgentsItems0 `json:"agents,omitempty"`
+
 	// answer
 	Answer RecallDecisionAnswer `json:"answer,omitempty"`
 
@@ -365,10 +369,15 @@ type RecallDecisionAttributes struct {
 
 	// recall amount
 	RecallAmount *CurrencyAndAmount `json:"recall_amount,omitempty"`
+
+	// resolution related information
+	ResolutionRelatedInformation *ResolutionRelatedInformation `json:"resolution_related_information,omitempty"`
 }
 
 func RecallDecisionAttributesWithDefaults(defaults client.Defaults) *RecallDecisionAttributes {
 	return &RecallDecisionAttributes{
+
+		Agents: make([]*RecallDecisionAttributesAgentsItems0, 0),
 
 		// TODO Answer: RecallDecisionAnswer,
 
@@ -379,7 +388,16 @@ func RecallDecisionAttributesWithDefaults(defaults client.Defaults) *RecallDecis
 		ReasonCode: defaults.GetString("RecallDecisionAttributes", "reason_code"),
 
 		RecallAmount: CurrencyAndAmountWithDefaults(defaults),
+
+		ResolutionRelatedInformation: ResolutionRelatedInformationWithDefaults(defaults),
 	}
+}
+
+func (m *RecallDecisionAttributes) WithAgents(agents []*RecallDecisionAttributesAgentsItems0) *RecallDecisionAttributes {
+
+	m.Agents = agents
+
+	return m
 }
 
 func (m *RecallDecisionAttributes) WithAnswer(answer RecallDecisionAnswer) *RecallDecisionAttributes {
@@ -427,9 +445,25 @@ func (m *RecallDecisionAttributes) WithoutRecallAmount() *RecallDecisionAttribut
 	return m
 }
 
+func (m *RecallDecisionAttributes) WithResolutionRelatedInformation(resolutionRelatedInformation ResolutionRelatedInformation) *RecallDecisionAttributes {
+
+	m.ResolutionRelatedInformation = &resolutionRelatedInformation
+
+	return m
+}
+
+func (m *RecallDecisionAttributes) WithoutResolutionRelatedInformation() *RecallDecisionAttributes {
+	m.ResolutionRelatedInformation = nil
+	return m
+}
+
 // Validate validates this recall decision attributes
 func (m *RecallDecisionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAgents(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateAnswer(formats); err != nil {
 		res = append(res, err)
@@ -443,9 +477,38 @@ func (m *RecallDecisionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateResolutionRelatedInformation(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RecallDecisionAttributes) validateAgents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Agents) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Agents); i++ {
+		if swag.IsZero(m.Agents[i]) { // not required
+			continue
+		}
+
+		if m.Agents[i] != nil {
+			if err := m.Agents[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "agents" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -501,6 +564,24 @@ func (m *RecallDecisionAttributes) validateRecallAmount(formats strfmt.Registry)
 	return nil
 }
 
+func (m *RecallDecisionAttributes) validateResolutionRelatedInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ResolutionRelatedInformation) { // not required
+		return nil
+	}
+
+	if m.ResolutionRelatedInformation != nil {
+		if err := m.ResolutionRelatedInformation.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "resolution_related_information")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *RecallDecisionAttributes) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -519,6 +600,166 @@ func (m *RecallDecisionAttributes) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *RecallDecisionAttributes) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// RecallDecisionAttributesAgentsItems0 recall decision attributes agents items0
+// swagger:model RecallDecisionAttributesAgentsItems0
+type RecallDecisionAttributesAgentsItems0 struct {
+
+	// identification
+	Identification *RecallDecisionAttributesAgentsItems0Identification `json:"identification,omitempty"`
+
+	// role
+	Role string `json:"role,omitempty"`
+}
+
+func RecallDecisionAttributesAgentsItems0WithDefaults(defaults client.Defaults) *RecallDecisionAttributesAgentsItems0 {
+	return &RecallDecisionAttributesAgentsItems0{
+
+		Identification: RecallDecisionAttributesAgentsItems0IdentificationWithDefaults(defaults),
+
+		Role: defaults.GetString("RecallDecisionAttributesAgentsItems0", "role"),
+	}
+}
+
+func (m *RecallDecisionAttributesAgentsItems0) WithIdentification(identification RecallDecisionAttributesAgentsItems0Identification) *RecallDecisionAttributesAgentsItems0 {
+
+	m.Identification = &identification
+
+	return m
+}
+
+func (m *RecallDecisionAttributesAgentsItems0) WithoutIdentification() *RecallDecisionAttributesAgentsItems0 {
+	m.Identification = nil
+	return m
+}
+
+func (m *RecallDecisionAttributesAgentsItems0) WithRole(role string) *RecallDecisionAttributesAgentsItems0 {
+
+	m.Role = role
+
+	return m
+}
+
+// Validate validates this recall decision attributes agents items0
+func (m *RecallDecisionAttributesAgentsItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateIdentification(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *RecallDecisionAttributesAgentsItems0) validateIdentification(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Identification) { // not required
+		return nil
+	}
+
+	if m.Identification != nil {
+		if err := m.Identification.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("identification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *RecallDecisionAttributesAgentsItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *RecallDecisionAttributesAgentsItems0) UnmarshalBinary(b []byte) error {
+	var res RecallDecisionAttributesAgentsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *RecallDecisionAttributesAgentsItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// RecallDecisionAttributesAgentsItems0Identification recall decision attributes agents items0 identification
+// swagger:model RecallDecisionAttributesAgentsItems0Identification
+type RecallDecisionAttributesAgentsItems0Identification struct {
+
+	// Identification code of the financial institution.
+	BankID string `json:"bank_id,omitempty"`
+
+	// Type of identification provided in bank_id field. Required when bank_id is provided, not used otherwise.
+	BankIDCode string `json:"bank_id_code,omitempty"`
+}
+
+func RecallDecisionAttributesAgentsItems0IdentificationWithDefaults(defaults client.Defaults) *RecallDecisionAttributesAgentsItems0Identification {
+	return &RecallDecisionAttributesAgentsItems0Identification{
+
+		BankID: defaults.GetString("RecallDecisionAttributesAgentsItems0Identification", "bank_id"),
+
+		BankIDCode: defaults.GetString("RecallDecisionAttributesAgentsItems0Identification", "bank_id_code"),
+	}
+}
+
+func (m *RecallDecisionAttributesAgentsItems0Identification) WithBankID(bankID string) *RecallDecisionAttributesAgentsItems0Identification {
+
+	m.BankID = bankID
+
+	return m
+}
+
+func (m *RecallDecisionAttributesAgentsItems0Identification) WithBankIDCode(bankIDCode string) *RecallDecisionAttributesAgentsItems0Identification {
+
+	m.BankIDCode = bankIDCode
+
+	return m
+}
+
+// Validate validates this recall decision attributes agents items0 identification
+func (m *RecallDecisionAttributesAgentsItems0Identification) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *RecallDecisionAttributesAgentsItems0Identification) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *RecallDecisionAttributesAgentsItems0Identification) UnmarshalBinary(b []byte) error {
+	var res RecallDecisionAttributesAgentsItems0Identification
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *RecallDecisionAttributesAgentsItems0Identification) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

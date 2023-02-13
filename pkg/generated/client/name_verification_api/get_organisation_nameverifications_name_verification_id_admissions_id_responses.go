@@ -32,6 +32,13 @@ func (o *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDReader) R
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 403:
 		result := NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -86,6 +93,40 @@ func (o *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK) readR
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.NameVerificationAdmissionDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest creates a GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest with default headers values
+func NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest() *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest {
+	return &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest{}
+}
+
+/*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest handles this case with default header values.
+
+Bad Request
+*/
+type GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /organisation/nameverifications/{name_verification_id}/admissions/{id}][%d] getOrganisationNameverificationsNameVerificationIdAdmissionsIdBadRequest", 400)
+}
+
+func (o *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -244,7 +244,6 @@ func (m *Ace) Json() string {
 type AceAttributes struct {
 
 	// Action that this ACE controls
-	// Pattern: ^[A-Za-z]*$
 	Action string `json:"action,omitempty"`
 
 	// filter
@@ -304,10 +303,6 @@ func (m *AceAttributes) WithRoleID(roleID strfmt.UUID) *AceAttributes {
 func (m *AceAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAction(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateRecordType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -319,19 +314,6 @@ func (m *AceAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AceAttributes) validateAction(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Action) { // not required
-		return nil
-	}
-
-	if err := validate.Pattern("attributes"+"."+"action", "body", string(m.Action), `^[A-Za-z]*$`); err != nil {
-		return err
-	}
-
 	return nil
 }
 

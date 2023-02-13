@@ -26,6 +26,9 @@ const (
 
 	// RecallDecisionAnswerRejected captures enum value "rejected"
 	RecallDecisionAnswerRejected RecallDecisionAnswer = "rejected"
+
+	// RecallDecisionAnswerPending captures enum value "pending"
+	RecallDecisionAnswerPending RecallDecisionAnswer = "pending"
 )
 
 // for schema
@@ -33,7 +36,7 @@ var recallDecisionAnswerEnum []interface{}
 
 func init() {
 	var res []RecallDecisionAnswer
-	if err := json.Unmarshal([]byte(`["accepted","rejected"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","rejected","pending"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

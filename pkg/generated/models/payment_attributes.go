@@ -103,6 +103,9 @@ type PaymentAttributes struct {
 	// Payment reference for beneficiary use
 	Reference string `json:"reference,omitempty"`
 
+	// Block to represent a list of references
+	References []*Reference `json:"references,omitempty"`
+
 	// Regulatory reporting information
 	RegulatoryReporting string `json:"regulatory_reporting,omitempty"`
 
@@ -205,6 +208,8 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 		ReceiversCorrespondent: ReceiversCorrespondentAccountHoldingEntityWithDefaults(defaults),
 
 		Reference: defaults.GetString("PaymentAttributes", "reference"),
+
+		References: make([]*Reference, 0),
 
 		RegulatoryReporting: defaults.GetString("PaymentAttributes", "regulatory_reporting"),
 
@@ -460,6 +465,13 @@ func (m *PaymentAttributes) WithReference(reference string) *PaymentAttributes {
 	return m
 }
 
+func (m *PaymentAttributes) WithReferences(references []*Reference) *PaymentAttributes {
+
+	m.References = references
+
+	return m
+}
+
 func (m *PaymentAttributes) WithRegulatoryReporting(regulatoryReporting string) *PaymentAttributes {
 
 	m.RegulatoryReporting = regulatoryReporting
@@ -646,6 +658,10 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateReceiversCorrespondent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferences(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -858,6 +874,31 @@ func (m *PaymentAttributes) validateReceiversCorrespondent(formats strfmt.Regist
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributes) validateReferences(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.References) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.References); i++ {
+		if swag.IsZero(m.References[i]) { // not required
+			continue
+		}
+
+		if m.References[i] != nil {
+			if err := m.References[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("references" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -1105,6 +1146,9 @@ type PaymentAttributesBeneficiaryParty struct {
 	// Country of the beneficiary address, ISO 3166 format country code
 	Country string `json:"country,omitempty"`
 
+	// Country of residence of the beneficiary party, ISO 3166 format country code
+	CountryOfResidence string `json:"country_of_residence,omitempty"`
+
 	// Beneficiary name
 	Name string `json:"name,omitempty"`
 
@@ -1166,6 +1210,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		City: defaults.GetString("PaymentAttributesBeneficiaryParty", "city"),
 
 		Country: defaults.GetString("PaymentAttributesBeneficiaryParty", "country"),
+
+		CountryOfResidence: defaults.GetString("PaymentAttributesBeneficiaryParty", "country_of_residence"),
 
 		Name: defaults.GetString("PaymentAttributesBeneficiaryParty", "name"),
 
@@ -1293,6 +1339,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithCity(city string) *PaymentAttrib
 func (m *PaymentAttributesBeneficiaryParty) WithCountry(country string) *PaymentAttributesBeneficiaryParty {
 
 	m.Country = country
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithCountryOfResidence(countryOfResidence string) *PaymentAttributesBeneficiaryParty {
+
+	m.CountryOfResidence = countryOfResidence
 
 	return m
 }
@@ -1532,6 +1585,9 @@ type PaymentAttributesDebtorParty struct {
 	// Country of debtor address. ISO 3166 format country code"
 	Country string `json:"country,omitempty"`
 
+	// Country of residence of the debtor party, ISO 3166 format country code
+	CountryOfResidence string `json:"country_of_residence,omitempty"`
+
 	// SWIFT BIC for ordering customer, either BIC8 or BIC11
 	CustomerID string `json:"customer_id,omitempty"`
 
@@ -1594,6 +1650,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 		City: defaults.GetString("PaymentAttributesDebtorParty", "city"),
 
 		Country: defaults.GetString("PaymentAttributesDebtorParty", "country"),
+
+		CountryOfResidence: defaults.GetString("PaymentAttributesDebtorParty", "country_of_residence"),
 
 		CustomerID: defaults.GetString("PaymentAttributesDebtorParty", "customer_id"),
 
@@ -1716,6 +1774,13 @@ func (m *PaymentAttributesDebtorParty) WithCity(city string) *PaymentAttributesD
 func (m *PaymentAttributesDebtorParty) WithCountry(country string) *PaymentAttributesDebtorParty {
 
 	m.Country = country
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithCountryOfResidence(countryOfResidence string) *PaymentAttributesDebtorParty {
+
+	m.CountryOfResidence = countryOfResidence
 
 	return m
 }

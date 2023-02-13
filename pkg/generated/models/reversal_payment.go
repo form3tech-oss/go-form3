@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -22,7 +23,7 @@ import (
 type ReversalPayment struct {
 
 	// attributes
-	Attributes interface{} `json:"attributes,omitempty"`
+	Attributes *ReversalPaymentAttributes `json:"attributes,omitempty"`
 
 	// created on
 	// Format: date-time
@@ -57,7 +58,7 @@ type ReversalPayment struct {
 func ReversalPaymentWithDefaults(defaults client.Defaults) *ReversalPayment {
 	return &ReversalPayment{
 
-		// TODO Attributes: interface{},
+		Attributes: ReversalPaymentAttributesWithDefaults(defaults),
 
 		CreatedOn: defaults.GetStrfmtDateTimePtr("ReversalPayment", "created_on"),
 
@@ -75,10 +76,15 @@ func ReversalPaymentWithDefaults(defaults client.Defaults) *ReversalPayment {
 	}
 }
 
-func (m *ReversalPayment) WithAttributes(attributes interface{}) *ReversalPayment {
+func (m *ReversalPayment) WithAttributes(attributes ReversalPaymentAttributes) *ReversalPayment {
 
-	m.Attributes = attributes
+	m.Attributes = &attributes
 
+	return m
+}
+
+func (m *ReversalPayment) WithoutAttributes() *ReversalPayment {
+	m.Attributes = nil
 	return m
 }
 
@@ -165,6 +171,10 @@ func (m *ReversalPayment) WithoutVersion() *ReversalPayment {
 func (m *ReversalPayment) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAttributes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreatedOn(formats); err != nil {
 		res = append(res, err)
 	}
@@ -196,6 +206,24 @@ func (m *ReversalPayment) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ReversalPayment) validateAttributes(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Attributes) { // not required
+		return nil
+	}
+
+	if m.Attributes != nil {
+		if err := m.Attributes.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -313,6 +341,99 @@ func (m *ReversalPayment) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ReversalPayment) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReversalPaymentAttributes reversal payment attributes
+// swagger:model ReversalPaymentAttributes
+type ReversalPaymentAttributes struct {
+
+	// All purpose list of key-value pairs.
+	// Max Items: 5
+	UserDefinedData []*UserDefinedData `json:"user_defined_data,omitempty"`
+}
+
+func ReversalPaymentAttributesWithDefaults(defaults client.Defaults) *ReversalPaymentAttributes {
+	return &ReversalPaymentAttributes{
+
+		UserDefinedData: make([]*UserDefinedData, 0),
+	}
+}
+
+func (m *ReversalPaymentAttributes) WithUserDefinedData(userDefinedData []*UserDefinedData) *ReversalPaymentAttributes {
+
+	m.UserDefinedData = userDefinedData
+
+	return m
+}
+
+// Validate validates this reversal payment attributes
+func (m *ReversalPaymentAttributes) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateUserDefinedData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReversalPaymentAttributes) validateUserDefinedData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserDefinedData) { // not required
+		return nil
+	}
+
+	iUserDefinedDataSize := int64(len(m.UserDefinedData))
+
+	if err := validate.MaxItems("attributes"+"."+"user_defined_data", "body", iUserDefinedDataSize, 5); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.UserDefinedData); i++ {
+		if swag.IsZero(m.UserDefinedData[i]) { // not required
+			continue
+		}
+
+		if m.UserDefinedData[i] != nil {
+			if err := m.UserDefinedData[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "user_defined_data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReversalPaymentAttributes) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReversalPaymentAttributes) UnmarshalBinary(b []byte) error {
+	var res ReversalPaymentAttributes
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReversalPaymentAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -1285,6 +1285,39 @@ func (a *ListPaymentsRequest) MustDo() *ListPaymentsOK {
 }
 
 /*
+patch return submission task API
+*/
+func (a *PatchReturnSubmissionTaskRequest) Do() (*PatchReturnSubmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchReturnSubmissionTask",
+		Method:             "PATCH",
+		PathPattern:        "/transaction/payments/{paymentId}/returns/{returnId}/submissions/{returnSubmissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchReturnSubmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchReturnSubmissionTaskOK), nil
+
+}
+
+func (a *PatchReturnSubmissionTaskRequest) MustDo() *PatchReturnSubmissionTaskOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 patch transaction payments ID admissions admission ID tasks task ID API
 */
 func (a *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) Do() (*PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK, error) {
@@ -1310,6 +1343,39 @@ func (a *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) Do()
 }
 
 func (a *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDRequest) MustDo() *PatchTransactionPaymentsIDAdmissionsAdmissionIDTasksTaskIDOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+patch transaction payments ID submissions submission ID tasks task ID API
+*/
+func (a *PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskIDRequest) Do() (*PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskIDOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskID",
+		Method:             "PATCH",
+		PathPattern:        "/transaction/payments/{id}/submissions/{submissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskIDReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskIDOK), nil
+
+}
+
+func (a *PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskIDRequest) MustDo() *PatchTransactionPaymentsIDSubmissionsSubmissionIDTasksTaskIDOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
