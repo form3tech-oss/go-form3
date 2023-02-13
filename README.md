@@ -45,9 +45,8 @@ f3, err := form3.New(
     form3.WithBaseURL(*u),
     form3.WithOrganisationID(o),
     form3.WithRequestSigningTransport(
-        form3.NewRequestSigningTransport(
-            form3.WithPrivateKey(privKey),
-            form3.WithPublicKeyID(pubKeyID))))
+        form3.WithPrivateKey(privKey),
+        form3.WithPublicKeyID(pubKeyID)))
 if err != nil {
     log.Fatal(err)
 }
