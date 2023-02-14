@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  test-tags:
+    name: "Test: Go tests"
+    runs-on: [self-hosted, builder-large, x64, linux]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v3.5.0
+        with:
+          go-version-file: 'go.mod'
+      - name: Run tests
+        id: runTests
+        run: make test
+        env:
+          FORM3_CLIENT_ID: "${{ secrets.FORM3_CLIENT_ID }}"
+          FORM3_HOST: "https://symphony.api.env.staging-form3.tech"
+          FORM3_PUBLIC_KEY_ID: "${{ secrets.FORM3_PUBLIC_KEY_ID }}"
+          FORM3_ORGANISATION_ID: "${{ secrets.ORGANISATION_ID }}"
