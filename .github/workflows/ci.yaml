@@ -6,10 +6,7 @@ on:
 jobs:
   test-tags:
     name: "Test: Go tests"
-    runs-on: [self-hosted, builder-large, x64, linux]
-    permissions:
-      id-token: write
-      contents: read
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
