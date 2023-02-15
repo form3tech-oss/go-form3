@@ -23,8 +23,7 @@ jobs:
         id: runTests
         run: make test
         env:
-          FORM3_CLIENT_ID: ${{ secrets.FORM3_CLIENT_ID }}
-          FORM3_CLIENT_SECRET: ${{ secrets.FORM3_CLIENT_SECRET }}
+          FORM3_ORGANISATION_ID: ${{ secrets.FORM3_ORGANISATION_ID }}
           FORM3_HOST: https://${{ secrets.FORM3_HOST }}
           FORM3_PRIVATE_KEY: ${{ secrets.FORM3_PRIVATE_KEY }}
           FORM3_PUBLIC_KEY_ID: ${{ secrets.FORM3_PUBLIC_KEY_ID }}
