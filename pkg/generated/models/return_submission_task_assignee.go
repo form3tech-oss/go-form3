@@ -21,6 +21,9 @@ type ReturnSubmissionTaskAssignee string
 
 const (
 
+	// ReturnSubmissionTaskAssigneeCustomer captures enum value "customer"
+	ReturnSubmissionTaskAssigneeCustomer ReturnSubmissionTaskAssignee = "customer"
+
 	// ReturnSubmissionTaskAssigneeForm3 captures enum value "form3"
 	ReturnSubmissionTaskAssigneeForm3 ReturnSubmissionTaskAssignee = "form3"
 )
@@ -30,7 +33,7 @@ var returnSubmissionTaskAssigneeEnum []interface{}
 
 func init() {
 	var res []ReturnSubmissionTaskAssignee
-	if err := json.Unmarshal([]byte(`["form3"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["customer","form3"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

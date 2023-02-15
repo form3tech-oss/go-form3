@@ -289,6 +289,9 @@ type ReversalAdmissionUpdateAttributes struct {
 
 	// source gateway
 	SourceGateway string `json:"source_gateway,omitempty"`
+
+	// status
+	Status ReversalAdmissionStatus `json:"status,omitempty"`
 }
 
 func ReversalAdmissionUpdateAttributesWithDefaults(defaults client.Defaults) *ReversalAdmissionUpdateAttributes {
@@ -299,6 +302,9 @@ func ReversalAdmissionUpdateAttributesWithDefaults(defaults client.Defaults) *Re
 		SchemeStatusCodeDescription: defaults.GetString("ReversalAdmissionUpdateAttributes", "scheme_status_code_description"),
 
 		SourceGateway: defaults.GetString("ReversalAdmissionUpdateAttributes", "source_gateway"),
+
+		// TODO Status: ReversalAdmissionStatus,
+
 	}
 }
 
@@ -323,8 +329,40 @@ func (m *ReversalAdmissionUpdateAttributes) WithSourceGateway(sourceGateway stri
 	return m
 }
 
+func (m *ReversalAdmissionUpdateAttributes) WithStatus(status ReversalAdmissionStatus) *ReversalAdmissionUpdateAttributes {
+
+	m.Status = status
+
+	return m
+}
+
 // Validate validates this reversal admission update attributes
 func (m *ReversalAdmissionUpdateAttributes) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReversalAdmissionUpdateAttributes) validateStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	if err := m.Status.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "status")
+		}
+		return err
+	}
+
 	return nil
 }
 

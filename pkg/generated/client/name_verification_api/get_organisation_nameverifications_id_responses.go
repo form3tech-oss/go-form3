@@ -32,6 +32,13 @@ func (o *GetOrganisationNameverificationsIDReader) ReadResponse(response runtime
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetOrganisationNameverificationsIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 403:
 		result := NewGetOrganisationNameverificationsIDForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -86,6 +93,40 @@ func (o *GetOrganisationNameverificationsIDOK) readResponse(response runtime.Cli
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.NameVerificationDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetOrganisationNameverificationsIDBadRequest creates a GetOrganisationNameverificationsIDBadRequest with default headers values
+func NewGetOrganisationNameverificationsIDBadRequest() *GetOrganisationNameverificationsIDBadRequest {
+	return &GetOrganisationNameverificationsIDBadRequest{}
+}
+
+/*GetOrganisationNameverificationsIDBadRequest handles this case with default header values.
+
+Bad Request
+*/
+type GetOrganisationNameverificationsIDBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetOrganisationNameverificationsIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /organisation/nameverifications/{id}][%d] getOrganisationNameverificationsIdBadRequest", 400)
+}
+
+func (o *GetOrganisationNameverificationsIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

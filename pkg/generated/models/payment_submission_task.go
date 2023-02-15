@@ -17,12 +17,12 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ReturnSubmissionTask return submission task
-// swagger:model ReturnSubmissionTask
-type ReturnSubmissionTask struct {
+// PaymentSubmissionTask payment submission task
+// swagger:model PaymentSubmissionTask
+type PaymentSubmissionTask struct {
 
 	// attributes
-	Attributes *ReturnSubmissionTaskAttributes `json:"attributes,omitempty"`
+	Attributes *PaymentSubmissionTaskAttributes `json:"attributes,omitempty"`
 
 	// created on
 	// Format: date-time
@@ -41,7 +41,7 @@ type ReturnSubmissionTask struct {
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
 	// relationships
-	Relationships *ReturnSubmissionTaskRelationships `json:"relationships,omitempty"`
+	Relationships *PaymentSubmissionTaskRelationships `json:"relationships,omitempty"`
 
 	// Name of the resource type
 	// Pattern: ^[A-Za-z_]*$
@@ -52,100 +52,100 @@ type ReturnSubmissionTask struct {
 	Version *int64 `json:"version,omitempty"`
 }
 
-func ReturnSubmissionTaskWithDefaults(defaults client.Defaults) *ReturnSubmissionTask {
-	return &ReturnSubmissionTask{
+func PaymentSubmissionTaskWithDefaults(defaults client.Defaults) *PaymentSubmissionTask {
+	return &PaymentSubmissionTask{
 
-		Attributes: ReturnSubmissionTaskAttributesWithDefaults(defaults),
+		Attributes: PaymentSubmissionTaskAttributesWithDefaults(defaults),
 
-		CreatedOn: defaults.GetStrfmtDateTime("ReturnSubmissionTask", "created_on"),
+		CreatedOn: defaults.GetStrfmtDateTime("PaymentSubmissionTask", "created_on"),
 
-		ID: defaults.GetStrfmtUUID("ReturnSubmissionTask", "id"),
+		ID: defaults.GetStrfmtUUID("PaymentSubmissionTask", "id"),
 
-		ModifiedOn: defaults.GetStrfmtDateTime("ReturnSubmissionTask", "modified_on"),
+		ModifiedOn: defaults.GetStrfmtDateTime("PaymentSubmissionTask", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("ReturnSubmissionTask", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUID("PaymentSubmissionTask", "organisation_id"),
 
-		Relationships: ReturnSubmissionTaskRelationshipsWithDefaults(defaults),
+		Relationships: PaymentSubmissionTaskRelationshipsWithDefaults(defaults),
 
-		Type: defaults.GetString("ReturnSubmissionTask", "type"),
+		Type: defaults.GetString("PaymentSubmissionTask", "type"),
 
-		Version: defaults.GetInt64Ptr("ReturnSubmissionTask", "version"),
+		Version: defaults.GetInt64Ptr("PaymentSubmissionTask", "version"),
 	}
 }
 
-func (m *ReturnSubmissionTask) WithAttributes(attributes ReturnSubmissionTaskAttributes) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithAttributes(attributes PaymentSubmissionTaskAttributes) *PaymentSubmissionTask {
 
 	m.Attributes = &attributes
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithoutAttributes() *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithoutAttributes() *PaymentSubmissionTask {
 	m.Attributes = nil
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithCreatedOn(createdOn strfmt.DateTime) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithCreatedOn(createdOn strfmt.DateTime) *PaymentSubmissionTask {
 
 	m.CreatedOn = createdOn
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithID(id strfmt.UUID) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithID(id strfmt.UUID) *PaymentSubmissionTask {
 
 	m.ID = id
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithModifiedOn(modifiedOn strfmt.DateTime) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithModifiedOn(modifiedOn strfmt.DateTime) *PaymentSubmissionTask {
 
 	m.ModifiedOn = modifiedOn
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithOrganisationID(organisationID strfmt.UUID) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithOrganisationID(organisationID strfmt.UUID) *PaymentSubmissionTask {
 
 	m.OrganisationID = organisationID
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithRelationships(relationships ReturnSubmissionTaskRelationships) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithRelationships(relationships PaymentSubmissionTaskRelationships) *PaymentSubmissionTask {
 
 	m.Relationships = &relationships
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithoutRelationships() *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithoutRelationships() *PaymentSubmissionTask {
 	m.Relationships = nil
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithType(typeVar string) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithType(typeVar string) *PaymentSubmissionTask {
 
 	m.Type = typeVar
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithVersion(version int64) *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithVersion(version int64) *PaymentSubmissionTask {
 
 	m.Version = &version
 
 	return m
 }
 
-func (m *ReturnSubmissionTask) WithoutVersion() *ReturnSubmissionTask {
+func (m *PaymentSubmissionTask) WithoutVersion() *PaymentSubmissionTask {
 	m.Version = nil
 	return m
 }
 
-// Validate validates this return submission task
-func (m *ReturnSubmissionTask) Validate(formats strfmt.Registry) error {
+// Validate validates this payment submission task
+func (m *PaymentSubmissionTask) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAttributes(formats); err != nil {
@@ -186,7 +186,7 @@ func (m *ReturnSubmissionTask) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateAttributes(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateAttributes(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Attributes) { // not required
 		return nil
@@ -204,7 +204,7 @@ func (m *ReturnSubmissionTask) validateAttributes(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateCreatedOn(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateCreatedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.CreatedOn) { // not required
 		return nil
@@ -217,7 +217,7 @@ func (m *ReturnSubmissionTask) validateCreatedOn(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateID(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateID(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ID) { // not required
 		return nil
@@ -230,7 +230,7 @@ func (m *ReturnSubmissionTask) validateID(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateModifiedOn(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateModifiedOn(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.ModifiedOn) { // not required
 		return nil
@@ -243,7 +243,7 @@ func (m *ReturnSubmissionTask) validateModifiedOn(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateOrganisationID(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateOrganisationID(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.OrganisationID) { // not required
 		return nil
@@ -256,7 +256,7 @@ func (m *ReturnSubmissionTask) validateOrganisationID(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateRelationships(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateRelationships(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Relationships) { // not required
 		return nil
@@ -274,7 +274,7 @@ func (m *ReturnSubmissionTask) validateRelationships(formats strfmt.Registry) er
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateType(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
@@ -287,7 +287,7 @@ func (m *ReturnSubmissionTask) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ReturnSubmissionTask) validateVersion(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTask) validateVersion(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Version) { // not required
 		return nil
@@ -301,7 +301,7 @@ func (m *ReturnSubmissionTask) validateVersion(formats strfmt.Registry) error {
 }
 
 // MarshalBinary interface implementation
-func (m *ReturnSubmissionTask) MarshalBinary() ([]byte, error) {
+func (m *PaymentSubmissionTask) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -309,15 +309,15 @@ func (m *ReturnSubmissionTask) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ReturnSubmissionTask) UnmarshalBinary(b []byte) error {
-	var res ReturnSubmissionTask
+func (m *PaymentSubmissionTask) UnmarshalBinary(b []byte) error {
+	var res PaymentSubmissionTask
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ReturnSubmissionTask) Json() string {
+func (m *PaymentSubmissionTask) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)
@@ -325,79 +325,67 @@ func (m *ReturnSubmissionTask) Json() string {
 	return string(json)
 }
 
-// ReturnSubmissionTaskAttributes return submission task attributes
-// swagger:model ReturnSubmissionTaskAttributes
-type ReturnSubmissionTaskAttributes struct {
+// PaymentSubmissionTaskAttributes payment submission task attributes
+// swagger:model PaymentSubmissionTaskAttributes
+type PaymentSubmissionTaskAttributes struct {
 
 	// assignee
-	Assignee ReturnSubmissionTaskAssignee `json:"assignee,omitempty"`
-
-	// Key Value map that contains additional data for executing the task.
-	Input map[string]interface{} `json:"input,omitempty"`
+	Assignee PaymentSubmissionTaskAssignee `json:"assignee,omitempty"`
 
 	// name
-	Name ReturnSubmissionTaskName `json:"name,omitempty"`
+	Name PaymentSubmissionTaskName `json:"name,omitempty"`
 
 	// Key Value map that contains the Task result.
 	Output map[string]interface{} `json:"output,omitempty"`
 
 	// status
-	Status ReturnSubmissionTaskStatus `json:"status,omitempty"`
+	Status PaymentSubmissionTaskStatus `json:"status,omitempty"`
 }
 
-func ReturnSubmissionTaskAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionTaskAttributes {
-	return &ReturnSubmissionTaskAttributes{
+func PaymentSubmissionTaskAttributesWithDefaults(defaults client.Defaults) *PaymentSubmissionTaskAttributes {
+	return &PaymentSubmissionTaskAttributes{
 
-		// TODO Assignee: ReturnSubmissionTaskAssignee,
+		// TODO Assignee: PaymentSubmissionTaskAssignee,
 
-		Input: defaults.GetMapStringInterface("ReturnSubmissionTaskAttributes", "input"),
+		// TODO Name: PaymentSubmissionTaskName,
 
-		// TODO Name: ReturnSubmissionTaskName,
+		Output: defaults.GetMapStringInterface("PaymentSubmissionTaskAttributes", "output"),
 
-		Output: defaults.GetMapStringInterface("ReturnSubmissionTaskAttributes", "output"),
-
-		// TODO Status: ReturnSubmissionTaskStatus,
+		// TODO Status: PaymentSubmissionTaskStatus,
 
 	}
 }
 
-func (m *ReturnSubmissionTaskAttributes) WithAssignee(assignee ReturnSubmissionTaskAssignee) *ReturnSubmissionTaskAttributes {
+func (m *PaymentSubmissionTaskAttributes) WithAssignee(assignee PaymentSubmissionTaskAssignee) *PaymentSubmissionTaskAttributes {
 
 	m.Assignee = assignee
 
 	return m
 }
 
-func (m *ReturnSubmissionTaskAttributes) WithInput(input map[string]interface{}) *ReturnSubmissionTaskAttributes {
-
-	m.Input = input
-
-	return m
-}
-
-func (m *ReturnSubmissionTaskAttributes) WithName(name ReturnSubmissionTaskName) *ReturnSubmissionTaskAttributes {
+func (m *PaymentSubmissionTaskAttributes) WithName(name PaymentSubmissionTaskName) *PaymentSubmissionTaskAttributes {
 
 	m.Name = name
 
 	return m
 }
 
-func (m *ReturnSubmissionTaskAttributes) WithOutput(output map[string]interface{}) *ReturnSubmissionTaskAttributes {
+func (m *PaymentSubmissionTaskAttributes) WithOutput(output map[string]interface{}) *PaymentSubmissionTaskAttributes {
 
 	m.Output = output
 
 	return m
 }
 
-func (m *ReturnSubmissionTaskAttributes) WithStatus(status ReturnSubmissionTaskStatus) *ReturnSubmissionTaskAttributes {
+func (m *PaymentSubmissionTaskAttributes) WithStatus(status PaymentSubmissionTaskStatus) *PaymentSubmissionTaskAttributes {
 
 	m.Status = status
 
 	return m
 }
 
-// Validate validates this return submission task attributes
-func (m *ReturnSubmissionTaskAttributes) Validate(formats strfmt.Registry) error {
+// Validate validates this payment submission task attributes
+func (m *PaymentSubmissionTaskAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAssignee(formats); err != nil {
@@ -418,7 +406,7 @@ func (m *ReturnSubmissionTaskAttributes) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *ReturnSubmissionTaskAttributes) validateAssignee(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTaskAttributes) validateAssignee(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Assignee) { // not required
 		return nil
@@ -434,7 +422,7 @@ func (m *ReturnSubmissionTaskAttributes) validateAssignee(formats strfmt.Registr
 	return nil
 }
 
-func (m *ReturnSubmissionTaskAttributes) validateName(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTaskAttributes) validateName(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Name) { // not required
 		return nil
@@ -450,7 +438,7 @@ func (m *ReturnSubmissionTaskAttributes) validateName(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *ReturnSubmissionTaskAttributes) validateStatus(formats strfmt.Registry) error {
+func (m *PaymentSubmissionTaskAttributes) validateStatus(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Status) { // not required
 		return nil
@@ -467,7 +455,7 @@ func (m *ReturnSubmissionTaskAttributes) validateStatus(formats strfmt.Registry)
 }
 
 // MarshalBinary interface implementation
-func (m *ReturnSubmissionTaskAttributes) MarshalBinary() ([]byte, error) {
+func (m *PaymentSubmissionTaskAttributes) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -475,15 +463,15 @@ func (m *ReturnSubmissionTaskAttributes) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ReturnSubmissionTaskAttributes) UnmarshalBinary(b []byte) error {
-	var res ReturnSubmissionTaskAttributes
+func (m *PaymentSubmissionTaskAttributes) UnmarshalBinary(b []byte) error {
+	var res PaymentSubmissionTaskAttributes
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *ReturnSubmissionTaskAttributes) Json() string {
+func (m *PaymentSubmissionTaskAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

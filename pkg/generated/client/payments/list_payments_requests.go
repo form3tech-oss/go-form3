@@ -31,15 +31,21 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 
 		FilterAmount: c.Defaults.GetStringPtr("ListPayments", "filter[amount]"),
 
+		FilterBeneficiaryPartyAccountName: c.Defaults.GetStringPtr("ListPayments", "filter[beneficiary_party.account_name]"),
+
 		FilterBeneficiaryPartyAccountNumber: c.Defaults.GetStringPtr("ListPayments", "filter[beneficiary_party.account_number]"),
 
 		FilterBeneficiaryPartyBankID: c.Defaults.GetStringPtr("ListPayments", "filter[beneficiary_party.bank_id]"),
 
 		FilterCurrency: c.Defaults.GetStringPtr("ListPayments", "filter[currency]"),
 
+		FilterDebtorPartyAccountName: c.Defaults.GetStringPtr("ListPayments", "filter[debtor_party.account_name]"),
+
 		FilterDebtorPartyAccountNumber: c.Defaults.GetStringPtr("ListPayments", "filter[debtor_party.account_number]"),
 
 		FilterDebtorPartyBankID: c.Defaults.GetStringPtr("ListPayments", "filter[debtor_party.bank_id]"),
+
+		FilterEndToEndReference: c.Defaults.GetStringPtr("ListPayments", "filter[end_to_end_reference]"),
 
 		FilterNotRelationships: make([]string, 0),
 
@@ -56,6 +62,8 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 		FilterReference: c.Defaults.GetStringPtr("ListPayments", "filter[reference]"),
 
 		FilterRelationships: make([]string, 0),
+
+		FilterReturnUniqueSchemeID: c.Defaults.GetStringPtr("ListPayments", "filter[return.unique_scheme_id]"),
 
 		FilterSchemeTransactionID: c.Defaults.GetStringPtr("ListPayments", "filter[scheme_transaction_id]"),
 
@@ -102,6 +110,10 @@ type ListPaymentsRequest struct {
 
 	FilterAmount *string
 
+	/*FilterBeneficiaryPartyAccountName*/
+
+	FilterBeneficiaryPartyAccountName *string
+
 	/*FilterBeneficiaryPartyAccountNumber*/
 
 	FilterBeneficiaryPartyAccountNumber *string
@@ -114,6 +126,10 @@ type ListPaymentsRequest struct {
 
 	FilterCurrency *string
 
+	/*FilterDebtorPartyAccountName*/
+
+	FilterDebtorPartyAccountName *string
+
 	/*FilterDebtorPartyAccountNumber*/
 
 	FilterDebtorPartyAccountNumber *string
@@ -121,6 +137,10 @@ type ListPaymentsRequest struct {
 	/*FilterDebtorPartyBankID*/
 
 	FilterDebtorPartyBankID *string
+
+	/*FilterEndToEndReference*/
+
+	FilterEndToEndReference *string
 
 	/*FilterNotRelationships      Filter for payments containing none of the requested relationships      */
 
@@ -153,6 +173,10 @@ type ListPaymentsRequest struct {
 	/*FilterRelationships      Filter for payments containing all of the requested relationships      */
 
 	FilterRelationships []string
+
+	/*FilterReturnUniqueSchemeID*/
+
+	FilterReturnUniqueSchemeID *string
 
 	/*FilterSchemeTransactionID*/
 
@@ -269,6 +293,20 @@ func (o *ListPaymentsRequest) WithoutFilterAmount() *ListPaymentsRequest {
 	return o
 }
 
+func (o *ListPaymentsRequest) WithFilterBeneficiaryPartyAccountName(filterBeneficiaryPartyAccountName string) *ListPaymentsRequest {
+
+	o.FilterBeneficiaryPartyAccountName = &filterBeneficiaryPartyAccountName
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterBeneficiaryPartyAccountName() *ListPaymentsRequest {
+
+	o.FilterBeneficiaryPartyAccountName = nil
+
+	return o
+}
+
 func (o *ListPaymentsRequest) WithFilterBeneficiaryPartyAccountNumber(filterBeneficiaryPartyAccountNumber string) *ListPaymentsRequest {
 
 	o.FilterBeneficiaryPartyAccountNumber = &filterBeneficiaryPartyAccountNumber
@@ -311,6 +349,20 @@ func (o *ListPaymentsRequest) WithoutFilterCurrency() *ListPaymentsRequest {
 	return o
 }
 
+func (o *ListPaymentsRequest) WithFilterDebtorPartyAccountName(filterDebtorPartyAccountName string) *ListPaymentsRequest {
+
+	o.FilterDebtorPartyAccountName = &filterDebtorPartyAccountName
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterDebtorPartyAccountName() *ListPaymentsRequest {
+
+	o.FilterDebtorPartyAccountName = nil
+
+	return o
+}
+
 func (o *ListPaymentsRequest) WithFilterDebtorPartyAccountNumber(filterDebtorPartyAccountNumber string) *ListPaymentsRequest {
 
 	o.FilterDebtorPartyAccountNumber = &filterDebtorPartyAccountNumber
@@ -335,6 +387,20 @@ func (o *ListPaymentsRequest) WithFilterDebtorPartyBankID(filterDebtorPartyBankI
 func (o *ListPaymentsRequest) WithoutFilterDebtorPartyBankID() *ListPaymentsRequest {
 
 	o.FilterDebtorPartyBankID = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterEndToEndReference(filterEndToEndReference string) *ListPaymentsRequest {
+
+	o.FilterEndToEndReference = &filterEndToEndReference
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterEndToEndReference() *ListPaymentsRequest {
+
+	o.FilterEndToEndReference = nil
 
 	return o
 }
@@ -447,6 +513,20 @@ func (o *ListPaymentsRequest) WithFilterRelationships(filterRelationships []stri
 func (o *ListPaymentsRequest) WithoutFilterRelationships() *ListPaymentsRequest {
 
 	o.FilterRelationships = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterReturnUniqueSchemeID(filterReturnUniqueSchemeID string) *ListPaymentsRequest {
+
+	o.FilterReturnUniqueSchemeID = &filterReturnUniqueSchemeID
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterReturnUniqueSchemeID() *ListPaymentsRequest {
+
+	o.FilterReturnUniqueSchemeID = nil
 
 	return o
 }
@@ -664,6 +744,22 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	}
 
+	if o.FilterBeneficiaryPartyAccountName != nil {
+
+		// query param filter[beneficiary_party.account_name]
+		var qrFilterBeneficiaryPartyAccountName string
+		if o.FilterBeneficiaryPartyAccountName != nil {
+			qrFilterBeneficiaryPartyAccountName = *o.FilterBeneficiaryPartyAccountName
+		}
+		qFilterBeneficiaryPartyAccountName := qrFilterBeneficiaryPartyAccountName
+		if qFilterBeneficiaryPartyAccountName != "" {
+			if err := r.SetQueryParam("filter[beneficiary_party.account_name]", qFilterBeneficiaryPartyAccountName); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	if o.FilterBeneficiaryPartyAccountNumber != nil {
 
 		// query param filter[beneficiary_party.account_number]
@@ -712,6 +808,22 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	}
 
+	if o.FilterDebtorPartyAccountName != nil {
+
+		// query param filter[debtor_party.account_name]
+		var qrFilterDebtorPartyAccountName string
+		if o.FilterDebtorPartyAccountName != nil {
+			qrFilterDebtorPartyAccountName = *o.FilterDebtorPartyAccountName
+		}
+		qFilterDebtorPartyAccountName := qrFilterDebtorPartyAccountName
+		if qFilterDebtorPartyAccountName != "" {
+			if err := r.SetQueryParam("filter[debtor_party.account_name]", qFilterDebtorPartyAccountName); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	if o.FilterDebtorPartyAccountNumber != nil {
 
 		// query param filter[debtor_party.account_number]
@@ -738,6 +850,22 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qFilterDebtorPartyBankID := qrFilterDebtorPartyBankID
 		if qFilterDebtorPartyBankID != "" {
 			if err := r.SetQueryParam("filter[debtor_party.bank_id]", qFilterDebtorPartyBankID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterEndToEndReference != nil {
+
+		// query param filter[end_to_end_reference]
+		var qrFilterEndToEndReference string
+		if o.FilterEndToEndReference != nil {
+			qrFilterEndToEndReference = *o.FilterEndToEndReference
+		}
+		qFilterEndToEndReference := qrFilterEndToEndReference
+		if qFilterEndToEndReference != "" {
+			if err := r.SetQueryParam("filter[end_to_end_reference]", qFilterEndToEndReference); err != nil {
 				return err
 			}
 		}
@@ -849,6 +977,22 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	// query array param filter[relationships]
 	if err := r.SetQueryParam("filter[relationships]", joinedFilterRelationships...); err != nil {
 		return err
+	}
+
+	if o.FilterReturnUniqueSchemeID != nil {
+
+		// query param filter[return.unique_scheme_id]
+		var qrFilterReturnUniqueSchemeID string
+		if o.FilterReturnUniqueSchemeID != nil {
+			qrFilterReturnUniqueSchemeID = *o.FilterReturnUniqueSchemeID
+		}
+		qFilterReturnUniqueSchemeID := qrFilterReturnUniqueSchemeID
+		if qFilterReturnUniqueSchemeID != "" {
+			if err := r.SetQueryParam("filter[return.unique_scheme_id]", qFilterReturnUniqueSchemeID); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if o.FilterSchemeTransactionID != nil {

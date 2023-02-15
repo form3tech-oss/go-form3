@@ -384,6 +384,10 @@ type ReturnPaymentAttributes struct {
 	// settlement
 	Settlement *Settlement `json:"settlement,omitempty"`
 
+	// The scheme-specific unique transaction ID. Populated by the scheme.
+	// Max Length: 42
+	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
+
 	// All purpose list of key-value pairs specific data stored on the return.
 	// Max Items: 5
 	UserDefinedData []*UserDefinedData `json:"user_defined_data"`
@@ -409,6 +413,8 @@ func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymen
 		SchemeTransactionID: defaults.GetString("ReturnPaymentAttributes", "scheme_transaction_id"),
 
 		Settlement: SettlementWithDefaults(defaults),
+
+		UniqueSchemeID: defaults.GetString("ReturnPaymentAttributes", "unique_scheme_id"),
 
 		UserDefinedData: make([]*UserDefinedData, 0),
 	}
@@ -497,6 +503,13 @@ func (m *ReturnPaymentAttributes) WithoutSettlement() *ReturnPaymentAttributes {
 	return m
 }
 
+func (m *ReturnPaymentAttributes) WithUniqueSchemeID(uniqueSchemeID string) *ReturnPaymentAttributes {
+
+	m.UniqueSchemeID = uniqueSchemeID
+
+	return m
+}
+
 func (m *ReturnPaymentAttributes) WithUserDefinedData(userDefinedData []*UserDefinedData) *ReturnPaymentAttributes {
 
 	m.UserDefinedData = userDefinedData
@@ -521,6 +534,10 @@ func (m *ReturnPaymentAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSettlement(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUniqueSchemeID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -586,6 +603,19 @@ func (m *ReturnPaymentAttributes) validateSettlement(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ReturnPaymentAttributes) validateUniqueSchemeID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UniqueSchemeID) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"unique_scheme_id", "body", string(m.UniqueSchemeID), 42); err != nil {
+		return err
 	}
 
 	return nil
