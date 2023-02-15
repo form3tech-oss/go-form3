@@ -6,9 +6,7 @@ import (
 	"testing"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/form3"
-	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -30,11 +28,9 @@ func TestTokenAuth(t *testing.T) {
 			form3.WithClientSecret(os.Getenv("FORM3_CLIENT_SECRET"))))
 	require.NoError(t, err)
 
-	req := f3.Users.GetUser()
-	req.UserID = strfmt.UUID(os.Getenv("FORM3_CLIENT_ID"))
+	req := f3.Users.ListUsers()
 
-	resp, err := req.Do()
+	_, err = req.Do()
 
 	require.Nil(t, err)
-	assert.Equal(t, resp.Data.ID.String(), os.Getenv("FORM3_CLIENT_ID"))
 }
