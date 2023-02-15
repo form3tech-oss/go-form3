@@ -4,8 +4,8 @@ on:
       - master
   pull_request:
 jobs:
-  test-tags:
-    name: "Test: Go tests"
+  go-tests:
+    name: "Go tests"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
