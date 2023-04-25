@@ -71,6 +71,15 @@ const (
 
 	// DirectDebitAdmissionStatusReasonSchemeStatusInvalid captures enum value "scheme_status_invalid"
 	DirectDebitAdmissionStatusReasonSchemeStatusInvalid DirectDebitAdmissionStatusReason = "scheme_status_invalid"
+
+	// DirectDebitAdmissionStatusReasonPendingAuthorisationBySponsor captures enum value "pending_authorisation_by_sponsor"
+	DirectDebitAdmissionStatusReasonPendingAuthorisationBySponsor DirectDebitAdmissionStatusReason = "pending_authorisation_by_sponsor"
+
+	// DirectDebitAdmissionStatusReasonAuthorisedBySponsor captures enum value "authorised_by_sponsor"
+	DirectDebitAdmissionStatusReasonAuthorisedBySponsor DirectDebitAdmissionStatusReason = "authorised_by_sponsor"
+
+	// DirectDebitAdmissionStatusReasonAuthorisationFailedBySponsor captures enum value "authorisation_failed_by_sponsor"
+	DirectDebitAdmissionStatusReasonAuthorisationFailedBySponsor DirectDebitAdmissionStatusReason = "authorisation_failed_by_sponsor"
 )
 
 // for schema
@@ -78,7 +87,7 @@ var directDebitAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","invalid_transaction","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","invalid_transaction","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid","pending_authorisation_by_sponsor","authorised_by_sponsor","authorisation_failed_by_sponsor"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

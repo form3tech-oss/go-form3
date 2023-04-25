@@ -29,6 +29,12 @@ const (
 
 	// DirectDebitAdmissionStatusPending captures enum value "pending"
 	DirectDebitAdmissionStatusPending DirectDebitAdmissionStatus = "pending"
+
+	// DirectDebitAdmissionStatusLimitCheckPending captures enum value "limit_check_pending"
+	DirectDebitAdmissionStatusLimitCheckPending DirectDebitAdmissionStatus = "limit_check_pending"
+
+	// DirectDebitAdmissionStatusLimitCheckPassed captures enum value "limit_check_passed"
+	DirectDebitAdmissionStatusLimitCheckPassed DirectDebitAdmissionStatus = "limit_check_passed"
 )
 
 // for schema
@@ -36,7 +42,7 @@ var directDebitAdmissionStatusEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatus
-	if err := json.Unmarshal([]byte(`["confirmed","failed","pending"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["confirmed","failed","pending","limit_check_pending","limit_check_passed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -210,6 +211,9 @@ type AgentIdentification struct {
 
 	// Type of identification provided in bank_id field. Required when bank_id is provided, not used otherwise.
 	BankIDCode string `json:"bank_id_code,omitempty"`
+
+	// Array for additional ID(s) of instructed (or other type of) agent
+	BankIds []*AccountWithBankID `json:"bank_ids,omitempty"`
 }
 
 func AgentIdentificationWithDefaults(defaults client.Defaults) *AgentIdentification {
@@ -218,6 +222,8 @@ func AgentIdentificationWithDefaults(defaults client.Defaults) *AgentIdentificat
 		BankID: defaults.GetString("AgentIdentification", "bank_id"),
 
 		BankIDCode: defaults.GetString("AgentIdentification", "bank_id_code"),
+
+		BankIds: make([]*AccountWithBankID, 0),
 	}
 }
 
@@ -235,8 +241,49 @@ func (m *AgentIdentification) WithBankIDCode(bankIDCode string) *AgentIdentifica
 	return m
 }
 
+func (m *AgentIdentification) WithBankIds(bankIds []*AccountWithBankID) *AgentIdentification {
+
+	m.BankIds = bankIds
+
+	return m
+}
+
 // Validate validates this agent identification
 func (m *AgentIdentification) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateBankIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AgentIdentification) validateBankIds(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankIds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.BankIds); i++ {
+		if swag.IsZero(m.BankIds[i]) { // not required
+			continue
+		}
+
+		if m.BankIds[i] != nil {
+			if err := m.BankIds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("identification" + "." + "bank_ids" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

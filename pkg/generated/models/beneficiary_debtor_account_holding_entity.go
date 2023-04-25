@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -29,6 +30,9 @@ type BeneficiaryDebtorAccountHoldingEntity struct {
 	// bank id code
 	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
 
+	// Array for additional ID(s) for agent
+	BankIds []*AccountWithBankID `json:"bank_ids,omitempty"`
+
 	// Financial institution name
 	BankName string `json:"bank_name,omitempty"`
 
@@ -44,6 +48,8 @@ func BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults client.Defaults)
 		BankID: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_id"),
 
 		// TODO BankIDCode: BankIDCode,
+
+		BankIds: make([]*AccountWithBankID, 0),
 
 		BankName: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_name"),
 
@@ -72,6 +78,13 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankIDCode(bankIDCode BankID
 	return m
 }
 
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankIds(bankIds []*AccountWithBankID) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankIds = bankIds
+
+	return m
+}
+
 func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankName(bankName string) *BeneficiaryDebtorAccountHoldingEntity {
 
 	m.BankName = bankName
@@ -94,6 +107,10 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) Validate(formats strfmt.Registry
 		res = append(res, err)
 	}
 
+	if err := m.validateBankIds(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -111,6 +128,31 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankIDCode(formats strfm
 			return ve.ValidateName("bank_id_code")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankIds(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankIds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.BankIds); i++ {
+		if swag.IsZero(m.BankIds[i]) { // not required
+			continue
+		}
+
+		if m.BankIds[i] != nil {
+			if err := m.BankIds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("bank_ids" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

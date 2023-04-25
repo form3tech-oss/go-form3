@@ -38,6 +38,12 @@ const (
 
 	// AgentRoleAdditionalBeneficiaryPartyAgentInformation captures enum value "AdditionalBeneficiaryPartyAgentInformation"
 	AgentRoleAdditionalBeneficiaryPartyAgentInformation AgentRole = "AdditionalBeneficiaryPartyAgentInformation"
+
+	// AgentRoleCreditorAgent captures enum value "CreditorAgent"
+	AgentRoleCreditorAgent AgentRole = "CreditorAgent"
+
+	// AgentRoleDebtorAgent captures enum value "DebtorAgent"
+	AgentRoleDebtorAgent AgentRole = "DebtorAgent"
 )
 
 // for schema
@@ -45,7 +51,7 @@ var agentRoleEnum []interface{}
 
 func init() {
 	var res []AgentRole
-	if err := json.Unmarshal([]byte(`["IntermediaryAgent1","IntermediaryAgent2","IntermediaryAgent3","InstructingAgent","InstructedAgent","AdditionalBeneficiaryPartyAgentInformation"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["IntermediaryAgent1","IntermediaryAgent2","IntermediaryAgent3","InstructingAgent","InstructedAgent","AdditionalBeneficiaryPartyAgentInformation","CreditorAgent","DebtorAgent"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

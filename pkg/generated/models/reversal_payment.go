@@ -448,8 +448,8 @@ type ReversalPaymentRelationships struct {
 	// ID of the payment resource related to the reversal
 	Payment *RelationshipLinks `json:"payment,omitempty"`
 
-	// ID of the reversal admission resource related to the reversal
-	ReversalAdmission *RelationshipLinks `json:"reversal_admission,omitempty"`
+	// reversal admission
+	ReversalAdmission *ReversalPaymentRelationshipsReversalAdmission `json:"reversal_admission,omitempty"`
 
 	// ID of the reversal submission resource related to the reversal
 	ReversalSubmission *RelationshipLinks `json:"reversal_submission,omitempty"`
@@ -460,7 +460,7 @@ func ReversalPaymentRelationshipsWithDefaults(defaults client.Defaults) *Reversa
 
 		Payment: RelationshipLinksWithDefaults(defaults),
 
-		ReversalAdmission: RelationshipLinksWithDefaults(defaults),
+		ReversalAdmission: ReversalPaymentRelationshipsReversalAdmissionWithDefaults(defaults),
 
 		ReversalSubmission: RelationshipLinksWithDefaults(defaults),
 	}
@@ -478,7 +478,7 @@ func (m *ReversalPaymentRelationships) WithoutPayment() *ReversalPaymentRelation
 	return m
 }
 
-func (m *ReversalPaymentRelationships) WithReversalAdmission(reversalAdmission RelationshipLinks) *ReversalPaymentRelationships {
+func (m *ReversalPaymentRelationships) WithReversalAdmission(reversalAdmission ReversalPaymentRelationshipsReversalAdmission) *ReversalPaymentRelationships {
 
 	m.ReversalAdmission = &reversalAdmission
 
@@ -596,6 +596,92 @@ func (m *ReversalPaymentRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ReversalPaymentRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReversalPaymentRelationshipsReversalAdmission reversal payment relationships reversal admission
+// swagger:model ReversalPaymentRelationshipsReversalAdmission
+type ReversalPaymentRelationshipsReversalAdmission struct {
+
+	// Array of Reversal Admission resources related to the reversal
+	Data []*ReversalAdmission `json:"data"`
+}
+
+func ReversalPaymentRelationshipsReversalAdmissionWithDefaults(defaults client.Defaults) *ReversalPaymentRelationshipsReversalAdmission {
+	return &ReversalPaymentRelationshipsReversalAdmission{
+
+		Data: make([]*ReversalAdmission, 0),
+	}
+}
+
+func (m *ReversalPaymentRelationshipsReversalAdmission) WithData(data []*ReversalAdmission) *ReversalPaymentRelationshipsReversalAdmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this reversal payment relationships reversal admission
+func (m *ReversalPaymentRelationshipsReversalAdmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReversalPaymentRelationshipsReversalAdmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "reversal_admission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReversalPaymentRelationshipsReversalAdmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReversalPaymentRelationshipsReversalAdmission) UnmarshalBinary(b []byte) error {
+	var res ReversalPaymentRelationshipsReversalAdmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReversalPaymentRelationshipsReversalAdmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

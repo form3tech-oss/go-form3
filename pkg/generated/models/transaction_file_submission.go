@@ -372,8 +372,8 @@ func (m *TransactionFileSubmission) Json() string {
 // swagger:model TransactionFileSubmissionAttributes
 type TransactionFileSubmissionAttributes struct {
 
-	// Summary of scheme-specific files submission to the scheme
-	SchemeFiles []*TransactionFileSubmissionSchemeFile `json:"scheme_files"`
+	// Summary of scheme-specific references submission to the scheme
+	SchemeReferences []*TransactionFileSubmissionSchemeReference `json:"scheme_references"`
 
 	// status
 	Status TransactionFileSubmissionStatus `json:"status,omitempty"`
@@ -396,7 +396,7 @@ type TransactionFileSubmissionAttributes struct {
 func TransactionFileSubmissionAttributesWithDefaults(defaults client.Defaults) *TransactionFileSubmissionAttributes {
 	return &TransactionFileSubmissionAttributes{
 
-		SchemeFiles: make([]*TransactionFileSubmissionSchemeFile, 0),
+		SchemeReferences: make([]*TransactionFileSubmissionSchemeReference, 0),
 
 		// TODO Status: TransactionFileSubmissionStatus,
 
@@ -408,9 +408,9 @@ func TransactionFileSubmissionAttributesWithDefaults(defaults client.Defaults) *
 	}
 }
 
-func (m *TransactionFileSubmissionAttributes) WithSchemeFiles(schemeFiles []*TransactionFileSubmissionSchemeFile) *TransactionFileSubmissionAttributes {
+func (m *TransactionFileSubmissionAttributes) WithSchemeReferences(schemeReferences []*TransactionFileSubmissionSchemeReference) *TransactionFileSubmissionAttributes {
 
-	m.SchemeFiles = schemeFiles
+	m.SchemeReferences = schemeReferences
 
 	return m
 }
@@ -447,7 +447,7 @@ func (m *TransactionFileSubmissionAttributes) WithTransactionStartDatetime(trans
 func (m *TransactionFileSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateSchemeFiles(formats); err != nil {
+	if err := m.validateSchemeReferences(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -469,21 +469,21 @@ func (m *TransactionFileSubmissionAttributes) Validate(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *TransactionFileSubmissionAttributes) validateSchemeFiles(formats strfmt.Registry) error {
+func (m *TransactionFileSubmissionAttributes) validateSchemeReferences(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.SchemeFiles) { // not required
+	if swag.IsZero(m.SchemeReferences) { // not required
 		return nil
 	}
 
-	for i := 0; i < len(m.SchemeFiles); i++ {
-		if swag.IsZero(m.SchemeFiles[i]) { // not required
+	for i := 0; i < len(m.SchemeReferences); i++ {
+		if swag.IsZero(m.SchemeReferences[i]) { // not required
 			continue
 		}
 
-		if m.SchemeFiles[i] != nil {
-			if err := m.SchemeFiles[i].Validate(formats); err != nil {
+		if m.SchemeReferences[i] != nil {
+			if err := m.SchemeReferences[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("attributes" + "." + "scheme_files" + "." + strconv.Itoa(i))
+					return ve.ValidateName("attributes" + "." + "scheme_references" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

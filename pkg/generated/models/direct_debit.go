@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -1002,14 +1003,29 @@ type DirectDebitAttributesBeneficiaryParty struct {
 	// Beneficiary address
 	Address []string `json:"address"`
 
+	// Building number of the Debtor address
+	BuildingNumber string `json:"building_number,omitempty"`
+
+	// City/Town of the Debtor address
+	City string `json:"city,omitempty"`
+
 	// Country of the beneficiary address, ISO 3166 format country code
 	Country string `json:"country,omitempty"`
 
 	// Beneficiary name
 	Name string `json:"name,omitempty"`
 
+	// Post code of the Debtor address
+	PostCode string `json:"post_code,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
+
+	// Province of the Debtor address
+	Province string `json:"province,omitempty"`
+
+	// Street name of the Debtor address
+	StreetName string `json:"street_name,omitempty"`
 }
 
 func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesBeneficiaryParty {
@@ -1027,11 +1043,21 @@ func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults)
 
 		Address: make([]string, 0),
 
+		BuildingNumber: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "building_number"),
+
+		City: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "city"),
+
 		Country: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "country"),
 
 		Name: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "name"),
 
+		PostCode: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "post_code"),
+
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
+
+		Province: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "province"),
+
+		StreetName: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "street_name"),
 	}
 }
 
@@ -1082,6 +1108,20 @@ func (m *DirectDebitAttributesBeneficiaryParty) WithAddress(address []string) *D
 	return m
 }
 
+func (m *DirectDebitAttributesBeneficiaryParty) WithBuildingNumber(buildingNumber string) *DirectDebitAttributesBeneficiaryParty {
+
+	m.BuildingNumber = buildingNumber
+
+	return m
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) WithCity(city string) *DirectDebitAttributesBeneficiaryParty {
+
+	m.City = city
+
+	return m
+}
+
 func (m *DirectDebitAttributesBeneficiaryParty) WithCountry(country string) *DirectDebitAttributesBeneficiaryParty {
 
 	m.Country = country
@@ -1096,6 +1136,13 @@ func (m *DirectDebitAttributesBeneficiaryParty) WithName(name string) *DirectDeb
 	return m
 }
 
+func (m *DirectDebitAttributesBeneficiaryParty) WithPostCode(postCode string) *DirectDebitAttributesBeneficiaryParty {
+
+	m.PostCode = postCode
+
+	return m
+}
+
 func (m *DirectDebitAttributesBeneficiaryParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *DirectDebitAttributesBeneficiaryParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1105,6 +1152,20 @@ func (m *DirectDebitAttributesBeneficiaryParty) WithPrivateIdentification(privat
 
 func (m *DirectDebitAttributesBeneficiaryParty) WithoutPrivateIdentification() *DirectDebitAttributesBeneficiaryParty {
 	m.PrivateIdentification = nil
+	return m
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) WithProvince(province string) *DirectDebitAttributesBeneficiaryParty {
+
+	m.Province = province
+
+	return m
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) WithStreetName(streetName string) *DirectDebitAttributesBeneficiaryParty {
+
+	m.StreetName = streetName
+
 	return m
 }
 
@@ -1226,6 +1287,12 @@ type DirectDebitAttributesDebtorParty struct {
 	// Debtor address
 	Address []string `json:"address"`
 
+	// Building number of the Debtor address
+	BuildingNumber string `json:"building_number,omitempty"`
+
+	// City/Town of the Debtor address
+	City string `json:"city,omitempty"`
+
 	// Country of debtor address. ISO 3166 format country code"
 	Country string `json:"country,omitempty"`
 
@@ -1244,8 +1311,20 @@ type DirectDebitAttributesDebtorParty struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Array for additional ID(s) of ultimate organisation
+	OrganisationIdentifications []*BeneficiaryDebtorOrganisationIdentification `json:"organisation_identifications,omitempty"`
+
+	// Post code of the Debtor address
+	PostCode string `json:"post_code,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
+
+	// Province of the Debtor address
+	Province string `json:"province,omitempty"`
+
+	// Street name of the Debtor address
+	StreetName string `json:"street_name,omitempty"`
 }
 
 func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *DirectDebitAttributesDebtorParty {
@@ -1261,6 +1340,10 @@ func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Dir
 
 		Address: make([]string, 0),
 
+		BuildingNumber: defaults.GetString("DirectDebitAttributesDebtorParty", "building_number"),
+
+		City: defaults.GetString("DirectDebitAttributesDebtorParty", "city"),
+
 		Country: defaults.GetString("DirectDebitAttributesDebtorParty", "country"),
 
 		Name: defaults.GetString("DirectDebitAttributesDebtorParty", "name"),
@@ -1273,7 +1356,15 @@ func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Dir
 
 		OrganisationIdentificationScheme: defaults.GetString("DirectDebitAttributesDebtorParty", "organisation_identification_scheme"),
 
+		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
+
+		PostCode: defaults.GetString("DirectDebitAttributesDebtorParty", "post_code"),
+
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
+
+		Province: defaults.GetString("DirectDebitAttributesDebtorParty", "province"),
+
+		StreetName: defaults.GetString("DirectDebitAttributesDebtorParty", "street_name"),
 	}
 }
 
@@ -1313,6 +1404,20 @@ func (m *DirectDebitAttributesDebtorParty) WithoutAccountWith() *DirectDebitAttr
 func (m *DirectDebitAttributesDebtorParty) WithAddress(address []string) *DirectDebitAttributesDebtorParty {
 
 	m.Address = address
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithBuildingNumber(buildingNumber string) *DirectDebitAttributesDebtorParty {
+
+	m.BuildingNumber = buildingNumber
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithCity(city string) *DirectDebitAttributesDebtorParty {
+
+	m.City = city
 
 	return m
 }
@@ -1359,6 +1464,20 @@ func (m *DirectDebitAttributesDebtorParty) WithOrganisationIdentificationScheme(
 	return m
 }
 
+func (m *DirectDebitAttributesDebtorParty) WithOrganisationIdentifications(organisationIdentifications []*BeneficiaryDebtorOrganisationIdentification) *DirectDebitAttributesDebtorParty {
+
+	m.OrganisationIdentifications = organisationIdentifications
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithPostCode(postCode string) *DirectDebitAttributesDebtorParty {
+
+	m.PostCode = postCode
+
+	return m
+}
+
 func (m *DirectDebitAttributesDebtorParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *DirectDebitAttributesDebtorParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1371,6 +1490,20 @@ func (m *DirectDebitAttributesDebtorParty) WithoutPrivateIdentification() *Direc
 	return m
 }
 
+func (m *DirectDebitAttributesDebtorParty) WithProvince(province string) *DirectDebitAttributesDebtorParty {
+
+	m.Province = province
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithStreetName(streetName string) *DirectDebitAttributesDebtorParty {
+
+	m.StreetName = streetName
+
+	return m
+}
+
 // Validate validates this direct debit attributes debtor party
 func (m *DirectDebitAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -1380,6 +1513,10 @@ func (m *DirectDebitAttributesDebtorParty) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateAccountWith(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrganisationIdentifications(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1422,6 +1559,31 @@ func (m *DirectDebitAttributesDebtorParty) validateAccountWith(formats strfmt.Re
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributesDebtorParty) validateOrganisationIdentifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.OrganisationIdentifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OrganisationIdentifications); i++ {
+		if swag.IsZero(m.OrganisationIdentifications[i]) { // not required
+			continue
+		}
+
+		if m.OrganisationIdentifications[i] != nil {
+			if err := m.OrganisationIdentifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "debtor_party" + "." + "organisation_identifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

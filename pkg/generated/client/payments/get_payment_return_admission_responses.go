@@ -51,7 +51,7 @@ type GetPaymentReturnAdmissionOK struct {
 	//Payload
 
 	// isStream: false
-	*models.ReturnAdmissionDetailsResponse
+	*models.ReturnAdmissionFetchResponse
 }
 
 func (o *GetPaymentReturnAdmissionOK) Error() string {
@@ -60,11 +60,11 @@ func (o *GetPaymentReturnAdmissionOK) Error() string {
 
 func (o *GetPaymentReturnAdmissionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.ReturnAdmissionDetailsResponse = new(models.ReturnAdmissionDetailsResponse)
+	o.ReturnAdmissionFetchResponse = new(models.ReturnAdmissionFetchResponse)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.ReturnAdmissionDetailsResponse); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.ReturnAdmissionFetchResponse); err != nil && err != io.EOF {
 		return err
 	}
 
