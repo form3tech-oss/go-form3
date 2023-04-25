@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -34,6 +35,9 @@ type AccountHoldingEntity struct {
 	// Enum: [GBDSC]
 	BankIDCode *BankIDCode `json:"bank_id_code"`
 
+	// Array for additional ID(s) for agent
+	BankIds []*AccountWithBankID `json:"bank_ids,omitempty"`
+
 	// Financial institution name
 	BankName string `json:"bank_name,omitempty"`
 
@@ -49,6 +53,8 @@ func AccountHoldingEntityWithDefaults(defaults client.Defaults) *AccountHoldingE
 		BankID: defaults.GetStringPtr("AccountHoldingEntity", "bank_id"),
 
 		// TODO BankIDCode: BankIDCode,
+
+		BankIds: make([]*AccountWithBankID, 0),
 
 		BankName: defaults.GetString("AccountHoldingEntity", "bank_name"),
 
@@ -87,6 +93,13 @@ func (m *AccountHoldingEntity) WithoutBankIDCode() *AccountHoldingEntity {
 	return m
 }
 
+func (m *AccountHoldingEntity) WithBankIds(bankIds []*AccountWithBankID) *AccountHoldingEntity {
+
+	m.BankIds = bankIds
+
+	return m
+}
+
 func (m *AccountHoldingEntity) WithBankName(bankName string) *AccountHoldingEntity {
 
 	m.BankName = bankName
@@ -110,6 +123,10 @@ func (m *AccountHoldingEntity) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateBankIDCode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankIds(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -171,6 +188,31 @@ func (m *AccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *AccountHoldingEntity) validateBankIds(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankIds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.BankIds); i++ {
+		if swag.IsZero(m.BankIds[i]) { // not required
+			continue
+		}
+
+		if m.BankIds[i] != nil {
+			if err := m.BankIds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("bank_ids" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

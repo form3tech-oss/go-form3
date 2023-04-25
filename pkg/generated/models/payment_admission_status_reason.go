@@ -71,6 +71,84 @@ const (
 
 	// PaymentAdmissionStatusReasonAccountClosedTermsAndConditions captures enum value "account_closed_terms_and_conditions"
 	PaymentAdmissionStatusReasonAccountClosedTermsAndConditions PaymentAdmissionStatusReason = "account_closed_terms_and_conditions"
+
+	// PaymentAdmissionStatusReasonBeneficiaryAgentClearingProcessTimeout captures enum value "beneficiary_agent_clearing_process_timeout"
+	PaymentAdmissionStatusReasonBeneficiaryAgentClearingProcessTimeout PaymentAdmissionStatusReason = "beneficiary_agent_clearing_process_timeout"
+
+	// PaymentAdmissionStatusReasonAgentClearingProcessTimeout captures enum value "agent_clearing_process_timeout"
+	PaymentAdmissionStatusReasonAgentClearingProcessTimeout PaymentAdmissionStatusReason = "agent_clearing_process_timeout"
+
+	// PaymentAdmissionStatusReasonAgentUnavailable captures enum value "agent_unavailable"
+	PaymentAdmissionStatusReasonAgentUnavailable PaymentAdmissionStatusReason = "agent_unavailable"
+
+	// PaymentAdmissionStatusReasonBeneficiaryAgentUnavailable captures enum value "beneficiary_agent_unavailable"
+	PaymentAdmissionStatusReasonBeneficiaryAgentUnavailable PaymentAdmissionStatusReason = "beneficiary_agent_unavailable"
+
+	// PaymentAdmissionStatusReasonBeneficiaryAgentClearingProcessError captures enum value "beneficiary_agent_clearing_process_error"
+	PaymentAdmissionStatusReasonBeneficiaryAgentClearingProcessError PaymentAdmissionStatusReason = "beneficiary_agent_clearing_process_error"
+
+	// PaymentAdmissionStatusReasonAgentClearingProcessError captures enum value "agent_clearing_process_error"
+	PaymentAdmissionStatusReasonAgentClearingProcessError PaymentAdmissionStatusReason = "agent_clearing_process_error"
+
+	// PaymentAdmissionStatusReasonBlockedAccount captures enum value "blocked_account"
+	PaymentAdmissionStatusReasonBlockedAccount PaymentAdmissionStatusReason = "blocked_account"
+
+	// PaymentAdmissionStatusReasonTransactionForbidden captures enum value "transaction_forbidden"
+	PaymentAdmissionStatusReasonTransactionForbidden PaymentAdmissionStatusReason = "transaction_forbidden"
+
+	// PaymentAdmissionStatusReasonInvalidBankOperationCode captures enum value "invalid_bank_operation_code"
+	PaymentAdmissionStatusReasonInvalidBankOperationCode PaymentAdmissionStatusReason = "invalid_bank_operation_code"
+
+	// PaymentAdmissionStatusReasonOriginalPaymentNotReceived captures enum value "original_payment_not_received"
+	PaymentAdmissionStatusReasonOriginalPaymentNotReceived PaymentAdmissionStatusReason = "original_payment_not_received"
+
+	// PaymentAdmissionStatusReasonAgentSuspended captures enum value "agent_suspended"
+	PaymentAdmissionStatusReasonAgentSuspended PaymentAdmissionStatusReason = "agent_suspended"
+
+	// PaymentAdmissionStatusReasonBeneficiaryAgentSuspended captures enum value "beneficiary_agent_suspended"
+	PaymentAdmissionStatusReasonBeneficiaryAgentSuspended PaymentAdmissionStatusReason = "beneficiary_agent_suspended"
+
+	// PaymentAdmissionStatusReasonAmountNotAllowed captures enum value "amount_not_allowed"
+	PaymentAdmissionStatusReasonAmountNotAllowed PaymentAdmissionStatusReason = "amount_not_allowed"
+
+	// PaymentAdmissionStatusReasonDuplicatePayment captures enum value "duplicate_payment"
+	PaymentAdmissionStatusReasonDuplicatePayment PaymentAdmissionStatusReason = "duplicate_payment"
+
+	// PaymentAdmissionStatusReasonAmountExceedsSettlementLimit captures enum value "amount_exceeds_settlement_limit"
+	PaymentAdmissionStatusReasonAmountExceedsSettlementLimit PaymentAdmissionStatusReason = "amount_exceeds_settlement_limit"
+
+	// PaymentAdmissionStatusReasonInvalidBeneficiaryAddress captures enum value "invalid_beneficiary_address"
+	PaymentAdmissionStatusReasonInvalidBeneficiaryAddress PaymentAdmissionStatusReason = "invalid_beneficiary_address"
+
+	// PaymentAdmissionStatusReasonInvalidBeneficiaryAgentBIC captures enum value "invalid_beneficiary_agent_BIC"
+	PaymentAdmissionStatusReasonInvalidBeneficiaryAgentBIC PaymentAdmissionStatusReason = "invalid_beneficiary_agent_BIC"
+
+	// PaymentAdmissionStatusReasonInvalidDebtorAgentBIC captures enum value "invalid_debtor_agent_BIC"
+	PaymentAdmissionStatusReasonInvalidDebtorAgentBIC PaymentAdmissionStatusReason = "invalid_debtor_agent_BIC"
+
+	// PaymentAdmissionStatusReasonCustomerReasonUnknown captures enum value "customer_reason_unknown"
+	PaymentAdmissionStatusReasonCustomerReasonUnknown PaymentAdmissionStatusReason = "customer_reason_unknown"
+
+	// PaymentAdmissionStatusReasonAgentReasonUnknown captures enum value "agent_reason_unknown"
+	PaymentAdmissionStatusReasonAgentReasonUnknown PaymentAdmissionStatusReason = "agent_reason_unknown"
+
+	// PaymentAdmissionStatusReasonInvalidBankID captures enum value "invalid_bank_ID"
+	PaymentAdmissionStatusReasonInvalidBankID PaymentAdmissionStatusReason = "invalid_bank_ID"
+
+	// PaymentAdmissionStatusReasonInvalidDebtorDetails captures enum value "invalid_debtor_details"
+	PaymentAdmissionStatusReasonInvalidDebtorDetails PaymentAdmissionStatusReason = "invalid_debtor_details"
+
+	// PaymentAdmissionStatusReasonRegulatoryReason captures enum value "regulatory_reason"
+	PaymentAdmissionStatusReasonRegulatoryReason PaymentAdmissionStatusReason = "regulatory_reason"
+
+	// PaymentAdmissionStatusReasonAmountInvalidOrMissing captures enum value "amount_invalid_or_missing"
+	PaymentAdmissionStatusReasonAmountInvalidOrMissing PaymentAdmissionStatusReason = "amount_invalid_or_missing"
+
+	// PaymentAdmissionStatusReasonEndToEndIDMissingOrInvalid captures enum value "end_to_end_id_missing_or_invalid"
+	PaymentAdmissionStatusReasonEndToEndIDMissingOrInvalid PaymentAdmissionStatusReason = "end_to_end_id_missing_or_invalid"
+
+	// PaymentAdmissionStatusReasonTransactionTypeNotSupported captures enum value "transaction_type_not_supported"
+	PaymentAdmissionStatusReasonTransactionTypeNotSupported PaymentAdmissionStatusReason = "transaction_type_not_supported"
 )
 
 // for schema
@@ -78,7 +156,7 @@ var paymentAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []PaymentAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","customer_check_failed","scheme_timeout","incorrect_reference_validation_type","incorrect_reference_secondary_identification","incorrect_reference_reference_mask","account_closed","account_closed_business_reasons","account_closed_stopped","account_closed_currency","account_closed_transferred","account_closed_beneficiary_deceased","account_closed_beneficiary_sensitivities","account_closed_terms_and_conditions"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","bankid_not_provisioned","unknown_accountnumber","customer_check_failed","scheme_timeout","incorrect_reference_validation_type","incorrect_reference_secondary_identification","incorrect_reference_reference_mask","account_closed","account_closed_business_reasons","account_closed_stopped","account_closed_currency","account_closed_transferred","account_closed_beneficiary_deceased","account_closed_beneficiary_sensitivities","account_closed_terms_and_conditions","beneficiary_agent_clearing_process_timeout","agent_clearing_process_timeout","agent_unavailable","beneficiary_agent_unavailable","beneficiary_agent_clearing_process_error","agent_clearing_process_error","blocked_account","transaction_forbidden","invalid_bank_operation_code","original_payment_not_received","agent_suspended","beneficiary_agent_suspended","amount_not_allowed","duplicate_payment","amount_exceeds_settlement_limit","invalid_beneficiary_address","invalid_beneficiary_agent_BIC","invalid_debtor_agent_BIC","customer_reason_unknown","agent_reason_unknown","invalid_bank_ID","invalid_debtor_details","regulatory_reason","amount_invalid_or_missing","end_to_end_id_missing_or_invalid","transaction_type_not_supported"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

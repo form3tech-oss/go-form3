@@ -40,6 +40,9 @@ type ReversalAdmissionTask struct {
 	// Format: uuid
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
+	// relationships
+	Relationships *ReversalAdmissionTaskRelationships `json:"relationships,omitempty"`
+
 	// Name of the resource type
 	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
@@ -61,6 +64,8 @@ func ReversalAdmissionTaskWithDefaults(defaults client.Defaults) *ReversalAdmiss
 		ModifiedOn: defaults.GetStrfmtDateTime("ReversalAdmissionTask", "modified_on"),
 
 		OrganisationID: defaults.GetStrfmtUUID("ReversalAdmissionTask", "organisation_id"),
+
+		Relationships: ReversalAdmissionTaskRelationshipsWithDefaults(defaults),
 
 		Type: defaults.GetString("ReversalAdmissionTask", "type"),
 
@@ -108,6 +113,18 @@ func (m *ReversalAdmissionTask) WithOrganisationID(organisationID strfmt.UUID) *
 	return m
 }
 
+func (m *ReversalAdmissionTask) WithRelationships(relationships ReversalAdmissionTaskRelationships) *ReversalAdmissionTask {
+
+	m.Relationships = &relationships
+
+	return m
+}
+
+func (m *ReversalAdmissionTask) WithoutRelationships() *ReversalAdmissionTask {
+	m.Relationships = nil
+	return m
+}
+
 func (m *ReversalAdmissionTask) WithType(typeVar string) *ReversalAdmissionTask {
 
 	m.Type = typeVar
@@ -148,6 +165,10 @@ func (m *ReversalAdmissionTask) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrganisationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRelationships(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -230,6 +251,24 @@ func (m *ReversalAdmissionTask) validateOrganisationID(formats strfmt.Registry) 
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ReversalAdmissionTask) validateRelationships(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Relationships) { // not required
+		return nil
+	}
+
+	if m.Relationships != nil {
+		if err := m.Relationships.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships")
+			}
+			return err
+		}
 	}
 
 	return nil

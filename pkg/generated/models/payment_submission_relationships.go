@@ -24,7 +24,7 @@ type PaymentSubmissionRelationships struct {
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
 	// payment submission task
-	PaymentSubmissionTask *RelationshipLinks `json:"payment_submission_task,omitempty"`
+	PaymentSubmissionTask *RelationshipPaymentSubmissionTasks `json:"payment_submission_task,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
@@ -35,7 +35,7 @@ func PaymentSubmissionRelationshipsWithDefaults(defaults client.Defaults) *Payme
 
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
-		PaymentSubmissionTask: RelationshipLinksWithDefaults(defaults),
+		PaymentSubmissionTask: RelationshipPaymentSubmissionTasksWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
@@ -53,7 +53,7 @@ func (m *PaymentSubmissionRelationships) WithoutPayment() *PaymentSubmissionRela
 	return m
 }
 
-func (m *PaymentSubmissionRelationships) WithPaymentSubmissionTask(paymentSubmissionTask RelationshipLinks) *PaymentSubmissionRelationships {
+func (m *PaymentSubmissionRelationships) WithPaymentSubmissionTask(paymentSubmissionTask RelationshipPaymentSubmissionTasks) *PaymentSubmissionRelationships {
 
 	m.PaymentSubmissionTask = &paymentSubmissionTask
 

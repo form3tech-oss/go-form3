@@ -32,6 +32,13 @@ func (o *GetClaimReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetClaimBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -65,6 +72,40 @@ func (o *GetClaimOK) readResponse(response runtime.ClientResponse, consumer runt
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.ClaimDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClaimBadRequest creates a GetClaimBadRequest with default headers values
+func NewGetClaimBadRequest() *GetClaimBadRequest {
+	return &GetClaimBadRequest{}
+}
+
+/*GetClaimBadRequest handles this case with default header values.
+
+Error
+*/
+type GetClaimBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetClaimBadRequest) Error() string {
+	return fmt.Sprintf("[GET /transaction/claims/{id}][%d] getClaimBadRequest", 400)
+}
+
+func (o *GetClaimBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

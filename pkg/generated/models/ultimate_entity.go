@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -67,6 +68,9 @@ type UltimateEntity struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Array for additional ID(s) of ultimate organisation
+	OrganisationIdentifications []*BeneficiaryDebtorOrganisationIdentification `json:"organisation_identifications,omitempty"`
+
 	// Post code of the debtor/beneficiary address
 	PostCode string `json:"post_code,omitempty"`
 
@@ -112,6 +116,8 @@ func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 		OrganisationIdentificationIssuer: defaults.GetString("UltimateEntity", "organisation_identification_issuer"),
 
 		OrganisationIdentificationScheme: defaults.GetString("UltimateEntity", "organisation_identification_scheme"),
+
+		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
 
 		PostCode: defaults.GetString("UltimateEntity", "post_code"),
 
@@ -233,6 +239,13 @@ func (m *UltimateEntity) WithOrganisationIdentificationScheme(organisationIdenti
 	return m
 }
 
+func (m *UltimateEntity) WithOrganisationIdentifications(organisationIdentifications []*BeneficiaryDebtorOrganisationIdentification) *UltimateEntity {
+
+	m.OrganisationIdentifications = organisationIdentifications
+
+	return m
+}
+
 func (m *UltimateEntity) WithPostCode(postCode string) *UltimateEntity {
 
 	m.PostCode = postCode
@@ -274,6 +287,10 @@ func (m *UltimateEntity) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateOrganisationIdentifications(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePrivateIdentification(formats); err != nil {
 		res = append(res, err)
 	}
@@ -292,6 +309,31 @@ func (m *UltimateEntity) validateBirthDate(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("birth_date", "body", "date", m.BirthDate.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *UltimateEntity) validateOrganisationIdentifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.OrganisationIdentifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OrganisationIdentifications); i++ {
+		if swag.IsZero(m.OrganisationIdentifications[i]) { // not required
+			continue
+		}
+
+		if m.OrganisationIdentifications[i] != nil {
+			if err := m.OrganisationIdentifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("organisation_identifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

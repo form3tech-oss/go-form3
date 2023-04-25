@@ -472,7 +472,7 @@ type ReversalAdmissionRelationships struct {
 	Reversal *RelationshipReversals `json:"reversal,omitempty"`
 
 	// reversal admission task
-	ReversalAdmissionTask *RelationshipLinks `json:"reversal_admission_task,omitempty"`
+	ReversalAdmissionTask *RelationshipReversalAdmissionTasks `json:"reversal_admission_task,omitempty"`
 }
 
 func ReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReversalAdmissionRelationships {
@@ -482,7 +482,7 @@ func ReversalAdmissionRelationshipsWithDefaults(defaults client.Defaults) *Rever
 
 		Reversal: RelationshipReversalsWithDefaults(defaults),
 
-		ReversalAdmissionTask: RelationshipLinksWithDefaults(defaults),
+		ReversalAdmissionTask: RelationshipReversalAdmissionTasksWithDefaults(defaults),
 	}
 }
 
@@ -510,7 +510,7 @@ func (m *ReversalAdmissionRelationships) WithoutReversal() *ReversalAdmissionRel
 	return m
 }
 
-func (m *ReversalAdmissionRelationships) WithReversalAdmissionTask(reversalAdmissionTask RelationshipLinks) *ReversalAdmissionRelationships {
+func (m *ReversalAdmissionRelationships) WithReversalAdmissionTask(reversalAdmissionTask RelationshipReversalAdmissionTasks) *ReversalAdmissionRelationships {
 
 	m.ReversalAdmissionTask = &reversalAdmissionTask
 

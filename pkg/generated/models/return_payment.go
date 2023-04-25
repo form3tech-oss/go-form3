@@ -390,7 +390,7 @@ type ReturnPaymentAttributes struct {
 
 	// All purpose list of key-value pairs specific data stored on the return.
 	// Max Items: 5
-	UserDefinedData []*UserDefinedData `json:"user_defined_data"`
+	UserDefinedData []*UserDefinedData `json:"user_defined_data,omitempty"`
 }
 
 func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymentAttributes {
@@ -684,14 +684,14 @@ type ReturnPaymentRelationships struct {
 	// ID of the payment resource related to the return
 	Payment *RelationshipLinks `json:"payment,omitempty"`
 
-	// ID of the return admission resource related to the return
-	ReturnAdmission *RelationshipLinks `json:"return_admission,omitempty"`
+	// return admission
+	ReturnAdmission *ReturnPaymentRelationshipsReturnAdmission `json:"return_admission,omitempty"`
 
 	// ID of the return reversal resource related to the return
 	ReturnReversal *RelationshipLinks `json:"return_reversal,omitempty"`
 
-	// ID of the return submission resource related to the return
-	ReturnSubmission *RelationshipLinks `json:"return_submission,omitempty"`
+	// return submission
+	ReturnSubmission *ReturnPaymentRelationshipsReturnSubmission `json:"return_submission,omitempty"`
 }
 
 func ReturnPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReturnPaymentRelationships {
@@ -699,11 +699,11 @@ func ReturnPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReturnPay
 
 		Payment: RelationshipLinksWithDefaults(defaults),
 
-		ReturnAdmission: RelationshipLinksWithDefaults(defaults),
+		ReturnAdmission: ReturnPaymentRelationshipsReturnAdmissionWithDefaults(defaults),
 
 		ReturnReversal: RelationshipLinksWithDefaults(defaults),
 
-		ReturnSubmission: RelationshipLinksWithDefaults(defaults),
+		ReturnSubmission: ReturnPaymentRelationshipsReturnSubmissionWithDefaults(defaults),
 	}
 }
 
@@ -719,7 +719,7 @@ func (m *ReturnPaymentRelationships) WithoutPayment() *ReturnPaymentRelationship
 	return m
 }
 
-func (m *ReturnPaymentRelationships) WithReturnAdmission(returnAdmission RelationshipLinks) *ReturnPaymentRelationships {
+func (m *ReturnPaymentRelationships) WithReturnAdmission(returnAdmission ReturnPaymentRelationshipsReturnAdmission) *ReturnPaymentRelationships {
 
 	m.ReturnAdmission = &returnAdmission
 
@@ -743,7 +743,7 @@ func (m *ReturnPaymentRelationships) WithoutReturnReversal() *ReturnPaymentRelat
 	return m
 }
 
-func (m *ReturnPaymentRelationships) WithReturnSubmission(returnSubmission RelationshipLinks) *ReturnPaymentRelationships {
+func (m *ReturnPaymentRelationships) WithReturnSubmission(returnSubmission ReturnPaymentRelationshipsReturnSubmission) *ReturnPaymentRelationships {
 
 	m.ReturnSubmission = &returnSubmission
 
@@ -871,6 +871,178 @@ func (m *ReturnPaymentRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ReturnPaymentRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReturnPaymentRelationshipsReturnAdmission return payment relationships return admission
+// swagger:model ReturnPaymentRelationshipsReturnAdmission
+type ReturnPaymentRelationshipsReturnAdmission struct {
+
+	// Array of Return Admission resources related to the return
+	Data []*ReturnAdmission `json:"data"`
+}
+
+func ReturnPaymentRelationshipsReturnAdmissionWithDefaults(defaults client.Defaults) *ReturnPaymentRelationshipsReturnAdmission {
+	return &ReturnPaymentRelationshipsReturnAdmission{
+
+		Data: make([]*ReturnAdmission, 0),
+	}
+}
+
+func (m *ReturnPaymentRelationshipsReturnAdmission) WithData(data []*ReturnAdmission) *ReturnPaymentRelationshipsReturnAdmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this return payment relationships return admission
+func (m *ReturnPaymentRelationshipsReturnAdmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReturnPaymentRelationshipsReturnAdmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "return_admission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReturnPaymentRelationshipsReturnAdmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReturnPaymentRelationshipsReturnAdmission) UnmarshalBinary(b []byte) error {
+	var res ReturnPaymentRelationshipsReturnAdmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReturnPaymentRelationshipsReturnAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReturnPaymentRelationshipsReturnSubmission return payment relationships return submission
+// swagger:model ReturnPaymentRelationshipsReturnSubmission
+type ReturnPaymentRelationshipsReturnSubmission struct {
+
+	// Array of Return Submission resources related to the return
+	Data []*ReturnSubmission `json:"data"`
+}
+
+func ReturnPaymentRelationshipsReturnSubmissionWithDefaults(defaults client.Defaults) *ReturnPaymentRelationshipsReturnSubmission {
+	return &ReturnPaymentRelationshipsReturnSubmission{
+
+		Data: make([]*ReturnSubmission, 0),
+	}
+}
+
+func (m *ReturnPaymentRelationshipsReturnSubmission) WithData(data []*ReturnSubmission) *ReturnPaymentRelationshipsReturnSubmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this return payment relationships return submission
+func (m *ReturnPaymentRelationshipsReturnSubmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReturnPaymentRelationshipsReturnSubmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "return_submission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReturnPaymentRelationshipsReturnSubmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReturnPaymentRelationshipsReturnSubmission) UnmarshalBinary(b []byte) error {
+	var res ReturnPaymentRelationshipsReturnSubmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReturnPaymentRelationshipsReturnSubmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

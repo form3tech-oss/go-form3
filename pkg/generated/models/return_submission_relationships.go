@@ -27,7 +27,7 @@ type ReturnSubmissionRelationships struct {
 	PaymentReturn *RelationshipReturns `json:"payment_return,omitempty"`
 
 	// return submission task
-	ReturnSubmissionTask *RelationshipLinks `json:"return_submission_task,omitempty"`
+	ReturnSubmissionTask *RelationshipReturnSubmissionTasks `json:"return_submission_task,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
@@ -40,7 +40,7 @@ func ReturnSubmissionRelationshipsWithDefaults(defaults client.Defaults) *Return
 
 		PaymentReturn: RelationshipReturnsWithDefaults(defaults),
 
-		ReturnSubmissionTask: RelationshipLinksWithDefaults(defaults),
+		ReturnSubmissionTask: RelationshipReturnSubmissionTasksWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
@@ -70,7 +70,7 @@ func (m *ReturnSubmissionRelationships) WithoutPaymentReturn() *ReturnSubmission
 	return m
 }
 
-func (m *ReturnSubmissionRelationships) WithReturnSubmissionTask(returnSubmissionTask RelationshipLinks) *ReturnSubmissionRelationships {
+func (m *ReturnSubmissionRelationships) WithReturnSubmissionTask(returnSubmissionTask RelationshipReturnSubmissionTasks) *ReturnSubmissionRelationships {
 
 	m.ReturnSubmissionTask = &returnSubmissionTask
 

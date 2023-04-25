@@ -250,7 +250,6 @@ type AceAttributes struct {
 	Filter string `json:"filter,omitempty"`
 
 	// Type of record that this ACE gives access to
-	// Pattern: ^[A-Za-z]*$
 	RecordType string `json:"record_type,omitempty"`
 
 	// Role ID of the role that this ACE belongs to
@@ -303,10 +302,6 @@ func (m *AceAttributes) WithRoleID(roleID strfmt.UUID) *AceAttributes {
 func (m *AceAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateRecordType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateRoleID(formats); err != nil {
 		res = append(res, err)
 	}
@@ -314,19 +309,6 @@ func (m *AceAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *AceAttributes) validateRecordType(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.RecordType) { // not required
-		return nil
-	}
-
-	if err := validate.Pattern("attributes"+"."+"record_type", "body", string(m.RecordType), `^[A-Za-z]*$`); err != nil {
-		return err
-	}
-
 	return nil
 }
 

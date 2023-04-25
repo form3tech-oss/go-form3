@@ -151,7 +151,7 @@ type PaymentAttributes struct {
 
 	// All purpose list of key-value pairs specific data stored on the payment.
 	// Max Items: 5
-	UserDefinedData []*UserDefinedData `json:"user_defined_data"`
+	UserDefinedData []*UserDefinedData `json:"user_defined_data,omitempty"`
 }
 
 func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes {
@@ -1112,6 +1112,9 @@ type PaymentAttributesBeneficiaryParty struct {
 	// account number code
 	AccountNumberCode AccountNumberCode `json:"account_number_code,omitempty"`
 
+	// account proxy
+	AccountProxy *BeneficiaryDebtorAccountProxy `json:"account_proxy,omitempty"`
+
 	// The type of the account given with `beneficiary_party.account_number`. Single digit number. Only required if requested by the beneficiary party. Defaults to 0.
 	AccountType int64 `json:"account_type,omitempty"`
 
@@ -1164,6 +1167,9 @@ type PaymentAttributesBeneficiaryParty struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Array for additional ID(s) of beneficiary organisation
+	OrganisationIdentifications []*BeneficiaryDebtorOrganisationIdentification `json:"organisation_identifications,omitempty"`
+
 	// Post code of the beneficiary address
 	PostCode string `json:"post_code,omitempty"`
 
@@ -1188,6 +1194,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		AccountNumber: defaults.GetString("PaymentAttributesBeneficiaryParty", "account_number"),
 
 		// TODO AccountNumberCode: AccountNumberCode,
+
+		AccountProxy: BeneficiaryDebtorAccountProxyWithDefaults(defaults),
 
 		AccountType: defaults.GetInt64("PaymentAttributesBeneficiaryParty", "account_type"),
 
@@ -1223,6 +1231,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 
 		OrganisationIdentificationScheme: defaults.GetString("PaymentAttributesBeneficiaryParty", "organisation_identification_scheme"),
 
+		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
+
 		PostCode: defaults.GetString("PaymentAttributesBeneficiaryParty", "post_code"),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
@@ -1253,6 +1263,18 @@ func (m *PaymentAttributesBeneficiaryParty) WithAccountNumberCode(accountNumberC
 
 	m.AccountNumberCode = accountNumberCode
 
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithAccountProxy(accountProxy BeneficiaryDebtorAccountProxy) *PaymentAttributesBeneficiaryParty {
+
+	m.AccountProxy = &accountProxy
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithoutAccountProxy() *PaymentAttributesBeneficiaryParty {
+	m.AccountProxy = nil
 	return m
 }
 
@@ -1385,6 +1407,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithOrganisationIdentificationScheme
 	return m
 }
 
+func (m *PaymentAttributesBeneficiaryParty) WithOrganisationIdentifications(organisationIdentifications []*BeneficiaryDebtorOrganisationIdentification) *PaymentAttributesBeneficiaryParty {
+
+	m.OrganisationIdentifications = organisationIdentifications
+
+	return m
+}
+
 func (m *PaymentAttributesBeneficiaryParty) WithPostCode(postCode string) *PaymentAttributesBeneficiaryParty {
 
 	m.PostCode = postCode
@@ -1433,11 +1462,19 @@ func (m *PaymentAttributesBeneficiaryParty) Validate(formats strfmt.Registry) er
 		res = append(res, err)
 	}
 
+	if err := m.validateAccountProxy(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAccountWith(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateBirthDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrganisationIdentifications(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1462,6 +1499,24 @@ func (m *PaymentAttributesBeneficiaryParty) validateAccountNumberCode(formats st
 			return ve.ValidateName("beneficiary_party" + "." + "account_number_code")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesBeneficiaryParty) validateAccountProxy(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccountProxy) { // not required
+		return nil
+	}
+
+	if m.AccountProxy != nil {
+		if err := m.AccountProxy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary_party" + "." + "account_proxy")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1493,6 +1548,31 @@ func (m *PaymentAttributesBeneficiaryParty) validateBirthDate(formats strfmt.Reg
 
 	if err := validate.FormatOf("beneficiary_party"+"."+"birth_date", "body", "date", m.BirthDate.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesBeneficiaryParty) validateOrganisationIdentifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.OrganisationIdentifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OrganisationIdentifications); i++ {
+		if swag.IsZero(m.OrganisationIdentifications[i]) { // not required
+			continue
+		}
+
+		if m.OrganisationIdentifications[i] != nil {
+			if err := m.OrganisationIdentifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("beneficiary_party" + "." + "organisation_identifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -1554,6 +1634,9 @@ type PaymentAttributesDebtorParty struct {
 	// account number code
 	AccountNumberCode AccountNumberCode `json:"account_number_code,omitempty"`
 
+	// account proxy
+	AccountProxy *BeneficiaryDebtorAccountProxy `json:"account_proxy,omitempty"`
+
 	// account with
 	AccountWith *BeneficiaryDebtorAccountHoldingEntity `json:"account_with,omitempty"`
 
@@ -1609,6 +1692,9 @@ type PaymentAttributesDebtorParty struct {
 	// The code that specifies the scheme of `organisation_identification`
 	OrganisationIdentificationScheme string `json:"organisation_identification_scheme,omitempty"`
 
+	// Array for additional ID(s) of debtor organisation
+	OrganisationIdentifications []*BeneficiaryDebtorOrganisationIdentification `json:"organisation_identifications,omitempty"`
+
 	// Post code of the Debtor address
 	PostCode string `json:"post_code,omitempty"`
 
@@ -1630,6 +1716,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 		AccountNumber: defaults.GetString("PaymentAttributesDebtorParty", "account_number"),
 
 		// TODO AccountNumberCode: AccountNumberCode,
+
+		AccountProxy: BeneficiaryDebtorAccountProxyWithDefaults(defaults),
 
 		AccountWith: BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults),
 
@@ -1667,6 +1755,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 
 		OrganisationIdentificationScheme: defaults.GetString("PaymentAttributesDebtorParty", "organisation_identification_scheme"),
 
+		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
+
 		PostCode: defaults.GetString("PaymentAttributesDebtorParty", "post_code"),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
@@ -1695,6 +1785,18 @@ func (m *PaymentAttributesDebtorParty) WithAccountNumberCode(accountNumberCode A
 
 	m.AccountNumberCode = accountNumberCode
 
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithAccountProxy(accountProxy BeneficiaryDebtorAccountProxy) *PaymentAttributesDebtorParty {
+
+	m.AccountProxy = &accountProxy
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithoutAccountProxy() *PaymentAttributesDebtorParty {
+	m.AccountProxy = nil
 	return m
 }
 
@@ -1834,6 +1936,13 @@ func (m *PaymentAttributesDebtorParty) WithOrganisationIdentificationScheme(orga
 	return m
 }
 
+func (m *PaymentAttributesDebtorParty) WithOrganisationIdentifications(organisationIdentifications []*BeneficiaryDebtorOrganisationIdentification) *PaymentAttributesDebtorParty {
+
+	m.OrganisationIdentifications = organisationIdentifications
+
+	return m
+}
+
 func (m *PaymentAttributesDebtorParty) WithPostCode(postCode string) *PaymentAttributesDebtorParty {
 
 	m.PostCode = postCode
@@ -1875,11 +1984,19 @@ func (m *PaymentAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAccountProxy(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAccountWith(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateBirthDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrganisationIdentifications(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1904,6 +2021,24 @@ func (m *PaymentAttributesDebtorParty) validateAccountNumberCode(formats strfmt.
 			return ve.ValidateName("debtor_party" + "." + "account_number_code")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesDebtorParty) validateAccountProxy(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccountProxy) { // not required
+		return nil
+	}
+
+	if m.AccountProxy != nil {
+		if err := m.AccountProxy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("debtor_party" + "." + "account_proxy")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1935,6 +2070,31 @@ func (m *PaymentAttributesDebtorParty) validateBirthDate(formats strfmt.Registry
 
 	if err := validate.FormatOf("debtor_party"+"."+"birth_date", "body", "date", m.BirthDate.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesDebtorParty) validateOrganisationIdentifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.OrganisationIdentifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OrganisationIdentifications); i++ {
+		if swag.IsZero(m.OrganisationIdentifications[i]) { // not required
+			continue
+		}
+
+		if m.OrganisationIdentifications[i] != nil {
+			if err := m.OrganisationIdentifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("debtor_party" + "." + "organisation_identifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
