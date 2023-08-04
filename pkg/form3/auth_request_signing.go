@@ -21,7 +21,14 @@ type RequestSigningOption func(*RequestSigningTransport)
 type RequestSigningTransport struct {
 	pubKeyID            uuid.UUID
 	privateKey          *rsa.PrivateKey
+	userAgent           string
 	underlyingTransport http.RoundTripper
+}
+
+func WithUserAgent(ua string) RequestSigningOption {
+	return func(t *RequestSigningTransport) {
+		t.userAgent = ua
+	}
 }
 
 func WithPrivateKey(key *rsa.PrivateKey) RequestSigningOption {
@@ -45,6 +52,7 @@ func WithUnderlyingRequestSigningTransport(tr http.RoundTripper) RequestSigningO
 func NewRequestSigningTransport(opts ...RequestSigningOption) *RequestSigningTransport {
 	t := &RequestSigningTransport{
 		underlyingTransport: http.DefaultTransport,
+		userAgent:           UserAgent,
 	}
 
 	for _, opt := range opts {
@@ -55,7 +63,7 @@ func NewRequestSigningTransport(opts ...RequestSigningOption) *RequestSigningTra
 }
 
 func (t *RequestSigningTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Add("User-Agent", UserAgent)
+	req.Header.Add("User-Agent", t.userAgent)
 
 	var headers []string
 	hasher := sha256.New()
