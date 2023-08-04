@@ -52,3 +52,54 @@ func TestRequestSigningAuth(t *testing.T) {
 	defer resp.Body.Close()
 	require.NoError(t, err)
 }
+
+func TestWithUserAgent(t *testing.T) {
+	privKey, err := rsa.GenerateKey(rand.Reader, 2048)
+	require.NoError(t, err)
+	pubKeyID, err := uuid.Parse("9cdc44af-479c-45a7-9973-07b5b8608d11")
+	require.NoError(t, err)
+
+	tests := []struct {
+		name      string
+		opts      []form3.RequestSigningOption
+		validator func(t *testing.T) func(w http.ResponseWriter, r *http.Request)
+	}{
+		{
+			"Default",
+			[]form3.RequestSigningOption{},
+			func(t *testing.T) func(w http.ResponseWriter, r *http.Request) {
+				return func(w http.ResponseWriter, r *http.Request) {
+					assert.Contains(t, r.Header.Get("User-Agent"), form3.UserAgent)
+				}
+			},
+		},
+		{
+			"Custom User Agent",
+			[]form3.RequestSigningOption{form3.WithUserAgent("Service-v1")},
+			func(t *testing.T) func(w http.ResponseWriter, r *http.Request) {
+				return func(w http.ResponseWriter, r *http.Request) {
+					assert.Contains(t, r.Header.Get("User-Agent"), "Service-v1")
+				}
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ts := httptest.NewServer(http.HandlerFunc(tt.validator(t)))
+			defer ts.Close()
+
+			req, err := http.NewRequest(http.MethodGet, ts.URL, bytes.NewBuffer([]byte("dummy body")))
+			require.NoError(t, err)
+
+			opts := []form3.RequestSigningOption{
+				form3.WithPrivateKey(privKey),
+				form3.WithPublicKeyID(pubKeyID),
+			}
+			tr := form3.NewRequestSigningTransport(append(opts, tt.opts...)...)
+
+			resp, err := tr.RoundTrip(req)
+			defer resp.Body.Close()
+			require.NoError(t, err)
+		})
+	}
+}
