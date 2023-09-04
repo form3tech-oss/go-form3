@@ -65,6 +65,12 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 
 		FilterReturnUniqueSchemeID: c.Defaults.GetStringPtr("ListPayments", "filter[return.unique_scheme_id]"),
 
+		FilterReturnSubmissionStatus: c.Defaults.GetStringPtr("ListPayments", "filter[return_submission.status]"),
+
+		FilterReturnSubmissionSubmissionDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListPayments", "filter[return_submission.submission_date_from]"),
+
+		FilterReturnSubmissionSubmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListPayments", "filter[return_submission.submission_date_to]"),
+
 		FilterSchemeTransactionID: c.Defaults.GetStringPtr("ListPayments", "filter[scheme_transaction_id]"),
 
 		FilterSubmissionSchemeStatusCode: c.Defaults.GetStringPtr("ListPayments", "filter[submission.scheme_status_code]"),
@@ -177,6 +183,18 @@ type ListPaymentsRequest struct {
 	/*FilterReturnUniqueSchemeID*/
 
 	FilterReturnUniqueSchemeID *string
+
+	/*FilterReturnSubmissionStatus      Filter by return submission status      */
+
+	FilterReturnSubmissionStatus *string
+
+	/*FilterReturnSubmissionSubmissionDateFrom*/
+
+	FilterReturnSubmissionSubmissionDateFrom *strfmt.DateTime
+
+	/*FilterReturnSubmissionSubmissionDateTo*/
+
+	FilterReturnSubmissionSubmissionDateTo *strfmt.DateTime
 
 	/*FilterSchemeTransactionID*/
 
@@ -527,6 +545,48 @@ func (o *ListPaymentsRequest) WithFilterReturnUniqueSchemeID(filterReturnUniqueS
 func (o *ListPaymentsRequest) WithoutFilterReturnUniqueSchemeID() *ListPaymentsRequest {
 
 	o.FilterReturnUniqueSchemeID = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterReturnSubmissionStatus(filterReturnSubmissionStatus string) *ListPaymentsRequest {
+
+	o.FilterReturnSubmissionStatus = &filterReturnSubmissionStatus
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterReturnSubmissionStatus() *ListPaymentsRequest {
+
+	o.FilterReturnSubmissionStatus = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterReturnSubmissionSubmissionDateFrom(filterReturnSubmissionSubmissionDateFrom strfmt.DateTime) *ListPaymentsRequest {
+
+	o.FilterReturnSubmissionSubmissionDateFrom = &filterReturnSubmissionSubmissionDateFrom
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterReturnSubmissionSubmissionDateFrom() *ListPaymentsRequest {
+
+	o.FilterReturnSubmissionSubmissionDateFrom = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterReturnSubmissionSubmissionDateTo(filterReturnSubmissionSubmissionDateTo strfmt.DateTime) *ListPaymentsRequest {
+
+	o.FilterReturnSubmissionSubmissionDateTo = &filterReturnSubmissionSubmissionDateTo
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterReturnSubmissionSubmissionDateTo() *ListPaymentsRequest {
+
+	o.FilterReturnSubmissionSubmissionDateTo = nil
 
 	return o
 }
@@ -989,6 +1049,54 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qFilterReturnUniqueSchemeID := qrFilterReturnUniqueSchemeID
 		if qFilterReturnUniqueSchemeID != "" {
 			if err := r.SetQueryParam("filter[return.unique_scheme_id]", qFilterReturnUniqueSchemeID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterReturnSubmissionStatus != nil {
+
+		// query param filter[return_submission.status]
+		var qrFilterReturnSubmissionStatus string
+		if o.FilterReturnSubmissionStatus != nil {
+			qrFilterReturnSubmissionStatus = *o.FilterReturnSubmissionStatus
+		}
+		qFilterReturnSubmissionStatus := qrFilterReturnSubmissionStatus
+		if qFilterReturnSubmissionStatus != "" {
+			if err := r.SetQueryParam("filter[return_submission.status]", qFilterReturnSubmissionStatus); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterReturnSubmissionSubmissionDateFrom != nil {
+
+		// query param filter[return_submission.submission_date_from]
+		var qrFilterReturnSubmissionSubmissionDateFrom strfmt.DateTime
+		if o.FilterReturnSubmissionSubmissionDateFrom != nil {
+			qrFilterReturnSubmissionSubmissionDateFrom = *o.FilterReturnSubmissionSubmissionDateFrom
+		}
+		qFilterReturnSubmissionSubmissionDateFrom := qrFilterReturnSubmissionSubmissionDateFrom.String()
+		if qFilterReturnSubmissionSubmissionDateFrom != "" {
+			if err := r.SetQueryParam("filter[return_submission.submission_date_from]", qFilterReturnSubmissionSubmissionDateFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterReturnSubmissionSubmissionDateTo != nil {
+
+		// query param filter[return_submission.submission_date_to]
+		var qrFilterReturnSubmissionSubmissionDateTo strfmt.DateTime
+		if o.FilterReturnSubmissionSubmissionDateTo != nil {
+			qrFilterReturnSubmissionSubmissionDateTo = *o.FilterReturnSubmissionSubmissionDateTo
+		}
+		qFilterReturnSubmissionSubmissionDateTo := qrFilterReturnSubmissionSubmissionDateTo.String()
+		if qFilterReturnSubmissionSubmissionDateTo != "" {
+			if err := r.SetQueryParam("filter[return_submission.submission_date_to]", qFilterReturnSubmissionSubmissionDateTo); err != nil {
 				return err
 			}
 		}
