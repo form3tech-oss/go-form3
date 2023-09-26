@@ -42,8 +42,9 @@ type ReturnSubmissionUpdate struct {
 	Type string `json:"type,omitempty"`
 
 	// Version number
+	// Required: true
 	// Minimum: 0
-	Version *int64 `json:"version,omitempty"`
+	Version *int64 `json:"version"`
 }
 
 func ReturnSubmissionUpdateWithDefaults(defaults client.Defaults) *ReturnSubmissionUpdate {
@@ -241,8 +242,8 @@ func (m *ReturnSubmissionUpdate) validateType(formats strfmt.Registry) error {
 
 func (m *ReturnSubmissionUpdate) validateVersion(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Version) { // not required
-		return nil
+	if err := validate.Required("version", "body", m.Version); err != nil {
+		return err
 	}
 
 	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {

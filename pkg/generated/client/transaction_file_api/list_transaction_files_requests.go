@@ -35,9 +35,9 @@ func (c *Client) ListTransactionFiles() *ListTransactionFilesRequest {
 
 		FilterSubmissionSchemeReferencesClearingID: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.clearing_id]"),
 
-		FilterSubmissionSchemeReferencesSchemeFileID: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.scheme_file_id]"),
+		FilterSubmissionSchemeReferencesFileIdentifier: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.file_identifier]"),
 
-		FilterSubmissionSchemeReferencesSchemeSubmissionID: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.scheme_submission_id]"),
+		FilterSubmissionSchemeReferencesFileNumber: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.file_number]"),
 
 		FilterSubmissionStatus: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.status]"),
 
@@ -82,13 +82,13 @@ type ListTransactionFilesRequest struct {
 
 	FilterSubmissionSchemeReferencesClearingID *string
 
-	/*FilterSubmissionSchemeReferencesSchemeFileID      Find File resources by the id of the file sent to the scheme      */
+	/*FilterSubmissionSchemeReferencesFileIdentifier      Find File resources the id of the submission to to the scheme      */
 
-	FilterSubmissionSchemeReferencesSchemeFileID *string
+	FilterSubmissionSchemeReferencesFileIdentifier *string
 
-	/*FilterSubmissionSchemeReferencesSchemeSubmissionID      Find File resources the id of the submission to to the scheme      */
+	/*FilterSubmissionSchemeReferencesFileNumber      Find File resources by the id of the file sent to the scheme      */
 
-	FilterSubmissionSchemeReferencesSchemeSubmissionID *string
+	FilterSubmissionSchemeReferencesFileNumber *string
 
 	/*FilterSubmissionStatus      Find all File resources with a certain submission status      */
 
@@ -207,30 +207,30 @@ func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesCle
 	return o
 }
 
-func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesSchemeFileID(filterSubmissionSchemeReferencesSchemeFileID string) *ListTransactionFilesRequest {
+func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesFileIdentifier(filterSubmissionSchemeReferencesFileIdentifier string) *ListTransactionFilesRequest {
 
-	o.FilterSubmissionSchemeReferencesSchemeFileID = &filterSubmissionSchemeReferencesSchemeFileID
-
-	return o
-}
-
-func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesSchemeFileID() *ListTransactionFilesRequest {
-
-	o.FilterSubmissionSchemeReferencesSchemeFileID = nil
+	o.FilterSubmissionSchemeReferencesFileIdentifier = &filterSubmissionSchemeReferencesFileIdentifier
 
 	return o
 }
 
-func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesSchemeSubmissionID(filterSubmissionSchemeReferencesSchemeSubmissionID string) *ListTransactionFilesRequest {
+func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesFileIdentifier() *ListTransactionFilesRequest {
 
-	o.FilterSubmissionSchemeReferencesSchemeSubmissionID = &filterSubmissionSchemeReferencesSchemeSubmissionID
+	o.FilterSubmissionSchemeReferencesFileIdentifier = nil
 
 	return o
 }
 
-func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesSchemeSubmissionID() *ListTransactionFilesRequest {
+func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesFileNumber(filterSubmissionSchemeReferencesFileNumber string) *ListTransactionFilesRequest {
 
-	o.FilterSubmissionSchemeReferencesSchemeSubmissionID = nil
+	o.FilterSubmissionSchemeReferencesFileNumber = &filterSubmissionSchemeReferencesFileNumber
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesFileNumber() *ListTransactionFilesRequest {
+
+	o.FilterSubmissionSchemeReferencesFileNumber = nil
 
 	return o
 }
@@ -417,32 +417,32 @@ func (o *ListTransactionFilesRequest) WriteToRequest(r runtime.ClientRequest, re
 
 	}
 
-	if o.FilterSubmissionSchemeReferencesSchemeFileID != nil {
+	if o.FilterSubmissionSchemeReferencesFileIdentifier != nil {
 
-		// query param filter[submission.scheme_references.scheme_file_id]
-		var qrFilterSubmissionSchemeReferencesSchemeFileID string
-		if o.FilterSubmissionSchemeReferencesSchemeFileID != nil {
-			qrFilterSubmissionSchemeReferencesSchemeFileID = *o.FilterSubmissionSchemeReferencesSchemeFileID
+		// query param filter[submission.scheme_references.file_identifier]
+		var qrFilterSubmissionSchemeReferencesFileIdentifier string
+		if o.FilterSubmissionSchemeReferencesFileIdentifier != nil {
+			qrFilterSubmissionSchemeReferencesFileIdentifier = *o.FilterSubmissionSchemeReferencesFileIdentifier
 		}
-		qFilterSubmissionSchemeReferencesSchemeFileID := qrFilterSubmissionSchemeReferencesSchemeFileID
-		if qFilterSubmissionSchemeReferencesSchemeFileID != "" {
-			if err := r.SetQueryParam("filter[submission.scheme_references.scheme_file_id]", qFilterSubmissionSchemeReferencesSchemeFileID); err != nil {
+		qFilterSubmissionSchemeReferencesFileIdentifier := qrFilterSubmissionSchemeReferencesFileIdentifier
+		if qFilterSubmissionSchemeReferencesFileIdentifier != "" {
+			if err := r.SetQueryParam("filter[submission.scheme_references.file_identifier]", qFilterSubmissionSchemeReferencesFileIdentifier); err != nil {
 				return err
 			}
 		}
 
 	}
 
-	if o.FilterSubmissionSchemeReferencesSchemeSubmissionID != nil {
+	if o.FilterSubmissionSchemeReferencesFileNumber != nil {
 
-		// query param filter[submission.scheme_references.scheme_submission_id]
-		var qrFilterSubmissionSchemeReferencesSchemeSubmissionID string
-		if o.FilterSubmissionSchemeReferencesSchemeSubmissionID != nil {
-			qrFilterSubmissionSchemeReferencesSchemeSubmissionID = *o.FilterSubmissionSchemeReferencesSchemeSubmissionID
+		// query param filter[submission.scheme_references.file_number]
+		var qrFilterSubmissionSchemeReferencesFileNumber string
+		if o.FilterSubmissionSchemeReferencesFileNumber != nil {
+			qrFilterSubmissionSchemeReferencesFileNumber = *o.FilterSubmissionSchemeReferencesFileNumber
 		}
-		qFilterSubmissionSchemeReferencesSchemeSubmissionID := qrFilterSubmissionSchemeReferencesSchemeSubmissionID
-		if qFilterSubmissionSchemeReferencesSchemeSubmissionID != "" {
-			if err := r.SetQueryParam("filter[submission.scheme_references.scheme_submission_id]", qFilterSubmissionSchemeReferencesSchemeSubmissionID); err != nil {
+		qFilterSubmissionSchemeReferencesFileNumber := qrFilterSubmissionSchemeReferencesFileNumber
+		if qFilterSubmissionSchemeReferencesFileNumber != "" {
+			if err := r.SetQueryParam("filter[submission.scheme_references.file_number]", qFilterSubmissionSchemeReferencesFileNumber); err != nil {
 				return err
 			}
 		}

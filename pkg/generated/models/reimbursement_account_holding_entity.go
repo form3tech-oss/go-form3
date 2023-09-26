@@ -12,7 +12,6 @@ import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
 )
 
@@ -26,8 +25,8 @@ type ReimbursementAccountHoldingEntity struct {
 	// Identification of third party reimbursement institution
 	BankID string `json:"bank_id,omitempty"`
 
-	// bank id code
-	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
+	// The type of identification provided at `bank_id` attribute. Must be ISO code as listed in the [External Code Sets spreadsheet](https://www.iso20022.org/external_code_list.page)
+	BankIDCode string `json:"bank_id_code,omitempty"`
 
 	// Third party reimbursement institution name
 	BankName string `json:"bank_name,omitempty"`
@@ -43,7 +42,7 @@ func ReimbursementAccountHoldingEntityWithDefaults(defaults client.Defaults) *Re
 
 		BankID: defaults.GetString("ReimbursementAccountHoldingEntity", "bank_id"),
 
-		// TODO BankIDCode: BankIDCode,
+		BankIDCode: defaults.GetString("ReimbursementAccountHoldingEntity", "bank_id_code"),
 
 		BankName: defaults.GetString("ReimbursementAccountHoldingEntity", "bank_name"),
 
@@ -65,7 +64,7 @@ func (m *ReimbursementAccountHoldingEntity) WithBankID(bankID string) *Reimburse
 	return m
 }
 
-func (m *ReimbursementAccountHoldingEntity) WithBankIDCode(bankIDCode BankIDCode) *ReimbursementAccountHoldingEntity {
+func (m *ReimbursementAccountHoldingEntity) WithBankIDCode(bankIDCode string) *ReimbursementAccountHoldingEntity {
 
 	m.BankIDCode = bankIDCode
 
@@ -88,31 +87,6 @@ func (m *ReimbursementAccountHoldingEntity) WithBankPartyID(bankPartyID string) 
 
 // Validate validates this reimbursement account holding entity
 func (m *ReimbursementAccountHoldingEntity) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateBankIDCode(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ReimbursementAccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.BankIDCode) { // not required
-		return nil
-	}
-
-	if err := m.BankIDCode.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("bank_id_code")
-		}
-		return err
-	}
-
 	return nil
 }
 

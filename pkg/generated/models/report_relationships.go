@@ -24,6 +24,9 @@ type ReportRelationships struct {
 	// report admission
 	ReportAdmission *ReportRelationshipsReportAdmission `json:"report_admission,omitempty"`
 
+	// report request
+	ReportRequest *ReportRelationshipsReportRequest `json:"report_request,omitempty"`
+
 	// transaction file
 	TransactionFile *ThinRelationship `json:"transaction_file,omitempty"`
 }
@@ -32,6 +35,8 @@ func ReportRelationshipsWithDefaults(defaults client.Defaults) *ReportRelationsh
 	return &ReportRelationships{
 
 		ReportAdmission: ReportRelationshipsReportAdmissionWithDefaults(defaults),
+
+		ReportRequest: ReportRelationshipsReportRequestWithDefaults(defaults),
 
 		TransactionFile: ThinRelationshipWithDefaults(defaults),
 	}
@@ -46,6 +51,18 @@ func (m *ReportRelationships) WithReportAdmission(reportAdmission ReportRelation
 
 func (m *ReportRelationships) WithoutReportAdmission() *ReportRelationships {
 	m.ReportAdmission = nil
+	return m
+}
+
+func (m *ReportRelationships) WithReportRequest(reportRequest ReportRelationshipsReportRequest) *ReportRelationships {
+
+	m.ReportRequest = &reportRequest
+
+	return m
+}
+
+func (m *ReportRelationships) WithoutReportRequest() *ReportRelationships {
+	m.ReportRequest = nil
 	return m
 }
 
@@ -69,6 +86,10 @@ func (m *ReportRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateReportRequest(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTransactionFile(formats); err != nil {
 		res = append(res, err)
 	}
@@ -89,6 +110,24 @@ func (m *ReportRelationships) validateReportAdmission(formats strfmt.Registry) e
 		if err := m.ReportAdmission.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("report_admission")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReportRelationships) validateReportRequest(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReportRequest) { // not required
+		return nil
+	}
+
+	if m.ReportRequest != nil {
+		if err := m.ReportRequest.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("report_request")
 			}
 			return err
 		}
@@ -219,6 +258,92 @@ func (m *ReportRelationshipsReportAdmission) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ReportRelationshipsReportAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReportRelationshipsReportRequest report relationships report request
+// swagger:model ReportRelationshipsReportRequest
+type ReportRelationshipsReportRequest struct {
+
+	// data
+	Data []*ReportRequest `json:"data"`
+}
+
+func ReportRelationshipsReportRequestWithDefaults(defaults client.Defaults) *ReportRelationshipsReportRequest {
+	return &ReportRelationshipsReportRequest{
+
+		Data: make([]*ReportRequest, 0),
+	}
+}
+
+func (m *ReportRelationshipsReportRequest) WithData(data []*ReportRequest) *ReportRelationshipsReportRequest {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this report relationships report request
+func (m *ReportRelationshipsReportRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReportRelationshipsReportRequest) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("report_request" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReportRelationshipsReportRequest) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReportRelationshipsReportRequest) UnmarshalBinary(b []byte) error {
+	var res ReportRelationshipsReportRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReportRelationshipsReportRequest) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

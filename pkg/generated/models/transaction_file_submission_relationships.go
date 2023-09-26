@@ -20,26 +20,26 @@ import (
 // swagger:model TransactionFileSubmissionRelationships
 type TransactionFileSubmissionRelationships struct {
 
-	// transaction file
-	TransactionFile *ThinRelationships `json:"transaction_file,omitempty"`
+	// transaction files
+	TransactionFiles *ThinRelationships `json:"transaction_files,omitempty"`
 }
 
 func TransactionFileSubmissionRelationshipsWithDefaults(defaults client.Defaults) *TransactionFileSubmissionRelationships {
 	return &TransactionFileSubmissionRelationships{
 
-		TransactionFile: ThinRelationshipsWithDefaults(defaults),
+		TransactionFiles: ThinRelationshipsWithDefaults(defaults),
 	}
 }
 
-func (m *TransactionFileSubmissionRelationships) WithTransactionFile(transactionFile ThinRelationships) *TransactionFileSubmissionRelationships {
+func (m *TransactionFileSubmissionRelationships) WithTransactionFiles(transactionFiles ThinRelationships) *TransactionFileSubmissionRelationships {
 
-	m.TransactionFile = &transactionFile
+	m.TransactionFiles = &transactionFiles
 
 	return m
 }
 
-func (m *TransactionFileSubmissionRelationships) WithoutTransactionFile() *TransactionFileSubmissionRelationships {
-	m.TransactionFile = nil
+func (m *TransactionFileSubmissionRelationships) WithoutTransactionFiles() *TransactionFileSubmissionRelationships {
+	m.TransactionFiles = nil
 	return m
 }
 
@@ -47,7 +47,7 @@ func (m *TransactionFileSubmissionRelationships) WithoutTransactionFile() *Trans
 func (m *TransactionFileSubmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateTransactionFile(formats); err != nil {
+	if err := m.validateTransactionFiles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,16 +57,16 @@ func (m *TransactionFileSubmissionRelationships) Validate(formats strfmt.Registr
 	return nil
 }
 
-func (m *TransactionFileSubmissionRelationships) validateTransactionFile(formats strfmt.Registry) error {
+func (m *TransactionFileSubmissionRelationships) validateTransactionFiles(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.TransactionFile) { // not required
+	if swag.IsZero(m.TransactionFiles) { // not required
 		return nil
 	}
 
-	if m.TransactionFile != nil {
-		if err := m.TransactionFile.Validate(formats); err != nil {
+	if m.TransactionFiles != nil {
+		if err := m.TransactionFiles.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("transaction_file")
+				return ve.ValidateName("transaction_files")
 			}
 			return err
 		}

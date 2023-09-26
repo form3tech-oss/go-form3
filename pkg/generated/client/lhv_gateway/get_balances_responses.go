@@ -32,6 +32,13 @@ func (o *GetBalancesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetBalancesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -65,6 +72,40 @@ func (o *GetBalancesOK) readResponse(response runtime.ClientResponse, consumer r
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.BalanceDetailsListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetBalancesNotFound creates a GetBalancesNotFound with default headers values
+func NewGetBalancesNotFound() *GetBalancesNotFound {
+	return &GetBalancesNotFound{}
+}
+
+/*GetBalancesNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetBalancesNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetBalancesNotFound) Error() string {
+	return fmt.Sprintf("[GET /organisation/balances][%d] getBalancesNotFound", 404)
+}
+
+func (o *GetBalancesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

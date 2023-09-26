@@ -49,8 +49,7 @@ type NameVerificationAttributes struct {
 	Name []string `json:"name"`
 
 	// secondary identification
-	// Required: true
-	SecondaryIdentification *string `json:"secondary_identification"`
+	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 }
 
 func NameVerificationAttributesWithDefaults(defaults client.Defaults) *NameVerificationAttributes {
@@ -68,7 +67,7 @@ func NameVerificationAttributesWithDefaults(defaults client.Defaults) *NameVerif
 
 		Name: make([]string, 0),
 
-		SecondaryIdentification: defaults.GetStringPtr("NameVerificationAttributes", "secondary_identification"),
+		SecondaryIdentification: defaults.GetString("NameVerificationAttributes", "secondary_identification"),
 	}
 }
 
@@ -141,13 +140,8 @@ func (m *NameVerificationAttributes) WithName(name []string) *NameVerificationAt
 
 func (m *NameVerificationAttributes) WithSecondaryIdentification(secondaryIdentification string) *NameVerificationAttributes {
 
-	m.SecondaryIdentification = &secondaryIdentification
+	m.SecondaryIdentification = secondaryIdentification
 
-	return m
-}
-
-func (m *NameVerificationAttributes) WithoutSecondaryIdentification() *NameVerificationAttributes {
-	m.SecondaryIdentification = nil
 	return m
 }
 
@@ -176,10 +170,6 @@ func (m *NameVerificationAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSecondaryIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -287,15 +277,6 @@ func (m *NameVerificationAttributes) validateName(formats strfmt.Registry) error
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *NameVerificationAttributes) validateSecondaryIdentification(formats strfmt.Registry) error {
-
-	if err := validate.Required("secondary_identification", "body", m.SecondaryIdentification); err != nil {
-		return err
 	}
 
 	return nil

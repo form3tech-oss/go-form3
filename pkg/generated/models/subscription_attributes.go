@@ -33,7 +33,7 @@ type SubscriptionAttributes struct {
 	CallbackUris []*CallbackURI `json:"callback_uris"`
 
 	// deactivated
-	Deactivated bool `json:"deactivated,omitempty"`
+	Deactivated *bool `json:"deactivated,omitempty"`
 
 	// event type
 	// Required: true
@@ -63,7 +63,7 @@ func SubscriptionAttributesWithDefaults(defaults client.Defaults) *SubscriptionA
 
 		CallbackUris: make([]*CallbackURI, 0),
 
-		Deactivated: defaults.GetBool("SubscriptionAttributes", "deactivated"),
+		Deactivated: defaults.GetBoolPtr("SubscriptionAttributes", "deactivated"),
 
 		EventType: defaults.GetStringPtr("SubscriptionAttributes", "event_type"),
 
@@ -98,8 +98,13 @@ func (m *SubscriptionAttributes) WithCallbackUris(callbackUris []*CallbackURI) *
 
 func (m *SubscriptionAttributes) WithDeactivated(deactivated bool) *SubscriptionAttributes {
 
-	m.Deactivated = deactivated
+	m.Deactivated = &deactivated
 
+	return m
+}
+
+func (m *SubscriptionAttributes) WithoutDeactivated() *SubscriptionAttributes {
+	m.Deactivated = nil
 	return m
 }
 

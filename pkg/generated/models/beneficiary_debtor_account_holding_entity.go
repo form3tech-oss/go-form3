@@ -27,8 +27,8 @@ type BeneficiaryDebtorAccountHoldingEntity struct {
 	// Financial institution identification
 	BankID string `json:"bank_id,omitempty"`
 
-	// bank id code
-	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
+	// The type of identification provided at `bank_id` attribute. Must be ISO code as listed in the [External Code Sets spreadsheet](https://www.iso20022.org/external_code_list.page)
+	BankIDCode string `json:"bank_id_code,omitempty"`
 
 	// Array for additional ID(s) for agent
 	BankIds []*AccountWithBankID `json:"bank_ids,omitempty"`
@@ -47,7 +47,7 @@ func BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults client.Defaults)
 
 		BankID: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_id"),
 
-		// TODO BankIDCode: BankIDCode,
+		BankIDCode: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_id_code"),
 
 		BankIds: make([]*AccountWithBankID, 0),
 
@@ -71,7 +71,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankID(bankID string) *Benef
 	return m
 }
 
-func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankIDCode(bankIDCode BankIDCode) *BeneficiaryDebtorAccountHoldingEntity {
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankIDCode(bankIDCode string) *BeneficiaryDebtorAccountHoldingEntity {
 
 	m.BankIDCode = bankIDCode
 
@@ -103,10 +103,6 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankPartyID(bankPartyID stri
 func (m *BeneficiaryDebtorAccountHoldingEntity) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBankIDCode(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateBankIds(formats); err != nil {
 		res = append(res, err)
 	}
@@ -114,22 +110,6 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.BankIDCode) { // not required
-		return nil
-	}
-
-	if err := m.BankIDCode.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("bank_id_code")
-		}
-		return err
-	}
-
 	return nil
 }
 

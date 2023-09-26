@@ -351,6 +351,14 @@ func (m *ReturnSubmission) Json() string {
 // swagger:model ReturnSubmissionAttributes
 type ReturnSubmissionAttributes struct {
 
+	// Identification code of the file sent to scheme.
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// Number of the file sent to scheme.
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// Time a payment was released from being held due to a limit breach
 	// Read Only: true
 	// Format: date-time
@@ -405,6 +413,10 @@ type ReturnSubmissionAttributes struct {
 func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionAttributes {
 	return &ReturnSubmissionAttributes{
 
+		FileIdentifier: defaults.GetStringPtr("ReturnSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("ReturnSubmissionAttributes", "file_number"),
+
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "limit_breach_end_datetime"),
 
 		LimitBreachStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "limit_breach_start_datetime"),
@@ -431,6 +443,30 @@ func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSub
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *ReturnSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *ReturnSubmissionAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithoutFileIdentifier() *ReturnSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithFileNumber(fileNumber string) *ReturnSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithoutFileNumber() *ReturnSubmissionAttributes {
+	m.FileNumber = nil
+	return m
 }
 
 func (m *ReturnSubmissionAttributes) WithLimitBreachEndDatetime(limitBreachEndDatetime strfmt.DateTime) *ReturnSubmissionAttributes {
@@ -558,6 +594,14 @@ func (m *ReturnSubmissionAttributes) WithoutTransactionStartDatetime() *ReturnSu
 func (m *ReturnSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLimitBreachEndDatetime(formats); err != nil {
 		res = append(res, err)
 	}
@@ -593,6 +637,32 @@ func (m *ReturnSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ReturnSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ReturnSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+		return err
+	}
+
 	return nil
 }
 
