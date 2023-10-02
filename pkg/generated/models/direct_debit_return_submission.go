@@ -352,6 +352,14 @@ func (m *DirectDebitReturnSubmission) Json() string {
 // swagger:model DirectDebitReturnSubmissionAttributes
 type DirectDebitReturnSubmissionAttributes struct {
 
+	// file identifier
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// file number
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// scheme status code
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -378,6 +386,10 @@ type DirectDebitReturnSubmissionAttributes struct {
 func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionAttributes {
 	return &DirectDebitReturnSubmissionAttributes{
 
+		FileIdentifier: defaults.GetStringPtr("DirectDebitReturnSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("DirectDebitReturnSubmissionAttributes", "file_number"),
+
 		SchemeStatusCode: defaults.GetString("DirectDebitReturnSubmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("DirectDebitReturnSubmissionAttributes", "scheme_status_code_description"),
@@ -390,6 +402,30 @@ func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults)
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("DirectDebitReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *DirectDebitReturnSubmissionAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithoutFileIdentifier() *DirectDebitReturnSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithFileNumber(fileNumber string) *DirectDebitReturnSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithoutFileNumber() *DirectDebitReturnSubmissionAttributes {
+	m.FileNumber = nil
+	return m
 }
 
 func (m *DirectDebitReturnSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitReturnSubmissionAttributes {
@@ -438,6 +474,14 @@ func (m *DirectDebitReturnSubmissionAttributes) WithTransactionStartDatetime(tra
 func (m *DirectDebitReturnSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -453,6 +497,32 @@ func (m *DirectDebitReturnSubmissionAttributes) Validate(formats strfmt.Registry
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+		return err
+	}
+
 	return nil
 }
 

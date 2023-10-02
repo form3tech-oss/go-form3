@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// BankIDCode The type of identification provided at `bank_id` attribute. Must be ISO code as listed in the [External Code Sets spreadsheet](https://www.iso20022.org/external_code_list.page)
+// BankIDCode bank Id code
 // swagger:model BankIdCode
 type BankIDCode string
 

@@ -424,6 +424,9 @@ type DirectDebitAttributes struct {
 	// Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain.
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
 
+	// settlement
+	Settlement *Settlement `json:"settlement,omitempty"`
+
 	// structured reference
 	StructuredReference *DirectDebitAttributesStructuredReference `json:"structured_reference,omitempty"`
 
@@ -483,6 +486,8 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 		SchemeStatus: defaults.GetString("DirectDebitAttributes", "scheme_status"),
 
 		SchemeTransactionID: defaults.GetString("DirectDebitAttributes", "scheme_transaction_id"),
+
+		Settlement: SettlementWithDefaults(defaults),
 
 		StructuredReference: DirectDebitAttributesStructuredReferenceWithDefaults(defaults),
 
@@ -678,6 +683,18 @@ func (m *DirectDebitAttributes) WithSchemeTransactionID(schemeTransactionID stri
 	return m
 }
 
+func (m *DirectDebitAttributes) WithSettlement(settlement Settlement) *DirectDebitAttributes {
+
+	m.Settlement = &settlement
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutSettlement() *DirectDebitAttributes {
+	m.Settlement = nil
+	return m
+}
+
 func (m *DirectDebitAttributes) WithStructuredReference(structuredReference DirectDebitAttributesStructuredReference) *DirectDebitAttributes {
 
 	m.StructuredReference = &structuredReference
@@ -750,6 +767,10 @@ func (m *DirectDebitAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSchemeStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSettlement(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -902,6 +923,24 @@ func (m *DirectDebitAttributes) validateSchemeStatus(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *DirectDebitAttributes) validateSettlement(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Settlement) { // not required
+		return nil
+	}
+
+	if m.Settlement != nil {
+		if err := m.Settlement.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "settlement")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *DirectDebitAttributes) validateStructuredReference(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.StructuredReference) { // not required
@@ -1001,7 +1040,7 @@ type DirectDebitAttributesBeneficiaryParty struct {
 	AccountWith *AccountHoldingEntity `json:"account_with,omitempty"`
 
 	// Beneficiary address
-	Address []string `json:"address"`
+	Address []string `json:"address,omitempty"`
 
 	// Building number of the Debtor address
 	BuildingNumber string `json:"building_number,omitempty"`
@@ -1285,7 +1324,7 @@ type DirectDebitAttributesDebtorParty struct {
 	AccountWith *AccountHoldingEntity `json:"account_with,omitempty"`
 
 	// Debtor address
-	Address []string `json:"address"`
+	Address []string `json:"address,omitempty"`
 
 	// Building number of the Debtor address
 	BuildingNumber string `json:"building_number,omitempty"`

@@ -382,6 +382,9 @@ type DirectDebitReturnAttributes struct {
 
 	// scheme transaction id
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
+
+	// settlement
+	Settlement *Settlement `json:"settlement,omitempty"`
 }
 
 func DirectDebitReturnAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnAttributes {
@@ -404,6 +407,8 @@ func DirectDebitReturnAttributesWithDefaults(defaults client.Defaults) *DirectDe
 		SchemeProcessingDate: defaults.GetStrfmtDatePtr("DirectDebitReturnAttributes", "scheme_processing_date"),
 
 		SchemeTransactionID: defaults.GetString("DirectDebitReturnAttributes", "scheme_transaction_id"),
+
+		Settlement: SettlementWithDefaults(defaults),
 	}
 }
 
@@ -495,6 +500,18 @@ func (m *DirectDebitReturnAttributes) WithSchemeTransactionID(schemeTransactionI
 	return m
 }
 
+func (m *DirectDebitReturnAttributes) WithSettlement(settlement Settlement) *DirectDebitReturnAttributes {
+
+	m.Settlement = &settlement
+
+	return m
+}
+
+func (m *DirectDebitReturnAttributes) WithoutSettlement() *DirectDebitReturnAttributes {
+	m.Settlement = nil
+	return m
+}
+
 // Validate validates this direct debit return attributes
 func (m *DirectDebitReturnAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -520,6 +537,10 @@ func (m *DirectDebitReturnAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSchemeProcessingDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSettlement(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -647,6 +668,24 @@ func (m *DirectDebitReturnAttributes) validateSchemeProcessingDate(formats strfm
 
 	if err := validate.FormatOf("attributes"+"."+"scheme_processing_date", "body", "date", m.SchemeProcessingDate.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnAttributes) validateSettlement(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Settlement) { // not required
+		return nil
+	}
+
+	if m.Settlement != nil {
+		if err := m.Settlement.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "settlement")
+			}
+			return err
+		}
 	}
 
 	return nil

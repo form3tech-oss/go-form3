@@ -28,7 +28,7 @@ type Agent struct {
 	AccountNumberCode AccountNumberCode `json:"account_number_code,omitempty"`
 
 	// address
-	Address []string `json:"address"`
+	Address []string `json:"address,omitempty"`
 
 	// identification
 	Identification *AgentIdentification `json:"identification,omitempty"`

@@ -21,12 +21,19 @@ import (
 // swagger:model Settlement
 type Settlement struct {
 
-	// Specific purpose account used to post the debit/credit entries as result of the transaction
+	// account number
 	AccountNumber *string `json:"account_number,omitempty"`
 
-	// Identification code of the account number. Required when account_number is provided, not used otherwise. Supported values: IBAN, BBAN
+	// account number code
 	// Enum: [IBAN BBAN]
-	AccountNumberCode *string `json:"account_number_code,omitempty"`
+	AccountNumberCode AccountNumberCode `json:"account_number_code,omitempty"`
+
+	// bank id
+	BankID *string `json:"bank_id,omitempty"`
+
+	// bank id code
+	// Enum: [GBDSC]
+	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
 
 	// Method used to settle the payment instruction. Acceptable Values for SEPA: CLRG. Acceptable Values for SWIFT: INDA (settled by Instructed Agent), INGA (Settled by Instructing Agent), COVE (Cover Payment)
 	// Enum: [CLRG COVE INGA INDA]
@@ -38,7 +45,11 @@ func SettlementWithDefaults(defaults client.Defaults) *Settlement {
 
 		AccountNumber: defaults.GetStringPtr("Settlement", "account_number"),
 
-		AccountNumberCode: defaults.GetStringPtr("Settlement", "account_number_code"),
+		// TODO AccountNumberCode: AccountNumberCode,
+
+		BankID: defaults.GetStringPtr("Settlement", "bank_id"),
+
+		// TODO BankIDCode: BankIDCode,
 
 		Method: defaults.GetStringPtr("Settlement", "method"),
 	}
@@ -56,15 +67,29 @@ func (m *Settlement) WithoutAccountNumber() *Settlement {
 	return m
 }
 
-func (m *Settlement) WithAccountNumberCode(accountNumberCode string) *Settlement {
+func (m *Settlement) WithAccountNumberCode(accountNumberCode AccountNumberCode) *Settlement {
 
-	m.AccountNumberCode = &accountNumberCode
+	m.AccountNumberCode = accountNumberCode
 
 	return m
 }
 
-func (m *Settlement) WithoutAccountNumberCode() *Settlement {
-	m.AccountNumberCode = nil
+func (m *Settlement) WithBankID(bankID string) *Settlement {
+
+	m.BankID = &bankID
+
+	return m
+}
+
+func (m *Settlement) WithoutBankID() *Settlement {
+	m.BankID = nil
+	return m
+}
+
+func (m *Settlement) WithBankIDCode(bankIDCode BankIDCode) *Settlement {
+
+	m.BankIDCode = bankIDCode
+
 	return m
 }
 
@@ -88,6 +113,10 @@ func (m *Settlement) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateBankIDCode(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMethod(formats); err != nil {
 		res = append(res, err)
 	}
@@ -101,7 +130,7 @@ func (m *Settlement) Validate(formats strfmt.Registry) error {
 var settlementTypeAccountNumberCodePropEnum []interface{}
 
 func init() {
-	var res []string
+	var res []AccountNumberCode
 	if err := json.Unmarshal([]byte(`["IBAN","BBAN"]`), &res); err != nil {
 		panic(err)
 	}
@@ -113,14 +142,14 @@ func init() {
 const (
 
 	// SettlementAccountNumberCodeIBAN captures enum value "IBAN"
-	SettlementAccountNumberCodeIBAN string = "IBAN"
+	SettlementAccountNumberCodeIBAN AccountNumberCode = "IBAN"
 
 	// SettlementAccountNumberCodeBBAN captures enum value "BBAN"
-	SettlementAccountNumberCodeBBAN string = "BBAN"
+	SettlementAccountNumberCodeBBAN AccountNumberCode = "BBAN"
 )
 
 // prop value enum
-func (m *Settlement) validateAccountNumberCodeEnum(path, location string, value string) error {
+func (m *Settlement) validateAccountNumberCodeEnum(path, location string, value AccountNumberCode) error {
 	if err := validate.Enum(path, location, value, settlementTypeAccountNumberCodePropEnum); err != nil {
 		return err
 	}
@@ -133,8 +162,52 @@ func (m *Settlement) validateAccountNumberCode(formats strfmt.Registry) error {
 		return nil
 	}
 
-	// value enum
-	if err := m.validateAccountNumberCodeEnum("account_number_code", "body", *m.AccountNumberCode); err != nil {
+	if err := m.AccountNumberCode.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("account_number_code")
+		}
+		return err
+	}
+
+	return nil
+}
+
+var settlementTypeBankIDCodePropEnum []interface{}
+
+func init() {
+	var res []BankIDCode
+	if err := json.Unmarshal([]byte(`["GBDSC"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		settlementTypeBankIDCodePropEnum = append(settlementTypeBankIDCodePropEnum, v)
+	}
+}
+
+const (
+
+	// SettlementBankIDCodeGBDSC captures enum value "GBDSC"
+	SettlementBankIDCodeGBDSC BankIDCode = "GBDSC"
+)
+
+// prop value enum
+func (m *Settlement) validateBankIDCodeEnum(path, location string, value BankIDCode) error {
+	if err := validate.Enum(path, location, value, settlementTypeBankIDCodePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Settlement) validateBankIDCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankIDCode) { // not required
+		return nil
+	}
+
+	if err := m.BankIDCode.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("bank_id_code")
+		}
 		return err
 	}
 

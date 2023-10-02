@@ -351,6 +351,14 @@ func (m *PaymentSubmission) Json() string {
 // swagger:model PaymentSubmissionAttributes
 type PaymentSubmissionAttributes struct {
 
+	// Identification code of the file sent to scheme.
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// Number of the file sent to scheme.
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// Time a payment was released from being held due to a limit breach
 	// Read Only: true
 	// Format: date-time
@@ -392,7 +400,6 @@ type PaymentSubmissionAttributes struct {
 	StatusReason string `json:"status_reason,omitempty"`
 
 	// Date of the submission
-	// Read Only: true
 	// Format: date-time
 	SubmissionDatetime strfmt.DateTime `json:"submission_datetime,omitempty"`
 
@@ -404,6 +411,10 @@ type PaymentSubmissionAttributes struct {
 
 func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentSubmissionAttributes {
 	return &PaymentSubmissionAttributes{
+
+		FileIdentifier: defaults.GetStringPtr("PaymentSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("PaymentSubmissionAttributes", "file_number"),
 
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionAttributes", "limit_breach_end_datetime"),
 
@@ -431,6 +442,30 @@ func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentS
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("PaymentSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *PaymentSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *PaymentSubmissionAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithoutFileIdentifier() *PaymentSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithFileNumber(fileNumber string) *PaymentSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithoutFileNumber() *PaymentSubmissionAttributes {
+	m.FileNumber = nil
+	return m
 }
 
 func (m *PaymentSubmissionAttributes) WithLimitBreachEndDatetime(limitBreachEndDatetime strfmt.DateTime) *PaymentSubmissionAttributes {
@@ -548,6 +583,14 @@ func (m *PaymentSubmissionAttributes) WithTransactionStartDatetime(transactionSt
 func (m *PaymentSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLimitBreachEndDatetime(formats); err != nil {
 		res = append(res, err)
 	}
@@ -583,6 +626,32 @@ func (m *PaymentSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PaymentSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+		return err
+	}
+
 	return nil
 }
 

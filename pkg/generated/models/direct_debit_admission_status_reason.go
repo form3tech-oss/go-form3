@@ -80,6 +80,75 @@ const (
 
 	// DirectDebitAdmissionStatusReasonAuthorisationFailedBySponsor captures enum value "authorisation_failed_by_sponsor"
 	DirectDebitAdmissionStatusReasonAuthorisationFailedBySponsor DirectDebitAdmissionStatusReason = "authorisation_failed_by_sponsor"
+
+	// DirectDebitAdmissionStatusReasonClosedAccount captures enum value "closed_account"
+	DirectDebitAdmissionStatusReasonClosedAccount DirectDebitAdmissionStatusReason = "closed_account"
+
+	// DirectDebitAdmissionStatusReasonBlockedAccount captures enum value "blocked_account"
+	DirectDebitAdmissionStatusReasonBlockedAccount DirectDebitAdmissionStatusReason = "blocked_account"
+
+	// DirectDebitAdmissionStatusReasonInvalidDebtorAccountType captures enum value "invalid_debtor_account_type"
+	DirectDebitAdmissionStatusReasonInvalidDebtorAccountType DirectDebitAdmissionStatusReason = "invalid_debtor_account_type"
+
+	// DirectDebitAdmissionStatusReasonTransactionForbidden captures enum value "transaction_forbidden"
+	DirectDebitAdmissionStatusReasonTransactionForbidden DirectDebitAdmissionStatusReason = "transaction_forbidden"
+
+	// DirectDebitAdmissionStatusReasonInvalidBankOperationCode captures enum value "invalid_bank_operation_code"
+	DirectDebitAdmissionStatusReasonInvalidBankOperationCode DirectDebitAdmissionStatusReason = "invalid_bank_operation_code"
+
+	// DirectDebitAdmissionStatusReasonInsufficientFunds captures enum value "insufficient_funds"
+	DirectDebitAdmissionStatusReasonInsufficientFunds DirectDebitAdmissionStatusReason = "insufficient_funds"
+
+	// DirectDebitAdmissionStatusReasonUnrecognisedInitiatingParty captures enum value "unrecognised_initiating_party"
+	DirectDebitAdmissionStatusReasonUnrecognisedInitiatingParty DirectDebitAdmissionStatusReason = "unrecognised_initiating_party"
+
+	// DirectDebitAdmissionStatusReasonCreditorBankNotRegisteredUnderBic captures enum value "creditor_bank_not_registered_under_bic"
+	DirectDebitAdmissionStatusReasonCreditorBankNotRegisteredUnderBic DirectDebitAdmissionStatusReason = "creditor_bank_not_registered_under_bic"
+
+	// DirectDebitAdmissionStatusReasonDebtorBankNotRegisteredUnderBic captures enum value "debtor_bank_not registered_under_bic"
+	DirectDebitAdmissionStatusReasonDebtorBankNotRegisteredUnderBic DirectDebitAdmissionStatusReason = "debtor_bank_not registered_under_bic"
+
+	// DirectDebitAdmissionStatusReasonOperationCodeIncorrect captures enum value "operation_code_incorrect"
+	DirectDebitAdmissionStatusReasonOperationCodeIncorrect DirectDebitAdmissionStatusReason = "operation_code_incorrect"
+
+	// DirectDebitAdmissionStatusReasonUnauthorisedTransaction captures enum value "unauthorised_transaction"
+	DirectDebitAdmissionStatusReasonUnauthorisedTransaction DirectDebitAdmissionStatusReason = "unauthorised_transaction"
+
+	// DirectDebitAdmissionStatusReasonMissingMandatoryMandateInformation captures enum value "missing_mandatory_mandate_information"
+	DirectDebitAdmissionStatusReasonMissingMandatoryMandateInformation DirectDebitAdmissionStatusReason = "missing_mandatory_mandate_information"
+
+	// DirectDebitAdmissionStatusReasonEndCustomerDeceased captures enum value "end_customer_deceased"
+	DirectDebitAdmissionStatusReasonEndCustomerDeceased DirectDebitAdmissionStatusReason = "end_customer_deceased"
+
+	// DirectDebitAdmissionStatusReasonNotSpecifiedReasonCustomer captures enum value "not_specified_reason_customer"
+	DirectDebitAdmissionStatusReasonNotSpecifiedReasonCustomer DirectDebitAdmissionStatusReason = "not_specified_reason_customer"
+
+	// DirectDebitAdmissionStatusReasonNotSpecifiedReasonAgent captures enum value "not_specified_reason_agent"
+	DirectDebitAdmissionStatusReasonNotSpecifiedReasonAgent DirectDebitAdmissionStatusReason = "not_specified_reason_agent"
+
+	// DirectDebitAdmissionStatusReasonBankIdentifierIncorrect captures enum value "bank_identifier_incorrect"
+	DirectDebitAdmissionStatusReasonBankIdentifierIncorrect DirectDebitAdmissionStatusReason = "bank_identifier_incorrect"
+
+	// DirectDebitAdmissionStatusReasonMissingDebtorAccount captures enum value "missing_debtor_account"
+	DirectDebitAdmissionStatusReasonMissingDebtorAccount DirectDebitAdmissionStatusReason = "missing_debtor_account"
+
+	// DirectDebitAdmissionStatusReasonMissingDebtorNameOrAddress captures enum value "missing_debtor_name_or_address"
+	DirectDebitAdmissionStatusReasonMissingDebtorNameOrAddress DirectDebitAdmissionStatusReason = "missing_debtor_name_or_address"
+
+	// DirectDebitAdmissionStatusReasonMissingCreditorNameOrAddress captures enum value "missing_creditor_name_or_address"
+	DirectDebitAdmissionStatusReasonMissingCreditorNameOrAddress DirectDebitAdmissionStatusReason = "missing_creditor_name_or_address"
+
+	// DirectDebitAdmissionStatusReasonRegulatoryReason captures enum value "regulatory_reason"
+	DirectDebitAdmissionStatusReasonRegulatoryReason DirectDebitAdmissionStatusReason = "regulatory_reason"
+
+	// DirectDebitAdmissionStatusReasonSpecificServiceOfferedByDebtorBank captures enum value "specific_service_offered_by_debtor_bank"
+	DirectDebitAdmissionStatusReasonSpecificServiceOfferedByDebtorBank DirectDebitAdmissionStatusReason = "specific_service_offered_by_debtor_bank"
+
+	// DirectDebitAdmissionStatusReasonRecalledByOriginator captures enum value "recalled_by_originator"
+	DirectDebitAdmissionStatusReasonRecalledByOriginator DirectDebitAdmissionStatusReason = "recalled_by_originator"
+
+	// DirectDebitAdmissionStatusReasonUnknownStatusReason captures enum value "unknown_status_reason"
+	DirectDebitAdmissionStatusReasonUnknownStatusReason DirectDebitAdmissionStatusReason = "unknown_status_reason"
 )
 
 // for schema
@@ -87,7 +156,7 @@ var directDebitAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []DirectDebitAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","invalid_transaction","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid","pending_authorisation_by_sponsor","authorised_by_sponsor","authorisation_failed_by_sponsor"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","invalid_beneficiary_details","invalid_transaction","bankid_not_provisioned","unknown_accountnumber","pending_settlement","settlement_failed","duplication","not_allowed_amount","mandate_cancelled","no_instruction","account_transferred_to_new_psp","paying_bank_cancellation","cancelled_by_payer","payer_deceased","account_closed","scheme_status_invalid","pending_authorisation_by_sponsor","authorised_by_sponsor","authorisation_failed_by_sponsor","closed_account","blocked_account","invalid_debtor_account_type","transaction_forbidden","invalid_bank_operation_code","insufficient_funds","unrecognised_initiating_party","creditor_bank_not_registered_under_bic","debtor_bank_not registered_under_bic","operation_code_incorrect","unauthorised_transaction","missing_mandatory_mandate_information","end_customer_deceased","not_specified_reason_customer","not_specified_reason_agent","bank_identifier_incorrect","missing_debtor_account","missing_debtor_name_or_address","missing_creditor_name_or_address","regulatory_reason","specific_service_offered_by_debtor_bank","recalled_by_originator","unknown_status_reason"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

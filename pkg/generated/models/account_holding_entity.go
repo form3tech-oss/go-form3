@@ -30,7 +30,7 @@ type AccountHoldingEntity struct {
 	// Pattern: ^[A-Z0-9]{0,16}$
 	BankID *string `json:"bank_id"`
 
-	// ISO 20022 code used to identify the type of bank ID being used
+	// bank id code
 	// Required: true
 	// Enum: [GBDSC]
 	BankIDCode *BankIDCode `json:"bank_id_code"`
