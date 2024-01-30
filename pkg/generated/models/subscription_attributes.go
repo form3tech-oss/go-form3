@@ -48,6 +48,10 @@ type SubscriptionAttributes struct {
 	// Pattern: ^[A-Za-z_-]*$
 	RecordType *string `json:"record_type"`
 
+	// All purpose list of key-value pairs to store specific data for the associated subscription.
+	// Max Items: 5
+	UserDefinedData []*SubscriptionUserDefinedData `json:"user_defined_data,omitempty"`
+
 	// user id
 	// Read Only: true
 	// Format: uuid
@@ -70,6 +74,8 @@ func SubscriptionAttributesWithDefaults(defaults client.Defaults) *SubscriptionA
 		Filter: defaults.GetString("SubscriptionAttributes", "filter"),
 
 		RecordType: defaults.GetStringPtr("SubscriptionAttributes", "record_type"),
+
+		UserDefinedData: make([]*SubscriptionUserDefinedData, 0),
 
 		UserID: defaults.GetStrfmtUUID("SubscriptionAttributes", "user_id"),
 	}
@@ -134,6 +140,13 @@ func (m *SubscriptionAttributes) WithoutRecordType() *SubscriptionAttributes {
 	return m
 }
 
+func (m *SubscriptionAttributes) WithUserDefinedData(userDefinedData []*SubscriptionUserDefinedData) *SubscriptionAttributes {
+
+	m.UserDefinedData = userDefinedData
+
+	return m
+}
+
 func (m *SubscriptionAttributes) WithUserID(userID strfmt.UUID) *SubscriptionAttributes {
 
 	m.UserID = userID
@@ -162,6 +175,10 @@ func (m *SubscriptionAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRecordType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserDefinedData(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -250,6 +267,37 @@ func (m *SubscriptionAttributes) validateRecordType(formats strfmt.Registry) err
 
 	if err := validate.Pattern("record_type", "body", string(*m.RecordType), `^[A-Za-z_-]*$`); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *SubscriptionAttributes) validateUserDefinedData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserDefinedData) { // not required
+		return nil
+	}
+
+	iUserDefinedDataSize := int64(len(m.UserDefinedData))
+
+	if err := validate.MaxItems("user_defined_data", "body", iUserDefinedDataSize, 5); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.UserDefinedData); i++ {
+		if swag.IsZero(m.UserDefinedData[i]) { // not required
+			continue
+		}
+
+		if m.UserDefinedData[i] != nil {
+			if err := m.UserDefinedData[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("user_defined_data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
