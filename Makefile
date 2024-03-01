@@ -25,7 +25,7 @@ download-swagger:
 	./scripts/extract_paths.py swagger/form3-swagger-raw.yaml swagger/paths.yaml
 
 .PHONY: modify-swagger-file
-modify-swagger-file: download-swagger install-swagger
+modify-swagger-file: download-swagger
 	# Add an operation name (operationId) to each endpoint
 	yq eval-all 'select(fi==0) * select(fi==1)' swagger/form3-swagger-raw.yaml operationNames.yaml > swagger/form3-swagger-updated.yaml
 	# Delete the ReportDetailsResponse links property (and its definition)
@@ -52,7 +52,7 @@ modify-swagger-file: download-swagger install-swagger
 
 
 .PHONY: generate-client
-generate-client: modify-swagger-file
+generate-client: modify-swagger-file install-swagger
 	@rm -rf pkg/generated
 	@mkdir pkg/generated
 	./bin/swagger generate client -f swagger/form3-swagger-updated.yaml -t pkg/generated/ -T templates -C templates/layout.yaml
