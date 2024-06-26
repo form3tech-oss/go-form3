@@ -32,6 +32,9 @@ const (
 
 	// CallbackTransportHTTPGcpPrivate captures enum value "http_gcp_private"
 	CallbackTransportHTTPGcpPrivate CallbackTransport = "http_gcp_private"
+
+	// CallbackTransportHTTPAzurePrivate captures enum value "http_azure_private"
+	CallbackTransportHTTPAzurePrivate CallbackTransport = "http_azure_private"
 )
 
 // for schema
@@ -39,7 +42,7 @@ var callbackTransportEnum []interface{}
 
 func init() {
 	var res []CallbackTransport
-	if err := json.Unmarshal([]byte(`["queue","http","http_aws_private","http_gcp_private"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["queue","http","http_aws_private","http_gcp_private","http_azure_private"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
