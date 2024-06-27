@@ -21,6 +21,18 @@ A simple client library with:
 - A fluent API with reduced repetition compared with vanilla swagger-go generated clients
 - All the power and flexibility of Go!
 
+## Contributing
+
+Please include proof of running the full test suite over the Form3 API with the following variables set:
+  * `FORM3_CLIENT_ID`
+  * `FORM3_CLIENT_SECRET`
+  * `FORM3_ORGANISATION_ID`
+  * `FORM3_HOST`
+  * `FORM3_PRIVATE_KEY`
+  * `FORM3_PUBLIC_KEY_ID`
+
+In case of external contributions, it is the responsibility of the reviewer to run those tests.
+
 ## Getting started
 
 For interactive usage we recommend using [gore](https://github.com/motemen/gore).

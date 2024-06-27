@@ -10,6 +10,8 @@ import (
 )
 
 func TestQueryPayments(t *testing.T) {
+	skipWhenCredentialsMissing(t)
+
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
@@ -22,6 +24,8 @@ func TestQueryPayments(t *testing.T) {
 }
 
 func TestPaymentFromJsonFile(t *testing.T) {
+	skipWhenCredentialsMissing(t)
+
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
@@ -34,6 +38,8 @@ func TestPaymentFromJsonFile(t *testing.T) {
 }
 
 func TestPaymentToJson(t *testing.T) {
+	skipWhenCredentialsMissing(t)
+
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
