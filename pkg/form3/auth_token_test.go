@@ -11,9 +11,7 @@ import (
 )
 
 func TestTokenAuth(t *testing.T) {
-	if os.Getenv("FORM3_CLIENT_ID") == "" || os.Getenv("FORM3_CLIENT_SECRET") == "" {
-		t.Skip("WARN: FORM3_CLIENT_ID or FORM3_CLIENT_SECRET not set, skipping test")
-	}
+	skipWhenCredentialsMissing(t)
 
 	u, err := uuid.Parse(os.Getenv("FORM3_CLIENT_ID"))
 	require.NoError(t, err)

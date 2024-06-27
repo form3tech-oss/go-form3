@@ -62,6 +62,8 @@ func TestCreateSubscriptionsNewCallbackUriParamsHttpAwsPrivate(t *testing.T) {
 }
 
 func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.SubscriptionAttributes) {
+	skipWhenCredentialsMissing(t)
+
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
@@ -103,6 +105,8 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 }
 
 func TestListSubscriptions(t *testing.T) {
+	skipWhenCredentialsMissing(t)
+
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
