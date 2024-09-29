@@ -23,6 +23,7 @@ type RequestSigningTransport struct {
 	privateKey          *rsa.PrivateKey
 	userAgent           string
 	underlyingTransport http.RoundTripper
+	isDebugMode         bool
 }
 
 func WithUserAgent(ua string) RequestSigningOption {
@@ -46,6 +47,14 @@ func WithPublicKeyID(keyID uuid.UUID) RequestSigningOption {
 func WithUnderlyingRequestSigningTransport(tr http.RoundTripper) RequestSigningOption {
 	return func(t *RequestSigningTransport) {
 		t.underlyingTransport = tr
+	}
+}
+
+// WithDebugMode diverts requests to an endpoint that can help to debug a mismatching request signature between client
+// and server.
+func WithDebugMode(enabled bool) RequestSigningOption {
+	return func(t *RequestSigningTransport) {
+		t.isDebugMode = enabled
 	}
 }
 
@@ -138,6 +147,11 @@ content-length: %d`,
 			base64.StdEncoding.EncodeToString(signature),
 		),
 	)
+
+	if t.isDebugMode {
+		req.Header.Set("signature-debug", base64.StdEncoding.EncodeToString([]byte(msgToSign)))
+		req.URL.Path = "/v1/http-signatures/debug"
+	}
 
 	return t.underlyingTransport.RoundTrip(req)
 }
