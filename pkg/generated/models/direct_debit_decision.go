@@ -11,9 +11,8 @@ import (
 	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -354,7 +353,7 @@ func (m *DirectDebitDecision) Json() string {
 type DirectDebitDecisionAttributes struct {
 
 	// Answer to direct debit request. Only `rejected` can be used.
-	// Enum: [rejected]
+	// Enum: ["rejected"]
 	Answer string `json:"answer,omitempty"`
 
 	// Free text reason in addition to `reason_code`. Maximum length 105 characters for both inbound and outbound direct debit decisions.

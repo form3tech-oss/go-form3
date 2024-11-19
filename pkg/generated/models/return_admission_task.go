@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -44,7 +43,7 @@ type ReturnAdmissionTask struct {
 	Relationships *ReturnAdmissionTaskRelationships `json:"relationships,omitempty"`
 
 	// type
-	// Enum: [return_admission_tasks]
+	// Enum: ["return_admission_tasks"]
 	Type string `json:"type,omitempty"`
 
 	// Version number

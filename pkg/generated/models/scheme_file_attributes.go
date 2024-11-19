@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -23,7 +22,7 @@ type SchemeFileAttributes struct {
 
 	// The format of the file that will be submitted to Form3
 	// Required: true
-	// Enum: [xml]
+	// Enum: ["xml"]
 	FileFormat *string `json:"file_format"`
 
 	// Hashed content of the file
@@ -38,12 +37,12 @@ type SchemeFileAttributes struct {
 
 	// The file type
 	// Required: true
-	// Enum: [switch ISA]
+	// Enum: ["switch","ISA"]
 	FileType *string `json:"file_type"`
 
 	// The algorithm used to generate the signature
 	// Required: true
-	// Enum: [SHA256]
+	// Enum: ["SHA256"]
 	HashingAlgorithm *string `json:"hashing_algorithm"`
 
 	// The count of chunks to be uploaded to the resource
@@ -53,7 +52,7 @@ type SchemeFileAttributes struct {
 
 	// Scheme/gateway that the file is to be processed by
 	// Required: true
-	// Enum: [CASS CISA]
+	// Enum: ["CASS","CISA"]
 	PaymentScheme *string `json:"payment_scheme"`
 }
 

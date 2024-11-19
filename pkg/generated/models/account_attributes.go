@@ -11,9 +11,8 @@ import (
 	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -26,7 +25,7 @@ type AccountAttributes struct {
 	AcceptanceQualifier AcceptanceQualifier `json:"acceptance_qualifier,omitempty"`
 
 	// Is the account business or personal?
-	// Enum: [Personal Business]
+	// Enum: ["Personal","Business"]
 	AccountClassification *string `json:"account_classification,omitempty"`
 
 	// - deprecated - Is the account opted out of account matching, e.g. CoP?
@@ -91,7 +90,7 @@ type AccountAttributes struct {
 	Name []string `json:"name"`
 
 	// Describes the status of the account for name matching via CoP. The value determines the code with which Form3 responds to matched CoP requests to this account.
-	// Enum: [supported switched opted_out not_supported]
+	// Enum: ["supported","switched","opted_out","not_supported"]
 	NameMatchingStatus *string `json:"name_matching_status,omitempty"`
 
 	// organisation identification
@@ -114,7 +113,7 @@ type AccountAttributes struct {
 	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 
 	// Current status of the account
-	// Enum: [pending failed confirmed closed]
+	// Enum: ["pending","failed","confirmed","closed"]
 	Status string `json:"status,omitempty"`
 
 	// status reason

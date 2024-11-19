@@ -10,8 +10,7 @@ package account_identification
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new account identification API client.
@@ -39,8 +38,8 @@ func (a *CreateAccountIdentificationRequest) Do() (*CreateAccountIdentificationC
 		ID:                 "CreateAccountIdentification",
 		Method:             "POST",
 		PathPattern:        "/organisation/accounts/{account_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateAccountIdentificationReader{formats: a.formats},
@@ -72,7 +71,7 @@ func (a *DeleteAccountIdentificationRequest) Do() (*DeleteAccountIdentificationN
 		ID:                 "DeleteAccountIdentification",
 		Method:             "DELETE",
 		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,8 +104,8 @@ func (a *GetAccountIdentificationRequest) Do() (*GetAccountIdentificationOK, err
 		ID:                 "GetAccountIdentification",
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetAccountIdentificationReader{formats: a.formats},
@@ -138,7 +137,7 @@ func (a *ListAccountIdentificationsByAccountRequest) Do() (*ListAccountIdentific
 		ID:                 "ListAccountIdentificationsByAccount",
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts/{account_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -171,8 +170,8 @@ func (a *PatchAccountIdentificationRequest) Do() (*PatchAccountIdentificationOK,
 		ID:                 "PatchAccountIdentification",
 		Method:             "PATCH",
 		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &PatchAccountIdentificationReader{formats: a.formats},

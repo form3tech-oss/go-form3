@@ -11,9 +11,8 @@ import (
 	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )

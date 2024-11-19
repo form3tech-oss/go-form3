@@ -10,8 +10,7 @@ package platformsecurityapi
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new platformsecurityapi API client.
@@ -39,7 +38,7 @@ func (a *GetSigningKeyRequest) Do() (*GetSigningKeyOK, error) {
 		ID:                 "GetSigningKey",
 		Method:             "GET",
 		PathPattern:        "/platform/security/signing_keys/{signingkey_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -72,7 +71,7 @@ func (a *ListSigningKeysRequest) Do() (*ListSigningKeysOK, error) {
 		ID:                 "ListSigningKeys",
 		Method:             "GET",
 		PathPattern:        "/platform/security/signing_keys",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,

@@ -10,8 +10,7 @@ package branches
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new branches API client.
@@ -39,8 +38,8 @@ func (a *CreateBranchRequest) Do() (*CreateBranchCreated, error) {
 		ID:                 "CreateBranch",
 		Method:             "POST",
 		PathPattern:        "/organisation/branches",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateBranchReader{formats: a.formats},
@@ -72,7 +71,7 @@ func (a *DeleteBranchRequest) Do() (*DeleteBranchNoContent, error) {
 		ID:                 "DeleteBranch",
 		Method:             "DELETE",
 		PathPattern:        "/organisation/branches/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,7 +104,7 @@ func (a *GetBranchRequest) Do() (*GetBranchOK, error) {
 		ID:                 "GetBranch",
 		Method:             "GET",
 		PathPattern:        "/organisation/branches/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -138,7 +137,7 @@ func (a *ListBranchesRequest) Do() (*ListBranchesOK, error) {
 		ID:                 "ListBranches",
 		Method:             "GET",
 		PathPattern:        "/organisation/branches",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -171,8 +170,8 @@ func (a *PatchBranchRequest) Do() (*PatchBranchOK, error) {
 		ID:                 "PatchBranch",
 		Method:             "PATCH",
 		PathPattern:        "/organisation/branches/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &PatchBranchReader{formats: a.formats},

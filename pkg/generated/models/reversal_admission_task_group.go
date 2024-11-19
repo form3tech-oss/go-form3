@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // ReversalAdmissionTaskGroup Identifies the task group the task belongs to

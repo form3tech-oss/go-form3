@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // ReturnAdmissionTaskName Identifies the return admission task to be executed

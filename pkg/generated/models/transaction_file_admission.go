@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -27,7 +26,7 @@ type TransactionFileAdmission struct {
 	ID *strfmt.UUID `json:"id"`
 
 	// type
-	// Enum: [transaction_file_admissions]
+	// Enum: ["transaction_file_admissions"]
 	Type string `json:"type,omitempty"`
 
 	// Unique ID of the organisation this resource is created by

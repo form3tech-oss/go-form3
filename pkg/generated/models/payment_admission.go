@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -370,7 +369,7 @@ type PaymentAdmissionAttributes struct {
 	ReferenceID string `json:"reference_id,omitempty"`
 
 	// Route taken for an inbound payment
-	// Enum: [on_us xp]
+	// Enum: ["on_us","xp"]
 	Route string `json:"route,omitempty"`
 
 	// Refers to individual scheme where applicable

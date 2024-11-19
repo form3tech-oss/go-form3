@@ -11,9 +11,8 @@ import (
 	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -373,7 +372,7 @@ type DirectDebitReturnAttributes struct {
 	ReturnCode string `json:"return_code,omitempty"`
 
 	// return initiator
-	// Enum: [BANK CUSTOMER]
+	// Enum: ["BANK","CUSTOMER"]
 	ReturnInitiator string `json:"return_initiator,omitempty"`
 
 	// Date on which the operation is processed by the scheme. Formatted according to ISO 8601 format: YYYY-MM-DD. Only used if different from `processing_date`.

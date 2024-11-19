@@ -11,9 +11,8 @@ import (
 	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -418,7 +417,7 @@ type DirectDebitAttributes struct {
 	SchemeProcessingDate *strfmt.Date `json:"scheme_processing_date,omitempty"`
 
 	// This reference is used by the receiving party to identify whether the related DDI would have been electronic (AUDDIS) or paper‐based.
-	// Enum: [AUDDIS MIGRATING]
+	// Enum: ["AUDDIS","MIGRATING"]
 	SchemeStatus string `json:"scheme_status,omitempty"`
 
 	// Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain.

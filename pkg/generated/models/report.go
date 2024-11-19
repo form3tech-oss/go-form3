@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -49,7 +48,7 @@ type Report struct {
 	Relationships *ReportRelationships `json:"relationships,omitempty"`
 
 	// type
-	// Enum: [reports]
+	// Enum: ["reports"]
 	Type string `json:"type,omitempty"`
 
 	// version

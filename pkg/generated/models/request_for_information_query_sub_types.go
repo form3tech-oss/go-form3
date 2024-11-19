@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // RequestForInformationQuerySubTypes request for information query sub types

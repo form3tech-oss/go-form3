@@ -10,8 +10,7 @@ package branch_identification
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new branch identification API client.
@@ -39,8 +38,8 @@ func (a *CreateBranchIdentificationRequest) Do() (*CreateBranchIdentificationCre
 		ID:                 "CreateBranchIdentification",
 		Method:             "POST",
 		PathPattern:        "/organisation/branches/{branch_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateBranchIdentificationReader{formats: a.formats},
@@ -72,7 +71,7 @@ func (a *DeleteBranchIdentificationRequest) Do() (*DeleteBranchIdentificationNoC
 		ID:                 "DeleteBranchIdentification",
 		Method:             "DELETE",
 		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,8 +104,8 @@ func (a *GetBranchIdentificationRequest) Do() (*GetBranchIdentificationOK, error
 		ID:                 "GetBranchIdentification",
 		Method:             "GET",
 		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetBranchIdentificationReader{formats: a.formats},
@@ -138,7 +137,7 @@ func (a *ListBranchIdentificationsByBranchRequest) Do() (*ListBranchIdentificati
 		ID:                 "ListBranchIdentificationsByBranch",
 		Method:             "GET",
 		PathPattern:        "/organisation/branches/{branch_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -171,8 +170,8 @@ func (a *PatchBranchIdentificationRequest) Do() (*PatchBranchIdentificationOK, e
 		ID:                 "PatchBranchIdentification",
 		Method:             "PATCH",
 		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &PatchBranchIdentificationReader{formats: a.formats},

@@ -10,8 +10,7 @@ package scheme_messages
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new scheme messages API client.
@@ -39,7 +38,7 @@ func (a *GetSchemeMessageRequest) Do() (*GetSchemeMessageOK, error) {
 		ID:                 "GetSchemeMessage",
 		Method:             "GET",
 		PathPattern:        "/notification/schememessages/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -72,7 +71,7 @@ func (a *GetSchemeMessageAdmissionRequest) Do() (*GetSchemeMessageAdmissionOK, e
 		ID:                 "GetSchemeMessageAdmission",
 		Method:             "GET",
 		PathPattern:        "/notification/schememessages/{id}/admissions/{admissionId}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,7 +104,7 @@ func (a *ListSchemeMessagesRequest) Do() (*ListSchemeMessagesOK, error) {
 		ID:                 "ListSchemeMessages",
 		Method:             "GET",
 		PathPattern:        "/notification/schememessages",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,

@@ -7,8 +7,7 @@ package client
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/a_c_e"

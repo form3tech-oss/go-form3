@@ -10,8 +10,7 @@ package scheme_file_api
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new scheme file api API client.
@@ -39,7 +38,7 @@ func (a *CreateSchemeFileRequest) Do() (*CreateSchemeFileCreated, error) {
 		ID:                 "CreateSchemeFile",
 		Method:             "POST",
 		PathPattern:        "/files/schemefiles",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -72,7 +71,7 @@ func (a *CreateSchemeFileAdmissionRequest) Do() (*CreateSchemeFileAdmissionCreat
 		ID:                 "CreateSchemeFileAdmission",
 		Method:             "POST",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}/admissions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,7 +104,7 @@ func (a *CreateSchemeFileSubmissionRequest) Do() (*CreateSchemeFileSubmissionCre
 		ID:                 "CreateSchemeFileSubmission",
 		Method:             "POST",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}/submissions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -138,7 +137,7 @@ func (a *GetSchemeFileRequest) Do() (*GetSchemeFileOK, error) {
 		ID:                 "GetSchemeFile",
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -171,7 +170,7 @@ func (a *GetSchemeFileAdmissionRequest) Do() (*GetSchemeFileAdmissionOK, error) 
 		ID:                 "GetSchemeFileAdmission",
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}/admissions/{scheme_file_admission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -204,7 +203,7 @@ func (a *GetSchemeFileSubmissionRequest) Do() (*GetSchemeFileSubmissionOK, error
 		ID:                 "GetSchemeFileSubmission",
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}/submissions/{scheme_file_submission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -237,7 +236,7 @@ func (a *ListSchemeFilesRequest) Do() (*ListSchemeFilesOK, error) {
 		ID:                 "ListSchemeFiles",
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -270,7 +269,7 @@ func (a *UploadSchemeFileRequest) Do() (*UploadSchemeFileOK, error) {
 		ID:                 "UploadSchemeFile",
 		Method:             "PUT",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/octet-stream"},
 		Schemes:            []string{"https"},
 		Params:             a,

@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // PaymentAdmissionTaskGroup Identifies the task group the task belongs to

@@ -10,8 +10,7 @@ package direct_debits_reads
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new direct debits reads API client.
@@ -39,7 +38,7 @@ func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
 		ID:                 "ListDirectDebits",
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,

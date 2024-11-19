@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -42,7 +41,7 @@ type QueryAttributes struct {
 
 	// query type
 	// Required: true
-	// Enum: [claim_non_receipt modify_payment status_request request_for_information]
+	// Enum: ["claim_non_receipt","modify_payment","status_request","request_for_information"]
 	QueryType *string `json:"query_type"`
 
 	// references
@@ -55,7 +54,7 @@ type QueryAttributes struct {
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
 
 	// status
-	// Enum: [pending closed]
+	// Enum: ["pending","closed"]
 	Status string `json:"status,omitempty"`
 
 	// unstructured message

@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -36,7 +35,7 @@ type NewReportRequestSubmission struct {
 
 	// type
 	// Required: true
-	// Enum: [report_request_submissions]
+	// Enum: ["report_request_submissions"]
 	Type string `json:"type"`
 
 	// version

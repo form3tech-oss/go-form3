@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -33,7 +32,7 @@ type PaymentAdmissionTaskUpdate struct {
 	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
 
 	// type
-	// Enum: [payment_admission_tasks]
+	// Enum: ["payment_admission_tasks"]
 	Type string `json:"type,omitempty"`
 
 	// Version number

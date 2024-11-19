@@ -10,8 +10,7 @@ package roles
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new roles API client.
@@ -39,8 +38,8 @@ func (a *CreateRolesRequest) Do() (*CreateRolesCreated, error) {
 		ID:                 "CreateRoles",
 		Method:             "POST",
 		PathPattern:        "/security/roles",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateRolesReader{formats: a.formats},
@@ -72,7 +71,7 @@ func (a *DeleteRoleRequest) Do() (*DeleteRoleNoContent, error) {
 		ID:                 "DeleteRole",
 		Method:             "DELETE",
 		PathPattern:        "/security/roles/{role_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,7 +104,7 @@ func (a *GetRoleRequest) Do() (*GetRoleOK, error) {
 		ID:                 "GetRole",
 		Method:             "GET",
 		PathPattern:        "/security/roles/{role_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -138,7 +137,7 @@ func (a *ListRolesRequest) Do() (*ListRolesOK, error) {
 		ID:                 "ListRoles",
 		Method:             "GET",
 		PathPattern:        "/security/roles",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,

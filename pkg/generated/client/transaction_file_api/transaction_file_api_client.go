@@ -10,8 +10,7 @@ package transaction_file_api
 import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new transaction file api API client.
@@ -39,7 +38,7 @@ func (a *CreateTransactionFileRequest) Do() (*CreateTransactionFileCreated, erro
 		ID:                 "CreateTransactionFile",
 		Method:             "POST",
 		PathPattern:        "/files/transactions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -72,7 +71,7 @@ func (a *CreateTransactionFileAdmissionRequest) Do() (*CreateTransactionFileAdmi
 		ID:                 "CreateTransactionFileAdmission",
 		Method:             "POST",
 		PathPattern:        "/files/transactions/{transaction_file_id}/admissions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -105,7 +104,7 @@ func (a *CreateTransactionFileSubmissionRequest) Do() (*CreateTransactionFileSub
 		ID:                 "CreateTransactionFileSubmission",
 		Method:             "POST",
 		PathPattern:        "/files/transactions/{transaction_file_id}/submissions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -138,7 +137,7 @@ func (a *GetTransactionFileRequest) Do() (*GetTransactionFileOK, error) {
 		ID:                 "GetTransactionFile",
 		Method:             "GET",
 		PathPattern:        "/files/transactions/{transaction_file_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -171,7 +170,7 @@ func (a *GetTransactionFileAdmissionRequest) Do() (*GetTransactionFileAdmissionO
 		ID:                 "GetTransactionFileAdmission",
 		Method:             "GET",
 		PathPattern:        "/files/transactions/{transaction_file_id}/admissions/{transaction_file_admission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -204,7 +203,7 @@ func (a *GetTransactionFileSubmissionRequest) Do() (*GetTransactionFileSubmissio
 		ID:                 "GetTransactionFileSubmission",
 		Method:             "GET",
 		PathPattern:        "/files/transactions/{transaction_file_id}/submissions/{transaction_file_submission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -237,7 +236,7 @@ func (a *ListTransactionFilesRequest) Do() (*ListTransactionFilesOK, error) {
 		ID:                 "ListTransactionFiles",
 		Method:             "GET",
 		PathPattern:        "/files/transactions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -270,7 +269,7 @@ func (a *UploadTransactionFileRequest) Do() (*UploadTransactionFileOK, error) {
 		ID:                 "UploadTransactionFile",
 		Method:             "PUT",
 		PathPattern:        "/files/transactions/{transaction_file_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/octet-stream"},
 		Schemes:            []string{"https"},
 		Params:             a,

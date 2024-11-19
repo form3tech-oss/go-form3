@@ -10,9 +10,8 @@ import (
 	"log"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -25,18 +24,18 @@ type Settlement struct {
 	AccountNumber *string `json:"account_number,omitempty"`
 
 	// account number code
-	// Enum: [IBAN BBAN]
+	// Enum: ["IBAN","BBAN"]
 	AccountNumberCode AccountNumberCode `json:"account_number_code,omitempty"`
 
 	// bank id
 	BankID *string `json:"bank_id,omitempty"`
 
 	// bank id code
-	// Enum: [GBDSC]
+	// Enum: ["GBDSC"]
 	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
 
 	// Method used to settle the payment instruction. Acceptable Values for SEPA: CLRG. Acceptable Values for SWIFT: INDA (settled by Instructed Agent), INGA (Settled by Instructing Agent), COVE (Cover Payment)
-	// Enum: [CLRG COVE INGA INDA]
+	// Enum: ["CLRG","COVE","INGA","INDA"]
 	Method *string `json:"method,omitempty"`
 }
 

@@ -11,9 +11,8 @@ import (
 	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -28,7 +27,7 @@ type TransactionFileSubmission struct {
 	ID *strfmt.UUID `json:"id"`
 
 	// type
-	// Enum: [transaction_file_submissions]
+	// Enum: ["transaction_file_submissions"]
 	Type string `json:"type,omitempty"`
 
 	// Unique ID of the organisation this resource is created by
