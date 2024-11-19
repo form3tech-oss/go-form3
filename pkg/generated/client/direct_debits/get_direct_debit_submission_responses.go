@@ -42,7 +42,8 @@ func NewGetDirectDebitSubmissionOK() *GetDirectDebitSubmissionOK {
 	return &GetDirectDebitSubmissionOK{}
 }
 
-/*GetDirectDebitSubmissionOK handles this case with default header values.
+/*
+GetDirectDebitSubmissionOK handles this case with default header values.
 
 Direct debit submission details
 */

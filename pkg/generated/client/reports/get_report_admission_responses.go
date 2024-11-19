@@ -63,7 +63,8 @@ func NewGetReportAdmissionOK() *GetReportAdmissionOK {
 	return &GetReportAdmissionOK{}
 }
 
-/*GetReportAdmissionOK handles this case with default header values.
+/*
+GetReportAdmissionOK handles this case with default header values.
 
 Get report admission by Id
 */
@@ -97,7 +98,8 @@ func NewGetReportAdmissionBadRequest() *GetReportAdmissionBadRequest {
 	return &GetReportAdmissionBadRequest{}
 }
 
-/*GetReportAdmissionBadRequest handles this case with default header values.
+/*
+GetReportAdmissionBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -131,7 +133,8 @@ func NewGetReportAdmissionForbidden() *GetReportAdmissionForbidden {
 	return &GetReportAdmissionForbidden{}
 }
 
-/*GetReportAdmissionForbidden handles this case with default header values.
+/*
+GetReportAdmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -165,7 +168,8 @@ func NewGetReportAdmissionNotFound() *GetReportAdmissionNotFound {
 	return &GetReportAdmissionNotFound{}
 }
 
-/*GetReportAdmissionNotFound handles this case with default header values.
+/*
+GetReportAdmissionNotFound handles this case with default header values.
 
 Not Found
 */

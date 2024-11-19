@@ -49,7 +49,8 @@ func NewPostDirectdebitsIDReversalsReversalIDSubmissionsCreated() *PostDirectdeb
 	return &PostDirectdebitsIDReversalsReversalIDSubmissionsCreated{}
 }
 
-/*PostDirectdebitsIDReversalsReversalIDSubmissionsCreated handles this case with default header values.
+/*
+PostDirectdebitsIDReversalsReversalIDSubmissionsCreated handles this case with default header values.
 
 Reversal submission creation response
 */
@@ -83,7 +84,8 @@ func NewPostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest() *PostDirect
 	return &PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest{}
 }
 
-/*PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest handles this case with default header values.
+/*
+PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest handles this case with default header values.
 
 Reversal submission creation error
 */

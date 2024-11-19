@@ -56,7 +56,8 @@ func NewGetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK() *Get
 	return &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK handles this case with default header values.
 
 Sort code and account number details
 */
@@ -90,7 +91,8 @@ func NewGetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadReques
 	return &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest handles this case with default header values.
 
 Validation error
 */
@@ -124,7 +126,8 @@ func NewGetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound(
 	return &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound handles this case with default header values.
 
 Validation failed
 */

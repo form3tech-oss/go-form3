@@ -42,7 +42,8 @@ func NewGetDirectdebitsIDDecisionsDecisionIDOK() *GetDirectdebitsIDDecisionsDeci
 	return &GetDirectdebitsIDDecisionsDecisionIDOK{}
 }
 
-/*GetDirectdebitsIDDecisionsDecisionIDOK handles this case with default header values.
+/*
+GetDirectdebitsIDDecisionsDecisionIDOK handles this case with default header values.
 
 Direct debit decision details
 */

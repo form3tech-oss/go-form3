@@ -49,7 +49,8 @@ func NewCreateDirectDebitReversalCreated() *CreateDirectDebitReversalCreated {
 	return &CreateDirectDebitReversalCreated{}
 }
 
-/*CreateDirectDebitReversalCreated handles this case with default header values.
+/*
+CreateDirectDebitReversalCreated handles this case with default header values.
 
 Reversal creation response
 */
@@ -83,7 +84,8 @@ func NewCreateDirectDebitReversalBadRequest() *CreateDirectDebitReversalBadReque
 	return &CreateDirectDebitReversalBadRequest{}
 }
 
-/*CreateDirectDebitReversalBadRequest handles this case with default header values.
+/*
+CreateDirectDebitReversalBadRequest handles this case with default header values.
 
 Reversal creation error
 */

@@ -49,7 +49,8 @@ func NewCreateDirectDebitReturnSubmissionCreated() *CreateDirectDebitReturnSubmi
 	return &CreateDirectDebitReturnSubmissionCreated{}
 }
 
-/*CreateDirectDebitReturnSubmissionCreated handles this case with default header values.
+/*
+CreateDirectDebitReturnSubmissionCreated handles this case with default header values.
 
 Return submission creation response
 */
@@ -83,7 +84,8 @@ func NewCreateDirectDebitReturnSubmissionBadRequest() *CreateDirectDebitReturnSu
 	return &CreateDirectDebitReturnSubmissionBadRequest{}
 }
 
-/*CreateDirectDebitReturnSubmissionBadRequest handles this case with default header values.
+/*
+CreateDirectDebitReturnSubmissionBadRequest handles this case with default header values.
 
 Return submission creation error
 */

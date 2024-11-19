@@ -68,7 +68,7 @@ func (o *GetTransactionFileSubmissionRequest) WithTransactionFileSubmissionID(tr
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get transaction file submission Request
 func (o *GetTransactionFileSubmissionRequest) WithContext(ctx context.Context) *GetTransactionFileSubmissionRequest {
 	o.Context = ctx

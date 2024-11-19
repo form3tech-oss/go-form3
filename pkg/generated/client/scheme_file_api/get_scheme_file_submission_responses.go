@@ -70,7 +70,8 @@ func NewGetSchemeFileSubmissionOK() *GetSchemeFileSubmissionOK {
 	return &GetSchemeFileSubmissionOK{}
 }
 
-/*GetSchemeFileSubmissionOK handles this case with default header values.
+/*
+GetSchemeFileSubmissionOK handles this case with default header values.
 
 Scheme File Submission Response
 */
@@ -104,7 +105,8 @@ func NewGetSchemeFileSubmissionUnauthorized() *GetSchemeFileSubmissionUnauthoriz
 	return &GetSchemeFileSubmissionUnauthorized{}
 }
 
-/*GetSchemeFileSubmissionUnauthorized handles this case with default header values.
+/*
+GetSchemeFileSubmissionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -138,7 +140,8 @@ func NewGetSchemeFileSubmissionForbidden() *GetSchemeFileSubmissionForbidden {
 	return &GetSchemeFileSubmissionForbidden{}
 }
 
-/*GetSchemeFileSubmissionForbidden handles this case with default header values.
+/*
+GetSchemeFileSubmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewGetSchemeFileSubmissionNotFound() *GetSchemeFileSubmissionNotFound {
 	return &GetSchemeFileSubmissionNotFound{}
 }
 
-/*GetSchemeFileSubmissionNotFound handles this case with default header values.
+/*
+GetSchemeFileSubmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -206,7 +210,8 @@ func NewGetSchemeFileSubmissionInternalServerError() *GetSchemeFileSubmissionInt
 	return &GetSchemeFileSubmissionInternalServerError{}
 }
 
-/*GetSchemeFileSubmissionInternalServerError handles this case with default header values.
+/*
+GetSchemeFileSubmissionInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

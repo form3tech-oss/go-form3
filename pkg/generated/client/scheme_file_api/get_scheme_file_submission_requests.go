@@ -68,7 +68,7 @@ func (o *GetSchemeFileSubmissionRequest) WithSchemeFileSubmissionID(schemeFileSu
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get scheme file submission Request
 func (o *GetSchemeFileSubmissionRequest) WithContext(ctx context.Context) *GetSchemeFileSubmissionRequest {
 	o.Context = ctx

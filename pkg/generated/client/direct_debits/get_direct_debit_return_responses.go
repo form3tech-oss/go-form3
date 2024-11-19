@@ -42,7 +42,8 @@ func NewGetDirectDebitReturnOK() *GetDirectDebitReturnOK {
 	return &GetDirectDebitReturnOK{}
 }
 
-/*GetDirectDebitReturnOK handles this case with default header values.
+/*
+GetDirectDebitReturnOK handles this case with default header values.
 
 Return details
 */

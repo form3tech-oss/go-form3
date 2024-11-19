@@ -55,7 +55,7 @@ func (o *GetSchemeMessageRequest) WithID(id strfmt.UUID) *GetSchemeMessageReques
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get scheme message Request
 func (o *GetSchemeMessageRequest) WithContext(ctx context.Context) *GetSchemeMessageRequest {
 	o.Context = ctx

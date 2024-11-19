@@ -77,7 +77,8 @@ func NewCreateTransactionFileCreated() *CreateTransactionFileCreated {
 	return &CreateTransactionFileCreated{}
 }
 
-/*CreateTransactionFileCreated handles this case with default header values.
+/*
+CreateTransactionFileCreated handles this case with default header values.
 
 Transaction File Creation Response
 */
@@ -111,7 +112,8 @@ func NewCreateTransactionFileBadRequest() *CreateTransactionFileBadRequest {
 	return &CreateTransactionFileBadRequest{}
 }
 
-/*CreateTransactionFileBadRequest handles this case with default header values.
+/*
+CreateTransactionFileBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -145,7 +147,8 @@ func NewCreateTransactionFileUnauthorized() *CreateTransactionFileUnauthorized {
 	return &CreateTransactionFileUnauthorized{}
 }
 
-/*CreateTransactionFileUnauthorized handles this case with default header values.
+/*
+CreateTransactionFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -179,7 +182,8 @@ func NewCreateTransactionFileForbidden() *CreateTransactionFileForbidden {
 	return &CreateTransactionFileForbidden{}
 }
 
-/*CreateTransactionFileForbidden handles this case with default header values.
+/*
+CreateTransactionFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -213,7 +217,8 @@ func NewCreateTransactionFileConflict() *CreateTransactionFileConflict {
 	return &CreateTransactionFileConflict{}
 }
 
-/*CreateTransactionFileConflict handles this case with default header values.
+/*
+CreateTransactionFileConflict handles this case with default header values.
 
 Conflict
 */
@@ -247,7 +252,8 @@ func NewCreateTransactionFileInternalServerError() *CreateTransactionFileInterna
 	return &CreateTransactionFileInternalServerError{}
 }
 
-/*CreateTransactionFileInternalServerError handles this case with default header values.
+/*
+CreateTransactionFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

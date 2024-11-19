@@ -42,7 +42,8 @@ func NewGetDirectDebitReversalAdmissionOK() *GetDirectDebitReversalAdmissionOK {
 	return &GetDirectDebitReversalAdmissionOK{}
 }
 
-/*GetDirectDebitReversalAdmissionOK handles this case with default header values.
+/*
+GetDirectDebitReversalAdmissionOK handles this case with default header values.
 
 Reversal admission details
 */

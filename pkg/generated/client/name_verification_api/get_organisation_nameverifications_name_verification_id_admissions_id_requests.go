@@ -68,7 +68,7 @@ func (o *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDRequest) 
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get organisation nameverifications name verification ID admissions ID Request
 func (o *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDRequest) WithContext(ctx context.Context) *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDRequest {
 	o.Context = ctx

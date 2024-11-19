@@ -68,7 +68,7 @@ func (o *GetMandateAdmissionRequest) WithID(id strfmt.UUID) *GetMandateAdmission
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get mandate admission Request
 func (o *GetMandateAdmissionRequest) WithContext(ctx context.Context) *GetMandateAdmissionRequest {
 	o.Context = ctx

@@ -42,7 +42,8 @@ func NewGetDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDOK() *GetDirect
 	return &GetDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDOK{}
 }
 
-/*GetDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDOK handles this case with default header values.
+/*
+GetDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDOK handles this case with default header values.
 
 Decision admission details
 */

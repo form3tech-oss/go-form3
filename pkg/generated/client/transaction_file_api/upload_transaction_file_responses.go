@@ -84,7 +84,8 @@ func NewUploadTransactionFileOK() *UploadTransactionFileOK {
 	return &UploadTransactionFileOK{}
 }
 
-/*UploadTransactionFileOK handles this case with default header values.
+/*
+UploadTransactionFileOK handles this case with default header values.
 
 Transaction File Response
 */
@@ -118,7 +119,8 @@ func NewUploadTransactionFileBadRequest() *UploadTransactionFileBadRequest {
 	return &UploadTransactionFileBadRequest{}
 }
 
-/*UploadTransactionFileBadRequest handles this case with default header values.
+/*
+UploadTransactionFileBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -152,7 +154,8 @@ func NewUploadTransactionFileUnauthorized() *UploadTransactionFileUnauthorized {
 	return &UploadTransactionFileUnauthorized{}
 }
 
-/*UploadTransactionFileUnauthorized handles this case with default header values.
+/*
+UploadTransactionFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -186,7 +189,8 @@ func NewUploadTransactionFileForbidden() *UploadTransactionFileForbidden {
 	return &UploadTransactionFileForbidden{}
 }
 
-/*UploadTransactionFileForbidden handles this case with default header values.
+/*
+UploadTransactionFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -220,7 +224,8 @@ func NewUploadTransactionFileNotFound() *UploadTransactionFileNotFound {
 	return &UploadTransactionFileNotFound{}
 }
 
-/*UploadTransactionFileNotFound handles this case with default header values.
+/*
+UploadTransactionFileNotFound handles this case with default header values.
 
 Transaction File Not Found
 */
@@ -254,7 +259,8 @@ func NewUploadTransactionFileConflict() *UploadTransactionFileConflict {
 	return &UploadTransactionFileConflict{}
 }
 
-/*UploadTransactionFileConflict handles this case with default header values.
+/*
+UploadTransactionFileConflict handles this case with default header values.
 
 Transaction File Conflict
 */
@@ -288,7 +294,8 @@ func NewUploadTransactionFileInternalServerError() *UploadTransactionFileInterna
 	return &UploadTransactionFileInternalServerError{}
 }
 
-/*UploadTransactionFileInternalServerError handles this case with default header values.
+/*
+UploadTransactionFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

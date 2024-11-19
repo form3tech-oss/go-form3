@@ -83,7 +83,7 @@ func (o *ListUsersRequest) WithoutPageSize() *ListUsersRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list users Request
 func (o *ListUsersRequest) WithContext(ctx context.Context) *ListUsersRequest {
 	o.Context = ctx

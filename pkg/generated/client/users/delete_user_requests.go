@@ -69,7 +69,7 @@ func (o *DeleteUserRequest) WithVersion(version int64) *DeleteUserRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete user Request
 func (o *DeleteUserRequest) WithContext(ctx context.Context) *DeleteUserRequest {
 	o.Context = ctx

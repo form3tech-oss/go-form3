@@ -73,7 +73,7 @@ func (o *CreateMandateRequest) WithoutMandateCreationRequest() *CreateMandateReq
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create mandate Request
 func (o *CreateMandateRequest) WithContext(ctx context.Context) *CreateMandateRequest {
 	o.Context = ctx

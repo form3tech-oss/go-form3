@@ -176,7 +176,7 @@ func (o *ListAuditEntriesRequest) WithRecordType(recordType string) *ListAuditEn
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list audit entries Request
 func (o *ListAuditEntriesRequest) WithContext(ctx context.Context) *ListAuditEntriesRequest {
 	o.Context = ctx

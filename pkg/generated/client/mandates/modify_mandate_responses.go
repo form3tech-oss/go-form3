@@ -49,7 +49,8 @@ func NewModifyMandateOK() *ModifyMandateOK {
 	return &ModifyMandateOK{}
 }
 
-/*ModifyMandateOK handles this case with default header values.
+/*
+ModifyMandateOK handles this case with default header values.
 
 Mandate details
 */
@@ -83,7 +84,8 @@ func NewModifyMandateBadRequest() *ModifyMandateBadRequest {
 	return &ModifyMandateBadRequest{}
 }
 
-/*ModifyMandateBadRequest handles this case with default header values.
+/*
+ModifyMandateBadRequest handles this case with default header values.
 
 Mandate update error
 */

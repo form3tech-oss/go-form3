@@ -42,7 +42,8 @@ func NewGetSubscriptionOK() *GetSubscriptionOK {
 	return &GetSubscriptionOK{}
 }
 
-/*GetSubscriptionOK handles this case with default header values.
+/*
+GetSubscriptionOK handles this case with default header values.
 
 Subscription details
 */

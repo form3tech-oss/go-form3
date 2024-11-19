@@ -42,7 +42,8 @@ func NewListUsersOK() *ListUsersOK {
 	return &ListUsersOK{}
 }
 
-/*ListUsersOK handles this case with default header values.
+/*
+ListUsersOK handles this case with default header values.
 
 List of user details
 */

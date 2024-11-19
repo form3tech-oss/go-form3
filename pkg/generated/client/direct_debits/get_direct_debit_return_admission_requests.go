@@ -81,7 +81,7 @@ func (o *GetDirectDebitReturnAdmissionRequest) WithReturnID(returnID strfmt.UUID
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get direct debit return admission Request
 func (o *GetDirectDebitReturnAdmissionRequest) WithContext(ctx context.Context) *GetDirectDebitReturnAdmissionRequest {
 	o.Context = ctx

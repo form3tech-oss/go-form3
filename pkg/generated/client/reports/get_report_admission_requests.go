@@ -68,7 +68,7 @@ func (o *GetReportAdmissionRequest) WithID(id strfmt.UUID) *GetReportAdmissionRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get report admission Request
 func (o *GetReportAdmissionRequest) WithContext(ctx context.Context) *GetReportAdmissionRequest {
 	o.Context = ctx

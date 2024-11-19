@@ -73,7 +73,7 @@ func (o *CreateDirectDebitRequest) WithoutDirectDebitCreationRequest() *CreateDi
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create direct debit Request
 func (o *CreateDirectDebitRequest) WithContext(ctx context.Context) *CreateDirectDebitRequest {
 	o.Context = ctx

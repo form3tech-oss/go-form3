@@ -39,7 +39,8 @@ func NewDeleteAccountNoContent() *DeleteAccountNoContent {
 	return &DeleteAccountNoContent{}
 }
 
-/*DeleteAccountNoContent handles this case with default header values.
+/*
+DeleteAccountNoContent handles this case with default header values.
 
 Account deleted
 */

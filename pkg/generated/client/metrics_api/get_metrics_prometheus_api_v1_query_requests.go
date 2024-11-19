@@ -95,7 +95,7 @@ func (o *GetMetricsPrometheusAPIV1QueryRequest) WithoutTimeout() *GetMetricsProm
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get metrics prometheus API v1 query Request
 func (o *GetMetricsPrometheusAPIV1QueryRequest) WithContext(ctx context.Context) *GetMetricsPrometheusAPIV1QueryRequest {
 	o.Context = ctx

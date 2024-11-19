@@ -42,7 +42,8 @@ func NewListRolesOK() *ListRolesOK {
 	return &ListRolesOK{}
 }
 
-/*ListRolesOK handles this case with default header values.
+/*
+ListRolesOK handles this case with default header values.
 
 List of role details
 */

@@ -42,7 +42,8 @@ func NewListClaimsOK() *ListClaimsOK {
 	return &ListClaimsOK{}
 }
 
-/*ListClaimsOK handles this case with default header values.
+/*
+ListClaimsOK handles this case with default header values.
 
 List of claims details
 */

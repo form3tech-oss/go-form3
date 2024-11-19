@@ -49,7 +49,8 @@ func NewCreateClaimCreated() *CreateClaimCreated {
 	return &CreateClaimCreated{}
 }
 
-/*CreateClaimCreated handles this case with default header values.
+/*
+CreateClaimCreated handles this case with default header values.
 
 Claim creation response
 */
@@ -83,7 +84,8 @@ func NewCreateClaimBadRequest() *CreateClaimBadRequest {
 	return &CreateClaimBadRequest{}
 }
 
-/*CreateClaimBadRequest handles this case with default header values.
+/*
+CreateClaimBadRequest handles this case with default header values.
 
 Claim creation error
 */

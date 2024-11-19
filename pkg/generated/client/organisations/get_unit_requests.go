@@ -55,7 +55,7 @@ func (o *GetUnitRequest) WithID(id strfmt.UUID) *GetUnitRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get unit Request
 func (o *GetUnitRequest) WithContext(ctx context.Context) *GetUnitRequest {
 	o.Context = ctx

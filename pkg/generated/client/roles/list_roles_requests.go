@@ -83,7 +83,7 @@ func (o *ListRolesRequest) WithoutPageSize() *ListRolesRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list roles Request
 func (o *ListRolesRequest) WithContext(ctx context.Context) *ListRolesRequest {
 	o.Context = ctx

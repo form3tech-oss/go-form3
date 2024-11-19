@@ -73,7 +73,7 @@ func (o *CreateTransactionFileRequest) WithoutTransactionFileCreationRequest() *
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create transaction file Request
 func (o *CreateTransactionFileRequest) WithContext(ctx context.Context) *CreateTransactionFileRequest {
 	o.Context = ctx

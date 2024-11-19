@@ -84,7 +84,8 @@ func NewUploadSchemeFileOK() *UploadSchemeFileOK {
 	return &UploadSchemeFileOK{}
 }
 
-/*UploadSchemeFileOK handles this case with default header values.
+/*
+UploadSchemeFileOK handles this case with default header values.
 
 Scheme File Response
 */
@@ -118,7 +119,8 @@ func NewUploadSchemeFileBadRequest() *UploadSchemeFileBadRequest {
 	return &UploadSchemeFileBadRequest{}
 }
 
-/*UploadSchemeFileBadRequest handles this case with default header values.
+/*
+UploadSchemeFileBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -152,7 +154,8 @@ func NewUploadSchemeFileUnauthorized() *UploadSchemeFileUnauthorized {
 	return &UploadSchemeFileUnauthorized{}
 }
 
-/*UploadSchemeFileUnauthorized handles this case with default header values.
+/*
+UploadSchemeFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -186,7 +189,8 @@ func NewUploadSchemeFileForbidden() *UploadSchemeFileForbidden {
 	return &UploadSchemeFileForbidden{}
 }
 
-/*UploadSchemeFileForbidden handles this case with default header values.
+/*
+UploadSchemeFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -220,7 +224,8 @@ func NewUploadSchemeFileNotFound() *UploadSchemeFileNotFound {
 	return &UploadSchemeFileNotFound{}
 }
 
-/*UploadSchemeFileNotFound handles this case with default header values.
+/*
+UploadSchemeFileNotFound handles this case with default header values.
 
 Scheme File Not Found
 */
@@ -254,7 +259,8 @@ func NewUploadSchemeFileConflict() *UploadSchemeFileConflict {
 	return &UploadSchemeFileConflict{}
 }
 
-/*UploadSchemeFileConflict handles this case with default header values.
+/*
+UploadSchemeFileConflict handles this case with default header values.
 
 Scheme File Conflict
 */
@@ -288,7 +294,8 @@ func NewUploadSchemeFileInternalServerError() *UploadSchemeFileInternalServerErr
 	return &UploadSchemeFileInternalServerError{}
 }
 
-/*UploadSchemeFileInternalServerError handles this case with default header values.
+/*
+UploadSchemeFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

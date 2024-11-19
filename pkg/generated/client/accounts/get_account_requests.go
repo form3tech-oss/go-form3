@@ -55,7 +55,7 @@ func (o *GetAccountRequest) WithID(id strfmt.UUID) *GetAccountRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get account Request
 func (o *GetAccountRequest) WithContext(ctx context.Context) *GetAccountRequest {
 	o.Context = ctx

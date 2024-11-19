@@ -99,7 +99,7 @@ func (o *CreateMandateReturnSubmissionRequest) WithReturnID(returnID strfmt.UUID
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create mandate return submission Request
 func (o *CreateMandateReturnSubmissionRequest) WithContext(ctx context.Context) *CreateMandateReturnSubmissionRequest {
 	o.Context = ctx

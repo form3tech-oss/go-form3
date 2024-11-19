@@ -55,7 +55,7 @@ func (o *GetDirectDebitRequest) WithID(id strfmt.UUID) *GetDirectDebitRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get direct debit Request
 func (o *GetDirectDebitRequest) WithContext(ctx context.Context) *GetDirectDebitRequest {
 	o.Context = ctx

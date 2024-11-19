@@ -68,7 +68,7 @@ func (o *DeleteAceRequest) WithRoleID(roleID strfmt.UUID) *DeleteAceRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete ace Request
 func (o *DeleteAceRequest) WithContext(ctx context.Context) *DeleteAceRequest {
 	o.Context = ctx

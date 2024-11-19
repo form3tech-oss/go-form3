@@ -68,7 +68,7 @@ func (o *GetDirectdebitsIDDecisionsDecisionIDRequest) WithID(id strfmt.UUID) *Ge
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get directdebits ID decisions decision ID Request
 func (o *GetDirectdebitsIDDecisionsDecisionIDRequest) WithContext(ctx context.Context) *GetDirectdebitsIDDecisionsDecisionIDRequest {
 	o.Context = ctx

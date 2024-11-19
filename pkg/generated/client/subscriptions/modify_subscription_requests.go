@@ -86,7 +86,7 @@ func (o *ModifySubscriptionRequest) WithID(id strfmt.UUID) *ModifySubscriptionRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the modify subscription Request
 func (o *ModifySubscriptionRequest) WithContext(ctx context.Context) *ModifySubscriptionRequest {
 	o.Context = ctx

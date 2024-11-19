@@ -49,7 +49,8 @@ func NewCreateMandateReturnCreated() *CreateMandateReturnCreated {
 	return &CreateMandateReturnCreated{}
 }
 
-/*CreateMandateReturnCreated handles this case with default header values.
+/*
+CreateMandateReturnCreated handles this case with default header values.
 
 Return creation response
 */
@@ -83,7 +84,8 @@ func NewCreateMandateReturnBadRequest() *CreateMandateReturnBadRequest {
 	return &CreateMandateReturnBadRequest{}
 }
 
-/*CreateMandateReturnBadRequest handles this case with default header values.
+/*
+CreateMandateReturnBadRequest handles this case with default header values.
 
 Return creation error
 */

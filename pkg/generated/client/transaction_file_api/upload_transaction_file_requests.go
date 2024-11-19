@@ -75,7 +75,7 @@ func (o *UploadTransactionFileRequest) WithTransactionFileID(transactionFileID s
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the upload transaction file Request
 func (o *UploadTransactionFileRequest) WithContext(ctx context.Context) *UploadTransactionFileRequest {
 	o.Context = ctx

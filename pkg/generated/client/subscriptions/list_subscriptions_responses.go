@@ -42,7 +42,8 @@ func NewListSubscriptionsOK() *ListSubscriptionsOK {
 	return &ListSubscriptionsOK{}
 }
 
-/*ListSubscriptionsOK handles this case with default header values.
+/*
+ListSubscriptionsOK handles this case with default header values.
 
 List of subscription details
 */

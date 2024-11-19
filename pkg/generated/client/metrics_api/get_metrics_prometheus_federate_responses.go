@@ -63,7 +63,8 @@ func NewGetMetricsPrometheusFederateOK() *GetMetricsPrometheusFederateOK {
 	return &GetMetricsPrometheusFederateOK{}
 }
 
-/*GetMetricsPrometheusFederateOK handles this case with default header values.
+/*
+GetMetricsPrometheusFederateOK handles this case with default header values.
 
 See Prometheus api https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries
 */
@@ -95,7 +96,8 @@ func NewGetMetricsPrometheusFederateBadRequest() *GetMetricsPrometheusFederateBa
 	return &GetMetricsPrometheusFederateBadRequest{}
 }
 
-/*GetMetricsPrometheusFederateBadRequest handles this case with default header values.
+/*
+GetMetricsPrometheusFederateBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -129,7 +131,8 @@ func NewGetMetricsPrometheusFederateForbidden() *GetMetricsPrometheusFederateFor
 	return &GetMetricsPrometheusFederateForbidden{}
 }
 
-/*GetMetricsPrometheusFederateForbidden handles this case with default header values.
+/*
+GetMetricsPrometheusFederateForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -150,7 +153,8 @@ func NewGetMetricsPrometheusFederateInternalServerError() *GetMetricsPrometheusF
 	return &GetMetricsPrometheusFederateInternalServerError{}
 }
 
-/*GetMetricsPrometheusFederateInternalServerError handles this case with default header values.
+/*
+GetMetricsPrometheusFederateInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

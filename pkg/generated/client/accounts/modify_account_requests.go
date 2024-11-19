@@ -86,7 +86,7 @@ func (o *ModifyAccountRequest) WithID(id strfmt.UUID) *ModifyAccountRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the modify account Request
 func (o *ModifyAccountRequest) WithContext(ctx context.Context) *ModifyAccountRequest {
 	o.Context = ctx

@@ -70,7 +70,8 @@ func NewListSchemeFilesOK() *ListSchemeFilesOK {
 	return &ListSchemeFilesOK{}
 }
 
-/*ListSchemeFilesOK handles this case with default header values.
+/*
+ListSchemeFilesOK handles this case with default header values.
 
 List of scheme files
 */
@@ -104,7 +105,8 @@ func NewListSchemeFilesBadRequest() *ListSchemeFilesBadRequest {
 	return &ListSchemeFilesBadRequest{}
 }
 
-/*ListSchemeFilesBadRequest handles this case with default header values.
+/*
+ListSchemeFilesBadRequest handles this case with default header values.
 
 Reports bad request
 */
@@ -138,7 +140,8 @@ func NewListSchemeFilesUnauthorized() *ListSchemeFilesUnauthorized {
 	return &ListSchemeFilesUnauthorized{}
 }
 
-/*ListSchemeFilesUnauthorized handles this case with default header values.
+/*
+ListSchemeFilesUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -172,7 +175,8 @@ func NewListSchemeFilesForbidden() *ListSchemeFilesForbidden {
 	return &ListSchemeFilesForbidden{}
 }
 
-/*ListSchemeFilesForbidden handles this case with default header values.
+/*
+ListSchemeFilesForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -206,7 +210,8 @@ func NewListSchemeFilesInternalServerError() *ListSchemeFilesInternalServerError
 	return &ListSchemeFilesInternalServerError{}
 }
 
-/*ListSchemeFilesInternalServerError handles this case with default header values.
+/*
+ListSchemeFilesInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

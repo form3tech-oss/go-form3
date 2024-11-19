@@ -68,7 +68,7 @@ func (o *GetReportRequest) WithID(id strfmt.UUID) *GetReportRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get report Request
 func (o *GetReportRequest) WithContext(ctx context.Context) *GetReportRequest {
 	o.Context = ctx

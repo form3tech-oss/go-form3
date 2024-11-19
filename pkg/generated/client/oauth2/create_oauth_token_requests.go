@@ -55,7 +55,7 @@ func (o *CreateOauthTokenRequest) WithGrantType(grantType string) *CreateOauthTo
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create oauth token Request
 func (o *CreateOauthTokenRequest) WithContext(ctx context.Context) *CreateOauthTokenRequest {
 	o.Context = ctx

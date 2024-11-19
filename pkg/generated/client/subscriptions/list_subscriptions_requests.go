@@ -223,7 +223,7 @@ func (o *ListSubscriptionsRequest) WithoutPageSize() *ListSubscriptionsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list subscriptions Request
 func (o *ListSubscriptionsRequest) WithContext(ctx context.Context) *ListSubscriptionsRequest {
 	o.Context = ctx

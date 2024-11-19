@@ -86,7 +86,7 @@ func (o *ModifyUnitRequest) WithID(id strfmt.UUID) *ModifyUnitRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the modify unit Request
 func (o *ModifyUnitRequest) WithContext(ctx context.Context) *ModifyUnitRequest {
 	o.Context = ctx

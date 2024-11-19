@@ -42,7 +42,8 @@ func NewListAccountEventsOK() *ListAccountEventsOK {
 	return &ListAccountEventsOK{}
 }
 
-/*ListAccountEventsOK handles this case with default header values.
+/*
+ListAccountEventsOK handles this case with default header values.
 
 Account event list
 */

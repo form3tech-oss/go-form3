@@ -73,7 +73,7 @@ func (o *CreateRolesRequest) WithoutRoleCreationRequest() *CreateRolesRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create roles Request
 func (o *CreateRolesRequest) WithContext(ctx context.Context) *CreateRolesRequest {
 	o.Context = ctx

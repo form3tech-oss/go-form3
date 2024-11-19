@@ -55,7 +55,7 @@ func (o *ListUserRolesRequest) WithUserID(userID strfmt.UUID) *ListUserRolesRequ
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list user roles Request
 func (o *ListUserRolesRequest) WithContext(ctx context.Context) *ListUserRolesRequest {
 	o.Context = ctx

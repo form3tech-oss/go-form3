@@ -68,7 +68,7 @@ func (o *DeleteUserCredentialRequest) WithUserID(userID strfmt.UUID) *DeleteUser
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete user credential Request
 func (o *DeleteUserCredentialRequest) WithContext(ctx context.Context) *DeleteUserCredentialRequest {
 	o.Context = ctx

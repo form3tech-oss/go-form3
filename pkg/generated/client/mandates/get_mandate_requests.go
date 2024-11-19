@@ -55,7 +55,7 @@ func (o *GetMandateRequest) WithID(id strfmt.UUID) *GetMandateRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get mandate Request
 func (o *GetMandateRequest) WithContext(ctx context.Context) *GetMandateRequest {
 	o.Context = ctx

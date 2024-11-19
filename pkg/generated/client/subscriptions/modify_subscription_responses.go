@@ -70,7 +70,8 @@ func NewModifySubscriptionOK() *ModifySubscriptionOK {
 	return &ModifySubscriptionOK{}
 }
 
-/*ModifySubscriptionOK handles this case with default header values.
+/*
+ModifySubscriptionOK handles this case with default header values.
 
 Subscription details
 */
@@ -104,7 +105,8 @@ func NewModifySubscriptionBadRequest() *ModifySubscriptionBadRequest {
 	return &ModifySubscriptionBadRequest{}
 }
 
-/*ModifySubscriptionBadRequest handles this case with default header values.
+/*
+ModifySubscriptionBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -138,7 +140,8 @@ func NewModifySubscriptionNotFound() *ModifySubscriptionNotFound {
 	return &ModifySubscriptionNotFound{}
 }
 
-/*ModifySubscriptionNotFound handles this case with default header values.
+/*
+ModifySubscriptionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -172,7 +175,8 @@ func NewModifySubscriptionConflict() *ModifySubscriptionConflict {
 	return &ModifySubscriptionConflict{}
 }
 
-/*ModifySubscriptionConflict handles this case with default header values.
+/*
+ModifySubscriptionConflict handles this case with default header values.
 
 Conflict
 */
@@ -206,7 +210,8 @@ func NewModifySubscriptionInternalServerError() *ModifySubscriptionInternalServe
 	return &ModifySubscriptionInternalServerError{}
 }
 
-/*ModifySubscriptionInternalServerError handles this case with default header values.
+/*
+ModifySubscriptionInternalServerError handles this case with default header values.
 
 Internal Error
 */

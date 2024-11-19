@@ -49,7 +49,8 @@ func NewPostDirectdebitsIDRecallsCreated() *PostDirectdebitsIDRecallsCreated {
 	return &PostDirectdebitsIDRecallsCreated{}
 }
 
-/*PostDirectdebitsIDRecallsCreated handles this case with default header values.
+/*
+PostDirectdebitsIDRecallsCreated handles this case with default header values.
 
 Recall creation response
 */
@@ -83,7 +84,8 @@ func NewPostDirectdebitsIDRecallsBadRequest() *PostDirectdebitsIDRecallsBadReque
 	return &PostDirectdebitsIDRecallsBadRequest{}
 }
 
-/*PostDirectdebitsIDRecallsBadRequest handles this case with default header values.
+/*
+PostDirectdebitsIDRecallsBadRequest handles this case with default header values.
 
 Recall creation error
 */

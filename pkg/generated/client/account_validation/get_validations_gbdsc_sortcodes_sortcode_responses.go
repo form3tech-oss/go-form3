@@ -49,7 +49,8 @@ func NewGetValidationsGbdscSortcodesSortcodeOK() *GetValidationsGbdscSortcodesSo
 	return &GetValidationsGbdscSortcodesSortcodeOK{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeOK handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeOK handles this case with default header values.
 
 Sort code details
 */
@@ -83,7 +84,8 @@ func NewGetValidationsGbdscSortcodesSortcodeBadRequest() *GetValidationsGbdscSor
 	return &GetValidationsGbdscSortcodesSortcodeBadRequest{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeBadRequest handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeBadRequest handles this case with default header values.
 
 Validation failed
 */

@@ -55,7 +55,7 @@ func (o *CreateUserCredentialsRequest) WithUserID(userID strfmt.UUID) *CreateUse
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create user credentials Request
 func (o *CreateUserCredentialsRequest) WithContext(ctx context.Context) *CreateUserCredentialsRequest {
 	o.Context = ctx

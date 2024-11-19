@@ -63,7 +63,8 @@ func NewPostMetricsPrometheusAPIV1QueryOK() *PostMetricsPrometheusAPIV1QueryOK {
 	return &PostMetricsPrometheusAPIV1QueryOK{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryOK handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryOK handles this case with default header values.
 
 See Prometheus api https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries
 */
@@ -97,7 +98,8 @@ func NewPostMetricsPrometheusAPIV1QueryBadRequest() *PostMetricsPrometheusAPIV1Q
 	return &PostMetricsPrometheusAPIV1QueryBadRequest{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryBadRequest handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -131,7 +133,8 @@ func NewPostMetricsPrometheusAPIV1QueryForbidden() *PostMetricsPrometheusAPIV1Qu
 	return &PostMetricsPrometheusAPIV1QueryForbidden{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryForbidden handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -152,7 +155,8 @@ func NewPostMetricsPrometheusAPIV1QueryInternalServerError() *PostMetricsPrometh
 	return &PostMetricsPrometheusAPIV1QueryInternalServerError{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryInternalServerError handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

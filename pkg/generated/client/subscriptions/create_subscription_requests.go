@@ -73,7 +73,7 @@ func (o *CreateSubscriptionRequest) WithoutSubscriptionCreationRequest() *Create
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create subscription Request
 func (o *CreateSubscriptionRequest) WithContext(ctx context.Context) *CreateSubscriptionRequest {
 	o.Context = ctx

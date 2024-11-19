@@ -49,7 +49,8 @@ func NewGetMandateSubmissionOK() *GetMandateSubmissionOK {
 	return &GetMandateSubmissionOK{}
 }
 
-/*GetMandateSubmissionOK handles this case with default header values.
+/*
+GetMandateSubmissionOK handles this case with default header values.
 
 Mandate Submission details
 */
@@ -83,7 +84,8 @@ func NewGetMandateSubmissionBadRequest() *GetMandateSubmissionBadRequest {
 	return &GetMandateSubmissionBadRequest{}
 }
 
-/*GetMandateSubmissionBadRequest handles this case with default header values.
+/*
+GetMandateSubmissionBadRequest handles this case with default header values.
 
 Error
 */

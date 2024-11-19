@@ -75,7 +75,7 @@ func (o *GetSchemeFileRequest) WithSchemeFileID(schemeFileID strfmt.UUID) *GetSc
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get scheme file Request
 func (o *GetSchemeFileRequest) WithContext(ctx context.Context) *GetSchemeFileRequest {
 	o.Context = ctx

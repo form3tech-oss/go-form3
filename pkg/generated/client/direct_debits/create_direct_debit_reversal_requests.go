@@ -86,7 +86,7 @@ func (o *CreateDirectDebitReversalRequest) WithID(id strfmt.UUID) *CreateDirectD
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create direct debit reversal Request
 func (o *CreateDirectDebitReversalRequest) WithContext(ctx context.Context) *CreateDirectDebitReversalRequest {
 	o.Context = ctx

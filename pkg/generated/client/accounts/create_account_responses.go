@@ -42,7 +42,8 @@ func NewCreateAccountCreated() *CreateAccountCreated {
 	return &CreateAccountCreated{}
 }
 
-/*CreateAccountCreated handles this case with default header values.
+/*
+CreateAccountCreated handles this case with default header values.
 
 Account creation response
 */

@@ -42,7 +42,8 @@ func NewListUnitsOK() *ListUnitsOK {
 	return &ListUnitsOK{}
 }
 
-/*ListUnitsOK handles this case with default header values.
+/*
+ListUnitsOK handles this case with default header values.
 
 List of organisation details
 */

@@ -86,7 +86,7 @@ func (o *CreateMandateSubmissionRequest) WithID(id strfmt.UUID) *CreateMandateSu
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create mandate submission Request
 func (o *CreateMandateSubmissionRequest) WithContext(ctx context.Context) *CreateMandateSubmissionRequest {
 	o.Context = ctx

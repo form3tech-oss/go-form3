@@ -69,7 +69,7 @@ func (o *DeleteSubscriptionRequest) WithVersion(version int64) *DeleteSubscripti
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete subscription Request
 func (o *DeleteSubscriptionRequest) WithContext(ctx context.Context) *DeleteSubscriptionRequest {
 	o.Context = ctx

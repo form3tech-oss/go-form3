@@ -70,7 +70,8 @@ func NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK() *GetO
 	return &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK{}
 }
 
-/*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK handles this case with default header values.
+/*
+GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK handles this case with default header values.
 
 Name verification admission details
 */
@@ -104,7 +105,8 @@ func NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest
 	return &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest{}
 }
 
-/*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest handles this case with default header values.
+/*
+GetOrganisationNameverificationsNameVerificationIDAdmissionsIDBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -138,7 +140,8 @@ func NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDForbidden(
 	return &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDForbidden{}
 }
 
-/*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDForbidden handles this case with default header values.
+/*
+GetOrganisationNameverificationsNameVerificationIDAdmissionsIDForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDNotFound()
 	return &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDNotFound{}
 }
 
-/*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDNotFound handles this case with default header values.
+/*
+GetOrganisationNameverificationsNameVerificationIDAdmissionsIDNotFound handles this case with default header values.
 
 Not Found
 */
@@ -206,7 +210,8 @@ func NewGetOrganisationNameverificationsNameVerificationIDAdmissionsIDInternalSe
 	return &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDInternalServerError{}
 }
 
-/*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDInternalServerError handles this case with default header values.
+/*
+GetOrganisationNameverificationsNameVerificationIDAdmissionsIDInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

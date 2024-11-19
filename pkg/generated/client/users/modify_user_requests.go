@@ -86,7 +86,7 @@ func (o *ModifyUserRequest) WithUserID(userID strfmt.UUID) *ModifyUserRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the modify user Request
 func (o *ModifyUserRequest) WithContext(ctx context.Context) *ModifyUserRequest {
 	o.Context = ctx

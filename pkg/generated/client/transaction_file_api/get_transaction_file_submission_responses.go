@@ -70,7 +70,8 @@ func NewGetTransactionFileSubmissionOK() *GetTransactionFileSubmissionOK {
 	return &GetTransactionFileSubmissionOK{}
 }
 
-/*GetTransactionFileSubmissionOK handles this case with default header values.
+/*
+GetTransactionFileSubmissionOK handles this case with default header values.
 
 Transaction File Submission Response
 */
@@ -104,7 +105,8 @@ func NewGetTransactionFileSubmissionUnauthorized() *GetTransactionFileSubmission
 	return &GetTransactionFileSubmissionUnauthorized{}
 }
 
-/*GetTransactionFileSubmissionUnauthorized handles this case with default header values.
+/*
+GetTransactionFileSubmissionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -138,7 +140,8 @@ func NewGetTransactionFileSubmissionForbidden() *GetTransactionFileSubmissionFor
 	return &GetTransactionFileSubmissionForbidden{}
 }
 
-/*GetTransactionFileSubmissionForbidden handles this case with default header values.
+/*
+GetTransactionFileSubmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewGetTransactionFileSubmissionNotFound() *GetTransactionFileSubmissionNotF
 	return &GetTransactionFileSubmissionNotFound{}
 }
 
-/*GetTransactionFileSubmissionNotFound handles this case with default header values.
+/*
+GetTransactionFileSubmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -206,7 +210,8 @@ func NewGetTransactionFileSubmissionInternalServerError() *GetTransactionFileSub
 	return &GetTransactionFileSubmissionInternalServerError{}
 }
 
-/*GetTransactionFileSubmissionInternalServerError handles this case with default header values.
+/*
+GetTransactionFileSubmissionInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

@@ -99,7 +99,7 @@ func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsRequest) WithReversalID
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the post directdebits ID reversals reversal ID submissions Request
 func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsRequest) WithContext(ctx context.Context) *PostDirectdebitsIDReversalsReversalIDSubmissionsRequest {
 	o.Context = ctx

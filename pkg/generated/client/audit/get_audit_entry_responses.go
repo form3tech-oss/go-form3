@@ -42,7 +42,8 @@ func NewGetAuditEntryOK() *GetAuditEntryOK {
 	return &GetAuditEntryOK{}
 }
 
-/*GetAuditEntryOK handles this case with default header values.
+/*
+GetAuditEntryOK handles this case with default header values.
 
 Audit details
 */

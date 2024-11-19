@@ -69,7 +69,7 @@ func (o *DeleteRoleRequest) WithVersion(version int64) *DeleteRoleRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete role Request
 func (o *DeleteRoleRequest) WithContext(ctx context.Context) *DeleteRoleRequest {
 	o.Context = ctx

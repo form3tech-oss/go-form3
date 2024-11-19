@@ -70,7 +70,8 @@ func NewListTransactionFilesOK() *ListTransactionFilesOK {
 	return &ListTransactionFilesOK{}
 }
 
-/*ListTransactionFilesOK handles this case with default header values.
+/*
+ListTransactionFilesOK handles this case with default header values.
 
 List of transaction files
 */
@@ -104,7 +105,8 @@ func NewListTransactionFilesBadRequest() *ListTransactionFilesBadRequest {
 	return &ListTransactionFilesBadRequest{}
 }
 
-/*ListTransactionFilesBadRequest handles this case with default header values.
+/*
+ListTransactionFilesBadRequest handles this case with default header values.
 
 Reports bad request
 */
@@ -138,7 +140,8 @@ func NewListTransactionFilesUnauthorized() *ListTransactionFilesUnauthorized {
 	return &ListTransactionFilesUnauthorized{}
 }
 
-/*ListTransactionFilesUnauthorized handles this case with default header values.
+/*
+ListTransactionFilesUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -172,7 +175,8 @@ func NewListTransactionFilesForbidden() *ListTransactionFilesForbidden {
 	return &ListTransactionFilesForbidden{}
 }
 
-/*ListTransactionFilesForbidden handles this case with default header values.
+/*
+ListTransactionFilesForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -206,7 +210,8 @@ func NewListTransactionFilesInternalServerError() *ListTransactionFilesInternalS
 	return &ListTransactionFilesInternalServerError{}
 }
 
-/*ListTransactionFilesInternalServerError handles this case with default header values.
+/*
+ListTransactionFilesInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

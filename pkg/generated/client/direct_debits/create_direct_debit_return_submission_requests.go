@@ -99,7 +99,7 @@ func (o *CreateDirectDebitReturnSubmissionRequest) WithReturnID(returnID strfmt.
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create direct debit return submission Request
 func (o *CreateDirectDebitReturnSubmissionRequest) WithContext(ctx context.Context) *CreateDirectDebitReturnSubmissionRequest {
 	o.Context = ctx

@@ -70,7 +70,8 @@ func NewGetSchemeFileOK() *GetSchemeFileOK {
 	return &GetSchemeFileOK{}
 }
 
-/*GetSchemeFileOK handles this case with default header values.
+/*
+GetSchemeFileOK handles this case with default header values.
 
 Scheme File Response
 */
@@ -104,7 +105,8 @@ func NewGetSchemeFileUnauthorized() *GetSchemeFileUnauthorized {
 	return &GetSchemeFileUnauthorized{}
 }
 
-/*GetSchemeFileUnauthorized handles this case with default header values.
+/*
+GetSchemeFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -138,7 +140,8 @@ func NewGetSchemeFileForbidden() *GetSchemeFileForbidden {
 	return &GetSchemeFileForbidden{}
 }
 
-/*GetSchemeFileForbidden handles this case with default header values.
+/*
+GetSchemeFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewGetSchemeFileNotFound() *GetSchemeFileNotFound {
 	return &GetSchemeFileNotFound{}
 }
 
-/*GetSchemeFileNotFound handles this case with default header values.
+/*
+GetSchemeFileNotFound handles this case with default header values.
 
 Not Found
 */
@@ -206,7 +210,8 @@ func NewGetSchemeFileInternalServerError() *GetSchemeFileInternalServerError {
 	return &GetSchemeFileInternalServerError{}
 }
 
-/*GetSchemeFileInternalServerError handles this case with default header values.
+/*
+GetSchemeFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

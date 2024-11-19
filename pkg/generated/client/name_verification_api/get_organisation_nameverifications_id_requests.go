@@ -55,7 +55,7 @@ func (o *GetOrganisationNameverificationsIDRequest) WithID(id strfmt.UUID) *GetO
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get organisation nameverifications ID Request
 func (o *GetOrganisationNameverificationsIDRequest) WithContext(ctx context.Context) *GetOrganisationNameverificationsIDRequest {
 	o.Context = ctx

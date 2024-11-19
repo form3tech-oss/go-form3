@@ -55,7 +55,7 @@ func (o *GetValidationsGbdscSortcodesSortcodeRequest) WithSortcode(sortcode stri
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get validations gbdsc sortcodes sortcode Request
 func (o *GetValidationsGbdscSortcodesSortcodeRequest) WithContext(ctx context.Context) *GetValidationsGbdscSortcodesSortcodeRequest {
 	o.Context = ctx

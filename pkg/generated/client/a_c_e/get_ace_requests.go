@@ -68,7 +68,7 @@ func (o *GetAceRequest) WithRoleID(roleID strfmt.UUID) *GetAceRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get ace Request
 func (o *GetAceRequest) WithContext(ctx context.Context) *GetAceRequest {
 	o.Context = ctx

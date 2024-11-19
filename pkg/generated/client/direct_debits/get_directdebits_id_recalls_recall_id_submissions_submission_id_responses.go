@@ -42,7 +42,8 @@ func NewGetDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDOK() *GetDirectde
 	return &GetDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDOK{}
 }
 
-/*GetDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDOK handles this case with default header values.
+/*
+GetDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDOK handles this case with default header values.
 
 Recall submission details
 */

@@ -56,7 +56,8 @@ func NewListReportsOK() *ListReportsOK {
 	return &ListReportsOK{}
 }
 
-/*ListReportsOK handles this case with default header values.
+/*
+ListReportsOK handles this case with default header values.
 
 List of reports
 */
@@ -90,7 +91,8 @@ func NewListReportsBadRequest() *ListReportsBadRequest {
 	return &ListReportsBadRequest{}
 }
 
-/*ListReportsBadRequest handles this case with default header values.
+/*
+ListReportsBadRequest handles this case with default header values.
 
 Reports bad request
 */
@@ -124,7 +126,8 @@ func NewListReportsForbidden() *ListReportsForbidden {
 	return &ListReportsForbidden{}
 }
 
-/*ListReportsForbidden handles this case with default header values.
+/*
+ListReportsForbidden handles this case with default header values.
 
 Forbidden
 */

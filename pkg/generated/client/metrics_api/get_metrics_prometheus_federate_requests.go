@@ -56,7 +56,7 @@ func (o *GetMetricsPrometheusFederateRequest) WithMatch(match []string) *GetMetr
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get metrics prometheus federate Request
 func (o *GetMetricsPrometheusFederateRequest) WithContext(ctx context.Context) *GetMetricsPrometheusFederateRequest {
 	o.Context = ctx

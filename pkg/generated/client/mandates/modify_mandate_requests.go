@@ -86,7 +86,7 @@ func (o *ModifyMandateRequest) WithID(id strfmt.UUID) *ModifyMandateRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the modify mandate Request
 func (o *ModifyMandateRequest) WithContext(ctx context.Context) *ModifyMandateRequest {
 	o.Context = ctx

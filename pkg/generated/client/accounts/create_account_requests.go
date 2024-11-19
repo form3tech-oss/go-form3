@@ -73,7 +73,7 @@ func (o *CreateAccountRequest) WithoutAccountCreationRequest() *CreateAccountReq
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create account Request
 func (o *CreateAccountRequest) WithContext(ctx context.Context) *CreateAccountRequest {
 	o.Context = ctx

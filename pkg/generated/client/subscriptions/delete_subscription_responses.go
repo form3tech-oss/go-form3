@@ -39,7 +39,8 @@ func NewDeleteSubscriptionNoContent() *DeleteSubscriptionNoContent {
 	return &DeleteSubscriptionNoContent{}
 }
 
-/*DeleteSubscriptionNoContent handles this case with default header values.
+/*
+DeleteSubscriptionNoContent handles this case with default header values.
 
 Subscription deleted OK. No body content will be returned
 */

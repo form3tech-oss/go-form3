@@ -73,7 +73,7 @@ func (o *PostOrganisationNameverificationsRequest) WithoutNameVerificationCreati
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the post organisation nameverifications Request
 func (o *PostOrganisationNameverificationsRequest) WithContext(ctx context.Context) *PostOrganisationNameverificationsRequest {
 	o.Context = ctx

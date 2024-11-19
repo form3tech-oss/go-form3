@@ -68,7 +68,7 @@ func (o *GetAuditEntryRequest) WithRecordType(recordType string) *GetAuditEntryR
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get audit entry Request
 func (o *GetAuditEntryRequest) WithContext(ctx context.Context) *GetAuditEntryRequest {
 	o.Context = ctx

@@ -55,7 +55,7 @@ func (o *GetSubscriptionRequest) WithID(id strfmt.UUID) *GetSubscriptionRequest 
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get subscription Request
 func (o *GetSubscriptionRequest) WithContext(ctx context.Context) *GetSubscriptionRequest {
 	o.Context = ctx

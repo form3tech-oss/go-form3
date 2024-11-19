@@ -56,7 +56,8 @@ func NewPostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated() *PostDirectdeb
 	return &PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated{}
 }
 
-/*PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated handles this case with default header values.
+/*
+PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated handles this case with default header values.
 
 Direct Debit decision submission creation response
 */
@@ -90,7 +91,8 @@ func NewPostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest() *PostDirect
 	return &PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest{}
 }
 
-/*PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest handles this case with default header values.
+/*
+PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest handles this case with default header values.
 
 Direct Debit decision submission creation error
 */
@@ -124,7 +126,8 @@ func NewPostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict() *PostDirectde
 	return &PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict{}
 }
 
-/*PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict handles this case with default header values.
+/*
+PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict handles this case with default header values.
 
 Direct Debit decision submission creation conflict error
 */

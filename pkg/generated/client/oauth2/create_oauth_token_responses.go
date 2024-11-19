@@ -49,7 +49,8 @@ func NewCreateOauthTokenOK() *CreateOauthTokenOK {
 	return &CreateOauthTokenOK{}
 }
 
-/*CreateOauthTokenOK handles this case with default header values.
+/*
+CreateOauthTokenOK handles this case with default header values.
 
 Authorisation token (Bearer)
 */
@@ -83,7 +84,8 @@ func NewCreateOauthTokenForbidden() *CreateOauthTokenForbidden {
 	return &CreateOauthTokenForbidden{}
 }
 
-/*CreateOauthTokenForbidden handles this case with default header values.
+/*
+CreateOauthTokenForbidden handles this case with default header values.
 
 Authentication failed
 */

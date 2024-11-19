@@ -42,7 +42,8 @@ func NewGetMandateAdmissionOK() *GetMandateAdmissionOK {
 	return &GetMandateAdmissionOK{}
 }
 
-/*GetMandateAdmissionOK handles this case with default header values.
+/*
+GetMandateAdmissionOK handles this case with default header values.
 
 Mandate Admission details
 */

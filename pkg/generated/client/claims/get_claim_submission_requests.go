@@ -68,7 +68,7 @@ func (o *GetClaimSubmissionRequest) WithSubmissionID(submissionID strfmt.UUID) *
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get claim submission Request
 func (o *GetClaimSubmissionRequest) WithContext(ctx context.Context) *GetClaimSubmissionRequest {
 	o.Context = ctx

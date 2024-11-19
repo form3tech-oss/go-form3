@@ -42,7 +42,8 @@ func NewListAccountsOK() *ListAccountsOK {
 	return &ListAccountsOK{}
 }
 
-/*ListAccountsOK handles this case with default header values.
+/*
+ListAccountsOK handles this case with default header values.
 
 List of account details
 */

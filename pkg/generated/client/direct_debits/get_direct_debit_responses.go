@@ -42,7 +42,8 @@ func NewGetDirectDebitOK() *GetDirectDebitOK {
 	return &GetDirectDebitOK{}
 }
 
-/*GetDirectDebitOK handles this case with default header values.
+/*
+GetDirectDebitOK handles this case with default header values.
 
 Direct Debit details
 */

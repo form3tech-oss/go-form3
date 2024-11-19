@@ -42,7 +42,8 @@ func NewCreateSubscriptionCreated() *CreateSubscriptionCreated {
 	return &CreateSubscriptionCreated{}
 }
 
-/*CreateSubscriptionCreated handles this case with default header values.
+/*
+CreateSubscriptionCreated handles this case with default header values.
 
 Subscription creation response
 */

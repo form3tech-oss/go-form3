@@ -49,7 +49,8 @@ func NewCreateMandateSubmissionCreated() *CreateMandateSubmissionCreated {
 	return &CreateMandateSubmissionCreated{}
 }
 
-/*CreateMandateSubmissionCreated handles this case with default header values.
+/*
+CreateMandateSubmissionCreated handles this case with default header values.
 
 Mandate Submission creation response
 */
@@ -83,7 +84,8 @@ func NewCreateMandateSubmissionBadRequest() *CreateMandateSubmissionBadRequest {
 	return &CreateMandateSubmissionBadRequest{}
 }
 
-/*CreateMandateSubmissionBadRequest handles this case with default header values.
+/*
+CreateMandateSubmissionBadRequest handles this case with default header values.
 
 Mandate Submission creation error
 */

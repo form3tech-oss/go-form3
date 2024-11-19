@@ -86,7 +86,7 @@ func (o *CreateClaimReversalRequest) WithID(id strfmt.UUID) *CreateClaimReversal
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create claim reversal Request
 func (o *CreateClaimReversalRequest) WithContext(ctx context.Context) *CreateClaimReversalRequest {
 	o.Context = ctx

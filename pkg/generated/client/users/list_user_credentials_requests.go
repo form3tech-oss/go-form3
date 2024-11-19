@@ -55,7 +55,7 @@ func (o *ListUserCredentialsRequest) WithUserID(userID strfmt.UUID) *ListUserCre
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list user credentials Request
 func (o *ListUserCredentialsRequest) WithContext(ctx context.Context) *ListUserCredentialsRequest {
 	o.Context = ctx

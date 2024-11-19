@@ -42,7 +42,8 @@ func NewGetMandateReturnSubmissionOK() *GetMandateReturnSubmissionOK {
 	return &GetMandateReturnSubmissionOK{}
 }
 
-/*GetMandateReturnSubmissionOK handles this case with default header values.
+/*
+GetMandateReturnSubmissionOK handles this case with default header values.
 
 Return submission details
 */

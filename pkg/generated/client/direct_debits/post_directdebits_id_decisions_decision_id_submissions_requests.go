@@ -99,7 +99,7 @@ func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsRequest) WithID(id strf
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the post directdebits ID decisions decision ID submissions Request
 func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsRequest) WithContext(ctx context.Context) *PostDirectdebitsIDDecisionsDecisionIDSubmissionsRequest {
 	o.Context = ctx

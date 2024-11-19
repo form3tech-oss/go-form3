@@ -2,7 +2,7 @@
 
 GOFMT_FILES?=$$(find ./ -name '*.go' | grep -v vendor)
 
-swagger_codegen_version := "v0.29.0"
+swagger_codegen_version := "v0.30.5"
 
 platform := $(shell uname)
 ifeq (${platform},Darwin)

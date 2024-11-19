@@ -155,7 +155,7 @@ func (o *PostMetricsPrometheusAPIV1QueryRangeRequest) WithoutTimeout() *PostMetr
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the post metrics prometheus API v1 query range Request
 func (o *PostMetricsPrometheusAPIV1QueryRangeRequest) WithContext(ctx context.Context) *PostMetricsPrometheusAPIV1QueryRangeRequest {
 	o.Context = ctx

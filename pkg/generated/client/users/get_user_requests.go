@@ -55,7 +55,7 @@ func (o *GetUserRequest) WithUserID(userID strfmt.UUID) *GetUserRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get user Request
 func (o *GetUserRequest) WithContext(ctx context.Context) *GetUserRequest {
 	o.Context = ctx

@@ -68,7 +68,7 @@ func (o *CreateUserRoleRequest) WithUserID(userID strfmt.UUID) *CreateUserRoleRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create user role Request
 func (o *CreateUserRoleRequest) WithContext(ctx context.Context) *CreateUserRoleRequest {
 	o.Context = ctx

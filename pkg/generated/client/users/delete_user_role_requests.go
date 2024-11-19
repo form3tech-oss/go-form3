@@ -68,7 +68,7 @@ func (o *DeleteUserRoleRequest) WithUserID(userID strfmt.UUID) *DeleteUserRoleRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete user role Request
 func (o *DeleteUserRoleRequest) WithContext(ctx context.Context) *DeleteUserRoleRequest {
 	o.Context = ctx

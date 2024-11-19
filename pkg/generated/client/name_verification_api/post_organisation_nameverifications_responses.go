@@ -70,7 +70,8 @@ func NewPostOrganisationNameverificationsCreated() *PostOrganisationNameverifica
 	return &PostOrganisationNameverificationsCreated{}
 }
 
-/*PostOrganisationNameverificationsCreated handles this case with default header values.
+/*
+PostOrganisationNameverificationsCreated handles this case with default header values.
 
 created
 */
@@ -104,7 +105,8 @@ func NewPostOrganisationNameverificationsBadRequest() *PostOrganisationNameverif
 	return &PostOrganisationNameverificationsBadRequest{}
 }
 
-/*PostOrganisationNameverificationsBadRequest handles this case with default header values.
+/*
+PostOrganisationNameverificationsBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -138,7 +140,8 @@ func NewPostOrganisationNameverificationsForbidden() *PostOrganisationNameverifi
 	return &PostOrganisationNameverificationsForbidden{}
 }
 
-/*PostOrganisationNameverificationsForbidden handles this case with default header values.
+/*
+PostOrganisationNameverificationsForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewPostOrganisationNameverificationsConflict() *PostOrganisationNameverific
 	return &PostOrganisationNameverificationsConflict{}
 }
 
-/*PostOrganisationNameverificationsConflict handles this case with default header values.
+/*
+PostOrganisationNameverificationsConflict handles this case with default header values.
 
 Conflict
 */
@@ -206,7 +210,8 @@ func NewPostOrganisationNameverificationsInternalServerError() *PostOrganisation
 	return &PostOrganisationNameverificationsInternalServerError{}
 }
 
-/*PostOrganisationNameverificationsInternalServerError handles this case with default header values.
+/*
+PostOrganisationNameverificationsInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

@@ -42,7 +42,8 @@ func NewGetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK() *GetDirectdebi
 	return &GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK{}
 }
 
-/*GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK handles this case with default header values.
+/*
+GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK handles this case with default header values.
 
 Recall admission details
 */

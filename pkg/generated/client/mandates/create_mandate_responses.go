@@ -56,7 +56,8 @@ func NewCreateMandateCreated() *CreateMandateCreated {
 	return &CreateMandateCreated{}
 }
 
-/*CreateMandateCreated handles this case with default header values.
+/*
+CreateMandateCreated handles this case with default header values.
 
 Mandate creation response
 */
@@ -90,7 +91,8 @@ func NewCreateMandateBadRequest() *CreateMandateBadRequest {
 	return &CreateMandateBadRequest{}
 }
 
-/*CreateMandateBadRequest handles this case with default header values.
+/*
+CreateMandateBadRequest handles this case with default header values.
 
 Mandate creation error
 */
@@ -124,7 +126,8 @@ func NewCreateMandateConflict() *CreateMandateConflict {
 	return &CreateMandateConflict{}
 }
 
-/*CreateMandateConflict handles this case with default header values.
+/*
+CreateMandateConflict handles this case with default header values.
 
 Mandate creation conflict Error
 */

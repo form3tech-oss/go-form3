@@ -42,7 +42,8 @@ func NewListAuditEntriesOK() *ListAuditEntriesOK {
 	return &ListAuditEntriesOK{}
 }
 
-/*ListAuditEntriesOK handles this case with default header values.
+/*
+ListAuditEntriesOK handles this case with default header values.
 
 Audit details
 */

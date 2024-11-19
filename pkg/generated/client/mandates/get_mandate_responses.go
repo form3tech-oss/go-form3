@@ -42,7 +42,8 @@ func NewGetMandateOK() *GetMandateOK {
 	return &GetMandateOK{}
 }
 
-/*GetMandateOK handles this case with default header values.
+/*
+GetMandateOK handles this case with default header values.
 
 Mandate details
 */

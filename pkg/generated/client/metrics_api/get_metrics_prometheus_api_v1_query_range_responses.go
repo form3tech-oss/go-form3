@@ -63,7 +63,8 @@ func NewGetMetricsPrometheusAPIV1QueryRangeOK() *GetMetricsPrometheusAPIV1QueryR
 	return &GetMetricsPrometheusAPIV1QueryRangeOK{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryRangeOK handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryRangeOK handles this case with default header values.
 
 See Prometheus api https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries
 */
@@ -97,7 +98,8 @@ func NewGetMetricsPrometheusAPIV1QueryRangeBadRequest() *GetMetricsPrometheusAPI
 	return &GetMetricsPrometheusAPIV1QueryRangeBadRequest{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryRangeBadRequest handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryRangeBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -131,7 +133,8 @@ func NewGetMetricsPrometheusAPIV1QueryRangeForbidden() *GetMetricsPrometheusAPIV
 	return &GetMetricsPrometheusAPIV1QueryRangeForbidden{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryRangeForbidden handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryRangeForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -152,7 +155,8 @@ func NewGetMetricsPrometheusAPIV1QueryRangeInternalServerError() *GetMetricsProm
 	return &GetMetricsPrometheusAPIV1QueryRangeInternalServerError{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryRangeInternalServerError handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryRangeInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

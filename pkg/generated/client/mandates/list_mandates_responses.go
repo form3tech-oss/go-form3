@@ -42,7 +42,8 @@ func NewListMandatesOK() *ListMandatesOK {
 	return &ListMandatesOK{}
 }
 
-/*ListMandatesOK handles this case with default header values.
+/*
+ListMandatesOK handles this case with default header values.
 
 List of mandates details
 */

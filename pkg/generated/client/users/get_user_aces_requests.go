@@ -95,7 +95,7 @@ func (o *GetUserAcesRequest) WithUserID(userID strfmt.UUID) *GetUserAcesRequest 
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get user aces Request
 func (o *GetUserAcesRequest) WithContext(ctx context.Context) *GetUserAcesRequest {
 	o.Context = ctx

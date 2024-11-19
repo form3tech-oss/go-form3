@@ -73,7 +73,7 @@ func (o *CreateClaimRequest) WithoutClaimCreationRequest() *CreateClaimRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create claim Request
 func (o *CreateClaimRequest) WithContext(ctx context.Context) *CreateClaimRequest {
 	o.Context = ctx

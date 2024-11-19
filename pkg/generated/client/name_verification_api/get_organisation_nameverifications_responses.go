@@ -70,7 +70,8 @@ func NewGetOrganisationNameverificationsOK() *GetOrganisationNameverificationsOK
 	return &GetOrganisationNameverificationsOK{}
 }
 
-/*GetOrganisationNameverificationsOK handles this case with default header values.
+/*
+GetOrganisationNameverificationsOK handles this case with default header values.
 
 List of name verification details
 */
@@ -104,7 +105,8 @@ func NewGetOrganisationNameverificationsBadRequest() *GetOrganisationNameverific
 	return &GetOrganisationNameverificationsBadRequest{}
 }
 
-/*GetOrganisationNameverificationsBadRequest handles this case with default header values.
+/*
+GetOrganisationNameverificationsBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -138,7 +140,8 @@ func NewGetOrganisationNameverificationsForbidden() *GetOrganisationNameverifica
 	return &GetOrganisationNameverificationsForbidden{}
 }
 
-/*GetOrganisationNameverificationsForbidden handles this case with default header values.
+/*
+GetOrganisationNameverificationsForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewGetOrganisationNameverificationsNotFound() *GetOrganisationNameverificat
 	return &GetOrganisationNameverificationsNotFound{}
 }
 
-/*GetOrganisationNameverificationsNotFound handles this case with default header values.
+/*
+GetOrganisationNameverificationsNotFound handles this case with default header values.
 
 Not Found
 */
@@ -206,7 +210,8 @@ func NewGetOrganisationNameverificationsInternalServerError() *GetOrganisationNa
 	return &GetOrganisationNameverificationsInternalServerError{}
 }
 
-/*GetOrganisationNameverificationsInternalServerError handles this case with default header values.
+/*
+GetOrganisationNameverificationsInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

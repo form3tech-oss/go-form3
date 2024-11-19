@@ -42,7 +42,8 @@ func NewModifyAccountOK() *ModifyAccountOK {
 	return &ModifyAccountOK{}
 }
 
-/*ModifyAccountOK handles this case with default header values.
+/*
+ModifyAccountOK handles this case with default header values.
 
 Account updated
 */

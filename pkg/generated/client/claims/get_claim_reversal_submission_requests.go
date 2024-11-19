@@ -81,7 +81,7 @@ func (o *GetClaimReversalSubmissionRequest) WithSubmissionID(submissionID strfmt
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get claim reversal submission Request
 func (o *GetClaimReversalSubmissionRequest) WithContext(ctx context.Context) *GetClaimReversalSubmissionRequest {
 	o.Context = ctx

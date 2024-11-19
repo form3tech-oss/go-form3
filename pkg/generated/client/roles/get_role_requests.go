@@ -55,7 +55,7 @@ func (o *GetRoleRequest) WithRoleID(roleID strfmt.UUID) *GetRoleRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get role Request
 func (o *GetRoleRequest) WithContext(ctx context.Context) *GetRoleRequest {
 	o.Context = ctx

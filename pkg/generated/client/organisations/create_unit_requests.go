@@ -73,7 +73,7 @@ func (o *CreateUnitRequest) WithoutOrganisationCreationRequest() *CreateUnitRequ
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create unit Request
 func (o *CreateUnitRequest) WithContext(ctx context.Context) *CreateUnitRequest {
 	o.Context = ctx

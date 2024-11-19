@@ -70,7 +70,8 @@ func NewGetReportOK() *GetReportOK {
 	return &GetReportOK{}
 }
 
-/*GetReportOK handles this case with default header values.
+/*
+GetReportOK handles this case with default header values.
 
 Report details
 */
@@ -104,7 +105,8 @@ func NewGetReportBadRequest() *GetReportBadRequest {
 	return &GetReportBadRequest{}
 }
 
-/*GetReportBadRequest handles this case with default header values.
+/*
+GetReportBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -138,7 +140,8 @@ func NewGetReportForbidden() *GetReportForbidden {
 	return &GetReportForbidden{}
 }
 
-/*GetReportForbidden handles this case with default header values.
+/*
+GetReportForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -172,7 +175,8 @@ func NewGetReportNotFound() *GetReportNotFound {
 	return &GetReportNotFound{}
 }
 
-/*GetReportNotFound handles this case with default header values.
+/*
+GetReportNotFound handles this case with default header values.
 
 Report Not Found
 */
@@ -206,7 +210,8 @@ func NewGetReportNotAcceptable() *GetReportNotAcceptable {
 	return &GetReportNotAcceptable{}
 }
 
-/*GetReportNotAcceptable handles this case with default header values.
+/*
+GetReportNotAcceptable handles this case with default header values.
 
 Report not available in acceptable format
 */

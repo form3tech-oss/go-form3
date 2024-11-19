@@ -42,7 +42,8 @@ func NewGetMandateReturnOK() *GetMandateReturnOK {
 	return &GetMandateReturnOK{}
 }
 
-/*GetMandateReturnOK handles this case with default header values.
+/*
+GetMandateReturnOK handles this case with default header values.
 
 Return details
 */

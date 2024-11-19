@@ -86,7 +86,7 @@ func (o *CreateMandateReturnRequest) WithID(id strfmt.UUID) *CreateMandateReturn
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create mandate return Request
 func (o *CreateMandateReturnRequest) WithContext(ctx context.Context) *CreateMandateReturnRequest {
 	o.Context = ctx

@@ -42,7 +42,8 @@ func NewGetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDOK() *GetDire
 	return &GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDOK{}
 }
 
-/*GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDOK handles this case with default header values.
+/*
+GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDOK handles this case with default header values.
 
 Reversal submission details
 */

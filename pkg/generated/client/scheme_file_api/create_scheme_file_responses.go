@@ -77,7 +77,8 @@ func NewCreateSchemeFileCreated() *CreateSchemeFileCreated {
 	return &CreateSchemeFileCreated{}
 }
 
-/*CreateSchemeFileCreated handles this case with default header values.
+/*
+CreateSchemeFileCreated handles this case with default header values.
 
 Scheme File Creation Response
 */
@@ -111,7 +112,8 @@ func NewCreateSchemeFileBadRequest() *CreateSchemeFileBadRequest {
 	return &CreateSchemeFileBadRequest{}
 }
 
-/*CreateSchemeFileBadRequest handles this case with default header values.
+/*
+CreateSchemeFileBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -145,7 +147,8 @@ func NewCreateSchemeFileUnauthorized() *CreateSchemeFileUnauthorized {
 	return &CreateSchemeFileUnauthorized{}
 }
 
-/*CreateSchemeFileUnauthorized handles this case with default header values.
+/*
+CreateSchemeFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -179,7 +182,8 @@ func NewCreateSchemeFileForbidden() *CreateSchemeFileForbidden {
 	return &CreateSchemeFileForbidden{}
 }
 
-/*CreateSchemeFileForbidden handles this case with default header values.
+/*
+CreateSchemeFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -213,7 +217,8 @@ func NewCreateSchemeFileConflict() *CreateSchemeFileConflict {
 	return &CreateSchemeFileConflict{}
 }
 
-/*CreateSchemeFileConflict handles this case with default header values.
+/*
+CreateSchemeFileConflict handles this case with default header values.
 
 Conflict
 */
@@ -247,7 +252,8 @@ func NewCreateSchemeFileInternalServerError() *CreateSchemeFileInternalServerErr
 	return &CreateSchemeFileInternalServerError{}
 }
 
-/*CreateSchemeFileInternalServerError handles this case with default header values.
+/*
+CreateSchemeFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

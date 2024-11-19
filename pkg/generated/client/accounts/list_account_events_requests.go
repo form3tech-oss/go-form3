@@ -96,7 +96,7 @@ func (o *ListAccountEventsRequest) WithoutPageSize() *ListAccountEventsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list account events Request
 func (o *ListAccountEventsRequest) WithContext(ctx context.Context) *ListAccountEventsRequest {
 	o.Context = ctx

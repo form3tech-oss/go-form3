@@ -83,7 +83,7 @@ func (o *ListUnitsRequest) WithoutFilterOrganisationIds() *ListUnitsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list units Request
 func (o *ListUnitsRequest) WithContext(ctx context.Context) *ListUnitsRequest {
 	o.Context = ctx
