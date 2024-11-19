@@ -392,6 +392,10 @@ type AccountUpdateAttributes struct {
 	// Min Length: 1
 	Title string `json:"title,omitempty"`
 
+	// Account type
+	// Max Length: 35
+	Type string `json:"type,omitempty"`
+
 	// All purpose list of key-value pairs to store specific data for the associated account. It will be added to each payment received to an account.
 	// Max Items: 5
 	UserDefinedData []*UserDefinedData `json:"user_defined_data,omitempty"`
@@ -462,6 +466,8 @@ func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdat
 		SwitchedAccountDetails: SwitchedAccountDetailsWithDefaults(defaults),
 
 		Title: defaults.GetString("AccountUpdateAttributes", "title"),
+
+		Type: defaults.GetString("AccountUpdateAttributes", "type"),
 
 		UserDefinedData: make([]*UserDefinedData, 0),
 
@@ -683,6 +689,13 @@ func (m *AccountUpdateAttributes) WithTitle(title string) *AccountUpdateAttribut
 	return m
 }
 
+func (m *AccountUpdateAttributes) WithType(typeVar string) *AccountUpdateAttributes {
+
+	m.Type = typeVar
+
+	return m
+}
+
 func (m *AccountUpdateAttributes) WithUserDefinedData(userDefinedData []*UserDefinedData) *AccountUpdateAttributes {
 
 	m.UserDefinedData = userDefinedData
@@ -805,6 +818,10 @@ func (m *AccountUpdateAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTitle(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1326,6 +1343,19 @@ func (m *AccountUpdateAttributes) validateTitle(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MaxLength("attributes"+"."+"title", "body", string(m.Title), 40); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountUpdateAttributes) validateType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("attributes"+"."+"type", "body", string(m.Type), 35); err != nil {
 		return err
 	}
 

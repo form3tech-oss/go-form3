@@ -32,6 +32,13 @@ func (o *GetAceReader) ReadResponse(response runtime.ClientResponse, consumer ru
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetAceNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +49,8 @@ func NewGetAceOK() *GetAceOK {
 	return &GetAceOK{}
 }
 
-/*GetAceOK handles this case with default header values.
+/*
+GetAceOK handles this case with default header values.
 
 ACE details
 */
@@ -65,6 +73,41 @@ func (o *GetAceOK) readResponse(response runtime.ClientResponse, consumer runtim
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.AceDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetAceNotFound creates a GetAceNotFound with default headers values
+func NewGetAceNotFound() *GetAceNotFound {
+	return &GetAceNotFound{}
+}
+
+/*
+GetAceNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetAceNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetAceNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/roles/{role_id}/aces/{ace_id}][%d] getAceNotFound", 404)
+}
+
+func (o *GetAceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

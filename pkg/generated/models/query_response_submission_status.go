@@ -27,9 +27,6 @@ const (
 	// QueryResponseSubmissionStatusValidationPending captures enum value "validation_pending"
 	QueryResponseSubmissionStatusValidationPending QueryResponseSubmissionStatus = "validation_pending"
 
-	// QueryResponseSubmissionStatusValidationFailed captures enum value "validation_failed"
-	QueryResponseSubmissionStatusValidationFailed QueryResponseSubmissionStatus = "validation_failed"
-
 	// QueryResponseSubmissionStatusReleasedToGateway captures enum value "released_to_gateway"
 	QueryResponseSubmissionStatusReleasedToGateway QueryResponseSubmissionStatus = "released_to_gateway"
 
@@ -44,15 +41,6 @@ const (
 
 	// QueryResponseSubmissionStatusDeliveryFailed captures enum value "delivery_failed"
 	QueryResponseSubmissionStatusDeliveryFailed QueryResponseSubmissionStatus = "delivery_failed"
-
-	// QueryResponseSubmissionStatusLimitCheckPending captures enum value "limit_check_pending"
-	QueryResponseSubmissionStatusLimitCheckPending QueryResponseSubmissionStatus = "limit_check_pending"
-
-	// QueryResponseSubmissionStatusLimitCheckPassed captures enum value "limit_check_passed"
-	QueryResponseSubmissionStatusLimitCheckPassed QueryResponseSubmissionStatus = "limit_check_passed"
-
-	// QueryResponseSubmissionStatusLimitCheckFailed captures enum value "limit_check_failed"
-	QueryResponseSubmissionStatusLimitCheckFailed QueryResponseSubmissionStatus = "limit_check_failed"
 )
 
 // for schema
@@ -60,7 +48,7 @@ var queryResponseSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []QueryResponseSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","validation_pending","validation_failed","released_to_gateway","queued_for_delivery","submitted","delivery_confirmed","delivery_failed","limit_check_pending","limit_check_passed","limit_check_failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","validation_pending","released_to_gateway","queued_for_delivery","submitted","delivery_confirmed","delivery_failed"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

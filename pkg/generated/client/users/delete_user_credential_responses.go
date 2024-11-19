@@ -7,10 +7,13 @@ package users
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
 )
 
 // DeleteUserCredentialReader is a Reader for the DeleteUserCredential structure.
@@ -29,6 +32,13 @@ func (o *DeleteUserCredentialReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 
+	case 404:
+		result := NewDeleteUserCredentialNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -39,7 +49,8 @@ func NewDeleteUserCredentialNoContent() *DeleteUserCredentialNoContent {
 	return &DeleteUserCredentialNoContent{}
 }
 
-/*DeleteUserCredentialNoContent handles this case with default header values.
+/*
+DeleteUserCredentialNoContent handles this case with default header values.
 
 Credential deleted
 */
@@ -51,6 +62,41 @@ func (o *DeleteUserCredentialNoContent) Error() string {
 }
 
 func (o *DeleteUserCredentialNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteUserCredentialNotFound creates a DeleteUserCredentialNotFound with default headers values
+func NewDeleteUserCredentialNotFound() *DeleteUserCredentialNotFound {
+	return &DeleteUserCredentialNotFound{}
+}
+
+/*
+DeleteUserCredentialNotFound handles this case with default header values.
+
+Not Found
+*/
+type DeleteUserCredentialNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *DeleteUserCredentialNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /security/users/{user_id}/credentials/{client_id}][%d] deleteUserCredentialNotFound", 404)
+}
+
+func (o *DeleteUserCredentialNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

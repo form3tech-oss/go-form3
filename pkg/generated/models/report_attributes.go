@@ -41,6 +41,9 @@ type ReportAttributes struct {
 
 	// report type description
 	ReportTypeDescription string `json:"report_type_description,omitempty"`
+
+	// report users
+	ReportUsers ReportUsers `json:"report_users,omitempty"`
 }
 
 func ReportAttributesWithDefaults(defaults client.Defaults) *ReportAttributes {
@@ -57,6 +60,9 @@ func ReportAttributesWithDefaults(defaults client.Defaults) *ReportAttributes {
 		ReportType: defaults.GetString("ReportAttributes", "report_type"),
 
 		ReportTypeDescription: defaults.GetString("ReportAttributes", "report_type_description"),
+
+		// TODO ReportUsers: ReportUsers,
+
 	}
 }
 
@@ -107,6 +113,13 @@ func (m *ReportAttributes) WithReportTypeDescription(reportTypeDescription strin
 	return m
 }
 
+func (m *ReportAttributes) WithReportUsers(reportUsers ReportUsers) *ReportAttributes {
+
+	m.ReportUsers = reportUsers
+
+	return m
+}
+
 // Validate validates this report attributes
 func (m *ReportAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -116,6 +129,10 @@ func (m *ReportAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateProcessingDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReportUsers(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -145,6 +162,22 @@ func (m *ReportAttributes) validateProcessingDate(formats strfmt.Registry) error
 	}
 
 	if err := validate.FormatOf("processing_date", "body", "date", m.ProcessingDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ReportAttributes) validateReportUsers(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReportUsers) { // not required
+		return nil
+	}
+
+	if err := m.ReportUsers.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("report_users")
+		}
 		return err
 	}
 

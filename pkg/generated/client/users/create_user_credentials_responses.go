@@ -32,6 +32,13 @@ func (o *CreateUserCredentialsReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 
+	case 404:
+		result := NewCreateUserCredentialsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +49,8 @@ func NewCreateUserCredentialsCreated() *CreateUserCredentialsCreated {
 	return &CreateUserCredentialsCreated{}
 }
 
-/*CreateUserCredentialsCreated handles this case with default header values.
+/*
+CreateUserCredentialsCreated handles this case with default header values.
 
 Credential creation response
 */
@@ -65,6 +73,41 @@ func (o *CreateUserCredentialsCreated) readResponse(response runtime.ClientRespo
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.CredentialCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUserCredentialsNotFound creates a CreateUserCredentialsNotFound with default headers values
+func NewCreateUserCredentialsNotFound() *CreateUserCredentialsNotFound {
+	return &CreateUserCredentialsNotFound{}
+}
+
+/*
+CreateUserCredentialsNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateUserCredentialsNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateUserCredentialsNotFound) Error() string {
+	return fmt.Sprintf("[POST /security/users/{user_id}/credentials][%d] createUserCredentialsNotFound", 404)
+}
+
+func (o *CreateUserCredentialsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

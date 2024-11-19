@@ -31,151 +31,19 @@ type Client struct {
 // range of operations
 
 /*
-delete organisation branches branch ID identifications identification ID API
+create branch identification API
 */
-func (a *DeleteOrganisationBranchesBranchIDIdentificationsIdentificationIDRequest) Do() (*DeleteOrganisationBranchesBranchIDIdentificationsIdentificationIDNoContent, error) {
+func (a *CreateBranchIdentificationRequest) Do() (*CreateBranchIdentificationCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteOrganisationBranchesBranchIDIdentificationsIdentificationID",
-		Method:             "DELETE",
-		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &DeleteOrganisationBranchesBranchIDIdentificationsIdentificationIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteOrganisationBranchesBranchIDIdentificationsIdentificationIDNoContent), nil
-
-}
-
-func (a *DeleteOrganisationBranchesBranchIDIdentificationsIdentificationIDRequest) MustDo() *DeleteOrganisationBranchesBranchIDIdentificationsIdentificationIDNoContent {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get organisation branches branch ID identifications API
-*/
-func (a *GetOrganisationBranchesBranchIDIdentificationsRequest) Do() (*GetOrganisationBranchesBranchIDIdentificationsOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationBranchesBranchIDIdentifications",
-		Method:             "GET",
-		PathPattern:        "/organisation/branches/{branch_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationBranchesBranchIDIdentificationsReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationBranchesBranchIDIdentificationsOK), nil
-
-}
-
-func (a *GetOrganisationBranchesBranchIDIdentificationsRequest) MustDo() *GetOrganisationBranchesBranchIDIdentificationsOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get organisation branches branch ID identifications identification ID API
-*/
-func (a *GetOrganisationBranchesBranchIDIdentificationsIdentificationIDRequest) Do() (*GetOrganisationBranchesBranchIDIdentificationsIdentificationIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationBranchesBranchIDIdentificationsIdentificationID",
-		Method:             "GET",
-		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationBranchesBranchIDIdentificationsIdentificationIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationBranchesBranchIDIdentificationsIdentificationIDOK), nil
-
-}
-
-func (a *GetOrganisationBranchesBranchIDIdentificationsIdentificationIDRequest) MustDo() *GetOrganisationBranchesBranchIDIdentificationsIdentificationIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-patch organisation branches branch ID identifications identification ID API
-*/
-func (a *PatchOrganisationBranchesBranchIDIdentificationsIdentificationIDRequest) Do() (*PatchOrganisationBranchesBranchIDIdentificationsIdentificationIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PatchOrganisationBranchesBranchIDIdentificationsIdentificationID",
-		Method:             "PATCH",
-		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &PatchOrganisationBranchesBranchIDIdentificationsIdentificationIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PatchOrganisationBranchesBranchIDIdentificationsIdentificationIDOK), nil
-
-}
-
-func (a *PatchOrganisationBranchesBranchIDIdentificationsIdentificationIDRequest) MustDo() *PatchOrganisationBranchesBranchIDIdentificationsIdentificationIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-post organisation branches branch ID identifications API
-*/
-func (a *PostOrganisationBranchesBranchIDIdentificationsRequest) Do() (*PostOrganisationBranchesBranchIDIdentificationsCreated, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostOrganisationBranchesBranchIDIdentifications",
+		ID:                 "CreateBranchIdentification",
 		Method:             "POST",
 		PathPattern:        "/organisation/branches/{branch_id}/identifications",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostOrganisationBranchesBranchIDIdentificationsReader{formats: a.formats},
+		Reader:             &CreateBranchIdentificationReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -183,11 +51,143 @@ func (a *PostOrganisationBranchesBranchIDIdentificationsRequest) Do() (*PostOrga
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostOrganisationBranchesBranchIDIdentificationsCreated), nil
+	return result.(*CreateBranchIdentificationCreated), nil
 
 }
 
-func (a *PostOrganisationBranchesBranchIDIdentificationsRequest) MustDo() *PostOrganisationBranchesBranchIDIdentificationsCreated {
+func (a *CreateBranchIdentificationRequest) MustDo() *CreateBranchIdentificationCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+delete branch identification API
+*/
+func (a *DeleteBranchIdentificationRequest) Do() (*DeleteBranchIdentificationNoContent, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "DeleteBranchIdentification",
+		Method:             "DELETE",
+		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &DeleteBranchIdentificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteBranchIdentificationNoContent), nil
+
+}
+
+func (a *DeleteBranchIdentificationRequest) MustDo() *DeleteBranchIdentificationNoContent {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get branch identification API
+*/
+func (a *GetBranchIdentificationRequest) Do() (*GetBranchIdentificationOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetBranchIdentification",
+		Method:             "GET",
+		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetBranchIdentificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetBranchIdentificationOK), nil
+
+}
+
+func (a *GetBranchIdentificationRequest) MustDo() *GetBranchIdentificationOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+list branch identifications by branch API
+*/
+func (a *ListBranchIdentificationsByBranchRequest) Do() (*ListBranchIdentificationsByBranchOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListBranchIdentificationsByBranch",
+		Method:             "GET",
+		PathPattern:        "/organisation/branches/{branch_id}/identifications",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &ListBranchIdentificationsByBranchReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListBranchIdentificationsByBranchOK), nil
+
+}
+
+func (a *ListBranchIdentificationsByBranchRequest) MustDo() *ListBranchIdentificationsByBranchOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+patch branch identification API
+*/
+func (a *PatchBranchIdentificationRequest) Do() (*PatchBranchIdentificationOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchBranchIdentification",
+		Method:             "PATCH",
+		PathPattern:        "/organisation/branches/{branch_id}/identifications/{identification_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchBranchIdentificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchBranchIdentificationOK), nil
+
+}
+
+func (a *PatchBranchIdentificationRequest) MustDo() *PatchBranchIdentificationOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

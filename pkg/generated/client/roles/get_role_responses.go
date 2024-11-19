@@ -32,6 +32,13 @@ func (o *GetRoleReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetRoleNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +49,8 @@ func NewGetRoleOK() *GetRoleOK {
 	return &GetRoleOK{}
 }
 
-/*GetRoleOK handles this case with default header values.
+/*
+GetRoleOK handles this case with default header values.
 
 Role details
 */
@@ -65,6 +73,41 @@ func (o *GetRoleOK) readResponse(response runtime.ClientResponse, consumer runti
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.RoleDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetRoleNotFound creates a GetRoleNotFound with default headers values
+func NewGetRoleNotFound() *GetRoleNotFound {
+	return &GetRoleNotFound{}
+}
+
+/*
+GetRoleNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetRoleNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetRoleNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/roles/{role_id}][%d] getRoleNotFound", 404)
+}
+
+func (o *GetRoleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

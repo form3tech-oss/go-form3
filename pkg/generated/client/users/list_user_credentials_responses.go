@@ -32,6 +32,13 @@ func (o *ListUserCredentialsReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 
+	case 404:
+		result := NewListUserCredentialsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +49,8 @@ func NewListUserCredentialsOK() *ListUserCredentialsOK {
 	return &ListUserCredentialsOK{}
 }
 
-/*ListUserCredentialsOK handles this case with default header values.
+/*
+ListUserCredentialsOK handles this case with default header values.
 
 List of credentials for user
 */
@@ -65,6 +73,41 @@ func (o *ListUserCredentialsOK) readResponse(response runtime.ClientResponse, co
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserCredentialListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListUserCredentialsNotFound creates a ListUserCredentialsNotFound with default headers values
+func NewListUserCredentialsNotFound() *ListUserCredentialsNotFound {
+	return &ListUserCredentialsNotFound{}
+}
+
+/*
+ListUserCredentialsNotFound handles this case with default header values.
+
+Not Found
+*/
+type ListUserCredentialsNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ListUserCredentialsNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/users/{user_id}/credentials][%d] listUserCredentialsNotFound", 404)
+}
+
+func (o *ListUserCredentialsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

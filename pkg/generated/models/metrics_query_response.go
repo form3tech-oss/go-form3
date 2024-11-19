@@ -31,6 +31,9 @@ type MetricsQueryResponse struct {
 
 	// status
 	Status string `json:"status,omitempty"`
+
+	// warnings
+	Warnings []string `json:"warnings"`
 }
 
 func MetricsQueryResponseWithDefaults(defaults client.Defaults) *MetricsQueryResponse {
@@ -43,6 +46,8 @@ func MetricsQueryResponseWithDefaults(defaults client.Defaults) *MetricsQueryRes
 		ErrorType: defaults.GetString("MetricsQueryResponse", "errorType"),
 
 		Status: defaults.GetString("MetricsQueryResponse", "status"),
+
+		Warnings: make([]string, 0),
 	}
 }
 
@@ -75,6 +80,13 @@ func (m *MetricsQueryResponse) WithErrorType(errorType string) *MetricsQueryResp
 func (m *MetricsQueryResponse) WithStatus(status string) *MetricsQueryResponse {
 
 	m.Status = status
+
+	return m
+}
+
+func (m *MetricsQueryResponse) WithWarnings(warnings []string) *MetricsQueryResponse {
+
+	m.Warnings = warnings
 
 	return m
 }

@@ -32,6 +32,13 @@ func (o *ListUserRolesReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return result, nil
 
+	case 404:
+		result := NewListUserRolesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +49,8 @@ func NewListUserRolesOK() *ListUserRolesOK {
 	return &ListUserRolesOK{}
 }
 
-/*ListUserRolesOK handles this case with default header values.
+/*
+ListUserRolesOK handles this case with default header values.
 
 List of roles for user
 */
@@ -65,6 +73,41 @@ func (o *ListUserRolesOK) readResponse(response runtime.ClientResponse, consumer
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserRoleListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListUserRolesNotFound creates a ListUserRolesNotFound with default headers values
+func NewListUserRolesNotFound() *ListUserRolesNotFound {
+	return &ListUserRolesNotFound{}
+}
+
+/*
+ListUserRolesNotFound handles this case with default header values.
+
+Not Found
+*/
+type ListUserRolesNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ListUserRolesNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/users/{user_id}/roles][%d] listUserRolesNotFound", 404)
+}
+
+func (o *ListUserRolesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

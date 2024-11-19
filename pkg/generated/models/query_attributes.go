@@ -21,8 +21,14 @@ import (
 // swagger:model QueryAttributes
 type QueryAttributes struct {
 
+	// agents
+	Agents RequestForInformationAgents `json:"agents,omitempty"`
+
 	// auto handled
 	AutoHandled *bool `json:"auto_handled,omitempty"`
+
+	// creator party
+	CreatorParty *RequestForInformationCreatorParty `json:"creator_party,omitempty"`
 
 	// message id
 	MessageID string `json:"message_id,omitempty"`
@@ -31,10 +37,19 @@ type QueryAttributes struct {
 	// Format: date
 	ProcessingDate *strfmt.Date `json:"processing_date,omitempty"`
 
+	// query sub types
+	QuerySubTypes RequestForInformationQuerySubTypes `json:"query_sub_types,omitempty"`
+
 	// query type
 	// Required: true
-	// Enum: [claim_non_receipt modify_payment status_request]
+	// Enum: [claim_non_receipt modify_payment status_request request_for_information]
 	QueryType *string `json:"query_type"`
+
+	// references
+	References RequestForInformationReferences `json:"references,omitempty"`
+
+	// requested information
+	RequestedInformation RequestForInformationRequestedInformation `json:"requested_information,omitempty"`
 
 	// scheme transaction id
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
@@ -50,13 +65,23 @@ type QueryAttributes struct {
 func QueryAttributesWithDefaults(defaults client.Defaults) *QueryAttributes {
 	return &QueryAttributes{
 
+		// TODO Agents: RequestForInformationAgents,
+
 		AutoHandled: defaults.GetBoolPtr("QueryAttributes", "auto_handled"),
+
+		CreatorParty: RequestForInformationCreatorPartyWithDefaults(defaults),
 
 		MessageID: defaults.GetString("QueryAttributes", "message_id"),
 
 		ProcessingDate: defaults.GetStrfmtDatePtr("QueryAttributes", "processing_date"),
 
+		// TODO QuerySubTypes: RequestForInformationQuerySubTypes,
+
 		QueryType: defaults.GetStringPtr("QueryAttributes", "query_type"),
+
+		// TODO References: RequestForInformationReferences,
+
+		// TODO RequestedInformation: RequestForInformationRequestedInformation,
 
 		SchemeTransactionID: defaults.GetString("QueryAttributes", "scheme_transaction_id"),
 
@@ -64,6 +89,13 @@ func QueryAttributesWithDefaults(defaults client.Defaults) *QueryAttributes {
 
 		UnstructuredMessage: defaults.GetStringPtr("QueryAttributes", "unstructured_message"),
 	}
+}
+
+func (m *QueryAttributes) WithAgents(agents RequestForInformationAgents) *QueryAttributes {
+
+	m.Agents = agents
+
+	return m
 }
 
 func (m *QueryAttributes) WithAutoHandled(autoHandled bool) *QueryAttributes {
@@ -75,6 +107,18 @@ func (m *QueryAttributes) WithAutoHandled(autoHandled bool) *QueryAttributes {
 
 func (m *QueryAttributes) WithoutAutoHandled() *QueryAttributes {
 	m.AutoHandled = nil
+	return m
+}
+
+func (m *QueryAttributes) WithCreatorParty(creatorParty RequestForInformationCreatorParty) *QueryAttributes {
+
+	m.CreatorParty = &creatorParty
+
+	return m
+}
+
+func (m *QueryAttributes) WithoutCreatorParty() *QueryAttributes {
+	m.CreatorParty = nil
 	return m
 }
 
@@ -97,6 +141,13 @@ func (m *QueryAttributes) WithoutProcessingDate() *QueryAttributes {
 	return m
 }
 
+func (m *QueryAttributes) WithQuerySubTypes(querySubTypes RequestForInformationQuerySubTypes) *QueryAttributes {
+
+	m.QuerySubTypes = querySubTypes
+
+	return m
+}
+
 func (m *QueryAttributes) WithQueryType(queryType string) *QueryAttributes {
 
 	m.QueryType = &queryType
@@ -106,6 +157,20 @@ func (m *QueryAttributes) WithQueryType(queryType string) *QueryAttributes {
 
 func (m *QueryAttributes) WithoutQueryType() *QueryAttributes {
 	m.QueryType = nil
+	return m
+}
+
+func (m *QueryAttributes) WithReferences(references RequestForInformationReferences) *QueryAttributes {
+
+	m.References = references
+
+	return m
+}
+
+func (m *QueryAttributes) WithRequestedInformation(requestedInformation RequestForInformationRequestedInformation) *QueryAttributes {
+
+	m.RequestedInformation = requestedInformation
+
 	return m
 }
 
@@ -139,11 +204,31 @@ func (m *QueryAttributes) WithoutUnstructuredMessage() *QueryAttributes {
 func (m *QueryAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAgents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatorParty(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateProcessingDate(formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.validateQuerySubTypes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateQueryType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferences(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRequestedInformation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -154,6 +239,40 @@ func (m *QueryAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *QueryAttributes) validateAgents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Agents) { // not required
+		return nil
+	}
+
+	if err := m.Agents.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("agents")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *QueryAttributes) validateCreatorParty(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.CreatorParty) { // not required
+		return nil
+	}
+
+	if m.CreatorParty != nil {
+		if err := m.CreatorParty.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("creator_party")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -170,11 +289,27 @@ func (m *QueryAttributes) validateProcessingDate(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *QueryAttributes) validateQuerySubTypes(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.QuerySubTypes) { // not required
+		return nil
+	}
+
+	if err := m.QuerySubTypes.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("query_sub_types")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var queryAttributesTypeQueryTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["claim_non_receipt","modify_payment","status_request"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["claim_non_receipt","modify_payment","status_request","request_for_information"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -192,6 +327,9 @@ const (
 
 	// QueryAttributesQueryTypeStatusRequest captures enum value "status_request"
 	QueryAttributesQueryTypeStatusRequest string = "status_request"
+
+	// QueryAttributesQueryTypeRequestForInformation captures enum value "request_for_information"
+	QueryAttributesQueryTypeRequestForInformation string = "request_for_information"
 )
 
 // prop value enum
@@ -210,6 +348,38 @@ func (m *QueryAttributes) validateQueryType(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateQueryTypeEnum("query_type", "body", *m.QueryType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *QueryAttributes) validateReferences(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.References) { // not required
+		return nil
+	}
+
+	if err := m.References.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("references")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *QueryAttributes) validateRequestedInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RequestedInformation) { // not required
+		return nil
+	}
+
+	if err := m.RequestedInformation.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("requested_information")
+		}
 		return err
 	}
 

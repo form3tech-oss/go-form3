@@ -205,7 +205,7 @@ func (a *GetDirectDebitRequest) Do() (*GetDirectDebitOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReader{formats: a.formats},
@@ -238,7 +238,7 @@ func (a *GetDirectDebitAdmissionRequest) Do() (*GetDirectDebitAdmissionOK, error
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitAdmissionReader{formats: a.formats},
@@ -271,7 +271,7 @@ func (a *GetDirectDebitReturnRequest) Do() (*GetDirectDebitReturnOK, error) {
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReturnReader{formats: a.formats},
@@ -304,7 +304,7 @@ func (a *GetDirectDebitReturnAdmissionRequest) Do() (*GetDirectDebitReturnAdmiss
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReturnAdmissionReader{formats: a.formats},
@@ -337,7 +337,7 @@ func (a *GetDirectDebitReturnReversalRequest) Do() (*GetDirectDebitReturnReversa
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReturnReversalReader{formats: a.formats},
@@ -370,7 +370,7 @@ func (a *GetDirectDebitReturnReversalAdmissionRequest) Do() (*GetDirectDebitRetu
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReturnReversalAdmissionReader{formats: a.formats},
@@ -403,7 +403,7 @@ func (a *GetDirectDebitReturnSubmissionRequest) Do() (*GetDirectDebitReturnSubmi
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/returns/{returnId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReturnSubmissionReader{formats: a.formats},
@@ -436,7 +436,7 @@ func (a *GetDirectDebitReversalRequest) Do() (*GetDirectDebitReversalOK, error) 
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/reversals/{reversalId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReversalReader{formats: a.formats},
@@ -469,7 +469,7 @@ func (a *GetDirectDebitReversalAdmissionRequest) Do() (*GetDirectDebitReversalAd
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitReversalAdmissionReader{formats: a.formats},
@@ -502,7 +502,7 @@ func (a *GetDirectDebitSubmissionRequest) Do() (*GetDirectDebitSubmissionOK, err
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectDebitSubmissionReader{formats: a.formats},
@@ -535,7 +535,7 @@ func (a *GetDirectdebitsIDDecisionsDecisionIDRequest) Do() (*GetDirectdebitsIDDe
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDDecisionsDecisionIDReader{formats: a.formats},
@@ -568,7 +568,7 @@ func (a *GetDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDRequest) Do() 
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDDecisionsDecisionIDAdmissionsAdmissionIDReader{formats: a.formats},
@@ -601,7 +601,7 @@ func (a *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDRequest) Do(
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDReader{formats: a.formats},
@@ -634,7 +634,7 @@ func (a *GetDirectdebitsIDRecallsRecallIDRequest) Do() (*GetDirectdebitsIDRecall
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/recalls/{recallId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDRecallsRecallIDReader{formats: a.formats},
@@ -667,7 +667,7 @@ func (a *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest) Do() (*Ge
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/recalls/{recallId}/admissions/{admissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDReader{formats: a.formats},
@@ -700,7 +700,7 @@ func (a *GetDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDRequest) Do() (*
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/recalls/{recallId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDRecallsRecallIDSubmissionsSubmissionIDReader{formats: a.formats},
@@ -733,7 +733,7 @@ func (a *GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDRequest) Do(
 		Method:             "GET",
 		PathPattern:        "/transaction/directdebits/{id}/reversals/{reversalId}/submissions/{submissionId}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDReader{formats: a.formats},
@@ -749,39 +749,6 @@ func (a *GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDRequest) Do(
 }
 
 func (a *GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDRequest) MustDo() *GetDirectdebitsIDReversalsReversalIDSubmissionsSubmissionIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-list direct debits API
-*/
-func (a *ListDirectDebitsRequest) Do() (*ListDirectDebitsOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "ListDirectDebits",
-		Method:             "GET",
-		PathPattern:        "/transaction/directdebits",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &ListDirectDebitsReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*ListDirectDebitsOK), nil
-
-}
-
-func (a *ListDirectDebitsRequest) MustDo() *ListDirectDebitsOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -815,39 +782,6 @@ func (a *PostDirectdebitsIDDecisionsRequest) Do() (*PostDirectdebitsIDDecisionsC
 }
 
 func (a *PostDirectdebitsIDDecisionsRequest) MustDo() *PostDirectdebitsIDDecisionsCreated {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-post directdebits ID decisions decision ID admissions API
-*/
-func (a *PostDirectdebitsIDDecisionsDecisionIDAdmissionsRequest) Do() (*PostDirectdebitsIDDecisionsDecisionIDAdmissionsCreated, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostDirectdebitsIDDecisionsDecisionIDAdmissions",
-		Method:             "POST",
-		PathPattern:        "/transaction/directdebits/{id}/decisions/{decisionId}/admissions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &PostDirectdebitsIDDecisionsDecisionIDAdmissionsReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PostDirectdebitsIDDecisionsDecisionIDAdmissionsCreated), nil
-
-}
-
-func (a *PostDirectdebitsIDDecisionsDecisionIDAdmissionsRequest) MustDo() *PostDirectdebitsIDDecisionsDecisionIDAdmissionsCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

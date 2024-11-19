@@ -7,10 +7,13 @@ package a_c_e
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
 )
 
 // DeleteAceReader is a Reader for the DeleteAce structure.
@@ -29,6 +32,20 @@ func (o *DeleteAceReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return result, nil
 
+	case 400:
+		result := NewDeleteAceBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 404:
+		result := NewDeleteAceNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -39,7 +56,8 @@ func NewDeleteAceNoContent() *DeleteAceNoContent {
 	return &DeleteAceNoContent{}
 }
 
-/*DeleteAceNoContent handles this case with default header values.
+/*
+DeleteAceNoContent handles this case with default header values.
 
 ACE deleted OK
 */
@@ -51,6 +69,76 @@ func (o *DeleteAceNoContent) Error() string {
 }
 
 func (o *DeleteAceNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteAceBadRequest creates a DeleteAceBadRequest with default headers values
+func NewDeleteAceBadRequest() *DeleteAceBadRequest {
+	return &DeleteAceBadRequest{}
+}
+
+/*
+DeleteAceBadRequest handles this case with default header values.
+
+Bad request
+*/
+type DeleteAceBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *DeleteAceBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /security/roles/{role_id}/aces/{ace_id}][%d] deleteAceBadRequest", 400)
+}
+
+func (o *DeleteAceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteAceNotFound creates a DeleteAceNotFound with default headers values
+func NewDeleteAceNotFound() *DeleteAceNotFound {
+	return &DeleteAceNotFound{}
+}
+
+/*
+DeleteAceNotFound handles this case with default header values.
+
+Not Found
+*/
+type DeleteAceNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *DeleteAceNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /security/roles/{role_id}/aces/{ace_id}][%d] deleteAceNotFound", 404)
+}
+
+func (o *DeleteAceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

@@ -32,6 +32,20 @@ func (o *CreateUserReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewCreateUserBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateUserConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +56,8 @@ func NewCreateUserCreated() *CreateUserCreated {
 	return &CreateUserCreated{}
 }
 
-/*CreateUserCreated handles this case with default header values.
+/*
+CreateUserCreated handles this case with default header values.
 
 User creation response
 */
@@ -65,6 +80,76 @@ func (o *CreateUserCreated) readResponse(response runtime.ClientResponse, consum
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUserBadRequest creates a CreateUserBadRequest with default headers values
+func NewCreateUserBadRequest() *CreateUserBadRequest {
+	return &CreateUserBadRequest{}
+}
+
+/*
+CreateUserBadRequest handles this case with default header values.
+
+Bad request
+*/
+type CreateUserBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateUserBadRequest) Error() string {
+	return fmt.Sprintf("[POST /security/users][%d] createUserBadRequest", 400)
+}
+
+func (o *CreateUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUserConflict creates a CreateUserConflict with default headers values
+func NewCreateUserConflict() *CreateUserConflict {
+	return &CreateUserConflict{}
+}
+
+/*
+CreateUserConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateUserConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateUserConflict) Error() string {
+	return fmt.Sprintf("[POST /security/users][%d] createUserConflict", 409)
+}
+
+func (o *CreateUserConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

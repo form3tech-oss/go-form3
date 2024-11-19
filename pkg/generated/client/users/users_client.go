@@ -139,7 +139,7 @@ func (a *DeleteUserRequest) Do() (*DeleteUserNoContent, error) {
 		Method:             "DELETE",
 		PathPattern:        "/security/users/{user_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteUserReader{formats: a.formats},
@@ -172,7 +172,7 @@ func (a *DeleteUserCredentialRequest) Do() (*DeleteUserCredentialNoContent, erro
 		Method:             "DELETE",
 		PathPattern:        "/security/users/{user_id}/credentials/{client_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteUserCredentialReader{formats: a.formats},
@@ -205,7 +205,7 @@ func (a *DeleteUserRoleRequest) Do() (*DeleteUserRoleNoContent, error) {
 		Method:             "DELETE",
 		PathPattern:        "/security/users/{user_id}/roles/{role_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteUserRoleReader{formats: a.formats},
@@ -229,6 +229,39 @@ func (a *DeleteUserRoleRequest) MustDo() *DeleteUserRoleNoContent {
 }
 
 /*
+fetch public key for user API
+*/
+func (a *FetchPublicKeyForUserRequest) Do() (*FetchPublicKeyForUserOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "FetchPublicKeyForUser",
+		Method:             "GET",
+		PathPattern:        "/security/users/{user_id}/authn/public_keys/{public_key_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &FetchPublicKeyForUserReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*FetchPublicKeyForUserOK), nil
+
+}
+
+func (a *FetchPublicKeyForUserRequest) MustDo() *FetchPublicKeyForUserOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 get user API
 */
 func (a *GetUserRequest) Do() (*GetUserOK, error) {
@@ -238,7 +271,7 @@ func (a *GetUserRequest) Do() (*GetUserOK, error) {
 		Method:             "GET",
 		PathPattern:        "/security/users/{user_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetUserReader{formats: a.formats},
@@ -271,7 +304,7 @@ func (a *GetUserAcesRequest) Do() (*GetUserAcesOK, error) {
 		Method:             "GET",
 		PathPattern:        "/security/users/{user_id}/aces",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetUserAcesReader{formats: a.formats},
@@ -295,6 +328,39 @@ func (a *GetUserAcesRequest) MustDo() *GetUserAcesOK {
 }
 
 /*
+list public keys for user API
+*/
+func (a *ListPublicKeysForUserRequest) Do() (*ListPublicKeysForUserOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListPublicKeysForUser",
+		Method:             "GET",
+		PathPattern:        "/security/users/{user_id}/authn/public_keys",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &ListPublicKeysForUserReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListPublicKeysForUserOK), nil
+
+}
+
+func (a *ListPublicKeysForUserRequest) MustDo() *ListPublicKeysForUserOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 list user credentials API
 */
 func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {
@@ -304,7 +370,7 @@ func (a *ListUserCredentialsRequest) Do() (*ListUserCredentialsOK, error) {
 		Method:             "GET",
 		PathPattern:        "/security/users/{user_id}/credentials",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListUserCredentialsReader{formats: a.formats},
@@ -337,7 +403,7 @@ func (a *ListUserRolesRequest) Do() (*ListUserRolesOK, error) {
 		Method:             "GET",
 		PathPattern:        "/security/users/{user_id}/roles",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListUserRolesReader{formats: a.formats},
@@ -370,7 +436,7 @@ func (a *ListUsersRequest) Do() (*ListUsersOK, error) {
 		Method:             "GET",
 		PathPattern:        "/security/users",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListUsersReader{formats: a.formats},

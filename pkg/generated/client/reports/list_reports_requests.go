@@ -33,6 +33,10 @@ func (c *Client) ListReports() *ListReportsRequest {
 
 		FilterOrganisationID: make([]strfmt.UUID, 0),
 
+		FilterProcessingDateFrom: c.Defaults.GetStrfmtDatePtr("ListReports", "filter[processing_date_from]"),
+
+		FilterProcessingDateTo: c.Defaults.GetStrfmtDatePtr("ListReports", "filter[processing_date_to]"),
+
 		FilterReportSource: c.Defaults.GetStringPtr("ListReports", "filter[report_source]"),
 
 		FilterReportType: c.Defaults.GetStringPtr("ListReports", "filter[report_type]"),
@@ -71,6 +75,14 @@ type ListReportsRequest struct {
 	/*FilterOrganisationID      Filter by organisation Ids      */
 
 	FilterOrganisationID []strfmt.UUID
+
+	/*FilterProcessingDateFrom      Request reports with processing date from specific date (inclusive)      */
+
+	FilterProcessingDateFrom *strfmt.Date
+
+	/*FilterProcessingDateTo      Request reports with processing date to specific date (inclusive)      */
+
+	FilterProcessingDateTo *strfmt.Date
 
 	/*FilterReportSource      Filter by Report Source      */
 
@@ -175,6 +187,34 @@ func (o *ListReportsRequest) WithoutFilterOrganisationID() *ListReportsRequest {
 	return o
 }
 
+func (o *ListReportsRequest) WithFilterProcessingDateFrom(filterProcessingDateFrom strfmt.Date) *ListReportsRequest {
+
+	o.FilterProcessingDateFrom = &filterProcessingDateFrom
+
+	return o
+}
+
+func (o *ListReportsRequest) WithoutFilterProcessingDateFrom() *ListReportsRequest {
+
+	o.FilterProcessingDateFrom = nil
+
+	return o
+}
+
+func (o *ListReportsRequest) WithFilterProcessingDateTo(filterProcessingDateTo strfmt.Date) *ListReportsRequest {
+
+	o.FilterProcessingDateTo = &filterProcessingDateTo
+
+	return o
+}
+
+func (o *ListReportsRequest) WithoutFilterProcessingDateTo() *ListReportsRequest {
+
+	o.FilterProcessingDateTo = nil
+
+	return o
+}
+
 func (o *ListReportsRequest) WithFilterReportSource(filterReportSource string) *ListReportsRequest {
 
 	o.FilterReportSource = &filterReportSource
@@ -245,7 +285,7 @@ func (o *ListReportsRequest) WithoutPageSize() *ListReportsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list reports Request
 func (o *ListReportsRequest) WithContext(ctx context.Context) *ListReportsRequest {
 	o.Context = ctx
@@ -339,6 +379,38 @@ func (o *ListReportsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	// query array param filter[organisation_id]
 	if err := r.SetQueryParam("filter[organisation_id]", joinedFilterOrganisationID...); err != nil {
 		return err
+	}
+
+	if o.FilterProcessingDateFrom != nil {
+
+		// query param filter[processing_date_from]
+		var qrFilterProcessingDateFrom strfmt.Date
+		if o.FilterProcessingDateFrom != nil {
+			qrFilterProcessingDateFrom = *o.FilterProcessingDateFrom
+		}
+		qFilterProcessingDateFrom := qrFilterProcessingDateFrom.String()
+		if qFilterProcessingDateFrom != "" {
+			if err := r.SetQueryParam("filter[processing_date_from]", qFilterProcessingDateFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterProcessingDateTo != nil {
+
+		// query param filter[processing_date_to]
+		var qrFilterProcessingDateTo strfmt.Date
+		if o.FilterProcessingDateTo != nil {
+			qrFilterProcessingDateTo = *o.FilterProcessingDateTo
+		}
+		qFilterProcessingDateTo := qrFilterProcessingDateTo.String()
+		if qFilterProcessingDateTo != "" {
+			if err := r.SetQueryParam("filter[processing_date_to]", qFilterProcessingDateTo); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if o.FilterReportSource != nil {

@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -20,26 +21,26 @@ import (
 // swagger:model TransactionFileSubmissionRelationships
 type TransactionFileSubmissionRelationships struct {
 
-	// transaction file
-	TransactionFile *ThinRelationships `json:"transaction_file,omitempty"`
+	// transaction files
+	TransactionFiles *TransactionFileSubmissionRelationshipsTransactionFiles `json:"transaction_files,omitempty"`
 }
 
 func TransactionFileSubmissionRelationshipsWithDefaults(defaults client.Defaults) *TransactionFileSubmissionRelationships {
 	return &TransactionFileSubmissionRelationships{
 
-		TransactionFile: ThinRelationshipsWithDefaults(defaults),
+		TransactionFiles: TransactionFileSubmissionRelationshipsTransactionFilesWithDefaults(defaults),
 	}
 }
 
-func (m *TransactionFileSubmissionRelationships) WithTransactionFile(transactionFile ThinRelationships) *TransactionFileSubmissionRelationships {
+func (m *TransactionFileSubmissionRelationships) WithTransactionFiles(transactionFiles TransactionFileSubmissionRelationshipsTransactionFiles) *TransactionFileSubmissionRelationships {
 
-	m.TransactionFile = &transactionFile
+	m.TransactionFiles = &transactionFiles
 
 	return m
 }
 
-func (m *TransactionFileSubmissionRelationships) WithoutTransactionFile() *TransactionFileSubmissionRelationships {
-	m.TransactionFile = nil
+func (m *TransactionFileSubmissionRelationships) WithoutTransactionFiles() *TransactionFileSubmissionRelationships {
+	m.TransactionFiles = nil
 	return m
 }
 
@@ -47,7 +48,7 @@ func (m *TransactionFileSubmissionRelationships) WithoutTransactionFile() *Trans
 func (m *TransactionFileSubmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateTransactionFile(formats); err != nil {
+	if err := m.validateTransactionFiles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,16 +58,16 @@ func (m *TransactionFileSubmissionRelationships) Validate(formats strfmt.Registr
 	return nil
 }
 
-func (m *TransactionFileSubmissionRelationships) validateTransactionFile(formats strfmt.Registry) error {
+func (m *TransactionFileSubmissionRelationships) validateTransactionFiles(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.TransactionFile) { // not required
+	if swag.IsZero(m.TransactionFiles) { // not required
 		return nil
 	}
 
-	if m.TransactionFile != nil {
-		if err := m.TransactionFile.Validate(formats); err != nil {
+	if m.TransactionFiles != nil {
+		if err := m.TransactionFiles.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("transaction_file")
+				return ve.ValidateName("transaction_files")
 			}
 			return err
 		}
@@ -93,6 +94,92 @@ func (m *TransactionFileSubmissionRelationships) UnmarshalBinary(b []byte) error
 	return nil
 }
 func (m *TransactionFileSubmissionRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// TransactionFileSubmissionRelationshipsTransactionFiles transaction file submission relationships transaction files
+// swagger:model TransactionFileSubmissionRelationshipsTransactionFiles
+type TransactionFileSubmissionRelationshipsTransactionFiles struct {
+
+	// data
+	Data []*TransactionFile `json:"data"`
+}
+
+func TransactionFileSubmissionRelationshipsTransactionFilesWithDefaults(defaults client.Defaults) *TransactionFileSubmissionRelationshipsTransactionFiles {
+	return &TransactionFileSubmissionRelationshipsTransactionFiles{
+
+		Data: make([]*TransactionFile, 0),
+	}
+}
+
+func (m *TransactionFileSubmissionRelationshipsTransactionFiles) WithData(data []*TransactionFile) *TransactionFileSubmissionRelationshipsTransactionFiles {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this transaction file submission relationships transaction files
+func (m *TransactionFileSubmissionRelationshipsTransactionFiles) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *TransactionFileSubmissionRelationshipsTransactionFiles) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("transaction_files" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *TransactionFileSubmissionRelationshipsTransactionFiles) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *TransactionFileSubmissionRelationshipsTransactionFiles) UnmarshalBinary(b []byte) error {
+	var res TransactionFileSubmissionRelationshipsTransactionFiles
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *TransactionFileSubmissionRelationshipsTransactionFiles) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

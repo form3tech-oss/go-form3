@@ -39,6 +39,13 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 
+	case 401:
+		result := NewGetSchemeMessageAdmissionUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 403:
 		result := NewGetSchemeMessageAdmissionForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -63,7 +70,8 @@ func NewGetSchemeMessageAdmissionOK() *GetSchemeMessageAdmissionOK {
 	return &GetSchemeMessageAdmissionOK{}
 }
 
-/*GetSchemeMessageAdmissionOK handles this case with default header values.
+/*
+GetSchemeMessageAdmissionOK handles this case with default header values.
 
 Get scheme message admission by Id
 */
@@ -97,7 +105,8 @@ func NewGetSchemeMessageAdmissionBadRequest() *GetSchemeMessageAdmissionBadReque
 	return &GetSchemeMessageAdmissionBadRequest{}
 }
 
-/*GetSchemeMessageAdmissionBadRequest handles this case with default header values.
+/*
+GetSchemeMessageAdmissionBadRequest handles this case with default header values.
 
 Scheme Message Admission by Id bad request
 */
@@ -126,12 +135,48 @@ func (o *GetSchemeMessageAdmissionBadRequest) readResponse(response runtime.Clie
 	return nil
 }
 
+// NewGetSchemeMessageAdmissionUnauthorized creates a GetSchemeMessageAdmissionUnauthorized with default headers values
+func NewGetSchemeMessageAdmissionUnauthorized() *GetSchemeMessageAdmissionUnauthorized {
+	return &GetSchemeMessageAdmissionUnauthorized{}
+}
+
+/*
+GetSchemeMessageAdmissionUnauthorized handles this case with default header values.
+
+Unauthorized
+*/
+type GetSchemeMessageAdmissionUnauthorized struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetSchemeMessageAdmissionUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionUnauthorized", 401)
+}
+
+func (o *GetSchemeMessageAdmissionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewGetSchemeMessageAdmissionForbidden creates a GetSchemeMessageAdmissionForbidden with default headers values
 func NewGetSchemeMessageAdmissionForbidden() *GetSchemeMessageAdmissionForbidden {
 	return &GetSchemeMessageAdmissionForbidden{}
 }
 
-/*GetSchemeMessageAdmissionForbidden handles this case with default header values.
+/*
+GetSchemeMessageAdmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -165,7 +210,8 @@ func NewGetSchemeMessageAdmissionNotFound() *GetSchemeMessageAdmissionNotFound {
 	return &GetSchemeMessageAdmissionNotFound{}
 }
 
-/*GetSchemeMessageAdmissionNotFound handles this case with default header values.
+/*
+GetSchemeMessageAdmissionNotFound handles this case with default header values.
 
 Scheme Message Not found
 */

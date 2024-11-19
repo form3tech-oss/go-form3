@@ -40,7 +40,7 @@ func (a *CreateSchemeFileRequest) Do() (*CreateSchemeFileCreated, error) {
 		Method:             "POST",
 		PathPattern:        "/files/schemefiles",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateSchemeFileReader{formats: a.formats},
@@ -64,6 +64,39 @@ func (a *CreateSchemeFileRequest) MustDo() *CreateSchemeFileCreated {
 }
 
 /*
+create scheme file admission API
+*/
+func (a *CreateSchemeFileAdmissionRequest) Do() (*CreateSchemeFileAdmissionCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "CreateSchemeFileAdmission",
+		Method:             "POST",
+		PathPattern:        "/files/schemefiles/{scheme_file_id}/admissions",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &CreateSchemeFileAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CreateSchemeFileAdmissionCreated), nil
+
+}
+
+func (a *CreateSchemeFileAdmissionRequest) MustDo() *CreateSchemeFileAdmissionCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 create scheme file submission API
 */
 func (a *CreateSchemeFileSubmissionRequest) Do() (*CreateSchemeFileSubmissionCreated, error) {
@@ -73,7 +106,7 @@ func (a *CreateSchemeFileSubmissionRequest) Do() (*CreateSchemeFileSubmissionCre
 		Method:             "POST",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}/submissions",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateSchemeFileSubmissionReader{formats: a.formats},
@@ -106,7 +139,7 @@ func (a *GetSchemeFileRequest) Do() (*GetSchemeFileOK, error) {
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetSchemeFileReader{formats: a.formats},
@@ -130,6 +163,39 @@ func (a *GetSchemeFileRequest) MustDo() *GetSchemeFileOK {
 }
 
 /*
+get scheme file admission API
+*/
+func (a *GetSchemeFileAdmissionRequest) Do() (*GetSchemeFileAdmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetSchemeFileAdmission",
+		Method:             "GET",
+		PathPattern:        "/files/schemefiles/{scheme_file_id}/admissions/{scheme_file_admission_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetSchemeFileAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetSchemeFileAdmissionOK), nil
+
+}
+
+func (a *GetSchemeFileAdmissionRequest) MustDo() *GetSchemeFileAdmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 get scheme file submission API
 */
 func (a *GetSchemeFileSubmissionRequest) Do() (*GetSchemeFileSubmissionOK, error) {
@@ -139,7 +205,7 @@ func (a *GetSchemeFileSubmissionRequest) Do() (*GetSchemeFileSubmissionOK, error
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles/{scheme_file_id}/submissions/{scheme_file_submission_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetSchemeFileSubmissionReader{formats: a.formats},
@@ -172,7 +238,7 @@ func (a *ListSchemeFilesRequest) Do() (*ListSchemeFilesOK, error) {
 		Method:             "GET",
 		PathPattern:        "/files/schemefiles",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListSchemeFilesReader{formats: a.formats},

@@ -39,6 +39,13 @@ func (o *GetSchemeMessageReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 
+	case 401:
+		result := NewGetSchemeMessageUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 403:
 		result := NewGetSchemeMessageForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -63,7 +70,8 @@ func NewGetSchemeMessageOK() *GetSchemeMessageOK {
 	return &GetSchemeMessageOK{}
 }
 
-/*GetSchemeMessageOK handles this case with default header values.
+/*
+GetSchemeMessageOK handles this case with default header values.
 
 Scheme Message details
 */
@@ -97,9 +105,10 @@ func NewGetSchemeMessageBadRequest() *GetSchemeMessageBadRequest {
 	return &GetSchemeMessageBadRequest{}
 }
 
-/*GetSchemeMessageBadRequest handles this case with default header values.
+/*
+GetSchemeMessageBadRequest handles this case with default header values.
 
-Scheme Message bad request
+Bad Request
 */
 type GetSchemeMessageBadRequest struct {
 
@@ -126,12 +135,48 @@ func (o *GetSchemeMessageBadRequest) readResponse(response runtime.ClientRespons
 	return nil
 }
 
+// NewGetSchemeMessageUnauthorized creates a GetSchemeMessageUnauthorized with default headers values
+func NewGetSchemeMessageUnauthorized() *GetSchemeMessageUnauthorized {
+	return &GetSchemeMessageUnauthorized{}
+}
+
+/*
+GetSchemeMessageUnauthorized handles this case with default header values.
+
+Unauthorized
+*/
+type GetSchemeMessageUnauthorized struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetSchemeMessageUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /notification/schememessages/{id}][%d] getSchemeMessageUnauthorized", 401)
+}
+
+func (o *GetSchemeMessageUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewGetSchemeMessageForbidden creates a GetSchemeMessageForbidden with default headers values
 func NewGetSchemeMessageForbidden() *GetSchemeMessageForbidden {
 	return &GetSchemeMessageForbidden{}
 }
 
-/*GetSchemeMessageForbidden handles this case with default header values.
+/*
+GetSchemeMessageForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -165,7 +210,8 @@ func NewGetSchemeMessageNotFound() *GetSchemeMessageNotFound {
 	return &GetSchemeMessageNotFound{}
 }
 
-/*GetSchemeMessageNotFound handles this case with default header values.
+/*
+GetSchemeMessageNotFound handles this case with default header values.
 
 Scheme Message Not found
 */

@@ -31,19 +31,19 @@ type Client struct {
 // range of operations
 
 /*
-get platform security signing keys API
+get signing key API
 */
-func (a *GetPlatformSecuritySigningKeysRequest) Do() (*GetPlatformSecuritySigningKeysOK, error) {
+func (a *GetSigningKeyRequest) Do() (*GetSigningKeyOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPlatformSecuritySigningKeys",
+		ID:                 "GetSigningKey",
 		Method:             "GET",
-		PathPattern:        "/platform/security/signing_keys",
+		PathPattern:        "/platform/security/signing_keys/{signingkey_id}",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPlatformSecuritySigningKeysReader{formats: a.formats},
+		Reader:             &GetSigningKeyReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -51,11 +51,11 @@ func (a *GetPlatformSecuritySigningKeysRequest) Do() (*GetPlatformSecuritySignin
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPlatformSecuritySigningKeysOK), nil
+	return result.(*GetSigningKeyOK), nil
 
 }
 
-func (a *GetPlatformSecuritySigningKeysRequest) MustDo() *GetPlatformSecuritySigningKeysOK {
+func (a *GetSigningKeyRequest) MustDo() *GetSigningKeyOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -64,19 +64,19 @@ func (a *GetPlatformSecuritySigningKeysRequest) MustDo() *GetPlatformSecuritySig
 }
 
 /*
-get platform security signing keys signingkey ID API
+list signing keys API
 */
-func (a *GetPlatformSecuritySigningKeysSigningkeyIDRequest) Do() (*GetPlatformSecuritySigningKeysSigningkeyIDOK, error) {
+func (a *ListSigningKeysRequest) Do() (*ListSigningKeysOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPlatformSecuritySigningKeysSigningkeyID",
+		ID:                 "ListSigningKeys",
 		Method:             "GET",
-		PathPattern:        "/platform/security/signing_keys/{signingkey_id}",
+		PathPattern:        "/platform/security/signing_keys",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &GetPlatformSecuritySigningKeysSigningkeyIDReader{formats: a.formats},
+		Reader:             &ListSigningKeysReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -84,11 +84,11 @@ func (a *GetPlatformSecuritySigningKeysSigningkeyIDRequest) Do() (*GetPlatformSe
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPlatformSecuritySigningKeysSigningkeyIDOK), nil
+	return result.(*ListSigningKeysOK), nil
 
 }
 
-func (a *GetPlatformSecuritySigningKeysSigningkeyIDRequest) MustDo() *GetPlatformSecuritySigningKeysSigningkeyIDOK {
+func (a *ListSigningKeysRequest) MustDo() *ListSigningKeysOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

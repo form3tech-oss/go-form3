@@ -22,11 +22,14 @@ import (
 // swagger:model PaymentAttributes
 type PaymentAttributes struct {
 
+	// Block to represent further information related to the processing of payment instructions from one agent to another.
+	AgentInstructions []*AgentInstruction `json:"agent_instructions,omitempty"`
+
 	// Block to represent a Financial Institution/agent in the payment chain
 	Agents []*Agent `json:"agents,omitempty"`
 
 	// Amount of money moved between the instructing agent and instructed agent
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Amount string `json:"amount,omitempty"`
 
 	// batch booking indicator
@@ -77,6 +80,9 @@ type PaymentAttributes struct {
 	// Numeric reference field, see scheme specific descriptions for usage
 	NumericReference string `json:"numeric_reference,omitempty"`
 
+	// Block to represent parties involved in the payment instruction
+	Parties []*Party `json:"parties,omitempty"`
+
 	// Timestamp of when the payment instruction meets the set processing conditions. Format: YYYY-MM-DDThh:mm:ss:mmm+hh:mm
 	// Format: date-time
 	PaymentAcceptanceDatetime *strfmt.DateTime `json:"payment_acceptance_datetime,omitempty"`
@@ -88,6 +94,7 @@ type PaymentAttributes struct {
 	PaymentPurposeCoded string `json:"payment_purpose_coded,omitempty"`
 
 	// Clearing infrastructure through which the payment instruction is to be processed. Default for given organisation ID is used if left empty. Has to be a valid [scheme identifier](http://draft-api-docs.form3.tech/api.html#enumerations-schemes).
+	// Pattern: ^[A-Za-z_]*$
 	PaymentScheme string `json:"payment_scheme,omitempty"`
 
 	// payment type
@@ -150,12 +157,14 @@ type PaymentAttributes struct {
 	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 
 	// All purpose list of key-value pairs specific data stored on the payment.
-	// Max Items: 5
+	// Max Items: 10
 	UserDefinedData []*UserDefinedData `json:"user_defined_data,omitempty"`
 }
 
 func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes {
 	return &PaymentAttributes{
+
+		AgentInstructions: make([]*AgentInstruction, 0),
 
 		Agents: make([]*Agent, 0),
 
@@ -192,6 +201,8 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 		IntermediaryBank: IntermediaryBankAccountHoldingEntityWithDefaults(defaults),
 
 		NumericReference: defaults.GetString("PaymentAttributes", "numeric_reference"),
+
+		Parties: make([]*Party, 0),
 
 		PaymentAcceptanceDatetime: defaults.GetStrfmtDateTimePtr("PaymentAttributes", "payment_acceptance_datetime"),
 
@@ -241,6 +252,13 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 
 		UserDefinedData: make([]*UserDefinedData, 0),
 	}
+}
+
+func (m *PaymentAttributes) WithAgentInstructions(agentInstructions []*AgentInstruction) *PaymentAttributes {
+
+	m.AgentInstructions = agentInstructions
+
+	return m
 }
 
 func (m *PaymentAttributes) WithAgents(agents []*Agent) *PaymentAttributes {
@@ -390,6 +408,13 @@ func (m *PaymentAttributes) WithoutIntermediaryBank() *PaymentAttributes {
 func (m *PaymentAttributes) WithNumericReference(numericReference string) *PaymentAttributes {
 
 	m.NumericReference = numericReference
+
+	return m
+}
+
+func (m *PaymentAttributes) WithParties(parties []*Party) *PaymentAttributes {
+
+	m.Parties = parties
 
 	return m
 }
@@ -621,6 +646,10 @@ func (m *PaymentAttributes) WithUserDefinedData(userDefinedData []*UserDefinedDa
 func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAgentInstructions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAgents(formats); err != nil {
 		res = append(res, err)
 	}
@@ -649,7 +678,15 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateParties(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePaymentAcceptanceDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePaymentScheme(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -707,6 +744,31 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *PaymentAttributes) validateAgentInstructions(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AgentInstructions) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AgentInstructions); i++ {
+		if swag.IsZero(m.AgentInstructions[i]) { // not required
+			continue
+		}
+
+		if m.AgentInstructions[i] != nil {
+			if err := m.AgentInstructions[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("agent_instructions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *PaymentAttributes) validateAgents(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Agents) { // not required
@@ -738,7 +800,7 @@ func (m *PaymentAttributes) validateAmount(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -835,6 +897,31 @@ func (m *PaymentAttributes) validateIntermediaryBank(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *PaymentAttributes) validateParties(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Parties) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Parties); i++ {
+		if swag.IsZero(m.Parties[i]) { // not required
+			continue
+		}
+
+		if m.Parties[i] != nil {
+			if err := m.Parties[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("parties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *PaymentAttributes) validatePaymentAcceptanceDatetime(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.PaymentAcceptanceDatetime) { // not required
@@ -842,6 +929,19 @@ func (m *PaymentAttributes) validatePaymentAcceptanceDatetime(formats strfmt.Reg
 	}
 
 	if err := validate.FormatOf("payment_acceptance_datetime", "body", "date-time", m.PaymentAcceptanceDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributes) validatePaymentScheme(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PaymentScheme) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("payment_scheme", "body", string(m.PaymentScheme), `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -1051,7 +1151,7 @@ func (m *PaymentAttributes) validateUserDefinedData(formats strfmt.Registry) err
 
 	iUserDefinedDataSize := int64(len(m.UserDefinedData))
 
-	if err := validate.MaxItems("user_defined_data", "body", iUserDefinedDataSize, 5); err != nil {
+	if err := validate.MaxItems("user_defined_data", "body", iUserDefinedDataSize, 10); err != nil {
 		return err
 	}
 
@@ -1116,7 +1216,10 @@ type PaymentAttributesBeneficiaryParty struct {
 	AccountProxy *BeneficiaryDebtorAccountProxy `json:"account_proxy,omitempty"`
 
 	// The type of the account given with `beneficiary_party.account_number`. Single digit number. Only required if requested by the beneficiary party. Defaults to 0.
-	AccountType int64 `json:"account_type,omitempty"`
+	AccountType int64 `json:"account_type"`
+
+	// ISO20022 four character account type code, or a proprietary equivalent
+	AccountTypeCode string `json:"account_type_code,omitempty"`
 
 	// account with
 	AccountWith *BeneficiaryDebtorAccountHoldingEntity `json:"account_with,omitempty"`
@@ -1173,6 +1276,9 @@ type PaymentAttributesBeneficiaryParty struct {
 	// Post code of the beneficiary address
 	PostCode string `json:"post_code,omitempty"`
 
+	// Beneficiary postal address
+	PostalAddress *PostalAddress `json:"postal_address,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 
@@ -1198,6 +1304,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		AccountProxy: BeneficiaryDebtorAccountProxyWithDefaults(defaults),
 
 		AccountType: defaults.GetInt64("PaymentAttributesBeneficiaryParty", "account_type"),
+
+		AccountTypeCode: defaults.GetString("PaymentAttributesBeneficiaryParty", "account_type_code"),
 
 		AccountWith: BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults),
 
@@ -1234,6 +1342,8 @@ func PaymentAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults) *Pa
 		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
 
 		PostCode: defaults.GetString("PaymentAttributesBeneficiaryParty", "post_code"),
+
+		PostalAddress: PostalAddressWithDefaults(defaults),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 
@@ -1281,6 +1391,13 @@ func (m *PaymentAttributesBeneficiaryParty) WithoutAccountProxy() *PaymentAttrib
 func (m *PaymentAttributesBeneficiaryParty) WithAccountType(accountType int64) *PaymentAttributesBeneficiaryParty {
 
 	m.AccountType = accountType
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithAccountTypeCode(accountTypeCode string) *PaymentAttributesBeneficiaryParty {
+
+	m.AccountTypeCode = accountTypeCode
 
 	return m
 }
@@ -1421,6 +1538,18 @@ func (m *PaymentAttributesBeneficiaryParty) WithPostCode(postCode string) *Payme
 	return m
 }
 
+func (m *PaymentAttributesBeneficiaryParty) WithPostalAddress(postalAddress PostalAddress) *PaymentAttributesBeneficiaryParty {
+
+	m.PostalAddress = &postalAddress
+
+	return m
+}
+
+func (m *PaymentAttributesBeneficiaryParty) WithoutPostalAddress() *PaymentAttributesBeneficiaryParty {
+	m.PostalAddress = nil
+	return m
+}
+
 func (m *PaymentAttributesBeneficiaryParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *PaymentAttributesBeneficiaryParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1475,6 +1604,10 @@ func (m *PaymentAttributesBeneficiaryParty) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateOrganisationIdentifications(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostalAddress(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1573,6 +1706,24 @@ func (m *PaymentAttributesBeneficiaryParty) validateOrganisationIdentifications(
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesBeneficiaryParty) validatePostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostalAddress) { // not required
+		return nil
+	}
+
+	if m.PostalAddress != nil {
+		if err := m.PostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary_party" + "." + "postal_address")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1698,6 +1849,9 @@ type PaymentAttributesDebtorParty struct {
 	// Post code of the Debtor address
 	PostCode string `json:"post_code,omitempty"`
 
+	// Debtor postal address
+	PostalAddress *PostalAddress `json:"postal_address,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 
@@ -1758,6 +1912,8 @@ func PaymentAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Payment
 		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
 
 		PostCode: defaults.GetString("PaymentAttributesDebtorParty", "post_code"),
+
+		PostalAddress: PostalAddressWithDefaults(defaults),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 
@@ -1950,6 +2106,18 @@ func (m *PaymentAttributesDebtorParty) WithPostCode(postCode string) *PaymentAtt
 	return m
 }
 
+func (m *PaymentAttributesDebtorParty) WithPostalAddress(postalAddress PostalAddress) *PaymentAttributesDebtorParty {
+
+	m.PostalAddress = &postalAddress
+
+	return m
+}
+
+func (m *PaymentAttributesDebtorParty) WithoutPostalAddress() *PaymentAttributesDebtorParty {
+	m.PostalAddress = nil
+	return m
+}
+
 func (m *PaymentAttributesDebtorParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *PaymentAttributesDebtorParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1997,6 +2165,10 @@ func (m *PaymentAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrganisationIdentifications(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostalAddress(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -2095,6 +2267,24 @@ func (m *PaymentAttributesDebtorParty) validateOrganisationIdentifications(forma
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesDebtorParty) validatePostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostalAddress) { // not required
+		return nil
+	}
+
+	if m.PostalAddress != nil {
+		if err := m.PostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("debtor_party" + "." + "postal_address")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -26,6 +26,9 @@ const (
 
 	// ReturnAdmissionStatusFailed captures enum value "failed"
 	ReturnAdmissionStatusFailed ReturnAdmissionStatus = "failed"
+
+	// ReturnAdmissionStatusPending captures enum value "pending"
+	ReturnAdmissionStatusPending ReturnAdmissionStatus = "pending"
 )
 
 // for schema
@@ -33,7 +36,7 @@ var returnAdmissionStatusEnum []interface{}
 
 func init() {
 	var res []ReturnAdmissionStatus
-	if err := json.Unmarshal([]byte(`["confirmed","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["confirmed","failed","pending"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

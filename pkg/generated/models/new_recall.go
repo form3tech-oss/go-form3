@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
@@ -281,20 +282,54 @@ func (m *NewRecall) Json() string {
 // swagger:model NewRecallAttributes
 type NewRecallAttributes struct {
 
+	// Block to represent a Financial Institution/agent in the payment chain
+	Agents []*Agent `json:"agents,omitempty"`
+
+	// Block to represent parties involved in the payment chain
+	Parties []*Party `json:"parties,omitempty"`
+
 	// Further explanation of the reason given in reason_code. Only evaluated for certain reason codes.
 	Reason string `json:"reason,omitempty"`
 
 	// The reason for the recall. Has to be a valid [recall reason code](http://api-docs.form3.tech/api.html#enumerations-recall-reason-codes).
 	ReasonCode string `json:"reason_code,omitempty"`
+
+	// Block to represent a list of references
+	References []*Reference `json:"references,omitempty"`
+
+	// Scheme-specific unique ID
+	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
 
 func NewRecallAttributesWithDefaults(defaults client.Defaults) *NewRecallAttributes {
 	return &NewRecallAttributes{
 
+		Agents: make([]*Agent, 0),
+
+		Parties: make([]*Party, 0),
+
 		Reason: defaults.GetString("NewRecallAttributes", "reason"),
 
 		ReasonCode: defaults.GetString("NewRecallAttributes", "reason_code"),
+
+		References: make([]*Reference, 0),
+
+		UniqueSchemeID: defaults.GetString("NewRecallAttributes", "unique_scheme_id"),
 	}
+}
+
+func (m *NewRecallAttributes) WithAgents(agents []*Agent) *NewRecallAttributes {
+
+	m.Agents = agents
+
+	return m
+}
+
+func (m *NewRecallAttributes) WithParties(parties []*Party) *NewRecallAttributes {
+
+	m.Parties = parties
+
+	return m
 }
 
 func (m *NewRecallAttributes) WithReason(reason string) *NewRecallAttributes {
@@ -311,8 +346,114 @@ func (m *NewRecallAttributes) WithReasonCode(reasonCode string) *NewRecallAttrib
 	return m
 }
 
+func (m *NewRecallAttributes) WithReferences(references []*Reference) *NewRecallAttributes {
+
+	m.References = references
+
+	return m
+}
+
+func (m *NewRecallAttributes) WithUniqueSchemeID(uniqueSchemeID string) *NewRecallAttributes {
+
+	m.UniqueSchemeID = uniqueSchemeID
+
+	return m
+}
+
 // Validate validates this new recall attributes
 func (m *NewRecallAttributes) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAgents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateParties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferences(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *NewRecallAttributes) validateAgents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Agents) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Agents); i++ {
+		if swag.IsZero(m.Agents[i]) { // not required
+			continue
+		}
+
+		if m.Agents[i] != nil {
+			if err := m.Agents[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "agents" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *NewRecallAttributes) validateParties(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Parties) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Parties); i++ {
+		if swag.IsZero(m.Parties[i]) { // not required
+			continue
+		}
+
+		if m.Parties[i] != nil {
+			if err := m.Parties[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "parties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *NewRecallAttributes) validateReferences(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.References) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.References); i++ {
+		if swag.IsZero(m.References[i]) { // not required
+			continue
+		}
+
+		if m.References[i] != nil {
+			if err := m.References[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "references" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

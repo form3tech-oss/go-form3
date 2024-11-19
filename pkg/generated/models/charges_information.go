@@ -15,6 +15,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ChargesInformation charges information
@@ -23,6 +24,9 @@ type ChargesInformation struct {
 
 	// Specifies which party/parties will bear the charges associated with the processing of the payment transaction. Can be one of the following: `DEBT`, `CRED`, `SHAR` or `SLEV`
 	BearerCode string `json:"bearer_code,omitempty"`
+
+	// charges bearer
+	ChargesBearer []*ChargesInformationChargesBearerItems0 `json:"charges_bearer,omitempty"`
 
 	// Transaction charges due to the receiver of the transaction. Requires 1 to 2 decimal places. Must be > 0.
 	ReceiverChargesAmount string `json:"receiver_charges_amount,omitempty"`
@@ -39,6 +43,8 @@ func ChargesInformationWithDefaults(defaults client.Defaults) *ChargesInformatio
 
 		BearerCode: defaults.GetString("ChargesInformation", "bearer_code"),
 
+		ChargesBearer: make([]*ChargesInformationChargesBearerItems0, 0),
+
 		ReceiverChargesAmount: defaults.GetString("ChargesInformation", "receiver_charges_amount"),
 
 		ReceiverChargesCurrency: defaults.GetString("ChargesInformation", "receiver_charges_currency"),
@@ -50,6 +56,13 @@ func ChargesInformationWithDefaults(defaults client.Defaults) *ChargesInformatio
 func (m *ChargesInformation) WithBearerCode(bearerCode string) *ChargesInformation {
 
 	m.BearerCode = bearerCode
+
+	return m
+}
+
+func (m *ChargesInformation) WithChargesBearer(chargesBearer []*ChargesInformationChargesBearerItems0) *ChargesInformation {
+
+	m.ChargesBearer = chargesBearer
 
 	return m
 }
@@ -79,6 +92,10 @@ func (m *ChargesInformation) WithSenderCharges(senderCharges []*ChargesInformati
 func (m *ChargesInformation) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateChargesBearer(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSenderCharges(formats); err != nil {
 		res = append(res, err)
 	}
@@ -86,6 +103,31 @@ func (m *ChargesInformation) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ChargesInformation) validateChargesBearer(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ChargesBearer) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ChargesBearer); i++ {
+		if swag.IsZero(m.ChargesBearer[i]) { // not required
+			continue
+		}
+
+		if m.ChargesBearer[i] != nil {
+			if err := m.ChargesBearer[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("charges_bearer" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -132,6 +174,525 @@ func (m *ChargesInformation) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ChargesInformation) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ChargesInformationChargesBearerItems0 List of agents applying charges
+// swagger:model ChargesInformationChargesBearerItems0
+type ChargesInformationChargesBearerItems0 struct {
+
+	// agent
+	Agent *ChargesInformationChargesBearerItems0Agent `json:"agent,omitempty"`
+
+	// Transaction charges applied by agent. Requires 1 to 2 decimal places. Must be > 0.
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
+	Amount string `json:"amount,omitempty"`
+
+	// Currency of charges_bearer amount. Currency code as defined in [ISO 4217](http://www.iso.org/iso/home/standards/currency_codes.htm).
+	// Max Length: 3
+	Currency string `json:"currency,omitempty"`
+}
+
+func ChargesInformationChargesBearerItems0WithDefaults(defaults client.Defaults) *ChargesInformationChargesBearerItems0 {
+	return &ChargesInformationChargesBearerItems0{
+
+		Agent: ChargesInformationChargesBearerItems0AgentWithDefaults(defaults),
+
+		Amount: defaults.GetString("ChargesInformationChargesBearerItems0", "amount"),
+
+		Currency: defaults.GetString("ChargesInformationChargesBearerItems0", "currency"),
+	}
+}
+
+func (m *ChargesInformationChargesBearerItems0) WithAgent(agent ChargesInformationChargesBearerItems0Agent) *ChargesInformationChargesBearerItems0 {
+
+	m.Agent = &agent
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0) WithoutAgent() *ChargesInformationChargesBearerItems0 {
+	m.Agent = nil
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0) WithAmount(amount string) *ChargesInformationChargesBearerItems0 {
+
+	m.Amount = amount
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0) WithCurrency(currency string) *ChargesInformationChargesBearerItems0 {
+
+	m.Currency = currency
+
+	return m
+}
+
+// Validate validates this charges information charges bearer items0
+func (m *ChargesInformationChargesBearerItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAgent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCurrency(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0) validateAgent(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Agent) { // not required
+		return nil
+	}
+
+	if m.Agent != nil {
+		if err := m.Agent.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("agent")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0) validateAmount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Amount) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0) validateCurrency(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Currency) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("currency", "body", string(m.Currency), 3); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ChargesInformationChargesBearerItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ChargesInformationChargesBearerItems0) UnmarshalBinary(b []byte) error {
+	var res ChargesInformationChargesBearerItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ChargesInformationChargesBearerItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ChargesInformationChargesBearerItems0Agent charges information charges bearer items0 agent
+// swagger:model ChargesInformationChargesBearerItems0Agent
+type ChargesInformationChargesBearerItems0Agent struct {
+
+	// bank additional address line
+	// Max Items: 3
+	BankAdditionalAddressLine []string `json:"bank_additional_address_line,omitempty"`
+
+	// bank building number
+	// Max Length: 16
+	BankBuildingNumber string `json:"bank_building_number,omitempty"`
+
+	// bank city
+	// Max Length: 35
+	BankCity string `json:"bank_city,omitempty"`
+
+	// ISO 3166 format country code
+	// Max Length: 2
+	BankCountry string `json:"bank_country,omitempty"`
+
+	// Array for additional ID(s) for agent
+	BankIds []*AccountWithBankID `json:"bank_ids,omitempty"`
+
+	// bank name
+	// Max Length: 140
+	BankName string `json:"bank_name,omitempty"`
+
+	// bank post code
+	// Max Length: 16
+	BankPostCode string `json:"bank_post_code,omitempty"`
+
+	// Agent postal address
+	BankPostalAddress *PostalAddress `json:"bank_postal_address,omitempty"`
+
+	// bank province
+	// Max Length: 35
+	BankProvince string `json:"bank_province,omitempty"`
+
+	// bank street name
+	// Max Length: 70
+	BankStreetName string `json:"bank_street_name,omitempty"`
+}
+
+func ChargesInformationChargesBearerItems0AgentWithDefaults(defaults client.Defaults) *ChargesInformationChargesBearerItems0Agent {
+	return &ChargesInformationChargesBearerItems0Agent{
+
+		BankAdditionalAddressLine: make([]string, 0),
+
+		BankBuildingNumber: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_building_number"),
+
+		BankCity: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_city"),
+
+		BankCountry: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_country"),
+
+		BankIds: make([]*AccountWithBankID, 0),
+
+		BankName: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_name"),
+
+		BankPostCode: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_post_code"),
+
+		BankPostalAddress: PostalAddressWithDefaults(defaults),
+
+		BankProvince: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_province"),
+
+		BankStreetName: defaults.GetString("ChargesInformationChargesBearerItems0Agent", "bank_street_name"),
+	}
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankAdditionalAddressLine(bankAdditionalAddressLine []string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankAdditionalAddressLine = bankAdditionalAddressLine
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankBuildingNumber(bankBuildingNumber string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankBuildingNumber = bankBuildingNumber
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankCity(bankCity string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankCity = bankCity
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankCountry(bankCountry string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankCountry = bankCountry
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankIds(bankIds []*AccountWithBankID) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankIds = bankIds
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankName(bankName string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankName = bankName
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankPostCode(bankPostCode string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankPostCode = bankPostCode
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankPostalAddress(bankPostalAddress PostalAddress) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankPostalAddress = &bankPostalAddress
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithoutBankPostalAddress() *ChargesInformationChargesBearerItems0Agent {
+	m.BankPostalAddress = nil
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankProvince(bankProvince string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankProvince = bankProvince
+
+	return m
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) WithBankStreetName(bankStreetName string) *ChargesInformationChargesBearerItems0Agent {
+
+	m.BankStreetName = bankStreetName
+
+	return m
+}
+
+// Validate validates this charges information charges bearer items0 agent
+func (m *ChargesInformationChargesBearerItems0Agent) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateBankAdditionalAddressLine(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankBuildingNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankCity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankCountry(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankPostCode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankPostalAddress(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankProvince(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankStreetName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankAdditionalAddressLine(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankAdditionalAddressLine) { // not required
+		return nil
+	}
+
+	iBankAdditionalAddressLineSize := int64(len(m.BankAdditionalAddressLine))
+
+	if err := validate.MaxItems("agent"+"."+"bank_additional_address_line", "body", iBankAdditionalAddressLineSize, 3); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.BankAdditionalAddressLine); i++ {
+
+		if err := validate.MaxLength("agent"+"."+"bank_additional_address_line"+"."+strconv.Itoa(i), "body", string(m.BankAdditionalAddressLine[i]), 35); err != nil {
+			return err
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankBuildingNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankBuildingNumber) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_building_number", "body", string(m.BankBuildingNumber), 16); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankCity(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankCity) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_city", "body", string(m.BankCity), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankCountry(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankCountry) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_country", "body", string(m.BankCountry), 2); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankIds(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankIds) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.BankIds); i++ {
+		if swag.IsZero(m.BankIds[i]) { // not required
+			continue
+		}
+
+		if m.BankIds[i] != nil {
+			if err := m.BankIds[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("agent" + "." + "bank_ids" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankName(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankName) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_name", "body", string(m.BankName), 140); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankPostCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankPostCode) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_post_code", "body", string(m.BankPostCode), 16); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankPostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankPostalAddress) { // not required
+		return nil
+	}
+
+	if m.BankPostalAddress != nil {
+		if err := m.BankPostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("agent" + "." + "bank_postal_address")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankProvince(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankProvince) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_province", "body", string(m.BankProvince), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ChargesInformationChargesBearerItems0Agent) validateBankStreetName(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankStreetName) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("agent"+"."+"bank_street_name", "body", string(m.BankStreetName), 70); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ChargesInformationChargesBearerItems0Agent) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ChargesInformationChargesBearerItems0Agent) UnmarshalBinary(b []byte) error {
+	var res ChargesInformationChargesBearerItems0Agent
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ChargesInformationChargesBearerItems0Agent) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

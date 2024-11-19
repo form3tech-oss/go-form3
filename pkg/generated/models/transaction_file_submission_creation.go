@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // TransactionFileSubmissionCreation transaction file submission creation
@@ -21,7 +22,8 @@ import (
 type TransactionFileSubmissionCreation struct {
 
 	// data
-	Data *TransactionFileSubmission `json:"data,omitempty"`
+	// Required: true
+	Data *TransactionFileSubmission `json:"data"`
 }
 
 func TransactionFileSubmissionCreationWithDefaults(defaults client.Defaults) *TransactionFileSubmissionCreation {
@@ -59,8 +61,8 @@ func (m *TransactionFileSubmissionCreation) Validate(formats strfmt.Registry) er
 
 func (m *TransactionFileSubmissionCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

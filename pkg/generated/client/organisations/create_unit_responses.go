@@ -32,6 +32,20 @@ func (o *CreateUnitReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewCreateUnitBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateUnitConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +56,8 @@ func NewCreateUnitCreated() *CreateUnitCreated {
 	return &CreateUnitCreated{}
 }
 
-/*CreateUnitCreated handles this case with default header values.
+/*
+CreateUnitCreated handles this case with default header values.
 
 Organisation creation response
 */
@@ -65,6 +80,76 @@ func (o *CreateUnitCreated) readResponse(response runtime.ClientResponse, consum
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.OrganisationCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUnitBadRequest creates a CreateUnitBadRequest with default headers values
+func NewCreateUnitBadRequest() *CreateUnitBadRequest {
+	return &CreateUnitBadRequest{}
+}
+
+/*
+CreateUnitBadRequest handles this case with default header values.
+
+Bad Request
+*/
+type CreateUnitBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateUnitBadRequest) Error() string {
+	return fmt.Sprintf("[POST /organisation/units][%d] createUnitBadRequest", 400)
+}
+
+func (o *CreateUnitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUnitConflict creates a CreateUnitConflict with default headers values
+func NewCreateUnitConflict() *CreateUnitConflict {
+	return &CreateUnitConflict{}
+}
+
+/*
+CreateUnitConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateUnitConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateUnitConflict) Error() string {
+	return fmt.Sprintf("[POST /organisation/units][%d] createUnitConflict", 409)
+}
+
+func (o *CreateUnitConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

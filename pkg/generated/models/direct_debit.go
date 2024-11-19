@@ -354,7 +354,7 @@ func (m *DirectDebit) Json() string {
 type DirectDebitAttributes struct {
 
 	// Amount of money moved between the instructing agent and instructed agent
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Amount string `json:"amount,omitempty"`
 
 	// beneficiary party
@@ -424,6 +424,9 @@ type DirectDebitAttributes struct {
 	// Unique identification, as assigned by the first instructing agent, to unambiguously identify the transaction that is passed on, unchanged, throughout the entire interbank chain.
 	SchemeTransactionID string `json:"scheme_transaction_id,omitempty"`
 
+	// settlement
+	Settlement *Settlement `json:"settlement,omitempty"`
+
 	// structured reference
 	StructuredReference *DirectDebitAttributesStructuredReference `json:"structured_reference,omitempty"`
 
@@ -483,6 +486,8 @@ func DirectDebitAttributesWithDefaults(defaults client.Defaults) *DirectDebitAtt
 		SchemeStatus: defaults.GetString("DirectDebitAttributes", "scheme_status"),
 
 		SchemeTransactionID: defaults.GetString("DirectDebitAttributes", "scheme_transaction_id"),
+
+		Settlement: SettlementWithDefaults(defaults),
 
 		StructuredReference: DirectDebitAttributesStructuredReferenceWithDefaults(defaults),
 
@@ -678,6 +683,18 @@ func (m *DirectDebitAttributes) WithSchemeTransactionID(schemeTransactionID stri
 	return m
 }
 
+func (m *DirectDebitAttributes) WithSettlement(settlement Settlement) *DirectDebitAttributes {
+
+	m.Settlement = &settlement
+
+	return m
+}
+
+func (m *DirectDebitAttributes) WithoutSettlement() *DirectDebitAttributes {
+	m.Settlement = nil
+	return m
+}
+
 func (m *DirectDebitAttributes) WithStructuredReference(structuredReference DirectDebitAttributesStructuredReference) *DirectDebitAttributes {
 
 	m.StructuredReference = &structuredReference
@@ -753,6 +770,10 @@ func (m *DirectDebitAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSettlement(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStructuredReference(formats); err != nil {
 		res = append(res, err)
 	}
@@ -777,7 +798,7 @@ func (m *DirectDebitAttributes) validateAmount(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -902,6 +923,24 @@ func (m *DirectDebitAttributes) validateSchemeStatus(formats strfmt.Registry) er
 	return nil
 }
 
+func (m *DirectDebitAttributes) validateSettlement(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Settlement) { // not required
+		return nil
+	}
+
+	if m.Settlement != nil {
+		if err := m.Settlement.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "settlement")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *DirectDebitAttributes) validateStructuredReference(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.StructuredReference) { // not required
@@ -995,13 +1034,13 @@ type DirectDebitAttributesBeneficiaryParty struct {
 	AccountNumberCode AccountNumberCode `json:"account_number_code,omitempty"`
 
 	// The type of the account given with `beneficiary_party.account_number`. Single digit number. Only required if requested by the beneficiary party. Defaults to 0.
-	AccountType int64 `json:"account_type,omitempty"`
+	AccountType int64 `json:"account_type"`
 
 	// account with
 	AccountWith *AccountHoldingEntity `json:"account_with,omitempty"`
 
 	// Beneficiary address
-	Address []string `json:"address"`
+	Address []string `json:"address,omitempty"`
 
 	// Building number of the Debtor address
 	BuildingNumber string `json:"building_number,omitempty"`
@@ -1017,6 +1056,9 @@ type DirectDebitAttributesBeneficiaryParty struct {
 
 	// Post code of the Debtor address
 	PostCode string `json:"post_code,omitempty"`
+
+	// Beneficiary postal address
+	PostalAddress *PostalAddress `json:"postal_address,omitempty"`
 
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
@@ -1052,6 +1094,8 @@ func DirectDebitAttributesBeneficiaryPartyWithDefaults(defaults client.Defaults)
 		Name: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "name"),
 
 		PostCode: defaults.GetString("DirectDebitAttributesBeneficiaryParty", "post_code"),
+
+		PostalAddress: PostalAddressWithDefaults(defaults),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 
@@ -1143,6 +1187,18 @@ func (m *DirectDebitAttributesBeneficiaryParty) WithPostCode(postCode string) *D
 	return m
 }
 
+func (m *DirectDebitAttributesBeneficiaryParty) WithPostalAddress(postalAddress PostalAddress) *DirectDebitAttributesBeneficiaryParty {
+
+	m.PostalAddress = &postalAddress
+
+	return m
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) WithoutPostalAddress() *DirectDebitAttributesBeneficiaryParty {
+	m.PostalAddress = nil
+	return m
+}
+
 func (m *DirectDebitAttributesBeneficiaryParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *DirectDebitAttributesBeneficiaryParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1178,6 +1234,10 @@ func (m *DirectDebitAttributesBeneficiaryParty) Validate(formats strfmt.Registry
 	}
 
 	if err := m.validateAccountWith(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostalAddress(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1217,6 +1277,24 @@ func (m *DirectDebitAttributesBeneficiaryParty) validateAccountWith(formats strf
 		if err := m.AccountWith.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("attributes" + "." + "beneficiary_party" + "." + "account_with")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributesBeneficiaryParty) validatePostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostalAddress) { // not required
+		return nil
+	}
+
+	if m.PostalAddress != nil {
+		if err := m.PostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "beneficiary_party" + "." + "postal_address")
 			}
 			return err
 		}
@@ -1285,7 +1363,7 @@ type DirectDebitAttributesDebtorParty struct {
 	AccountWith *AccountHoldingEntity `json:"account_with,omitempty"`
 
 	// Debtor address
-	Address []string `json:"address"`
+	Address []string `json:"address,omitempty"`
 
 	// Building number of the Debtor address
 	BuildingNumber string `json:"building_number,omitempty"`
@@ -1316,6 +1394,9 @@ type DirectDebitAttributesDebtorParty struct {
 
 	// Post code of the Debtor address
 	PostCode string `json:"post_code,omitempty"`
+
+	// Debtor postal address
+	PostalAddress *PostalAddress `json:"postal_address,omitempty"`
 
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
@@ -1359,6 +1440,8 @@ func DirectDebitAttributesDebtorPartyWithDefaults(defaults client.Defaults) *Dir
 		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
 
 		PostCode: defaults.GetString("DirectDebitAttributesDebtorParty", "post_code"),
+
+		PostalAddress: PostalAddressWithDefaults(defaults),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 
@@ -1478,6 +1561,18 @@ func (m *DirectDebitAttributesDebtorParty) WithPostCode(postCode string) *Direct
 	return m
 }
 
+func (m *DirectDebitAttributesDebtorParty) WithPostalAddress(postalAddress PostalAddress) *DirectDebitAttributesDebtorParty {
+
+	m.PostalAddress = &postalAddress
+
+	return m
+}
+
+func (m *DirectDebitAttributesDebtorParty) WithoutPostalAddress() *DirectDebitAttributesDebtorParty {
+	m.PostalAddress = nil
+	return m
+}
+
 func (m *DirectDebitAttributesDebtorParty) WithPrivateIdentification(privateIdentification PrivateIdentification) *DirectDebitAttributesDebtorParty {
 
 	m.PrivateIdentification = &privateIdentification
@@ -1517,6 +1612,10 @@ func (m *DirectDebitAttributesDebtorParty) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateOrganisationIdentifications(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostalAddress(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1584,6 +1683,24 @@ func (m *DirectDebitAttributesDebtorParty) validateOrganisationIdentifications(f
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DirectDebitAttributesDebtorParty) validatePostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostalAddress) { // not required
+		return nil
+	}
+
+	if m.PostalAddress != nil {
+		if err := m.PostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("attributes" + "." + "debtor_party" + "." + "postal_address")
+			}
+			return err
+		}
 	}
 
 	return nil

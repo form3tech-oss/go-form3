@@ -55,7 +55,7 @@ func (c *Client) ListClaims() *ListClaimsRequest {
 
 		FilterSubmissionSubmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListClaims", "filter[submission.submission_date_to]"),
 
-		PageNumber: c.Defaults.GetStringPtr("ListClaims", "page[number]"),
+		PageNumber: c.Defaults.GetInt64Ptr("ListClaims", "page[number]"),
 
 		PageSize: c.Defaults.GetInt64Ptr("ListClaims", "page[size]"),
 
@@ -138,7 +138,7 @@ type ListClaimsRequest struct {
 
 	/*PageNumber      Which page to select      */
 
-	PageNumber *string
+	PageNumber *int64
 
 	/*PageSize      Number of items to select      */
 
@@ -395,7 +395,7 @@ func (o *ListClaimsRequest) WithoutFilterSubmissionSubmissionDateTo() *ListClaim
 	return o
 }
 
-func (o *ListClaimsRequest) WithPageNumber(pageNumber string) *ListClaimsRequest {
+func (o *ListClaimsRequest) WithPageNumber(pageNumber int64) *ListClaimsRequest {
 
 	o.PageNumber = &pageNumber
 
@@ -423,7 +423,7 @@ func (o *ListClaimsRequest) WithoutPageSize() *ListClaimsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list claims Request
 func (o *ListClaimsRequest) WithContext(ctx context.Context) *ListClaimsRequest {
 	o.Context = ctx
@@ -714,11 +714,11 @@ func (o *ListClaimsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	if o.PageNumber != nil {
 
 		// query param page[number]
-		var qrPageNumber string
+		var qrPageNumber int64
 		if o.PageNumber != nil {
 			qrPageNumber = *o.PageNumber
 		}
-		qPageNumber := qrPageNumber
+		qPageNumber := swag.FormatInt64(qrPageNumber)
 		if qPageNumber != "" {
 			if err := r.SetQueryParam("page[number]", qPageNumber); err != nil {
 				return err

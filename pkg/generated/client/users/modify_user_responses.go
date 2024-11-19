@@ -32,6 +32,20 @@ func (o *ModifyUserReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewModifyUserBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 404:
+		result := NewModifyUserNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +56,8 @@ func NewModifyUserOK() *ModifyUserOK {
 	return &ModifyUserOK{}
 }
 
-/*ModifyUserOK handles this case with default header values.
+/*
+ModifyUserOK handles this case with default header values.
 
 User details
 */
@@ -65,6 +80,76 @@ func (o *ModifyUserOK) readResponse(response runtime.ClientResponse, consumer ru
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUserBadRequest creates a ModifyUserBadRequest with default headers values
+func NewModifyUserBadRequest() *ModifyUserBadRequest {
+	return &ModifyUserBadRequest{}
+}
+
+/*
+ModifyUserBadRequest handles this case with default header values.
+
+Bad request
+*/
+type ModifyUserBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ModifyUserBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserBadRequest", 400)
+}
+
+func (o *ModifyUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUserNotFound creates a ModifyUserNotFound with default headers values
+func NewModifyUserNotFound() *ModifyUserNotFound {
+	return &ModifyUserNotFound{}
+}
+
+/*
+ModifyUserNotFound handles this case with default header values.
+
+Not Found
+*/
+type ModifyUserNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ModifyUserNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserNotFound", 404)
+}
+
+func (o *ModifyUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

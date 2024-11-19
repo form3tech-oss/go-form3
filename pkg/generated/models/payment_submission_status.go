@@ -50,6 +50,9 @@ const (
 
 	// PaymentSubmissionStatusValidationPending captures enum value "validation_pending"
 	PaymentSubmissionStatusValidationPending PaymentSubmissionStatus = "validation_pending"
+
+	// PaymentSubmissionStatusRejectedByCustomer captures enum value "rejected_by_customer"
+	PaymentSubmissionStatusRejectedByCustomer PaymentSubmissionStatus = "rejected_by_customer"
 )
 
 // for schema
@@ -57,7 +60,7 @@ var paymentSubmissionStatusEnum []interface{}
 
 func init() {
 	var res []PaymentSubmissionStatus
-	if err := json.Unmarshal([]byte(`["accepted","limit_check_pending","limit_check_failed","limit_check_passed","released_to_gateway","queued_for_delivery","delivery_confirmed","delivery_failed","submitted","validation_pending"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","limit_check_pending","limit_check_failed","limit_check_passed","released_to_gateway","queued_for_delivery","delivery_confirmed","delivery_failed","submitted","validation_pending","rejected_by_customer"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

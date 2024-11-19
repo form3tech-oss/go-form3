@@ -22,7 +22,7 @@ import (
 type MandateAttributes struct {
 
 	// amount
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Amount string `json:"amount,omitempty"`
 
 	// beneficiary party
@@ -301,7 +301,7 @@ func (m *MandateAttributes) validateAmount(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

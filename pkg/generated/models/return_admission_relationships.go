@@ -23,11 +23,17 @@ type ReturnAdmissionRelationships struct {
 	// beneficiary account
 	BeneficiaryAccount *RelationshipReturnAdmissionBeneficiaryAccount `json:"beneficiary_account,omitempty"`
 
+	// beneficiary branch
+	BeneficiaryBranch *RelationshipReturnAdmissionBeneficiaryBranch `json:"beneficiary_branch,omitempty"`
+
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
 	// payment return
 	PaymentReturn *RelationshipReturns `json:"payment_return,omitempty"`
+
+	// return admission task
+	ReturnAdmissionTask *RelationshipReturnAdmissionTasks `json:"return_admission_task,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
@@ -38,9 +44,13 @@ func ReturnAdmissionRelationshipsWithDefaults(defaults client.Defaults) *ReturnA
 
 		BeneficiaryAccount: RelationshipReturnAdmissionBeneficiaryAccountWithDefaults(defaults),
 
+		BeneficiaryBranch: RelationshipReturnAdmissionBeneficiaryBranchWithDefaults(defaults),
+
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
 		PaymentReturn: RelationshipReturnsWithDefaults(defaults),
+
+		ReturnAdmissionTask: RelationshipReturnAdmissionTasksWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
@@ -55,6 +65,18 @@ func (m *ReturnAdmissionRelationships) WithBeneficiaryAccount(beneficiaryAccount
 
 func (m *ReturnAdmissionRelationships) WithoutBeneficiaryAccount() *ReturnAdmissionRelationships {
 	m.BeneficiaryAccount = nil
+	return m
+}
+
+func (m *ReturnAdmissionRelationships) WithBeneficiaryBranch(beneficiaryBranch RelationshipReturnAdmissionBeneficiaryBranch) *ReturnAdmissionRelationships {
+
+	m.BeneficiaryBranch = &beneficiaryBranch
+
+	return m
+}
+
+func (m *ReturnAdmissionRelationships) WithoutBeneficiaryBranch() *ReturnAdmissionRelationships {
+	m.BeneficiaryBranch = nil
 	return m
 }
 
@@ -82,6 +104,18 @@ func (m *ReturnAdmissionRelationships) WithoutPaymentReturn() *ReturnAdmissionRe
 	return m
 }
 
+func (m *ReturnAdmissionRelationships) WithReturnAdmissionTask(returnAdmissionTask RelationshipReturnAdmissionTasks) *ReturnAdmissionRelationships {
+
+	m.ReturnAdmissionTask = &returnAdmissionTask
+
+	return m
+}
+
+func (m *ReturnAdmissionRelationships) WithoutReturnAdmissionTask() *ReturnAdmissionRelationships {
+	m.ReturnAdmissionTask = nil
+	return m
+}
+
 func (m *ReturnAdmissionRelationships) WithValidations(validations RelationshipLinks) *ReturnAdmissionRelationships {
 
 	m.Validations = &validations
@@ -102,11 +136,19 @@ func (m *ReturnAdmissionRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateBeneficiaryBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePayment(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePaymentReturn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReturnAdmissionTask(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,6 +172,24 @@ func (m *ReturnAdmissionRelationships) validateBeneficiaryAccount(formats strfmt
 		if err := m.BeneficiaryAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("beneficiary_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReturnAdmissionRelationships) validateBeneficiaryBranch(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BeneficiaryBranch) { // not required
+		return nil
+	}
+
+	if m.BeneficiaryBranch != nil {
+		if err := m.BeneficiaryBranch.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary_branch")
 			}
 			return err
 		}
@@ -166,6 +226,24 @@ func (m *ReturnAdmissionRelationships) validatePaymentReturn(formats strfmt.Regi
 		if err := m.PaymentReturn.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("payment_return")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReturnAdmissionRelationships) validateReturnAdmissionTask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReturnAdmissionTask) { // not required
+		return nil
+	}
+
+	if m.ReturnAdmissionTask != nil {
+		if err := m.ReturnAdmissionTask.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("return_admission_task")
 			}
 			return err
 		}

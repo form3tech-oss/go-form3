@@ -17,7 +17,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Reference reference
+// Reference Payment reference. Defined by a pair of reference type and reference value
 // swagger:model Reference
 type Reference struct {
 

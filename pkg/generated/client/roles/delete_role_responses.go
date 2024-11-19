@@ -7,10 +7,13 @@ package roles
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
 )
 
 // DeleteRoleReader is a Reader for the DeleteRole structure.
@@ -29,6 +32,20 @@ func (o *DeleteRoleReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 404:
+		result := NewDeleteRoleNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewDeleteRoleConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -39,7 +56,8 @@ func NewDeleteRoleNoContent() *DeleteRoleNoContent {
 	return &DeleteRoleNoContent{}
 }
 
-/*DeleteRoleNoContent handles this case with default header values.
+/*
+DeleteRoleNoContent handles this case with default header values.
 
 Role deleted
 */
@@ -51,6 +69,76 @@ func (o *DeleteRoleNoContent) Error() string {
 }
 
 func (o *DeleteRoleNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteRoleNotFound creates a DeleteRoleNotFound with default headers values
+func NewDeleteRoleNotFound() *DeleteRoleNotFound {
+	return &DeleteRoleNotFound{}
+}
+
+/*
+DeleteRoleNotFound handles this case with default header values.
+
+Not Found
+*/
+type DeleteRoleNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *DeleteRoleNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /security/roles/{role_id}][%d] deleteRoleNotFound", 404)
+}
+
+func (o *DeleteRoleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteRoleConflict creates a DeleteRoleConflict with default headers values
+func NewDeleteRoleConflict() *DeleteRoleConflict {
+	return &DeleteRoleConflict{}
+}
+
+/*
+DeleteRoleConflict handles this case with default header values.
+
+Conflict
+*/
+type DeleteRoleConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *DeleteRoleConflict) Error() string {
+	return fmt.Sprintf("[DELETE /security/roles/{role_id}][%d] deleteRoleConflict", 409)
+}
+
+func (o *DeleteRoleConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

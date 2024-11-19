@@ -39,6 +39,13 @@ func (o *GetClaimReversalReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetClaimReversalNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +56,8 @@ func NewGetClaimReversalOK() *GetClaimReversalOK {
 	return &GetClaimReversalOK{}
 }
 
-/*GetClaimReversalOK handles this case with default header values.
+/*
+GetClaimReversalOK handles this case with default header values.
 
 Claim Reversal details
 */
@@ -83,9 +91,10 @@ func NewGetClaimReversalBadRequest() *GetClaimReversalBadRequest {
 	return &GetClaimReversalBadRequest{}
 }
 
-/*GetClaimReversalBadRequest handles this case with default header values.
+/*
+GetClaimReversalBadRequest handles this case with default header values.
 
-Error
+Bad Request
 */
 type GetClaimReversalBadRequest struct {
 
@@ -100,6 +109,41 @@ func (o *GetClaimReversalBadRequest) Error() string {
 }
 
 func (o *GetClaimReversalBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClaimReversalNotFound creates a GetClaimReversalNotFound with default headers values
+func NewGetClaimReversalNotFound() *GetClaimReversalNotFound {
+	return &GetClaimReversalNotFound{}
+}
+
+/*
+GetClaimReversalNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetClaimReversalNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetClaimReversalNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}][%d] getClaimReversalNotFound", 404)
+}
+
+func (o *GetClaimReversalNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

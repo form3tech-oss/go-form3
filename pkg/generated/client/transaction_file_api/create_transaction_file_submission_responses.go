@@ -84,7 +84,8 @@ func NewCreateTransactionFileSubmissionCreated() *CreateTransactionFileSubmissio
 	return &CreateTransactionFileSubmissionCreated{}
 }
 
-/*CreateTransactionFileSubmissionCreated handles this case with default header values.
+/*
+CreateTransactionFileSubmissionCreated handles this case with default header values.
 
 Transaction File Submission Response
 */
@@ -118,7 +119,8 @@ func NewCreateTransactionFileSubmissionBadRequest() *CreateTransactionFileSubmis
 	return &CreateTransactionFileSubmissionBadRequest{}
 }
 
-/*CreateTransactionFileSubmissionBadRequest handles this case with default header values.
+/*
+CreateTransactionFileSubmissionBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -152,7 +154,8 @@ func NewCreateTransactionFileSubmissionUnauthorized() *CreateTransactionFileSubm
 	return &CreateTransactionFileSubmissionUnauthorized{}
 }
 
-/*CreateTransactionFileSubmissionUnauthorized handles this case with default header values.
+/*
+CreateTransactionFileSubmissionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -186,7 +189,8 @@ func NewCreateTransactionFileSubmissionForbidden() *CreateTransactionFileSubmiss
 	return &CreateTransactionFileSubmissionForbidden{}
 }
 
-/*CreateTransactionFileSubmissionForbidden handles this case with default header values.
+/*
+CreateTransactionFileSubmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -220,7 +224,8 @@ func NewCreateTransactionFileSubmissionNotFound() *CreateTransactionFileSubmissi
 	return &CreateTransactionFileSubmissionNotFound{}
 }
 
-/*CreateTransactionFileSubmissionNotFound handles this case with default header values.
+/*
+CreateTransactionFileSubmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -254,9 +259,10 @@ func NewCreateTransactionFileSubmissionConflict() *CreateTransactionFileSubmissi
 	return &CreateTransactionFileSubmissionConflict{}
 }
 
-/*CreateTransactionFileSubmissionConflict handles this case with default header values.
+/*
+CreateTransactionFileSubmissionConflict handles this case with default header values.
 
-Forbidden
+Transaction File Submission Conflict
 */
 type CreateTransactionFileSubmissionConflict struct {
 
@@ -288,7 +294,8 @@ func NewCreateTransactionFileSubmissionInternalServerError() *CreateTransactionF
 	return &CreateTransactionFileSubmissionInternalServerError{}
 }
 
-/*CreateTransactionFileSubmissionInternalServerError handles this case with default header values.
+/*
+CreateTransactionFileSubmissionInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

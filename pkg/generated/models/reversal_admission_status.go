@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ReversalAdmissionStatus Status of the reversal admission
+// ReversalAdmissionStatus [Status](http://draft-api-docs.form3.tech/api.html#enumerations-payment-admission-status) of the reversal admission
 // swagger:model ReversalAdmissionStatus
 type ReversalAdmissionStatus string
 

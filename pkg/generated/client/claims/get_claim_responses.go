@@ -39,6 +39,13 @@ func (o *GetClaimReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetClaimNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +56,8 @@ func NewGetClaimOK() *GetClaimOK {
 	return &GetClaimOK{}
 }
 
-/*GetClaimOK handles this case with default header values.
+/*
+GetClaimOK handles this case with default header values.
 
 Claim details
 */
@@ -83,9 +91,10 @@ func NewGetClaimBadRequest() *GetClaimBadRequest {
 	return &GetClaimBadRequest{}
 }
 
-/*GetClaimBadRequest handles this case with default header values.
+/*
+GetClaimBadRequest handles this case with default header values.
 
-Error
+Bad Request
 */
 type GetClaimBadRequest struct {
 
@@ -100,6 +109,41 @@ func (o *GetClaimBadRequest) Error() string {
 }
 
 func (o *GetClaimBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClaimNotFound creates a GetClaimNotFound with default headers values
+func NewGetClaimNotFound() *GetClaimNotFound {
+	return &GetClaimNotFound{}
+}
+
+/*
+GetClaimNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetClaimNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetClaimNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/claims/{id}][%d] getClaimNotFound", 404)
+}
+
+func (o *GetClaimNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

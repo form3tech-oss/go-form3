@@ -32,6 +32,20 @@ func (o *CreateRolesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 
+	case 400:
+		result := NewCreateRolesBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateRolesConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +56,8 @@ func NewCreateRolesCreated() *CreateRolesCreated {
 	return &CreateRolesCreated{}
 }
 
-/*CreateRolesCreated handles this case with default header values.
+/*
+CreateRolesCreated handles this case with default header values.
 
 Role creation response
 */
@@ -65,6 +80,76 @@ func (o *CreateRolesCreated) readResponse(response runtime.ClientResponse, consu
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.RoleCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateRolesBadRequest creates a CreateRolesBadRequest with default headers values
+func NewCreateRolesBadRequest() *CreateRolesBadRequest {
+	return &CreateRolesBadRequest{}
+}
+
+/*
+CreateRolesBadRequest handles this case with default header values.
+
+Bad request
+*/
+type CreateRolesBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateRolesBadRequest) Error() string {
+	return fmt.Sprintf("[POST /security/roles][%d] createRolesBadRequest", 400)
+}
+
+func (o *CreateRolesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateRolesConflict creates a CreateRolesConflict with default headers values
+func NewCreateRolesConflict() *CreateRolesConflict {
+	return &CreateRolesConflict{}
+}
+
+/*
+CreateRolesConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateRolesConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateRolesConflict) Error() string {
+	return fmt.Sprintf("[POST /security/roles][%d] createRolesConflict", 409)
+}
+
+func (o *CreateRolesConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

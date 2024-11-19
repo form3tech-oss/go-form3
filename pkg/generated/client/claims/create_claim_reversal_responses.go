@@ -39,6 +39,13 @@ func (o *CreateClaimReversalReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 
+	case 404:
+		result := NewCreateClaimReversalNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +56,8 @@ func NewCreateClaimReversalCreated() *CreateClaimReversalCreated {
 	return &CreateClaimReversalCreated{}
 }
 
-/*CreateClaimReversalCreated handles this case with default header values.
+/*
+CreateClaimReversalCreated handles this case with default header values.
 
 Claim Reversal creation response
 */
@@ -83,9 +91,10 @@ func NewCreateClaimReversalBadRequest() *CreateClaimReversalBadRequest {
 	return &CreateClaimReversalBadRequest{}
 }
 
-/*CreateClaimReversalBadRequest handles this case with default header values.
+/*
+CreateClaimReversalBadRequest handles this case with default header values.
 
-Claim Reversal creation error
+Bad Request
 */
 type CreateClaimReversalBadRequest struct {
 
@@ -100,6 +109,41 @@ func (o *CreateClaimReversalBadRequest) Error() string {
 }
 
 func (o *CreateClaimReversalBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateClaimReversalNotFound creates a CreateClaimReversalNotFound with default headers values
+func NewCreateClaimReversalNotFound() *CreateClaimReversalNotFound {
+	return &CreateClaimReversalNotFound{}
+}
+
+/*
+CreateClaimReversalNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateClaimReversalNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateClaimReversalNotFound) Error() string {
+	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals][%d] createClaimReversalNotFound", 404)
+}
+
+func (o *CreateClaimReversalNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

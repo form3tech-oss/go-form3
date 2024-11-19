@@ -15,20 +15,37 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // BeneficiaryDebtorAccountHoldingEntity beneficiary debtor account holding entity
 // swagger:model BeneficiaryDebtorAccountHoldingEntity
 type BeneficiaryDebtorAccountHoldingEntity struct {
 
+	// Additional address lines of the debtor/benificiary bank address
+	// Max Items: 3
+	BankAdditionalAddressLine []string `json:"bank_additional_address_line,omitempty"`
+
 	// Financial institution address
 	BankAddress []string `json:"bank_address,omitempty"`
+
+	// Building number of the debtor/benificiary bank address
+	// Max Length: 16
+	BankBuildingNumber string `json:"bank_building_number,omitempty"`
+
+	// City/Town of the debtor/benificiary bank address
+	// Max Length: 35
+	BankCity string `json:"bank_city,omitempty"`
+
+	// Country of the debtor/benificiary bank address, ISO 3166 format country code
+	// Max Length: 2
+	BankCountry string `json:"bank_country,omitempty"`
 
 	// Financial institution identification
 	BankID string `json:"bank_id,omitempty"`
 
-	// bank id code
-	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
+	// The type of identification provided at `bank_id` attribute. Must be ISO code as listed in the [External Code Sets spreadsheet](https://www.iso20022.org/external_code_list.page)
+	BankIDCode string `json:"bank_id_code,omitempty"`
 
 	// Array for additional ID(s) for agent
 	BankIds []*AccountWithBankID `json:"bank_ids,omitempty"`
@@ -38,28 +55,87 @@ type BeneficiaryDebtorAccountHoldingEntity struct {
 
 	// Identifier of the financial institution which services the account
 	BankPartyID string `json:"bank_party_id,omitempty"`
+
+	// Post code of the debtor/benificiary bank address
+	// Max Length: 16
+	BankPostCode string `json:"bank_post_code,omitempty"`
+
+	// Postal address of the debtor/benificiary bank
+	BankPostalAddress *PostalAddress `json:"bank_postal_address,omitempty"`
+
+	// Province of the debtor/benificiary bank address
+	// Max Length: 35
+	BankProvince string `json:"bank_province,omitempty"`
+
+	// Street name of the debtor/benificiary bank address
+	// Max Length: 70
+	BankStreetName string `json:"bank_street_name,omitempty"`
 }
 
 func BeneficiaryDebtorAccountHoldingEntityWithDefaults(defaults client.Defaults) *BeneficiaryDebtorAccountHoldingEntity {
 	return &BeneficiaryDebtorAccountHoldingEntity{
 
+		BankAdditionalAddressLine: make([]string, 0),
+
 		BankAddress: make([]string, 0),
+
+		BankBuildingNumber: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_building_number"),
+
+		BankCity: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_city"),
+
+		BankCountry: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_country"),
 
 		BankID: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_id"),
 
-		// TODO BankIDCode: BankIDCode,
+		BankIDCode: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_id_code"),
 
 		BankIds: make([]*AccountWithBankID, 0),
 
 		BankName: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_name"),
 
 		BankPartyID: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_party_id"),
+
+		BankPostCode: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_post_code"),
+
+		BankPostalAddress: PostalAddressWithDefaults(defaults),
+
+		BankProvince: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_province"),
+
+		BankStreetName: defaults.GetString("BeneficiaryDebtorAccountHoldingEntity", "bank_street_name"),
 	}
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankAdditionalAddressLine(bankAdditionalAddressLine []string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankAdditionalAddressLine = bankAdditionalAddressLine
+
+	return m
 }
 
 func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankAddress(bankAddress []string) *BeneficiaryDebtorAccountHoldingEntity {
 
 	m.BankAddress = bankAddress
+
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankBuildingNumber(bankBuildingNumber string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankBuildingNumber = bankBuildingNumber
+
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankCity(bankCity string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankCity = bankCity
+
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankCountry(bankCountry string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankCountry = bankCountry
 
 	return m
 }
@@ -71,7 +147,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankID(bankID string) *Benef
 	return m
 }
 
-func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankIDCode(bankIDCode BankIDCode) *BeneficiaryDebtorAccountHoldingEntity {
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankIDCode(bankIDCode string) *BeneficiaryDebtorAccountHoldingEntity {
 
 	m.BankIDCode = bankIDCode
 
@@ -99,15 +175,76 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankPartyID(bankPartyID stri
 	return m
 }
 
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankPostCode(bankPostCode string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankPostCode = bankPostCode
+
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankPostalAddress(bankPostalAddress PostalAddress) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankPostalAddress = &bankPostalAddress
+
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithoutBankPostalAddress() *BeneficiaryDebtorAccountHoldingEntity {
+	m.BankPostalAddress = nil
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankProvince(bankProvince string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankProvince = bankProvince
+
+	return m
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) WithBankStreetName(bankStreetName string) *BeneficiaryDebtorAccountHoldingEntity {
+
+	m.BankStreetName = bankStreetName
+
+	return m
+}
+
 // Validate validates this beneficiary debtor account holding entity
 func (m *BeneficiaryDebtorAccountHoldingEntity) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateBankIDCode(formats); err != nil {
+	if err := m.validateBankAdditionalAddressLine(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankBuildingNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankCity(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankCountry(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateBankIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankPostCode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankPostalAddress(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankProvince(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankStreetName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -117,16 +254,62 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) Validate(formats strfmt.Registry
 	return nil
 }
 
-func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error {
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankAdditionalAddressLine(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.BankIDCode) { // not required
+	if swag.IsZero(m.BankAdditionalAddressLine) { // not required
 		return nil
 	}
 
-	if err := m.BankIDCode.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("bank_id_code")
+	iBankAdditionalAddressLineSize := int64(len(m.BankAdditionalAddressLine))
+
+	if err := validate.MaxItems("bank_additional_address_line", "body", iBankAdditionalAddressLineSize, 3); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.BankAdditionalAddressLine); i++ {
+
+		if err := validate.MaxLength("bank_additional_address_line"+"."+strconv.Itoa(i), "body", string(m.BankAdditionalAddressLine[i]), 35); err != nil {
+			return err
 		}
+
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankBuildingNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankBuildingNumber) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_building_number", "body", string(m.BankBuildingNumber), 16); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankCity(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankCity) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_city", "body", string(m.BankCity), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankCountry(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankCountry) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_country", "body", string(m.BankCountry), 2); err != nil {
 		return err
 	}
 
@@ -153,6 +336,63 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankIds(formats strfmt.R
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankPostCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankPostCode) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_post_code", "body", string(m.BankPostCode), 16); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankPostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankPostalAddress) { // not required
+		return nil
+	}
+
+	if m.BankPostalAddress != nil {
+		if err := m.BankPostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("bank_postal_address")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankProvince(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankProvince) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_province", "body", string(m.BankProvince), 35); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankStreetName(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankStreetName) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_street_name", "body", string(m.BankStreetName), 70); err != nil {
+		return err
 	}
 
 	return nil

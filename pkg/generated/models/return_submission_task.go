@@ -43,8 +43,8 @@ type ReturnSubmissionTask struct {
 	// relationships
 	Relationships *ReturnSubmissionTaskRelationships `json:"relationships,omitempty"`
 
-	// Name of the resource type
-	// Pattern: ^[A-Za-z_]*$
+	// type
+	// Enum: [return_submission_tasks]
 	Type string `json:"type,omitempty"`
 
 	// Version number
@@ -274,13 +274,40 @@ func (m *ReturnSubmissionTask) validateRelationships(formats strfmt.Registry) er
 	return nil
 }
 
+var returnSubmissionTaskTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["return_submission_tasks"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		returnSubmissionTaskTypeTypePropEnum = append(returnSubmissionTaskTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// ReturnSubmissionTaskTypeReturnSubmissionTasks captures enum value "return_submission_tasks"
+	ReturnSubmissionTaskTypeReturnSubmissionTasks string = "return_submission_tasks"
+)
+
+// prop value enum
+func (m *ReturnSubmissionTask) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, returnSubmissionTaskTypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *ReturnSubmissionTask) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
 		return err
 	}
 
@@ -318,172 +345,6 @@ func (m *ReturnSubmissionTask) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ReturnSubmissionTask) Json() string {
-	json, err := json.MarshalIndent(m, "  ", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(json)
-}
-
-// ReturnSubmissionTaskAttributes return submission task attributes
-// swagger:model ReturnSubmissionTaskAttributes
-type ReturnSubmissionTaskAttributes struct {
-
-	// assignee
-	Assignee ReturnSubmissionTaskAssignee `json:"assignee,omitempty"`
-
-	// Key Value map that contains additional data for executing the task.
-	Input map[string]interface{} `json:"input,omitempty"`
-
-	// name
-	Name ReturnSubmissionTaskName `json:"name,omitempty"`
-
-	// Key Value map that contains the Task result.
-	Output map[string]interface{} `json:"output,omitempty"`
-
-	// status
-	Status ReturnSubmissionTaskStatus `json:"status,omitempty"`
-}
-
-func ReturnSubmissionTaskAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionTaskAttributes {
-	return &ReturnSubmissionTaskAttributes{
-
-		// TODO Assignee: ReturnSubmissionTaskAssignee,
-
-		Input: defaults.GetMapStringInterface("ReturnSubmissionTaskAttributes", "input"),
-
-		// TODO Name: ReturnSubmissionTaskName,
-
-		Output: defaults.GetMapStringInterface("ReturnSubmissionTaskAttributes", "output"),
-
-		// TODO Status: ReturnSubmissionTaskStatus,
-
-	}
-}
-
-func (m *ReturnSubmissionTaskAttributes) WithAssignee(assignee ReturnSubmissionTaskAssignee) *ReturnSubmissionTaskAttributes {
-
-	m.Assignee = assignee
-
-	return m
-}
-
-func (m *ReturnSubmissionTaskAttributes) WithInput(input map[string]interface{}) *ReturnSubmissionTaskAttributes {
-
-	m.Input = input
-
-	return m
-}
-
-func (m *ReturnSubmissionTaskAttributes) WithName(name ReturnSubmissionTaskName) *ReturnSubmissionTaskAttributes {
-
-	m.Name = name
-
-	return m
-}
-
-func (m *ReturnSubmissionTaskAttributes) WithOutput(output map[string]interface{}) *ReturnSubmissionTaskAttributes {
-
-	m.Output = output
-
-	return m
-}
-
-func (m *ReturnSubmissionTaskAttributes) WithStatus(status ReturnSubmissionTaskStatus) *ReturnSubmissionTaskAttributes {
-
-	m.Status = status
-
-	return m
-}
-
-// Validate validates this return submission task attributes
-func (m *ReturnSubmissionTaskAttributes) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateAssignee(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ReturnSubmissionTaskAttributes) validateAssignee(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Assignee) { // not required
-		return nil
-	}
-
-	if err := m.Assignee.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("attributes" + "." + "assignee")
-		}
-		return err
-	}
-
-	return nil
-}
-
-func (m *ReturnSubmissionTaskAttributes) validateName(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Name) { // not required
-		return nil
-	}
-
-	if err := m.Name.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("attributes" + "." + "name")
-		}
-		return err
-	}
-
-	return nil
-}
-
-func (m *ReturnSubmissionTaskAttributes) validateStatus(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Status) { // not required
-		return nil
-	}
-
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("attributes" + "." + "status")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *ReturnSubmissionTaskAttributes) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *ReturnSubmissionTaskAttributes) UnmarshalBinary(b []byte) error {
-	var res ReturnSubmissionTaskAttributes
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-func (m *ReturnSubmissionTaskAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

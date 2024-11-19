@@ -12,9 +12,7 @@ import (
 
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/a_c_e"
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/account_amendment"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/account_identification"
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/account_request"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/account_validation"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/accounts"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/audit"
@@ -22,14 +20,14 @@ import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/branches"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/claims"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/direct_debits"
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/go_subscription_api"
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/lhv_gateway"
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/direct_debits_reads"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/mandates"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/metrics_api"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/name_verification_api"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/oauth2"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/organisations"
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/payments"
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/payment_reads"
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/payment_writes"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/platformsecurityapi"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/query_api"
 	"github.com/form3tech-oss/go-form3/v6/pkg/generated/client/reports"
@@ -88,11 +86,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.Ace = a_c_e.New(transport, formats, defaults)
 
-	cli.AccountAmendment = account_amendment.New(transport, formats, defaults)
-
 	cli.AccountIdentification = account_identification.New(transport, formats, defaults)
-
-	cli.AccountRequest = account_request.New(transport, formats, defaults)
 
 	cli.AccountValidation = account_validation.New(transport, formats, defaults)
 
@@ -108,9 +102,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.DirectDebits = direct_debits.New(transport, formats, defaults)
 
-	cli.GoSubscriptionAPI = go_subscription_api.New(transport, formats, defaults)
-
-	cli.LhvGateway = lhv_gateway.New(transport, formats, defaults)
+	cli.DirectDebitsReads = direct_debits_reads.New(transport, formats, defaults)
 
 	cli.Mandates = mandates.New(transport, formats, defaults)
 
@@ -122,7 +114,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, defaults cl
 
 	cli.Organisations = organisations.New(transport, formats, defaults)
 
-	cli.Payments = payments.New(transport, formats, defaults)
+	cli.PaymentReads = payment_reads.New(transport, formats, defaults)
+
+	cli.PaymentWrites = payment_writes.New(transport, formats, defaults)
 
 	cli.Platformsecurityapi = platformsecurityapi.New(transport, formats, defaults)
 
@@ -188,11 +182,7 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type Form3PublicAPI struct {
 	Ace *a_c_e.Client
 
-	AccountAmendment *account_amendment.Client
-
 	AccountIdentification *account_identification.Client
-
-	AccountRequest *account_request.Client
 
 	AccountValidation *account_validation.Client
 
@@ -208,9 +198,7 @@ type Form3PublicAPI struct {
 
 	DirectDebits *direct_debits.Client
 
-	GoSubscriptionAPI *go_subscription_api.Client
-
-	LhvGateway *lhv_gateway.Client
+	DirectDebitsReads *direct_debits_reads.Client
 
 	Mandates *mandates.Client
 
@@ -222,7 +210,9 @@ type Form3PublicAPI struct {
 
 	Organisations *organisations.Client
 
-	Payments *payments.Client
+	PaymentReads *payment_reads.Client
+
+	PaymentWrites *payment_writes.Client
 
 	Platformsecurityapi *platformsecurityapi.Client
 
@@ -251,11 +241,7 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.Ace.SetTransport(transport)
 
-	c.AccountAmendment.SetTransport(transport)
-
 	c.AccountIdentification.SetTransport(transport)
-
-	c.AccountRequest.SetTransport(transport)
 
 	c.AccountValidation.SetTransport(transport)
 
@@ -271,9 +257,7 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.DirectDebits.SetTransport(transport)
 
-	c.GoSubscriptionAPI.SetTransport(transport)
-
-	c.LhvGateway.SetTransport(transport)
+	c.DirectDebitsReads.SetTransport(transport)
 
 	c.Mandates.SetTransport(transport)
 
@@ -285,7 +269,9 @@ func (c *Form3PublicAPI) SetTransport(transport runtime.ClientTransport) {
 
 	c.Organisations.SetTransport(transport)
 
-	c.Payments.SetTransport(transport)
+	c.PaymentReads.SetTransport(transport)
+
+	c.PaymentWrites.SetTransport(transport)
 
 	c.Platformsecurityapi.SetTransport(transport)
 

@@ -242,6 +242,9 @@ func (m *RecallDecisionSubmissionUpdate) Json() string {
 // swagger:model RecallDecisionSubmissionUpdateAttributes
 type RecallDecisionSubmissionUpdateAttributes struct {
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// status
 	Status RecallDecisionSubmissionStatus `json:"status,omitempty"`
 
@@ -252,10 +255,19 @@ type RecallDecisionSubmissionUpdateAttributes struct {
 func RecallDecisionSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *RecallDecisionSubmissionUpdateAttributes {
 	return &RecallDecisionSubmissionUpdateAttributes{
 
+		ReferenceID: defaults.GetString("RecallDecisionSubmissionUpdateAttributes", "reference_id"),
+
 		// TODO Status: RecallDecisionSubmissionStatus,
 
 		StatusReason: defaults.GetString("RecallDecisionSubmissionUpdateAttributes", "status_reason"),
 	}
+}
+
+func (m *RecallDecisionSubmissionUpdateAttributes) WithReferenceID(referenceID string) *RecallDecisionSubmissionUpdateAttributes {
+
+	m.ReferenceID = referenceID
+
+	return m
 }
 
 func (m *RecallDecisionSubmissionUpdateAttributes) WithStatus(status RecallDecisionSubmissionStatus) *RecallDecisionSubmissionUpdateAttributes {

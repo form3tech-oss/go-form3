@@ -39,8 +39,9 @@ type DirectDebitRecallSubmission struct {
 	ModifiedOn *strfmt.DateTime `json:"modified_on,omitempty"`
 
 	// organisation id
+	// Required: true
 	// Format: uuid
-	OrganisationID strfmt.UUID `json:"organisation_id,omitempty"`
+	OrganisationID *strfmt.UUID `json:"organisation_id"`
 
 	// relationships
 	Relationships *DirectDebitRecallSubmissionRelationships `json:"relationships,omitempty"`
@@ -65,7 +66,7 @@ func DirectDebitRecallSubmissionWithDefaults(defaults client.Defaults) *DirectDe
 
 		ModifiedOn: defaults.GetStrfmtDateTimePtr("DirectDebitRecallSubmission", "modified_on"),
 
-		OrganisationID: defaults.GetStrfmtUUID("DirectDebitRecallSubmission", "organisation_id"),
+		OrganisationID: defaults.GetStrfmtUUIDPtr("DirectDebitRecallSubmission", "organisation_id"),
 
 		Relationships: DirectDebitRecallSubmissionRelationshipsWithDefaults(defaults),
 
@@ -125,8 +126,13 @@ func (m *DirectDebitRecallSubmission) WithoutModifiedOn() *DirectDebitRecallSubm
 
 func (m *DirectDebitRecallSubmission) WithOrganisationID(organisationID strfmt.UUID) *DirectDebitRecallSubmission {
 
-	m.OrganisationID = organisationID
+	m.OrganisationID = &organisationID
 
+	return m
+}
+
+func (m *DirectDebitRecallSubmission) WithoutOrganisationID() *DirectDebitRecallSubmission {
+	m.OrganisationID = nil
 	return m
 }
 
@@ -262,8 +268,8 @@ func (m *DirectDebitRecallSubmission) validateModifiedOn(formats strfmt.Registry
 
 func (m *DirectDebitRecallSubmission) validateOrganisationID(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.OrganisationID) { // not required
-		return nil
+	if err := validate.Required("organisation_id", "body", m.OrganisationID); err != nil {
+		return err
 	}
 
 	if err := validate.FormatOf("organisation_id", "body", "uuid", m.OrganisationID.String(), formats); err != nil {
@@ -349,6 +355,9 @@ type DirectDebitRecallSubmissionAttributes struct {
 	// destination gateway
 	DestinationGateway string `json:"destination_gateway,omitempty"`
 
+	// Scheme-specific status (if submission has been submitted to a scheme)
+	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
+
 	// status
 	Status DirectDebitRecallSubmissionStatus `json:"status,omitempty"`
 
@@ -366,6 +375,8 @@ func DirectDebitRecallSubmissionAttributesWithDefaults(defaults client.Defaults)
 
 		DestinationGateway: defaults.GetString("DirectDebitRecallSubmissionAttributes", "destination_gateway"),
 
+		SchemeStatusCode: defaults.GetString("DirectDebitRecallSubmissionAttributes", "scheme_status_code"),
+
 		// TODO Status: DirectDebitRecallSubmissionStatus,
 
 		StatusReason: defaults.GetString("DirectDebitRecallSubmissionAttributes", "status_reason"),
@@ -377,6 +388,13 @@ func DirectDebitRecallSubmissionAttributesWithDefaults(defaults client.Defaults)
 func (m *DirectDebitRecallSubmissionAttributes) WithDestinationGateway(destinationGateway string) *DirectDebitRecallSubmissionAttributes {
 
 	m.DestinationGateway = destinationGateway
+
+	return m
+}
+
+func (m *DirectDebitRecallSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitRecallSubmissionAttributes {
+
+	m.SchemeStatusCode = schemeStatusCode
 
 	return m
 }

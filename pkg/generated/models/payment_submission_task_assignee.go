@@ -21,6 +21,9 @@ type PaymentSubmissionTaskAssignee string
 
 const (
 
+	// PaymentSubmissionTaskAssigneeCustomer captures enum value "customer"
+	PaymentSubmissionTaskAssigneeCustomer PaymentSubmissionTaskAssignee = "customer"
+
 	// PaymentSubmissionTaskAssigneeForm3 captures enum value "form3"
 	PaymentSubmissionTaskAssigneeForm3 PaymentSubmissionTaskAssignee = "form3"
 )
@@ -30,7 +33,7 @@ var paymentSubmissionTaskAssigneeEnum []interface{}
 
 func init() {
 	var res []PaymentSubmissionTaskAssignee
-	if err := json.Unmarshal([]byte(`["form3"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["customer","form3"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

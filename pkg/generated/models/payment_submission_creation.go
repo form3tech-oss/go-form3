@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // PaymentSubmissionCreation payment submission creation
@@ -21,7 +22,8 @@ import (
 type PaymentSubmissionCreation struct {
 
 	// data
-	Data *NewPaymentSubmission `json:"data,omitempty"`
+	// Required: true
+	Data *NewPaymentSubmission `json:"data"`
 }
 
 func PaymentSubmissionCreationWithDefaults(defaults client.Defaults) *PaymentSubmissionCreation {
@@ -59,8 +61,8 @@ func (m *PaymentSubmissionCreation) Validate(formats strfmt.Registry) error {
 
 func (m *PaymentSubmissionCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

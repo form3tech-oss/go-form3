@@ -39,6 +39,13 @@ func (o *GetClaimReversalSubmissionReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetClaimReversalSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +56,8 @@ func NewGetClaimReversalSubmissionOK() *GetClaimReversalSubmissionOK {
 	return &GetClaimReversalSubmissionOK{}
 }
 
-/*GetClaimReversalSubmissionOK handles this case with default header values.
+/*
+GetClaimReversalSubmissionOK handles this case with default header values.
 
 Claim Reversal Submission details
 */
@@ -83,9 +91,10 @@ func NewGetClaimReversalSubmissionBadRequest() *GetClaimReversalSubmissionBadReq
 	return &GetClaimReversalSubmissionBadRequest{}
 }
 
-/*GetClaimReversalSubmissionBadRequest handles this case with default header values.
+/*
+GetClaimReversalSubmissionBadRequest handles this case with default header values.
 
-Error
+Bad Request
 */
 type GetClaimReversalSubmissionBadRequest struct {
 
@@ -100,6 +109,41 @@ func (o *GetClaimReversalSubmissionBadRequest) Error() string {
 }
 
 func (o *GetClaimReversalSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClaimReversalSubmissionNotFound creates a GetClaimReversalSubmissionNotFound with default headers values
+func NewGetClaimReversalSubmissionNotFound() *GetClaimReversalSubmissionNotFound {
+	return &GetClaimReversalSubmissionNotFound{}
+}
+
+/*
+GetClaimReversalSubmissionNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetClaimReversalSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetClaimReversalSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionNotFound", 404)
+}
+
+func (o *GetClaimReversalSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

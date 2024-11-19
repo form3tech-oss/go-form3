@@ -21,7 +21,7 @@ import (
 type PaymentSubmissionCreationResponse struct {
 
 	// data
-	Data *PaymentSubmission `json:"data,omitempty"`
+	Data *PaymentSubmissionFetch `json:"data,omitempty"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
@@ -30,13 +30,13 @@ type PaymentSubmissionCreationResponse struct {
 func PaymentSubmissionCreationResponseWithDefaults(defaults client.Defaults) *PaymentSubmissionCreationResponse {
 	return &PaymentSubmissionCreationResponse{
 
-		Data: PaymentSubmissionWithDefaults(defaults),
+		Data: PaymentSubmissionFetchWithDefaults(defaults),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *PaymentSubmissionCreationResponse) WithData(data PaymentSubmission) *PaymentSubmissionCreationResponse {
+func (m *PaymentSubmissionCreationResponse) WithData(data PaymentSubmissionFetch) *PaymentSubmissionCreationResponse {
 
 	m.Data = &data
 

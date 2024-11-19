@@ -7,10 +7,13 @@ package users
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
 )
 
 // DeleteUserRoleReader is a Reader for the DeleteUserRole structure.
@@ -29,6 +32,13 @@ func (o *DeleteUserRoleReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 
+	case 404:
+		result := NewDeleteUserRoleNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -39,7 +49,8 @@ func NewDeleteUserRoleNoContent() *DeleteUserRoleNoContent {
 	return &DeleteUserRoleNoContent{}
 }
 
-/*DeleteUserRoleNoContent handles this case with default header values.
+/*
+DeleteUserRoleNoContent handles this case with default header values.
 
 User role deleted OK
 */
@@ -51,6 +62,41 @@ func (o *DeleteUserRoleNoContent) Error() string {
 }
 
 func (o *DeleteUserRoleNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteUserRoleNotFound creates a DeleteUserRoleNotFound with default headers values
+func NewDeleteUserRoleNotFound() *DeleteUserRoleNotFound {
+	return &DeleteUserRoleNotFound{}
+}
+
+/*
+DeleteUserRoleNotFound handles this case with default header values.
+
+Not Found
+*/
+type DeleteUserRoleNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *DeleteUserRoleNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /security/users/{user_id}/roles/{role_id}][%d] deleteUserRoleNotFound", 404)
+}
+
+func (o *DeleteUserRoleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

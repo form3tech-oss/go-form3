@@ -856,17 +856,17 @@ func (m *DirectDebitRelationshipsDirectDebitSubmission) Json() string {
 type DirectDebitRelationshipsMandate struct {
 
 	// data
-	Data []*Mandate `json:"data"`
+	Data []*DirectDebitMandate `json:"data"`
 }
 
 func DirectDebitRelationshipsMandateWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsMandate {
 	return &DirectDebitRelationshipsMandate{
 
-		Data: make([]*Mandate, 0),
+		Data: make([]*DirectDebitMandate, 0),
 	}
 }
 
-func (m *DirectDebitRelationshipsMandate) WithData(data []*Mandate) *DirectDebitRelationshipsMandate {
+func (m *DirectDebitRelationshipsMandate) WithData(data []*DirectDebitMandate) *DirectDebitRelationshipsMandate {
 
 	m.Data = data
 

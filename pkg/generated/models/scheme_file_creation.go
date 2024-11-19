@@ -14,6 +14,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // SchemeFileCreation scheme file creation
@@ -21,17 +22,18 @@ import (
 type SchemeFileCreation struct {
 
 	// data
-	Data *SchemeFile `json:"data,omitempty"`
+	// Required: true
+	Data *NewSchemeFile `json:"data"`
 }
 
 func SchemeFileCreationWithDefaults(defaults client.Defaults) *SchemeFileCreation {
 	return &SchemeFileCreation{
 
-		Data: SchemeFileWithDefaults(defaults),
+		Data: NewSchemeFileWithDefaults(defaults),
 	}
 }
 
-func (m *SchemeFileCreation) WithData(data SchemeFile) *SchemeFileCreation {
+func (m *SchemeFileCreation) WithData(data NewSchemeFile) *SchemeFileCreation {
 
 	m.Data = &data
 
@@ -59,8 +61,8 @@ func (m *SchemeFileCreation) Validate(formats strfmt.Registry) error {
 
 func (m *SchemeFileCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

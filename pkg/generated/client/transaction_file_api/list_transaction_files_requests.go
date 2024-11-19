@@ -23,6 +23,12 @@ func (c *Client) ListTransactionFiles() *ListTransactionFilesRequest {
 	)
 	return &ListTransactionFilesRequest{
 
+		FilterAdmissionAdmissionDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListTransactionFiles", "filter[admission.admission_date_from]"),
+
+		FilterAdmissionAdmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListTransactionFiles", "filter[admission.admission_date_to]"),
+
+		FilterAdmissionStatus: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[admission.status]"),
+
 		FilterCreatedOnFrom: c.Defaults.GetStrfmtDatePtr("ListTransactionFiles", "filter[created_on_from]"),
 
 		FilterCreatedOnTo: c.Defaults.GetStrfmtDatePtr("ListTransactionFiles", "filter[created_on_to]"),
@@ -35,9 +41,9 @@ func (c *Client) ListTransactionFiles() *ListTransactionFilesRequest {
 
 		FilterSubmissionSchemeReferencesClearingID: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.clearing_id]"),
 
-		FilterSubmissionSchemeReferencesSchemeFileID: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.scheme_file_id]"),
+		FilterSubmissionSchemeReferencesFileIdentifier: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.file_identifier]"),
 
-		FilterSubmissionSchemeReferencesSchemeSubmissionID: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.scheme_submission_id]"),
+		FilterSubmissionSchemeReferencesFileNumber: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.scheme_references.file_number]"),
 
 		FilterSubmissionStatus: c.Defaults.GetStringPtr("ListTransactionFiles", "filter[submission.status]"),
 
@@ -57,6 +63,18 @@ func (c *Client) ListTransactionFiles() *ListTransactionFilesRequest {
 }
 
 type ListTransactionFilesRequest struct {
+
+	/*FilterAdmissionAdmissionDateFrom      Find all File resources admitted from and including this date/time      */
+
+	FilterAdmissionAdmissionDateFrom *strfmt.DateTime
+
+	/*FilterAdmissionAdmissionDateTo      Find all File resources admitted up to and included this date/time      */
+
+	FilterAdmissionAdmissionDateTo *strfmt.DateTime
+
+	/*FilterAdmissionStatus      Find all File resources with a certain admission status      */
+
+	FilterAdmissionStatus *string
 
 	/*FilterCreatedOnFrom      Find all File resources created from this date, in format YYYY-MM-DD      */
 
@@ -82,13 +100,13 @@ type ListTransactionFilesRequest struct {
 
 	FilterSubmissionSchemeReferencesClearingID *string
 
-	/*FilterSubmissionSchemeReferencesSchemeFileID      Find File resources by the id of the file sent to the scheme      */
+	/*FilterSubmissionSchemeReferencesFileIdentifier      Find File resources the id of the submission to to the scheme      */
 
-	FilterSubmissionSchemeReferencesSchemeFileID *string
+	FilterSubmissionSchemeReferencesFileIdentifier *string
 
-	/*FilterSubmissionSchemeReferencesSchemeSubmissionID      Find File resources the id of the submission to to the scheme      */
+	/*FilterSubmissionSchemeReferencesFileNumber      Find File resources by the id of the file sent to the scheme      */
 
-	FilterSubmissionSchemeReferencesSchemeSubmissionID *string
+	FilterSubmissionSchemeReferencesFileNumber *string
 
 	/*FilterSubmissionStatus      Find all File resources with a certain submission status      */
 
@@ -121,6 +139,48 @@ type ListTransactionFilesRequest struct {
 func (o *ListTransactionFilesRequest) FromJson(j string) (*ListTransactionFilesRequest, error) {
 
 	return o, nil
+}
+
+func (o *ListTransactionFilesRequest) WithFilterAdmissionAdmissionDateFrom(filterAdmissionAdmissionDateFrom strfmt.DateTime) *ListTransactionFilesRequest {
+
+	o.FilterAdmissionAdmissionDateFrom = &filterAdmissionAdmissionDateFrom
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithoutFilterAdmissionAdmissionDateFrom() *ListTransactionFilesRequest {
+
+	o.FilterAdmissionAdmissionDateFrom = nil
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithFilterAdmissionAdmissionDateTo(filterAdmissionAdmissionDateTo strfmt.DateTime) *ListTransactionFilesRequest {
+
+	o.FilterAdmissionAdmissionDateTo = &filterAdmissionAdmissionDateTo
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithoutFilterAdmissionAdmissionDateTo() *ListTransactionFilesRequest {
+
+	o.FilterAdmissionAdmissionDateTo = nil
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithFilterAdmissionStatus(filterAdmissionStatus string) *ListTransactionFilesRequest {
+
+	o.FilterAdmissionStatus = &filterAdmissionStatus
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithoutFilterAdmissionStatus() *ListTransactionFilesRequest {
+
+	o.FilterAdmissionStatus = nil
+
+	return o
 }
 
 func (o *ListTransactionFilesRequest) WithFilterCreatedOnFrom(filterCreatedOnFrom strfmt.Date) *ListTransactionFilesRequest {
@@ -207,30 +267,30 @@ func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesCle
 	return o
 }
 
-func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesSchemeFileID(filterSubmissionSchemeReferencesSchemeFileID string) *ListTransactionFilesRequest {
+func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesFileIdentifier(filterSubmissionSchemeReferencesFileIdentifier string) *ListTransactionFilesRequest {
 
-	o.FilterSubmissionSchemeReferencesSchemeFileID = &filterSubmissionSchemeReferencesSchemeFileID
-
-	return o
-}
-
-func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesSchemeFileID() *ListTransactionFilesRequest {
-
-	o.FilterSubmissionSchemeReferencesSchemeFileID = nil
+	o.FilterSubmissionSchemeReferencesFileIdentifier = &filterSubmissionSchemeReferencesFileIdentifier
 
 	return o
 }
 
-func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesSchemeSubmissionID(filterSubmissionSchemeReferencesSchemeSubmissionID string) *ListTransactionFilesRequest {
+func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesFileIdentifier() *ListTransactionFilesRequest {
 
-	o.FilterSubmissionSchemeReferencesSchemeSubmissionID = &filterSubmissionSchemeReferencesSchemeSubmissionID
+	o.FilterSubmissionSchemeReferencesFileIdentifier = nil
 
 	return o
 }
 
-func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesSchemeSubmissionID() *ListTransactionFilesRequest {
+func (o *ListTransactionFilesRequest) WithFilterSubmissionSchemeReferencesFileNumber(filterSubmissionSchemeReferencesFileNumber string) *ListTransactionFilesRequest {
 
-	o.FilterSubmissionSchemeReferencesSchemeSubmissionID = nil
+	o.FilterSubmissionSchemeReferencesFileNumber = &filterSubmissionSchemeReferencesFileNumber
+
+	return o
+}
+
+func (o *ListTransactionFilesRequest) WithoutFilterSubmissionSchemeReferencesFileNumber() *ListTransactionFilesRequest {
+
+	o.FilterSubmissionSchemeReferencesFileNumber = nil
 
 	return o
 }
@@ -305,7 +365,7 @@ func (o *ListTransactionFilesRequest) WithoutPageSize() *ListTransactionFilesReq
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list transaction files Request
 func (o *ListTransactionFilesRequest) WithContext(ctx context.Context) *ListTransactionFilesRequest {
 	o.Context = ctx
@@ -325,6 +385,54 @@ func (o *ListTransactionFilesRequest) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	if o.FilterAdmissionAdmissionDateFrom != nil {
+
+		// query param filter[admission.admission_date_from]
+		var qrFilterAdmissionAdmissionDateFrom strfmt.DateTime
+		if o.FilterAdmissionAdmissionDateFrom != nil {
+			qrFilterAdmissionAdmissionDateFrom = *o.FilterAdmissionAdmissionDateFrom
+		}
+		qFilterAdmissionAdmissionDateFrom := qrFilterAdmissionAdmissionDateFrom.String()
+		if qFilterAdmissionAdmissionDateFrom != "" {
+			if err := r.SetQueryParam("filter[admission.admission_date_from]", qFilterAdmissionAdmissionDateFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterAdmissionAdmissionDateTo != nil {
+
+		// query param filter[admission.admission_date_to]
+		var qrFilterAdmissionAdmissionDateTo strfmt.DateTime
+		if o.FilterAdmissionAdmissionDateTo != nil {
+			qrFilterAdmissionAdmissionDateTo = *o.FilterAdmissionAdmissionDateTo
+		}
+		qFilterAdmissionAdmissionDateTo := qrFilterAdmissionAdmissionDateTo.String()
+		if qFilterAdmissionAdmissionDateTo != "" {
+			if err := r.SetQueryParam("filter[admission.admission_date_to]", qFilterAdmissionAdmissionDateTo); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterAdmissionStatus != nil {
+
+		// query param filter[admission.status]
+		var qrFilterAdmissionStatus string
+		if o.FilterAdmissionStatus != nil {
+			qrFilterAdmissionStatus = *o.FilterAdmissionStatus
+		}
+		qFilterAdmissionStatus := qrFilterAdmissionStatus
+		if qFilterAdmissionStatus != "" {
+			if err := r.SetQueryParam("filter[admission.status]", qFilterAdmissionStatus); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	if o.FilterCreatedOnFrom != nil {
 
@@ -417,32 +525,32 @@ func (o *ListTransactionFilesRequest) WriteToRequest(r runtime.ClientRequest, re
 
 	}
 
-	if o.FilterSubmissionSchemeReferencesSchemeFileID != nil {
+	if o.FilterSubmissionSchemeReferencesFileIdentifier != nil {
 
-		// query param filter[submission.scheme_references.scheme_file_id]
-		var qrFilterSubmissionSchemeReferencesSchemeFileID string
-		if o.FilterSubmissionSchemeReferencesSchemeFileID != nil {
-			qrFilterSubmissionSchemeReferencesSchemeFileID = *o.FilterSubmissionSchemeReferencesSchemeFileID
+		// query param filter[submission.scheme_references.file_identifier]
+		var qrFilterSubmissionSchemeReferencesFileIdentifier string
+		if o.FilterSubmissionSchemeReferencesFileIdentifier != nil {
+			qrFilterSubmissionSchemeReferencesFileIdentifier = *o.FilterSubmissionSchemeReferencesFileIdentifier
 		}
-		qFilterSubmissionSchemeReferencesSchemeFileID := qrFilterSubmissionSchemeReferencesSchemeFileID
-		if qFilterSubmissionSchemeReferencesSchemeFileID != "" {
-			if err := r.SetQueryParam("filter[submission.scheme_references.scheme_file_id]", qFilterSubmissionSchemeReferencesSchemeFileID); err != nil {
+		qFilterSubmissionSchemeReferencesFileIdentifier := qrFilterSubmissionSchemeReferencesFileIdentifier
+		if qFilterSubmissionSchemeReferencesFileIdentifier != "" {
+			if err := r.SetQueryParam("filter[submission.scheme_references.file_identifier]", qFilterSubmissionSchemeReferencesFileIdentifier); err != nil {
 				return err
 			}
 		}
 
 	}
 
-	if o.FilterSubmissionSchemeReferencesSchemeSubmissionID != nil {
+	if o.FilterSubmissionSchemeReferencesFileNumber != nil {
 
-		// query param filter[submission.scheme_references.scheme_submission_id]
-		var qrFilterSubmissionSchemeReferencesSchemeSubmissionID string
-		if o.FilterSubmissionSchemeReferencesSchemeSubmissionID != nil {
-			qrFilterSubmissionSchemeReferencesSchemeSubmissionID = *o.FilterSubmissionSchemeReferencesSchemeSubmissionID
+		// query param filter[submission.scheme_references.file_number]
+		var qrFilterSubmissionSchemeReferencesFileNumber string
+		if o.FilterSubmissionSchemeReferencesFileNumber != nil {
+			qrFilterSubmissionSchemeReferencesFileNumber = *o.FilterSubmissionSchemeReferencesFileNumber
 		}
-		qFilterSubmissionSchemeReferencesSchemeSubmissionID := qrFilterSubmissionSchemeReferencesSchemeSubmissionID
-		if qFilterSubmissionSchemeReferencesSchemeSubmissionID != "" {
-			if err := r.SetQueryParam("filter[submission.scheme_references.scheme_submission_id]", qFilterSubmissionSchemeReferencesSchemeSubmissionID); err != nil {
+		qFilterSubmissionSchemeReferencesFileNumber := qrFilterSubmissionSchemeReferencesFileNumber
+		if qFilterSubmissionSchemeReferencesFileNumber != "" {
+			if err := r.SetQueryParam("filter[submission.scheme_references.file_number]", qFilterSubmissionSchemeReferencesFileNumber); err != nil {
 				return err
 			}
 		}

@@ -12,7 +12,9 @@ import (
 	"github.com/form3tech-oss/go-form3/v6/pkg/client"
 	strfmt "github.com/go-openapi/strfmt"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // AccountWithBankID account with bank Id
@@ -20,9 +22,11 @@ import (
 type AccountWithBankID struct {
 
 	// Other ID of agent
+	// Max Length: 30
 	BankID string `json:"bank_id,omitempty"`
 
 	// Code for the type of other ID for agent
+	// Max Length: 5
 	BankIDCode string `json:"bank_id_code,omitempty"`
 }
 
@@ -51,6 +55,45 @@ func (m *AccountWithBankID) WithBankIDCode(bankIDCode string) *AccountWithBankID
 
 // Validate validates this account with bank Id
 func (m *AccountWithBankID) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateBankID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBankIDCode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AccountWithBankID) validateBankID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankID) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_id", "body", string(m.BankID), 30); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountWithBankID) validateBankIDCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BankIDCode) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("bank_id_code", "body", string(m.BankIDCode), 5); err != nil {
+		return err
+	}
+
 	return nil
 }
 

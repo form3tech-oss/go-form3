@@ -84,7 +84,8 @@ func NewCreateSchemeFileSubmissionCreated() *CreateSchemeFileSubmissionCreated {
 	return &CreateSchemeFileSubmissionCreated{}
 }
 
-/*CreateSchemeFileSubmissionCreated handles this case with default header values.
+/*
+CreateSchemeFileSubmissionCreated handles this case with default header values.
 
 Scheme File Submission Response
 */
@@ -118,7 +119,8 @@ func NewCreateSchemeFileSubmissionBadRequest() *CreateSchemeFileSubmissionBadReq
 	return &CreateSchemeFileSubmissionBadRequest{}
 }
 
-/*CreateSchemeFileSubmissionBadRequest handles this case with default header values.
+/*
+CreateSchemeFileSubmissionBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -152,7 +154,8 @@ func NewCreateSchemeFileSubmissionUnauthorized() *CreateSchemeFileSubmissionUnau
 	return &CreateSchemeFileSubmissionUnauthorized{}
 }
 
-/*CreateSchemeFileSubmissionUnauthorized handles this case with default header values.
+/*
+CreateSchemeFileSubmissionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -186,7 +189,8 @@ func NewCreateSchemeFileSubmissionForbidden() *CreateSchemeFileSubmissionForbidd
 	return &CreateSchemeFileSubmissionForbidden{}
 }
 
-/*CreateSchemeFileSubmissionForbidden handles this case with default header values.
+/*
+CreateSchemeFileSubmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -220,7 +224,8 @@ func NewCreateSchemeFileSubmissionNotFound() *CreateSchemeFileSubmissionNotFound
 	return &CreateSchemeFileSubmissionNotFound{}
 }
 
-/*CreateSchemeFileSubmissionNotFound handles this case with default header values.
+/*
+CreateSchemeFileSubmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -254,9 +259,10 @@ func NewCreateSchemeFileSubmissionConflict() *CreateSchemeFileSubmissionConflict
 	return &CreateSchemeFileSubmissionConflict{}
 }
 
-/*CreateSchemeFileSubmissionConflict handles this case with default header values.
+/*
+CreateSchemeFileSubmissionConflict handles this case with default header values.
 
-Forbidden
+Scheme File Submission Conflict
 */
 type CreateSchemeFileSubmissionConflict struct {
 
@@ -288,7 +294,8 @@ func NewCreateSchemeFileSubmissionInternalServerError() *CreateSchemeFileSubmiss
 	return &CreateSchemeFileSubmissionInternalServerError{}
 }
 
-/*CreateSchemeFileSubmissionInternalServerError handles this case with default header values.
+/*
+CreateSchemeFileSubmissionInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

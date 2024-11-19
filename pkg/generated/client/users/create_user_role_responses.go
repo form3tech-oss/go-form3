@@ -7,10 +7,13 @@ package users
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
 )
 
 // CreateUserRoleReader is a Reader for the CreateUserRole structure.
@@ -29,6 +32,13 @@ func (o *CreateUserRoleReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 
+	case 404:
+		result := NewCreateUserRoleNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -39,7 +49,8 @@ func NewCreateUserRoleCreated() *CreateUserRoleCreated {
 	return &CreateUserRoleCreated{}
 }
 
-/*CreateUserRoleCreated handles this case with default header values.
+/*
+CreateUserRoleCreated handles this case with default header values.
 
 Role set OK
 */
@@ -51,6 +62,41 @@ func (o *CreateUserRoleCreated) Error() string {
 }
 
 func (o *CreateUserRoleCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateUserRoleNotFound creates a CreateUserRoleNotFound with default headers values
+func NewCreateUserRoleNotFound() *CreateUserRoleNotFound {
+	return &CreateUserRoleNotFound{}
+}
+
+/*
+CreateUserRoleNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateUserRoleNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateUserRoleNotFound) Error() string {
+	return fmt.Sprintf("[POST /security/users/{user_id}/roles/{role_id}][%d] createUserRoleNotFound", 404)
+}
+
+func (o *CreateUserRoleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

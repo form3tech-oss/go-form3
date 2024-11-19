@@ -356,8 +356,14 @@ type ReturnAdmissionFetchAttributes struct {
 	// Format: date-time
 	AdmissionDatetime strfmt.DateTime `json:"admission_datetime,omitempty"`
 
+	// posting status
+	PostingStatus PostingStatus `json:"posting_status,omitempty"`
+
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// Route taken for a return
-	// Enum: [on_us]
+	// Enum: [on_us xp]
 	Route string `json:"route,omitempty"`
 
 	// Refer to individual scheme where applicable
@@ -389,6 +395,10 @@ func ReturnAdmissionFetchAttributesWithDefaults(defaults client.Defaults) *Retur
 
 		AdmissionDatetime: defaults.GetStrfmtDateTime("ReturnAdmissionFetchAttributes", "admission_datetime"),
 
+		// TODO PostingStatus: PostingStatus,
+
+		ReferenceID: defaults.GetString("ReturnAdmissionFetchAttributes", "reference_id"),
+
 		Route: defaults.GetString("ReturnAdmissionFetchAttributes", "route"),
 
 		SchemeStatusCode: defaults.GetString("ReturnAdmissionFetchAttributes", "scheme_status_code"),
@@ -410,6 +420,20 @@ func ReturnAdmissionFetchAttributesWithDefaults(defaults client.Defaults) *Retur
 func (m *ReturnAdmissionFetchAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *ReturnAdmissionFetchAttributes {
 
 	m.AdmissionDatetime = admissionDatetime
+
+	return m
+}
+
+func (m *ReturnAdmissionFetchAttributes) WithPostingStatus(postingStatus PostingStatus) *ReturnAdmissionFetchAttributes {
+
+	m.PostingStatus = postingStatus
+
+	return m
+}
+
+func (m *ReturnAdmissionFetchAttributes) WithReferenceID(referenceID string) *ReturnAdmissionFetchAttributes {
+
+	m.ReferenceID = referenceID
 
 	return m
 }
@@ -488,6 +512,10 @@ func (m *ReturnAdmissionFetchAttributes) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
+	if err := m.validatePostingStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRoute(formats); err != nil {
 		res = append(res, err)
 	}
@@ -523,11 +551,27 @@ func (m *ReturnAdmissionFetchAttributes) validateAdmissionDatetime(formats strfm
 	return nil
 }
 
+func (m *ReturnAdmissionFetchAttributes) validatePostingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostingStatus) { // not required
+		return nil
+	}
+
+	if err := m.PostingStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "posting_status")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var returnAdmissionFetchAttributesTypeRoutePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["on_us","xp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -539,6 +583,9 @@ const (
 
 	// ReturnAdmissionFetchAttributesRouteOnUs captures enum value "on_us"
 	ReturnAdmissionFetchAttributesRouteOnUs string = "on_us"
+
+	// ReturnAdmissionFetchAttributesRouteXp captures enum value "xp"
+	ReturnAdmissionFetchAttributesRouteXp string = "xp"
 )
 
 // prop value enum

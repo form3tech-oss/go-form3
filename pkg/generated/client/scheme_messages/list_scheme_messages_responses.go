@@ -39,6 +39,13 @@ func (o *ListSchemeMessagesReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 
+	case 401:
+		result := NewListSchemeMessagesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 403:
 		result := NewListSchemeMessagesForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -56,7 +63,8 @@ func NewListSchemeMessagesOK() *ListSchemeMessagesOK {
 	return &ListSchemeMessagesOK{}
 }
 
-/*ListSchemeMessagesOK handles this case with default header values.
+/*
+ListSchemeMessagesOK handles this case with default header values.
 
 List of scheme messages
 */
@@ -90,9 +98,10 @@ func NewListSchemeMessagesBadRequest() *ListSchemeMessagesBadRequest {
 	return &ListSchemeMessagesBadRequest{}
 }
 
-/*ListSchemeMessagesBadRequest handles this case with default header values.
+/*
+ListSchemeMessagesBadRequest handles this case with default header values.
 
-Scheme Message bad request
+Bad Request
 */
 type ListSchemeMessagesBadRequest struct {
 
@@ -119,12 +128,48 @@ func (o *ListSchemeMessagesBadRequest) readResponse(response runtime.ClientRespo
 	return nil
 }
 
+// NewListSchemeMessagesUnauthorized creates a ListSchemeMessagesUnauthorized with default headers values
+func NewListSchemeMessagesUnauthorized() *ListSchemeMessagesUnauthorized {
+	return &ListSchemeMessagesUnauthorized{}
+}
+
+/*
+ListSchemeMessagesUnauthorized handles this case with default header values.
+
+Unauthorized
+*/
+type ListSchemeMessagesUnauthorized struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ListSchemeMessagesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesUnauthorized", 401)
+}
+
+func (o *ListSchemeMessagesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewListSchemeMessagesForbidden creates a ListSchemeMessagesForbidden with default headers values
 func NewListSchemeMessagesForbidden() *ListSchemeMessagesForbidden {
 	return &ListSchemeMessagesForbidden{}
 }
 
-/*ListSchemeMessagesForbidden handles this case with default header values.
+/*
+ListSchemeMessagesForbidden handles this case with default header values.
 
 Forbidden
 */

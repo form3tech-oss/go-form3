@@ -49,13 +49,13 @@ func (c *Client) ListMandates() *ListMandatesRequest {
 
 		FilterPaymentScheme: c.Defaults.GetStringPtr("ListMandates", "filter[payment_scheme]"),
 
-		FilterPaymentType: c.Defaults.GetStringPtr("ListMandates", "filter[payment_type]"),
-
 		FilterProcessingDateFrom: c.Defaults.GetStrfmtDatePtr("ListMandates", "filter[processing_date_from]"),
 
 		FilterProcessingDateTo: c.Defaults.GetStrfmtDatePtr("ListMandates", "filter[processing_date_to]"),
 
 		FilterReference: c.Defaults.GetStringPtr("ListMandates", "filter[reference]"),
+
+		FilterSchemePaymentType: c.Defaults.GetStringPtr("ListMandates", "filter[scheme_payment_type]"),
 
 		FilterSchemeProcessingDateFrom: c.Defaults.GetStrfmtDatePtr("ListMandates", "filter[scheme_processing_date_from]"),
 
@@ -140,10 +140,6 @@ type ListMandatesRequest struct {
 
 	FilterPaymentScheme *string
 
-	/*FilterPaymentType*/
-
-	FilterPaymentType *string
-
 	/*FilterProcessingDateFrom*/
 
 	FilterProcessingDateFrom *strfmt.Date
@@ -155,6 +151,10 @@ type ListMandatesRequest struct {
 	/*FilterReference      Filter by reference      */
 
 	FilterReference *string
+
+	/*FilterSchemePaymentType*/
+
+	FilterSchemePaymentType *string
 
 	/*FilterSchemeProcessingDateFrom*/
 
@@ -401,20 +401,6 @@ func (o *ListMandatesRequest) WithoutFilterPaymentScheme() *ListMandatesRequest 
 	return o
 }
 
-func (o *ListMandatesRequest) WithFilterPaymentType(filterPaymentType string) *ListMandatesRequest {
-
-	o.FilterPaymentType = &filterPaymentType
-
-	return o
-}
-
-func (o *ListMandatesRequest) WithoutFilterPaymentType() *ListMandatesRequest {
-
-	o.FilterPaymentType = nil
-
-	return o
-}
-
 func (o *ListMandatesRequest) WithFilterProcessingDateFrom(filterProcessingDateFrom strfmt.Date) *ListMandatesRequest {
 
 	o.FilterProcessingDateFrom = &filterProcessingDateFrom
@@ -453,6 +439,20 @@ func (o *ListMandatesRequest) WithFilterReference(filterReference string) *ListM
 func (o *ListMandatesRequest) WithoutFilterReference() *ListMandatesRequest {
 
 	o.FilterReference = nil
+
+	return o
+}
+
+func (o *ListMandatesRequest) WithFilterSchemePaymentType(filterSchemePaymentType string) *ListMandatesRequest {
+
+	o.FilterSchemePaymentType = &filterSchemePaymentType
+
+	return o
+}
+
+func (o *ListMandatesRequest) WithoutFilterSchemePaymentType() *ListMandatesRequest {
+
+	o.FilterSchemePaymentType = nil
 
 	return o
 }
@@ -583,7 +583,7 @@ func (o *ListMandatesRequest) WithoutPageSize() *ListMandatesRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list mandates Request
 func (o *ListMandatesRequest) WithContext(ctx context.Context) *ListMandatesRequest {
 	o.Context = ctx
@@ -823,22 +823,6 @@ func (o *ListMandatesRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	}
 
-	if o.FilterPaymentType != nil {
-
-		// query param filter[payment_type]
-		var qrFilterPaymentType string
-		if o.FilterPaymentType != nil {
-			qrFilterPaymentType = *o.FilterPaymentType
-		}
-		qFilterPaymentType := qrFilterPaymentType
-		if qFilterPaymentType != "" {
-			if err := r.SetQueryParam("filter[payment_type]", qFilterPaymentType); err != nil {
-				return err
-			}
-		}
-
-	}
-
 	if o.FilterProcessingDateFrom != nil {
 
 		// query param filter[processing_date_from]
@@ -881,6 +865,22 @@ func (o *ListMandatesRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qFilterReference := qrFilterReference
 		if qFilterReference != "" {
 			if err := r.SetQueryParam("filter[reference]", qFilterReference); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterSchemePaymentType != nil {
+
+		// query param filter[scheme_payment_type]
+		var qrFilterSchemePaymentType string
+		if o.FilterSchemePaymentType != nil {
+			qrFilterSchemePaymentType = *o.FilterSchemePaymentType
+		}
+		qFilterSchemePaymentType := qrFilterSchemePaymentType
+		if qFilterSchemePaymentType != "" {
+			if err := r.SetQueryParam("filter[scheme_payment_type]", qFilterSchemePaymentType); err != nil {
 				return err
 			}
 		}

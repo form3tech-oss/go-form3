@@ -39,6 +39,13 @@ func (o *CreateClaimSubmissionReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 
+	case 404:
+		result := NewCreateClaimSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +56,8 @@ func NewCreateClaimSubmissionCreated() *CreateClaimSubmissionCreated {
 	return &CreateClaimSubmissionCreated{}
 }
 
-/*CreateClaimSubmissionCreated handles this case with default header values.
+/*
+CreateClaimSubmissionCreated handles this case with default header values.
 
 Claim Submission creation response
 */
@@ -83,9 +91,10 @@ func NewCreateClaimSubmissionBadRequest() *CreateClaimSubmissionBadRequest {
 	return &CreateClaimSubmissionBadRequest{}
 }
 
-/*CreateClaimSubmissionBadRequest handles this case with default header values.
+/*
+CreateClaimSubmissionBadRequest handles this case with default header values.
 
-Claim Submission creation error
+Bad Request
 */
 type CreateClaimSubmissionBadRequest struct {
 
@@ -100,6 +109,41 @@ func (o *CreateClaimSubmissionBadRequest) Error() string {
 }
 
 func (o *CreateClaimSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateClaimSubmissionNotFound creates a CreateClaimSubmissionNotFound with default headers values
+func NewCreateClaimSubmissionNotFound() *CreateClaimSubmissionNotFound {
+	return &CreateClaimSubmissionNotFound{}
+}
+
+/*
+CreateClaimSubmissionNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateClaimSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *CreateClaimSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[POST /transaction/claims/{id}/submissions][%d] createClaimSubmissionNotFound", 404)
+}
+
+func (o *CreateClaimSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

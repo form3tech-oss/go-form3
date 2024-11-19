@@ -356,8 +356,14 @@ type ReturnAdmissionAttributes struct {
 	// Format: date-time
 	AdmissionDatetime strfmt.DateTime `json:"admission_datetime,omitempty"`
 
+	// posting status
+	PostingStatus PostingStatus `json:"posting_status,omitempty"`
+
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// Route taken for a return
-	// Enum: [on_us]
+	// Enum: [on_us xp]
 	Route string `json:"route,omitempty"`
 
 	// Refer to individual scheme where applicable
@@ -389,6 +395,10 @@ func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmi
 
 		AdmissionDatetime: defaults.GetStrfmtDateTime("ReturnAdmissionAttributes", "admission_datetime"),
 
+		// TODO PostingStatus: PostingStatus,
+
+		ReferenceID: defaults.GetString("ReturnAdmissionAttributes", "reference_id"),
+
 		Route: defaults.GetString("ReturnAdmissionAttributes", "route"),
 
 		SchemeStatusCode: defaults.GetString("ReturnAdmissionAttributes", "scheme_status_code"),
@@ -410,6 +420,20 @@ func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmi
 func (m *ReturnAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *ReturnAdmissionAttributes {
 
 	m.AdmissionDatetime = admissionDatetime
+
+	return m
+}
+
+func (m *ReturnAdmissionAttributes) WithPostingStatus(postingStatus PostingStatus) *ReturnAdmissionAttributes {
+
+	m.PostingStatus = postingStatus
+
+	return m
+}
+
+func (m *ReturnAdmissionAttributes) WithReferenceID(referenceID string) *ReturnAdmissionAttributes {
+
+	m.ReferenceID = referenceID
 
 	return m
 }
@@ -488,6 +512,10 @@ func (m *ReturnAdmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePostingStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRoute(formats); err != nil {
 		res = append(res, err)
 	}
@@ -523,11 +551,27 @@ func (m *ReturnAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Reg
 	return nil
 }
 
+func (m *ReturnAdmissionAttributes) validatePostingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostingStatus) { // not required
+		return nil
+	}
+
+	if err := m.PostingStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "posting_status")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var returnAdmissionAttributesTypeRoutePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["on_us","xp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -539,6 +583,9 @@ const (
 
 	// ReturnAdmissionAttributesRouteOnUs captures enum value "on_us"
 	ReturnAdmissionAttributesRouteOnUs string = "on_us"
+
+	// ReturnAdmissionAttributesRouteXp captures enum value "xp"
+	ReturnAdmissionAttributesRouteXp string = "xp"
 )
 
 // prop value enum

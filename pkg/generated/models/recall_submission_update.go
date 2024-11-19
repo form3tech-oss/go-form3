@@ -242,6 +242,12 @@ func (m *RecallSubmissionUpdate) Json() string {
 // swagger:model RecallSubmissionUpdateAttributes
 type RecallSubmissionUpdateAttributes struct {
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
+	// Scheme-specific status code. Refer to scheme documentation where available.
+	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
+
 	// status
 	Status RecallSubmissionStatus `json:"status,omitempty"`
 
@@ -252,10 +258,28 @@ type RecallSubmissionUpdateAttributes struct {
 func RecallSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *RecallSubmissionUpdateAttributes {
 	return &RecallSubmissionUpdateAttributes{
 
+		ReferenceID: defaults.GetString("RecallSubmissionUpdateAttributes", "reference_id"),
+
+		SchemeStatusCode: defaults.GetString("RecallSubmissionUpdateAttributes", "scheme_status_code"),
+
 		// TODO Status: RecallSubmissionStatus,
 
 		StatusReason: defaults.GetString("RecallSubmissionUpdateAttributes", "status_reason"),
 	}
+}
+
+func (m *RecallSubmissionUpdateAttributes) WithReferenceID(referenceID string) *RecallSubmissionUpdateAttributes {
+
+	m.ReferenceID = referenceID
+
+	return m
+}
+
+func (m *RecallSubmissionUpdateAttributes) WithSchemeStatusCode(schemeStatusCode string) *RecallSubmissionUpdateAttributes {
+
+	m.SchemeStatusCode = schemeStatusCode
+
+	return m
 }
 
 func (m *RecallSubmissionUpdateAttributes) WithStatus(status RecallSubmissionStatus) *RecallSubmissionUpdateAttributes {

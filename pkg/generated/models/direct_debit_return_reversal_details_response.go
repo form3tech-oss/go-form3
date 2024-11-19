@@ -22,12 +22,17 @@ type DirectDebitReturnReversalDetailsResponse struct {
 
 	// data
 	Data *DirectDebitReturnReversal `json:"data,omitempty"`
+
+	// links
+	Links *Links `json:"links,omitempty"`
 }
 
 func DirectDebitReturnReversalDetailsResponseWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalDetailsResponse {
 	return &DirectDebitReturnReversalDetailsResponse{
 
 		Data: DirectDebitReturnReversalWithDefaults(defaults),
+
+		Links: LinksWithDefaults(defaults),
 	}
 }
 
@@ -43,11 +48,27 @@ func (m *DirectDebitReturnReversalDetailsResponse) WithoutData() *DirectDebitRet
 	return m
 }
 
+func (m *DirectDebitReturnReversalDetailsResponse) WithLinks(links Links) *DirectDebitReturnReversalDetailsResponse {
+
+	m.Links = &links
+
+	return m
+}
+
+func (m *DirectDebitReturnReversalDetailsResponse) WithoutLinks() *DirectDebitReturnReversalDetailsResponse {
+	m.Links = nil
+	return m
+}
+
 // Validate validates this direct debit return reversal details response
 func (m *DirectDebitReturnReversalDetailsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLinks(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,6 +88,24 @@ func (m *DirectDebitReturnReversalDetailsResponse) validateData(formats strfmt.R
 		if err := m.Data.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnReversalDetailsResponse) validateLinks(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Links) { // not required
+		return nil
+	}
+
+	if m.Links != nil {
+		if err := m.Links.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("links")
 			}
 			return err
 		}

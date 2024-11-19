@@ -31,250 +31,19 @@ type Client struct {
 // range of operations
 
 /*
-get transaction queries API
+create query API
 */
-func (a *GetTransactionQueriesRequest) Do() (*GetTransactionQueriesOK, error) {
+func (a *CreateQueryRequest) Do() (*CreateQueryCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueries",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesOK), nil
-
-}
-
-func (a *GetTransactionQueriesRequest) MustDo() *GetTransactionQueriesOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get transaction queries query ID API
-*/
-func (a *GetTransactionQueriesQueryIDRequest) Do() (*GetTransactionQueriesQueryIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueriesQueryID",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries/{query_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesQueryIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesQueryIDOK), nil
-
-}
-
-func (a *GetTransactionQueriesQueryIDRequest) MustDo() *GetTransactionQueriesQueryIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get transaction queries query ID admissions query admission ID API
-*/
-func (a *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest) Do() (*GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueriesQueryIDAdmissionsQueryAdmissionID",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries/{query_id}/admissions/{query_admission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDOK), nil
-
-}
-
-func (a *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDRequest) MustDo() *GetTransactionQueriesQueryIDAdmissionsQueryAdmissionIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get transaction queries query ID responses query response ID API
-*/
-func (a *GetTransactionQueriesQueryIDResponsesQueryResponseIDRequest) Do() (*GetTransactionQueriesQueryIDResponsesQueryResponseIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueriesQueryIDResponsesQueryResponseID",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesQueryIDResponsesQueryResponseIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesQueryIDResponsesQueryResponseIDOK), nil
-
-}
-
-func (a *GetTransactionQueriesQueryIDResponsesQueryResponseIDRequest) MustDo() *GetTransactionQueriesQueryIDResponsesQueryResponseIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get transaction queries query ID responses query response ID admissions query response admission ID API
-*/
-func (a *GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionIDRequest) Do() (*GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionID",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}/admissions/{query_response_admission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionIDOK), nil
-
-}
-
-func (a *GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionIDRequest) MustDo() *GetTransactionQueriesQueryIDResponsesQueryResponseIDAdmissionsQueryResponseAdmissionIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get transaction queries query ID responses query response ID submissions query response submission ID API
-*/
-func (a *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest) Do() (*GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionID",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}/submissions/{query_response_submission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDOK), nil
-
-}
-
-func (a *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDRequest) MustDo() *GetTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsQueryResponseSubmissionIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get transaction queries query ID submissions query submission ID API
-*/
-func (a *GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDRequest) Do() (*GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetTransactionQueriesQueryIDSubmissionsQuerySubmissionID",
-		Method:             "GET",
-		PathPattern:        "/transaction/queries/{query_id}/submissions/{query_submission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDOK), nil
-
-}
-
-func (a *GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDRequest) MustDo() *GetTransactionQueriesQueryIDSubmissionsQuerySubmissionIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-post transaction queries API
-*/
-func (a *PostTransactionQueriesRequest) Do() (*PostTransactionQueriesCreated, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostTransactionQueries",
+		ID:                 "CreateQuery",
 		Method:             "POST",
 		PathPattern:        "/transaction/queries",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostTransactionQueriesReader{formats: a.formats},
+		Reader:             &CreateQueryReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -282,11 +51,11 @@ func (a *PostTransactionQueriesRequest) Do() (*PostTransactionQueriesCreated, er
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostTransactionQueriesCreated), nil
+	return result.(*CreateQueryCreated), nil
 
 }
 
-func (a *PostTransactionQueriesRequest) MustDo() *PostTransactionQueriesCreated {
+func (a *CreateQueryRequest) MustDo() *CreateQueryCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -295,19 +64,19 @@ func (a *PostTransactionQueriesRequest) MustDo() *PostTransactionQueriesCreated 
 }
 
 /*
-post transaction queries query ID responses API
+create query response API
 */
-func (a *PostTransactionQueriesQueryIDResponsesRequest) Do() (*PostTransactionQueriesQueryIDResponsesCreated, error) {
+func (a *CreateQueryResponseRequest) Do() (*CreateQueryResponseCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostTransactionQueriesQueryIDResponses",
+		ID:                 "CreateQueryResponse",
 		Method:             "POST",
 		PathPattern:        "/transaction/queries/{query_id}/responses",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostTransactionQueriesQueryIDResponsesReader{formats: a.formats},
+		Reader:             &CreateQueryResponseReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -315,11 +84,11 @@ func (a *PostTransactionQueriesQueryIDResponsesRequest) Do() (*PostTransactionQu
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostTransactionQueriesQueryIDResponsesCreated), nil
+	return result.(*CreateQueryResponseCreated), nil
 
 }
 
-func (a *PostTransactionQueriesQueryIDResponsesRequest) MustDo() *PostTransactionQueriesQueryIDResponsesCreated {
+func (a *CreateQueryResponseRequest) MustDo() *CreateQueryResponseCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -328,19 +97,19 @@ func (a *PostTransactionQueriesQueryIDResponsesRequest) MustDo() *PostTransactio
 }
 
 /*
-post transaction queries query ID responses query response ID submissions API
+create query response submission API
 */
-func (a *PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsRequest) Do() (*PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsCreated, error) {
+func (a *CreateQueryResponseSubmissionRequest) Do() (*CreateQueryResponseSubmissionCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissions",
+		ID:                 "CreateQueryResponseSubmission",
 		Method:             "POST",
 		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}/submissions",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsReader{formats: a.formats},
+		Reader:             &CreateQueryResponseSubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -348,11 +117,11 @@ func (a *PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsRequest
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsCreated), nil
+	return result.(*CreateQueryResponseSubmissionCreated), nil
 
 }
 
-func (a *PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsRequest) MustDo() *PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsCreated {
+func (a *CreateQueryResponseSubmissionRequest) MustDo() *CreateQueryResponseSubmissionCreated {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)
@@ -361,19 +130,19 @@ func (a *PostTransactionQueriesQueryIDResponsesQueryResponseIDSubmissionsRequest
 }
 
 /*
-post transaction queries query ID submissions API
+create query submission API
 */
-func (a *PostTransactionQueriesQueryIDSubmissionsRequest) Do() (*PostTransactionQueriesQueryIDSubmissionsCreated, error) {
+func (a *CreateQuerySubmissionRequest) Do() (*CreateQuerySubmissionCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostTransactionQueriesQueryIDSubmissions",
+		ID:                 "CreateQuerySubmission",
 		Method:             "POST",
 		PathPattern:        "/transaction/queries/{query_id}/submissions",
 		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostTransactionQueriesQueryIDSubmissionsReader{formats: a.formats},
+		Reader:             &CreateQuerySubmissionReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -381,11 +150,242 @@ func (a *PostTransactionQueriesQueryIDSubmissionsRequest) Do() (*PostTransaction
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostTransactionQueriesQueryIDSubmissionsCreated), nil
+	return result.(*CreateQuerySubmissionCreated), nil
 
 }
 
-func (a *PostTransactionQueriesQueryIDSubmissionsRequest) MustDo() *PostTransactionQueriesQueryIDSubmissionsCreated {
+func (a *CreateQuerySubmissionRequest) MustDo() *CreateQuerySubmissionCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get query API
+*/
+func (a *GetQueryRequest) Do() (*GetQueryOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetQuery",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries/{query_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetQueryReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetQueryOK), nil
+
+}
+
+func (a *GetQueryRequest) MustDo() *GetQueryOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get query admission API
+*/
+func (a *GetQueryAdmissionRequest) Do() (*GetQueryAdmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetQueryAdmission",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries/{query_id}/admissions/{query_admission_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetQueryAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetQueryAdmissionOK), nil
+
+}
+
+func (a *GetQueryAdmissionRequest) MustDo() *GetQueryAdmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get query response API
+*/
+func (a *GetQueryResponseRequest) Do() (*GetQueryResponseOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetQueryResponse",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetQueryResponseReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetQueryResponseOK), nil
+
+}
+
+func (a *GetQueryResponseRequest) MustDo() *GetQueryResponseOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get query response admission API
+*/
+func (a *GetQueryResponseAdmissionRequest) Do() (*GetQueryResponseAdmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetQueryResponseAdmission",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}/admissions/{query_response_admission_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetQueryResponseAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetQueryResponseAdmissionOK), nil
+
+}
+
+func (a *GetQueryResponseAdmissionRequest) MustDo() *GetQueryResponseAdmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get query response submission API
+*/
+func (a *GetQueryResponseSubmissionRequest) Do() (*GetQueryResponseSubmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetQueryResponseSubmission",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries/{query_id}/responses/{query_response_id}/submissions/{query_response_submission_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetQueryResponseSubmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetQueryResponseSubmissionOK), nil
+
+}
+
+func (a *GetQueryResponseSubmissionRequest) MustDo() *GetQueryResponseSubmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get query submission API
+*/
+func (a *GetQuerySubmissionRequest) Do() (*GetQuerySubmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetQuerySubmission",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries/{query_id}/submissions/{query_submission_id}",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetQuerySubmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetQuerySubmissionOK), nil
+
+}
+
+func (a *GetQuerySubmissionRequest) MustDo() *GetQuerySubmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+list queries API
+*/
+func (a *ListQueriesRequest) Do() (*ListQueriesOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListQueries",
+		Method:             "GET",
+		PathPattern:        "/transaction/queries",
+		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &ListQueriesReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListQueriesOK), nil
+
+}
+
+func (a *ListQueriesRequest) MustDo() *ListQueriesOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

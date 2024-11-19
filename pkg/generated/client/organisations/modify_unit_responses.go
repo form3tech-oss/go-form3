@@ -32,6 +32,20 @@ func (o *ModifyUnitReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewModifyUnitBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 404:
+		result := NewModifyUnitNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +56,8 @@ func NewModifyUnitOK() *ModifyUnitOK {
 	return &ModifyUnitOK{}
 }
 
-/*ModifyUnitOK handles this case with default header values.
+/*
+ModifyUnitOK handles this case with default header values.
 
 Organisation details
 */
@@ -65,6 +80,76 @@ func (o *ModifyUnitOK) readResponse(response runtime.ClientResponse, consumer ru
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUnitBadRequest creates a ModifyUnitBadRequest with default headers values
+func NewModifyUnitBadRequest() *ModifyUnitBadRequest {
+	return &ModifyUnitBadRequest{}
+}
+
+/*
+ModifyUnitBadRequest handles this case with default header values.
+
+Bad request
+*/
+type ModifyUnitBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ModifyUnitBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /organisation/units/{id}][%d] modifyUnitBadRequest", 400)
+}
+
+func (o *ModifyUnitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUnitNotFound creates a ModifyUnitNotFound with default headers values
+func NewModifyUnitNotFound() *ModifyUnitNotFound {
+	return &ModifyUnitNotFound{}
+}
+
+/*
+ModifyUnitNotFound handles this case with default header values.
+
+Not Found
+*/
+type ModifyUnitNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *ModifyUnitNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /organisation/units/{id}][%d] modifyUnitNotFound", 404)
+}
+
+func (o *ModifyUnitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

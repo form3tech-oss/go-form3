@@ -24,6 +24,9 @@ type RecallDecisionSubmissionAttributes struct {
 	// Indicates if the submission was created automatically by the system (`true`) or manually (`false`).
 	Auto *bool `json:"auto,omitempty"`
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// status
 	Status RecallDecisionSubmissionStatus `json:"status,omitempty"`
 
@@ -40,6 +43,8 @@ func RecallDecisionSubmissionAttributesWithDefaults(defaults client.Defaults) *R
 	return &RecallDecisionSubmissionAttributes{
 
 		Auto: defaults.GetBoolPtr("RecallDecisionSubmissionAttributes", "auto"),
+
+		ReferenceID: defaults.GetString("RecallDecisionSubmissionAttributes", "reference_id"),
 
 		// TODO Status: RecallDecisionSubmissionStatus,
 
@@ -58,6 +63,13 @@ func (m *RecallDecisionSubmissionAttributes) WithAuto(auto bool) *RecallDecision
 
 func (m *RecallDecisionSubmissionAttributes) WithoutAuto() *RecallDecisionSubmissionAttributes {
 	m.Auto = nil
+	return m
+}
+
+func (m *RecallDecisionSubmissionAttributes) WithReferenceID(referenceID string) *RecallDecisionSubmissionAttributes {
+
+	m.ReferenceID = referenceID
+
 	return m
 }
 

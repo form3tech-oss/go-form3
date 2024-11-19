@@ -32,6 +32,13 @@ func (o *GetUserReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetUserNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +49,8 @@ func NewGetUserOK() *GetUserOK {
 	return &GetUserOK{}
 }
 
-/*GetUserOK handles this case with default header values.
+/*
+GetUserOK handles this case with default header values.
 
 User details
 */
@@ -65,6 +73,41 @@ func (o *GetUserOK) readResponse(response runtime.ClientResponse, consumer runti
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetUserNotFound creates a GetUserNotFound with default headers values
+func NewGetUserNotFound() *GetUserNotFound {
+	return &GetUserNotFound{}
+}
+
+/*
+GetUserNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetUserNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+func (o *GetUserNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/users/{user_id}][%d] getUserNotFound", 404)
+}
+
+func (o *GetUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

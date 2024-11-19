@@ -351,6 +351,18 @@ func (m *PaymentSubmission) Json() string {
 // swagger:model PaymentSubmissionAttributes
 type PaymentSubmissionAttributes struct {
 
+	// Clearing infrastructure through which the payment instruction was processed
+	// Pattern: ^[0-9A-Za-z_]*$
+	ClearingSystem string `json:"clearing_system,omitempty"`
+
+	// Identification code of the file sent to scheme.
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// Number of the file sent to scheme.
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// Time a payment was released from being held due to a limit breach
 	// Read Only: true
 	// Format: date-time
@@ -361,14 +373,20 @@ type PaymentSubmissionAttributes struct {
 	// Format: date-time
 	LimitBreachStartDatetime *strfmt.DateTime `json:"limit_breach_start_datetime,omitempty"`
 
+	// posting status
+	PostingStatus PostingStatus `json:"posting_status,omitempty"`
+
 	// Details of the account to which funds are redirected (if applicable)
 	RedirectedAccountNumber string `json:"redirected_account_number,omitempty"`
 
 	// Details of the bank to which funds are redirected (if applicable)
 	RedirectedBankID string `json:"redirected_bank_id,omitempty"`
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// Route taken for an outbound payment
-	// Enum: [on_us]
+	// Enum: [on_us xp]
 	Route string `json:"route,omitempty"`
 
 	// Scheme-specific status (if submission has been submitted to a scheme)
@@ -405,13 +423,23 @@ type PaymentSubmissionAttributes struct {
 func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentSubmissionAttributes {
 	return &PaymentSubmissionAttributes{
 
+		ClearingSystem: defaults.GetString("PaymentSubmissionAttributes", "clearing_system"),
+
+		FileIdentifier: defaults.GetStringPtr("PaymentSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("PaymentSubmissionAttributes", "file_number"),
+
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionAttributes", "limit_breach_end_datetime"),
 
 		LimitBreachStartDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionAttributes", "limit_breach_start_datetime"),
 
+		// TODO PostingStatus: PostingStatus,
+
 		RedirectedAccountNumber: defaults.GetString("PaymentSubmissionAttributes", "redirected_account_number"),
 
 		RedirectedBankID: defaults.GetString("PaymentSubmissionAttributes", "redirected_bank_id"),
+
+		ReferenceID: defaults.GetString("PaymentSubmissionAttributes", "reference_id"),
 
 		Route: defaults.GetString("PaymentSubmissionAttributes", "route"),
 
@@ -431,6 +459,37 @@ func PaymentSubmissionAttributesWithDefaults(defaults client.Defaults) *PaymentS
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("PaymentSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *PaymentSubmissionAttributes) WithClearingSystem(clearingSystem string) *PaymentSubmissionAttributes {
+
+	m.ClearingSystem = clearingSystem
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *PaymentSubmissionAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithoutFileIdentifier() *PaymentSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithFileNumber(fileNumber string) *PaymentSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithoutFileNumber() *PaymentSubmissionAttributes {
+	m.FileNumber = nil
+	return m
 }
 
 func (m *PaymentSubmissionAttributes) WithLimitBreachEndDatetime(limitBreachEndDatetime strfmt.DateTime) *PaymentSubmissionAttributes {
@@ -457,6 +516,13 @@ func (m *PaymentSubmissionAttributes) WithoutLimitBreachStartDatetime() *Payment
 	return m
 }
 
+func (m *PaymentSubmissionAttributes) WithPostingStatus(postingStatus PostingStatus) *PaymentSubmissionAttributes {
+
+	m.PostingStatus = postingStatus
+
+	return m
+}
+
 func (m *PaymentSubmissionAttributes) WithRedirectedAccountNumber(redirectedAccountNumber string) *PaymentSubmissionAttributes {
 
 	m.RedirectedAccountNumber = redirectedAccountNumber
@@ -467,6 +533,13 @@ func (m *PaymentSubmissionAttributes) WithRedirectedAccountNumber(redirectedAcco
 func (m *PaymentSubmissionAttributes) WithRedirectedBankID(redirectedBankID string) *PaymentSubmissionAttributes {
 
 	m.RedirectedBankID = redirectedBankID
+
+	return m
+}
+
+func (m *PaymentSubmissionAttributes) WithReferenceID(referenceID string) *PaymentSubmissionAttributes {
+
+	m.ReferenceID = referenceID
 
 	return m
 }
@@ -548,11 +621,27 @@ func (m *PaymentSubmissionAttributes) WithTransactionStartDatetime(transactionSt
 func (m *PaymentSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateClearingSystem(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLimitBreachEndDatetime(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateLimitBreachStartDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostingStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -586,6 +675,45 @@ func (m *PaymentSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *PaymentSubmissionAttributes) validateClearingSystem(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ClearingSystem) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", string(m.ClearingSystem), `^[0-9A-Za-z_]*$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *PaymentSubmissionAttributes) validateLimitBreachEndDatetime(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.LimitBreachEndDatetime) { // not required
@@ -612,11 +740,27 @@ func (m *PaymentSubmissionAttributes) validateLimitBreachStartDatetime(formats s
 	return nil
 }
 
+func (m *PaymentSubmissionAttributes) validatePostingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostingStatus) { // not required
+		return nil
+	}
+
+	if err := m.PostingStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "posting_status")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var paymentSubmissionAttributesTypeRoutePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["on_us","xp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -628,6 +772,9 @@ const (
 
 	// PaymentSubmissionAttributesRouteOnUs captures enum value "on_us"
 	PaymentSubmissionAttributesRouteOnUs string = "on_us"
+
+	// PaymentSubmissionAttributesRouteXp captures enum value "xp"
+	PaymentSubmissionAttributesRouteXp string = "xp"
 )
 
 // prop value enum

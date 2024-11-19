@@ -27,6 +27,9 @@ type NameVerificationAdmissionAttributes struct {
 	// answer
 	Answer NameVerificationAdmissionAnswer `json:"answer,omitempty"`
 
+	// debtor party
+	DebtorParty *DebtorParty `json:"debtor_party,omitempty"`
+
 	// reason
 	Reason string `json:"reason,omitempty"`
 
@@ -47,6 +50,8 @@ func NameVerificationAdmissionAttributesWithDefaults(defaults client.Defaults) *
 		ActualName: defaults.GetString("NameVerificationAdmissionAttributes", "actual_name"),
 
 		// TODO Answer: NameVerificationAdmissionAnswer,
+
+		DebtorParty: DebtorPartyWithDefaults(defaults),
 
 		Reason: defaults.GetString("NameVerificationAdmissionAttributes", "reason"),
 
@@ -69,6 +74,18 @@ func (m *NameVerificationAdmissionAttributes) WithAnswer(answer NameVerification
 
 	m.Answer = answer
 
+	return m
+}
+
+func (m *NameVerificationAdmissionAttributes) WithDebtorParty(debtorParty DebtorParty) *NameVerificationAdmissionAttributes {
+
+	m.DebtorParty = &debtorParty
+
+	return m
+}
+
+func (m *NameVerificationAdmissionAttributes) WithoutDebtorParty() *NameVerificationAdmissionAttributes {
+	m.DebtorParty = nil
 	return m
 }
 
@@ -113,6 +130,10 @@ func (m *NameVerificationAdmissionAttributes) Validate(formats strfmt.Registry) 
 		res = append(res, err)
 	}
 
+	if err := m.validateDebtorParty(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateReasonCode(formats); err != nil {
 		res = append(res, err)
 	}
@@ -138,6 +159,24 @@ func (m *NameVerificationAdmissionAttributes) validateAnswer(formats strfmt.Regi
 			return ve.ValidateName("answer")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *NameVerificationAdmissionAttributes) validateDebtorParty(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DebtorParty) { // not required
+		return nil
+	}
+
+	if m.DebtorParty != nil {
+		if err := m.DebtorParty.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("debtor_party")
+			}
+			return err
+		}
 	}
 
 	return nil
