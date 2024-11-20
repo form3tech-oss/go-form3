@@ -1,4 +1,4 @@
-module github.com/form3tech-oss/go-form3/v6
+module github.com/form3tech-oss/go-form3/v7
 
 go 1.20
 

@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/form3"
+	"github.com/form3tech-oss/go-form3/v7/pkg/form3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
