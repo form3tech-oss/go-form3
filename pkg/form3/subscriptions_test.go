@@ -84,13 +84,14 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 	// update
 	updateReq := f3.Subscriptions.ModifySubscription()
 	version := int64(0)
+	deactivated := true
 	updateReq.
 		WithID(id).
 		WithData(models.SubscriptionUpdate{
 			ID:             &id,
 			OrganisationID: &organisationID,
 			Attributes: &models.SubscriptionUpdateAttributes{
-				Deactivated: true,
+				Deactivated: &deactivated,
 			},
 			Version: &version,
 		})
