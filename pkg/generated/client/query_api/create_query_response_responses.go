@@ -75,6 +75,36 @@ type CreateQueryResponseCreated struct {
 	*models.QueryResponseResponse
 }
 
+// IsSuccess returns true when this create query response created response has a 2xx status code
+func (o *CreateQueryResponseCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create query response created response has a 3xx status code
+func (o *CreateQueryResponseCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create query response created response has a 4xx status code
+func (o *CreateQueryResponseCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create query response created response has a 5xx status code
+func (o *CreateQueryResponseCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create query response created response a status code equal to that given
+func (o *CreateQueryResponseCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create query response created response
+func (o *CreateQueryResponseCreated) Code() int {
+	return 201
+}
+
 func (o *CreateQueryResponseCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/queries/{query_id}/responses][%d] createQueryResponseCreated", 201)
 }
@@ -108,6 +138,36 @@ type CreateQueryResponseBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create query response bad request response has a 2xx status code
+func (o *CreateQueryResponseBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create query response bad request response has a 3xx status code
+func (o *CreateQueryResponseBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create query response bad request response has a 4xx status code
+func (o *CreateQueryResponseBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create query response bad request response has a 5xx status code
+func (o *CreateQueryResponseBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create query response bad request response a status code equal to that given
+func (o *CreateQueryResponseBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create query response bad request response
+func (o *CreateQueryResponseBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateQueryResponseBadRequest) Error() string {
@@ -145,6 +205,36 @@ type CreateQueryResponseForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create query response forbidden response has a 2xx status code
+func (o *CreateQueryResponseForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create query response forbidden response has a 3xx status code
+func (o *CreateQueryResponseForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create query response forbidden response has a 4xx status code
+func (o *CreateQueryResponseForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create query response forbidden response has a 5xx status code
+func (o *CreateQueryResponseForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create query response forbidden response a status code equal to that given
+func (o *CreateQueryResponseForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create query response forbidden response
+func (o *CreateQueryResponseForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateQueryResponseForbidden) Error() string {
 	return fmt.Sprintf("[POST /transaction/queries/{query_id}/responses][%d] createQueryResponseForbidden", 403)
 }
@@ -178,6 +268,36 @@ type CreateQueryResponseBadGateway struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create query response bad gateway response has a 2xx status code
+func (o *CreateQueryResponseBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create query response bad gateway response has a 3xx status code
+func (o *CreateQueryResponseBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create query response bad gateway response has a 4xx status code
+func (o *CreateQueryResponseBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create query response bad gateway response has a 5xx status code
+func (o *CreateQueryResponseBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create query response bad gateway response a status code equal to that given
+func (o *CreateQueryResponseBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the create query response bad gateway response
+func (o *CreateQueryResponseBadGateway) Code() int {
+	return 502
 }
 
 func (o *CreateQueryResponseBadGateway) Error() string {

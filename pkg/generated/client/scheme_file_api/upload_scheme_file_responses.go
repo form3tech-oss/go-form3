@@ -96,6 +96,36 @@ type UploadSchemeFileOK struct {
 	*models.SchemeFileResponse
 }
 
+// IsSuccess returns true when this upload scheme file o k response has a 2xx status code
+func (o *UploadSchemeFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this upload scheme file o k response has a 3xx status code
+func (o *UploadSchemeFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file o k response has a 4xx status code
+func (o *UploadSchemeFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upload scheme file o k response has a 5xx status code
+func (o *UploadSchemeFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload scheme file o k response a status code equal to that given
+func (o *UploadSchemeFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the upload scheme file o k response
+func (o *UploadSchemeFileOK) Code() int {
+	return 200
+}
+
 func (o *UploadSchemeFileOK) Error() string {
 	return fmt.Sprintf("[PUT /files/schemefiles/{scheme_file_id}][%d] uploadSchemeFileOK", 200)
 }
@@ -129,6 +159,36 @@ type UploadSchemeFileBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload scheme file bad request response has a 2xx status code
+func (o *UploadSchemeFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload scheme file bad request response has a 3xx status code
+func (o *UploadSchemeFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file bad request response has a 4xx status code
+func (o *UploadSchemeFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload scheme file bad request response has a 5xx status code
+func (o *UploadSchemeFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload scheme file bad request response a status code equal to that given
+func (o *UploadSchemeFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the upload scheme file bad request response
+func (o *UploadSchemeFileBadRequest) Code() int {
+	return 400
 }
 
 func (o *UploadSchemeFileBadRequest) Error() string {
@@ -166,6 +226,36 @@ type UploadSchemeFileUnauthorized struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this upload scheme file unauthorized response has a 2xx status code
+func (o *UploadSchemeFileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload scheme file unauthorized response has a 3xx status code
+func (o *UploadSchemeFileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file unauthorized response has a 4xx status code
+func (o *UploadSchemeFileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload scheme file unauthorized response has a 5xx status code
+func (o *UploadSchemeFileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload scheme file unauthorized response a status code equal to that given
+func (o *UploadSchemeFileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the upload scheme file unauthorized response
+func (o *UploadSchemeFileUnauthorized) Code() int {
+	return 401
+}
+
 func (o *UploadSchemeFileUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /files/schemefiles/{scheme_file_id}][%d] uploadSchemeFileUnauthorized", 401)
 }
@@ -199,6 +289,36 @@ type UploadSchemeFileForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload scheme file forbidden response has a 2xx status code
+func (o *UploadSchemeFileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload scheme file forbidden response has a 3xx status code
+func (o *UploadSchemeFileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file forbidden response has a 4xx status code
+func (o *UploadSchemeFileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload scheme file forbidden response has a 5xx status code
+func (o *UploadSchemeFileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload scheme file forbidden response a status code equal to that given
+func (o *UploadSchemeFileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the upload scheme file forbidden response
+func (o *UploadSchemeFileForbidden) Code() int {
+	return 403
 }
 
 func (o *UploadSchemeFileForbidden) Error() string {
@@ -236,6 +356,36 @@ type UploadSchemeFileNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this upload scheme file not found response has a 2xx status code
+func (o *UploadSchemeFileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload scheme file not found response has a 3xx status code
+func (o *UploadSchemeFileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file not found response has a 4xx status code
+func (o *UploadSchemeFileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload scheme file not found response has a 5xx status code
+func (o *UploadSchemeFileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload scheme file not found response a status code equal to that given
+func (o *UploadSchemeFileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the upload scheme file not found response
+func (o *UploadSchemeFileNotFound) Code() int {
+	return 404
+}
+
 func (o *UploadSchemeFileNotFound) Error() string {
 	return fmt.Sprintf("[PUT /files/schemefiles/{scheme_file_id}][%d] uploadSchemeFileNotFound", 404)
 }
@@ -271,6 +421,36 @@ type UploadSchemeFileConflict struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this upload scheme file conflict response has a 2xx status code
+func (o *UploadSchemeFileConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload scheme file conflict response has a 3xx status code
+func (o *UploadSchemeFileConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file conflict response has a 4xx status code
+func (o *UploadSchemeFileConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload scheme file conflict response has a 5xx status code
+func (o *UploadSchemeFileConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload scheme file conflict response a status code equal to that given
+func (o *UploadSchemeFileConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the upload scheme file conflict response
+func (o *UploadSchemeFileConflict) Code() int {
+	return 409
+}
+
 func (o *UploadSchemeFileConflict) Error() string {
 	return fmt.Sprintf("[PUT /files/schemefiles/{scheme_file_id}][%d] uploadSchemeFileConflict", 409)
 }
@@ -304,6 +484,36 @@ type UploadSchemeFileInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload scheme file internal server error response has a 2xx status code
+func (o *UploadSchemeFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload scheme file internal server error response has a 3xx status code
+func (o *UploadSchemeFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload scheme file internal server error response has a 4xx status code
+func (o *UploadSchemeFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upload scheme file internal server error response has a 5xx status code
+func (o *UploadSchemeFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this upload scheme file internal server error response a status code equal to that given
+func (o *UploadSchemeFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the upload scheme file internal server error response
+func (o *UploadSchemeFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UploadSchemeFileInternalServerError) Error() string {

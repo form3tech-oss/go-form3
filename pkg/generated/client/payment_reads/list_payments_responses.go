@@ -54,6 +54,36 @@ type ListPaymentsOK struct {
 	*models.PaymentDetailsListResponse
 }
 
+// IsSuccess returns true when this list payments o k response has a 2xx status code
+func (o *ListPaymentsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list payments o k response has a 3xx status code
+func (o *ListPaymentsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list payments o k response has a 4xx status code
+func (o *ListPaymentsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list payments o k response has a 5xx status code
+func (o *ListPaymentsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list payments o k response a status code equal to that given
+func (o *ListPaymentsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list payments o k response
+func (o *ListPaymentsOK) Code() int {
+	return 200
+}
+
 func (o *ListPaymentsOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments][%d] listPaymentsOK", 200)
 }

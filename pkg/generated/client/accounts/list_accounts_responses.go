@@ -54,6 +54,36 @@ type ListAccountsOK struct {
 	*models.AccountDetailsListResponse
 }
 
+// IsSuccess returns true when this list accounts o k response has a 2xx status code
+func (o *ListAccountsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list accounts o k response has a 3xx status code
+func (o *ListAccountsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accounts o k response has a 4xx status code
+func (o *ListAccountsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list accounts o k response has a 5xx status code
+func (o *ListAccountsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accounts o k response a status code equal to that given
+func (o *ListAccountsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list accounts o k response
+func (o *ListAccountsOK) Code() int {
+	return 200
+}
+
 func (o *ListAccountsOK) Error() string {
 	return fmt.Sprintf("[GET /organisation/accounts][%d] listAccountsOK", 200)
 }

@@ -89,6 +89,36 @@ type CreateTransactionFileCreated struct {
 	*models.TransactionFileResponse
 }
 
+// IsSuccess returns true when this create transaction file created response has a 2xx status code
+func (o *CreateTransactionFileCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create transaction file created response has a 3xx status code
+func (o *CreateTransactionFileCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create transaction file created response has a 4xx status code
+func (o *CreateTransactionFileCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create transaction file created response has a 5xx status code
+func (o *CreateTransactionFileCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create transaction file created response a status code equal to that given
+func (o *CreateTransactionFileCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create transaction file created response
+func (o *CreateTransactionFileCreated) Code() int {
+	return 201
+}
+
 func (o *CreateTransactionFileCreated) Error() string {
 	return fmt.Sprintf("[POST /files/transactions][%d] createTransactionFileCreated", 201)
 }
@@ -122,6 +152,36 @@ type CreateTransactionFileBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create transaction file bad request response has a 2xx status code
+func (o *CreateTransactionFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create transaction file bad request response has a 3xx status code
+func (o *CreateTransactionFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create transaction file bad request response has a 4xx status code
+func (o *CreateTransactionFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create transaction file bad request response has a 5xx status code
+func (o *CreateTransactionFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create transaction file bad request response a status code equal to that given
+func (o *CreateTransactionFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create transaction file bad request response
+func (o *CreateTransactionFileBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateTransactionFileBadRequest) Error() string {
@@ -159,6 +219,36 @@ type CreateTransactionFileUnauthorized struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create transaction file unauthorized response has a 2xx status code
+func (o *CreateTransactionFileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create transaction file unauthorized response has a 3xx status code
+func (o *CreateTransactionFileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create transaction file unauthorized response has a 4xx status code
+func (o *CreateTransactionFileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create transaction file unauthorized response has a 5xx status code
+func (o *CreateTransactionFileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create transaction file unauthorized response a status code equal to that given
+func (o *CreateTransactionFileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create transaction file unauthorized response
+func (o *CreateTransactionFileUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateTransactionFileUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /files/transactions][%d] createTransactionFileUnauthorized", 401)
 }
@@ -192,6 +282,36 @@ type CreateTransactionFileForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create transaction file forbidden response has a 2xx status code
+func (o *CreateTransactionFileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create transaction file forbidden response has a 3xx status code
+func (o *CreateTransactionFileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create transaction file forbidden response has a 4xx status code
+func (o *CreateTransactionFileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create transaction file forbidden response has a 5xx status code
+func (o *CreateTransactionFileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create transaction file forbidden response a status code equal to that given
+func (o *CreateTransactionFileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create transaction file forbidden response
+func (o *CreateTransactionFileForbidden) Code() int {
+	return 403
 }
 
 func (o *CreateTransactionFileForbidden) Error() string {
@@ -229,6 +349,36 @@ type CreateTransactionFileConflict struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create transaction file conflict response has a 2xx status code
+func (o *CreateTransactionFileConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create transaction file conflict response has a 3xx status code
+func (o *CreateTransactionFileConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create transaction file conflict response has a 4xx status code
+func (o *CreateTransactionFileConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create transaction file conflict response has a 5xx status code
+func (o *CreateTransactionFileConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create transaction file conflict response a status code equal to that given
+func (o *CreateTransactionFileConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create transaction file conflict response
+func (o *CreateTransactionFileConflict) Code() int {
+	return 409
+}
+
 func (o *CreateTransactionFileConflict) Error() string {
 	return fmt.Sprintf("[POST /files/transactions][%d] createTransactionFileConflict", 409)
 }
@@ -262,6 +412,36 @@ type CreateTransactionFileInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create transaction file internal server error response has a 2xx status code
+func (o *CreateTransactionFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create transaction file internal server error response has a 3xx status code
+func (o *CreateTransactionFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create transaction file internal server error response has a 4xx status code
+func (o *CreateTransactionFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create transaction file internal server error response has a 5xx status code
+func (o *CreateTransactionFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create transaction file internal server error response a status code equal to that given
+func (o *CreateTransactionFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create transaction file internal server error response
+func (o *CreateTransactionFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CreateTransactionFileInternalServerError) Error() string {

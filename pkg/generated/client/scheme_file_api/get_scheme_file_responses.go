@@ -82,6 +82,36 @@ type GetSchemeFileOK struct {
 	*models.SchemeFileResponse
 }
 
+// IsSuccess returns true when this get scheme file o k response has a 2xx status code
+func (o *GetSchemeFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get scheme file o k response has a 3xx status code
+func (o *GetSchemeFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file o k response has a 4xx status code
+func (o *GetSchemeFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme file o k response has a 5xx status code
+func (o *GetSchemeFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file o k response a status code equal to that given
+func (o *GetSchemeFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get scheme file o k response
+func (o *GetSchemeFileOK) Code() int {
+	return 200
+}
+
 func (o *GetSchemeFileOK) Error() string {
 	return fmt.Sprintf("[GET /files/schemefiles/{scheme_file_id}][%d] getSchemeFileOK", 200)
 }
@@ -115,6 +145,36 @@ type GetSchemeFileUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file unauthorized response has a 2xx status code
+func (o *GetSchemeFileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file unauthorized response has a 3xx status code
+func (o *GetSchemeFileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file unauthorized response has a 4xx status code
+func (o *GetSchemeFileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file unauthorized response has a 5xx status code
+func (o *GetSchemeFileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file unauthorized response a status code equal to that given
+func (o *GetSchemeFileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get scheme file unauthorized response
+func (o *GetSchemeFileUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetSchemeFileUnauthorized) Error() string {
@@ -152,6 +212,36 @@ type GetSchemeFileForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get scheme file forbidden response has a 2xx status code
+func (o *GetSchemeFileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file forbidden response has a 3xx status code
+func (o *GetSchemeFileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file forbidden response has a 4xx status code
+func (o *GetSchemeFileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file forbidden response has a 5xx status code
+func (o *GetSchemeFileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file forbidden response a status code equal to that given
+func (o *GetSchemeFileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get scheme file forbidden response
+func (o *GetSchemeFileForbidden) Code() int {
+	return 403
+}
+
 func (o *GetSchemeFileForbidden) Error() string {
 	return fmt.Sprintf("[GET /files/schemefiles/{scheme_file_id}][%d] getSchemeFileForbidden", 403)
 }
@@ -187,6 +277,36 @@ type GetSchemeFileNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get scheme file not found response has a 2xx status code
+func (o *GetSchemeFileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file not found response has a 3xx status code
+func (o *GetSchemeFileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file not found response has a 4xx status code
+func (o *GetSchemeFileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file not found response has a 5xx status code
+func (o *GetSchemeFileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file not found response a status code equal to that given
+func (o *GetSchemeFileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get scheme file not found response
+func (o *GetSchemeFileNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSchemeFileNotFound) Error() string {
 	return fmt.Sprintf("[GET /files/schemefiles/{scheme_file_id}][%d] getSchemeFileNotFound", 404)
 }
@@ -220,6 +340,36 @@ type GetSchemeFileInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file internal server error response has a 2xx status code
+func (o *GetSchemeFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file internal server error response has a 3xx status code
+func (o *GetSchemeFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file internal server error response has a 4xx status code
+func (o *GetSchemeFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme file internal server error response has a 5xx status code
+func (o *GetSchemeFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get scheme file internal server error response a status code equal to that given
+func (o *GetSchemeFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get scheme file internal server error response
+func (o *GetSchemeFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetSchemeFileInternalServerError) Error() string {

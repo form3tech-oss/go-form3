@@ -54,6 +54,36 @@ type GetBranchIdentificationOK struct {
 	*models.BranchIdentificationResponse
 }
 
+// IsSuccess returns true when this get branch identification o k response has a 2xx status code
+func (o *GetBranchIdentificationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get branch identification o k response has a 3xx status code
+func (o *GetBranchIdentificationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get branch identification o k response has a 4xx status code
+func (o *GetBranchIdentificationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get branch identification o k response has a 5xx status code
+func (o *GetBranchIdentificationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get branch identification o k response a status code equal to that given
+func (o *GetBranchIdentificationOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get branch identification o k response
+func (o *GetBranchIdentificationOK) Code() int {
+	return 200
+}
+
 func (o *GetBranchIdentificationOK) Error() string {
 	return fmt.Sprintf("[GET /organisation/branches/{branch_id}/identifications/{identification_id}][%d] getBranchIdentificationOK", 200)
 }

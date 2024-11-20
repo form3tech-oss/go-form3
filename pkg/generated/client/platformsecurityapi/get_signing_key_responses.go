@@ -89,6 +89,36 @@ type GetSigningKeyOK struct {
 	*models.SigningKeysResponse
 }
 
+// IsSuccess returns true when this get signing key o k response has a 2xx status code
+func (o *GetSigningKeyOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get signing key o k response has a 3xx status code
+func (o *GetSigningKeyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get signing key o k response has a 4xx status code
+func (o *GetSigningKeyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get signing key o k response has a 5xx status code
+func (o *GetSigningKeyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get signing key o k response a status code equal to that given
+func (o *GetSigningKeyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get signing key o k response
+func (o *GetSigningKeyOK) Code() int {
+	return 200
+}
+
 func (o *GetSigningKeyOK) Error() string {
 	return fmt.Sprintf("[GET /platform/security/signing_keys/{signingkey_id}][%d] getSigningKeyOK", 200)
 }
@@ -122,6 +152,36 @@ type GetSigningKeyBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get signing key bad request response has a 2xx status code
+func (o *GetSigningKeyBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get signing key bad request response has a 3xx status code
+func (o *GetSigningKeyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get signing key bad request response has a 4xx status code
+func (o *GetSigningKeyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get signing key bad request response has a 5xx status code
+func (o *GetSigningKeyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get signing key bad request response a status code equal to that given
+func (o *GetSigningKeyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get signing key bad request response
+func (o *GetSigningKeyBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetSigningKeyBadRequest) Error() string {
@@ -159,6 +219,36 @@ type GetSigningKeyForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get signing key forbidden response has a 2xx status code
+func (o *GetSigningKeyForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get signing key forbidden response has a 3xx status code
+func (o *GetSigningKeyForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get signing key forbidden response has a 4xx status code
+func (o *GetSigningKeyForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get signing key forbidden response has a 5xx status code
+func (o *GetSigningKeyForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get signing key forbidden response a status code equal to that given
+func (o *GetSigningKeyForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get signing key forbidden response
+func (o *GetSigningKeyForbidden) Code() int {
+	return 403
+}
+
 func (o *GetSigningKeyForbidden) Error() string {
 	return fmt.Sprintf("[GET /platform/security/signing_keys/{signingkey_id}][%d] getSigningKeyForbidden", 403)
 }
@@ -194,6 +284,36 @@ type GetSigningKeyNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get signing key not found response has a 2xx status code
+func (o *GetSigningKeyNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get signing key not found response has a 3xx status code
+func (o *GetSigningKeyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get signing key not found response has a 4xx status code
+func (o *GetSigningKeyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get signing key not found response has a 5xx status code
+func (o *GetSigningKeyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get signing key not found response a status code equal to that given
+func (o *GetSigningKeyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get signing key not found response
+func (o *GetSigningKeyNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSigningKeyNotFound) Error() string {
 	return fmt.Sprintf("[GET /platform/security/signing_keys/{signingkey_id}][%d] getSigningKeyNotFound", 404)
 }
@@ -227,6 +347,36 @@ type GetSigningKeyBadGateway struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get signing key bad gateway response has a 2xx status code
+func (o *GetSigningKeyBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get signing key bad gateway response has a 3xx status code
+func (o *GetSigningKeyBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get signing key bad gateway response has a 4xx status code
+func (o *GetSigningKeyBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get signing key bad gateway response has a 5xx status code
+func (o *GetSigningKeyBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get signing key bad gateway response a status code equal to that given
+func (o *GetSigningKeyBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the get signing key bad gateway response
+func (o *GetSigningKeyBadGateway) Code() int {
+	return 502
 }
 
 func (o *GetSigningKeyBadGateway) Error() string {
@@ -265,6 +415,31 @@ type GetSigningKeyDefault struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get signing key default response has a 2xx status code
+func (o *GetSigningKeyDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get signing key default response has a 3xx status code
+func (o *GetSigningKeyDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get signing key default response has a 4xx status code
+func (o *GetSigningKeyDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get signing key default response has a 5xx status code
+func (o *GetSigningKeyDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get signing key default response a status code equal to that given
+func (o *GetSigningKeyDefault) IsCode(code int) bool {
+	return o._statusCode == code
 }
 
 // Code gets the status code for the get signing key default response

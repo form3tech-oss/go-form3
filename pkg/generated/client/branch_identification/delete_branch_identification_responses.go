@@ -53,6 +53,36 @@ Branch Identification deleted
 type DeleteBranchIdentificationNoContent struct {
 }
 
+// IsSuccess returns true when this delete branch identification no content response has a 2xx status code
+func (o *DeleteBranchIdentificationNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete branch identification no content response has a 3xx status code
+func (o *DeleteBranchIdentificationNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete branch identification no content response has a 4xx status code
+func (o *DeleteBranchIdentificationNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete branch identification no content response has a 5xx status code
+func (o *DeleteBranchIdentificationNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete branch identification no content response a status code equal to that given
+func (o *DeleteBranchIdentificationNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete branch identification no content response
+func (o *DeleteBranchIdentificationNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteBranchIdentificationNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /organisation/branches/{branch_id}/identifications/{identification_id}][%d] deleteBranchIdentificationNoContent", 204)
 }
@@ -73,6 +103,36 @@ DeleteBranchIdentificationNotFound handles this case with default header values.
 Branch Identification not found
 */
 type DeleteBranchIdentificationNotFound struct {
+}
+
+// IsSuccess returns true when this delete branch identification not found response has a 2xx status code
+func (o *DeleteBranchIdentificationNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete branch identification not found response has a 3xx status code
+func (o *DeleteBranchIdentificationNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete branch identification not found response has a 4xx status code
+func (o *DeleteBranchIdentificationNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete branch identification not found response has a 5xx status code
+func (o *DeleteBranchIdentificationNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete branch identification not found response a status code equal to that given
+func (o *DeleteBranchIdentificationNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete branch identification not found response
+func (o *DeleteBranchIdentificationNotFound) Code() int {
+	return 404
 }
 
 func (o *DeleteBranchIdentificationNotFound) Error() string {

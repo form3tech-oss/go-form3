@@ -82,6 +82,36 @@ type GetSchemeFileAdmissionOK struct {
 	*models.SchemeFileAdmissionResponse
 }
 
+// IsSuccess returns true when this get scheme file admission o k response has a 2xx status code
+func (o *GetSchemeFileAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get scheme file admission o k response has a 3xx status code
+func (o *GetSchemeFileAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file admission o k response has a 4xx status code
+func (o *GetSchemeFileAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme file admission o k response has a 5xx status code
+func (o *GetSchemeFileAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file admission o k response a status code equal to that given
+func (o *GetSchemeFileAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get scheme file admission o k response
+func (o *GetSchemeFileAdmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetSchemeFileAdmissionOK) Error() string {
 	return fmt.Sprintf("[GET /files/schemefiles/{scheme_file_id}/admissions/{scheme_file_admission_id}][%d] getSchemeFileAdmissionOK", 200)
 }
@@ -115,6 +145,36 @@ type GetSchemeFileAdmissionUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file admission unauthorized response has a 2xx status code
+func (o *GetSchemeFileAdmissionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file admission unauthorized response has a 3xx status code
+func (o *GetSchemeFileAdmissionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file admission unauthorized response has a 4xx status code
+func (o *GetSchemeFileAdmissionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file admission unauthorized response has a 5xx status code
+func (o *GetSchemeFileAdmissionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file admission unauthorized response a status code equal to that given
+func (o *GetSchemeFileAdmissionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get scheme file admission unauthorized response
+func (o *GetSchemeFileAdmissionUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetSchemeFileAdmissionUnauthorized) Error() string {
@@ -152,6 +212,36 @@ type GetSchemeFileAdmissionForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get scheme file admission forbidden response has a 2xx status code
+func (o *GetSchemeFileAdmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file admission forbidden response has a 3xx status code
+func (o *GetSchemeFileAdmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file admission forbidden response has a 4xx status code
+func (o *GetSchemeFileAdmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file admission forbidden response has a 5xx status code
+func (o *GetSchemeFileAdmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file admission forbidden response a status code equal to that given
+func (o *GetSchemeFileAdmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get scheme file admission forbidden response
+func (o *GetSchemeFileAdmissionForbidden) Code() int {
+	return 403
+}
+
 func (o *GetSchemeFileAdmissionForbidden) Error() string {
 	return fmt.Sprintf("[GET /files/schemefiles/{scheme_file_id}/admissions/{scheme_file_admission_id}][%d] getSchemeFileAdmissionForbidden", 403)
 }
@@ -187,6 +277,36 @@ type GetSchemeFileAdmissionNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get scheme file admission not found response has a 2xx status code
+func (o *GetSchemeFileAdmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file admission not found response has a 3xx status code
+func (o *GetSchemeFileAdmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file admission not found response has a 4xx status code
+func (o *GetSchemeFileAdmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file admission not found response has a 5xx status code
+func (o *GetSchemeFileAdmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file admission not found response a status code equal to that given
+func (o *GetSchemeFileAdmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get scheme file admission not found response
+func (o *GetSchemeFileAdmissionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSchemeFileAdmissionNotFound) Error() string {
 	return fmt.Sprintf("[GET /files/schemefiles/{scheme_file_id}/admissions/{scheme_file_admission_id}][%d] getSchemeFileAdmissionNotFound", 404)
 }
@@ -220,6 +340,36 @@ type GetSchemeFileAdmissionInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file admission internal server error response has a 2xx status code
+func (o *GetSchemeFileAdmissionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file admission internal server error response has a 3xx status code
+func (o *GetSchemeFileAdmissionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file admission internal server error response has a 4xx status code
+func (o *GetSchemeFileAdmissionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme file admission internal server error response has a 5xx status code
+func (o *GetSchemeFileAdmissionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get scheme file admission internal server error response a status code equal to that given
+func (o *GetSchemeFileAdmissionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get scheme file admission internal server error response
+func (o *GetSchemeFileAdmissionInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetSchemeFileAdmissionInternalServerError) Error() string {

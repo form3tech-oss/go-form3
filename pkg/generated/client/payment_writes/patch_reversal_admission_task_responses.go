@@ -68,6 +68,36 @@ type PatchReversalAdmissionTaskOK struct {
 	*models.ReversalAdmissionTaskDetailsResponse
 }
 
+// IsSuccess returns true when this patch reversal admission task o k response has a 2xx status code
+func (o *PatchReversalAdmissionTaskOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this patch reversal admission task o k response has a 3xx status code
+func (o *PatchReversalAdmissionTaskOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch reversal admission task o k response has a 4xx status code
+func (o *PatchReversalAdmissionTaskOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch reversal admission task o k response has a 5xx status code
+func (o *PatchReversalAdmissionTaskOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch reversal admission task o k response a status code equal to that given
+func (o *PatchReversalAdmissionTaskOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch reversal admission task o k response
+func (o *PatchReversalAdmissionTaskOK) Code() int {
+	return 200
+}
+
 func (o *PatchReversalAdmissionTaskOK) Error() string {
 	return fmt.Sprintf("[PATCH /transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}/tasks/{taskId}][%d] patchReversalAdmissionTaskOK", 200)
 }
@@ -103,6 +133,36 @@ type PatchReversalAdmissionTaskBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this patch reversal admission task bad request response has a 2xx status code
+func (o *PatchReversalAdmissionTaskBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch reversal admission task bad request response has a 3xx status code
+func (o *PatchReversalAdmissionTaskBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch reversal admission task bad request response has a 4xx status code
+func (o *PatchReversalAdmissionTaskBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch reversal admission task bad request response has a 5xx status code
+func (o *PatchReversalAdmissionTaskBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch reversal admission task bad request response a status code equal to that given
+func (o *PatchReversalAdmissionTaskBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the patch reversal admission task bad request response
+func (o *PatchReversalAdmissionTaskBadRequest) Code() int {
+	return 400
+}
+
 func (o *PatchReversalAdmissionTaskBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}/tasks/{taskId}][%d] patchReversalAdmissionTaskBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type PatchReversalAdmissionTaskConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this patch reversal admission task conflict response has a 2xx status code
+func (o *PatchReversalAdmissionTaskConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch reversal admission task conflict response has a 3xx status code
+func (o *PatchReversalAdmissionTaskConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch reversal admission task conflict response has a 4xx status code
+func (o *PatchReversalAdmissionTaskConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch reversal admission task conflict response has a 5xx status code
+func (o *PatchReversalAdmissionTaskConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch reversal admission task conflict response a status code equal to that given
+func (o *PatchReversalAdmissionTaskConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the patch reversal admission task conflict response
+func (o *PatchReversalAdmissionTaskConflict) Code() int {
+	return 409
 }
 
 func (o *PatchReversalAdmissionTaskConflict) Error() string {

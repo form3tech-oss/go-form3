@@ -68,6 +68,36 @@ type GetQueryAdmissionOK struct {
 	*models.QueryAdmissionResponse
 }
 
+// IsSuccess returns true when this get query admission o k response has a 2xx status code
+func (o *GetQueryAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get query admission o k response has a 3xx status code
+func (o *GetQueryAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get query admission o k response has a 4xx status code
+func (o *GetQueryAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get query admission o k response has a 5xx status code
+func (o *GetQueryAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get query admission o k response a status code equal to that given
+func (o *GetQueryAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get query admission o k response
+func (o *GetQueryAdmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetQueryAdmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/queries/{query_id}/admissions/{query_admission_id}][%d] getQueryAdmissionOK", 200)
 }
@@ -103,6 +133,36 @@ type GetQueryAdmissionBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get query admission bad request response has a 2xx status code
+func (o *GetQueryAdmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get query admission bad request response has a 3xx status code
+func (o *GetQueryAdmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get query admission bad request response has a 4xx status code
+func (o *GetQueryAdmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get query admission bad request response has a 5xx status code
+func (o *GetQueryAdmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get query admission bad request response a status code equal to that given
+func (o *GetQueryAdmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get query admission bad request response
+func (o *GetQueryAdmissionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetQueryAdmissionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /transaction/queries/{query_id}/admissions/{query_admission_id}][%d] getQueryAdmissionBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type GetQueryAdmissionForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get query admission forbidden response has a 2xx status code
+func (o *GetQueryAdmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get query admission forbidden response has a 3xx status code
+func (o *GetQueryAdmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get query admission forbidden response has a 4xx status code
+func (o *GetQueryAdmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get query admission forbidden response has a 5xx status code
+func (o *GetQueryAdmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get query admission forbidden response a status code equal to that given
+func (o *GetQueryAdmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get query admission forbidden response
+func (o *GetQueryAdmissionForbidden) Code() int {
+	return 403
 }
 
 func (o *GetQueryAdmissionForbidden) Error() string {

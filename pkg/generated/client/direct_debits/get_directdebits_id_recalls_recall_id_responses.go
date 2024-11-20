@@ -54,6 +54,36 @@ type GetDirectdebitsIDRecallsRecallIDOK struct {
 	*models.DirectDebitRecallDetailsResponse
 }
 
+// IsSuccess returns true when this get directdebits Id recalls recall Id o k response has a 2xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get directdebits Id recalls recall Id o k response has a 3xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get directdebits Id recalls recall Id o k response has a 4xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get directdebits Id recalls recall Id o k response has a 5xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get directdebits Id recalls recall Id o k response a status code equal to that given
+func (o *GetDirectdebitsIDRecallsRecallIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get directdebits Id recalls recall Id o k response
+func (o *GetDirectdebitsIDRecallsRecallIDOK) Code() int {
+	return 200
+}
+
 func (o *GetDirectdebitsIDRecallsRecallIDOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/directdebits/{id}/recalls/{recallId}][%d] getDirectdebitsIdRecallsRecallIdOK", 200)
 }

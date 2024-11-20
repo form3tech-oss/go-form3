@@ -54,6 +54,36 @@ type GetReversalAdmissionTaskOK struct {
 	*models.ReversalAdmissionTaskFetchResponse
 }
 
+// IsSuccess returns true when this get reversal admission task o k response has a 2xx status code
+func (o *GetReversalAdmissionTaskOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get reversal admission task o k response has a 3xx status code
+func (o *GetReversalAdmissionTaskOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get reversal admission task o k response has a 4xx status code
+func (o *GetReversalAdmissionTaskOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get reversal admission task o k response has a 5xx status code
+func (o *GetReversalAdmissionTaskOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get reversal admission task o k response a status code equal to that given
+func (o *GetReversalAdmissionTaskOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get reversal admission task o k response
+func (o *GetReversalAdmissionTaskOK) Code() int {
+	return 200
+}
+
 func (o *GetReversalAdmissionTaskOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}/tasks/{taskId}][%d] getReversalAdmissionTaskOK", 200)
 }

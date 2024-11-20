@@ -54,6 +54,36 @@ type GetReturnSubmissionTaskOK struct {
 	*models.ReturnSubmissionTaskFetchResponse
 }
 
+// IsSuccess returns true when this get return submission task o k response has a 2xx status code
+func (o *GetReturnSubmissionTaskOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get return submission task o k response has a 3xx status code
+func (o *GetReturnSubmissionTaskOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get return submission task o k response has a 4xx status code
+func (o *GetReturnSubmissionTaskOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get return submission task o k response has a 5xx status code
+func (o *GetReturnSubmissionTaskOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get return submission task o k response a status code equal to that given
+func (o *GetReturnSubmissionTaskOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get return submission task o k response
+func (o *GetReturnSubmissionTaskOK) Code() int {
+	return 200
+}
+
 func (o *GetReturnSubmissionTaskOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{paymentId}/returns/{returnId}/submissions/{returnSubmissionId}/tasks/{taskId}][%d] getReturnSubmissionTaskOK", 200)
 }

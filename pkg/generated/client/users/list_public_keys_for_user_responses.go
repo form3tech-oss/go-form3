@@ -61,6 +61,36 @@ type ListPublicKeysForUserOK struct {
 	*models.PublicKeysListResponse
 }
 
+// IsSuccess returns true when this list public keys for user o k response has a 2xx status code
+func (o *ListPublicKeysForUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list public keys for user o k response has a 3xx status code
+func (o *ListPublicKeysForUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list public keys for user o k response has a 4xx status code
+func (o *ListPublicKeysForUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list public keys for user o k response has a 5xx status code
+func (o *ListPublicKeysForUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list public keys for user o k response a status code equal to that given
+func (o *ListPublicKeysForUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list public keys for user o k response
+func (o *ListPublicKeysForUserOK) Code() int {
+	return 200
+}
+
 func (o *ListPublicKeysForUserOK) Error() string {
 	return fmt.Sprintf("[GET /security/users/{user_id}/authn/public_keys][%d] listPublicKeysForUserOK", 200)
 }
@@ -94,6 +124,36 @@ type ListPublicKeysForUserNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list public keys for user not found response has a 2xx status code
+func (o *ListPublicKeysForUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list public keys for user not found response has a 3xx status code
+func (o *ListPublicKeysForUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list public keys for user not found response has a 4xx status code
+func (o *ListPublicKeysForUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list public keys for user not found response has a 5xx status code
+func (o *ListPublicKeysForUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list public keys for user not found response a status code equal to that given
+func (o *ListPublicKeysForUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list public keys for user not found response
+func (o *ListPublicKeysForUserNotFound) Code() int {
+	return 404
 }
 
 func (o *ListPublicKeysForUserNotFound) Error() string {

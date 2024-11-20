@@ -54,6 +54,36 @@ type ListRolesOK struct {
 	*models.RoleDetailsListResponse
 }
 
+// IsSuccess returns true when this list roles o k response has a 2xx status code
+func (o *ListRolesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list roles o k response has a 3xx status code
+func (o *ListRolesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list roles o k response has a 4xx status code
+func (o *ListRolesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list roles o k response has a 5xx status code
+func (o *ListRolesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list roles o k response a status code equal to that given
+func (o *ListRolesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list roles o k response
+func (o *ListRolesOK) Code() int {
+	return 200
+}
+
 func (o *ListRolesOK) Error() string {
 	return fmt.Sprintf("[GET /security/roles][%d] listRolesOK", 200)
 }

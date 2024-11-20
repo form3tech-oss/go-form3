@@ -54,6 +54,36 @@ type GetPaymentReversalSubmissionOK struct {
 	*models.ReversalSubmissionFetchResponse
 }
 
+// IsSuccess returns true when this get payment reversal submission o k response has a 2xx status code
+func (o *GetPaymentReversalSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get payment reversal submission o k response has a 3xx status code
+func (o *GetPaymentReversalSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get payment reversal submission o k response has a 4xx status code
+func (o *GetPaymentReversalSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get payment reversal submission o k response has a 5xx status code
+func (o *GetPaymentReversalSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get payment reversal submission o k response a status code equal to that given
+func (o *GetPaymentReversalSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get payment reversal submission o k response
+func (o *GetPaymentReversalSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetPaymentReversalSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getPaymentReversalSubmissionOK", 200)
 }

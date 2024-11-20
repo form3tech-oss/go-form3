@@ -54,6 +54,36 @@ type ListReversalAdmissionTasksOK struct {
 	*models.ReversalAdmissionTaskListResponse
 }
 
+// IsSuccess returns true when this list reversal admission tasks o k response has a 2xx status code
+func (o *ListReversalAdmissionTasksOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list reversal admission tasks o k response has a 3xx status code
+func (o *ListReversalAdmissionTasksOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list reversal admission tasks o k response has a 4xx status code
+func (o *ListReversalAdmissionTasksOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list reversal admission tasks o k response has a 5xx status code
+func (o *ListReversalAdmissionTasksOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list reversal admission tasks o k response a status code equal to that given
+func (o *ListReversalAdmissionTasksOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list reversal admission tasks o k response
+func (o *ListReversalAdmissionTasksOK) Code() int {
+	return 200
+}
+
 func (o *ListReversalAdmissionTasksOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/reversals/{reversalId}/admissions/{admissionId}/tasks][%d] listReversalAdmissionTasksOK", 200)
 }

@@ -61,6 +61,36 @@ type PatchBranchIdentificationOK struct {
 	*models.BranchIdentificationResponse
 }
 
+// IsSuccess returns true when this patch branch identification o k response has a 2xx status code
+func (o *PatchBranchIdentificationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this patch branch identification o k response has a 3xx status code
+func (o *PatchBranchIdentificationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch branch identification o k response has a 4xx status code
+func (o *PatchBranchIdentificationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch branch identification o k response has a 5xx status code
+func (o *PatchBranchIdentificationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch branch identification o k response a status code equal to that given
+func (o *PatchBranchIdentificationOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch branch identification o k response
+func (o *PatchBranchIdentificationOK) Code() int {
+	return 200
+}
+
 func (o *PatchBranchIdentificationOK) Error() string {
 	return fmt.Sprintf("[PATCH /organisation/branches/{branch_id}/identifications/{identification_id}][%d] patchBranchIdentificationOK", 200)
 }
@@ -94,6 +124,36 @@ type PatchBranchIdentificationConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this patch branch identification conflict response has a 2xx status code
+func (o *PatchBranchIdentificationConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch branch identification conflict response has a 3xx status code
+func (o *PatchBranchIdentificationConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch branch identification conflict response has a 4xx status code
+func (o *PatchBranchIdentificationConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch branch identification conflict response has a 5xx status code
+func (o *PatchBranchIdentificationConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch branch identification conflict response a status code equal to that given
+func (o *PatchBranchIdentificationConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the patch branch identification conflict response
+func (o *PatchBranchIdentificationConflict) Code() int {
+	return 409
 }
 
 func (o *PatchBranchIdentificationConflict) Error() string {

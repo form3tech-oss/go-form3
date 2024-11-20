@@ -56,6 +56,36 @@ User role deleted OK
 type DeleteUserRoleNoContent struct {
 }
 
+// IsSuccess returns true when this delete user role no content response has a 2xx status code
+func (o *DeleteUserRoleNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete user role no content response has a 3xx status code
+func (o *DeleteUserRoleNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user role no content response has a 4xx status code
+func (o *DeleteUserRoleNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete user role no content response has a 5xx status code
+func (o *DeleteUserRoleNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user role no content response a status code equal to that given
+func (o *DeleteUserRoleNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete user role no content response
+func (o *DeleteUserRoleNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteUserRoleNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /security/users/{user_id}/roles/{role_id}][%d] deleteUserRoleNoContent", 204)
 }
@@ -81,6 +111,36 @@ type DeleteUserRoleNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this delete user role not found response has a 2xx status code
+func (o *DeleteUserRoleNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user role not found response has a 3xx status code
+func (o *DeleteUserRoleNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user role not found response has a 4xx status code
+func (o *DeleteUserRoleNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user role not found response has a 5xx status code
+func (o *DeleteUserRoleNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user role not found response a status code equal to that given
+func (o *DeleteUserRoleNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete user role not found response
+func (o *DeleteUserRoleNotFound) Code() int {
+	return 404
 }
 
 func (o *DeleteUserRoleNotFound) Error() string {

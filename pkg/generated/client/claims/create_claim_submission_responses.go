@@ -68,6 +68,36 @@ type CreateClaimSubmissionCreated struct {
 	*models.ClaimSubmissionDetailsResponse
 }
 
+// IsSuccess returns true when this create claim submission created response has a 2xx status code
+func (o *CreateClaimSubmissionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create claim submission created response has a 3xx status code
+func (o *CreateClaimSubmissionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim submission created response has a 4xx status code
+func (o *CreateClaimSubmissionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create claim submission created response has a 5xx status code
+func (o *CreateClaimSubmissionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim submission created response a status code equal to that given
+func (o *CreateClaimSubmissionCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create claim submission created response
+func (o *CreateClaimSubmissionCreated) Code() int {
+	return 201
+}
+
 func (o *CreateClaimSubmissionCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims/{id}/submissions][%d] createClaimSubmissionCreated", 201)
 }
@@ -103,6 +133,36 @@ type CreateClaimSubmissionBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create claim submission bad request response has a 2xx status code
+func (o *CreateClaimSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim submission bad request response has a 3xx status code
+func (o *CreateClaimSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim submission bad request response has a 4xx status code
+func (o *CreateClaimSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim submission bad request response has a 5xx status code
+func (o *CreateClaimSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim submission bad request response a status code equal to that given
+func (o *CreateClaimSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create claim submission bad request response
+func (o *CreateClaimSubmissionBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateClaimSubmissionBadRequest) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims/{id}/submissions][%d] createClaimSubmissionBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type CreateClaimSubmissionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create claim submission not found response has a 2xx status code
+func (o *CreateClaimSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim submission not found response has a 3xx status code
+func (o *CreateClaimSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim submission not found response has a 4xx status code
+func (o *CreateClaimSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim submission not found response has a 5xx status code
+func (o *CreateClaimSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim submission not found response a status code equal to that given
+func (o *CreateClaimSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create claim submission not found response
+func (o *CreateClaimSubmissionNotFound) Code() int {
+	return 404
 }
 
 func (o *CreateClaimSubmissionNotFound) Error() string {

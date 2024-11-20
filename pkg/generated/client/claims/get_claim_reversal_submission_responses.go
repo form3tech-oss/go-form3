@@ -68,6 +68,36 @@ type GetClaimReversalSubmissionOK struct {
 	*models.ClaimReversalSubmissionDetailsResponse
 }
 
+// IsSuccess returns true when this get claim reversal submission o k response has a 2xx status code
+func (o *GetClaimReversalSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get claim reversal submission o k response has a 3xx status code
+func (o *GetClaimReversalSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim reversal submission o k response has a 4xx status code
+func (o *GetClaimReversalSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get claim reversal submission o k response has a 5xx status code
+func (o *GetClaimReversalSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim reversal submission o k response a status code equal to that given
+func (o *GetClaimReversalSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get claim reversal submission o k response
+func (o *GetClaimReversalSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetClaimReversalSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionOK", 200)
 }
@@ -103,6 +133,36 @@ type GetClaimReversalSubmissionBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get claim reversal submission bad request response has a 2xx status code
+func (o *GetClaimReversalSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get claim reversal submission bad request response has a 3xx status code
+func (o *GetClaimReversalSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim reversal submission bad request response has a 4xx status code
+func (o *GetClaimReversalSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get claim reversal submission bad request response has a 5xx status code
+func (o *GetClaimReversalSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim reversal submission bad request response a status code equal to that given
+func (o *GetClaimReversalSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get claim reversal submission bad request response
+func (o *GetClaimReversalSubmissionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetClaimReversalSubmissionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /transaction/claims/{id}/reversals/{reversalId}/submissions/{submissionId}][%d] getClaimReversalSubmissionBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type GetClaimReversalSubmissionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get claim reversal submission not found response has a 2xx status code
+func (o *GetClaimReversalSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get claim reversal submission not found response has a 3xx status code
+func (o *GetClaimReversalSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim reversal submission not found response has a 4xx status code
+func (o *GetClaimReversalSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get claim reversal submission not found response has a 5xx status code
+func (o *GetClaimReversalSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim reversal submission not found response a status code equal to that given
+func (o *GetClaimReversalSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get claim reversal submission not found response
+func (o *GetClaimReversalSubmissionNotFound) Code() int {
+	return 404
 }
 
 func (o *GetClaimReversalSubmissionNotFound) Error() string {

@@ -61,6 +61,36 @@ type ListUserRolesOK struct {
 	*models.UserRoleListResponse
 }
 
+// IsSuccess returns true when this list user roles o k response has a 2xx status code
+func (o *ListUserRolesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list user roles o k response has a 3xx status code
+func (o *ListUserRolesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user roles o k response has a 4xx status code
+func (o *ListUserRolesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user roles o k response has a 5xx status code
+func (o *ListUserRolesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user roles o k response a status code equal to that given
+func (o *ListUserRolesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list user roles o k response
+func (o *ListUserRolesOK) Code() int {
+	return 200
+}
+
 func (o *ListUserRolesOK) Error() string {
 	return fmt.Sprintf("[GET /security/users/{user_id}/roles][%d] listUserRolesOK", 200)
 }
@@ -94,6 +124,36 @@ type ListUserRolesNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list user roles not found response has a 2xx status code
+func (o *ListUserRolesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user roles not found response has a 3xx status code
+func (o *ListUserRolesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user roles not found response has a 4xx status code
+func (o *ListUserRolesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user roles not found response has a 5xx status code
+func (o *ListUserRolesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user roles not found response a status code equal to that given
+func (o *ListUserRolesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list user roles not found response
+func (o *ListUserRolesNotFound) Code() int {
+	return 404
 }
 
 func (o *ListUserRolesNotFound) Error() string {

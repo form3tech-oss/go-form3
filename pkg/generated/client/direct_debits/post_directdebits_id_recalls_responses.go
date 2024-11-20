@@ -61,6 +61,36 @@ type PostDirectdebitsIDRecallsCreated struct {
 	*models.DirectDebitRecallCreationResponse
 }
 
+// IsSuccess returns true when this post directdebits Id recalls created response has a 2xx status code
+func (o *PostDirectdebitsIDRecallsCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post directdebits Id recalls created response has a 3xx status code
+func (o *PostDirectdebitsIDRecallsCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id recalls created response has a 4xx status code
+func (o *PostDirectdebitsIDRecallsCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post directdebits Id recalls created response has a 5xx status code
+func (o *PostDirectdebitsIDRecallsCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id recalls created response a status code equal to that given
+func (o *PostDirectdebitsIDRecallsCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the post directdebits Id recalls created response
+func (o *PostDirectdebitsIDRecallsCreated) Code() int {
+	return 201
+}
+
 func (o *PostDirectdebitsIDRecallsCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/directdebits/{id}/recalls][%d] postDirectdebitsIdRecallsCreated", 201)
 }
@@ -94,6 +124,36 @@ type PostDirectdebitsIDRecallsBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this post directdebits Id recalls bad request response has a 2xx status code
+func (o *PostDirectdebitsIDRecallsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post directdebits Id recalls bad request response has a 3xx status code
+func (o *PostDirectdebitsIDRecallsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id recalls bad request response has a 4xx status code
+func (o *PostDirectdebitsIDRecallsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post directdebits Id recalls bad request response has a 5xx status code
+func (o *PostDirectdebitsIDRecallsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id recalls bad request response a status code equal to that given
+func (o *PostDirectdebitsIDRecallsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post directdebits Id recalls bad request response
+func (o *PostDirectdebitsIDRecallsBadRequest) Code() int {
+	return 400
 }
 
 func (o *PostDirectdebitsIDRecallsBadRequest) Error() string {

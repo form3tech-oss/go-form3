@@ -61,6 +61,36 @@ type ListUserCredentialsOK struct {
 	*models.UserCredentialListResponse
 }
 
+// IsSuccess returns true when this list user credentials o k response has a 2xx status code
+func (o *ListUserCredentialsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list user credentials o k response has a 3xx status code
+func (o *ListUserCredentialsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user credentials o k response has a 4xx status code
+func (o *ListUserCredentialsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user credentials o k response has a 5xx status code
+func (o *ListUserCredentialsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user credentials o k response a status code equal to that given
+func (o *ListUserCredentialsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list user credentials o k response
+func (o *ListUserCredentialsOK) Code() int {
+	return 200
+}
+
 func (o *ListUserCredentialsOK) Error() string {
 	return fmt.Sprintf("[GET /security/users/{user_id}/credentials][%d] listUserCredentialsOK", 200)
 }
@@ -94,6 +124,36 @@ type ListUserCredentialsNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list user credentials not found response has a 2xx status code
+func (o *ListUserCredentialsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user credentials not found response has a 3xx status code
+func (o *ListUserCredentialsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user credentials not found response has a 4xx status code
+func (o *ListUserCredentialsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user credentials not found response has a 5xx status code
+func (o *ListUserCredentialsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user credentials not found response a status code equal to that given
+func (o *ListUserCredentialsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list user credentials not found response
+func (o *ListUserCredentialsNotFound) Code() int {
+	return 404
 }
 
 func (o *ListUserCredentialsNotFound) Error() string {

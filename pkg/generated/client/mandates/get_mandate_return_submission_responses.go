@@ -54,6 +54,36 @@ type GetMandateReturnSubmissionOK struct {
 	*models.MandateReturnSubmissionDetailsResponse
 }
 
+// IsSuccess returns true when this get mandate return submission o k response has a 2xx status code
+func (o *GetMandateReturnSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get mandate return submission o k response has a 3xx status code
+func (o *GetMandateReturnSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate return submission o k response has a 4xx status code
+func (o *GetMandateReturnSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get mandate return submission o k response has a 5xx status code
+func (o *GetMandateReturnSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate return submission o k response a status code equal to that given
+func (o *GetMandateReturnSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get mandate return submission o k response
+func (o *GetMandateReturnSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetMandateReturnSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/mandates/{id}/returns/{returnId}/submissions/{submissionId}][%d] getMandateReturnSubmissionOK", 200)
 }

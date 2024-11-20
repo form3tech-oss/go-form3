@@ -63,6 +63,36 @@ ACE deleted OK
 type DeleteAceNoContent struct {
 }
 
+// IsSuccess returns true when this delete ace no content response has a 2xx status code
+func (o *DeleteAceNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete ace no content response has a 3xx status code
+func (o *DeleteAceNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete ace no content response has a 4xx status code
+func (o *DeleteAceNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete ace no content response has a 5xx status code
+func (o *DeleteAceNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete ace no content response a status code equal to that given
+func (o *DeleteAceNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete ace no content response
+func (o *DeleteAceNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteAceNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /security/roles/{role_id}/aces/{ace_id}][%d] deleteAceNoContent", 204)
 }
@@ -88,6 +118,36 @@ type DeleteAceBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this delete ace bad request response has a 2xx status code
+func (o *DeleteAceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete ace bad request response has a 3xx status code
+func (o *DeleteAceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete ace bad request response has a 4xx status code
+func (o *DeleteAceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete ace bad request response has a 5xx status code
+func (o *DeleteAceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete ace bad request response a status code equal to that given
+func (o *DeleteAceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete ace bad request response
+func (o *DeleteAceBadRequest) Code() int {
+	return 400
 }
 
 func (o *DeleteAceBadRequest) Error() string {
@@ -123,6 +183,36 @@ type DeleteAceNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this delete ace not found response has a 2xx status code
+func (o *DeleteAceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete ace not found response has a 3xx status code
+func (o *DeleteAceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete ace not found response has a 4xx status code
+func (o *DeleteAceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete ace not found response has a 5xx status code
+func (o *DeleteAceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete ace not found response a status code equal to that given
+func (o *DeleteAceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete ace not found response
+func (o *DeleteAceNotFound) Code() int {
+	return 404
 }
 
 func (o *DeleteAceNotFound) Error() string {

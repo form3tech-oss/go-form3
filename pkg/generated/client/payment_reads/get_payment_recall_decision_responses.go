@@ -54,6 +54,36 @@ type GetPaymentRecallDecisionOK struct {
 	*models.RecallDecisionFetchResponse
 }
 
+// IsSuccess returns true when this get payment recall decision o k response has a 2xx status code
+func (o *GetPaymentRecallDecisionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get payment recall decision o k response has a 3xx status code
+func (o *GetPaymentRecallDecisionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get payment recall decision o k response has a 4xx status code
+func (o *GetPaymentRecallDecisionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get payment recall decision o k response has a 5xx status code
+func (o *GetPaymentRecallDecisionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get payment recall decision o k response a status code equal to that given
+func (o *GetPaymentRecallDecisionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get payment recall decision o k response
+func (o *GetPaymentRecallDecisionOK) Code() int {
+	return 200
+}
+
 func (o *GetPaymentRecallDecisionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/recalls/{recallId}/decisions/{decisionId}][%d] getPaymentRecallDecisionOK", 200)
 }

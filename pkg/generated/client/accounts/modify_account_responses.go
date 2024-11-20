@@ -54,6 +54,36 @@ type ModifyAccountOK struct {
 	*models.AccountDetailsResponse
 }
 
+// IsSuccess returns true when this modify account o k response has a 2xx status code
+func (o *ModifyAccountOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify account o k response has a 3xx status code
+func (o *ModifyAccountOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify account o k response has a 4xx status code
+func (o *ModifyAccountOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify account o k response has a 5xx status code
+func (o *ModifyAccountOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify account o k response a status code equal to that given
+func (o *ModifyAccountOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify account o k response
+func (o *ModifyAccountOK) Code() int {
+	return 200
+}
+
 func (o *ModifyAccountOK) Error() string {
 	return fmt.Sprintf("[PATCH /organisation/accounts/{id}][%d] modifyAccountOK", 200)
 }

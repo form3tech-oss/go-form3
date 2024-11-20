@@ -54,6 +54,36 @@ type GetAuditEntryOK struct {
 	*models.AuditEntryListResponse
 }
 
+// IsSuccess returns true when this get audit entry o k response has a 2xx status code
+func (o *GetAuditEntryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get audit entry o k response has a 3xx status code
+func (o *GetAuditEntryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get audit entry o k response has a 4xx status code
+func (o *GetAuditEntryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get audit entry o k response has a 5xx status code
+func (o *GetAuditEntryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get audit entry o k response a status code equal to that given
+func (o *GetAuditEntryOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get audit entry o k response
+func (o *GetAuditEntryOK) Code() int {
+	return 200
+}
+
 func (o *GetAuditEntryOK) Error() string {
 	return fmt.Sprintf("[GET /audit/entries/{record_type}/{id}][%d] getAuditEntryOK", 200)
 }

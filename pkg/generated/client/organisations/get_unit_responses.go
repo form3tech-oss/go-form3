@@ -61,6 +61,36 @@ type GetUnitOK struct {
 	*models.OrganisationDetailsResponse
 }
 
+// IsSuccess returns true when this get unit o k response has a 2xx status code
+func (o *GetUnitOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get unit o k response has a 3xx status code
+func (o *GetUnitOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get unit o k response has a 4xx status code
+func (o *GetUnitOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get unit o k response has a 5xx status code
+func (o *GetUnitOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get unit o k response a status code equal to that given
+func (o *GetUnitOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get unit o k response
+func (o *GetUnitOK) Code() int {
+	return 200
+}
+
 func (o *GetUnitOK) Error() string {
 	return fmt.Sprintf("[GET /organisation/units/{id}][%d] getUnitOK", 200)
 }
@@ -94,6 +124,36 @@ type GetUnitNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get unit not found response has a 2xx status code
+func (o *GetUnitNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get unit not found response has a 3xx status code
+func (o *GetUnitNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get unit not found response has a 4xx status code
+func (o *GetUnitNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get unit not found response has a 5xx status code
+func (o *GetUnitNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get unit not found response a status code equal to that given
+func (o *GetUnitNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get unit not found response
+func (o *GetUnitNotFound) Code() int {
+	return 404
 }
 
 func (o *GetUnitNotFound) Error() string {

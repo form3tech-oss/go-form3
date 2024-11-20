@@ -54,6 +54,36 @@ type GetSubscriptionOK struct {
 	*models.SubscriptionDetailsResponse
 }
 
+// IsSuccess returns true when this get subscription o k response has a 2xx status code
+func (o *GetSubscriptionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get subscription o k response has a 3xx status code
+func (o *GetSubscriptionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get subscription o k response has a 4xx status code
+func (o *GetSubscriptionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get subscription o k response has a 5xx status code
+func (o *GetSubscriptionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get subscription o k response a status code equal to that given
+func (o *GetSubscriptionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get subscription o k response
+func (o *GetSubscriptionOK) Code() int {
+	return 200
+}
+
 func (o *GetSubscriptionOK) Error() string {
 	return fmt.Sprintf("[GET /notification/subscriptions/{id}][%d] getSubscriptionOK", 200)
 }

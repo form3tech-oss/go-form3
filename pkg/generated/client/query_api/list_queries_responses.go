@@ -68,6 +68,36 @@ type ListQueriesOK struct {
 	*models.QueryListResponse
 }
 
+// IsSuccess returns true when this list queries o k response has a 2xx status code
+func (o *ListQueriesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list queries o k response has a 3xx status code
+func (o *ListQueriesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list queries o k response has a 4xx status code
+func (o *ListQueriesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list queries o k response has a 5xx status code
+func (o *ListQueriesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list queries o k response a status code equal to that given
+func (o *ListQueriesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list queries o k response
+func (o *ListQueriesOK) Code() int {
+	return 200
+}
+
 func (o *ListQueriesOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/queries][%d] listQueriesOK", 200)
 }
@@ -103,6 +133,36 @@ type ListQueriesBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this list queries bad request response has a 2xx status code
+func (o *ListQueriesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list queries bad request response has a 3xx status code
+func (o *ListQueriesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list queries bad request response has a 4xx status code
+func (o *ListQueriesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list queries bad request response has a 5xx status code
+func (o *ListQueriesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list queries bad request response a status code equal to that given
+func (o *ListQueriesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list queries bad request response
+func (o *ListQueriesBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListQueriesBadRequest) Error() string {
 	return fmt.Sprintf("[GET /transaction/queries][%d] listQueriesBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type ListQueriesBadGateway struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list queries bad gateway response has a 2xx status code
+func (o *ListQueriesBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list queries bad gateway response has a 3xx status code
+func (o *ListQueriesBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list queries bad gateway response has a 4xx status code
+func (o *ListQueriesBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list queries bad gateway response has a 5xx status code
+func (o *ListQueriesBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list queries bad gateway response a status code equal to that given
+func (o *ListQueriesBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the list queries bad gateway response
+func (o *ListQueriesBadGateway) Code() int {
+	return 502
 }
 
 func (o *ListQueriesBadGateway) Error() string {

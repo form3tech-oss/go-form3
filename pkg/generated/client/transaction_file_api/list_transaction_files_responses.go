@@ -82,6 +82,36 @@ type ListTransactionFilesOK struct {
 	*models.ListTransactionFilesResponse
 }
 
+// IsSuccess returns true when this list transaction files o k response has a 2xx status code
+func (o *ListTransactionFilesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list transaction files o k response has a 3xx status code
+func (o *ListTransactionFilesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transaction files o k response has a 4xx status code
+func (o *ListTransactionFilesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list transaction files o k response has a 5xx status code
+func (o *ListTransactionFilesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transaction files o k response a status code equal to that given
+func (o *ListTransactionFilesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list transaction files o k response
+func (o *ListTransactionFilesOK) Code() int {
+	return 200
+}
+
 func (o *ListTransactionFilesOK) Error() string {
 	return fmt.Sprintf("[GET /files/transactions][%d] listTransactionFilesOK", 200)
 }
@@ -115,6 +145,36 @@ type ListTransactionFilesBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list transaction files bad request response has a 2xx status code
+func (o *ListTransactionFilesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list transaction files bad request response has a 3xx status code
+func (o *ListTransactionFilesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transaction files bad request response has a 4xx status code
+func (o *ListTransactionFilesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list transaction files bad request response has a 5xx status code
+func (o *ListTransactionFilesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transaction files bad request response a status code equal to that given
+func (o *ListTransactionFilesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list transaction files bad request response
+func (o *ListTransactionFilesBadRequest) Code() int {
+	return 400
 }
 
 func (o *ListTransactionFilesBadRequest) Error() string {
@@ -152,6 +212,36 @@ type ListTransactionFilesUnauthorized struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this list transaction files unauthorized response has a 2xx status code
+func (o *ListTransactionFilesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list transaction files unauthorized response has a 3xx status code
+func (o *ListTransactionFilesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transaction files unauthorized response has a 4xx status code
+func (o *ListTransactionFilesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list transaction files unauthorized response has a 5xx status code
+func (o *ListTransactionFilesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transaction files unauthorized response a status code equal to that given
+func (o *ListTransactionFilesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list transaction files unauthorized response
+func (o *ListTransactionFilesUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListTransactionFilesUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /files/transactions][%d] listTransactionFilesUnauthorized", 401)
 }
@@ -187,6 +277,36 @@ type ListTransactionFilesForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this list transaction files forbidden response has a 2xx status code
+func (o *ListTransactionFilesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list transaction files forbidden response has a 3xx status code
+func (o *ListTransactionFilesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transaction files forbidden response has a 4xx status code
+func (o *ListTransactionFilesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list transaction files forbidden response has a 5xx status code
+func (o *ListTransactionFilesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list transaction files forbidden response a status code equal to that given
+func (o *ListTransactionFilesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list transaction files forbidden response
+func (o *ListTransactionFilesForbidden) Code() int {
+	return 403
+}
+
 func (o *ListTransactionFilesForbidden) Error() string {
 	return fmt.Sprintf("[GET /files/transactions][%d] listTransactionFilesForbidden", 403)
 }
@@ -220,6 +340,36 @@ type ListTransactionFilesInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list transaction files internal server error response has a 2xx status code
+func (o *ListTransactionFilesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list transaction files internal server error response has a 3xx status code
+func (o *ListTransactionFilesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list transaction files internal server error response has a 4xx status code
+func (o *ListTransactionFilesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list transaction files internal server error response has a 5xx status code
+func (o *ListTransactionFilesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list transaction files internal server error response a status code equal to that given
+func (o *ListTransactionFilesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list transaction files internal server error response
+func (o *ListTransactionFilesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ListTransactionFilesInternalServerError) Error() string {

@@ -61,6 +61,36 @@ type CreateDirectDebitCreated struct {
 	*models.DirectDebitCreationResponse
 }
 
+// IsSuccess returns true when this create direct debit created response has a 2xx status code
+func (o *CreateDirectDebitCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create direct debit created response has a 3xx status code
+func (o *CreateDirectDebitCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create direct debit created response has a 4xx status code
+func (o *CreateDirectDebitCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create direct debit created response has a 5xx status code
+func (o *CreateDirectDebitCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create direct debit created response a status code equal to that given
+func (o *CreateDirectDebitCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create direct debit created response
+func (o *CreateDirectDebitCreated) Code() int {
+	return 201
+}
+
 func (o *CreateDirectDebitCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/directdebits][%d] createDirectDebitCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreateDirectDebitBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create direct debit bad request response has a 2xx status code
+func (o *CreateDirectDebitBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create direct debit bad request response has a 3xx status code
+func (o *CreateDirectDebitBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create direct debit bad request response has a 4xx status code
+func (o *CreateDirectDebitBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create direct debit bad request response has a 5xx status code
+func (o *CreateDirectDebitBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create direct debit bad request response a status code equal to that given
+func (o *CreateDirectDebitBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create direct debit bad request response
+func (o *CreateDirectDebitBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateDirectDebitBadRequest) Error() string {

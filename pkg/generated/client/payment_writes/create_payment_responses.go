@@ -61,6 +61,36 @@ type CreatePaymentCreated struct {
 	*models.PaymentCreationResponse
 }
 
+// IsSuccess returns true when this create payment created response has a 2xx status code
+func (o *CreatePaymentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create payment created response has a 3xx status code
+func (o *CreatePaymentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment created response has a 4xx status code
+func (o *CreatePaymentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment created response has a 5xx status code
+func (o *CreatePaymentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment created response a status code equal to that given
+func (o *CreatePaymentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create payment created response
+func (o *CreatePaymentCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePaymentCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments][%d] createPaymentCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreatePaymentBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create payment bad request response has a 2xx status code
+func (o *CreatePaymentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment bad request response has a 3xx status code
+func (o *CreatePaymentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment bad request response has a 4xx status code
+func (o *CreatePaymentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment bad request response has a 5xx status code
+func (o *CreatePaymentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment bad request response a status code equal to that given
+func (o *CreatePaymentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create payment bad request response
+func (o *CreatePaymentBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreatePaymentBadRequest) Error() string {

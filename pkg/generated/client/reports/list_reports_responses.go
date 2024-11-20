@@ -68,6 +68,36 @@ type ListReportsOK struct {
 	*models.ReportDetailsListResponse
 }
 
+// IsSuccess returns true when this list reports o k response has a 2xx status code
+func (o *ListReportsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list reports o k response has a 3xx status code
+func (o *ListReportsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list reports o k response has a 4xx status code
+func (o *ListReportsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list reports o k response has a 5xx status code
+func (o *ListReportsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list reports o k response a status code equal to that given
+func (o *ListReportsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list reports o k response
+func (o *ListReportsOK) Code() int {
+	return 200
+}
+
 func (o *ListReportsOK) Error() string {
 	return fmt.Sprintf("[GET /notification/reports][%d] listReportsOK", 200)
 }
@@ -103,6 +133,36 @@ type ListReportsBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this list reports bad request response has a 2xx status code
+func (o *ListReportsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list reports bad request response has a 3xx status code
+func (o *ListReportsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list reports bad request response has a 4xx status code
+func (o *ListReportsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list reports bad request response has a 5xx status code
+func (o *ListReportsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list reports bad request response a status code equal to that given
+func (o *ListReportsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list reports bad request response
+func (o *ListReportsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListReportsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /notification/reports][%d] listReportsBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type ListReportsForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list reports forbidden response has a 2xx status code
+func (o *ListReportsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list reports forbidden response has a 3xx status code
+func (o *ListReportsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list reports forbidden response has a 4xx status code
+func (o *ListReportsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list reports forbidden response has a 5xx status code
+func (o *ListReportsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list reports forbidden response a status code equal to that given
+func (o *ListReportsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list reports forbidden response
+func (o *ListReportsForbidden) Code() int {
+	return 403
 }
 
 func (o *ListReportsForbidden) Error() string {

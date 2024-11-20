@@ -89,6 +89,36 @@ type CreateSchemeFileCreated struct {
 	*models.SchemeFileResponse
 }
 
+// IsSuccess returns true when this create scheme file created response has a 2xx status code
+func (o *CreateSchemeFileCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create scheme file created response has a 3xx status code
+func (o *CreateSchemeFileCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scheme file created response has a 4xx status code
+func (o *CreateSchemeFileCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create scheme file created response has a 5xx status code
+func (o *CreateSchemeFileCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scheme file created response a status code equal to that given
+func (o *CreateSchemeFileCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create scheme file created response
+func (o *CreateSchemeFileCreated) Code() int {
+	return 201
+}
+
 func (o *CreateSchemeFileCreated) Error() string {
 	return fmt.Sprintf("[POST /files/schemefiles][%d] createSchemeFileCreated", 201)
 }
@@ -122,6 +152,36 @@ type CreateSchemeFileBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create scheme file bad request response has a 2xx status code
+func (o *CreateSchemeFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scheme file bad request response has a 3xx status code
+func (o *CreateSchemeFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scheme file bad request response has a 4xx status code
+func (o *CreateSchemeFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scheme file bad request response has a 5xx status code
+func (o *CreateSchemeFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scheme file bad request response a status code equal to that given
+func (o *CreateSchemeFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create scheme file bad request response
+func (o *CreateSchemeFileBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateSchemeFileBadRequest) Error() string {
@@ -159,6 +219,36 @@ type CreateSchemeFileUnauthorized struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create scheme file unauthorized response has a 2xx status code
+func (o *CreateSchemeFileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scheme file unauthorized response has a 3xx status code
+func (o *CreateSchemeFileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scheme file unauthorized response has a 4xx status code
+func (o *CreateSchemeFileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scheme file unauthorized response has a 5xx status code
+func (o *CreateSchemeFileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scheme file unauthorized response a status code equal to that given
+func (o *CreateSchemeFileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create scheme file unauthorized response
+func (o *CreateSchemeFileUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateSchemeFileUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /files/schemefiles][%d] createSchemeFileUnauthorized", 401)
 }
@@ -192,6 +282,36 @@ type CreateSchemeFileForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create scheme file forbidden response has a 2xx status code
+func (o *CreateSchemeFileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scheme file forbidden response has a 3xx status code
+func (o *CreateSchemeFileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scheme file forbidden response has a 4xx status code
+func (o *CreateSchemeFileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scheme file forbidden response has a 5xx status code
+func (o *CreateSchemeFileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scheme file forbidden response a status code equal to that given
+func (o *CreateSchemeFileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create scheme file forbidden response
+func (o *CreateSchemeFileForbidden) Code() int {
+	return 403
 }
 
 func (o *CreateSchemeFileForbidden) Error() string {
@@ -229,6 +349,36 @@ type CreateSchemeFileConflict struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create scheme file conflict response has a 2xx status code
+func (o *CreateSchemeFileConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scheme file conflict response has a 3xx status code
+func (o *CreateSchemeFileConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scheme file conflict response has a 4xx status code
+func (o *CreateSchemeFileConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scheme file conflict response has a 5xx status code
+func (o *CreateSchemeFileConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scheme file conflict response a status code equal to that given
+func (o *CreateSchemeFileConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create scheme file conflict response
+func (o *CreateSchemeFileConflict) Code() int {
+	return 409
+}
+
 func (o *CreateSchemeFileConflict) Error() string {
 	return fmt.Sprintf("[POST /files/schemefiles][%d] createSchemeFileConflict", 409)
 }
@@ -262,6 +412,36 @@ type CreateSchemeFileInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create scheme file internal server error response has a 2xx status code
+func (o *CreateSchemeFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scheme file internal server error response has a 3xx status code
+func (o *CreateSchemeFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scheme file internal server error response has a 4xx status code
+func (o *CreateSchemeFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create scheme file internal server error response has a 5xx status code
+func (o *CreateSchemeFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create scheme file internal server error response a status code equal to that given
+func (o *CreateSchemeFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create scheme file internal server error response
+func (o *CreateSchemeFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CreateSchemeFileInternalServerError) Error() string {

@@ -68,6 +68,36 @@ type GetClaimOK struct {
 	*models.ClaimDetailsResponse
 }
 
+// IsSuccess returns true when this get claim o k response has a 2xx status code
+func (o *GetClaimOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get claim o k response has a 3xx status code
+func (o *GetClaimOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim o k response has a 4xx status code
+func (o *GetClaimOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get claim o k response has a 5xx status code
+func (o *GetClaimOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim o k response a status code equal to that given
+func (o *GetClaimOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get claim o k response
+func (o *GetClaimOK) Code() int {
+	return 200
+}
+
 func (o *GetClaimOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/claims/{id}][%d] getClaimOK", 200)
 }
@@ -103,6 +133,36 @@ type GetClaimBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get claim bad request response has a 2xx status code
+func (o *GetClaimBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get claim bad request response has a 3xx status code
+func (o *GetClaimBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim bad request response has a 4xx status code
+func (o *GetClaimBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get claim bad request response has a 5xx status code
+func (o *GetClaimBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim bad request response a status code equal to that given
+func (o *GetClaimBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get claim bad request response
+func (o *GetClaimBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetClaimBadRequest) Error() string {
 	return fmt.Sprintf("[GET /transaction/claims/{id}][%d] getClaimBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type GetClaimNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get claim not found response has a 2xx status code
+func (o *GetClaimNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get claim not found response has a 3xx status code
+func (o *GetClaimNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim not found response has a 4xx status code
+func (o *GetClaimNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get claim not found response has a 5xx status code
+func (o *GetClaimNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim not found response a status code equal to that given
+func (o *GetClaimNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get claim not found response
+func (o *GetClaimNotFound) Code() int {
+	return 404
 }
 
 func (o *GetClaimNotFound) Error() string {

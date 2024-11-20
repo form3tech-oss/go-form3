@@ -61,6 +61,36 @@ type PostDirectdebitsIDReversalsReversalIDSubmissionsCreated struct {
 	*models.DirectDebitReversalSubmissionCreationResponse
 }
 
+// IsSuccess returns true when this post directdebits Id reversals reversal Id submissions created response has a 2xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post directdebits Id reversals reversal Id submissions created response has a 3xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id reversals reversal Id submissions created response has a 4xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post directdebits Id reversals reversal Id submissions created response has a 5xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id reversals reversal Id submissions created response a status code equal to that given
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the post directdebits Id reversals reversal Id submissions created response
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) Code() int {
+	return 201
+}
+
 func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/directdebits/{id}/reversals/{reversalId}/submissions][%d] postDirectdebitsIdReversalsReversalIdSubmissionsCreated", 201)
 }
@@ -94,6 +124,36 @@ type PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this post directdebits Id reversals reversal Id submissions bad request response has a 2xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post directdebits Id reversals reversal Id submissions bad request response has a 3xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id reversals reversal Id submissions bad request response has a 4xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post directdebits Id reversals reversal Id submissions bad request response has a 5xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id reversals reversal Id submissions bad request response a status code equal to that given
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post directdebits Id reversals reversal Id submissions bad request response
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) Code() int {
+	return 400
 }
 
 func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) Error() string {

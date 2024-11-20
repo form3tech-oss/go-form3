@@ -54,6 +54,36 @@ type GetPaymentAdviceOK struct {
 	*models.AdviceDetailsResponse
 }
 
+// IsSuccess returns true when this get payment advice o k response has a 2xx status code
+func (o *GetPaymentAdviceOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get payment advice o k response has a 3xx status code
+func (o *GetPaymentAdviceOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get payment advice o k response has a 4xx status code
+func (o *GetPaymentAdviceOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get payment advice o k response has a 5xx status code
+func (o *GetPaymentAdviceOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get payment advice o k response a status code equal to that given
+func (o *GetPaymentAdviceOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get payment advice o k response
+func (o *GetPaymentAdviceOK) Code() int {
+	return 200
+}
+
 func (o *GetPaymentAdviceOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/advices/{adviceId}][%d] getPaymentAdviceOK", 200)
 }

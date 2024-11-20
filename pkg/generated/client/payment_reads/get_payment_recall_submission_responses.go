@@ -54,6 +54,36 @@ type GetPaymentRecallSubmissionOK struct {
 	*models.RecallSubmissionFetchResponse
 }
 
+// IsSuccess returns true when this get payment recall submission o k response has a 2xx status code
+func (o *GetPaymentRecallSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get payment recall submission o k response has a 3xx status code
+func (o *GetPaymentRecallSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get payment recall submission o k response has a 4xx status code
+func (o *GetPaymentRecallSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get payment recall submission o k response has a 5xx status code
+func (o *GetPaymentRecallSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get payment recall submission o k response a status code equal to that given
+func (o *GetPaymentRecallSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get payment recall submission o k response
+func (o *GetPaymentRecallSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetPaymentRecallSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/recalls/{recallId}/submissions/{submissionId}][%d] getPaymentRecallSubmissionOK", 200)
 }

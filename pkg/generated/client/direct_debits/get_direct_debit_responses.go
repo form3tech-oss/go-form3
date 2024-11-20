@@ -54,6 +54,36 @@ type GetDirectDebitOK struct {
 	*models.DirectDebitDetailsResponse
 }
 
+// IsSuccess returns true when this get direct debit o k response has a 2xx status code
+func (o *GetDirectDebitOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get direct debit o k response has a 3xx status code
+func (o *GetDirectDebitOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit o k response has a 4xx status code
+func (o *GetDirectDebitOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get direct debit o k response has a 5xx status code
+func (o *GetDirectDebitOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit o k response a status code equal to that given
+func (o *GetDirectDebitOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get direct debit o k response
+func (o *GetDirectDebitOK) Code() int {
+	return 200
+}
+
 func (o *GetDirectDebitOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/directdebits/{id}][%d] getDirectDebitOK", 200)
 }

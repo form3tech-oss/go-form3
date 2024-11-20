@@ -61,6 +61,36 @@ type CreateOauthTokenOK struct {
 	*models.Token
 }
 
+// IsSuccess returns true when this create oauth token o k response has a 2xx status code
+func (o *CreateOauthTokenOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create oauth token o k response has a 3xx status code
+func (o *CreateOauthTokenOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create oauth token o k response has a 4xx status code
+func (o *CreateOauthTokenOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create oauth token o k response has a 5xx status code
+func (o *CreateOauthTokenOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create oauth token o k response a status code equal to that given
+func (o *CreateOauthTokenOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the create oauth token o k response
+func (o *CreateOauthTokenOK) Code() int {
+	return 200
+}
+
 func (o *CreateOauthTokenOK) Error() string {
 	return fmt.Sprintf("[POST /oauth2/token][%d] createOauthTokenOK", 200)
 }
@@ -89,6 +119,36 @@ CreateOauthTokenForbidden handles this case with default header values.
 Authentication failed
 */
 type CreateOauthTokenForbidden struct {
+}
+
+// IsSuccess returns true when this create oauth token forbidden response has a 2xx status code
+func (o *CreateOauthTokenForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create oauth token forbidden response has a 3xx status code
+func (o *CreateOauthTokenForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create oauth token forbidden response has a 4xx status code
+func (o *CreateOauthTokenForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create oauth token forbidden response has a 5xx status code
+func (o *CreateOauthTokenForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create oauth token forbidden response a status code equal to that given
+func (o *CreateOauthTokenForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create oauth token forbidden response
+func (o *CreateOauthTokenForbidden) Code() int {
+	return 403
 }
 
 func (o *CreateOauthTokenForbidden) Error() string {

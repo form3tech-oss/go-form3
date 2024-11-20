@@ -61,6 +61,36 @@ type ListAcesOK struct {
 	*models.AceDetailsListResponse
 }
 
+// IsSuccess returns true when this list aces o k response has a 2xx status code
+func (o *ListAcesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list aces o k response has a 3xx status code
+func (o *ListAcesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list aces o k response has a 4xx status code
+func (o *ListAcesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list aces o k response has a 5xx status code
+func (o *ListAcesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list aces o k response a status code equal to that given
+func (o *ListAcesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list aces o k response
+func (o *ListAcesOK) Code() int {
+	return 200
+}
+
 func (o *ListAcesOK) Error() string {
 	return fmt.Sprintf("[GET /security/roles/{role_id}/aces][%d] listAcesOK", 200)
 }
@@ -94,6 +124,36 @@ type ListAcesNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list aces not found response has a 2xx status code
+func (o *ListAcesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list aces not found response has a 3xx status code
+func (o *ListAcesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list aces not found response has a 4xx status code
+func (o *ListAcesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list aces not found response has a 5xx status code
+func (o *ListAcesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list aces not found response a status code equal to that given
+func (o *ListAcesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list aces not found response
+func (o *ListAcesNotFound) Code() int {
+	return 404
 }
 
 func (o *ListAcesNotFound) Error() string {

@@ -61,6 +61,36 @@ type FetchPublicKeyForUserOK struct {
 	*models.PublicKeyResponse
 }
 
+// IsSuccess returns true when this fetch public key for user o k response has a 2xx status code
+func (o *FetchPublicKeyForUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this fetch public key for user o k response has a 3xx status code
+func (o *FetchPublicKeyForUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fetch public key for user o k response has a 4xx status code
+func (o *FetchPublicKeyForUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fetch public key for user o k response has a 5xx status code
+func (o *FetchPublicKeyForUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fetch public key for user o k response a status code equal to that given
+func (o *FetchPublicKeyForUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the fetch public key for user o k response
+func (o *FetchPublicKeyForUserOK) Code() int {
+	return 200
+}
+
 func (o *FetchPublicKeyForUserOK) Error() string {
 	return fmt.Sprintf("[GET /security/users/{user_id}/authn/public_keys/{public_key_id}][%d] fetchPublicKeyForUserOK", 200)
 }
@@ -94,6 +124,36 @@ type FetchPublicKeyForUserNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this fetch public key for user not found response has a 2xx status code
+func (o *FetchPublicKeyForUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fetch public key for user not found response has a 3xx status code
+func (o *FetchPublicKeyForUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fetch public key for user not found response has a 4xx status code
+func (o *FetchPublicKeyForUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fetch public key for user not found response has a 5xx status code
+func (o *FetchPublicKeyForUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fetch public key for user not found response a status code equal to that given
+func (o *FetchPublicKeyForUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the fetch public key for user not found response
+func (o *FetchPublicKeyForUserNotFound) Code() int {
+	return 404
 }
 
 func (o *FetchPublicKeyForUserNotFound) Error() string {

@@ -68,6 +68,36 @@ type ModifyUserOK struct {
 	*models.UserDetailsResponse
 }
 
+// IsSuccess returns true when this modify user o k response has a 2xx status code
+func (o *ModifyUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify user o k response has a 3xx status code
+func (o *ModifyUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify user o k response has a 4xx status code
+func (o *ModifyUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify user o k response has a 5xx status code
+func (o *ModifyUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify user o k response a status code equal to that given
+func (o *ModifyUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify user o k response
+func (o *ModifyUserOK) Code() int {
+	return 200
+}
+
 func (o *ModifyUserOK) Error() string {
 	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserOK", 200)
 }
@@ -103,6 +133,36 @@ type ModifyUserBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this modify user bad request response has a 2xx status code
+func (o *ModifyUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify user bad request response has a 3xx status code
+func (o *ModifyUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify user bad request response has a 4xx status code
+func (o *ModifyUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify user bad request response has a 5xx status code
+func (o *ModifyUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify user bad request response a status code equal to that given
+func (o *ModifyUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the modify user bad request response
+func (o *ModifyUserBadRequest) Code() int {
+	return 400
+}
+
 func (o *ModifyUserBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type ModifyUserNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this modify user not found response has a 2xx status code
+func (o *ModifyUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify user not found response has a 3xx status code
+func (o *ModifyUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify user not found response has a 4xx status code
+func (o *ModifyUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify user not found response has a 5xx status code
+func (o *ModifyUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify user not found response a status code equal to that given
+func (o *ModifyUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the modify user not found response
+func (o *ModifyUserNotFound) Code() int {
+	return 404
 }
 
 func (o *ModifyUserNotFound) Error() string {

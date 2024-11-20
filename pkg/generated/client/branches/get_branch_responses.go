@@ -54,6 +54,36 @@ type GetBranchOK struct {
 	*models.BranchDetailsResponse
 }
 
+// IsSuccess returns true when this get branch o k response has a 2xx status code
+func (o *GetBranchOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get branch o k response has a 3xx status code
+func (o *GetBranchOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get branch o k response has a 4xx status code
+func (o *GetBranchOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get branch o k response has a 5xx status code
+func (o *GetBranchOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get branch o k response a status code equal to that given
+func (o *GetBranchOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get branch o k response
+func (o *GetBranchOK) Code() int {
+	return 200
+}
+
 func (o *GetBranchOK) Error() string {
 	return fmt.Sprintf("[GET /organisation/branches/{id}][%d] getBranchOK", 200)
 }

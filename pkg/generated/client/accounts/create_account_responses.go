@@ -54,6 +54,36 @@ type CreateAccountCreated struct {
 	*models.AccountCreationResponse
 }
 
+// IsSuccess returns true when this create account created response has a 2xx status code
+func (o *CreateAccountCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create account created response has a 3xx status code
+func (o *CreateAccountCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create account created response has a 4xx status code
+func (o *CreateAccountCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create account created response has a 5xx status code
+func (o *CreateAccountCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create account created response a status code equal to that given
+func (o *CreateAccountCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create account created response
+func (o *CreateAccountCreated) Code() int {
+	return 201
+}
+
 func (o *CreateAccountCreated) Error() string {
 	return fmt.Sprintf("[POST /organisation/accounts][%d] createAccountCreated", 201)
 }

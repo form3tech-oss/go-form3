@@ -68,6 +68,36 @@ type CreateRolesCreated struct {
 	*models.RoleCreationResponse
 }
 
+// IsSuccess returns true when this create roles created response has a 2xx status code
+func (o *CreateRolesCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create roles created response has a 3xx status code
+func (o *CreateRolesCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create roles created response has a 4xx status code
+func (o *CreateRolesCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create roles created response has a 5xx status code
+func (o *CreateRolesCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create roles created response a status code equal to that given
+func (o *CreateRolesCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create roles created response
+func (o *CreateRolesCreated) Code() int {
+	return 201
+}
+
 func (o *CreateRolesCreated) Error() string {
 	return fmt.Sprintf("[POST /security/roles][%d] createRolesCreated", 201)
 }
@@ -103,6 +133,36 @@ type CreateRolesBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create roles bad request response has a 2xx status code
+func (o *CreateRolesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create roles bad request response has a 3xx status code
+func (o *CreateRolesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create roles bad request response has a 4xx status code
+func (o *CreateRolesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create roles bad request response has a 5xx status code
+func (o *CreateRolesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create roles bad request response a status code equal to that given
+func (o *CreateRolesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create roles bad request response
+func (o *CreateRolesBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateRolesBadRequest) Error() string {
 	return fmt.Sprintf("[POST /security/roles][%d] createRolesBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type CreateRolesConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create roles conflict response has a 2xx status code
+func (o *CreateRolesConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create roles conflict response has a 3xx status code
+func (o *CreateRolesConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create roles conflict response has a 4xx status code
+func (o *CreateRolesConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create roles conflict response has a 5xx status code
+func (o *CreateRolesConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create roles conflict response a status code equal to that given
+func (o *CreateRolesConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create roles conflict response
+func (o *CreateRolesConflict) Code() int {
+	return 409
 }
 
 func (o *CreateRolesConflict) Error() string {

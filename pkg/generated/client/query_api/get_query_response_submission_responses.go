@@ -68,6 +68,36 @@ type GetQueryResponseSubmissionOK struct {
 	*models.QueryResponseSubmissionResponse
 }
 
+// IsSuccess returns true when this get query response submission o k response has a 2xx status code
+func (o *GetQueryResponseSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get query response submission o k response has a 3xx status code
+func (o *GetQueryResponseSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get query response submission o k response has a 4xx status code
+func (o *GetQueryResponseSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get query response submission o k response has a 5xx status code
+func (o *GetQueryResponseSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get query response submission o k response a status code equal to that given
+func (o *GetQueryResponseSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get query response submission o k response
+func (o *GetQueryResponseSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetQueryResponseSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/queries/{query_id}/responses/{query_response_id}/submissions/{query_response_submission_id}][%d] getQueryResponseSubmissionOK", 200)
 }
@@ -103,6 +133,36 @@ type GetQueryResponseSubmissionBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get query response submission bad request response has a 2xx status code
+func (o *GetQueryResponseSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get query response submission bad request response has a 3xx status code
+func (o *GetQueryResponseSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get query response submission bad request response has a 4xx status code
+func (o *GetQueryResponseSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get query response submission bad request response has a 5xx status code
+func (o *GetQueryResponseSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get query response submission bad request response a status code equal to that given
+func (o *GetQueryResponseSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get query response submission bad request response
+func (o *GetQueryResponseSubmissionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetQueryResponseSubmissionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /transaction/queries/{query_id}/responses/{query_response_id}/submissions/{query_response_submission_id}][%d] getQueryResponseSubmissionBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type GetQueryResponseSubmissionForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get query response submission forbidden response has a 2xx status code
+func (o *GetQueryResponseSubmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get query response submission forbidden response has a 3xx status code
+func (o *GetQueryResponseSubmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get query response submission forbidden response has a 4xx status code
+func (o *GetQueryResponseSubmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get query response submission forbidden response has a 5xx status code
+func (o *GetQueryResponseSubmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get query response submission forbidden response a status code equal to that given
+func (o *GetQueryResponseSubmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get query response submission forbidden response
+func (o *GetQueryResponseSubmissionForbidden) Code() int {
+	return 403
 }
 
 func (o *GetQueryResponseSubmissionForbidden) Error() string {

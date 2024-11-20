@@ -54,6 +54,36 @@ type ListReturnSubmissionTasksOK struct {
 	*models.ReturnSubmissionTaskListResponse
 }
 
+// IsSuccess returns true when this list return submission tasks o k response has a 2xx status code
+func (o *ListReturnSubmissionTasksOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list return submission tasks o k response has a 3xx status code
+func (o *ListReturnSubmissionTasksOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list return submission tasks o k response has a 4xx status code
+func (o *ListReturnSubmissionTasksOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list return submission tasks o k response has a 5xx status code
+func (o *ListReturnSubmissionTasksOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list return submission tasks o k response a status code equal to that given
+func (o *ListReturnSubmissionTasksOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list return submission tasks o k response
+func (o *ListReturnSubmissionTasksOK) Code() int {
+	return 200
+}
+
 func (o *ListReturnSubmissionTasksOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{paymentId}/returns/{returnId}/submissions/{returnSubmissionId}/tasks][%d] listReturnSubmissionTasksOK", 200)
 }

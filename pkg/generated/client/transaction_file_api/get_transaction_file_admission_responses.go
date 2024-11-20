@@ -82,6 +82,36 @@ type GetTransactionFileAdmissionOK struct {
 	*models.TransactionFileAdmissionResponse
 }
 
+// IsSuccess returns true when this get transaction file admission o k response has a 2xx status code
+func (o *GetTransactionFileAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get transaction file admission o k response has a 3xx status code
+func (o *GetTransactionFileAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file admission o k response has a 4xx status code
+func (o *GetTransactionFileAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction file admission o k response has a 5xx status code
+func (o *GetTransactionFileAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file admission o k response a status code equal to that given
+func (o *GetTransactionFileAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get transaction file admission o k response
+func (o *GetTransactionFileAdmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetTransactionFileAdmissionOK) Error() string {
 	return fmt.Sprintf("[GET /files/transactions/{transaction_file_id}/admissions/{transaction_file_admission_id}][%d] getTransactionFileAdmissionOK", 200)
 }
@@ -115,6 +145,36 @@ type GetTransactionFileAdmissionUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file admission unauthorized response has a 2xx status code
+func (o *GetTransactionFileAdmissionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file admission unauthorized response has a 3xx status code
+func (o *GetTransactionFileAdmissionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file admission unauthorized response has a 4xx status code
+func (o *GetTransactionFileAdmissionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file admission unauthorized response has a 5xx status code
+func (o *GetTransactionFileAdmissionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file admission unauthorized response a status code equal to that given
+func (o *GetTransactionFileAdmissionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get transaction file admission unauthorized response
+func (o *GetTransactionFileAdmissionUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetTransactionFileAdmissionUnauthorized) Error() string {
@@ -152,6 +212,36 @@ type GetTransactionFileAdmissionForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get transaction file admission forbidden response has a 2xx status code
+func (o *GetTransactionFileAdmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file admission forbidden response has a 3xx status code
+func (o *GetTransactionFileAdmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file admission forbidden response has a 4xx status code
+func (o *GetTransactionFileAdmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file admission forbidden response has a 5xx status code
+func (o *GetTransactionFileAdmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file admission forbidden response a status code equal to that given
+func (o *GetTransactionFileAdmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get transaction file admission forbidden response
+func (o *GetTransactionFileAdmissionForbidden) Code() int {
+	return 403
+}
+
 func (o *GetTransactionFileAdmissionForbidden) Error() string {
 	return fmt.Sprintf("[GET /files/transactions/{transaction_file_id}/admissions/{transaction_file_admission_id}][%d] getTransactionFileAdmissionForbidden", 403)
 }
@@ -187,6 +277,36 @@ type GetTransactionFileAdmissionNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get transaction file admission not found response has a 2xx status code
+func (o *GetTransactionFileAdmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file admission not found response has a 3xx status code
+func (o *GetTransactionFileAdmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file admission not found response has a 4xx status code
+func (o *GetTransactionFileAdmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file admission not found response has a 5xx status code
+func (o *GetTransactionFileAdmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file admission not found response a status code equal to that given
+func (o *GetTransactionFileAdmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get transaction file admission not found response
+func (o *GetTransactionFileAdmissionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTransactionFileAdmissionNotFound) Error() string {
 	return fmt.Sprintf("[GET /files/transactions/{transaction_file_id}/admissions/{transaction_file_admission_id}][%d] getTransactionFileAdmissionNotFound", 404)
 }
@@ -220,6 +340,36 @@ type GetTransactionFileAdmissionInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file admission internal server error response has a 2xx status code
+func (o *GetTransactionFileAdmissionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file admission internal server error response has a 3xx status code
+func (o *GetTransactionFileAdmissionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file admission internal server error response has a 4xx status code
+func (o *GetTransactionFileAdmissionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction file admission internal server error response has a 5xx status code
+func (o *GetTransactionFileAdmissionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get transaction file admission internal server error response a status code equal to that given
+func (o *GetTransactionFileAdmissionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get transaction file admission internal server error response
+func (o *GetTransactionFileAdmissionInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetTransactionFileAdmissionInternalServerError) Error() string {

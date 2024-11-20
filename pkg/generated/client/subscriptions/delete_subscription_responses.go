@@ -46,6 +46,36 @@ Subscription deleted OK. No body content will be returned
 type DeleteSubscriptionNoContent struct {
 }
 
+// IsSuccess returns true when this delete subscription no content response has a 2xx status code
+func (o *DeleteSubscriptionNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete subscription no content response has a 3xx status code
+func (o *DeleteSubscriptionNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete subscription no content response has a 4xx status code
+func (o *DeleteSubscriptionNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete subscription no content response has a 5xx status code
+func (o *DeleteSubscriptionNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete subscription no content response a status code equal to that given
+func (o *DeleteSubscriptionNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete subscription no content response
+func (o *DeleteSubscriptionNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteSubscriptionNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /notification/subscriptions/{id}][%d] deleteSubscriptionNoContent", 204)
 }

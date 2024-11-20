@@ -54,6 +54,36 @@ type ListClaimsOK struct {
 	*models.ClaimDetailsListResponse
 }
 
+// IsSuccess returns true when this list claims o k response has a 2xx status code
+func (o *ListClaimsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list claims o k response has a 3xx status code
+func (o *ListClaimsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list claims o k response has a 4xx status code
+func (o *ListClaimsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list claims o k response has a 5xx status code
+func (o *ListClaimsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list claims o k response a status code equal to that given
+func (o *ListClaimsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list claims o k response
+func (o *ListClaimsOK) Code() int {
+	return 200
+}
+
 func (o *ListClaimsOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/claims][%d] listClaimsOK", 200)
 }

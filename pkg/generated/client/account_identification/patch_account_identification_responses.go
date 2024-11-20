@@ -61,6 +61,36 @@ type PatchAccountIdentificationOK struct {
 	*models.AccountIdentificationResponse
 }
 
+// IsSuccess returns true when this patch account identification o k response has a 2xx status code
+func (o *PatchAccountIdentificationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this patch account identification o k response has a 3xx status code
+func (o *PatchAccountIdentificationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch account identification o k response has a 4xx status code
+func (o *PatchAccountIdentificationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this patch account identification o k response has a 5xx status code
+func (o *PatchAccountIdentificationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch account identification o k response a status code equal to that given
+func (o *PatchAccountIdentificationOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the patch account identification o k response
+func (o *PatchAccountIdentificationOK) Code() int {
+	return 200
+}
+
 func (o *PatchAccountIdentificationOK) Error() string {
 	return fmt.Sprintf("[PATCH /organisation/accounts/{account_id}/identifications/{identification_id}][%d] patchAccountIdentificationOK", 200)
 }
@@ -94,6 +124,36 @@ type PatchAccountIdentificationConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this patch account identification conflict response has a 2xx status code
+func (o *PatchAccountIdentificationConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this patch account identification conflict response has a 3xx status code
+func (o *PatchAccountIdentificationConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this patch account identification conflict response has a 4xx status code
+func (o *PatchAccountIdentificationConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this patch account identification conflict response has a 5xx status code
+func (o *PatchAccountIdentificationConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this patch account identification conflict response a status code equal to that given
+func (o *PatchAccountIdentificationConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the patch account identification conflict response
+func (o *PatchAccountIdentificationConflict) Code() int {
+	return 409
 }
 
 func (o *PatchAccountIdentificationConflict) Error() string {

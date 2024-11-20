@@ -61,6 +61,36 @@ type CreatePaymentRecallDecisionCreated struct {
 	*models.RecallDecisionCreationResponse
 }
 
+// IsSuccess returns true when this create payment recall decision created response has a 2xx status code
+func (o *CreatePaymentRecallDecisionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create payment recall decision created response has a 3xx status code
+func (o *CreatePaymentRecallDecisionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment recall decision created response has a 4xx status code
+func (o *CreatePaymentRecallDecisionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment recall decision created response has a 5xx status code
+func (o *CreatePaymentRecallDecisionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment recall decision created response a status code equal to that given
+func (o *CreatePaymentRecallDecisionCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create payment recall decision created response
+func (o *CreatePaymentRecallDecisionCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePaymentRecallDecisionCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments/{id}/recalls/{recallId}/decisions][%d] createPaymentRecallDecisionCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreatePaymentRecallDecisionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create payment recall decision bad request response has a 2xx status code
+func (o *CreatePaymentRecallDecisionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment recall decision bad request response has a 3xx status code
+func (o *CreatePaymentRecallDecisionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment recall decision bad request response has a 4xx status code
+func (o *CreatePaymentRecallDecisionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment recall decision bad request response has a 5xx status code
+func (o *CreatePaymentRecallDecisionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment recall decision bad request response a status code equal to that given
+func (o *CreatePaymentRecallDecisionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create payment recall decision bad request response
+func (o *CreatePaymentRecallDecisionBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreatePaymentRecallDecisionBadRequest) Error() string {

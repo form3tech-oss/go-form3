@@ -75,6 +75,36 @@ type GetMetricsPrometheusAPIV1QueryRangeOK struct {
 	*models.MetricsQueryResponse
 }
 
+// IsSuccess returns true when this get metrics prometheus Api v1 query range o k response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query range o k response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query range o k response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query range o k response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query range o k response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryRangeOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query range o k response
+func (o *GetMetricsPrometheusAPIV1QueryRangeOK) Code() int {
+	return 200
+}
+
 func (o *GetMetricsPrometheusAPIV1QueryRangeOK) Error() string {
 	return fmt.Sprintf("[GET /metrics/prometheus/api/v1/query_range][%d] getMetricsPrometheusApiV1QueryRangeOK", 200)
 }
@@ -110,6 +140,36 @@ type GetMetricsPrometheusAPIV1QueryRangeBadRequest struct {
 	*models.MetricsQueryResponse
 }
 
+// IsSuccess returns true when this get metrics prometheus Api v1 query range bad request response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query range bad request response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query range bad request response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query range bad request response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query range bad request response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query range bad request response
+func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetMetricsPrometheusAPIV1QueryRangeBadRequest) Error() string {
 	return fmt.Sprintf("[GET /metrics/prometheus/api/v1/query_range][%d] getMetricsPrometheusApiV1QueryRangeBadRequest", 400)
 }
@@ -140,6 +200,36 @@ Forbidden
 type GetMetricsPrometheusAPIV1QueryRangeForbidden struct {
 }
 
+// IsSuccess returns true when this get metrics prometheus Api v1 query range forbidden response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query range forbidden response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query range forbidden response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query range forbidden response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query range forbidden response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query range forbidden response
+func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) Code() int {
+	return 403
+}
+
 func (o *GetMetricsPrometheusAPIV1QueryRangeForbidden) Error() string {
 	return fmt.Sprintf("[GET /metrics/prometheus/api/v1/query_range][%d] getMetricsPrometheusApiV1QueryRangeForbidden", 403)
 }
@@ -160,6 +250,36 @@ GetMetricsPrometheusAPIV1QueryRangeInternalServerError handles this case with de
 Internal Server Error
 */
 type GetMetricsPrometheusAPIV1QueryRangeInternalServerError struct {
+}
+
+// IsSuccess returns true when this get metrics prometheus Api v1 query range internal server error response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query range internal server error response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query range internal server error response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query range internal server error response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query range internal server error response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query range internal server error response
+func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetMetricsPrometheusAPIV1QueryRangeInternalServerError) Error() string {

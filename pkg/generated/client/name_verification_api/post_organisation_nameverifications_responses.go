@@ -82,6 +82,36 @@ type PostOrganisationNameverificationsCreated struct {
 	*models.NameVerificationCreationResponse
 }
 
+// IsSuccess returns true when this post organisation nameverifications created response has a 2xx status code
+func (o *PostOrganisationNameverificationsCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post organisation nameverifications created response has a 3xx status code
+func (o *PostOrganisationNameverificationsCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post organisation nameverifications created response has a 4xx status code
+func (o *PostOrganisationNameverificationsCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post organisation nameverifications created response has a 5xx status code
+func (o *PostOrganisationNameverificationsCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post organisation nameverifications created response a status code equal to that given
+func (o *PostOrganisationNameverificationsCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the post organisation nameverifications created response
+func (o *PostOrganisationNameverificationsCreated) Code() int {
+	return 201
+}
+
 func (o *PostOrganisationNameverificationsCreated) Error() string {
 	return fmt.Sprintf("[POST /organisation/nameverifications][%d] postOrganisationNameverificationsCreated", 201)
 }
@@ -115,6 +145,36 @@ type PostOrganisationNameverificationsBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this post organisation nameverifications bad request response has a 2xx status code
+func (o *PostOrganisationNameverificationsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post organisation nameverifications bad request response has a 3xx status code
+func (o *PostOrganisationNameverificationsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post organisation nameverifications bad request response has a 4xx status code
+func (o *PostOrganisationNameverificationsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post organisation nameverifications bad request response has a 5xx status code
+func (o *PostOrganisationNameverificationsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post organisation nameverifications bad request response a status code equal to that given
+func (o *PostOrganisationNameverificationsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post organisation nameverifications bad request response
+func (o *PostOrganisationNameverificationsBadRequest) Code() int {
+	return 400
 }
 
 func (o *PostOrganisationNameverificationsBadRequest) Error() string {
@@ -152,6 +212,36 @@ type PostOrganisationNameverificationsForbidden struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this post organisation nameverifications forbidden response has a 2xx status code
+func (o *PostOrganisationNameverificationsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post organisation nameverifications forbidden response has a 3xx status code
+func (o *PostOrganisationNameverificationsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post organisation nameverifications forbidden response has a 4xx status code
+func (o *PostOrganisationNameverificationsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post organisation nameverifications forbidden response has a 5xx status code
+func (o *PostOrganisationNameverificationsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post organisation nameverifications forbidden response a status code equal to that given
+func (o *PostOrganisationNameverificationsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post organisation nameverifications forbidden response
+func (o *PostOrganisationNameverificationsForbidden) Code() int {
+	return 403
+}
+
 func (o *PostOrganisationNameverificationsForbidden) Error() string {
 	return fmt.Sprintf("[POST /organisation/nameverifications][%d] postOrganisationNameverificationsForbidden", 403)
 }
@@ -187,6 +277,36 @@ type PostOrganisationNameverificationsConflict struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this post organisation nameverifications conflict response has a 2xx status code
+func (o *PostOrganisationNameverificationsConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post organisation nameverifications conflict response has a 3xx status code
+func (o *PostOrganisationNameverificationsConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post organisation nameverifications conflict response has a 4xx status code
+func (o *PostOrganisationNameverificationsConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post organisation nameverifications conflict response has a 5xx status code
+func (o *PostOrganisationNameverificationsConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post organisation nameverifications conflict response a status code equal to that given
+func (o *PostOrganisationNameverificationsConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the post organisation nameverifications conflict response
+func (o *PostOrganisationNameverificationsConflict) Code() int {
+	return 409
+}
+
 func (o *PostOrganisationNameverificationsConflict) Error() string {
 	return fmt.Sprintf("[POST /organisation/nameverifications][%d] postOrganisationNameverificationsConflict", 409)
 }
@@ -220,6 +340,36 @@ type PostOrganisationNameverificationsInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this post organisation nameverifications internal server error response has a 2xx status code
+func (o *PostOrganisationNameverificationsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post organisation nameverifications internal server error response has a 3xx status code
+func (o *PostOrganisationNameverificationsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post organisation nameverifications internal server error response has a 4xx status code
+func (o *PostOrganisationNameverificationsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post organisation nameverifications internal server error response has a 5xx status code
+func (o *PostOrganisationNameverificationsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post organisation nameverifications internal server error response a status code equal to that given
+func (o *PostOrganisationNameverificationsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post organisation nameverifications internal server error response
+func (o *PostOrganisationNameverificationsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostOrganisationNameverificationsInternalServerError) Error() string {

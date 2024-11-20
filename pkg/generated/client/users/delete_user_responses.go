@@ -63,6 +63,36 @@ User deleted
 type DeleteUserNoContent struct {
 }
 
+// IsSuccess returns true when this delete user no content response has a 2xx status code
+func (o *DeleteUserNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete user no content response has a 3xx status code
+func (o *DeleteUserNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user no content response has a 4xx status code
+func (o *DeleteUserNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete user no content response has a 5xx status code
+func (o *DeleteUserNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user no content response a status code equal to that given
+func (o *DeleteUserNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete user no content response
+func (o *DeleteUserNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteUserNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /security/users/{user_id}][%d] deleteUserNoContent", 204)
 }
@@ -88,6 +118,36 @@ type DeleteUserNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this delete user not found response has a 2xx status code
+func (o *DeleteUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user not found response has a 3xx status code
+func (o *DeleteUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user not found response has a 4xx status code
+func (o *DeleteUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user not found response has a 5xx status code
+func (o *DeleteUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user not found response a status code equal to that given
+func (o *DeleteUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete user not found response
+func (o *DeleteUserNotFound) Code() int {
+	return 404
 }
 
 func (o *DeleteUserNotFound) Error() string {
@@ -123,6 +183,36 @@ type DeleteUserConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this delete user conflict response has a 2xx status code
+func (o *DeleteUserConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user conflict response has a 3xx status code
+func (o *DeleteUserConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user conflict response has a 4xx status code
+func (o *DeleteUserConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user conflict response has a 5xx status code
+func (o *DeleteUserConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user conflict response a status code equal to that given
+func (o *DeleteUserConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete user conflict response
+func (o *DeleteUserConflict) Code() int {
+	return 409
 }
 
 func (o *DeleteUserConflict) Error() string {

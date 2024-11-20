@@ -54,6 +54,36 @@ type ListDirectDebitsOK struct {
 	*models.DirectDebitDetailsListResponse
 }
 
+// IsSuccess returns true when this list direct debits o k response has a 2xx status code
+func (o *ListDirectDebitsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list direct debits o k response has a 3xx status code
+func (o *ListDirectDebitsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list direct debits o k response has a 4xx status code
+func (o *ListDirectDebitsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list direct debits o k response has a 5xx status code
+func (o *ListDirectDebitsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list direct debits o k response a status code equal to that given
+func (o *ListDirectDebitsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list direct debits o k response
+func (o *ListDirectDebitsOK) Code() int {
+	return 200
+}
+
 func (o *ListDirectDebitsOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/directdebits][%d] listDirectDebitsOK", 200)
 }

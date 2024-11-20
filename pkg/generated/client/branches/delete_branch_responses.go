@@ -46,6 +46,36 @@ Branch deleted
 type DeleteBranchNoContent struct {
 }
 
+// IsSuccess returns true when this delete branch no content response has a 2xx status code
+func (o *DeleteBranchNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete branch no content response has a 3xx status code
+func (o *DeleteBranchNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete branch no content response has a 4xx status code
+func (o *DeleteBranchNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete branch no content response has a 5xx status code
+func (o *DeleteBranchNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete branch no content response a status code equal to that given
+func (o *DeleteBranchNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete branch no content response
+func (o *DeleteBranchNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteBranchNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /organisation/branches/{id}][%d] deleteBranchNoContent", 204)
 }

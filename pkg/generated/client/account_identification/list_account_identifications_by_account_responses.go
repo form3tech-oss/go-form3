@@ -54,6 +54,36 @@ type ListAccountIdentificationsByAccountOK struct {
 	*models.AccountIdentificationListResponse
 }
 
+// IsSuccess returns true when this list account identifications by account o k response has a 2xx status code
+func (o *ListAccountIdentificationsByAccountOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list account identifications by account o k response has a 3xx status code
+func (o *ListAccountIdentificationsByAccountOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list account identifications by account o k response has a 4xx status code
+func (o *ListAccountIdentificationsByAccountOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list account identifications by account o k response has a 5xx status code
+func (o *ListAccountIdentificationsByAccountOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list account identifications by account o k response a status code equal to that given
+func (o *ListAccountIdentificationsByAccountOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list account identifications by account o k response
+func (o *ListAccountIdentificationsByAccountOK) Code() int {
+	return 200
+}
+
 func (o *ListAccountIdentificationsByAccountOK) Error() string {
 	return fmt.Sprintf("[GET /organisation/accounts/{account_id}/identifications][%d] listAccountIdentificationsByAccountOK", 200)
 }

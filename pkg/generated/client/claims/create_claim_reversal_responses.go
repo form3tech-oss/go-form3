@@ -68,6 +68,36 @@ type CreateClaimReversalCreated struct {
 	*models.ClaimReversalDetailsResponse
 }
 
+// IsSuccess returns true when this create claim reversal created response has a 2xx status code
+func (o *CreateClaimReversalCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create claim reversal created response has a 3xx status code
+func (o *CreateClaimReversalCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim reversal created response has a 4xx status code
+func (o *CreateClaimReversalCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create claim reversal created response has a 5xx status code
+func (o *CreateClaimReversalCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim reversal created response a status code equal to that given
+func (o *CreateClaimReversalCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create claim reversal created response
+func (o *CreateClaimReversalCreated) Code() int {
+	return 201
+}
+
 func (o *CreateClaimReversalCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals][%d] createClaimReversalCreated", 201)
 }
@@ -103,6 +133,36 @@ type CreateClaimReversalBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create claim reversal bad request response has a 2xx status code
+func (o *CreateClaimReversalBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim reversal bad request response has a 3xx status code
+func (o *CreateClaimReversalBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim reversal bad request response has a 4xx status code
+func (o *CreateClaimReversalBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim reversal bad request response has a 5xx status code
+func (o *CreateClaimReversalBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim reversal bad request response a status code equal to that given
+func (o *CreateClaimReversalBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create claim reversal bad request response
+func (o *CreateClaimReversalBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateClaimReversalBadRequest) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals][%d] createClaimReversalBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type CreateClaimReversalNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create claim reversal not found response has a 2xx status code
+func (o *CreateClaimReversalNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim reversal not found response has a 3xx status code
+func (o *CreateClaimReversalNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim reversal not found response has a 4xx status code
+func (o *CreateClaimReversalNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim reversal not found response has a 5xx status code
+func (o *CreateClaimReversalNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim reversal not found response a status code equal to that given
+func (o *CreateClaimReversalNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create claim reversal not found response
+func (o *CreateClaimReversalNotFound) Code() int {
+	return 404
 }
 
 func (o *CreateClaimReversalNotFound) Error() string {

@@ -68,6 +68,36 @@ type CreateUnitCreated struct {
 	*models.OrganisationCreationResponse
 }
 
+// IsSuccess returns true when this create unit created response has a 2xx status code
+func (o *CreateUnitCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create unit created response has a 3xx status code
+func (o *CreateUnitCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create unit created response has a 4xx status code
+func (o *CreateUnitCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create unit created response has a 5xx status code
+func (o *CreateUnitCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create unit created response a status code equal to that given
+func (o *CreateUnitCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create unit created response
+func (o *CreateUnitCreated) Code() int {
+	return 201
+}
+
 func (o *CreateUnitCreated) Error() string {
 	return fmt.Sprintf("[POST /organisation/units][%d] createUnitCreated", 201)
 }
@@ -103,6 +133,36 @@ type CreateUnitBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create unit bad request response has a 2xx status code
+func (o *CreateUnitBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create unit bad request response has a 3xx status code
+func (o *CreateUnitBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create unit bad request response has a 4xx status code
+func (o *CreateUnitBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create unit bad request response has a 5xx status code
+func (o *CreateUnitBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create unit bad request response a status code equal to that given
+func (o *CreateUnitBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create unit bad request response
+func (o *CreateUnitBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateUnitBadRequest) Error() string {
 	return fmt.Sprintf("[POST /organisation/units][%d] createUnitBadRequest", 400)
 }
@@ -136,6 +196,36 @@ type CreateUnitConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create unit conflict response has a 2xx status code
+func (o *CreateUnitConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create unit conflict response has a 3xx status code
+func (o *CreateUnitConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create unit conflict response has a 4xx status code
+func (o *CreateUnitConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create unit conflict response has a 5xx status code
+func (o *CreateUnitConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create unit conflict response a status code equal to that given
+func (o *CreateUnitConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create unit conflict response
+func (o *CreateUnitConflict) Code() int {
+	return 409
 }
 
 func (o *CreateUnitConflict) Error() string {

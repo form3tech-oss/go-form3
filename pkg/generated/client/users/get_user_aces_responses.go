@@ -61,6 +61,36 @@ type GetUserAcesOK struct {
 	*models.AceDetailsListResponse
 }
 
+// IsSuccess returns true when this get user aces o k response has a 2xx status code
+func (o *GetUserAcesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get user aces o k response has a 3xx status code
+func (o *GetUserAcesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user aces o k response has a 4xx status code
+func (o *GetUserAcesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get user aces o k response has a 5xx status code
+func (o *GetUserAcesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user aces o k response a status code equal to that given
+func (o *GetUserAcesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get user aces o k response
+func (o *GetUserAcesOK) Code() int {
+	return 200
+}
+
 func (o *GetUserAcesOK) Error() string {
 	return fmt.Sprintf("[GET /security/users/{user_id}/aces][%d] getUserAcesOK", 200)
 }
@@ -94,6 +124,36 @@ type GetUserAcesNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get user aces not found response has a 2xx status code
+func (o *GetUserAcesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user aces not found response has a 3xx status code
+func (o *GetUserAcesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user aces not found response has a 4xx status code
+func (o *GetUserAcesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user aces not found response has a 5xx status code
+func (o *GetUserAcesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user aces not found response a status code equal to that given
+func (o *GetUserAcesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get user aces not found response
+func (o *GetUserAcesNotFound) Code() int {
+	return 404
 }
 
 func (o *GetUserAcesNotFound) Error() string {

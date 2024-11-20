@@ -61,6 +61,36 @@ type CreateBranchIdentificationCreated struct {
 	*models.BranchIdentificationResponse
 }
 
+// IsSuccess returns true when this create branch identification created response has a 2xx status code
+func (o *CreateBranchIdentificationCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create branch identification created response has a 3xx status code
+func (o *CreateBranchIdentificationCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create branch identification created response has a 4xx status code
+func (o *CreateBranchIdentificationCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create branch identification created response has a 5xx status code
+func (o *CreateBranchIdentificationCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create branch identification created response a status code equal to that given
+func (o *CreateBranchIdentificationCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create branch identification created response
+func (o *CreateBranchIdentificationCreated) Code() int {
+	return 201
+}
+
 func (o *CreateBranchIdentificationCreated) Error() string {
 	return fmt.Sprintf("[POST /organisation/branches/{branch_id}/identifications][%d] createBranchIdentificationCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreateBranchIdentificationConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create branch identification conflict response has a 2xx status code
+func (o *CreateBranchIdentificationConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create branch identification conflict response has a 3xx status code
+func (o *CreateBranchIdentificationConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create branch identification conflict response has a 4xx status code
+func (o *CreateBranchIdentificationConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create branch identification conflict response has a 5xx status code
+func (o *CreateBranchIdentificationConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create branch identification conflict response a status code equal to that given
+func (o *CreateBranchIdentificationConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create branch identification conflict response
+func (o *CreateBranchIdentificationConflict) Code() int {
+	return 409
 }
 
 func (o *CreateBranchIdentificationConflict) Error() string {

@@ -61,6 +61,36 @@ type CreateAccountIdentificationCreated struct {
 	*models.AccountIdentificationResponse
 }
 
+// IsSuccess returns true when this create account identification created response has a 2xx status code
+func (o *CreateAccountIdentificationCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create account identification created response has a 3xx status code
+func (o *CreateAccountIdentificationCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create account identification created response has a 4xx status code
+func (o *CreateAccountIdentificationCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create account identification created response has a 5xx status code
+func (o *CreateAccountIdentificationCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create account identification created response a status code equal to that given
+func (o *CreateAccountIdentificationCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create account identification created response
+func (o *CreateAccountIdentificationCreated) Code() int {
+	return 201
+}
+
 func (o *CreateAccountIdentificationCreated) Error() string {
 	return fmt.Sprintf("[POST /organisation/accounts/{account_id}/identifications][%d] createAccountIdentificationCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreateAccountIdentificationConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create account identification conflict response has a 2xx status code
+func (o *CreateAccountIdentificationConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create account identification conflict response has a 3xx status code
+func (o *CreateAccountIdentificationConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create account identification conflict response has a 4xx status code
+func (o *CreateAccountIdentificationConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create account identification conflict response has a 5xx status code
+func (o *CreateAccountIdentificationConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create account identification conflict response a status code equal to that given
+func (o *CreateAccountIdentificationConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create account identification conflict response
+func (o *CreateAccountIdentificationConflict) Code() int {
+	return 409
 }
 
 func (o *CreateAccountIdentificationConflict) Error() string {

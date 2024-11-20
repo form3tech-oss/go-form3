@@ -75,6 +75,36 @@ type CreateAceCreated struct {
 	*models.AceCreationResponse
 }
 
+// IsSuccess returns true when this create ace created response has a 2xx status code
+func (o *CreateAceCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create ace created response has a 3xx status code
+func (o *CreateAceCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace created response has a 4xx status code
+func (o *CreateAceCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create ace created response has a 5xx status code
+func (o *CreateAceCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace created response a status code equal to that given
+func (o *CreateAceCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create ace created response
+func (o *CreateAceCreated) Code() int {
+	return 201
+}
+
 func (o *CreateAceCreated) Error() string {
 	return fmt.Sprintf("[POST /security/roles/{role_id}/aces][%d] createAceCreated", 201)
 }
@@ -108,6 +138,36 @@ type CreateAceBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create ace bad request response has a 2xx status code
+func (o *CreateAceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create ace bad request response has a 3xx status code
+func (o *CreateAceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace bad request response has a 4xx status code
+func (o *CreateAceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ace bad request response has a 5xx status code
+func (o *CreateAceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace bad request response a status code equal to that given
+func (o *CreateAceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create ace bad request response
+func (o *CreateAceBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateAceBadRequest) Error() string {
@@ -145,6 +205,36 @@ type CreateAceNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create ace not found response has a 2xx status code
+func (o *CreateAceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create ace not found response has a 3xx status code
+func (o *CreateAceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace not found response has a 4xx status code
+func (o *CreateAceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ace not found response has a 5xx status code
+func (o *CreateAceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace not found response a status code equal to that given
+func (o *CreateAceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create ace not found response
+func (o *CreateAceNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateAceNotFound) Error() string {
 	return fmt.Sprintf("[POST /security/roles/{role_id}/aces][%d] createAceNotFound", 404)
 }
@@ -178,6 +268,36 @@ type CreateAceConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create ace conflict response has a 2xx status code
+func (o *CreateAceConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create ace conflict response has a 3xx status code
+func (o *CreateAceConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace conflict response has a 4xx status code
+func (o *CreateAceConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ace conflict response has a 5xx status code
+func (o *CreateAceConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace conflict response a status code equal to that given
+func (o *CreateAceConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create ace conflict response
+func (o *CreateAceConflict) Code() int {
+	return 409
 }
 
 func (o *CreateAceConflict) Error() string {

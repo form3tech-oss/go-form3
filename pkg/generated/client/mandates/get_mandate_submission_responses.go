@@ -61,6 +61,36 @@ type GetMandateSubmissionOK struct {
 	*models.MandateSubmissionDetailsResponse
 }
 
+// IsSuccess returns true when this get mandate submission o k response has a 2xx status code
+func (o *GetMandateSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get mandate submission o k response has a 3xx status code
+func (o *GetMandateSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate submission o k response has a 4xx status code
+func (o *GetMandateSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get mandate submission o k response has a 5xx status code
+func (o *GetMandateSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate submission o k response a status code equal to that given
+func (o *GetMandateSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get mandate submission o k response
+func (o *GetMandateSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetMandateSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/mandates/{id}/submissions/{submissionId}][%d] getMandateSubmissionOK", 200)
 }
@@ -94,6 +124,36 @@ type GetMandateSubmissionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get mandate submission bad request response has a 2xx status code
+func (o *GetMandateSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get mandate submission bad request response has a 3xx status code
+func (o *GetMandateSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate submission bad request response has a 4xx status code
+func (o *GetMandateSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get mandate submission bad request response has a 5xx status code
+func (o *GetMandateSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate submission bad request response a status code equal to that given
+func (o *GetMandateSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get mandate submission bad request response
+func (o *GetMandateSubmissionBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetMandateSubmissionBadRequest) Error() string {

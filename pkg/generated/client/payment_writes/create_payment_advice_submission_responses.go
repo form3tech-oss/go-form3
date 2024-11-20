@@ -61,6 +61,36 @@ type CreatePaymentAdviceSubmissionCreated struct {
 	*models.AdviceSubmissionCreationResponse
 }
 
+// IsSuccess returns true when this create payment advice submission created response has a 2xx status code
+func (o *CreatePaymentAdviceSubmissionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create payment advice submission created response has a 3xx status code
+func (o *CreatePaymentAdviceSubmissionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment advice submission created response has a 4xx status code
+func (o *CreatePaymentAdviceSubmissionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment advice submission created response has a 5xx status code
+func (o *CreatePaymentAdviceSubmissionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment advice submission created response a status code equal to that given
+func (o *CreatePaymentAdviceSubmissionCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create payment advice submission created response
+func (o *CreatePaymentAdviceSubmissionCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePaymentAdviceSubmissionCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments/{id}/advices/{adviceId}/submissions][%d] createPaymentAdviceSubmissionCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreatePaymentAdviceSubmissionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create payment advice submission bad request response has a 2xx status code
+func (o *CreatePaymentAdviceSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment advice submission bad request response has a 3xx status code
+func (o *CreatePaymentAdviceSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment advice submission bad request response has a 4xx status code
+func (o *CreatePaymentAdviceSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment advice submission bad request response has a 5xx status code
+func (o *CreatePaymentAdviceSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment advice submission bad request response a status code equal to that given
+func (o *CreatePaymentAdviceSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create payment advice submission bad request response
+func (o *CreatePaymentAdviceSubmissionBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreatePaymentAdviceSubmissionBadRequest) Error() string {

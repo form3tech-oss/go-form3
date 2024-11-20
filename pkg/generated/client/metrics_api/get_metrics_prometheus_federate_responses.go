@@ -75,6 +75,36 @@ type GetMetricsPrometheusFederateOK struct {
 	string
 }
 
+// IsSuccess returns true when this get metrics prometheus federate o k response has a 2xx status code
+func (o *GetMetricsPrometheusFederateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get metrics prometheus federate o k response has a 3xx status code
+func (o *GetMetricsPrometheusFederateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus federate o k response has a 4xx status code
+func (o *GetMetricsPrometheusFederateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get metrics prometheus federate o k response has a 5xx status code
+func (o *GetMetricsPrometheusFederateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus federate o k response a status code equal to that given
+func (o *GetMetricsPrometheusFederateOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get metrics prometheus federate o k response
+func (o *GetMetricsPrometheusFederateOK) Code() int {
+	return 200
+}
+
 func (o *GetMetricsPrometheusFederateOK) Error() string {
 	return fmt.Sprintf("[GET /metrics/prometheus/federate][%d] getMetricsPrometheusFederateOK", 200)
 }
@@ -108,6 +138,36 @@ type GetMetricsPrometheusFederateBadRequest struct {
 	*models.MetricsQueryResponse
 }
 
+// IsSuccess returns true when this get metrics prometheus federate bad request response has a 2xx status code
+func (o *GetMetricsPrometheusFederateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus federate bad request response has a 3xx status code
+func (o *GetMetricsPrometheusFederateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus federate bad request response has a 4xx status code
+func (o *GetMetricsPrometheusFederateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get metrics prometheus federate bad request response has a 5xx status code
+func (o *GetMetricsPrometheusFederateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus federate bad request response a status code equal to that given
+func (o *GetMetricsPrometheusFederateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get metrics prometheus federate bad request response
+func (o *GetMetricsPrometheusFederateBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetMetricsPrometheusFederateBadRequest) Error() string {
 	return fmt.Sprintf("[GET /metrics/prometheus/federate][%d] getMetricsPrometheusFederateBadRequest", 400)
 }
@@ -138,6 +198,36 @@ Forbidden
 type GetMetricsPrometheusFederateForbidden struct {
 }
 
+// IsSuccess returns true when this get metrics prometheus federate forbidden response has a 2xx status code
+func (o *GetMetricsPrometheusFederateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus federate forbidden response has a 3xx status code
+func (o *GetMetricsPrometheusFederateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus federate forbidden response has a 4xx status code
+func (o *GetMetricsPrometheusFederateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get metrics prometheus federate forbidden response has a 5xx status code
+func (o *GetMetricsPrometheusFederateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus federate forbidden response a status code equal to that given
+func (o *GetMetricsPrometheusFederateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get metrics prometheus federate forbidden response
+func (o *GetMetricsPrometheusFederateForbidden) Code() int {
+	return 403
+}
+
 func (o *GetMetricsPrometheusFederateForbidden) Error() string {
 	return fmt.Sprintf("[GET /metrics/prometheus/federate][%d] getMetricsPrometheusFederateForbidden", 403)
 }
@@ -158,6 +248,36 @@ GetMetricsPrometheusFederateInternalServerError handles this case with default h
 Internal Server Error
 */
 type GetMetricsPrometheusFederateInternalServerError struct {
+}
+
+// IsSuccess returns true when this get metrics prometheus federate internal server error response has a 2xx status code
+func (o *GetMetricsPrometheusFederateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus federate internal server error response has a 3xx status code
+func (o *GetMetricsPrometheusFederateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus federate internal server error response has a 4xx status code
+func (o *GetMetricsPrometheusFederateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get metrics prometheus federate internal server error response has a 5xx status code
+func (o *GetMetricsPrometheusFederateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get metrics prometheus federate internal server error response a status code equal to that given
+func (o *GetMetricsPrometheusFederateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get metrics prometheus federate internal server error response
+func (o *GetMetricsPrometheusFederateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetMetricsPrometheusFederateInternalServerError) Error() string {

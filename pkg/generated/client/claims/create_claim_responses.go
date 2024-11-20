@@ -61,6 +61,36 @@ type CreateClaimCreated struct {
 	*models.ClaimDetailsResponse
 }
 
+// IsSuccess returns true when this create claim created response has a 2xx status code
+func (o *CreateClaimCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create claim created response has a 3xx status code
+func (o *CreateClaimCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim created response has a 4xx status code
+func (o *CreateClaimCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create claim created response has a 5xx status code
+func (o *CreateClaimCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim created response a status code equal to that given
+func (o *CreateClaimCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create claim created response
+func (o *CreateClaimCreated) Code() int {
+	return 201
+}
+
 func (o *CreateClaimCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims][%d] createClaimCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreateClaimBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create claim bad request response has a 2xx status code
+func (o *CreateClaimBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim bad request response has a 3xx status code
+func (o *CreateClaimBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim bad request response has a 4xx status code
+func (o *CreateClaimBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim bad request response has a 5xx status code
+func (o *CreateClaimBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim bad request response a status code equal to that given
+func (o *CreateClaimBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create claim bad request response
+func (o *CreateClaimBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateClaimBadRequest) Error() string {

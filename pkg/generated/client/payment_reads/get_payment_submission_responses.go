@@ -54,6 +54,36 @@ type GetPaymentSubmissionOK struct {
 	*models.PaymentSubmissionFetchResponse
 }
 
+// IsSuccess returns true when this get payment submission o k response has a 2xx status code
+func (o *GetPaymentSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get payment submission o k response has a 3xx status code
+func (o *GetPaymentSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get payment submission o k response has a 4xx status code
+func (o *GetPaymentSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get payment submission o k response has a 5xx status code
+func (o *GetPaymentSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get payment submission o k response a status code equal to that given
+func (o *GetPaymentSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get payment submission o k response
+func (o *GetPaymentSubmissionOK) Code() int {
+	return 200
+}
+
 func (o *GetPaymentSubmissionOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/payments/{id}/submissions/{submissionId}][%d] getPaymentSubmissionOK", 200)
 }

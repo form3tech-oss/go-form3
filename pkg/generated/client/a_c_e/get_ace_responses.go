@@ -61,6 +61,36 @@ type GetAceOK struct {
 	*models.AceDetailsResponse
 }
 
+// IsSuccess returns true when this get ace o k response has a 2xx status code
+func (o *GetAceOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get ace o k response has a 3xx status code
+func (o *GetAceOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get ace o k response has a 4xx status code
+func (o *GetAceOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get ace o k response has a 5xx status code
+func (o *GetAceOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get ace o k response a status code equal to that given
+func (o *GetAceOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get ace o k response
+func (o *GetAceOK) Code() int {
+	return 200
+}
+
 func (o *GetAceOK) Error() string {
 	return fmt.Sprintf("[GET /security/roles/{role_id}/aces/{ace_id}][%d] getAceOK", 200)
 }
@@ -94,6 +124,36 @@ type GetAceNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get ace not found response has a 2xx status code
+func (o *GetAceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get ace not found response has a 3xx status code
+func (o *GetAceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get ace not found response has a 4xx status code
+func (o *GetAceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get ace not found response has a 5xx status code
+func (o *GetAceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get ace not found response a status code equal to that given
+func (o *GetAceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get ace not found response
+func (o *GetAceNotFound) Code() int {
+	return 404
 }
 
 func (o *GetAceNotFound) Error() string {

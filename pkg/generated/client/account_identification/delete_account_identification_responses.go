@@ -53,6 +53,36 @@ Account Identification deleted
 type DeleteAccountIdentificationNoContent struct {
 }
 
+// IsSuccess returns true when this delete account identification no content response has a 2xx status code
+func (o *DeleteAccountIdentificationNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete account identification no content response has a 3xx status code
+func (o *DeleteAccountIdentificationNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete account identification no content response has a 4xx status code
+func (o *DeleteAccountIdentificationNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete account identification no content response has a 5xx status code
+func (o *DeleteAccountIdentificationNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete account identification no content response a status code equal to that given
+func (o *DeleteAccountIdentificationNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete account identification no content response
+func (o *DeleteAccountIdentificationNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteAccountIdentificationNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /organisation/accounts/{account_id}/identifications/{identification_id}][%d] deleteAccountIdentificationNoContent", 204)
 }
@@ -73,6 +103,36 @@ DeleteAccountIdentificationNotFound handles this case with default header values
 Account Identification not found
 */
 type DeleteAccountIdentificationNotFound struct {
+}
+
+// IsSuccess returns true when this delete account identification not found response has a 2xx status code
+func (o *DeleteAccountIdentificationNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete account identification not found response has a 3xx status code
+func (o *DeleteAccountIdentificationNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete account identification not found response has a 4xx status code
+func (o *DeleteAccountIdentificationNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete account identification not found response has a 5xx status code
+func (o *DeleteAccountIdentificationNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete account identification not found response a status code equal to that given
+func (o *DeleteAccountIdentificationNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete account identification not found response
+func (o *DeleteAccountIdentificationNotFound) Code() int {
+	return 404
 }
 
 func (o *DeleteAccountIdentificationNotFound) Error() string {

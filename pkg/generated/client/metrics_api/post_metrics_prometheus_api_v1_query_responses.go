@@ -75,6 +75,36 @@ type PostMetricsPrometheusAPIV1QueryOK struct {
 	*models.MetricsQueryResponse
 }
 
+// IsSuccess returns true when this post metrics prometheus Api v1 query o k response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query o k response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query o k response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query o k response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query o k response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query o k response
+func (o *PostMetricsPrometheusAPIV1QueryOK) Code() int {
+	return 200
+}
+
 func (o *PostMetricsPrometheusAPIV1QueryOK) Error() string {
 	return fmt.Sprintf("[POST /metrics/prometheus/api/v1/query][%d] postMetricsPrometheusApiV1QueryOK", 200)
 }
@@ -110,6 +140,36 @@ type PostMetricsPrometheusAPIV1QueryBadRequest struct {
 	*models.MetricsQueryResponse
 }
 
+// IsSuccess returns true when this post metrics prometheus Api v1 query bad request response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query bad request response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query bad request response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query bad request response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query bad request response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query bad request response
+func (o *PostMetricsPrometheusAPIV1QueryBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostMetricsPrometheusAPIV1QueryBadRequest) Error() string {
 	return fmt.Sprintf("[POST /metrics/prometheus/api/v1/query][%d] postMetricsPrometheusApiV1QueryBadRequest", 400)
 }
@@ -140,6 +200,36 @@ Forbidden
 type PostMetricsPrometheusAPIV1QueryForbidden struct {
 }
 
+// IsSuccess returns true when this post metrics prometheus Api v1 query forbidden response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query forbidden response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query forbidden response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query forbidden response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query forbidden response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query forbidden response
+func (o *PostMetricsPrometheusAPIV1QueryForbidden) Code() int {
+	return 403
+}
+
 func (o *PostMetricsPrometheusAPIV1QueryForbidden) Error() string {
 	return fmt.Sprintf("[POST /metrics/prometheus/api/v1/query][%d] postMetricsPrometheusApiV1QueryForbidden", 403)
 }
@@ -160,6 +250,36 @@ PostMetricsPrometheusAPIV1QueryInternalServerError handles this case with defaul
 Internal Server Error
 */
 type PostMetricsPrometheusAPIV1QueryInternalServerError struct {
+}
+
+// IsSuccess returns true when this post metrics prometheus Api v1 query internal server error response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query internal server error response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query internal server error response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query internal server error response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query internal server error response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query internal server error response
+func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostMetricsPrometheusAPIV1QueryInternalServerError) Error() string {

@@ -54,6 +54,36 @@ type GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK struct {
 	*models.DirectDebitDecisionSubmissionDetailsResponse
 }
 
+// IsSuccess returns true when this get directdebits Id decisions decision Id submissions submission Id o k response has a 2xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get directdebits Id decisions decision Id submissions submission Id o k response has a 3xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get directdebits Id decisions decision Id submissions submission Id o k response has a 4xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get directdebits Id decisions decision Id submissions submission Id o k response has a 5xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get directdebits Id decisions decision Id submissions submission Id o k response a status code equal to that given
+func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get directdebits Id decisions decision Id submissions submission Id o k response
+func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) Code() int {
+	return 200
+}
+
 func (o *GetDirectdebitsIDDecisionsDecisionIDSubmissionsSubmissionIDOK) Error() string {
 	return fmt.Sprintf("[GET /transaction/directdebits/{id}/decisions/{decisionId}/submissions/{submissionId}][%d] getDirectdebitsIdDecisionsDecisionIdSubmissionsSubmissionIdOK", 200)
 }

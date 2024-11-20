@@ -54,6 +54,36 @@ type ListAuditEntriesOK struct {
 	*models.AuditEntryListResponse
 }
 
+// IsSuccess returns true when this list audit entries o k response has a 2xx status code
+func (o *ListAuditEntriesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list audit entries o k response has a 3xx status code
+func (o *ListAuditEntriesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list audit entries o k response has a 4xx status code
+func (o *ListAuditEntriesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list audit entries o k response has a 5xx status code
+func (o *ListAuditEntriesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list audit entries o k response a status code equal to that given
+func (o *ListAuditEntriesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list audit entries o k response
+func (o *ListAuditEntriesOK) Code() int {
+	return 200
+}
+
 func (o *ListAuditEntriesOK) Error() string {
 	return fmt.Sprintf("[GET /audit/entries/{record_type}][%d] listAuditEntriesOK", 200)
 }

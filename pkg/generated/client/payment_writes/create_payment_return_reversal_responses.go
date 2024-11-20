@@ -96,6 +96,36 @@ type CreatePaymentReturnReversalCreated struct {
 	*models.ReturnReversalCreationResponse
 }
 
+// IsSuccess returns true when this create payment return reversal created response has a 2xx status code
+func (o *CreatePaymentReturnReversalCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create payment return reversal created response has a 3xx status code
+func (o *CreatePaymentReturnReversalCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal created response has a 4xx status code
+func (o *CreatePaymentReturnReversalCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment return reversal created response has a 5xx status code
+func (o *CreatePaymentReturnReversalCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment return reversal created response a status code equal to that given
+func (o *CreatePaymentReturnReversalCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create payment return reversal created response
+func (o *CreatePaymentReturnReversalCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePaymentReturnReversalCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments/{id}/returns/{returnId}/reversals][%d] createPaymentReturnReversalCreated", 201)
 }
@@ -129,6 +159,36 @@ type CreatePaymentReturnReversalBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create payment return reversal bad request response has a 2xx status code
+func (o *CreatePaymentReturnReversalBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment return reversal bad request response has a 3xx status code
+func (o *CreatePaymentReturnReversalBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal bad request response has a 4xx status code
+func (o *CreatePaymentReturnReversalBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment return reversal bad request response has a 5xx status code
+func (o *CreatePaymentReturnReversalBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment return reversal bad request response a status code equal to that given
+func (o *CreatePaymentReturnReversalBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create payment return reversal bad request response
+func (o *CreatePaymentReturnReversalBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreatePaymentReturnReversalBadRequest) Error() string {
@@ -166,6 +226,36 @@ type CreatePaymentReturnReversalUnauthorized struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create payment return reversal unauthorized response has a 2xx status code
+func (o *CreatePaymentReturnReversalUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment return reversal unauthorized response has a 3xx status code
+func (o *CreatePaymentReturnReversalUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal unauthorized response has a 4xx status code
+func (o *CreatePaymentReturnReversalUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment return reversal unauthorized response has a 5xx status code
+func (o *CreatePaymentReturnReversalUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment return reversal unauthorized response a status code equal to that given
+func (o *CreatePaymentReturnReversalUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create payment return reversal unauthorized response
+func (o *CreatePaymentReturnReversalUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreatePaymentReturnReversalUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments/{id}/returns/{returnId}/reversals][%d] createPaymentReturnReversalUnauthorized", 401)
 }
@@ -199,6 +289,36 @@ type CreatePaymentReturnReversalForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create payment return reversal forbidden response has a 2xx status code
+func (o *CreatePaymentReturnReversalForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment return reversal forbidden response has a 3xx status code
+func (o *CreatePaymentReturnReversalForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal forbidden response has a 4xx status code
+func (o *CreatePaymentReturnReversalForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment return reversal forbidden response has a 5xx status code
+func (o *CreatePaymentReturnReversalForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment return reversal forbidden response a status code equal to that given
+func (o *CreatePaymentReturnReversalForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create payment return reversal forbidden response
+func (o *CreatePaymentReturnReversalForbidden) Code() int {
+	return 403
 }
 
 func (o *CreatePaymentReturnReversalForbidden) Error() string {
@@ -236,6 +356,36 @@ type CreatePaymentReturnReversalNotFound struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create payment return reversal not found response has a 2xx status code
+func (o *CreatePaymentReturnReversalNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment return reversal not found response has a 3xx status code
+func (o *CreatePaymentReturnReversalNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal not found response has a 4xx status code
+func (o *CreatePaymentReturnReversalNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment return reversal not found response has a 5xx status code
+func (o *CreatePaymentReturnReversalNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment return reversal not found response a status code equal to that given
+func (o *CreatePaymentReturnReversalNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create payment return reversal not found response
+func (o *CreatePaymentReturnReversalNotFound) Code() int {
+	return 404
+}
+
 func (o *CreatePaymentReturnReversalNotFound) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments/{id}/returns/{returnId}/reversals][%d] createPaymentReturnReversalNotFound", 404)
 }
@@ -271,6 +421,36 @@ type CreatePaymentReturnReversalConflict struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create payment return reversal conflict response has a 2xx status code
+func (o *CreatePaymentReturnReversalConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment return reversal conflict response has a 3xx status code
+func (o *CreatePaymentReturnReversalConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal conflict response has a 4xx status code
+func (o *CreatePaymentReturnReversalConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment return reversal conflict response has a 5xx status code
+func (o *CreatePaymentReturnReversalConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment return reversal conflict response a status code equal to that given
+func (o *CreatePaymentReturnReversalConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create payment return reversal conflict response
+func (o *CreatePaymentReturnReversalConflict) Code() int {
+	return 409
+}
+
 func (o *CreatePaymentReturnReversalConflict) Error() string {
 	return fmt.Sprintf("[POST /transaction/payments/{id}/returns/{returnId}/reversals][%d] createPaymentReturnReversalConflict", 409)
 }
@@ -304,6 +484,36 @@ type CreatePaymentReturnReversalInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create payment return reversal internal server error response has a 2xx status code
+func (o *CreatePaymentReturnReversalInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment return reversal internal server error response has a 3xx status code
+func (o *CreatePaymentReturnReversalInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment return reversal internal server error response has a 4xx status code
+func (o *CreatePaymentReturnReversalInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment return reversal internal server error response has a 5xx status code
+func (o *CreatePaymentReturnReversalInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create payment return reversal internal server error response a status code equal to that given
+func (o *CreatePaymentReturnReversalInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create payment return reversal internal server error response
+func (o *CreatePaymentReturnReversalInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CreatePaymentReturnReversalInternalServerError) Error() string {

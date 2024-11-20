@@ -54,6 +54,36 @@ type ListBranchesOK struct {
 	*models.BranchDetailsListResponse
 }
 
+// IsSuccess returns true when this list branches o k response has a 2xx status code
+func (o *ListBranchesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list branches o k response has a 3xx status code
+func (o *ListBranchesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list branches o k response has a 4xx status code
+func (o *ListBranchesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list branches o k response has a 5xx status code
+func (o *ListBranchesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list branches o k response a status code equal to that given
+func (o *ListBranchesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list branches o k response
+func (o *ListBranchesOK) Code() int {
+	return 200
+}
+
 func (o *ListBranchesOK) Error() string {
 	return fmt.Sprintf("[GET /organisation/branches][%d] listBranchesOK", 200)
 }

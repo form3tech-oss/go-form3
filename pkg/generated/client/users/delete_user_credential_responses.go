@@ -56,6 +56,36 @@ Credential deleted
 type DeleteUserCredentialNoContent struct {
 }
 
+// IsSuccess returns true when this delete user credential no content response has a 2xx status code
+func (o *DeleteUserCredentialNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete user credential no content response has a 3xx status code
+func (o *DeleteUserCredentialNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user credential no content response has a 4xx status code
+func (o *DeleteUserCredentialNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete user credential no content response has a 5xx status code
+func (o *DeleteUserCredentialNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user credential no content response a status code equal to that given
+func (o *DeleteUserCredentialNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete user credential no content response
+func (o *DeleteUserCredentialNoContent) Code() int {
+	return 204
+}
+
 func (o *DeleteUserCredentialNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /security/users/{user_id}/credentials/{client_id}][%d] deleteUserCredentialNoContent", 204)
 }
@@ -81,6 +111,36 @@ type DeleteUserCredentialNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this delete user credential not found response has a 2xx status code
+func (o *DeleteUserCredentialNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user credential not found response has a 3xx status code
+func (o *DeleteUserCredentialNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user credential not found response has a 4xx status code
+func (o *DeleteUserCredentialNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user credential not found response has a 5xx status code
+func (o *DeleteUserCredentialNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user credential not found response a status code equal to that given
+func (o *DeleteUserCredentialNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete user credential not found response
+func (o *DeleteUserCredentialNotFound) Code() int {
+	return 404
 }
 
 func (o *DeleteUserCredentialNotFound) Error() string {

@@ -61,6 +61,36 @@ type CreateMandateReturnCreated struct {
 	*models.MandateReturnCreationResponse
 }
 
+// IsSuccess returns true when this create mandate return created response has a 2xx status code
+func (o *CreateMandateReturnCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create mandate return created response has a 3xx status code
+func (o *CreateMandateReturnCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate return created response has a 4xx status code
+func (o *CreateMandateReturnCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create mandate return created response has a 5xx status code
+func (o *CreateMandateReturnCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate return created response a status code equal to that given
+func (o *CreateMandateReturnCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create mandate return created response
+func (o *CreateMandateReturnCreated) Code() int {
+	return 201
+}
+
 func (o *CreateMandateReturnCreated) Error() string {
 	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns][%d] createMandateReturnCreated", 201)
 }
@@ -94,6 +124,36 @@ type CreateMandateReturnBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create mandate return bad request response has a 2xx status code
+func (o *CreateMandateReturnBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create mandate return bad request response has a 3xx status code
+func (o *CreateMandateReturnBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate return bad request response has a 4xx status code
+func (o *CreateMandateReturnBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mandate return bad request response has a 5xx status code
+func (o *CreateMandateReturnBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate return bad request response a status code equal to that given
+func (o *CreateMandateReturnBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create mandate return bad request response
+func (o *CreateMandateReturnBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateMandateReturnBadRequest) Error() string {
