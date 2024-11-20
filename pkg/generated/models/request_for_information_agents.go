@@ -73,22 +73,10 @@ type RequestForInformationAgentsItems0 struct {
 func RequestForInformationAgentsItems0WithDefaults(defaults client.Defaults) *RequestForInformationAgentsItems0 {
 	return &RequestForInformationAgentsItems0{
 
-		Identification: RequestForInformationAgentsItems0WithDefaults(defaults),
+		// TODO Identification: RequestForInformationAgentsItems0,
 
 		Role: defaults.GetString("RequestForInformationAgentsItems0", "role"),
 	}
-}
-
-func (m *RequestForInformationAgentsItems0) WithIdentification(identification RequestForInformationAgentsItems0) *RequestForInformationAgentsItems0 {
-
-	m.Identification = &identification
-
-	return m
-}
-
-func (m *RequestForInformationAgentsItems0) WithoutIdentification() *RequestForInformationAgentsItems0 {
-	m.Identification = nil
-	return m
 }
 
 func (m *RequestForInformationAgentsItems0) WithRole(role string) *RequestForInformationAgentsItems0 {
