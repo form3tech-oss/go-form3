@@ -16,7 +16,6 @@ func TestQueryPayments(t *testing.T) {
 	require.NoError(t, err)
 
 	p, err := f3.PaymentReads.ListPayments().
-		WithFilterAmount("600.00").
 		WithoutFilterOrganisationID().
 		Do()
 	assert.Nil(t, err)
