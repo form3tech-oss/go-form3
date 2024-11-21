@@ -11,6 +11,7 @@ import (
 	"os"
 
 	genClient "github.com/form3tech-oss/go-form3/v7/pkg/generated/client"
+	"github.com/go-openapi/runtime"
 	rc "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
@@ -64,6 +65,8 @@ func New(opts ...Option) (*F3, error) {
 	}
 
 	rt := rc.NewWithClient(f3.baseURL.Host, "/v1", []string{f3.baseURL.Scheme}, f3.httpClient)
+	rt.Producers["application/vnd.api+json"] = runtime.JSONProducer()
+	rt.Consumers["application/vnd.api+json"] = runtime.JSONConsumer()
 
 	defaults := NewClientDefaults()
 	orgUUID := strfmt.UUID(f3.orgID.String())
