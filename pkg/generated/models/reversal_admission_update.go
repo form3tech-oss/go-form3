@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -42,8 +41,9 @@ type ReversalAdmissionUpdate struct {
 	Type string `json:"type,omitempty"`
 
 	// Version number
+	// Required: true
 	// Minimum: 0
-	Version *int64 `json:"version,omitempty"`
+	Version *int64 `json:"version"`
 }
 
 func ReversalAdmissionUpdateWithDefaults(defaults client.Defaults) *ReversalAdmissionUpdate {
@@ -241,8 +241,8 @@ func (m *ReversalAdmissionUpdate) validateType(formats strfmt.Registry) error {
 
 func (m *ReversalAdmissionUpdate) validateVersion(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Version) { // not required
-		return nil
+	if err := validate.Required("version", "body", m.Version); err != nil {
+		return err
 	}
 
 	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {

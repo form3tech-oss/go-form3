@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -23,11 +22,17 @@ type ReturnAdmissionFetchRelationships struct {
 	// beneficiary account
 	BeneficiaryAccount *RelationshipReturnAdmissionBeneficiaryAccount `json:"beneficiary_account,omitempty"`
 
+	// beneficiary branch
+	BeneficiaryBranch *RelationshipReturnAdmissionBeneficiaryBranch `json:"beneficiary_branch,omitempty"`
+
 	// payment
 	Payment *RelationshipLinks `json:"payment,omitempty"`
 
 	// payment return
 	PaymentReturn *RelationshipLinks `json:"payment_return,omitempty"`
+
+	// return admission task
+	ReturnAdmissionTask *RelationshipReturnAdmissionTasks `json:"return_admission_task,omitempty"`
 
 	// validations
 	Validations *RelationshipLinks `json:"validations,omitempty"`
@@ -38,9 +43,13 @@ func ReturnAdmissionFetchRelationshipsWithDefaults(defaults client.Defaults) *Re
 
 		BeneficiaryAccount: RelationshipReturnAdmissionBeneficiaryAccountWithDefaults(defaults),
 
+		BeneficiaryBranch: RelationshipReturnAdmissionBeneficiaryBranchWithDefaults(defaults),
+
 		Payment: RelationshipLinksWithDefaults(defaults),
 
 		PaymentReturn: RelationshipLinksWithDefaults(defaults),
+
+		ReturnAdmissionTask: RelationshipReturnAdmissionTasksWithDefaults(defaults),
 
 		Validations: RelationshipLinksWithDefaults(defaults),
 	}
@@ -55,6 +64,18 @@ func (m *ReturnAdmissionFetchRelationships) WithBeneficiaryAccount(beneficiaryAc
 
 func (m *ReturnAdmissionFetchRelationships) WithoutBeneficiaryAccount() *ReturnAdmissionFetchRelationships {
 	m.BeneficiaryAccount = nil
+	return m
+}
+
+func (m *ReturnAdmissionFetchRelationships) WithBeneficiaryBranch(beneficiaryBranch RelationshipReturnAdmissionBeneficiaryBranch) *ReturnAdmissionFetchRelationships {
+
+	m.BeneficiaryBranch = &beneficiaryBranch
+
+	return m
+}
+
+func (m *ReturnAdmissionFetchRelationships) WithoutBeneficiaryBranch() *ReturnAdmissionFetchRelationships {
+	m.BeneficiaryBranch = nil
 	return m
 }
 
@@ -82,6 +103,18 @@ func (m *ReturnAdmissionFetchRelationships) WithoutPaymentReturn() *ReturnAdmiss
 	return m
 }
 
+func (m *ReturnAdmissionFetchRelationships) WithReturnAdmissionTask(returnAdmissionTask RelationshipReturnAdmissionTasks) *ReturnAdmissionFetchRelationships {
+
+	m.ReturnAdmissionTask = &returnAdmissionTask
+
+	return m
+}
+
+func (m *ReturnAdmissionFetchRelationships) WithoutReturnAdmissionTask() *ReturnAdmissionFetchRelationships {
+	m.ReturnAdmissionTask = nil
+	return m
+}
+
 func (m *ReturnAdmissionFetchRelationships) WithValidations(validations RelationshipLinks) *ReturnAdmissionFetchRelationships {
 
 	m.Validations = &validations
@@ -102,11 +135,19 @@ func (m *ReturnAdmissionFetchRelationships) Validate(formats strfmt.Registry) er
 		res = append(res, err)
 	}
 
+	if err := m.validateBeneficiaryBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePayment(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validatePaymentReturn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReturnAdmissionTask(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,6 +171,24 @@ func (m *ReturnAdmissionFetchRelationships) validateBeneficiaryAccount(formats s
 		if err := m.BeneficiaryAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("beneficiary_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReturnAdmissionFetchRelationships) validateBeneficiaryBranch(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BeneficiaryBranch) { // not required
+		return nil
+	}
+
+	if m.BeneficiaryBranch != nil {
+		if err := m.BeneficiaryBranch.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("beneficiary_branch")
 			}
 			return err
 		}
@@ -166,6 +225,24 @@ func (m *ReturnAdmissionFetchRelationships) validatePaymentReturn(formats strfmt
 		if err := m.PaymentReturn.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("payment_return")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReturnAdmissionFetchRelationships) validateReturnAdmissionTask(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReturnAdmissionTask) { // not required
+		return nil
+	}
+
+	if m.ReturnAdmissionTask != nil {
+		if err := m.ReturnAdmissionTask.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("return_admission_task")
 			}
 			return err
 		}

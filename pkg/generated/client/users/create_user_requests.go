@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.CreateUser creates a new CreateUserRequest object
@@ -73,7 +72,7 @@ func (o *CreateUserRequest) WithoutUserCreationRequest() *CreateUserRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create user Request
 func (o *CreateUserRequest) WithContext(ctx context.Context) *CreateUserRequest {
 	o.Context = ctx

@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/form3"
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/form3"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
@@ -16,7 +16,7 @@ func TestCreateSubscriptionsDeprecatedCallbackUriParams(t *testing.T) {
 	transport := models.CallbackTransportHTTP
 	callbackURI := "https://webhook.site/db28eac0-d0a5-4078-b9be-0e4617471b01"
 	eventType := "created"
-	recordType := "PaymentSubmission"
+	recordType := "payment_submissions"
 
 	testCreateAndUpdateSubscriptions(t, &models.SubscriptionAttributes{
 		CallbackTransport: transport,
@@ -31,7 +31,7 @@ func TestCreateSubscriptionsNewCallbackUriParams(t *testing.T) {
 	transport := models.CallbackTransportHTTP
 	callbackURI := "https://webhook.site/db28eac0-d0a5-4078-b9be-0e4617471b01"
 	eventType := "created"
-	recordType := "PaymentSubmission"
+	recordType := "payment_submissions"
 
 	testCreateAndUpdateSubscriptions(t, &models.SubscriptionAttributes{
 		CallbackUris: []*models.CallbackURI{{
@@ -48,7 +48,7 @@ func TestCreateSubscriptionsNewCallbackUriParamsHttpAwsPrivate(t *testing.T) {
 	transport := models.CallbackTransportHTTPAwsPrivate
 	callbackURI := "https://webhook.site/db28eac0-d0a5-4078-b9be-0e4617471b01"
 	eventType := "created"
-	recordType := "PaymentSubmission"
+	recordType := "payment_submissions"
 
 	testCreateAndUpdateSubscriptions(t, &models.SubscriptionAttributes{
 		CallbackUris: []*models.CallbackURI{{
@@ -84,20 +84,21 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 	// update
 	updateReq := f3.Subscriptions.ModifySubscription()
 	version := int64(0)
+	deactivated := true
 	updateReq.
 		WithID(id).
 		WithData(models.SubscriptionUpdate{
 			ID:             &id,
 			OrganisationID: &organisationID,
 			Attributes: &models.SubscriptionUpdateAttributes{
-				Deactivated: true,
+				Deactivated: &deactivated,
 			},
 			Version: &version,
 		})
 	updateResp, err := updateReq.Do()
 	require.NoError(t, err)
 	assert.Equal(t, id.String(), updateResp.Data.ID.String())
-	assert.Equal(t, true, updateResp.Data.Attributes.Deactivated)
+	assert.Equal(t, &deactivated, updateResp.Data.Attributes.Deactivated)
 
 	//delete
 	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(version + 1).Do()

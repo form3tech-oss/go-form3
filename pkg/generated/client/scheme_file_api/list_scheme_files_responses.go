@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListSchemeFilesReader is a Reader for the ListSchemeFiles structure.
@@ -70,7 +69,8 @@ func NewListSchemeFilesOK() *ListSchemeFilesOK {
 	return &ListSchemeFilesOK{}
 }
 
-/*ListSchemeFilesOK handles this case with default header values.
+/*
+ListSchemeFilesOK handles this case with default header values.
 
 List of scheme files
 */
@@ -80,6 +80,36 @@ type ListSchemeFilesOK struct {
 
 	// isStream: false
 	*models.ListSchemeFilesResponse
+}
+
+// IsSuccess returns true when this list scheme files o k response has a 2xx status code
+func (o *ListSchemeFilesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list scheme files o k response has a 3xx status code
+func (o *ListSchemeFilesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme files o k response has a 4xx status code
+func (o *ListSchemeFilesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scheme files o k response has a 5xx status code
+func (o *ListSchemeFilesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme files o k response a status code equal to that given
+func (o *ListSchemeFilesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list scheme files o k response
+func (o *ListSchemeFilesOK) Code() int {
+	return 200
 }
 
 func (o *ListSchemeFilesOK) Error() string {
@@ -104,7 +134,8 @@ func NewListSchemeFilesBadRequest() *ListSchemeFilesBadRequest {
 	return &ListSchemeFilesBadRequest{}
 }
 
-/*ListSchemeFilesBadRequest handles this case with default header values.
+/*
+ListSchemeFilesBadRequest handles this case with default header values.
 
 Reports bad request
 */
@@ -114,6 +145,36 @@ type ListSchemeFilesBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme files bad request response has a 2xx status code
+func (o *ListSchemeFilesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme files bad request response has a 3xx status code
+func (o *ListSchemeFilesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme files bad request response has a 4xx status code
+func (o *ListSchemeFilesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scheme files bad request response has a 5xx status code
+func (o *ListSchemeFilesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme files bad request response a status code equal to that given
+func (o *ListSchemeFilesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list scheme files bad request response
+func (o *ListSchemeFilesBadRequest) Code() int {
+	return 400
 }
 
 func (o *ListSchemeFilesBadRequest) Error() string {
@@ -138,7 +199,8 @@ func NewListSchemeFilesUnauthorized() *ListSchemeFilesUnauthorized {
 	return &ListSchemeFilesUnauthorized{}
 }
 
-/*ListSchemeFilesUnauthorized handles this case with default header values.
+/*
+ListSchemeFilesUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -148,6 +210,36 @@ type ListSchemeFilesUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme files unauthorized response has a 2xx status code
+func (o *ListSchemeFilesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme files unauthorized response has a 3xx status code
+func (o *ListSchemeFilesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme files unauthorized response has a 4xx status code
+func (o *ListSchemeFilesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scheme files unauthorized response has a 5xx status code
+func (o *ListSchemeFilesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme files unauthorized response a status code equal to that given
+func (o *ListSchemeFilesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list scheme files unauthorized response
+func (o *ListSchemeFilesUnauthorized) Code() int {
+	return 401
 }
 
 func (o *ListSchemeFilesUnauthorized) Error() string {
@@ -172,7 +264,8 @@ func NewListSchemeFilesForbidden() *ListSchemeFilesForbidden {
 	return &ListSchemeFilesForbidden{}
 }
 
-/*ListSchemeFilesForbidden handles this case with default header values.
+/*
+ListSchemeFilesForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -182,6 +275,36 @@ type ListSchemeFilesForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme files forbidden response has a 2xx status code
+func (o *ListSchemeFilesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme files forbidden response has a 3xx status code
+func (o *ListSchemeFilesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme files forbidden response has a 4xx status code
+func (o *ListSchemeFilesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scheme files forbidden response has a 5xx status code
+func (o *ListSchemeFilesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme files forbidden response a status code equal to that given
+func (o *ListSchemeFilesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list scheme files forbidden response
+func (o *ListSchemeFilesForbidden) Code() int {
+	return 403
 }
 
 func (o *ListSchemeFilesForbidden) Error() string {
@@ -206,7 +329,8 @@ func NewListSchemeFilesInternalServerError() *ListSchemeFilesInternalServerError
 	return &ListSchemeFilesInternalServerError{}
 }
 
-/*ListSchemeFilesInternalServerError handles this case with default header values.
+/*
+ListSchemeFilesInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
@@ -216,6 +340,36 @@ type ListSchemeFilesInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme files internal server error response has a 2xx status code
+func (o *ListSchemeFilesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme files internal server error response has a 3xx status code
+func (o *ListSchemeFilesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme files internal server error response has a 4xx status code
+func (o *ListSchemeFilesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scheme files internal server error response has a 5xx status code
+func (o *ListSchemeFilesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list scheme files internal server error response a status code equal to that given
+func (o *ListSchemeFilesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list scheme files internal server error response
+func (o *ListSchemeFilesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ListSchemeFilesInternalServerError) Error() string {

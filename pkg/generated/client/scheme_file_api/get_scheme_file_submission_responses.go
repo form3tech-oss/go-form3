@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetSchemeFileSubmissionReader is a Reader for the GetSchemeFileSubmission structure.
@@ -70,7 +69,8 @@ func NewGetSchemeFileSubmissionOK() *GetSchemeFileSubmissionOK {
 	return &GetSchemeFileSubmissionOK{}
 }
 
-/*GetSchemeFileSubmissionOK handles this case with default header values.
+/*
+GetSchemeFileSubmissionOK handles this case with default header values.
 
 Scheme File Submission Response
 */
@@ -80,6 +80,36 @@ type GetSchemeFileSubmissionOK struct {
 
 	// isStream: false
 	*models.SchemeFileSubmissionResponse
+}
+
+// IsSuccess returns true when this get scheme file submission o k response has a 2xx status code
+func (o *GetSchemeFileSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get scheme file submission o k response has a 3xx status code
+func (o *GetSchemeFileSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file submission o k response has a 4xx status code
+func (o *GetSchemeFileSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme file submission o k response has a 5xx status code
+func (o *GetSchemeFileSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file submission o k response a status code equal to that given
+func (o *GetSchemeFileSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get scheme file submission o k response
+func (o *GetSchemeFileSubmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetSchemeFileSubmissionOK) Error() string {
@@ -104,7 +134,8 @@ func NewGetSchemeFileSubmissionUnauthorized() *GetSchemeFileSubmissionUnauthoriz
 	return &GetSchemeFileSubmissionUnauthorized{}
 }
 
-/*GetSchemeFileSubmissionUnauthorized handles this case with default header values.
+/*
+GetSchemeFileSubmissionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -114,6 +145,36 @@ type GetSchemeFileSubmissionUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file submission unauthorized response has a 2xx status code
+func (o *GetSchemeFileSubmissionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file submission unauthorized response has a 3xx status code
+func (o *GetSchemeFileSubmissionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file submission unauthorized response has a 4xx status code
+func (o *GetSchemeFileSubmissionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file submission unauthorized response has a 5xx status code
+func (o *GetSchemeFileSubmissionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file submission unauthorized response a status code equal to that given
+func (o *GetSchemeFileSubmissionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get scheme file submission unauthorized response
+func (o *GetSchemeFileSubmissionUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetSchemeFileSubmissionUnauthorized) Error() string {
@@ -138,7 +199,8 @@ func NewGetSchemeFileSubmissionForbidden() *GetSchemeFileSubmissionForbidden {
 	return &GetSchemeFileSubmissionForbidden{}
 }
 
-/*GetSchemeFileSubmissionForbidden handles this case with default header values.
+/*
+GetSchemeFileSubmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -148,6 +210,36 @@ type GetSchemeFileSubmissionForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file submission forbidden response has a 2xx status code
+func (o *GetSchemeFileSubmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file submission forbidden response has a 3xx status code
+func (o *GetSchemeFileSubmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file submission forbidden response has a 4xx status code
+func (o *GetSchemeFileSubmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file submission forbidden response has a 5xx status code
+func (o *GetSchemeFileSubmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file submission forbidden response a status code equal to that given
+func (o *GetSchemeFileSubmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get scheme file submission forbidden response
+func (o *GetSchemeFileSubmissionForbidden) Code() int {
+	return 403
 }
 
 func (o *GetSchemeFileSubmissionForbidden) Error() string {
@@ -172,7 +264,8 @@ func NewGetSchemeFileSubmissionNotFound() *GetSchemeFileSubmissionNotFound {
 	return &GetSchemeFileSubmissionNotFound{}
 }
 
-/*GetSchemeFileSubmissionNotFound handles this case with default header values.
+/*
+GetSchemeFileSubmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -182,6 +275,36 @@ type GetSchemeFileSubmissionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file submission not found response has a 2xx status code
+func (o *GetSchemeFileSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file submission not found response has a 3xx status code
+func (o *GetSchemeFileSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file submission not found response has a 4xx status code
+func (o *GetSchemeFileSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme file submission not found response has a 5xx status code
+func (o *GetSchemeFileSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme file submission not found response a status code equal to that given
+func (o *GetSchemeFileSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get scheme file submission not found response
+func (o *GetSchemeFileSubmissionNotFound) Code() int {
+	return 404
 }
 
 func (o *GetSchemeFileSubmissionNotFound) Error() string {
@@ -206,7 +329,8 @@ func NewGetSchemeFileSubmissionInternalServerError() *GetSchemeFileSubmissionInt
 	return &GetSchemeFileSubmissionInternalServerError{}
 }
 
-/*GetSchemeFileSubmissionInternalServerError handles this case with default header values.
+/*
+GetSchemeFileSubmissionInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
@@ -216,6 +340,36 @@ type GetSchemeFileSubmissionInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme file submission internal server error response has a 2xx status code
+func (o *GetSchemeFileSubmissionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme file submission internal server error response has a 3xx status code
+func (o *GetSchemeFileSubmissionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme file submission internal server error response has a 4xx status code
+func (o *GetSchemeFileSubmissionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme file submission internal server error response has a 5xx status code
+func (o *GetSchemeFileSubmissionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get scheme file submission internal server error response a status code equal to that given
+func (o *GetSchemeFileSubmissionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get scheme file submission internal server error response
+func (o *GetSchemeFileSubmissionInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetSchemeFileSubmissionInternalServerError) Error() string {

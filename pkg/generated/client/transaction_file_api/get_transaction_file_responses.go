@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetTransactionFileReader is a Reader for the GetTransactionFile structure.
@@ -70,7 +69,8 @@ func NewGetTransactionFileOK() *GetTransactionFileOK {
 	return &GetTransactionFileOK{}
 }
 
-/*GetTransactionFileOK handles this case with default header values.
+/*
+GetTransactionFileOK handles this case with default header values.
 
 Transaction File Response
 */
@@ -80,6 +80,36 @@ type GetTransactionFileOK struct {
 
 	// isStream: false
 	*models.TransactionFileResponse
+}
+
+// IsSuccess returns true when this get transaction file o k response has a 2xx status code
+func (o *GetTransactionFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get transaction file o k response has a 3xx status code
+func (o *GetTransactionFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file o k response has a 4xx status code
+func (o *GetTransactionFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction file o k response has a 5xx status code
+func (o *GetTransactionFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file o k response a status code equal to that given
+func (o *GetTransactionFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get transaction file o k response
+func (o *GetTransactionFileOK) Code() int {
+	return 200
 }
 
 func (o *GetTransactionFileOK) Error() string {
@@ -104,7 +134,8 @@ func NewGetTransactionFileUnauthorized() *GetTransactionFileUnauthorized {
 	return &GetTransactionFileUnauthorized{}
 }
 
-/*GetTransactionFileUnauthorized handles this case with default header values.
+/*
+GetTransactionFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -114,6 +145,36 @@ type GetTransactionFileUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file unauthorized response has a 2xx status code
+func (o *GetTransactionFileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file unauthorized response has a 3xx status code
+func (o *GetTransactionFileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file unauthorized response has a 4xx status code
+func (o *GetTransactionFileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file unauthorized response has a 5xx status code
+func (o *GetTransactionFileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file unauthorized response a status code equal to that given
+func (o *GetTransactionFileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get transaction file unauthorized response
+func (o *GetTransactionFileUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetTransactionFileUnauthorized) Error() string {
@@ -138,7 +199,8 @@ func NewGetTransactionFileForbidden() *GetTransactionFileForbidden {
 	return &GetTransactionFileForbidden{}
 }
 
-/*GetTransactionFileForbidden handles this case with default header values.
+/*
+GetTransactionFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -148,6 +210,36 @@ type GetTransactionFileForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file forbidden response has a 2xx status code
+func (o *GetTransactionFileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file forbidden response has a 3xx status code
+func (o *GetTransactionFileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file forbidden response has a 4xx status code
+func (o *GetTransactionFileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file forbidden response has a 5xx status code
+func (o *GetTransactionFileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file forbidden response a status code equal to that given
+func (o *GetTransactionFileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get transaction file forbidden response
+func (o *GetTransactionFileForbidden) Code() int {
+	return 403
 }
 
 func (o *GetTransactionFileForbidden) Error() string {
@@ -172,7 +264,8 @@ func NewGetTransactionFileNotFound() *GetTransactionFileNotFound {
 	return &GetTransactionFileNotFound{}
 }
 
-/*GetTransactionFileNotFound handles this case with default header values.
+/*
+GetTransactionFileNotFound handles this case with default header values.
 
 Not Found
 */
@@ -182,6 +275,36 @@ type GetTransactionFileNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file not found response has a 2xx status code
+func (o *GetTransactionFileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file not found response has a 3xx status code
+func (o *GetTransactionFileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file not found response has a 4xx status code
+func (o *GetTransactionFileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file not found response has a 5xx status code
+func (o *GetTransactionFileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file not found response a status code equal to that given
+func (o *GetTransactionFileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get transaction file not found response
+func (o *GetTransactionFileNotFound) Code() int {
+	return 404
 }
 
 func (o *GetTransactionFileNotFound) Error() string {
@@ -206,7 +329,8 @@ func NewGetTransactionFileInternalServerError() *GetTransactionFileInternalServe
 	return &GetTransactionFileInternalServerError{}
 }
 
-/*GetTransactionFileInternalServerError handles this case with default header values.
+/*
+GetTransactionFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
@@ -216,6 +340,36 @@ type GetTransactionFileInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file internal server error response has a 2xx status code
+func (o *GetTransactionFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file internal server error response has a 3xx status code
+func (o *GetTransactionFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file internal server error response has a 4xx status code
+func (o *GetTransactionFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction file internal server error response has a 5xx status code
+func (o *GetTransactionFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get transaction file internal server error response a status code equal to that given
+func (o *GetTransactionFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get transaction file internal server error response
+func (o *GetTransactionFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetTransactionFileInternalServerError) Error() string {

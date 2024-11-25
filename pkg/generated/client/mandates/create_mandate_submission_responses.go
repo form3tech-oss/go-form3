@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateMandateSubmissionReader is a Reader for the CreateMandateSubmission structure.
@@ -49,7 +48,8 @@ func NewCreateMandateSubmissionCreated() *CreateMandateSubmissionCreated {
 	return &CreateMandateSubmissionCreated{}
 }
 
-/*CreateMandateSubmissionCreated handles this case with default header values.
+/*
+CreateMandateSubmissionCreated handles this case with default header values.
 
 Mandate Submission creation response
 */
@@ -59,6 +59,36 @@ type CreateMandateSubmissionCreated struct {
 
 	// isStream: false
 	*models.MandateSubmissionDetailsResponse
+}
+
+// IsSuccess returns true when this create mandate submission created response has a 2xx status code
+func (o *CreateMandateSubmissionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create mandate submission created response has a 3xx status code
+func (o *CreateMandateSubmissionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate submission created response has a 4xx status code
+func (o *CreateMandateSubmissionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create mandate submission created response has a 5xx status code
+func (o *CreateMandateSubmissionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate submission created response a status code equal to that given
+func (o *CreateMandateSubmissionCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create mandate submission created response
+func (o *CreateMandateSubmissionCreated) Code() int {
+	return 201
 }
 
 func (o *CreateMandateSubmissionCreated) Error() string {
@@ -83,7 +113,8 @@ func NewCreateMandateSubmissionBadRequest() *CreateMandateSubmissionBadRequest {
 	return &CreateMandateSubmissionBadRequest{}
 }
 
-/*CreateMandateSubmissionBadRequest handles this case with default header values.
+/*
+CreateMandateSubmissionBadRequest handles this case with default header values.
 
 Mandate Submission creation error
 */
@@ -93,6 +124,36 @@ type CreateMandateSubmissionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create mandate submission bad request response has a 2xx status code
+func (o *CreateMandateSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create mandate submission bad request response has a 3xx status code
+func (o *CreateMandateSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate submission bad request response has a 4xx status code
+func (o *CreateMandateSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mandate submission bad request response has a 5xx status code
+func (o *CreateMandateSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate submission bad request response a status code equal to that given
+func (o *CreateMandateSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create mandate submission bad request response
+func (o *CreateMandateSubmissionBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateMandateSubmissionBadRequest) Error() string {

@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetReportAdmission creates a new GetReportAdmissionRequest object
@@ -68,7 +67,7 @@ func (o *GetReportAdmissionRequest) WithID(id strfmt.UUID) *GetReportAdmissionRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get report admission Request
 func (o *GetReportAdmissionRequest) WithContext(ctx context.Context) *GetReportAdmissionRequest {
 	o.Context = ctx

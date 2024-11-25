@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.CreateUserRole creates a new CreateUserRoleRequest object
@@ -68,7 +67,7 @@ func (o *CreateUserRoleRequest) WithUserID(userID strfmt.UUID) *CreateUserRoleRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create user role Request
 func (o *CreateUserRoleRequest) WithContext(ctx context.Context) *CreateUserRoleRequest {
 	o.Context = ctx

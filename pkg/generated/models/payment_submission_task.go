@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -43,8 +42,8 @@ type PaymentSubmissionTask struct {
 	// relationships
 	Relationships *PaymentSubmissionTaskRelationships `json:"relationships,omitempty"`
 
-	// Name of the resource type
-	// Pattern: ^[A-Za-z_]*$
+	// type
+	// Enum: ["payment_submission_tasks"]
 	Type string `json:"type,omitempty"`
 
 	// Version number
@@ -274,13 +273,40 @@ func (m *PaymentSubmissionTask) validateRelationships(formats strfmt.Registry) e
 	return nil
 }
 
+var paymentSubmissionTaskTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["payment_submission_tasks"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		paymentSubmissionTaskTypeTypePropEnum = append(paymentSubmissionTaskTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// PaymentSubmissionTaskTypePaymentSubmissionTasks captures enum value "payment_submission_tasks"
+	PaymentSubmissionTaskTypePaymentSubmissionTasks string = "payment_submission_tasks"
+)
+
+// prop value enum
+func (m *PaymentSubmissionTask) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, paymentSubmissionTaskTypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *PaymentSubmissionTask) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
 		return err
 	}
 
@@ -332,6 +358,12 @@ type PaymentSubmissionTaskAttributes struct {
 	// assignee
 	Assignee PaymentSubmissionTaskAssignee `json:"assignee,omitempty"`
 
+	// group
+	Group PaymentSubmissionTaskGroup `json:"group,omitempty"`
+
+	// Key Value map that contains additional data for executing the task.
+	Input map[string]interface{} `json:"input,omitempty"`
+
 	// name
 	Name PaymentSubmissionTaskName `json:"name,omitempty"`
 
@@ -347,6 +379,10 @@ func PaymentSubmissionTaskAttributesWithDefaults(defaults client.Defaults) *Paym
 
 		// TODO Assignee: PaymentSubmissionTaskAssignee,
 
+		// TODO Group: PaymentSubmissionTaskGroup,
+
+		Input: defaults.GetMapStringInterface("PaymentSubmissionTaskAttributes", "input"),
+
 		// TODO Name: PaymentSubmissionTaskName,
 
 		Output: defaults.GetMapStringInterface("PaymentSubmissionTaskAttributes", "output"),
@@ -359,6 +395,20 @@ func PaymentSubmissionTaskAttributesWithDefaults(defaults client.Defaults) *Paym
 func (m *PaymentSubmissionTaskAttributes) WithAssignee(assignee PaymentSubmissionTaskAssignee) *PaymentSubmissionTaskAttributes {
 
 	m.Assignee = assignee
+
+	return m
+}
+
+func (m *PaymentSubmissionTaskAttributes) WithGroup(group PaymentSubmissionTaskGroup) *PaymentSubmissionTaskAttributes {
+
+	m.Group = group
+
+	return m
+}
+
+func (m *PaymentSubmissionTaskAttributes) WithInput(input map[string]interface{}) *PaymentSubmissionTaskAttributes {
+
+	m.Input = input
 
 	return m
 }
@@ -392,6 +442,10 @@ func (m *PaymentSubmissionTaskAttributes) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -415,6 +469,22 @@ func (m *PaymentSubmissionTaskAttributes) validateAssignee(formats strfmt.Regist
 	if err := m.Assignee.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("attributes" + "." + "assignee")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionTaskAttributes) validateGroup(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Group) { // not required
+		return nil
+	}
+
+	if err := m.Group.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "group")
 		}
 		return err
 	}

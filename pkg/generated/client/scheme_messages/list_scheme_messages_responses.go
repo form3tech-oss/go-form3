@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListSchemeMessagesReader is a Reader for the ListSchemeMessages structure.
@@ -39,6 +38,13 @@ func (o *ListSchemeMessagesReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 
+	case 401:
+		result := NewListSchemeMessagesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	case 403:
 		result := NewListSchemeMessagesForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -56,7 +62,8 @@ func NewListSchemeMessagesOK() *ListSchemeMessagesOK {
 	return &ListSchemeMessagesOK{}
 }
 
-/*ListSchemeMessagesOK handles this case with default header values.
+/*
+ListSchemeMessagesOK handles this case with default header values.
 
 List of scheme messages
 */
@@ -66,6 +73,36 @@ type ListSchemeMessagesOK struct {
 
 	// isStream: false
 	*models.SchemeMessageDetailsListResponse
+}
+
+// IsSuccess returns true when this list scheme messages o k response has a 2xx status code
+func (o *ListSchemeMessagesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list scheme messages o k response has a 3xx status code
+func (o *ListSchemeMessagesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme messages o k response has a 4xx status code
+func (o *ListSchemeMessagesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scheme messages o k response has a 5xx status code
+func (o *ListSchemeMessagesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme messages o k response a status code equal to that given
+func (o *ListSchemeMessagesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list scheme messages o k response
+func (o *ListSchemeMessagesOK) Code() int {
+	return 200
 }
 
 func (o *ListSchemeMessagesOK) Error() string {
@@ -90,9 +127,10 @@ func NewListSchemeMessagesBadRequest() *ListSchemeMessagesBadRequest {
 	return &ListSchemeMessagesBadRequest{}
 }
 
-/*ListSchemeMessagesBadRequest handles this case with default header values.
+/*
+ListSchemeMessagesBadRequest handles this case with default header values.
 
-Scheme Message bad request
+Bad Request
 */
 type ListSchemeMessagesBadRequest struct {
 
@@ -100,6 +138,36 @@ type ListSchemeMessagesBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme messages bad request response has a 2xx status code
+func (o *ListSchemeMessagesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme messages bad request response has a 3xx status code
+func (o *ListSchemeMessagesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme messages bad request response has a 4xx status code
+func (o *ListSchemeMessagesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scheme messages bad request response has a 5xx status code
+func (o *ListSchemeMessagesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme messages bad request response a status code equal to that given
+func (o *ListSchemeMessagesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list scheme messages bad request response
+func (o *ListSchemeMessagesBadRequest) Code() int {
+	return 400
 }
 
 func (o *ListSchemeMessagesBadRequest) Error() string {
@@ -119,12 +187,78 @@ func (o *ListSchemeMessagesBadRequest) readResponse(response runtime.ClientRespo
 	return nil
 }
 
+// NewListSchemeMessagesUnauthorized creates a ListSchemeMessagesUnauthorized with default headers values
+func NewListSchemeMessagesUnauthorized() *ListSchemeMessagesUnauthorized {
+	return &ListSchemeMessagesUnauthorized{}
+}
+
+/*
+ListSchemeMessagesUnauthorized handles this case with default header values.
+
+Unauthorized
+*/
+type ListSchemeMessagesUnauthorized struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme messages unauthorized response has a 2xx status code
+func (o *ListSchemeMessagesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme messages unauthorized response has a 3xx status code
+func (o *ListSchemeMessagesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme messages unauthorized response has a 4xx status code
+func (o *ListSchemeMessagesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scheme messages unauthorized response has a 5xx status code
+func (o *ListSchemeMessagesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme messages unauthorized response a status code equal to that given
+func (o *ListSchemeMessagesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list scheme messages unauthorized response
+func (o *ListSchemeMessagesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *ListSchemeMessagesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /notification/schememessages][%d] listSchemeMessagesUnauthorized", 401)
+}
+
+func (o *ListSchemeMessagesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewListSchemeMessagesForbidden creates a ListSchemeMessagesForbidden with default headers values
 func NewListSchemeMessagesForbidden() *ListSchemeMessagesForbidden {
 	return &ListSchemeMessagesForbidden{}
 }
 
-/*ListSchemeMessagesForbidden handles this case with default header values.
+/*
+ListSchemeMessagesForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -134,6 +268,36 @@ type ListSchemeMessagesForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this list scheme messages forbidden response has a 2xx status code
+func (o *ListSchemeMessagesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scheme messages forbidden response has a 3xx status code
+func (o *ListSchemeMessagesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scheme messages forbidden response has a 4xx status code
+func (o *ListSchemeMessagesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scheme messages forbidden response has a 5xx status code
+func (o *ListSchemeMessagesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scheme messages forbidden response a status code equal to that given
+func (o *ListSchemeMessagesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list scheme messages forbidden response
+func (o *ListSchemeMessagesForbidden) Code() int {
+	return 403
 }
 
 func (o *ListSchemeMessagesForbidden) Error() string {

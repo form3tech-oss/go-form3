@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetDirectDebitReversalAdmissionReader is a Reader for the GetDirectDebitReversalAdmission structure.
@@ -42,7 +41,8 @@ func NewGetDirectDebitReversalAdmissionOK() *GetDirectDebitReversalAdmissionOK {
 	return &GetDirectDebitReversalAdmissionOK{}
 }
 
-/*GetDirectDebitReversalAdmissionOK handles this case with default header values.
+/*
+GetDirectDebitReversalAdmissionOK handles this case with default header values.
 
 Reversal admission details
 */
@@ -52,6 +52,36 @@ type GetDirectDebitReversalAdmissionOK struct {
 
 	// isStream: false
 	*models.DirectDebitReversalAdmissionDetailsResponse
+}
+
+// IsSuccess returns true when this get direct debit reversal admission o k response has a 2xx status code
+func (o *GetDirectDebitReversalAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get direct debit reversal admission o k response has a 3xx status code
+func (o *GetDirectDebitReversalAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit reversal admission o k response has a 4xx status code
+func (o *GetDirectDebitReversalAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get direct debit reversal admission o k response has a 5xx status code
+func (o *GetDirectDebitReversalAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit reversal admission o k response a status code equal to that given
+func (o *GetDirectDebitReversalAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get direct debit reversal admission o k response
+func (o *GetDirectDebitReversalAdmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetDirectDebitReversalAdmissionOK) Error() string {

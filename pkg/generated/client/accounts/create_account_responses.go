@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateAccountReader is a Reader for the CreateAccount structure.
@@ -42,7 +41,8 @@ func NewCreateAccountCreated() *CreateAccountCreated {
 	return &CreateAccountCreated{}
 }
 
-/*CreateAccountCreated handles this case with default header values.
+/*
+CreateAccountCreated handles this case with default header values.
 
 Account creation response
 */
@@ -52,6 +52,36 @@ type CreateAccountCreated struct {
 
 	// isStream: false
 	*models.AccountCreationResponse
+}
+
+// IsSuccess returns true when this create account created response has a 2xx status code
+func (o *CreateAccountCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create account created response has a 3xx status code
+func (o *CreateAccountCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create account created response has a 4xx status code
+func (o *CreateAccountCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create account created response has a 5xx status code
+func (o *CreateAccountCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create account created response a status code equal to that given
+func (o *CreateAccountCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create account created response
+func (o *CreateAccountCreated) Code() int {
+	return 201
 }
 
 func (o *CreateAccountCreated) Error() string {

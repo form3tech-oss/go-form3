@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.GetOrganisationNameverifications creates a new GetOrganisationNameverificationsRequest object
@@ -79,7 +78,7 @@ func (c *Client) GetOrganisationNameverifications() *GetOrganisationNameverifica
 
 		FilterSubmissionStatus: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[submission.status]"),
 
-		PageNumber: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "page[number]"),
+		PageNumber: c.Defaults.GetInt64Ptr("GetOrganisationNameverifications", "page[number]"),
 
 		PageSize: c.Defaults.GetInt64Ptr("GetOrganisationNameverifications", "page[size]"),
 
@@ -210,7 +209,7 @@ type GetOrganisationNameverificationsRequest struct {
 
 	/*PageNumber      Which page to select      */
 
-	PageNumber *string
+	PageNumber *int64
 
 	/*PageSize      Number of items to select      */
 
@@ -635,7 +634,7 @@ func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionStatus(
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithPageNumber(pageNumber string) *GetOrganisationNameverificationsRequest {
+func (o *GetOrganisationNameverificationsRequest) WithPageNumber(pageNumber int64) *GetOrganisationNameverificationsRequest {
 
 	o.PageNumber = &pageNumber
 
@@ -663,7 +662,7 @@ func (o *GetOrganisationNameverificationsRequest) WithoutPageSize() *GetOrganisa
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get organisation nameverifications Request
 func (o *GetOrganisationNameverificationsRequest) WithContext(ctx context.Context) *GetOrganisationNameverificationsRequest {
 	o.Context = ctx
@@ -1143,11 +1142,11 @@ func (o *GetOrganisationNameverificationsRequest) WriteToRequest(r runtime.Clien
 	if o.PageNumber != nil {
 
 		// query param page[number]
-		var qrPageNumber string
+		var qrPageNumber int64
 		if o.PageNumber != nil {
 			qrPageNumber = *o.PageNumber
 		}
-		qPageNumber := qrPageNumber
+		qPageNumber := swag.FormatInt64(qrPageNumber)
 		if qPageNumber != "" {
 			if err := r.SetQueryParam("page[number]", qPageNumber); err != nil {
 				return err

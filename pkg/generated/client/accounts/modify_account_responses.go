@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ModifyAccountReader is a Reader for the ModifyAccount structure.
@@ -42,7 +41,8 @@ func NewModifyAccountOK() *ModifyAccountOK {
 	return &ModifyAccountOK{}
 }
 
-/*ModifyAccountOK handles this case with default header values.
+/*
+ModifyAccountOK handles this case with default header values.
 
 Account updated
 */
@@ -52,6 +52,36 @@ type ModifyAccountOK struct {
 
 	// isStream: false
 	*models.AccountDetailsResponse
+}
+
+// IsSuccess returns true when this modify account o k response has a 2xx status code
+func (o *ModifyAccountOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify account o k response has a 3xx status code
+func (o *ModifyAccountOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify account o k response has a 4xx status code
+func (o *ModifyAccountOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify account o k response has a 5xx status code
+func (o *ModifyAccountOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify account o k response a status code equal to that given
+func (o *ModifyAccountOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify account o k response
+func (o *ModifyAccountOK) Code() int {
+	return 200
 }
 
 func (o *ModifyAccountOK) Error() string {

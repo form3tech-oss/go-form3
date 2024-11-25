@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -22,7 +21,7 @@ import (
 type MandateAttributes struct {
 
 	// amount
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Amount string `json:"amount,omitempty"`
 
 	// beneficiary party
@@ -301,7 +300,7 @@ func (m *MandateAttributes) validateAmount(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateRolesReader is a Reader for the CreateRoles structure.
@@ -32,6 +31,20 @@ func (o *CreateRolesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 
+	case 400:
+		result := NewCreateRolesBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateRolesConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +55,8 @@ func NewCreateRolesCreated() *CreateRolesCreated {
 	return &CreateRolesCreated{}
 }
 
-/*CreateRolesCreated handles this case with default header values.
+/*
+CreateRolesCreated handles this case with default header values.
 
 Role creation response
 */
@@ -52,6 +66,36 @@ type CreateRolesCreated struct {
 
 	// isStream: false
 	*models.RoleCreationResponse
+}
+
+// IsSuccess returns true when this create roles created response has a 2xx status code
+func (o *CreateRolesCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create roles created response has a 3xx status code
+func (o *CreateRolesCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create roles created response has a 4xx status code
+func (o *CreateRolesCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create roles created response has a 5xx status code
+func (o *CreateRolesCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create roles created response a status code equal to that given
+func (o *CreateRolesCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create roles created response
+func (o *CreateRolesCreated) Code() int {
+	return 201
 }
 
 func (o *CreateRolesCreated) Error() string {
@@ -65,6 +109,136 @@ func (o *CreateRolesCreated) readResponse(response runtime.ClientResponse, consu
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.RoleCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateRolesBadRequest creates a CreateRolesBadRequest with default headers values
+func NewCreateRolesBadRequest() *CreateRolesBadRequest {
+	return &CreateRolesBadRequest{}
+}
+
+/*
+CreateRolesBadRequest handles this case with default header values.
+
+Bad request
+*/
+type CreateRolesBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create roles bad request response has a 2xx status code
+func (o *CreateRolesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create roles bad request response has a 3xx status code
+func (o *CreateRolesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create roles bad request response has a 4xx status code
+func (o *CreateRolesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create roles bad request response has a 5xx status code
+func (o *CreateRolesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create roles bad request response a status code equal to that given
+func (o *CreateRolesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create roles bad request response
+func (o *CreateRolesBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateRolesBadRequest) Error() string {
+	return fmt.Sprintf("[POST /security/roles][%d] createRolesBadRequest", 400)
+}
+
+func (o *CreateRolesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateRolesConflict creates a CreateRolesConflict with default headers values
+func NewCreateRolesConflict() *CreateRolesConflict {
+	return &CreateRolesConflict{}
+}
+
+/*
+CreateRolesConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateRolesConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create roles conflict response has a 2xx status code
+func (o *CreateRolesConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create roles conflict response has a 3xx status code
+func (o *CreateRolesConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create roles conflict response has a 4xx status code
+func (o *CreateRolesConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create roles conflict response has a 5xx status code
+func (o *CreateRolesConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create roles conflict response a status code equal to that given
+func (o *CreateRolesConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create roles conflict response
+func (o *CreateRolesConflict) Code() int {
+	return 409
+}
+
+func (o *CreateRolesConflict) Error() string {
+	return fmt.Sprintf("[POST /security/roles][%d] createRolesConflict", 409)
+}
+
+func (o *CreateRolesConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

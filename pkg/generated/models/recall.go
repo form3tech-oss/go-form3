@@ -8,11 +8,11 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -351,26 +351,59 @@ func (m *Recall) Json() string {
 // swagger:model RecallAttributes
 type RecallAttributes struct {
 
+	// Block to represent a Financial Institution/agent in the payment chain
+	Agents []*Agent `json:"agents,omitempty"`
+
+	// Block to represent parties involved in the payment chain
+	Parties []*Party `json:"parties,omitempty"`
+
 	// Further explanation of the reason given in reason_code. Only evaluated for certain reason codes.
 	Reason string `json:"reason,omitempty"`
 
 	// The reason for the recall. Has to be a valid [recall reason code](http://api-docs.form3.tech/api.html#enumerations-recall-reason-codes).
 	ReasonCode string `json:"reason_code,omitempty"`
 
+	// Block to represent a list of references
+	References []*Reference `json:"references,omitempty"`
+
 	// status
 	Status RecallStatus `json:"status,omitempty"`
+
+	// Scheme-specific unique ID
+	UniqueSchemeID string `json:"unique_scheme_id,omitempty"`
 }
 
 func RecallAttributesWithDefaults(defaults client.Defaults) *RecallAttributes {
 	return &RecallAttributes{
 
+		Agents: make([]*Agent, 0),
+
+		Parties: make([]*Party, 0),
+
 		Reason: defaults.GetString("RecallAttributes", "reason"),
 
 		ReasonCode: defaults.GetString("RecallAttributes", "reason_code"),
 
+		References: make([]*Reference, 0),
+
 		// TODO Status: RecallStatus,
 
+		UniqueSchemeID: defaults.GetString("RecallAttributes", "unique_scheme_id"),
 	}
+}
+
+func (m *RecallAttributes) WithAgents(agents []*Agent) *RecallAttributes {
+
+	m.Agents = agents
+
+	return m
+}
+
+func (m *RecallAttributes) WithParties(parties []*Party) *RecallAttributes {
+
+	m.Parties = parties
+
+	return m
 }
 
 func (m *RecallAttributes) WithReason(reason string) *RecallAttributes {
@@ -387,9 +420,23 @@ func (m *RecallAttributes) WithReasonCode(reasonCode string) *RecallAttributes {
 	return m
 }
 
+func (m *RecallAttributes) WithReferences(references []*Reference) *RecallAttributes {
+
+	m.References = references
+
+	return m
+}
+
 func (m *RecallAttributes) WithStatus(status RecallStatus) *RecallAttributes {
 
 	m.Status = status
+
+	return m
+}
+
+func (m *RecallAttributes) WithUniqueSchemeID(uniqueSchemeID string) *RecallAttributes {
+
+	m.UniqueSchemeID = uniqueSchemeID
 
 	return m
 }
@@ -398,6 +445,18 @@ func (m *RecallAttributes) WithStatus(status RecallStatus) *RecallAttributes {
 func (m *RecallAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAgents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateParties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferences(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -405,6 +464,81 @@ func (m *RecallAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RecallAttributes) validateAgents(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Agents) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Agents); i++ {
+		if swag.IsZero(m.Agents[i]) { // not required
+			continue
+		}
+
+		if m.Agents[i] != nil {
+			if err := m.Agents[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "agents" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *RecallAttributes) validateParties(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Parties) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Parties); i++ {
+		if swag.IsZero(m.Parties[i]) { // not required
+			continue
+		}
+
+		if m.Parties[i] != nil {
+			if err := m.Parties[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "parties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *RecallAttributes) validateReferences(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.References) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.References); i++ {
+		if swag.IsZero(m.References[i]) { // not required
+			continue
+		}
+
+		if m.References[i] != nil {
+			if err := m.References[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("attributes" + "." + "references" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetOrganisationNameverificationsID creates a new GetOrganisationNameverificationsIDRequest object
@@ -55,7 +54,7 @@ func (o *GetOrganisationNameverificationsIDRequest) WithID(id strfmt.UUID) *GetO
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get organisation nameverifications ID Request
 func (o *GetOrganisationNameverificationsIDRequest) WithContext(ctx context.Context) *GetOrganisationNameverificationsIDRequest {
 	o.Context = ctx

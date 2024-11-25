@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetDirectDebitReturnReader is a Reader for the GetDirectDebitReturn structure.
@@ -42,7 +41,8 @@ func NewGetDirectDebitReturnOK() *GetDirectDebitReturnOK {
 	return &GetDirectDebitReturnOK{}
 }
 
-/*GetDirectDebitReturnOK handles this case with default header values.
+/*
+GetDirectDebitReturnOK handles this case with default header values.
 
 Return details
 */
@@ -52,6 +52,36 @@ type GetDirectDebitReturnOK struct {
 
 	// isStream: false
 	*models.DirectDebitReturnDetailsResponse
+}
+
+// IsSuccess returns true when this get direct debit return o k response has a 2xx status code
+func (o *GetDirectDebitReturnOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get direct debit return o k response has a 3xx status code
+func (o *GetDirectDebitReturnOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit return o k response has a 4xx status code
+func (o *GetDirectDebitReturnOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get direct debit return o k response has a 5xx status code
+func (o *GetDirectDebitReturnOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit return o k response a status code equal to that given
+func (o *GetDirectDebitReturnOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get direct debit return o k response
+func (o *GetDirectDebitReturnOK) Code() int {
+	return 200
 }
 
 func (o *GetDirectDebitReturnOK) Error() string {

@@ -8,10 +8,9 @@ package reports
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new reports API client.
@@ -39,8 +38,8 @@ func (a *GetReportRequest) Do() (*GetReportOK, error) {
 		ID:                 "GetReport",
 		Method:             "GET",
 		PathPattern:        "/notification/reports/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetReportReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *GetReportAdmissionRequest) Do() (*GetReportAdmissionOK, error) {
 		ID:                 "GetReportAdmission",
 		Method:             "GET",
 		PathPattern:        "/notification/reports/{id}/admissions/{admissionId}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetReportAdmissionReader{formats: a.formats},
@@ -105,8 +104,8 @@ func (a *ListReportsRequest) Do() (*ListReportsOK, error) {
 		ID:                 "ListReports",
 		Method:             "GET",
 		PathPattern:        "/notification/reports",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListReportsReader{formats: a.formats},

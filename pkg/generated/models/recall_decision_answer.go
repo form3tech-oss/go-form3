@@ -9,13 +9,12 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 )
 
-// RecallDecisionAnswer Answer to the recall request. Can either be `accepted` or `rejected`.
+// RecallDecisionAnswer Answer to the recall request.
 // swagger:model RecallDecisionAnswer
 type RecallDecisionAnswer string
 
@@ -29,6 +28,9 @@ const (
 
 	// RecallDecisionAnswerPending captures enum value "pending"
 	RecallDecisionAnswerPending RecallDecisionAnswer = "pending"
+
+	// RecallDecisionAnswerPartiallyAccepted captures enum value "partially_accepted"
+	RecallDecisionAnswerPartiallyAccepted RecallDecisionAnswer = "partially_accepted"
 )
 
 // for schema
@@ -36,7 +38,7 @@ var recallDecisionAnswerEnum []interface{}
 
 func init() {
 	var res []RecallDecisionAnswer
-	if err := json.Unmarshal([]byte(`["accepted","rejected","pending"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","rejected","pending","partially_accepted"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

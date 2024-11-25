@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetSchemeFile creates a new GetSchemeFileRequest object
@@ -75,7 +74,7 @@ func (o *GetSchemeFileRequest) WithSchemeFileID(schemeFileID strfmt.UUID) *GetSc
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get scheme file Request
 func (o *GetSchemeFileRequest) WithContext(ctx context.Context) *GetSchemeFileRequest {
 	o.Context = ctx

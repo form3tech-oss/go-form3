@@ -9,9 +9,8 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 )
 
@@ -51,6 +50,10 @@ func (m AccountNumberCode) validateAccountNumberCodeEnum(path, location string, 
 // Validate validates this account number code
 func (m AccountNumberCode) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := validate.MaxLength("", "body", string(m), 4); err != nil {
+		return err
+	}
 
 	// value enum
 	if err := m.validateAccountNumberCodeEnum("", "body", m); err != nil {

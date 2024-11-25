@@ -11,8 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.UploadTransactionFile creates a new UploadTransactionFileRequest object
@@ -75,7 +74,7 @@ func (o *UploadTransactionFileRequest) WithTransactionFileID(transactionFileID s
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the upload transaction file Request
 func (o *UploadTransactionFileRequest) WithContext(ctx context.Context) *UploadTransactionFileRequest {
 	o.Context = ctx

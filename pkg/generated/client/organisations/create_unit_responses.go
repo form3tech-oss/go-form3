@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateUnitReader is a Reader for the CreateUnit structure.
@@ -32,6 +31,20 @@ func (o *CreateUnitReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewCreateUnitBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateUnitConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +55,8 @@ func NewCreateUnitCreated() *CreateUnitCreated {
 	return &CreateUnitCreated{}
 }
 
-/*CreateUnitCreated handles this case with default header values.
+/*
+CreateUnitCreated handles this case with default header values.
 
 Organisation creation response
 */
@@ -52,6 +66,36 @@ type CreateUnitCreated struct {
 
 	// isStream: false
 	*models.OrganisationCreationResponse
+}
+
+// IsSuccess returns true when this create unit created response has a 2xx status code
+func (o *CreateUnitCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create unit created response has a 3xx status code
+func (o *CreateUnitCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create unit created response has a 4xx status code
+func (o *CreateUnitCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create unit created response has a 5xx status code
+func (o *CreateUnitCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create unit created response a status code equal to that given
+func (o *CreateUnitCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create unit created response
+func (o *CreateUnitCreated) Code() int {
+	return 201
 }
 
 func (o *CreateUnitCreated) Error() string {
@@ -65,6 +109,136 @@ func (o *CreateUnitCreated) readResponse(response runtime.ClientResponse, consum
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.OrganisationCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUnitBadRequest creates a CreateUnitBadRequest with default headers values
+func NewCreateUnitBadRequest() *CreateUnitBadRequest {
+	return &CreateUnitBadRequest{}
+}
+
+/*
+CreateUnitBadRequest handles this case with default header values.
+
+Bad Request
+*/
+type CreateUnitBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create unit bad request response has a 2xx status code
+func (o *CreateUnitBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create unit bad request response has a 3xx status code
+func (o *CreateUnitBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create unit bad request response has a 4xx status code
+func (o *CreateUnitBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create unit bad request response has a 5xx status code
+func (o *CreateUnitBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create unit bad request response a status code equal to that given
+func (o *CreateUnitBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create unit bad request response
+func (o *CreateUnitBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateUnitBadRequest) Error() string {
+	return fmt.Sprintf("[POST /organisation/units][%d] createUnitBadRequest", 400)
+}
+
+func (o *CreateUnitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUnitConflict creates a CreateUnitConflict with default headers values
+func NewCreateUnitConflict() *CreateUnitConflict {
+	return &CreateUnitConflict{}
+}
+
+/*
+CreateUnitConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateUnitConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create unit conflict response has a 2xx status code
+func (o *CreateUnitConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create unit conflict response has a 3xx status code
+func (o *CreateUnitConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create unit conflict response has a 4xx status code
+func (o *CreateUnitConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create unit conflict response has a 5xx status code
+func (o *CreateUnitConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create unit conflict response a status code equal to that given
+func (o *CreateUnitConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create unit conflict response
+func (o *CreateUnitConflict) Code() int {
+	return 409
+}
+
+func (o *CreateUnitConflict) Error() string {
+	return fmt.Sprintf("[POST /organisation/units][%d] createUnitConflict", 409)
+}
+
+func (o *CreateUnitConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

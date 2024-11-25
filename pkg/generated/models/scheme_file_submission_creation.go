@@ -9,11 +9,11 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // SchemeFileSubmissionCreation scheme file submission creation
@@ -21,7 +21,8 @@ import (
 type SchemeFileSubmissionCreation struct {
 
 	// data
-	Data *SchemeFileSubmission `json:"data,omitempty"`
+	// Required: true
+	Data *SchemeFileSubmission `json:"data"`
 }
 
 func SchemeFileSubmissionCreationWithDefaults(defaults client.Defaults) *SchemeFileSubmissionCreation {
@@ -59,8 +60,8 @@ func (m *SchemeFileSubmissionCreation) Validate(formats strfmt.Registry) error {
 
 func (m *SchemeFileSubmissionCreation) validateData(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Data) { // not required
-		return nil
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
 	}
 
 	if m.Data != nil {

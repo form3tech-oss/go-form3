@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.CreateMandate creates a new CreateMandateRequest object
@@ -73,7 +72,7 @@ func (o *CreateMandateRequest) WithoutMandateCreationRequest() *CreateMandateReq
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create mandate Request
 func (o *CreateMandateRequest) WithContext(ctx context.Context) *CreateMandateRequest {
 	o.Context = ctx

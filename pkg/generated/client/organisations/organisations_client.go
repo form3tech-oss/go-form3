@@ -8,10 +8,9 @@ package organisations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new organisations API client.
@@ -39,8 +38,8 @@ func (a *CreateUnitRequest) Do() (*CreateUnitCreated, error) {
 		ID:                 "CreateUnit",
 		Method:             "POST",
 		PathPattern:        "/organisation/units",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateUnitReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *GetUnitRequest) Do() (*GetUnitOK, error) {
 		ID:                 "GetUnit",
 		Method:             "GET",
 		PathPattern:        "/organisation/units/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetUnitReader{formats: a.formats},
@@ -105,8 +104,8 @@ func (a *ListUnitsRequest) Do() (*ListUnitsOK, error) {
 		ID:                 "ListUnits",
 		Method:             "GET",
 		PathPattern:        "/organisation/units",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListUnitsReader{formats: a.formats},
@@ -138,8 +137,8 @@ func (a *ModifyUnitRequest) Do() (*ModifyUnitOK, error) {
 		ID:                 "ModifyUnit",
 		Method:             "PATCH",
 		PathPattern:        "/organisation/units/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ModifyUnitReader{formats: a.formats},

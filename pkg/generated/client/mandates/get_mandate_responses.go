@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetMandateReader is a Reader for the GetMandate structure.
@@ -42,7 +41,8 @@ func NewGetMandateOK() *GetMandateOK {
 	return &GetMandateOK{}
 }
 
-/*GetMandateOK handles this case with default header values.
+/*
+GetMandateOK handles this case with default header values.
 
 Mandate details
 */
@@ -52,6 +52,36 @@ type GetMandateOK struct {
 
 	// isStream: false
 	*models.MandateDetailsResponse
+}
+
+// IsSuccess returns true when this get mandate o k response has a 2xx status code
+func (o *GetMandateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get mandate o k response has a 3xx status code
+func (o *GetMandateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate o k response has a 4xx status code
+func (o *GetMandateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get mandate o k response has a 5xx status code
+func (o *GetMandateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate o k response a status code equal to that given
+func (o *GetMandateOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get mandate o k response
+func (o *GetMandateOK) Code() int {
+	return 200
 }
 
 func (o *GetMandateOK) Error() string {

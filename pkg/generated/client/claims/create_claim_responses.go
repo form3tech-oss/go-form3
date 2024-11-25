@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateClaimReader is a Reader for the CreateClaim structure.
@@ -49,7 +48,8 @@ func NewCreateClaimCreated() *CreateClaimCreated {
 	return &CreateClaimCreated{}
 }
 
-/*CreateClaimCreated handles this case with default header values.
+/*
+CreateClaimCreated handles this case with default header values.
 
 Claim creation response
 */
@@ -59,6 +59,36 @@ type CreateClaimCreated struct {
 
 	// isStream: false
 	*models.ClaimDetailsResponse
+}
+
+// IsSuccess returns true when this create claim created response has a 2xx status code
+func (o *CreateClaimCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create claim created response has a 3xx status code
+func (o *CreateClaimCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim created response has a 4xx status code
+func (o *CreateClaimCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create claim created response has a 5xx status code
+func (o *CreateClaimCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim created response a status code equal to that given
+func (o *CreateClaimCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create claim created response
+func (o *CreateClaimCreated) Code() int {
+	return 201
 }
 
 func (o *CreateClaimCreated) Error() string {
@@ -83,7 +113,8 @@ func NewCreateClaimBadRequest() *CreateClaimBadRequest {
 	return &CreateClaimBadRequest{}
 }
 
-/*CreateClaimBadRequest handles this case with default header values.
+/*
+CreateClaimBadRequest handles this case with default header values.
 
 Claim creation error
 */
@@ -93,6 +124,36 @@ type CreateClaimBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create claim bad request response has a 2xx status code
+func (o *CreateClaimBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim bad request response has a 3xx status code
+func (o *CreateClaimBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim bad request response has a 4xx status code
+func (o *CreateClaimBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim bad request response has a 5xx status code
+func (o *CreateClaimBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim bad request response a status code equal to that given
+func (o *CreateClaimBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create claim bad request response
+func (o *CreateClaimBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateClaimBadRequest) Error() string {

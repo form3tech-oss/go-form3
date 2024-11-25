@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -451,8 +450,8 @@ type ReversalPaymentRelationships struct {
 	// reversal admission
 	ReversalAdmission *ReversalPaymentRelationshipsReversalAdmission `json:"reversal_admission,omitempty"`
 
-	// ID of the reversal submission resource related to the reversal
-	ReversalSubmission *RelationshipLinks `json:"reversal_submission,omitempty"`
+	// reversal submission
+	ReversalSubmission *ReversalPaymentRelationshipsReversalSubmission `json:"reversal_submission,omitempty"`
 }
 
 func ReversalPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReversalPaymentRelationships {
@@ -462,7 +461,7 @@ func ReversalPaymentRelationshipsWithDefaults(defaults client.Defaults) *Reversa
 
 		ReversalAdmission: ReversalPaymentRelationshipsReversalAdmissionWithDefaults(defaults),
 
-		ReversalSubmission: RelationshipLinksWithDefaults(defaults),
+		ReversalSubmission: ReversalPaymentRelationshipsReversalSubmissionWithDefaults(defaults),
 	}
 }
 
@@ -490,7 +489,7 @@ func (m *ReversalPaymentRelationships) WithoutReversalAdmission() *ReversalPayme
 	return m
 }
 
-func (m *ReversalPaymentRelationships) WithReversalSubmission(reversalSubmission RelationshipLinks) *ReversalPaymentRelationships {
+func (m *ReversalPaymentRelationships) WithReversalSubmission(reversalSubmission ReversalPaymentRelationshipsReversalSubmission) *ReversalPaymentRelationships {
 
 	m.ReversalSubmission = &reversalSubmission
 
@@ -682,6 +681,92 @@ func (m *ReversalPaymentRelationshipsReversalAdmission) UnmarshalBinary(b []byte
 	return nil
 }
 func (m *ReversalPaymentRelationshipsReversalAdmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReversalPaymentRelationshipsReversalSubmission reversal payment relationships reversal submission
+// swagger:model ReversalPaymentRelationshipsReversalSubmission
+type ReversalPaymentRelationshipsReversalSubmission struct {
+
+	// Array of Reversal Submission resources related to the reversal
+	Data []*ReversalSubmission `json:"data"`
+}
+
+func ReversalPaymentRelationshipsReversalSubmissionWithDefaults(defaults client.Defaults) *ReversalPaymentRelationshipsReversalSubmission {
+	return &ReversalPaymentRelationshipsReversalSubmission{
+
+		Data: make([]*ReversalSubmission, 0),
+	}
+}
+
+func (m *ReversalPaymentRelationshipsReversalSubmission) WithData(data []*ReversalSubmission) *ReversalPaymentRelationshipsReversalSubmission {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this reversal payment relationships reversal submission
+func (m *ReversalPaymentRelationshipsReversalSubmission) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReversalPaymentRelationshipsReversalSubmission) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relationships" + "." + "reversal_submission" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReversalPaymentRelationshipsReversalSubmission) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReversalPaymentRelationshipsReversalSubmission) UnmarshalBinary(b []byte) error {
+	var res ReversalPaymentRelationshipsReversalSubmission
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReversalPaymentRelationshipsReversalSubmission) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

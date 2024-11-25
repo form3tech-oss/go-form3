@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -332,6 +331,12 @@ type PaymentAdmissionTaskAttributes struct {
 	// assignee
 	Assignee PaymentAdmissionTaskAssignee `json:"assignee,omitempty"`
 
+	// group
+	Group PaymentAdmissionTaskGroup `json:"group,omitempty"`
+
+	// Key Value map that contains additional data for executing the task.
+	Input map[string]interface{} `json:"input,omitempty"`
+
 	// name
 	Name PaymentAdmissionTaskName `json:"name,omitempty"`
 
@@ -351,6 +356,10 @@ func PaymentAdmissionTaskAttributesWithDefaults(defaults client.Defaults) *Payme
 
 		// TODO Assignee: PaymentAdmissionTaskAssignee,
 
+		// TODO Group: PaymentAdmissionTaskGroup,
+
+		Input: defaults.GetMapStringInterface("PaymentAdmissionTaskAttributes", "input"),
+
 		// TODO Name: PaymentAdmissionTaskName,
 
 		Output: defaults.GetMapStringInterface("PaymentAdmissionTaskAttributes", "output"),
@@ -364,6 +373,20 @@ func PaymentAdmissionTaskAttributesWithDefaults(defaults client.Defaults) *Payme
 func (m *PaymentAdmissionTaskAttributes) WithAssignee(assignee PaymentAdmissionTaskAssignee) *PaymentAdmissionTaskAttributes {
 
 	m.Assignee = assignee
+
+	return m
+}
+
+func (m *PaymentAdmissionTaskAttributes) WithGroup(group PaymentAdmissionTaskGroup) *PaymentAdmissionTaskAttributes {
+
+	m.Group = group
+
+	return m
+}
+
+func (m *PaymentAdmissionTaskAttributes) WithInput(input map[string]interface{}) *PaymentAdmissionTaskAttributes {
+
+	m.Input = input
 
 	return m
 }
@@ -404,6 +427,10 @@ func (m *PaymentAdmissionTaskAttributes) Validate(formats strfmt.Registry) error
 		res = append(res, err)
 	}
 
+	if err := m.validateGroup(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -431,6 +458,22 @@ func (m *PaymentAdmissionTaskAttributes) validateAssignee(formats strfmt.Registr
 	if err := m.Assignee.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("attributes" + "." + "assignee")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAdmissionTaskAttributes) validateGroup(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Group) { // not required
+		return nil
+	}
+
+	if err := m.Group.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "group")
 		}
 		return err
 	}

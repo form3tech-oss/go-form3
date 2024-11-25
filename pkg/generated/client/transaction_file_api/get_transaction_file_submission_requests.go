@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetTransactionFileSubmission creates a new GetTransactionFileSubmissionRequest object
@@ -68,7 +67,7 @@ func (o *GetTransactionFileSubmissionRequest) WithTransactionFileSubmissionID(tr
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get transaction file submission Request
 func (o *GetTransactionFileSubmissionRequest) WithContext(ctx context.Context) *GetTransactionFileSubmissionRequest {
 	o.Context = ctx

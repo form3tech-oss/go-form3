@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // UploadTransactionFileReader is a Reader for the UploadTransactionFile structure.
@@ -84,7 +83,8 @@ func NewUploadTransactionFileOK() *UploadTransactionFileOK {
 	return &UploadTransactionFileOK{}
 }
 
-/*UploadTransactionFileOK handles this case with default header values.
+/*
+UploadTransactionFileOK handles this case with default header values.
 
 Transaction File Response
 */
@@ -94,6 +94,36 @@ type UploadTransactionFileOK struct {
 
 	// isStream: false
 	*models.TransactionFileResponse
+}
+
+// IsSuccess returns true when this upload transaction file o k response has a 2xx status code
+func (o *UploadTransactionFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this upload transaction file o k response has a 3xx status code
+func (o *UploadTransactionFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file o k response has a 4xx status code
+func (o *UploadTransactionFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upload transaction file o k response has a 5xx status code
+func (o *UploadTransactionFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload transaction file o k response a status code equal to that given
+func (o *UploadTransactionFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the upload transaction file o k response
+func (o *UploadTransactionFileOK) Code() int {
+	return 200
 }
 
 func (o *UploadTransactionFileOK) Error() string {
@@ -118,7 +148,8 @@ func NewUploadTransactionFileBadRequest() *UploadTransactionFileBadRequest {
 	return &UploadTransactionFileBadRequest{}
 }
 
-/*UploadTransactionFileBadRequest handles this case with default header values.
+/*
+UploadTransactionFileBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -128,6 +159,36 @@ type UploadTransactionFileBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload transaction file bad request response has a 2xx status code
+func (o *UploadTransactionFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload transaction file bad request response has a 3xx status code
+func (o *UploadTransactionFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file bad request response has a 4xx status code
+func (o *UploadTransactionFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload transaction file bad request response has a 5xx status code
+func (o *UploadTransactionFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload transaction file bad request response a status code equal to that given
+func (o *UploadTransactionFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the upload transaction file bad request response
+func (o *UploadTransactionFileBadRequest) Code() int {
+	return 400
 }
 
 func (o *UploadTransactionFileBadRequest) Error() string {
@@ -152,7 +213,8 @@ func NewUploadTransactionFileUnauthorized() *UploadTransactionFileUnauthorized {
 	return &UploadTransactionFileUnauthorized{}
 }
 
-/*UploadTransactionFileUnauthorized handles this case with default header values.
+/*
+UploadTransactionFileUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -162,6 +224,36 @@ type UploadTransactionFileUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload transaction file unauthorized response has a 2xx status code
+func (o *UploadTransactionFileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload transaction file unauthorized response has a 3xx status code
+func (o *UploadTransactionFileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file unauthorized response has a 4xx status code
+func (o *UploadTransactionFileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload transaction file unauthorized response has a 5xx status code
+func (o *UploadTransactionFileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload transaction file unauthorized response a status code equal to that given
+func (o *UploadTransactionFileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the upload transaction file unauthorized response
+func (o *UploadTransactionFileUnauthorized) Code() int {
+	return 401
 }
 
 func (o *UploadTransactionFileUnauthorized) Error() string {
@@ -186,7 +278,8 @@ func NewUploadTransactionFileForbidden() *UploadTransactionFileForbidden {
 	return &UploadTransactionFileForbidden{}
 }
 
-/*UploadTransactionFileForbidden handles this case with default header values.
+/*
+UploadTransactionFileForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -196,6 +289,36 @@ type UploadTransactionFileForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload transaction file forbidden response has a 2xx status code
+func (o *UploadTransactionFileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload transaction file forbidden response has a 3xx status code
+func (o *UploadTransactionFileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file forbidden response has a 4xx status code
+func (o *UploadTransactionFileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload transaction file forbidden response has a 5xx status code
+func (o *UploadTransactionFileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload transaction file forbidden response a status code equal to that given
+func (o *UploadTransactionFileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the upload transaction file forbidden response
+func (o *UploadTransactionFileForbidden) Code() int {
+	return 403
 }
 
 func (o *UploadTransactionFileForbidden) Error() string {
@@ -220,7 +343,8 @@ func NewUploadTransactionFileNotFound() *UploadTransactionFileNotFound {
 	return &UploadTransactionFileNotFound{}
 }
 
-/*UploadTransactionFileNotFound handles this case with default header values.
+/*
+UploadTransactionFileNotFound handles this case with default header values.
 
 Transaction File Not Found
 */
@@ -230,6 +354,36 @@ type UploadTransactionFileNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload transaction file not found response has a 2xx status code
+func (o *UploadTransactionFileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload transaction file not found response has a 3xx status code
+func (o *UploadTransactionFileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file not found response has a 4xx status code
+func (o *UploadTransactionFileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload transaction file not found response has a 5xx status code
+func (o *UploadTransactionFileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload transaction file not found response a status code equal to that given
+func (o *UploadTransactionFileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the upload transaction file not found response
+func (o *UploadTransactionFileNotFound) Code() int {
+	return 404
 }
 
 func (o *UploadTransactionFileNotFound) Error() string {
@@ -254,7 +408,8 @@ func NewUploadTransactionFileConflict() *UploadTransactionFileConflict {
 	return &UploadTransactionFileConflict{}
 }
 
-/*UploadTransactionFileConflict handles this case with default header values.
+/*
+UploadTransactionFileConflict handles this case with default header values.
 
 Transaction File Conflict
 */
@@ -264,6 +419,36 @@ type UploadTransactionFileConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload transaction file conflict response has a 2xx status code
+func (o *UploadTransactionFileConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload transaction file conflict response has a 3xx status code
+func (o *UploadTransactionFileConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file conflict response has a 4xx status code
+func (o *UploadTransactionFileConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload transaction file conflict response has a 5xx status code
+func (o *UploadTransactionFileConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload transaction file conflict response a status code equal to that given
+func (o *UploadTransactionFileConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the upload transaction file conflict response
+func (o *UploadTransactionFileConflict) Code() int {
+	return 409
 }
 
 func (o *UploadTransactionFileConflict) Error() string {
@@ -288,7 +473,8 @@ func NewUploadTransactionFileInternalServerError() *UploadTransactionFileInterna
 	return &UploadTransactionFileInternalServerError{}
 }
 
-/*UploadTransactionFileInternalServerError handles this case with default header values.
+/*
+UploadTransactionFileInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
@@ -298,6 +484,36 @@ type UploadTransactionFileInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this upload transaction file internal server error response has a 2xx status code
+func (o *UploadTransactionFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload transaction file internal server error response has a 3xx status code
+func (o *UploadTransactionFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload transaction file internal server error response has a 4xx status code
+func (o *UploadTransactionFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upload transaction file internal server error response has a 5xx status code
+func (o *UploadTransactionFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this upload transaction file internal server error response a status code equal to that given
+func (o *UploadTransactionFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the upload transaction file internal server error response
+func (o *UploadTransactionFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UploadTransactionFileInternalServerError) Error() string {

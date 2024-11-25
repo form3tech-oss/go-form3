@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetClaimSubmissionReader is a Reader for the GetClaimSubmission structure.
@@ -39,6 +38,13 @@ func (o *GetClaimSubmissionReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetClaimSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +55,8 @@ func NewGetClaimSubmissionOK() *GetClaimSubmissionOK {
 	return &GetClaimSubmissionOK{}
 }
 
-/*GetClaimSubmissionOK handles this case with default header values.
+/*
+GetClaimSubmissionOK handles this case with default header values.
 
 Claim Submission details
 */
@@ -59,6 +66,36 @@ type GetClaimSubmissionOK struct {
 
 	// isStream: false
 	*models.ClaimSubmissionDetailsResponse
+}
+
+// IsSuccess returns true when this get claim submission o k response has a 2xx status code
+func (o *GetClaimSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get claim submission o k response has a 3xx status code
+func (o *GetClaimSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim submission o k response has a 4xx status code
+func (o *GetClaimSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get claim submission o k response has a 5xx status code
+func (o *GetClaimSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim submission o k response a status code equal to that given
+func (o *GetClaimSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get claim submission o k response
+func (o *GetClaimSubmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetClaimSubmissionOK) Error() string {
@@ -83,9 +120,10 @@ func NewGetClaimSubmissionBadRequest() *GetClaimSubmissionBadRequest {
 	return &GetClaimSubmissionBadRequest{}
 }
 
-/*GetClaimSubmissionBadRequest handles this case with default header values.
+/*
+GetClaimSubmissionBadRequest handles this case with default header values.
 
-Error
+Bad Request
 */
 type GetClaimSubmissionBadRequest struct {
 
@@ -95,11 +133,106 @@ type GetClaimSubmissionBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this get claim submission bad request response has a 2xx status code
+func (o *GetClaimSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get claim submission bad request response has a 3xx status code
+func (o *GetClaimSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim submission bad request response has a 4xx status code
+func (o *GetClaimSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get claim submission bad request response has a 5xx status code
+func (o *GetClaimSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim submission bad request response a status code equal to that given
+func (o *GetClaimSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get claim submission bad request response
+func (o *GetClaimSubmissionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetClaimSubmissionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /transaction/claims/{id}/submissions/{submissionId}][%d] getClaimSubmissionBadRequest", 400)
 }
 
 func (o *GetClaimSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClaimSubmissionNotFound creates a GetClaimSubmissionNotFound with default headers values
+func NewGetClaimSubmissionNotFound() *GetClaimSubmissionNotFound {
+	return &GetClaimSubmissionNotFound{}
+}
+
+/*
+GetClaimSubmissionNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetClaimSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get claim submission not found response has a 2xx status code
+func (o *GetClaimSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get claim submission not found response has a 3xx status code
+func (o *GetClaimSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get claim submission not found response has a 4xx status code
+func (o *GetClaimSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get claim submission not found response has a 5xx status code
+func (o *GetClaimSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get claim submission not found response a status code equal to that given
+func (o *GetClaimSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get claim submission not found response
+func (o *GetClaimSubmissionNotFound) Code() int {
+	return 404
+}
+
+func (o *GetClaimSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/claims/{id}/submissions/{submissionId}][%d] getClaimSubmissionNotFound", 404)
+}
+
+func (o *GetClaimSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

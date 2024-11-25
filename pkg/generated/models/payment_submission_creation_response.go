@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -21,7 +20,7 @@ import (
 type PaymentSubmissionCreationResponse struct {
 
 	// data
-	Data *PaymentSubmission `json:"data,omitempty"`
+	Data *PaymentSubmissionFetch `json:"data,omitempty"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
@@ -30,13 +29,13 @@ type PaymentSubmissionCreationResponse struct {
 func PaymentSubmissionCreationResponseWithDefaults(defaults client.Defaults) *PaymentSubmissionCreationResponse {
 	return &PaymentSubmissionCreationResponse{
 
-		Data: PaymentSubmissionWithDefaults(defaults),
+		Data: PaymentSubmissionFetchWithDefaults(defaults),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *PaymentSubmissionCreationResponse) WithData(data PaymentSubmission) *PaymentSubmissionCreationResponse {
+func (m *PaymentSubmissionCreationResponse) WithData(data PaymentSubmissionFetch) *PaymentSubmissionCreationResponse {
 
 	m.Data = &data
 

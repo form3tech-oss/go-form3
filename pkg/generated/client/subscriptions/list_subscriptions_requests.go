@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.ListSubscriptions creates a new ListSubscriptionsRequest object
@@ -223,7 +222,7 @@ func (o *ListSubscriptionsRequest) WithoutPageSize() *ListSubscriptionsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list subscriptions Request
 func (o *ListSubscriptionsRequest) WithContext(ctx context.Context) *ListSubscriptionsRequest {
 	o.Context = ctx

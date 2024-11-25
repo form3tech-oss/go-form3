@@ -2,11 +2,16 @@
 
 GOFMT_FILES?=$$(find ./ -name '*.go' | grep -v vendor)
 
-swagger_codegen_version := "v0.29.0"
+swagger_codegen_version := "v0.31.0"
 
 platform := $(shell uname)
+arch := $(uname -p)
 ifeq (${platform},Darwin)
+ifeq (${arch},arm)
 swagger_binary := "swagger_darwin_amd64"
+else
+swagger_binary := "swagger_darwin_arm64"
+endif
 else
 swagger_binary := "swagger_linux_amd64"
 endif

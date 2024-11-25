@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetUser creates a new GetUserRequest object
@@ -55,7 +54,7 @@ func (o *GetUserRequest) WithUserID(userID strfmt.UUID) *GetUserRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get user Request
 func (o *GetUserRequest) WithContext(ctx context.Context) *GetUserRequest {
 	o.Context = ctx

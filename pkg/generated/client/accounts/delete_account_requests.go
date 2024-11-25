@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.DeleteAccount creates a new DeleteAccountRequest object
@@ -69,7 +68,7 @@ func (o *DeleteAccountRequest) WithVersion(version int64) *DeleteAccountRequest 
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete account Request
 func (o *DeleteAccountRequest) WithContext(ctx context.Context) *DeleteAccountRequest {
 	o.Context = ctx

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListAcesReader is a Reader for the ListAces structure.
@@ -32,6 +31,13 @@ func (o *ListAcesReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return result, nil
 
+	case 404:
+		result := NewListAcesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewListAcesOK() *ListAcesOK {
 	return &ListAcesOK{}
 }
 
-/*ListAcesOK handles this case with default header values.
+/*
+ListAcesOK handles this case with default header values.
 
 List of ACE details
 */
@@ -52,6 +59,36 @@ type ListAcesOK struct {
 
 	// isStream: false
 	*models.AceDetailsListResponse
+}
+
+// IsSuccess returns true when this list aces o k response has a 2xx status code
+func (o *ListAcesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list aces o k response has a 3xx status code
+func (o *ListAcesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list aces o k response has a 4xx status code
+func (o *ListAcesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list aces o k response has a 5xx status code
+func (o *ListAcesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list aces o k response a status code equal to that given
+func (o *ListAcesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list aces o k response
+func (o *ListAcesOK) Code() int {
+	return 200
 }
 
 func (o *ListAcesOK) Error() string {
@@ -65,6 +102,71 @@ func (o *ListAcesOK) readResponse(response runtime.ClientResponse, consumer runt
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.AceDetailsListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListAcesNotFound creates a ListAcesNotFound with default headers values
+func NewListAcesNotFound() *ListAcesNotFound {
+	return &ListAcesNotFound{}
+}
+
+/*
+ListAcesNotFound handles this case with default header values.
+
+Not Found
+*/
+type ListAcesNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this list aces not found response has a 2xx status code
+func (o *ListAcesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list aces not found response has a 3xx status code
+func (o *ListAcesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list aces not found response has a 4xx status code
+func (o *ListAcesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list aces not found response has a 5xx status code
+func (o *ListAcesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list aces not found response a status code equal to that given
+func (o *ListAcesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list aces not found response
+func (o *ListAcesNotFound) Code() int {
+	return 404
+}
+
+func (o *ListAcesNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/roles/{role_id}/aces][%d] listAcesNotFound", 404)
+}
+
+func (o *ListAcesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

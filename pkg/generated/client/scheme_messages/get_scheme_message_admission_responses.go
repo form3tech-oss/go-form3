@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetSchemeMessageAdmissionReader is a Reader for the GetSchemeMessageAdmission structure.
@@ -34,6 +33,13 @@ func (o *GetSchemeMessageAdmissionReader) ReadResponse(response runtime.ClientRe
 
 	case 400:
 		result := NewGetSchemeMessageAdmissionBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 401:
+		result := NewGetSchemeMessageAdmissionUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -63,7 +69,8 @@ func NewGetSchemeMessageAdmissionOK() *GetSchemeMessageAdmissionOK {
 	return &GetSchemeMessageAdmissionOK{}
 }
 
-/*GetSchemeMessageAdmissionOK handles this case with default header values.
+/*
+GetSchemeMessageAdmissionOK handles this case with default header values.
 
 Get scheme message admission by Id
 */
@@ -73,6 +80,36 @@ type GetSchemeMessageAdmissionOK struct {
 
 	// isStream: false
 	*models.SchemeMessageAdmissionDetailsResponse
+}
+
+// IsSuccess returns true when this get scheme message admission o k response has a 2xx status code
+func (o *GetSchemeMessageAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get scheme message admission o k response has a 3xx status code
+func (o *GetSchemeMessageAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme message admission o k response has a 4xx status code
+func (o *GetSchemeMessageAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get scheme message admission o k response has a 5xx status code
+func (o *GetSchemeMessageAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme message admission o k response a status code equal to that given
+func (o *GetSchemeMessageAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get scheme message admission o k response
+func (o *GetSchemeMessageAdmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetSchemeMessageAdmissionOK) Error() string {
@@ -97,7 +134,8 @@ func NewGetSchemeMessageAdmissionBadRequest() *GetSchemeMessageAdmissionBadReque
 	return &GetSchemeMessageAdmissionBadRequest{}
 }
 
-/*GetSchemeMessageAdmissionBadRequest handles this case with default header values.
+/*
+GetSchemeMessageAdmissionBadRequest handles this case with default header values.
 
 Scheme Message Admission by Id bad request
 */
@@ -107,6 +145,36 @@ type GetSchemeMessageAdmissionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme message admission bad request response has a 2xx status code
+func (o *GetSchemeMessageAdmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme message admission bad request response has a 3xx status code
+func (o *GetSchemeMessageAdmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme message admission bad request response has a 4xx status code
+func (o *GetSchemeMessageAdmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme message admission bad request response has a 5xx status code
+func (o *GetSchemeMessageAdmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme message admission bad request response a status code equal to that given
+func (o *GetSchemeMessageAdmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get scheme message admission bad request response
+func (o *GetSchemeMessageAdmissionBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetSchemeMessageAdmissionBadRequest) Error() string {
@@ -126,12 +194,78 @@ func (o *GetSchemeMessageAdmissionBadRequest) readResponse(response runtime.Clie
 	return nil
 }
 
+// NewGetSchemeMessageAdmissionUnauthorized creates a GetSchemeMessageAdmissionUnauthorized with default headers values
+func NewGetSchemeMessageAdmissionUnauthorized() *GetSchemeMessageAdmissionUnauthorized {
+	return &GetSchemeMessageAdmissionUnauthorized{}
+}
+
+/*
+GetSchemeMessageAdmissionUnauthorized handles this case with default header values.
+
+Unauthorized
+*/
+type GetSchemeMessageAdmissionUnauthorized struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme message admission unauthorized response has a 2xx status code
+func (o *GetSchemeMessageAdmissionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme message admission unauthorized response has a 3xx status code
+func (o *GetSchemeMessageAdmissionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme message admission unauthorized response has a 4xx status code
+func (o *GetSchemeMessageAdmissionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme message admission unauthorized response has a 5xx status code
+func (o *GetSchemeMessageAdmissionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme message admission unauthorized response a status code equal to that given
+func (o *GetSchemeMessageAdmissionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get scheme message admission unauthorized response
+func (o *GetSchemeMessageAdmissionUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetSchemeMessageAdmissionUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /notification/schememessages/{id}/admissions/{admissionId}][%d] getSchemeMessageAdmissionUnauthorized", 401)
+}
+
+func (o *GetSchemeMessageAdmissionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewGetSchemeMessageAdmissionForbidden creates a GetSchemeMessageAdmissionForbidden with default headers values
 func NewGetSchemeMessageAdmissionForbidden() *GetSchemeMessageAdmissionForbidden {
 	return &GetSchemeMessageAdmissionForbidden{}
 }
 
-/*GetSchemeMessageAdmissionForbidden handles this case with default header values.
+/*
+GetSchemeMessageAdmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -141,6 +275,36 @@ type GetSchemeMessageAdmissionForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme message admission forbidden response has a 2xx status code
+func (o *GetSchemeMessageAdmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme message admission forbidden response has a 3xx status code
+func (o *GetSchemeMessageAdmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme message admission forbidden response has a 4xx status code
+func (o *GetSchemeMessageAdmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme message admission forbidden response has a 5xx status code
+func (o *GetSchemeMessageAdmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme message admission forbidden response a status code equal to that given
+func (o *GetSchemeMessageAdmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get scheme message admission forbidden response
+func (o *GetSchemeMessageAdmissionForbidden) Code() int {
+	return 403
 }
 
 func (o *GetSchemeMessageAdmissionForbidden) Error() string {
@@ -165,7 +329,8 @@ func NewGetSchemeMessageAdmissionNotFound() *GetSchemeMessageAdmissionNotFound {
 	return &GetSchemeMessageAdmissionNotFound{}
 }
 
-/*GetSchemeMessageAdmissionNotFound handles this case with default header values.
+/*
+GetSchemeMessageAdmissionNotFound handles this case with default header values.
 
 Scheme Message Not found
 */
@@ -175,6 +340,36 @@ type GetSchemeMessageAdmissionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get scheme message admission not found response has a 2xx status code
+func (o *GetSchemeMessageAdmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get scheme message admission not found response has a 3xx status code
+func (o *GetSchemeMessageAdmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get scheme message admission not found response has a 4xx status code
+func (o *GetSchemeMessageAdmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get scheme message admission not found response has a 5xx status code
+func (o *GetSchemeMessageAdmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get scheme message admission not found response a status code equal to that given
+func (o *GetSchemeMessageAdmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get scheme message admission not found response
+func (o *GetSchemeMessageAdmissionNotFound) Code() int {
+	return 404
 }
 
 func (o *GetSchemeMessageAdmissionNotFound) Error() string {

@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetMandateSubmission creates a new GetMandateSubmissionRequest object
@@ -68,7 +67,7 @@ func (o *GetMandateSubmissionRequest) WithSubmissionID(submissionID strfmt.UUID)
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get mandate submission Request
 func (o *GetMandateSubmissionRequest) WithContext(ctx context.Context) *GetMandateSubmissionRequest {
 	o.Context = ctx

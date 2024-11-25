@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.ListAccounts creates a new ListAccountsRequest object
@@ -34,6 +33,8 @@ func (c *Client) ListAccounts() *ListAccountsRequest {
 		FilterIban: make([]string, 0),
 
 		FilterOrganisationID: make([]strfmt.UUID, 0),
+
+		FilterType: make([]string, 0),
 
 		PageNumber: c.Defaults.GetStringPtr("ListAccounts", "page[number]"),
 
@@ -75,6 +76,10 @@ type ListAccountsRequest struct {
 	/*FilterOrganisationID      Filter by organisation id      */
 
 	FilterOrganisationID []strfmt.UUID
+
+	/*FilterType      Filter by account type      */
+
+	FilterType []string
 
 	/*PageNumber      Which page to select      */
 
@@ -195,6 +200,20 @@ func (o *ListAccountsRequest) WithoutFilterOrganisationID() *ListAccountsRequest
 	return o
 }
 
+func (o *ListAccountsRequest) WithFilterType(filterType []string) *ListAccountsRequest {
+
+	o.FilterType = filterType
+
+	return o
+}
+
+func (o *ListAccountsRequest) WithoutFilterType() *ListAccountsRequest {
+
+	o.FilterType = nil
+
+	return o
+}
+
 func (o *ListAccountsRequest) WithPageNumber(pageNumber string) *ListAccountsRequest {
 
 	o.PageNumber = &pageNumber
@@ -223,7 +242,7 @@ func (o *ListAccountsRequest) WithoutPageSize() *ListAccountsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list accounts Request
 func (o *ListAccountsRequest) WithContext(ctx context.Context) *ListAccountsRequest {
 	o.Context = ctx
@@ -300,6 +319,14 @@ func (o *ListAccountsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	joinedFilterOrganisationID := swag.JoinByFormat(valuesFilterOrganisationID, "csv")
 	// query array param filter[organisation_id]
 	if err := r.SetQueryParam("filter[organisation_id]", joinedFilterOrganisationID...); err != nil {
+		return err
+	}
+
+	valuesFilterType := o.FilterType
+
+	joinedFilterType := swag.JoinByFormat(valuesFilterType, "csv")
+	// query array param filter[type]
+	if err := r.SetQueryParam("filter[type]", joinedFilterType...); err != nil {
 		return err
 	}
 

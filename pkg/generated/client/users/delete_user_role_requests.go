@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.DeleteUserRole creates a new DeleteUserRoleRequest object
@@ -68,7 +67,7 @@ func (o *DeleteUserRoleRequest) WithUserID(userID strfmt.UUID) *DeleteUserRoleRe
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete user role Request
 func (o *DeleteUserRoleRequest) WithContext(ctx context.Context) *DeleteUserRoleRequest {
 	o.Context = ctx

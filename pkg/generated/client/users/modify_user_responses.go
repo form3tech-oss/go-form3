@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ModifyUserReader is a Reader for the ModifyUser structure.
@@ -32,6 +31,20 @@ func (o *ModifyUserReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewModifyUserBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 404:
+		result := NewModifyUserNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +55,8 @@ func NewModifyUserOK() *ModifyUserOK {
 	return &ModifyUserOK{}
 }
 
-/*ModifyUserOK handles this case with default header values.
+/*
+ModifyUserOK handles this case with default header values.
 
 User details
 */
@@ -52,6 +66,36 @@ type ModifyUserOK struct {
 
 	// isStream: false
 	*models.UserDetailsResponse
+}
+
+// IsSuccess returns true when this modify user o k response has a 2xx status code
+func (o *ModifyUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify user o k response has a 3xx status code
+func (o *ModifyUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify user o k response has a 4xx status code
+func (o *ModifyUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify user o k response has a 5xx status code
+func (o *ModifyUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify user o k response a status code equal to that given
+func (o *ModifyUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify user o k response
+func (o *ModifyUserOK) Code() int {
+	return 200
 }
 
 func (o *ModifyUserOK) Error() string {
@@ -65,6 +109,136 @@ func (o *ModifyUserOK) readResponse(response runtime.ClientResponse, consumer ru
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUserBadRequest creates a ModifyUserBadRequest with default headers values
+func NewModifyUserBadRequest() *ModifyUserBadRequest {
+	return &ModifyUserBadRequest{}
+}
+
+/*
+ModifyUserBadRequest handles this case with default header values.
+
+Bad request
+*/
+type ModifyUserBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this modify user bad request response has a 2xx status code
+func (o *ModifyUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify user bad request response has a 3xx status code
+func (o *ModifyUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify user bad request response has a 4xx status code
+func (o *ModifyUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify user bad request response has a 5xx status code
+func (o *ModifyUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify user bad request response a status code equal to that given
+func (o *ModifyUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the modify user bad request response
+func (o *ModifyUserBadRequest) Code() int {
+	return 400
+}
+
+func (o *ModifyUserBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserBadRequest", 400)
+}
+
+func (o *ModifyUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUserNotFound creates a ModifyUserNotFound with default headers values
+func NewModifyUserNotFound() *ModifyUserNotFound {
+	return &ModifyUserNotFound{}
+}
+
+/*
+ModifyUserNotFound handles this case with default header values.
+
+Not Found
+*/
+type ModifyUserNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this modify user not found response has a 2xx status code
+func (o *ModifyUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify user not found response has a 3xx status code
+func (o *ModifyUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify user not found response has a 4xx status code
+func (o *ModifyUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify user not found response has a 5xx status code
+func (o *ModifyUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify user not found response a status code equal to that given
+func (o *ModifyUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the modify user not found response
+func (o *ModifyUserNotFound) Code() int {
+	return 404
+}
+
+func (o *ModifyUserNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /security/users/{user_id}][%d] modifyUserNotFound", 404)
+}
+
+func (o *ModifyUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

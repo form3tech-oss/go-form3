@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetTransactionFile creates a new GetTransactionFileRequest object
@@ -33,7 +32,7 @@ func (c *Client) GetTransactionFile() *GetTransactionFileRequest {
 
 type GetTransactionFileRequest struct {
 
-	/*Accept      Acceptable Formats, possible values are "application/vnd.api+json" and "application/x-ndjson"      */
+	/*Accept      Acceptable Formats, possible values are "application/vnd.api+json", "application/x-ndjson", "application/x.form3.standard18", "application/xml", "application/x.form3.messaging"      */
 
 	Accept *string
 
@@ -75,7 +74,7 @@ func (o *GetTransactionFileRequest) WithTransactionFileID(transactionFileID strf
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get transaction file Request
 func (o *GetTransactionFileRequest) WithContext(ctx context.Context) *GetTransactionFileRequest {
 	o.Context = ctx

@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.GetMetricsPrometheusFederate creates a new GetMetricsPrometheusFederateRequest object
@@ -56,7 +55,7 @@ func (o *GetMetricsPrometheusFederateRequest) WithMatch(match []string) *GetMetr
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get metrics prometheus federate Request
 func (o *GetMetricsPrometheusFederateRequest) WithContext(ctx context.Context) *GetMetricsPrometheusFederateRequest {
 	o.Context = ctx

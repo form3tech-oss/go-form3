@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetValidationsGbdscSortcodesSortcodeReader is a Reader for the GetValidationsGbdscSortcodesSortcode structure.
@@ -49,7 +48,8 @@ func NewGetValidationsGbdscSortcodesSortcodeOK() *GetValidationsGbdscSortcodesSo
 	return &GetValidationsGbdscSortcodesSortcodeOK{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeOK handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeOK handles this case with default header values.
 
 Sort code details
 */
@@ -59,6 +59,36 @@ type GetValidationsGbdscSortcodesSortcodeOK struct {
 
 	// isStream: false
 	*models.SortCodeDetailsResponse
+}
+
+// IsSuccess returns true when this get validations gbdsc sortcodes sortcode o k response has a 2xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get validations gbdsc sortcodes sortcode o k response has a 3xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get validations gbdsc sortcodes sortcode o k response has a 4xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get validations gbdsc sortcodes sortcode o k response has a 5xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get validations gbdsc sortcodes sortcode o k response a status code equal to that given
+func (o *GetValidationsGbdscSortcodesSortcodeOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get validations gbdsc sortcodes sortcode o k response
+func (o *GetValidationsGbdscSortcodesSortcodeOK) Code() int {
+	return 200
 }
 
 func (o *GetValidationsGbdscSortcodesSortcodeOK) Error() string {
@@ -83,7 +113,8 @@ func NewGetValidationsGbdscSortcodesSortcodeBadRequest() *GetValidationsGbdscSor
 	return &GetValidationsGbdscSortcodesSortcodeBadRequest{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeBadRequest handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeBadRequest handles this case with default header values.
 
 Validation failed
 */
@@ -93,6 +124,36 @@ type GetValidationsGbdscSortcodesSortcodeBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get validations gbdsc sortcodes sortcode bad request response has a 2xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get validations gbdsc sortcodes sortcode bad request response has a 3xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get validations gbdsc sortcodes sortcode bad request response has a 4xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get validations gbdsc sortcodes sortcode bad request response has a 5xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get validations gbdsc sortcodes sortcode bad request response a status code equal to that given
+func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get validations gbdsc sortcodes sortcode bad request response
+func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) Error() string {

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetReportAdmissionReader is a Reader for the GetReportAdmission structure.
@@ -63,7 +62,8 @@ func NewGetReportAdmissionOK() *GetReportAdmissionOK {
 	return &GetReportAdmissionOK{}
 }
 
-/*GetReportAdmissionOK handles this case with default header values.
+/*
+GetReportAdmissionOK handles this case with default header values.
 
 Get report admission by Id
 */
@@ -73,6 +73,36 @@ type GetReportAdmissionOK struct {
 
 	// isStream: false
 	*models.ReportAdmissionDetailsResponse
+}
+
+// IsSuccess returns true when this get report admission o k response has a 2xx status code
+func (o *GetReportAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get report admission o k response has a 3xx status code
+func (o *GetReportAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report admission o k response has a 4xx status code
+func (o *GetReportAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get report admission o k response has a 5xx status code
+func (o *GetReportAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report admission o k response a status code equal to that given
+func (o *GetReportAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get report admission o k response
+func (o *GetReportAdmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetReportAdmissionOK) Error() string {
@@ -97,7 +127,8 @@ func NewGetReportAdmissionBadRequest() *GetReportAdmissionBadRequest {
 	return &GetReportAdmissionBadRequest{}
 }
 
-/*GetReportAdmissionBadRequest handles this case with default header values.
+/*
+GetReportAdmissionBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -107,6 +138,36 @@ type GetReportAdmissionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get report admission bad request response has a 2xx status code
+func (o *GetReportAdmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report admission bad request response has a 3xx status code
+func (o *GetReportAdmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report admission bad request response has a 4xx status code
+func (o *GetReportAdmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report admission bad request response has a 5xx status code
+func (o *GetReportAdmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report admission bad request response a status code equal to that given
+func (o *GetReportAdmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get report admission bad request response
+func (o *GetReportAdmissionBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetReportAdmissionBadRequest) Error() string {
@@ -131,7 +192,8 @@ func NewGetReportAdmissionForbidden() *GetReportAdmissionForbidden {
 	return &GetReportAdmissionForbidden{}
 }
 
-/*GetReportAdmissionForbidden handles this case with default header values.
+/*
+GetReportAdmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -141,6 +203,36 @@ type GetReportAdmissionForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get report admission forbidden response has a 2xx status code
+func (o *GetReportAdmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report admission forbidden response has a 3xx status code
+func (o *GetReportAdmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report admission forbidden response has a 4xx status code
+func (o *GetReportAdmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report admission forbidden response has a 5xx status code
+func (o *GetReportAdmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report admission forbidden response a status code equal to that given
+func (o *GetReportAdmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get report admission forbidden response
+func (o *GetReportAdmissionForbidden) Code() int {
+	return 403
 }
 
 func (o *GetReportAdmissionForbidden) Error() string {
@@ -165,7 +257,8 @@ func NewGetReportAdmissionNotFound() *GetReportAdmissionNotFound {
 	return &GetReportAdmissionNotFound{}
 }
 
-/*GetReportAdmissionNotFound handles this case with default header values.
+/*
+GetReportAdmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -175,6 +268,36 @@ type GetReportAdmissionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get report admission not found response has a 2xx status code
+func (o *GetReportAdmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report admission not found response has a 3xx status code
+func (o *GetReportAdmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report admission not found response has a 4xx status code
+func (o *GetReportAdmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report admission not found response has a 5xx status code
+func (o *GetReportAdmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report admission not found response a status code equal to that given
+func (o *GetReportAdmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get report admission not found response
+func (o *GetReportAdmissionNotFound) Code() int {
+	return 404
 }
 
 func (o *GetReportAdmissionNotFound) Error() string {

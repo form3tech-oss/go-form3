@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListAuditEntriesReader is a Reader for the ListAuditEntries structure.
@@ -42,7 +41,8 @@ func NewListAuditEntriesOK() *ListAuditEntriesOK {
 	return &ListAuditEntriesOK{}
 }
 
-/*ListAuditEntriesOK handles this case with default header values.
+/*
+ListAuditEntriesOK handles this case with default header values.
 
 Audit details
 */
@@ -52,6 +52,36 @@ type ListAuditEntriesOK struct {
 
 	// isStream: false
 	*models.AuditEntryListResponse
+}
+
+// IsSuccess returns true when this list audit entries o k response has a 2xx status code
+func (o *ListAuditEntriesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list audit entries o k response has a 3xx status code
+func (o *ListAuditEntriesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list audit entries o k response has a 4xx status code
+func (o *ListAuditEntriesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list audit entries o k response has a 5xx status code
+func (o *ListAuditEntriesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list audit entries o k response a status code equal to that given
+func (o *ListAuditEntriesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list audit entries o k response
+func (o *ListAuditEntriesOK) Code() int {
+	return 200
 }
 
 func (o *ListAuditEntriesOK) Error() string {

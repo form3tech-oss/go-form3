@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -28,7 +27,7 @@ type Token struct {
 	ExpiresIn int32 `json:"expires_in,omitempty"`
 
 	// The type of the token. Is always set to `Bearer`.
-	// Enum: [Bearer]
+	// Enum: ["Bearer"]
 	TokenType string `json:"token_type,omitempty"`
 }
 

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetUserAcesReader is a Reader for the GetUserAces structure.
@@ -32,6 +31,13 @@ func (o *GetUserAcesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetUserAcesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewGetUserAcesOK() *GetUserAcesOK {
 	return &GetUserAcesOK{}
 }
 
-/*GetUserAcesOK handles this case with default header values.
+/*
+GetUserAcesOK handles this case with default header values.
 
 List of access control entries for this user
 */
@@ -52,6 +59,36 @@ type GetUserAcesOK struct {
 
 	// isStream: false
 	*models.AceDetailsListResponse
+}
+
+// IsSuccess returns true when this get user aces o k response has a 2xx status code
+func (o *GetUserAcesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get user aces o k response has a 3xx status code
+func (o *GetUserAcesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user aces o k response has a 4xx status code
+func (o *GetUserAcesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get user aces o k response has a 5xx status code
+func (o *GetUserAcesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user aces o k response a status code equal to that given
+func (o *GetUserAcesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get user aces o k response
+func (o *GetUserAcesOK) Code() int {
+	return 200
 }
 
 func (o *GetUserAcesOK) Error() string {
@@ -65,6 +102,71 @@ func (o *GetUserAcesOK) readResponse(response runtime.ClientResponse, consumer r
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.AceDetailsListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetUserAcesNotFound creates a GetUserAcesNotFound with default headers values
+func NewGetUserAcesNotFound() *GetUserAcesNotFound {
+	return &GetUserAcesNotFound{}
+}
+
+/*
+GetUserAcesNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetUserAcesNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get user aces not found response has a 2xx status code
+func (o *GetUserAcesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user aces not found response has a 3xx status code
+func (o *GetUserAcesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user aces not found response has a 4xx status code
+func (o *GetUserAcesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user aces not found response has a 5xx status code
+func (o *GetUserAcesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user aces not found response a status code equal to that given
+func (o *GetUserAcesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get user aces not found response
+func (o *GetUserAcesNotFound) Code() int {
+	return 404
+}
+
+func (o *GetUserAcesNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/users/{user_id}/aces][%d] getUserAcesNotFound", 404)
+}
+
+func (o *GetUserAcesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

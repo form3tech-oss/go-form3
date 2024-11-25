@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumber creates a new GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberRequest object
@@ -68,7 +67,7 @@ func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberRequest)
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get validations gbdsc sortcodes sortcode accountnumbers accountnumber Request
 func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberRequest) WithContext(ctx context.Context) *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberRequest {
 	o.Context = ctx

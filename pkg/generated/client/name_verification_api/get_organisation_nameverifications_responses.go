@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetOrganisationNameverificationsReader is a Reader for the GetOrganisationNameverifications structure.
@@ -70,7 +69,8 @@ func NewGetOrganisationNameverificationsOK() *GetOrganisationNameverificationsOK
 	return &GetOrganisationNameverificationsOK{}
 }
 
-/*GetOrganisationNameverificationsOK handles this case with default header values.
+/*
+GetOrganisationNameverificationsOK handles this case with default header values.
 
 List of name verification details
 */
@@ -80,6 +80,36 @@ type GetOrganisationNameverificationsOK struct {
 
 	// isStream: false
 	*models.NameVerificationDetailsListResponse
+}
+
+// IsSuccess returns true when this get organisation nameverifications o k response has a 2xx status code
+func (o *GetOrganisationNameverificationsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get organisation nameverifications o k response has a 3xx status code
+func (o *GetOrganisationNameverificationsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get organisation nameverifications o k response has a 4xx status code
+func (o *GetOrganisationNameverificationsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get organisation nameverifications o k response has a 5xx status code
+func (o *GetOrganisationNameverificationsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get organisation nameverifications o k response a status code equal to that given
+func (o *GetOrganisationNameverificationsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get organisation nameverifications o k response
+func (o *GetOrganisationNameverificationsOK) Code() int {
+	return 200
 }
 
 func (o *GetOrganisationNameverificationsOK) Error() string {
@@ -104,7 +134,8 @@ func NewGetOrganisationNameverificationsBadRequest() *GetOrganisationNameverific
 	return &GetOrganisationNameverificationsBadRequest{}
 }
 
-/*GetOrganisationNameverificationsBadRequest handles this case with default header values.
+/*
+GetOrganisationNameverificationsBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -114,6 +145,36 @@ type GetOrganisationNameverificationsBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get organisation nameverifications bad request response has a 2xx status code
+func (o *GetOrganisationNameverificationsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get organisation nameverifications bad request response has a 3xx status code
+func (o *GetOrganisationNameverificationsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get organisation nameverifications bad request response has a 4xx status code
+func (o *GetOrganisationNameverificationsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get organisation nameverifications bad request response has a 5xx status code
+func (o *GetOrganisationNameverificationsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get organisation nameverifications bad request response a status code equal to that given
+func (o *GetOrganisationNameverificationsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get organisation nameverifications bad request response
+func (o *GetOrganisationNameverificationsBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetOrganisationNameverificationsBadRequest) Error() string {
@@ -138,7 +199,8 @@ func NewGetOrganisationNameverificationsForbidden() *GetOrganisationNameverifica
 	return &GetOrganisationNameverificationsForbidden{}
 }
 
-/*GetOrganisationNameverificationsForbidden handles this case with default header values.
+/*
+GetOrganisationNameverificationsForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -148,6 +210,36 @@ type GetOrganisationNameverificationsForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get organisation nameverifications forbidden response has a 2xx status code
+func (o *GetOrganisationNameverificationsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get organisation nameverifications forbidden response has a 3xx status code
+func (o *GetOrganisationNameverificationsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get organisation nameverifications forbidden response has a 4xx status code
+func (o *GetOrganisationNameverificationsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get organisation nameverifications forbidden response has a 5xx status code
+func (o *GetOrganisationNameverificationsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get organisation nameverifications forbidden response a status code equal to that given
+func (o *GetOrganisationNameverificationsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get organisation nameverifications forbidden response
+func (o *GetOrganisationNameverificationsForbidden) Code() int {
+	return 403
 }
 
 func (o *GetOrganisationNameverificationsForbidden) Error() string {
@@ -172,7 +264,8 @@ func NewGetOrganisationNameverificationsNotFound() *GetOrganisationNameverificat
 	return &GetOrganisationNameverificationsNotFound{}
 }
 
-/*GetOrganisationNameverificationsNotFound handles this case with default header values.
+/*
+GetOrganisationNameverificationsNotFound handles this case with default header values.
 
 Not Found
 */
@@ -182,6 +275,36 @@ type GetOrganisationNameverificationsNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get organisation nameverifications not found response has a 2xx status code
+func (o *GetOrganisationNameverificationsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get organisation nameverifications not found response has a 3xx status code
+func (o *GetOrganisationNameverificationsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get organisation nameverifications not found response has a 4xx status code
+func (o *GetOrganisationNameverificationsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get organisation nameverifications not found response has a 5xx status code
+func (o *GetOrganisationNameverificationsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get organisation nameverifications not found response a status code equal to that given
+func (o *GetOrganisationNameverificationsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get organisation nameverifications not found response
+func (o *GetOrganisationNameverificationsNotFound) Code() int {
+	return 404
 }
 
 func (o *GetOrganisationNameverificationsNotFound) Error() string {
@@ -206,7 +329,8 @@ func NewGetOrganisationNameverificationsInternalServerError() *GetOrganisationNa
 	return &GetOrganisationNameverificationsInternalServerError{}
 }
 
-/*GetOrganisationNameverificationsInternalServerError handles this case with default header values.
+/*
+GetOrganisationNameverificationsInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
@@ -216,6 +340,36 @@ type GetOrganisationNameverificationsInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get organisation nameverifications internal server error response has a 2xx status code
+func (o *GetOrganisationNameverificationsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get organisation nameverifications internal server error response has a 3xx status code
+func (o *GetOrganisationNameverificationsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get organisation nameverifications internal server error response has a 4xx status code
+func (o *GetOrganisationNameverificationsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get organisation nameverifications internal server error response has a 5xx status code
+func (o *GetOrganisationNameverificationsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get organisation nameverifications internal server error response a status code equal to that given
+func (o *GetOrganisationNameverificationsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get organisation nameverifications internal server error response
+func (o *GetOrganisationNameverificationsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetOrganisationNameverificationsInternalServerError) Error() string {

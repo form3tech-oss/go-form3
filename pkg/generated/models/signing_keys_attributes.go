@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -29,7 +28,7 @@ type SigningKeysAttributes struct {
 	Certificate *string `json:"certificate,omitempty"`
 
 	// status
-	// Enum: [pending_activation active expired revoked]
+	// Enum: ["pending_activation","active","expired","revoked"]
 	Status *string `json:"status,omitempty"`
 
 	// expiration datetime

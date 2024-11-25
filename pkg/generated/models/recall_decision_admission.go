@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -340,143 +339,6 @@ func (m *RecallDecisionAdmission) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *RecallDecisionAdmission) Json() string {
-	json, err := json.MarshalIndent(m, "  ", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(json)
-}
-
-// RecallDecisionAdmissionAttributes recall decision admission attributes
-// swagger:model RecallDecisionAdmissionAttributes
-type RecallDecisionAdmissionAttributes struct {
-
-	// Date and time the recall decision admission was created
-	// Read Only: true
-	// Format: date-time
-	AdmissionDatetime *strfmt.DateTime `json:"admission_datetime,omitempty"`
-
-	// source gateway
-	SourceGateway string `json:"source_gateway,omitempty"`
-
-	// status
-	Status RecallDecisionAdmissionStatus `json:"status,omitempty"`
-
-	// Human-readable reason for failure if status is failed.
-	StatusReason string `json:"status_reason,omitempty"`
-}
-
-func RecallDecisionAdmissionAttributesWithDefaults(defaults client.Defaults) *RecallDecisionAdmissionAttributes {
-	return &RecallDecisionAdmissionAttributes{
-
-		AdmissionDatetime: defaults.GetStrfmtDateTimePtr("RecallDecisionAdmissionAttributes", "admission_datetime"),
-
-		SourceGateway: defaults.GetString("RecallDecisionAdmissionAttributes", "source_gateway"),
-
-		// TODO Status: RecallDecisionAdmissionStatus,
-
-		StatusReason: defaults.GetString("RecallDecisionAdmissionAttributes", "status_reason"),
-	}
-}
-
-func (m *RecallDecisionAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *RecallDecisionAdmissionAttributes {
-
-	m.AdmissionDatetime = &admissionDatetime
-
-	return m
-}
-
-func (m *RecallDecisionAdmissionAttributes) WithoutAdmissionDatetime() *RecallDecisionAdmissionAttributes {
-	m.AdmissionDatetime = nil
-	return m
-}
-
-func (m *RecallDecisionAdmissionAttributes) WithSourceGateway(sourceGateway string) *RecallDecisionAdmissionAttributes {
-
-	m.SourceGateway = sourceGateway
-
-	return m
-}
-
-func (m *RecallDecisionAdmissionAttributes) WithStatus(status RecallDecisionAdmissionStatus) *RecallDecisionAdmissionAttributes {
-
-	m.Status = status
-
-	return m
-}
-
-func (m *RecallDecisionAdmissionAttributes) WithStatusReason(statusReason string) *RecallDecisionAdmissionAttributes {
-
-	m.StatusReason = statusReason
-
-	return m
-}
-
-// Validate validates this recall decision admission attributes
-func (m *RecallDecisionAdmissionAttributes) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateAdmissionDatetime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *RecallDecisionAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.AdmissionDatetime) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("attributes"+"."+"admission_datetime", "body", "date-time", m.AdmissionDatetime.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *RecallDecisionAdmissionAttributes) validateStatus(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Status) { // not required
-		return nil
-	}
-
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("attributes" + "." + "status")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *RecallDecisionAdmissionAttributes) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *RecallDecisionAdmissionAttributes) UnmarshalBinary(b []byte) error {
-	var res RecallDecisionAdmissionAttributes
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-func (m *RecallDecisionAdmissionAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

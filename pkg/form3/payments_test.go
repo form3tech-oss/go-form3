@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/form3"
+	"github.com/form3tech-oss/go-form3/v7/pkg/form3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -15,8 +15,7 @@ func TestQueryPayments(t *testing.T) {
 	f3, err := form3.NewFromEnv()
 	require.NoError(t, err)
 
-	p, err := f3.Payments.ListPayments().
-		WithFilterAmount("600.00").
+	p, err := f3.PaymentReads.ListPayments().
 		WithoutFilterOrganisationID().
 		Do()
 	assert.Nil(t, err)
@@ -32,7 +31,7 @@ func TestPaymentFromJsonFile(t *testing.T) {
 	j, err := ioutil.ReadFile("../../test/payment.json")
 	require.NoError(t, err)
 
-	p, err := f3.Payments.CreatePayment().FromJson(string(j))
+	p, err := f3.PaymentWrites.CreatePayment().FromJson(string(j))
 	require.NoError(t, err)
 	assert.Equal(t, "603.00", p.Data.Attributes.Amount)
 }
@@ -46,9 +45,9 @@ func TestPaymentToJson(t *testing.T) {
 	j, err := ioutil.ReadFile("../../test/payment.json")
 	require.NoError(t, err)
 
-	p, err := f3.Payments.CreatePayment().FromJson(string(j))
+	p, err := f3.PaymentWrites.CreatePayment().FromJson(string(j))
 	require.NoError(t, err)
 
-	p2, err := f3.Payments.CreatePayment().FromJson(p.Json())
+	p2, err := f3.PaymentWrites.CreatePayment().FromJson(p.Json())
 	assert.Equal(t, p, p2)
 }

@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetUserAces creates a new GetUserAcesRequest object
@@ -95,7 +94,7 @@ func (o *GetUserAcesRequest) WithUserID(userID strfmt.UUID) *GetUserAcesRequest 
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get user aces Request
 func (o *GetUserAcesRequest) WithContext(ctx context.Context) *GetUserAcesRequest {
 	o.Context = ctx

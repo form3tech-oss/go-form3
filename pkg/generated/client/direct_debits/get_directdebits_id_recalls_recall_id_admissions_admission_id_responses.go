@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDReader is a Reader for the GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionID structure.
@@ -42,7 +41,8 @@ func NewGetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK() *GetDirectdebi
 	return &GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK{}
 }
 
-/*GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK handles this case with default header values.
+/*
+GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK handles this case with default header values.
 
 Recall admission details
 */
@@ -52,6 +52,36 @@ type GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK struct {
 
 	// isStream: false
 	*models.DirectDebitRecallAdmissionDetailsResponse
+}
+
+// IsSuccess returns true when this get directdebits Id recalls recall Id admissions admission Id o k response has a 2xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get directdebits Id recalls recall Id admissions admission Id o k response has a 3xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get directdebits Id recalls recall Id admissions admission Id o k response has a 4xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get directdebits Id recalls recall Id admissions admission Id o k response has a 5xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get directdebits Id recalls recall Id admissions admission Id o k response a status code equal to that given
+func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get directdebits Id recalls recall Id admissions admission Id o k response
+func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) Code() int {
+	return 200
 }
 
 func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDOK) Error() string {

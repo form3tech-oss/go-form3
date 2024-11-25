@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -45,12 +44,10 @@ type NameVerificationAttributes struct {
 
 	// Account holder names (for example title, first name, last name). Used for Confirmation of Payee matching.
 	// Required: true
-	// Max Items: 4
 	Name []string `json:"name"`
 
 	// secondary identification
-	// Required: true
-	SecondaryIdentification *string `json:"secondary_identification"`
+	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 }
 
 func NameVerificationAttributesWithDefaults(defaults client.Defaults) *NameVerificationAttributes {
@@ -68,7 +65,7 @@ func NameVerificationAttributesWithDefaults(defaults client.Defaults) *NameVerif
 
 		Name: make([]string, 0),
 
-		SecondaryIdentification: defaults.GetStringPtr("NameVerificationAttributes", "secondary_identification"),
+		SecondaryIdentification: defaults.GetString("NameVerificationAttributes", "secondary_identification"),
 	}
 }
 
@@ -141,13 +138,8 @@ func (m *NameVerificationAttributes) WithName(name []string) *NameVerificationAt
 
 func (m *NameVerificationAttributes) WithSecondaryIdentification(secondaryIdentification string) *NameVerificationAttributes {
 
-	m.SecondaryIdentification = &secondaryIdentification
+	m.SecondaryIdentification = secondaryIdentification
 
-	return m
-}
-
-func (m *NameVerificationAttributes) WithoutSecondaryIdentification() *NameVerificationAttributes {
-	m.SecondaryIdentification = nil
 	return m
 }
 
@@ -176,10 +168,6 @@ func (m *NameVerificationAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSecondaryIdentification(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -271,12 +259,6 @@ func (m *NameVerificationAttributes) validateName(formats strfmt.Registry) error
 		return err
 	}
 
-	iNameSize := int64(len(m.Name))
-
-	if err := validate.MaxItems("name", "body", iNameSize, 4); err != nil {
-		return err
-	}
-
 	for i := 0; i < len(m.Name); i++ {
 
 		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 1); err != nil {
@@ -287,15 +269,6 @@ func (m *NameVerificationAttributes) validateName(formats strfmt.Registry) error
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *NameVerificationAttributes) validateSecondaryIdentification(formats strfmt.Registry) error {
-
-	if err := validate.Required("secondary_identification", "body", m.SecondaryIdentification); err != nil {
-		return err
 	}
 
 	return nil

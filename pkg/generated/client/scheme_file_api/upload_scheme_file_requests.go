@@ -11,8 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.UploadSchemeFile creates a new UploadSchemeFileRequest object
@@ -75,7 +74,7 @@ func (o *UploadSchemeFileRequest) WithSchemeFileID(schemeFileID strfmt.UUID) *Up
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the upload scheme file Request
 func (o *UploadSchemeFileRequest) WithContext(ctx context.Context) *UploadSchemeFileRequest {
 	o.Context = ctx

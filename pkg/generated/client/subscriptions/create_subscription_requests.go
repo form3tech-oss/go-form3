@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.CreateSubscription creates a new CreateSubscriptionRequest object
@@ -73,7 +72,7 @@ func (o *CreateSubscriptionRequest) WithoutSubscriptionCreationRequest() *Create
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create subscription Request
 func (o *CreateSubscriptionRequest) WithContext(ctx context.Context) *CreateSubscriptionRequest {
 	o.Context = ctx

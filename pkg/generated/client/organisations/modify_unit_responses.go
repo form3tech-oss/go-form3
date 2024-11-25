@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ModifyUnitReader is a Reader for the ModifyUnit structure.
@@ -32,6 +31,20 @@ func (o *ModifyUnitReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 400:
+		result := NewModifyUnitBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 404:
+		result := NewModifyUnitNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +55,8 @@ func NewModifyUnitOK() *ModifyUnitOK {
 	return &ModifyUnitOK{}
 }
 
-/*ModifyUnitOK handles this case with default header values.
+/*
+ModifyUnitOK handles this case with default header values.
 
 Organisation details
 */
@@ -52,6 +66,36 @@ type ModifyUnitOK struct {
 
 	// isStream: false
 	*models.OrganisationDetailsResponse
+}
+
+// IsSuccess returns true when this modify unit o k response has a 2xx status code
+func (o *ModifyUnitOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify unit o k response has a 3xx status code
+func (o *ModifyUnitOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify unit o k response has a 4xx status code
+func (o *ModifyUnitOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify unit o k response has a 5xx status code
+func (o *ModifyUnitOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify unit o k response a status code equal to that given
+func (o *ModifyUnitOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify unit o k response
+func (o *ModifyUnitOK) Code() int {
+	return 200
 }
 
 func (o *ModifyUnitOK) Error() string {
@@ -65,6 +109,136 @@ func (o *ModifyUnitOK) readResponse(response runtime.ClientResponse, consumer ru
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUnitBadRequest creates a ModifyUnitBadRequest with default headers values
+func NewModifyUnitBadRequest() *ModifyUnitBadRequest {
+	return &ModifyUnitBadRequest{}
+}
+
+/*
+ModifyUnitBadRequest handles this case with default header values.
+
+Bad request
+*/
+type ModifyUnitBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this modify unit bad request response has a 2xx status code
+func (o *ModifyUnitBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify unit bad request response has a 3xx status code
+func (o *ModifyUnitBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify unit bad request response has a 4xx status code
+func (o *ModifyUnitBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify unit bad request response has a 5xx status code
+func (o *ModifyUnitBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify unit bad request response a status code equal to that given
+func (o *ModifyUnitBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the modify unit bad request response
+func (o *ModifyUnitBadRequest) Code() int {
+	return 400
+}
+
+func (o *ModifyUnitBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /organisation/units/{id}][%d] modifyUnitBadRequest", 400)
+}
+
+func (o *ModifyUnitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyUnitNotFound creates a ModifyUnitNotFound with default headers values
+func NewModifyUnitNotFound() *ModifyUnitNotFound {
+	return &ModifyUnitNotFound{}
+}
+
+/*
+ModifyUnitNotFound handles this case with default header values.
+
+Not Found
+*/
+type ModifyUnitNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this modify unit not found response has a 2xx status code
+func (o *ModifyUnitNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify unit not found response has a 3xx status code
+func (o *ModifyUnitNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify unit not found response has a 4xx status code
+func (o *ModifyUnitNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify unit not found response has a 5xx status code
+func (o *ModifyUnitNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify unit not found response a status code equal to that given
+func (o *ModifyUnitNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the modify unit not found response
+func (o *ModifyUnitNotFound) Code() int {
+	return 404
+}
+
+func (o *ModifyUnitNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /organisation/units/{id}][%d] modifyUnitNotFound", 404)
+}
+
+func (o *ModifyUnitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

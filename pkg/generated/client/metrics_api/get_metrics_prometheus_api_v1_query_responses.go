@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetMetricsPrometheusAPIV1QueryReader is a Reader for the GetMetricsPrometheusAPIV1Query structure.
@@ -63,7 +62,8 @@ func NewGetMetricsPrometheusAPIV1QueryOK() *GetMetricsPrometheusAPIV1QueryOK {
 	return &GetMetricsPrometheusAPIV1QueryOK{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryOK handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryOK handles this case with default header values.
 
 See Prometheus api https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries
 */
@@ -73,6 +73,36 @@ type GetMetricsPrometheusAPIV1QueryOK struct {
 
 	// isStream: false
 	*models.MetricsQueryResponse
+}
+
+// IsSuccess returns true when this get metrics prometheus Api v1 query o k response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query o k response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query o k response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query o k response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query o k response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query o k response
+func (o *GetMetricsPrometheusAPIV1QueryOK) Code() int {
+	return 200
 }
 
 func (o *GetMetricsPrometheusAPIV1QueryOK) Error() string {
@@ -97,7 +127,8 @@ func NewGetMetricsPrometheusAPIV1QueryBadRequest() *GetMetricsPrometheusAPIV1Que
 	return &GetMetricsPrometheusAPIV1QueryBadRequest{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryBadRequest handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -107,6 +138,36 @@ type GetMetricsPrometheusAPIV1QueryBadRequest struct {
 
 	// isStream: false
 	*models.MetricsQueryResponse
+}
+
+// IsSuccess returns true when this get metrics prometheus Api v1 query bad request response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query bad request response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query bad request response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query bad request response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query bad request response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query bad request response
+func (o *GetMetricsPrometheusAPIV1QueryBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetMetricsPrometheusAPIV1QueryBadRequest) Error() string {
@@ -131,11 +192,42 @@ func NewGetMetricsPrometheusAPIV1QueryForbidden() *GetMetricsPrometheusAPIV1Quer
 	return &GetMetricsPrometheusAPIV1QueryForbidden{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryForbidden handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryForbidden handles this case with default header values.
 
 Forbidden
 */
 type GetMetricsPrometheusAPIV1QueryForbidden struct {
+}
+
+// IsSuccess returns true when this get metrics prometheus Api v1 query forbidden response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query forbidden response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query forbidden response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query forbidden response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query forbidden response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query forbidden response
+func (o *GetMetricsPrometheusAPIV1QueryForbidden) Code() int {
+	return 403
 }
 
 func (o *GetMetricsPrometheusAPIV1QueryForbidden) Error() string {
@@ -152,11 +244,42 @@ func NewGetMetricsPrometheusAPIV1QueryInternalServerError() *GetMetricsPrometheu
 	return &GetMetricsPrometheusAPIV1QueryInternalServerError{}
 }
 
-/*GetMetricsPrometheusAPIV1QueryInternalServerError handles this case with default header values.
+/*
+GetMetricsPrometheusAPIV1QueryInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
 type GetMetricsPrometheusAPIV1QueryInternalServerError struct {
+}
+
+// IsSuccess returns true when this get metrics prometheus Api v1 query internal server error response has a 2xx status code
+func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get metrics prometheus Api v1 query internal server error response has a 3xx status code
+func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get metrics prometheus Api v1 query internal server error response has a 4xx status code
+func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get metrics prometheus Api v1 query internal server error response has a 5xx status code
+func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get metrics prometheus Api v1 query internal server error response a status code equal to that given
+func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get metrics prometheus Api v1 query internal server error response
+func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetMetricsPrometheusAPIV1QueryInternalServerError) Error() string {

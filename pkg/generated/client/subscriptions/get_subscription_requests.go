@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetSubscription creates a new GetSubscriptionRequest object
@@ -55,7 +54,7 @@ func (o *GetSubscriptionRequest) WithID(id strfmt.UUID) *GetSubscriptionRequest 
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get subscription Request
 func (o *GetSubscriptionRequest) WithContext(ctx context.Context) *GetSubscriptionRequest {
 	o.Context = ctx

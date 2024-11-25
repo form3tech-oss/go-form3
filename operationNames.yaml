@@ -59,9 +59,6 @@ paths:
   /organisation/accounts/{id}/events:
     get:
       operationId: ListAccountEvents
-  /organisation/balances:
-    get:
-      operationId: GetBalances
   /organisation/positions:
     get:
       operationId: GetPositions
@@ -78,34 +75,6 @@ paths:
   /organisation/units/health:
     get:
       operationId: GetUnitsHealth
-  /organisation/accountrequests:
-    post:
-      operationId: CreateAccountRequest
-    get:
-      operationId: ListAccountRequests
-  /organisation/accountrequests/{id}:
-    get:
-      operationId: GetAccountRequest
-  /organisation/accountrequests/{id}/submissions:
-    post:
-      operationId: CreateAccountRequestSubmission
-  /organisation/accountrequests/{id}/submissions/{submissionId}:
-    get:
-      operationId: GetAccountRequestSubmission
-  /organisation/accountamendments:
-    post:
-      operationId: CreateAccountAmendment
-    get:
-      operationId: ListAccountAmendments
-  /organisation/accountamendments/{id}:
-    get:
-      operationId: GetAccountAmendment
-  /organisation/accountamendments/{id}/submissions:
-    post:
-      operationId: CreateAccountAmendmentSubmission
-  /organisation/accountamendments/{id}/submissions/{submissionId}:
-    get:
-      operationId: GetAccountAmendmentSubmission
   /security/roles:
     get:
       operationId: ListRoles

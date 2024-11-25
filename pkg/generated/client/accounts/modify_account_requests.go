@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.ModifyAccount creates a new ModifyAccountRequest object
@@ -86,7 +85,7 @@ func (o *ModifyAccountRequest) WithID(id strfmt.UUID) *ModifyAccountRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the modify account Request
 func (o *ModifyAccountRequest) WithContext(ctx context.Context) *ModifyAccountRequest {
 	o.Context = ctx

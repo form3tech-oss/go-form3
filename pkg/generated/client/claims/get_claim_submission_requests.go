@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetClaimSubmission creates a new GetClaimSubmissionRequest object
@@ -68,7 +67,7 @@ func (o *GetClaimSubmissionRequest) WithSubmissionID(submissionID strfmt.UUID) *
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get claim submission Request
 func (o *GetClaimSubmissionRequest) WithContext(ctx context.Context) *GetClaimSubmissionRequest {
 	o.Context = ctx

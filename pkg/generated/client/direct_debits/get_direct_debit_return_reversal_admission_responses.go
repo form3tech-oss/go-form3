@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetDirectDebitReturnReversalAdmissionReader is a Reader for the GetDirectDebitReturnReversalAdmission structure.
@@ -42,7 +41,8 @@ func NewGetDirectDebitReturnReversalAdmissionOK() *GetDirectDebitReturnReversalA
 	return &GetDirectDebitReturnReversalAdmissionOK{}
 }
 
-/*GetDirectDebitReturnReversalAdmissionOK handles this case with default header values.
+/*
+GetDirectDebitReturnReversalAdmissionOK handles this case with default header values.
 
 Reversal admission details
 */
@@ -52,6 +52,36 @@ type GetDirectDebitReturnReversalAdmissionOK struct {
 
 	// isStream: false
 	*models.DirectDebitReturnReversalAdmissionDetailsResponse
+}
+
+// IsSuccess returns true when this get direct debit return reversal admission o k response has a 2xx status code
+func (o *GetDirectDebitReturnReversalAdmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get direct debit return reversal admission o k response has a 3xx status code
+func (o *GetDirectDebitReturnReversalAdmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit return reversal admission o k response has a 4xx status code
+func (o *GetDirectDebitReturnReversalAdmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get direct debit return reversal admission o k response has a 5xx status code
+func (o *GetDirectDebitReturnReversalAdmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit return reversal admission o k response a status code equal to that given
+func (o *GetDirectDebitReturnReversalAdmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get direct debit return reversal admission o k response
+func (o *GetDirectDebitReturnReversalAdmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetDirectDebitReturnReversalAdmissionOK) Error() string {

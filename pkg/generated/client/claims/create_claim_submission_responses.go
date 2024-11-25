@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateClaimSubmissionReader is a Reader for the CreateClaimSubmission structure.
@@ -39,6 +38,13 @@ func (o *CreateClaimSubmissionReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 
+	case 404:
+		result := NewCreateClaimSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +55,8 @@ func NewCreateClaimSubmissionCreated() *CreateClaimSubmissionCreated {
 	return &CreateClaimSubmissionCreated{}
 }
 
-/*CreateClaimSubmissionCreated handles this case with default header values.
+/*
+CreateClaimSubmissionCreated handles this case with default header values.
 
 Claim Submission creation response
 */
@@ -59,6 +66,36 @@ type CreateClaimSubmissionCreated struct {
 
 	// isStream: false
 	*models.ClaimSubmissionDetailsResponse
+}
+
+// IsSuccess returns true when this create claim submission created response has a 2xx status code
+func (o *CreateClaimSubmissionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create claim submission created response has a 3xx status code
+func (o *CreateClaimSubmissionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim submission created response has a 4xx status code
+func (o *CreateClaimSubmissionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create claim submission created response has a 5xx status code
+func (o *CreateClaimSubmissionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim submission created response a status code equal to that given
+func (o *CreateClaimSubmissionCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create claim submission created response
+func (o *CreateClaimSubmissionCreated) Code() int {
+	return 201
 }
 
 func (o *CreateClaimSubmissionCreated) Error() string {
@@ -83,9 +120,10 @@ func NewCreateClaimSubmissionBadRequest() *CreateClaimSubmissionBadRequest {
 	return &CreateClaimSubmissionBadRequest{}
 }
 
-/*CreateClaimSubmissionBadRequest handles this case with default header values.
+/*
+CreateClaimSubmissionBadRequest handles this case with default header values.
 
-Claim Submission creation error
+Bad Request
 */
 type CreateClaimSubmissionBadRequest struct {
 
@@ -95,11 +133,106 @@ type CreateClaimSubmissionBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create claim submission bad request response has a 2xx status code
+func (o *CreateClaimSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim submission bad request response has a 3xx status code
+func (o *CreateClaimSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim submission bad request response has a 4xx status code
+func (o *CreateClaimSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim submission bad request response has a 5xx status code
+func (o *CreateClaimSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim submission bad request response a status code equal to that given
+func (o *CreateClaimSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create claim submission bad request response
+func (o *CreateClaimSubmissionBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateClaimSubmissionBadRequest) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims/{id}/submissions][%d] createClaimSubmissionBadRequest", 400)
 }
 
 func (o *CreateClaimSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateClaimSubmissionNotFound creates a CreateClaimSubmissionNotFound with default headers values
+func NewCreateClaimSubmissionNotFound() *CreateClaimSubmissionNotFound {
+	return &CreateClaimSubmissionNotFound{}
+}
+
+/*
+CreateClaimSubmissionNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateClaimSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create claim submission not found response has a 2xx status code
+func (o *CreateClaimSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim submission not found response has a 3xx status code
+func (o *CreateClaimSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim submission not found response has a 4xx status code
+func (o *CreateClaimSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim submission not found response has a 5xx status code
+func (o *CreateClaimSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim submission not found response a status code equal to that given
+func (o *CreateClaimSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create claim submission not found response
+func (o *CreateClaimSubmissionNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateClaimSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[POST /transaction/claims/{id}/submissions][%d] createClaimSubmissionNotFound", 404)
+}
+
+func (o *CreateClaimSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

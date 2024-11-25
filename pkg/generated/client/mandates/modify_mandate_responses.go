@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ModifyMandateReader is a Reader for the ModifyMandate structure.
@@ -49,7 +48,8 @@ func NewModifyMandateOK() *ModifyMandateOK {
 	return &ModifyMandateOK{}
 }
 
-/*ModifyMandateOK handles this case with default header values.
+/*
+ModifyMandateOK handles this case with default header values.
 
 Mandate details
 */
@@ -59,6 +59,36 @@ type ModifyMandateOK struct {
 
 	// isStream: false
 	*models.MandateDetailsResponse
+}
+
+// IsSuccess returns true when this modify mandate o k response has a 2xx status code
+func (o *ModifyMandateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify mandate o k response has a 3xx status code
+func (o *ModifyMandateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify mandate o k response has a 4xx status code
+func (o *ModifyMandateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify mandate o k response has a 5xx status code
+func (o *ModifyMandateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify mandate o k response a status code equal to that given
+func (o *ModifyMandateOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify mandate o k response
+func (o *ModifyMandateOK) Code() int {
+	return 200
 }
 
 func (o *ModifyMandateOK) Error() string {
@@ -83,7 +113,8 @@ func NewModifyMandateBadRequest() *ModifyMandateBadRequest {
 	return &ModifyMandateBadRequest{}
 }
 
-/*ModifyMandateBadRequest handles this case with default header values.
+/*
+ModifyMandateBadRequest handles this case with default header values.
 
 Mandate update error
 */
@@ -93,6 +124,36 @@ type ModifyMandateBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this modify mandate bad request response has a 2xx status code
+func (o *ModifyMandateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify mandate bad request response has a 3xx status code
+func (o *ModifyMandateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify mandate bad request response has a 4xx status code
+func (o *ModifyMandateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify mandate bad request response has a 5xx status code
+func (o *ModifyMandateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify mandate bad request response a status code equal to that given
+func (o *ModifyMandateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the modify mandate bad request response
+func (o *ModifyMandateBadRequest) Code() int {
+	return 400
 }
 
 func (o *ModifyMandateBadRequest) Error() string {

@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetDirectDebit creates a new GetDirectDebitRequest object
@@ -55,7 +54,7 @@ func (o *GetDirectDebitRequest) WithID(id strfmt.UUID) *GetDirectDebitRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get direct debit Request
 func (o *GetDirectDebitRequest) WithContext(ctx context.Context) *GetDirectDebitRequest {
 	o.Context = ctx

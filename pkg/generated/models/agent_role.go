@@ -9,9 +9,8 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 )
 
@@ -39,11 +38,8 @@ const (
 	// AgentRoleAdditionalBeneficiaryPartyAgentInformation captures enum value "AdditionalBeneficiaryPartyAgentInformation"
 	AgentRoleAdditionalBeneficiaryPartyAgentInformation AgentRole = "AdditionalBeneficiaryPartyAgentInformation"
 
-	// AgentRoleCreditorAgent captures enum value "CreditorAgent"
-	AgentRoleCreditorAgent AgentRole = "CreditorAgent"
-
-	// AgentRoleDebtorAgent captures enum value "DebtorAgent"
-	AgentRoleDebtorAgent AgentRole = "DebtorAgent"
+	// AgentRoleCaseCreator captures enum value "CaseCreator"
+	AgentRoleCaseCreator AgentRole = "CaseCreator"
 )
 
 // for schema
@@ -51,7 +47,7 @@ var agentRoleEnum []interface{}
 
 func init() {
 	var res []AgentRole
-	if err := json.Unmarshal([]byte(`["IntermediaryAgent1","IntermediaryAgent2","IntermediaryAgent3","InstructingAgent","InstructedAgent","AdditionalBeneficiaryPartyAgentInformation","CreditorAgent","DebtorAgent"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["IntermediaryAgent1","IntermediaryAgent2","IntermediaryAgent3","InstructingAgent","InstructedAgent","AdditionalBeneficiaryPartyAgentInformation","CaseCreator"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

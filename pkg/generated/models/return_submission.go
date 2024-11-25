@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -351,6 +350,14 @@ func (m *ReturnSubmission) Json() string {
 // swagger:model ReturnSubmissionAttributes
 type ReturnSubmissionAttributes struct {
 
+	// Identification code of the file sent to scheme.
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// Number of the file sent to scheme.
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// Time a payment was released from being held due to a limit breach
 	// Read Only: true
 	// Format: date-time
@@ -361,14 +368,20 @@ type ReturnSubmissionAttributes struct {
 	// Format: date-time
 	LimitBreachStartDatetime *strfmt.DateTime `json:"limit_breach_start_datetime,omitempty"`
 
+	// posting status
+	PostingStatus PostingStatus `json:"posting_status,omitempty"`
+
 	// Details of the account to which funds are redirected (if applicable)
 	RedirectedAccountNumber string `json:"redirected_account_number,omitempty"`
 
 	// Details of the bank to which funds are redirected (if applicable)
 	RedirectedBankID string `json:"redirected_bank_id,omitempty"`
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// Route taken for a return
-	// Enum: [on_us]
+	// Enum: ["on_us","xp"]
 	Route string `json:"route,omitempty"`
 
 	// Scheme-specific status (if submission has been submitted to a scheme)
@@ -405,13 +418,21 @@ type ReturnSubmissionAttributes struct {
 func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionAttributes {
 	return &ReturnSubmissionAttributes{
 
+		FileIdentifier: defaults.GetStringPtr("ReturnSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("ReturnSubmissionAttributes", "file_number"),
+
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "limit_breach_end_datetime"),
 
 		LimitBreachStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "limit_breach_start_datetime"),
 
+		// TODO PostingStatus: PostingStatus,
+
 		RedirectedAccountNumber: defaults.GetString("ReturnSubmissionAttributes", "redirected_account_number"),
 
 		RedirectedBankID: defaults.GetString("ReturnSubmissionAttributes", "redirected_bank_id"),
+
+		ReferenceID: defaults.GetString("ReturnSubmissionAttributes", "reference_id"),
 
 		Route: defaults.GetString("ReturnSubmissionAttributes", "route"),
 
@@ -431,6 +452,30 @@ func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSub
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *ReturnSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *ReturnSubmissionAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithoutFileIdentifier() *ReturnSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithFileNumber(fileNumber string) *ReturnSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithoutFileNumber() *ReturnSubmissionAttributes {
+	m.FileNumber = nil
+	return m
 }
 
 func (m *ReturnSubmissionAttributes) WithLimitBreachEndDatetime(limitBreachEndDatetime strfmt.DateTime) *ReturnSubmissionAttributes {
@@ -457,6 +502,13 @@ func (m *ReturnSubmissionAttributes) WithoutLimitBreachStartDatetime() *ReturnSu
 	return m
 }
 
+func (m *ReturnSubmissionAttributes) WithPostingStatus(postingStatus PostingStatus) *ReturnSubmissionAttributes {
+
+	m.PostingStatus = postingStatus
+
+	return m
+}
+
 func (m *ReturnSubmissionAttributes) WithRedirectedAccountNumber(redirectedAccountNumber string) *ReturnSubmissionAttributes {
 
 	m.RedirectedAccountNumber = redirectedAccountNumber
@@ -467,6 +519,13 @@ func (m *ReturnSubmissionAttributes) WithRedirectedAccountNumber(redirectedAccou
 func (m *ReturnSubmissionAttributes) WithRedirectedBankID(redirectedBankID string) *ReturnSubmissionAttributes {
 
 	m.RedirectedBankID = redirectedBankID
+
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithReferenceID(referenceID string) *ReturnSubmissionAttributes {
+
+	m.ReferenceID = referenceID
 
 	return m
 }
@@ -558,11 +617,23 @@ func (m *ReturnSubmissionAttributes) WithoutTransactionStartDatetime() *ReturnSu
 func (m *ReturnSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLimitBreachEndDatetime(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateLimitBreachStartDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostingStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -596,6 +667,32 @@ func (m *ReturnSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ReturnSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ReturnSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ReturnSubmissionAttributes) validateLimitBreachEndDatetime(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.LimitBreachEndDatetime) { // not required
@@ -622,11 +719,27 @@ func (m *ReturnSubmissionAttributes) validateLimitBreachStartDatetime(formats st
 	return nil
 }
 
+func (m *ReturnSubmissionAttributes) validatePostingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostingStatus) { // not required
+		return nil
+	}
+
+	if err := m.PostingStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "posting_status")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var returnSubmissionAttributesTypeRoutePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["on_us","xp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -638,6 +751,9 @@ const (
 
 	// ReturnSubmissionAttributesRouteOnUs captures enum value "on_us"
 	ReturnSubmissionAttributesRouteOnUs string = "on_us"
+
+	// ReturnSubmissionAttributesRouteXp captures enum value "xp"
+	ReturnSubmissionAttributesRouteXp string = "xp"
 )
 
 // prop value enum

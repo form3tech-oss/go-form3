@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListUserRolesReader is a Reader for the ListUserRoles structure.
@@ -32,6 +31,13 @@ func (o *ListUserRolesReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return result, nil
 
+	case 404:
+		result := NewListUserRolesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewListUserRolesOK() *ListUserRolesOK {
 	return &ListUserRolesOK{}
 }
 
-/*ListUserRolesOK handles this case with default header values.
+/*
+ListUserRolesOK handles this case with default header values.
 
 List of roles for user
 */
@@ -52,6 +59,36 @@ type ListUserRolesOK struct {
 
 	// isStream: false
 	*models.UserRoleListResponse
+}
+
+// IsSuccess returns true when this list user roles o k response has a 2xx status code
+func (o *ListUserRolesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list user roles o k response has a 3xx status code
+func (o *ListUserRolesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user roles o k response has a 4xx status code
+func (o *ListUserRolesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user roles o k response has a 5xx status code
+func (o *ListUserRolesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user roles o k response a status code equal to that given
+func (o *ListUserRolesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list user roles o k response
+func (o *ListUserRolesOK) Code() int {
+	return 200
 }
 
 func (o *ListUserRolesOK) Error() string {
@@ -65,6 +102,71 @@ func (o *ListUserRolesOK) readResponse(response runtime.ClientResponse, consumer
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserRoleListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListUserRolesNotFound creates a ListUserRolesNotFound with default headers values
+func NewListUserRolesNotFound() *ListUserRolesNotFound {
+	return &ListUserRolesNotFound{}
+}
+
+/*
+ListUserRolesNotFound handles this case with default header values.
+
+Not Found
+*/
+type ListUserRolesNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this list user roles not found response has a 2xx status code
+func (o *ListUserRolesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user roles not found response has a 3xx status code
+func (o *ListUserRolesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user roles not found response has a 4xx status code
+func (o *ListUserRolesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user roles not found response has a 5xx status code
+func (o *ListUserRolesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user roles not found response a status code equal to that given
+func (o *ListUserRolesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list user roles not found response
+func (o *ListUserRolesNotFound) Code() int {
+	return 404
+}
+
+func (o *ListUserRolesNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/users/{user_id}/roles][%d] listUserRolesNotFound", 404)
+}
+
+func (o *ListUserRolesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

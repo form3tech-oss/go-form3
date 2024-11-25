@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -25,11 +24,11 @@ type TransactionFileSubmissionSchemeReference struct {
 	// Pattern: .{6}$
 	ClearingID string `json:"clearing_id,omitempty"`
 
-	// Number of the file sent to the scheme
-	SchemeFileID string `json:"scheme_file_id,omitempty"`
-
 	// Submission serial number
-	SchemeSubmissionID string `json:"scheme_submission_id,omitempty"`
+	FileIdentifier string `json:"file_identifier,omitempty"`
+
+	// Number of the file sent to the scheme
+	FileNumber string `json:"file_number,omitempty"`
 
 	// The count of transactions submitted in a given scheme file
 	TransactionCount int64 `json:"transaction_count,omitempty"`
@@ -43,9 +42,9 @@ func TransactionFileSubmissionSchemeReferenceWithDefaults(defaults client.Defaul
 
 		ClearingID: defaults.GetString("TransactionFileSubmissionSchemeReference", "clearing_id"),
 
-		SchemeFileID: defaults.GetString("TransactionFileSubmissionSchemeReference", "scheme_file_id"),
+		FileIdentifier: defaults.GetString("TransactionFileSubmissionSchemeReference", "file_identifier"),
 
-		SchemeSubmissionID: defaults.GetString("TransactionFileSubmissionSchemeReference", "scheme_submission_id"),
+		FileNumber: defaults.GetString("TransactionFileSubmissionSchemeReference", "file_number"),
 
 		TransactionCount: defaults.GetInt64("TransactionFileSubmissionSchemeReference", "transaction_count"),
 
@@ -60,16 +59,16 @@ func (m *TransactionFileSubmissionSchemeReference) WithClearingID(clearingID str
 	return m
 }
 
-func (m *TransactionFileSubmissionSchemeReference) WithSchemeFileID(schemeFileID string) *TransactionFileSubmissionSchemeReference {
+func (m *TransactionFileSubmissionSchemeReference) WithFileIdentifier(fileIdentifier string) *TransactionFileSubmissionSchemeReference {
 
-	m.SchemeFileID = schemeFileID
+	m.FileIdentifier = fileIdentifier
 
 	return m
 }
 
-func (m *TransactionFileSubmissionSchemeReference) WithSchemeSubmissionID(schemeSubmissionID string) *TransactionFileSubmissionSchemeReference {
+func (m *TransactionFileSubmissionSchemeReference) WithFileNumber(fileNumber string) *TransactionFileSubmissionSchemeReference {
 
-	m.SchemeSubmissionID = schemeSubmissionID
+	m.FileNumber = fileNumber
 
 	return m
 }

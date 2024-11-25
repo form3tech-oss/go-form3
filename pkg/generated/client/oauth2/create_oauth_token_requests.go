@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.CreateOauthToken creates a new CreateOauthTokenRequest object
@@ -55,7 +54,7 @@ func (o *CreateOauthTokenRequest) WithGrantType(grantType string) *CreateOauthTo
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create oauth token Request
 func (o *CreateOauthTokenRequest) WithContext(ctx context.Context) *CreateOauthTokenRequest {
 	o.Context = ctx

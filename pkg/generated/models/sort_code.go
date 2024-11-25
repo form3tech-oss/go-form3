@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -473,7 +472,7 @@ type SortCodeAttributesSupportedSchemesBACS struct {
 	AcceptsPayments *bool `json:"accepts_payments,omitempty"`
 
 	// account switching
-	// Enum: [full partial ineligible]
+	// Enum: ["full","partial","ineligible"]
 	AccountSwitching string `json:"account_switching,omitempty"`
 
 	// allowed transactions

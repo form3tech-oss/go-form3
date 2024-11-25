@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -856,17 +855,17 @@ func (m *DirectDebitRelationshipsDirectDebitSubmission) Json() string {
 type DirectDebitRelationshipsMandate struct {
 
 	// data
-	Data []*Mandate `json:"data"`
+	Data []*DirectDebitMandate `json:"data"`
 }
 
 func DirectDebitRelationshipsMandateWithDefaults(defaults client.Defaults) *DirectDebitRelationshipsMandate {
 	return &DirectDebitRelationshipsMandate{
 
-		Data: make([]*Mandate, 0),
+		Data: make([]*DirectDebitMandate, 0),
 	}
 }
 
-func (m *DirectDebitRelationshipsMandate) WithData(data []*Mandate) *DirectDebitRelationshipsMandate {
+func (m *DirectDebitRelationshipsMandate) WithData(data []*DirectDebitMandate) *DirectDebitRelationshipsMandate {
 
 	m.Data = data
 

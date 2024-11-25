@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetDirectdebitsIDDecisionsDecisionID creates a new GetDirectdebitsIDDecisionsDecisionIDRequest object
@@ -68,7 +67,7 @@ func (o *GetDirectdebitsIDDecisionsDecisionIDRequest) WithID(id strfmt.UUID) *Ge
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get directdebits ID decisions decision ID Request
 func (o *GetDirectdebitsIDDecisionsDecisionIDRequest) WithContext(ctx context.Context) *GetDirectdebitsIDDecisionsDecisionIDRequest {
 	o.Context = ctx

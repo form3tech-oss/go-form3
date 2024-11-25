@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -25,6 +24,9 @@ type QueryResponseSubmissionAttributes struct {
 
 	// status
 	Status QueryResponseSubmissionStatus `json:"status,omitempty"`
+
+	// status reason
+	StatusReason string `json:"status_reason,omitempty"`
 }
 
 func QueryResponseSubmissionAttributesWithDefaults(defaults client.Defaults) *QueryResponseSubmissionAttributes {
@@ -34,6 +36,7 @@ func QueryResponseSubmissionAttributesWithDefaults(defaults client.Defaults) *Qu
 
 		// TODO Status: QueryResponseSubmissionStatus,
 
+		StatusReason: defaults.GetString("QueryResponseSubmissionAttributes", "status_reason"),
 	}
 }
 
@@ -47,6 +50,13 @@ func (m *QueryResponseSubmissionAttributes) WithAuto(auto bool) *QueryResponseSu
 func (m *QueryResponseSubmissionAttributes) WithStatus(status QueryResponseSubmissionStatus) *QueryResponseSubmissionAttributes {
 
 	m.Status = status
+
+	return m
+}
+
+func (m *QueryResponseSubmissionAttributes) WithStatusReason(statusReason string) *QueryResponseSubmissionAttributes {
+
+	m.StatusReason = statusReason
 
 	return m
 }

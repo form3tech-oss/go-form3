@@ -31,7 +31,18 @@ Please include proof of running the full test suite over the Form3 API with the 
   * `FORM3_PRIVATE_KEY`
   * `FORM3_PUBLIC_KEY_ID`
 
-In case of external contributions, it is the responsibility of the reviewer to run those tests.
+In case of external contributions, it is the responsibility of the reviewer to run those tests since these values will only be accessible to Form3 employees, or Form3 customers.
+
+For Form3 employees: to find these values needed to run tests locally, first choose an environment to run against. 
+Most of the variables can then be found in the postman collection(s) for that environment, named similarly to the above.
+`FORM3_PRIVATE_KEY` & `FORM3_PUBLIC_KEY_ID` are not in Postman, as the client ID & secret are used for authentication.
+To find these, look at a deployed fake customer F1 test resource for the environment you are targeting.
+`FORM3_PUBLIC_KEY_ID` should be set as an environment variable which you can copy from the resource.
+`FORM3_PRIVATE_KEY` should be an environment variable loaded from a secret.
+Once you have the secret name from the F1 resource, find the secret and decode it so you can use it to run these tests.
+
+Note that the private/public key pair used will need to have the necessary permissions to perform each action required by the tests, e.g. create subscriptions.
+If some tests fail with HTTP 403 error codes, you can check the logs of the service that has rejected the request for a detailed reason, but you may want to just pick different credentials.
 
 ## Getting started
 

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateUserCredentialsReader is a Reader for the CreateUserCredentials structure.
@@ -32,6 +31,13 @@ func (o *CreateUserCredentialsReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 
+	case 404:
+		result := NewCreateUserCredentialsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewCreateUserCredentialsCreated() *CreateUserCredentialsCreated {
 	return &CreateUserCredentialsCreated{}
 }
 
-/*CreateUserCredentialsCreated handles this case with default header values.
+/*
+CreateUserCredentialsCreated handles this case with default header values.
 
 Credential creation response
 */
@@ -52,6 +59,36 @@ type CreateUserCredentialsCreated struct {
 
 	// isStream: false
 	*models.CredentialCreationResponse
+}
+
+// IsSuccess returns true when this create user credentials created response has a 2xx status code
+func (o *CreateUserCredentialsCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create user credentials created response has a 3xx status code
+func (o *CreateUserCredentialsCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user credentials created response has a 4xx status code
+func (o *CreateUserCredentialsCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create user credentials created response has a 5xx status code
+func (o *CreateUserCredentialsCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user credentials created response a status code equal to that given
+func (o *CreateUserCredentialsCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create user credentials created response
+func (o *CreateUserCredentialsCreated) Code() int {
+	return 201
 }
 
 func (o *CreateUserCredentialsCreated) Error() string {
@@ -65,6 +102,71 @@ func (o *CreateUserCredentialsCreated) readResponse(response runtime.ClientRespo
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.CredentialCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateUserCredentialsNotFound creates a CreateUserCredentialsNotFound with default headers values
+func NewCreateUserCredentialsNotFound() *CreateUserCredentialsNotFound {
+	return &CreateUserCredentialsNotFound{}
+}
+
+/*
+CreateUserCredentialsNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateUserCredentialsNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create user credentials not found response has a 2xx status code
+func (o *CreateUserCredentialsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user credentials not found response has a 3xx status code
+func (o *CreateUserCredentialsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user credentials not found response has a 4xx status code
+func (o *CreateUserCredentialsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user credentials not found response has a 5xx status code
+func (o *CreateUserCredentialsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user credentials not found response a status code equal to that given
+func (o *CreateUserCredentialsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create user credentials not found response
+func (o *CreateUserCredentialsNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateUserCredentialsNotFound) Error() string {
+	return fmt.Sprintf("[POST /security/users/{user_id}/credentials][%d] createUserCredentialsNotFound", 404)
+}
+
+func (o *CreateUserCredentialsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

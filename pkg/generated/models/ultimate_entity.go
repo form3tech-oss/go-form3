@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -74,6 +73,9 @@ type UltimateEntity struct {
 	// Post code of the debtor/beneficiary address
 	PostCode string `json:"post_code,omitempty"`
 
+	// Postal address of the ultimate debtor/beneficiary
+	PostalAddress *PostalAddress `json:"postal_address,omitempty"`
+
 	// private identification
 	PrivateIdentification *PrivateIdentification `json:"private_identification,omitempty"`
 
@@ -120,6 +122,8 @@ func UltimateEntityWithDefaults(defaults client.Defaults) *UltimateEntity {
 		OrganisationIdentifications: make([]*BeneficiaryDebtorOrganisationIdentification, 0),
 
 		PostCode: defaults.GetString("UltimateEntity", "post_code"),
+
+		PostalAddress: PostalAddressWithDefaults(defaults),
 
 		PrivateIdentification: PrivateIdentificationWithDefaults(defaults),
 
@@ -253,6 +257,18 @@ func (m *UltimateEntity) WithPostCode(postCode string) *UltimateEntity {
 	return m
 }
 
+func (m *UltimateEntity) WithPostalAddress(postalAddress PostalAddress) *UltimateEntity {
+
+	m.PostalAddress = &postalAddress
+
+	return m
+}
+
+func (m *UltimateEntity) WithoutPostalAddress() *UltimateEntity {
+	m.PostalAddress = nil
+	return m
+}
+
 func (m *UltimateEntity) WithPrivateIdentification(privateIdentification PrivateIdentification) *UltimateEntity {
 
 	m.PrivateIdentification = &privateIdentification
@@ -288,6 +304,10 @@ func (m *UltimateEntity) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOrganisationIdentifications(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostalAddress(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -334,6 +354,24 @@ func (m *UltimateEntity) validateOrganisationIdentifications(formats strfmt.Regi
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *UltimateEntity) validatePostalAddress(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostalAddress) { // not required
+		return nil
+	}
+
+	if m.PostalAddress != nil {
+		if err := m.PostalAddress.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("postal_address")
+			}
+			return err
+		}
 	}
 
 	return nil

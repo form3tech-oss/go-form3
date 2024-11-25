@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -21,43 +20,60 @@ import (
 // swagger:model TransactionFileRelationships
 type TransactionFileRelationships struct {
 
-	// report
-	Report *ThinRelationships `json:"report,omitempty"`
+	// reports
+	Reports *ThinRelationship `json:"reports,omitempty"`
 
-	// transaction file submission
-	TransactionFileSubmission *TransactionFileRelationshipsTransactionFileSubmission `json:"transaction_file_submission,omitempty"`
+	// transaction file admissions
+	TransactionFileAdmissions *TransactionFileRelationshipsTransactionFileAdmissions `json:"transaction_file_admissions,omitempty"`
+
+	// transaction file submissions
+	TransactionFileSubmissions *TransactionFileRelationshipsTransactionFileSubmissions `json:"transaction_file_submissions,omitempty"`
 }
 
 func TransactionFileRelationshipsWithDefaults(defaults client.Defaults) *TransactionFileRelationships {
 	return &TransactionFileRelationships{
 
-		Report: ThinRelationshipsWithDefaults(defaults),
+		Reports: ThinRelationshipWithDefaults(defaults),
 
-		TransactionFileSubmission: TransactionFileRelationshipsTransactionFileSubmissionWithDefaults(defaults),
+		TransactionFileAdmissions: TransactionFileRelationshipsTransactionFileAdmissionsWithDefaults(defaults),
+
+		TransactionFileSubmissions: TransactionFileRelationshipsTransactionFileSubmissionsWithDefaults(defaults),
 	}
 }
 
-func (m *TransactionFileRelationships) WithReport(report ThinRelationships) *TransactionFileRelationships {
+func (m *TransactionFileRelationships) WithReports(reports ThinRelationship) *TransactionFileRelationships {
 
-	m.Report = &report
-
-	return m
-}
-
-func (m *TransactionFileRelationships) WithoutReport() *TransactionFileRelationships {
-	m.Report = nil
-	return m
-}
-
-func (m *TransactionFileRelationships) WithTransactionFileSubmission(transactionFileSubmission TransactionFileRelationshipsTransactionFileSubmission) *TransactionFileRelationships {
-
-	m.TransactionFileSubmission = &transactionFileSubmission
+	m.Reports = &reports
 
 	return m
 }
 
-func (m *TransactionFileRelationships) WithoutTransactionFileSubmission() *TransactionFileRelationships {
-	m.TransactionFileSubmission = nil
+func (m *TransactionFileRelationships) WithoutReports() *TransactionFileRelationships {
+	m.Reports = nil
+	return m
+}
+
+func (m *TransactionFileRelationships) WithTransactionFileAdmissions(transactionFileAdmissions TransactionFileRelationshipsTransactionFileAdmissions) *TransactionFileRelationships {
+
+	m.TransactionFileAdmissions = &transactionFileAdmissions
+
+	return m
+}
+
+func (m *TransactionFileRelationships) WithoutTransactionFileAdmissions() *TransactionFileRelationships {
+	m.TransactionFileAdmissions = nil
+	return m
+}
+
+func (m *TransactionFileRelationships) WithTransactionFileSubmissions(transactionFileSubmissions TransactionFileRelationshipsTransactionFileSubmissions) *TransactionFileRelationships {
+
+	m.TransactionFileSubmissions = &transactionFileSubmissions
+
+	return m
+}
+
+func (m *TransactionFileRelationships) WithoutTransactionFileSubmissions() *TransactionFileRelationships {
+	m.TransactionFileSubmissions = nil
 	return m
 }
 
@@ -65,11 +81,15 @@ func (m *TransactionFileRelationships) WithoutTransactionFileSubmission() *Trans
 func (m *TransactionFileRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateReport(formats); err != nil {
+	if err := m.validateReports(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTransactionFileSubmission(formats); err != nil {
+	if err := m.validateTransactionFileAdmissions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTransactionFileSubmissions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -79,16 +99,16 @@ func (m *TransactionFileRelationships) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *TransactionFileRelationships) validateReport(formats strfmt.Registry) error {
+func (m *TransactionFileRelationships) validateReports(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Report) { // not required
+	if swag.IsZero(m.Reports) { // not required
 		return nil
 	}
 
-	if m.Report != nil {
-		if err := m.Report.Validate(formats); err != nil {
+	if m.Reports != nil {
+		if err := m.Reports.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("report")
+				return ve.ValidateName("reports")
 			}
 			return err
 		}
@@ -97,16 +117,34 @@ func (m *TransactionFileRelationships) validateReport(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *TransactionFileRelationships) validateTransactionFileSubmission(formats strfmt.Registry) error {
+func (m *TransactionFileRelationships) validateTransactionFileAdmissions(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.TransactionFileSubmission) { // not required
+	if swag.IsZero(m.TransactionFileAdmissions) { // not required
 		return nil
 	}
 
-	if m.TransactionFileSubmission != nil {
-		if err := m.TransactionFileSubmission.Validate(formats); err != nil {
+	if m.TransactionFileAdmissions != nil {
+		if err := m.TransactionFileAdmissions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("transaction_file_submission")
+				return ve.ValidateName("transaction_file_admissions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *TransactionFileRelationships) validateTransactionFileSubmissions(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TransactionFileSubmissions) { // not required
+		return nil
+	}
+
+	if m.TransactionFileSubmissions != nil {
+		if err := m.TransactionFileSubmissions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("transaction_file_submissions")
 			}
 			return err
 		}
@@ -140,30 +178,30 @@ func (m *TransactionFileRelationships) Json() string {
 	return string(json)
 }
 
-// TransactionFileRelationshipsTransactionFileSubmission transaction file relationships transaction file submission
-// swagger:model TransactionFileRelationshipsTransactionFileSubmission
-type TransactionFileRelationshipsTransactionFileSubmission struct {
+// TransactionFileRelationshipsTransactionFileAdmissions transaction file relationships transaction file admissions
+// swagger:model TransactionFileRelationshipsTransactionFileAdmissions
+type TransactionFileRelationshipsTransactionFileAdmissions struct {
 
 	// data
-	Data []*TransactionFileSubmission `json:"data"`
+	Data []*TransactionFileAdmission `json:"data"`
 }
 
-func TransactionFileRelationshipsTransactionFileSubmissionWithDefaults(defaults client.Defaults) *TransactionFileRelationshipsTransactionFileSubmission {
-	return &TransactionFileRelationshipsTransactionFileSubmission{
+func TransactionFileRelationshipsTransactionFileAdmissionsWithDefaults(defaults client.Defaults) *TransactionFileRelationshipsTransactionFileAdmissions {
+	return &TransactionFileRelationshipsTransactionFileAdmissions{
 
-		Data: make([]*TransactionFileSubmission, 0),
+		Data: make([]*TransactionFileAdmission, 0),
 	}
 }
 
-func (m *TransactionFileRelationshipsTransactionFileSubmission) WithData(data []*TransactionFileSubmission) *TransactionFileRelationshipsTransactionFileSubmission {
+func (m *TransactionFileRelationshipsTransactionFileAdmissions) WithData(data []*TransactionFileAdmission) *TransactionFileRelationshipsTransactionFileAdmissions {
 
 	m.Data = data
 
 	return m
 }
 
-// Validate validates this transaction file relationships transaction file submission
-func (m *TransactionFileRelationshipsTransactionFileSubmission) Validate(formats strfmt.Registry) error {
+// Validate validates this transaction file relationships transaction file admissions
+func (m *TransactionFileRelationshipsTransactionFileAdmissions) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -176,7 +214,7 @@ func (m *TransactionFileRelationshipsTransactionFileSubmission) Validate(formats
 	return nil
 }
 
-func (m *TransactionFileRelationshipsTransactionFileSubmission) validateData(formats strfmt.Registry) error {
+func (m *TransactionFileRelationshipsTransactionFileAdmissions) validateData(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Data) { // not required
 		return nil
@@ -190,7 +228,7 @@ func (m *TransactionFileRelationshipsTransactionFileSubmission) validateData(for
 		if m.Data[i] != nil {
 			if err := m.Data[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("transaction_file_submission" + "." + "data" + "." + strconv.Itoa(i))
+					return ve.ValidateName("transaction_file_admissions" + "." + "data" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -202,7 +240,7 @@ func (m *TransactionFileRelationshipsTransactionFileSubmission) validateData(for
 }
 
 // MarshalBinary interface implementation
-func (m *TransactionFileRelationshipsTransactionFileSubmission) MarshalBinary() ([]byte, error) {
+func (m *TransactionFileRelationshipsTransactionFileAdmissions) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -210,15 +248,101 @@ func (m *TransactionFileRelationshipsTransactionFileSubmission) MarshalBinary() 
 }
 
 // UnmarshalBinary interface implementation
-func (m *TransactionFileRelationshipsTransactionFileSubmission) UnmarshalBinary(b []byte) error {
-	var res TransactionFileRelationshipsTransactionFileSubmission
+func (m *TransactionFileRelationshipsTransactionFileAdmissions) UnmarshalBinary(b []byte) error {
+	var res TransactionFileRelationshipsTransactionFileAdmissions
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
 	return nil
 }
-func (m *TransactionFileRelationshipsTransactionFileSubmission) Json() string {
+func (m *TransactionFileRelationshipsTransactionFileAdmissions) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// TransactionFileRelationshipsTransactionFileSubmissions transaction file relationships transaction file submissions
+// swagger:model TransactionFileRelationshipsTransactionFileSubmissions
+type TransactionFileRelationshipsTransactionFileSubmissions struct {
+
+	// data
+	Data []*TransactionFileSubmission `json:"data"`
+}
+
+func TransactionFileRelationshipsTransactionFileSubmissionsWithDefaults(defaults client.Defaults) *TransactionFileRelationshipsTransactionFileSubmissions {
+	return &TransactionFileRelationshipsTransactionFileSubmissions{
+
+		Data: make([]*TransactionFileSubmission, 0),
+	}
+}
+
+func (m *TransactionFileRelationshipsTransactionFileSubmissions) WithData(data []*TransactionFileSubmission) *TransactionFileRelationshipsTransactionFileSubmissions {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this transaction file relationships transaction file submissions
+func (m *TransactionFileRelationshipsTransactionFileSubmissions) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *TransactionFileRelationshipsTransactionFileSubmissions) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("transaction_file_submissions" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *TransactionFileRelationshipsTransactionFileSubmissions) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *TransactionFileRelationshipsTransactionFileSubmissions) UnmarshalBinary(b []byte) error {
+	var res TransactionFileRelationshipsTransactionFileSubmissions
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *TransactionFileRelationshipsTransactionFileSubmissions) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

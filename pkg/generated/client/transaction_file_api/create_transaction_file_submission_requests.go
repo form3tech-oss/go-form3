@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.CreateTransactionFileSubmission creates a new CreateTransactionFileSubmissionRequest object
@@ -86,7 +85,7 @@ func (o *CreateTransactionFileSubmissionRequest) WithTransactionFileID(transacti
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create transaction file submission Request
 func (o *CreateTransactionFileSubmissionRequest) WithContext(ctx context.Context) *CreateTransactionFileSubmissionRequest {
 	o.Context = ctx

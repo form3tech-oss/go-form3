@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -31,6 +30,9 @@ type MetricsQueryResponse struct {
 
 	// status
 	Status string `json:"status,omitempty"`
+
+	// warnings
+	Warnings []string `json:"warnings"`
 }
 
 func MetricsQueryResponseWithDefaults(defaults client.Defaults) *MetricsQueryResponse {
@@ -43,6 +45,8 @@ func MetricsQueryResponseWithDefaults(defaults client.Defaults) *MetricsQueryRes
 		ErrorType: defaults.GetString("MetricsQueryResponse", "errorType"),
 
 		Status: defaults.GetString("MetricsQueryResponse", "status"),
+
+		Warnings: make([]string, 0),
 	}
 }
 
@@ -75,6 +79,13 @@ func (m *MetricsQueryResponse) WithErrorType(errorType string) *MetricsQueryResp
 func (m *MetricsQueryResponse) WithStatus(status string) *MetricsQueryResponse {
 
 	m.Status = status
+
+	return m
+}
+
+func (m *MetricsQueryResponse) WithWarnings(warnings []string) *MetricsQueryResponse {
+
+	m.Warnings = warnings
 
 	return m
 }

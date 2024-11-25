@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -20,6 +19,14 @@ import (
 // Notification notification
 // swagger:model Notification
 type Notification struct {
+
+	// Timestamp when the event that triggered the notification occurred.
+	// Format: datetime
+	ActionTime strfmt.DateTime `json:"action_time,omitempty"`
+
+	// The ID of the user that made the change that triggered this notification. This can be the user ID of a customer or a Form3 system user.
+	// Format: uuid
+	ActionedBy strfmt.UUID `json:"actioned_by,omitempty"`
 
 	// The full resource itself (as you would see from a GET request)
 	Data interface{} `json:"data,omitempty"`
@@ -52,6 +59,10 @@ type Notification struct {
 func NotificationWithDefaults(defaults client.Defaults) *Notification {
 	return &Notification{
 
+		ActionTime: defaults.GetStrfmtDateTime("Notification", "action_time"),
+
+		ActionedBy: defaults.GetStrfmtUUID("Notification", "actioned_by"),
+
 		// TODO Data: interface{},
 
 		DataRecordType: defaults.GetString("Notification", "data_record_type"),
@@ -66,6 +77,20 @@ func NotificationWithDefaults(defaults client.Defaults) *Notification {
 
 		Version: defaults.GetInt64Ptr("Notification", "version"),
 	}
+}
+
+func (m *Notification) WithActionTime(actionTime strfmt.DateTime) *Notification {
+
+	m.ActionTime = actionTime
+
+	return m
+}
+
+func (m *Notification) WithActionedBy(actionedBy strfmt.UUID) *Notification {
+
+	m.ActionedBy = actionedBy
+
+	return m
 }
 
 func (m *Notification) WithData(data interface{}) *Notification {
@@ -126,6 +151,14 @@ func (m *Notification) WithoutVersion() *Notification {
 func (m *Notification) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateActionTime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateActionedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDataRecordType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -153,6 +186,32 @@ func (m *Notification) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Notification) validateActionTime(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ActionTime) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("action_time", "body", "datetime", m.ActionTime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Notification) validateActionedBy(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ActionedBy) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("actioned_by", "body", "uuid", m.ActionedBy.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 

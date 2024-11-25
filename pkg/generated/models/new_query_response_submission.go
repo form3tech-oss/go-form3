@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -22,7 +21,7 @@ import (
 type NewQueryResponseSubmission struct {
 
 	// attributes
-	Attributes *QueryResponseSubmissionAttributes `json:"attributes,omitempty"`
+	Attributes *NewQueryResponseSubmissionAttributes `json:"attributes,omitempty"`
 
 	// id
 	// Required: true
@@ -42,7 +41,7 @@ type NewQueryResponseSubmission struct {
 func NewQueryResponseSubmissionWithDefaults(defaults client.Defaults) *NewQueryResponseSubmission {
 	return &NewQueryResponseSubmission{
 
-		Attributes: QueryResponseSubmissionAttributesWithDefaults(defaults),
+		Attributes: NewQueryResponseSubmissionAttributesWithDefaults(defaults),
 
 		ID: defaults.GetStrfmtUUIDPtr("NewQueryResponseSubmission", "id"),
 
@@ -53,7 +52,7 @@ func NewQueryResponseSubmissionWithDefaults(defaults client.Defaults) *NewQueryR
 	}
 }
 
-func (m *NewQueryResponseSubmission) WithAttributes(attributes QueryResponseSubmissionAttributes) *NewQueryResponseSubmission {
+func (m *NewQueryResponseSubmission) WithAttributes(attributes NewQueryResponseSubmissionAttributes) *NewQueryResponseSubmission {
 
 	m.Attributes = &attributes
 
@@ -207,6 +206,58 @@ func (m *NewQueryResponseSubmission) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *NewQueryResponseSubmission) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// NewQueryResponseSubmissionAttributes new query response submission attributes
+// swagger:model NewQueryResponseSubmissionAttributes
+type NewQueryResponseSubmissionAttributes struct {
+
+	// auto
+	Auto bool `json:"auto,omitempty"`
+}
+
+func NewQueryResponseSubmissionAttributesWithDefaults(defaults client.Defaults) *NewQueryResponseSubmissionAttributes {
+	return &NewQueryResponseSubmissionAttributes{
+
+		Auto: defaults.GetBool("NewQueryResponseSubmissionAttributes", "auto"),
+	}
+}
+
+func (m *NewQueryResponseSubmissionAttributes) WithAuto(auto bool) *NewQueryResponseSubmissionAttributes {
+
+	m.Auto = auto
+
+	return m
+}
+
+// Validate validates this new query response submission attributes
+func (m *NewQueryResponseSubmissionAttributes) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *NewQueryResponseSubmissionAttributes) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *NewQueryResponseSubmissionAttributes) UnmarshalBinary(b []byte) error {
+	var res NewQueryResponseSubmissionAttributes
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *NewQueryResponseSubmissionAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

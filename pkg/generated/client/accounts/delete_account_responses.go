@@ -9,8 +9,7 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // DeleteAccountReader is a Reader for the DeleteAccount structure.
@@ -39,11 +38,42 @@ func NewDeleteAccountNoContent() *DeleteAccountNoContent {
 	return &DeleteAccountNoContent{}
 }
 
-/*DeleteAccountNoContent handles this case with default header values.
+/*
+DeleteAccountNoContent handles this case with default header values.
 
 Account deleted
 */
 type DeleteAccountNoContent struct {
+}
+
+// IsSuccess returns true when this delete account no content response has a 2xx status code
+func (o *DeleteAccountNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete account no content response has a 3xx status code
+func (o *DeleteAccountNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete account no content response has a 4xx status code
+func (o *DeleteAccountNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete account no content response has a 5xx status code
+func (o *DeleteAccountNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete account no content response a status code equal to that given
+func (o *DeleteAccountNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete account no content response
+func (o *DeleteAccountNoContent) Code() int {
+	return 204
 }
 
 func (o *DeleteAccountNoContent) Error() string {

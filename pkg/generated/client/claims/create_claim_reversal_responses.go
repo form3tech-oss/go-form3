@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateClaimReversalReader is a Reader for the CreateClaimReversal structure.
@@ -39,6 +38,13 @@ func (o *CreateClaimReversalReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 
+	case 404:
+		result := NewCreateClaimReversalNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -49,7 +55,8 @@ func NewCreateClaimReversalCreated() *CreateClaimReversalCreated {
 	return &CreateClaimReversalCreated{}
 }
 
-/*CreateClaimReversalCreated handles this case with default header values.
+/*
+CreateClaimReversalCreated handles this case with default header values.
 
 Claim Reversal creation response
 */
@@ -59,6 +66,36 @@ type CreateClaimReversalCreated struct {
 
 	// isStream: false
 	*models.ClaimReversalDetailsResponse
+}
+
+// IsSuccess returns true when this create claim reversal created response has a 2xx status code
+func (o *CreateClaimReversalCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create claim reversal created response has a 3xx status code
+func (o *CreateClaimReversalCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim reversal created response has a 4xx status code
+func (o *CreateClaimReversalCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create claim reversal created response has a 5xx status code
+func (o *CreateClaimReversalCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim reversal created response a status code equal to that given
+func (o *CreateClaimReversalCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create claim reversal created response
+func (o *CreateClaimReversalCreated) Code() int {
+	return 201
 }
 
 func (o *CreateClaimReversalCreated) Error() string {
@@ -83,9 +120,10 @@ func NewCreateClaimReversalBadRequest() *CreateClaimReversalBadRequest {
 	return &CreateClaimReversalBadRequest{}
 }
 
-/*CreateClaimReversalBadRequest handles this case with default header values.
+/*
+CreateClaimReversalBadRequest handles this case with default header values.
 
-Claim Reversal creation error
+Bad Request
 */
 type CreateClaimReversalBadRequest struct {
 
@@ -95,11 +133,106 @@ type CreateClaimReversalBadRequest struct {
 	*models.APIError
 }
 
+// IsSuccess returns true when this create claim reversal bad request response has a 2xx status code
+func (o *CreateClaimReversalBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim reversal bad request response has a 3xx status code
+func (o *CreateClaimReversalBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim reversal bad request response has a 4xx status code
+func (o *CreateClaimReversalBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim reversal bad request response has a 5xx status code
+func (o *CreateClaimReversalBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim reversal bad request response a status code equal to that given
+func (o *CreateClaimReversalBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create claim reversal bad request response
+func (o *CreateClaimReversalBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateClaimReversalBadRequest) Error() string {
 	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals][%d] createClaimReversalBadRequest", 400)
 }
 
 func (o *CreateClaimReversalBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateClaimReversalNotFound creates a CreateClaimReversalNotFound with default headers values
+func NewCreateClaimReversalNotFound() *CreateClaimReversalNotFound {
+	return &CreateClaimReversalNotFound{}
+}
+
+/*
+CreateClaimReversalNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateClaimReversalNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create claim reversal not found response has a 2xx status code
+func (o *CreateClaimReversalNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create claim reversal not found response has a 3xx status code
+func (o *CreateClaimReversalNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create claim reversal not found response has a 4xx status code
+func (o *CreateClaimReversalNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create claim reversal not found response has a 5xx status code
+func (o *CreateClaimReversalNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create claim reversal not found response a status code equal to that given
+func (o *CreateClaimReversalNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create claim reversal not found response
+func (o *CreateClaimReversalNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateClaimReversalNotFound) Error() string {
+	return fmt.Sprintf("[POST /transaction/claims/{id}/reversals][%d] createClaimReversalNotFound", 404)
+}
+
+func (o *CreateClaimReversalNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

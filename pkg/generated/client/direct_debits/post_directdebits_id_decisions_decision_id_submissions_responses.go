@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // PostDirectdebitsIDDecisionsDecisionIDSubmissionsReader is a Reader for the PostDirectdebitsIDDecisionsDecisionIDSubmissions structure.
@@ -56,7 +55,8 @@ func NewPostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated() *PostDirectdeb
 	return &PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated{}
 }
 
-/*PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated handles this case with default header values.
+/*
+PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated handles this case with default header values.
 
 Direct Debit decision submission creation response
 */
@@ -66,6 +66,36 @@ type PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated struct {
 
 	// isStream: false
 	*models.DirectDebitDecisionSubmissionCreationResponse
+}
+
+// IsSuccess returns true when this post directdebits Id decisions decision Id submissions created response has a 2xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post directdebits Id decisions decision Id submissions created response has a 3xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id decisions decision Id submissions created response has a 4xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post directdebits Id decisions decision Id submissions created response has a 5xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id decisions decision Id submissions created response a status code equal to that given
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the post directdebits Id decisions decision Id submissions created response
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) Code() int {
+	return 201
 }
 
 func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsCreated) Error() string {
@@ -90,7 +120,8 @@ func NewPostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest() *PostDirect
 	return &PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest{}
 }
 
-/*PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest handles this case with default header values.
+/*
+PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest handles this case with default header values.
 
 Direct Debit decision submission creation error
 */
@@ -100,6 +131,36 @@ type PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this post directdebits Id decisions decision Id submissions bad request response has a 2xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post directdebits Id decisions decision Id submissions bad request response has a 3xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id decisions decision Id submissions bad request response has a 4xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post directdebits Id decisions decision Id submissions bad request response has a 5xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id decisions decision Id submissions bad request response a status code equal to that given
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post directdebits Id decisions decision Id submissions bad request response
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) Code() int {
+	return 400
 }
 
 func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsBadRequest) Error() string {
@@ -124,7 +185,8 @@ func NewPostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict() *PostDirectde
 	return &PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict{}
 }
 
-/*PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict handles this case with default header values.
+/*
+PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict handles this case with default header values.
 
 Direct Debit decision submission creation conflict error
 */
@@ -134,6 +196,36 @@ type PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this post directdebits Id decisions decision Id submissions conflict response has a 2xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post directdebits Id decisions decision Id submissions conflict response has a 3xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id decisions decision Id submissions conflict response has a 4xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post directdebits Id decisions decision Id submissions conflict response has a 5xx status code
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id decisions decision Id submissions conflict response a status code equal to that given
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the post directdebits Id decisions decision Id submissions conflict response
+func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) Code() int {
+	return 409
 }
 
 func (o *PostDirectdebitsIDDecisionsDecisionIDSubmissionsConflict) Error() string {

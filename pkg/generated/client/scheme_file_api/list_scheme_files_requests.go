@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.ListSchemeFiles creates a new ListSchemeFilesRequest object
@@ -22,6 +21,12 @@ func (c *Client) ListSchemeFiles() *ListSchemeFilesRequest {
 		pageSizeDefault = int64(100)
 	)
 	return &ListSchemeFilesRequest{
+
+		FilterAdmissionAdmissionDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListSchemeFiles", "filter[admission.admission_date_from]"),
+
+		FilterAdmissionAdmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListSchemeFiles", "filter[admission.admission_date_to]"),
+
+		FilterAdmissionStatus: c.Defaults.GetStringPtr("ListSchemeFiles", "filter[admission.status]"),
 
 		FilterCreatedOnFrom: c.Defaults.GetStrfmtDatePtr("ListSchemeFiles", "filter[created_on_from]"),
 
@@ -53,6 +58,18 @@ func (c *Client) ListSchemeFiles() *ListSchemeFilesRequest {
 }
 
 type ListSchemeFilesRequest struct {
+
+	/*FilterAdmissionAdmissionDateFrom      Find all File resources admitted from and including this date/time      */
+
+	FilterAdmissionAdmissionDateFrom *strfmt.DateTime
+
+	/*FilterAdmissionAdmissionDateTo      Find all File resources admitted up to and included this date/time      */
+
+	FilterAdmissionAdmissionDateTo *strfmt.DateTime
+
+	/*FilterAdmissionStatus      Find all File resources with a certain admission status      */
+
+	FilterAdmissionStatus *string
 
 	/*FilterCreatedOnFrom      Find all Scheme File resources created from this date, in format YYYY-MM-DD      */
 
@@ -109,6 +126,48 @@ type ListSchemeFilesRequest struct {
 func (o *ListSchemeFilesRequest) FromJson(j string) (*ListSchemeFilesRequest, error) {
 
 	return o, nil
+}
+
+func (o *ListSchemeFilesRequest) WithFilterAdmissionAdmissionDateFrom(filterAdmissionAdmissionDateFrom strfmt.DateTime) *ListSchemeFilesRequest {
+
+	o.FilterAdmissionAdmissionDateFrom = &filterAdmissionAdmissionDateFrom
+
+	return o
+}
+
+func (o *ListSchemeFilesRequest) WithoutFilterAdmissionAdmissionDateFrom() *ListSchemeFilesRequest {
+
+	o.FilterAdmissionAdmissionDateFrom = nil
+
+	return o
+}
+
+func (o *ListSchemeFilesRequest) WithFilterAdmissionAdmissionDateTo(filterAdmissionAdmissionDateTo strfmt.DateTime) *ListSchemeFilesRequest {
+
+	o.FilterAdmissionAdmissionDateTo = &filterAdmissionAdmissionDateTo
+
+	return o
+}
+
+func (o *ListSchemeFilesRequest) WithoutFilterAdmissionAdmissionDateTo() *ListSchemeFilesRequest {
+
+	o.FilterAdmissionAdmissionDateTo = nil
+
+	return o
+}
+
+func (o *ListSchemeFilesRequest) WithFilterAdmissionStatus(filterAdmissionStatus string) *ListSchemeFilesRequest {
+
+	o.FilterAdmissionStatus = &filterAdmissionStatus
+
+	return o
+}
+
+func (o *ListSchemeFilesRequest) WithoutFilterAdmissionStatus() *ListSchemeFilesRequest {
+
+	o.FilterAdmissionStatus = nil
+
+	return o
 }
 
 func (o *ListSchemeFilesRequest) WithFilterCreatedOnFrom(filterCreatedOnFrom strfmt.Date) *ListSchemeFilesRequest {
@@ -265,7 +324,7 @@ func (o *ListSchemeFilesRequest) WithoutPageSize() *ListSchemeFilesRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list scheme files Request
 func (o *ListSchemeFilesRequest) WithContext(ctx context.Context) *ListSchemeFilesRequest {
 	o.Context = ctx
@@ -285,6 +344,54 @@ func (o *ListSchemeFilesRequest) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
+
+	if o.FilterAdmissionAdmissionDateFrom != nil {
+
+		// query param filter[admission.admission_date_from]
+		var qrFilterAdmissionAdmissionDateFrom strfmt.DateTime
+		if o.FilterAdmissionAdmissionDateFrom != nil {
+			qrFilterAdmissionAdmissionDateFrom = *o.FilterAdmissionAdmissionDateFrom
+		}
+		qFilterAdmissionAdmissionDateFrom := qrFilterAdmissionAdmissionDateFrom.String()
+		if qFilterAdmissionAdmissionDateFrom != "" {
+			if err := r.SetQueryParam("filter[admission.admission_date_from]", qFilterAdmissionAdmissionDateFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterAdmissionAdmissionDateTo != nil {
+
+		// query param filter[admission.admission_date_to]
+		var qrFilterAdmissionAdmissionDateTo strfmt.DateTime
+		if o.FilterAdmissionAdmissionDateTo != nil {
+			qrFilterAdmissionAdmissionDateTo = *o.FilterAdmissionAdmissionDateTo
+		}
+		qFilterAdmissionAdmissionDateTo := qrFilterAdmissionAdmissionDateTo.String()
+		if qFilterAdmissionAdmissionDateTo != "" {
+			if err := r.SetQueryParam("filter[admission.admission_date_to]", qFilterAdmissionAdmissionDateTo); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterAdmissionStatus != nil {
+
+		// query param filter[admission.status]
+		var qrFilterAdmissionStatus string
+		if o.FilterAdmissionStatus != nil {
+			qrFilterAdmissionStatus = *o.FilterAdmissionStatus
+		}
+		qFilterAdmissionStatus := qrFilterAdmissionStatus
+		if qFilterAdmissionStatus != "" {
+			if err := r.SetQueryParam("filter[admission.status]", qFilterAdmissionStatus); err != nil {
+				return err
+			}
+		}
+
+	}
 
 	if o.FilterCreatedOnFrom != nil {
 

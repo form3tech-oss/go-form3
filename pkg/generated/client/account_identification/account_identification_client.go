@@ -8,10 +8,9 @@ package account_identification
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new account identification API client.
@@ -31,151 +30,19 @@ type Client struct {
 // range of operations
 
 /*
-delete organisation accounts account ID identifications identification ID API
+create account identification API
 */
-func (a *DeleteOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) Do() (*DeleteOrganisationAccountsAccountIDIdentificationsIdentificationIDNoContent, error) {
+func (a *CreateAccountIdentificationRequest) Do() (*CreateAccountIdentificationCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteOrganisationAccountsAccountIDIdentificationsIdentificationID",
-		Method:             "DELETE",
-		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &DeleteOrganisationAccountsAccountIDIdentificationsIdentificationIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*DeleteOrganisationAccountsAccountIDIdentificationsIdentificationIDNoContent), nil
-
-}
-
-func (a *DeleteOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) MustDo() *DeleteOrganisationAccountsAccountIDIdentificationsIdentificationIDNoContent {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get organisation accounts account ID identifications API
-*/
-func (a *GetOrganisationAccountsAccountIDIdentificationsRequest) Do() (*GetOrganisationAccountsAccountIDIdentificationsOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationAccountsAccountIDIdentifications",
-		Method:             "GET",
-		PathPattern:        "/organisation/accounts/{account_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationAccountsAccountIDIdentificationsReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationAccountsAccountIDIdentificationsOK), nil
-
-}
-
-func (a *GetOrganisationAccountsAccountIDIdentificationsRequest) MustDo() *GetOrganisationAccountsAccountIDIdentificationsOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get organisation accounts account ID identifications identification ID API
-*/
-func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) Do() (*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationAccountsAccountIDIdentificationsIdentificationID",
-		Method:             "GET",
-		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationAccountsAccountIDIdentificationsIdentificationIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK), nil
-
-}
-
-func (a *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) MustDo() *GetOrganisationAccountsAccountIDIdentificationsIdentificationIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-patch organisation accounts account ID identifications identification ID API
-*/
-func (a *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) Do() (*PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PatchOrganisationAccountsAccountIDIdentificationsIdentificationID",
-		Method:             "PATCH",
-		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDOK), nil
-
-}
-
-func (a *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDRequest) MustDo() *PatchOrganisationAccountsAccountIDIdentificationsIdentificationIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-post organisation accounts account ID identifications API
-*/
-func (a *PostOrganisationAccountsAccountIDIdentificationsRequest) Do() (*PostOrganisationAccountsAccountIDIdentificationsCreated, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostOrganisationAccountsAccountIDIdentifications",
+		ID:                 "CreateAccountIdentification",
 		Method:             "POST",
 		PathPattern:        "/organisation/accounts/{account_id}/identifications",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostOrganisationAccountsAccountIDIdentificationsReader{formats: a.formats},
+		Reader:             &CreateAccountIdentificationReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -183,11 +50,143 @@ func (a *PostOrganisationAccountsAccountIDIdentificationsRequest) Do() (*PostOrg
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostOrganisationAccountsAccountIDIdentificationsCreated), nil
+	return result.(*CreateAccountIdentificationCreated), nil
 
 }
 
-func (a *PostOrganisationAccountsAccountIDIdentificationsRequest) MustDo() *PostOrganisationAccountsAccountIDIdentificationsCreated {
+func (a *CreateAccountIdentificationRequest) MustDo() *CreateAccountIdentificationCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+delete account identification API
+*/
+func (a *DeleteAccountIdentificationRequest) Do() (*DeleteAccountIdentificationNoContent, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "DeleteAccountIdentification",
+		Method:             "DELETE",
+		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &DeleteAccountIdentificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteAccountIdentificationNoContent), nil
+
+}
+
+func (a *DeleteAccountIdentificationRequest) MustDo() *DeleteAccountIdentificationNoContent {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get account identification API
+*/
+func (a *GetAccountIdentificationRequest) Do() (*GetAccountIdentificationOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetAccountIdentification",
+		Method:             "GET",
+		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetAccountIdentificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetAccountIdentificationOK), nil
+
+}
+
+func (a *GetAccountIdentificationRequest) MustDo() *GetAccountIdentificationOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+list account identifications by account API
+*/
+func (a *ListAccountIdentificationsByAccountRequest) Do() (*ListAccountIdentificationsByAccountOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListAccountIdentificationsByAccount",
+		Method:             "GET",
+		PathPattern:        "/organisation/accounts/{account_id}/identifications",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &ListAccountIdentificationsByAccountReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListAccountIdentificationsByAccountOK), nil
+
+}
+
+func (a *ListAccountIdentificationsByAccountRequest) MustDo() *ListAccountIdentificationsByAccountOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+patch account identification API
+*/
+func (a *PatchAccountIdentificationRequest) Do() (*PatchAccountIdentificationOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchAccountIdentification",
+		Method:             "PATCH",
+		PathPattern:        "/organisation/accounts/{account_id}/identifications/{identification_id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchAccountIdentificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchAccountIdentificationOK), nil
+
+}
+
+func (a *PatchAccountIdentificationRequest) MustDo() *PatchAccountIdentificationOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

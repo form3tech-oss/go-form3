@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.PostMetricsPrometheusAPIV1Query creates a new PostMetricsPrometheusAPIV1QueryRequest object
@@ -95,7 +94,7 @@ func (o *PostMetricsPrometheusAPIV1QueryRequest) WithoutTimeout() *PostMetricsPr
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the post metrics prometheus API v1 query Request
 func (o *PostMetricsPrometheusAPIV1QueryRequest) WithContext(ctx context.Context) *PostMetricsPrometheusAPIV1QueryRequest {
 	o.Context = ctx

@@ -8,10 +8,9 @@ package subscriptions
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new subscriptions API client.
@@ -39,8 +38,8 @@ func (a *CreateSubscriptionRequest) Do() (*CreateSubscriptionCreated, error) {
 		ID:                 "CreateSubscription",
 		Method:             "POST",
 		PathPattern:        "/notification/subscriptions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateSubscriptionReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *DeleteSubscriptionRequest) Do() (*DeleteSubscriptionNoContent, error) {
 		ID:                 "DeleteSubscription",
 		Method:             "DELETE",
 		PathPattern:        "/notification/subscriptions/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteSubscriptionReader{formats: a.formats},
@@ -105,8 +104,8 @@ func (a *GetSubscriptionRequest) Do() (*GetSubscriptionOK, error) {
 		ID:                 "GetSubscription",
 		Method:             "GET",
 		PathPattern:        "/notification/subscriptions/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetSubscriptionReader{formats: a.formats},
@@ -138,8 +137,8 @@ func (a *ListSubscriptionsRequest) Do() (*ListSubscriptionsOK, error) {
 		ID:                 "ListSubscriptions",
 		Method:             "GET",
 		PathPattern:        "/notification/subscriptions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListSubscriptionsReader{formats: a.formats},
@@ -171,8 +170,8 @@ func (a *ModifySubscriptionRequest) Do() (*ModifySubscriptionOK, error) {
 		ID:                 "ModifySubscription",
 		Method:             "PATCH",
 		PathPattern:        "/notification/subscriptions/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ModifySubscriptionReader{formats: a.formats},

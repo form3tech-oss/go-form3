@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.ListAccountEvents creates a new ListAccountEventsRequest object
@@ -96,7 +95,7 @@ func (o *ListAccountEventsRequest) WithoutPageSize() *ListAccountEventsRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list account events Request
 func (o *ListAccountEventsRequest) WithContext(ctx context.Context) *ListAccountEventsRequest {
 	o.Context = ctx

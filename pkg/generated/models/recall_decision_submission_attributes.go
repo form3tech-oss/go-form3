@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -23,6 +22,9 @@ type RecallDecisionSubmissionAttributes struct {
 
 	// Indicates if the submission was created automatically by the system (`true`) or manually (`false`).
 	Auto *bool `json:"auto,omitempty"`
+
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
 
 	// status
 	Status RecallDecisionSubmissionStatus `json:"status,omitempty"`
@@ -41,6 +43,8 @@ func RecallDecisionSubmissionAttributesWithDefaults(defaults client.Defaults) *R
 
 		Auto: defaults.GetBoolPtr("RecallDecisionSubmissionAttributes", "auto"),
 
+		ReferenceID: defaults.GetString("RecallDecisionSubmissionAttributes", "reference_id"),
+
 		// TODO Status: RecallDecisionSubmissionStatus,
 
 		StatusReason: defaults.GetString("RecallDecisionSubmissionAttributes", "status_reason"),
@@ -58,6 +62,13 @@ func (m *RecallDecisionSubmissionAttributes) WithAuto(auto bool) *RecallDecision
 
 func (m *RecallDecisionSubmissionAttributes) WithoutAuto() *RecallDecisionSubmissionAttributes {
 	m.Auto = nil
+	return m
+}
+
+func (m *RecallDecisionSubmissionAttributes) WithReferenceID(referenceID string) *RecallDecisionSubmissionAttributes {
+
+	m.ReferenceID = referenceID
+
 	return m
 }
 

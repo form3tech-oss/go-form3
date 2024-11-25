@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -24,23 +23,12 @@ type ThinRelationship struct {
 
 	// A relationship which just contains id and type of the related resource
 	Data []*ThinRelationshipDataItems0 `json:"data"`
-
-	// ID of the referenced resource
-	// Format: uuid
-	ID strfmt.UUID `json:"id,omitempty"`
-
-	// Name of the referenced resource type
-	Type string `json:"type,omitempty"`
 }
 
 func ThinRelationshipWithDefaults(defaults client.Defaults) *ThinRelationship {
 	return &ThinRelationship{
 
 		Data: make([]*ThinRelationshipDataItems0, 0),
-
-		ID: defaults.GetStrfmtUUID("ThinRelationship", "id"),
-
-		Type: defaults.GetString("ThinRelationship", "type"),
 	}
 }
 
@@ -51,29 +39,11 @@ func (m *ThinRelationship) WithData(data []*ThinRelationshipDataItems0) *ThinRel
 	return m
 }
 
-func (m *ThinRelationship) WithID(id strfmt.UUID) *ThinRelationship {
-
-	m.ID = id
-
-	return m
-}
-
-func (m *ThinRelationship) WithType(typeVar string) *ThinRelationship {
-
-	m.Type = typeVar
-
-	return m
-}
-
 // Validate validates this thin relationship
 func (m *ThinRelationship) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,19 +73,6 @@ func (m *ThinRelationship) validateData(formats strfmt.Registry) error {
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *ThinRelationship) validateID(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.ID) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("id", "body", "uuid", m.ID.String(), formats); err != nil {
-		return err
 	}
 
 	return nil

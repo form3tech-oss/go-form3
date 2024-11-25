@@ -9,10 +9,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/go-openapi/errors"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -26,8 +24,8 @@ type ReceiversCorrespondentAccountHoldingEntity struct {
 	// SWIFT BIC for receiver's correspondent
 	BankID string `json:"bank_id,omitempty"`
 
-	// bank id code
-	BankIDCode BankIDCode `json:"bank_id_code,omitempty"`
+	// The type of identification provided at `bank_id` attribute. Must be ISO code as listed in the [External Code Sets spreadsheet](https://www.iso20022.org/external_code_list.page)
+	BankIDCode string `json:"bank_id_code,omitempty"`
 
 	// Receiver's correspondent's name
 	BankName string `json:"bank_name,omitempty"`
@@ -43,7 +41,7 @@ func ReceiversCorrespondentAccountHoldingEntityWithDefaults(defaults client.Defa
 
 		BankID: defaults.GetString("ReceiversCorrespondentAccountHoldingEntity", "bank_id"),
 
-		// TODO BankIDCode: BankIDCode,
+		BankIDCode: defaults.GetString("ReceiversCorrespondentAccountHoldingEntity", "bank_id_code"),
 
 		BankName: defaults.GetString("ReceiversCorrespondentAccountHoldingEntity", "bank_name"),
 
@@ -65,7 +63,7 @@ func (m *ReceiversCorrespondentAccountHoldingEntity) WithBankID(bankID string) *
 	return m
 }
 
-func (m *ReceiversCorrespondentAccountHoldingEntity) WithBankIDCode(bankIDCode BankIDCode) *ReceiversCorrespondentAccountHoldingEntity {
+func (m *ReceiversCorrespondentAccountHoldingEntity) WithBankIDCode(bankIDCode string) *ReceiversCorrespondentAccountHoldingEntity {
 
 	m.BankIDCode = bankIDCode
 
@@ -88,31 +86,6 @@ func (m *ReceiversCorrespondentAccountHoldingEntity) WithBankPartyID(bankPartyID
 
 // Validate validates this receivers correspondent account holding entity
 func (m *ReceiversCorrespondentAccountHoldingEntity) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateBankIDCode(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ReceiversCorrespondentAccountHoldingEntity) validateBankIDCode(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.BankIDCode) { // not required
-		return nil
-	}
-
-	if err := m.BankIDCode.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("bank_id_code")
-		}
-		return err
-	}
-
 	return nil
 }
 

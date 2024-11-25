@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetTransactionFileSubmissionReader is a Reader for the GetTransactionFileSubmission structure.
@@ -70,7 +69,8 @@ func NewGetTransactionFileSubmissionOK() *GetTransactionFileSubmissionOK {
 	return &GetTransactionFileSubmissionOK{}
 }
 
-/*GetTransactionFileSubmissionOK handles this case with default header values.
+/*
+GetTransactionFileSubmissionOK handles this case with default header values.
 
 Transaction File Submission Response
 */
@@ -80,6 +80,36 @@ type GetTransactionFileSubmissionOK struct {
 
 	// isStream: false
 	*models.TransactionFileSubmissionResponse
+}
+
+// IsSuccess returns true when this get transaction file submission o k response has a 2xx status code
+func (o *GetTransactionFileSubmissionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get transaction file submission o k response has a 3xx status code
+func (o *GetTransactionFileSubmissionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file submission o k response has a 4xx status code
+func (o *GetTransactionFileSubmissionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction file submission o k response has a 5xx status code
+func (o *GetTransactionFileSubmissionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file submission o k response a status code equal to that given
+func (o *GetTransactionFileSubmissionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get transaction file submission o k response
+func (o *GetTransactionFileSubmissionOK) Code() int {
+	return 200
 }
 
 func (o *GetTransactionFileSubmissionOK) Error() string {
@@ -104,7 +134,8 @@ func NewGetTransactionFileSubmissionUnauthorized() *GetTransactionFileSubmission
 	return &GetTransactionFileSubmissionUnauthorized{}
 }
 
-/*GetTransactionFileSubmissionUnauthorized handles this case with default header values.
+/*
+GetTransactionFileSubmissionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -114,6 +145,36 @@ type GetTransactionFileSubmissionUnauthorized struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file submission unauthorized response has a 2xx status code
+func (o *GetTransactionFileSubmissionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file submission unauthorized response has a 3xx status code
+func (o *GetTransactionFileSubmissionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file submission unauthorized response has a 4xx status code
+func (o *GetTransactionFileSubmissionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file submission unauthorized response has a 5xx status code
+func (o *GetTransactionFileSubmissionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file submission unauthorized response a status code equal to that given
+func (o *GetTransactionFileSubmissionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get transaction file submission unauthorized response
+func (o *GetTransactionFileSubmissionUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetTransactionFileSubmissionUnauthorized) Error() string {
@@ -138,7 +199,8 @@ func NewGetTransactionFileSubmissionForbidden() *GetTransactionFileSubmissionFor
 	return &GetTransactionFileSubmissionForbidden{}
 }
 
-/*GetTransactionFileSubmissionForbidden handles this case with default header values.
+/*
+GetTransactionFileSubmissionForbidden handles this case with default header values.
 
 Forbidden
 */
@@ -148,6 +210,36 @@ type GetTransactionFileSubmissionForbidden struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file submission forbidden response has a 2xx status code
+func (o *GetTransactionFileSubmissionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file submission forbidden response has a 3xx status code
+func (o *GetTransactionFileSubmissionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file submission forbidden response has a 4xx status code
+func (o *GetTransactionFileSubmissionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file submission forbidden response has a 5xx status code
+func (o *GetTransactionFileSubmissionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file submission forbidden response a status code equal to that given
+func (o *GetTransactionFileSubmissionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get transaction file submission forbidden response
+func (o *GetTransactionFileSubmissionForbidden) Code() int {
+	return 403
 }
 
 func (o *GetTransactionFileSubmissionForbidden) Error() string {
@@ -172,7 +264,8 @@ func NewGetTransactionFileSubmissionNotFound() *GetTransactionFileSubmissionNotF
 	return &GetTransactionFileSubmissionNotFound{}
 }
 
-/*GetTransactionFileSubmissionNotFound handles this case with default header values.
+/*
+GetTransactionFileSubmissionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -182,6 +275,36 @@ type GetTransactionFileSubmissionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file submission not found response has a 2xx status code
+func (o *GetTransactionFileSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file submission not found response has a 3xx status code
+func (o *GetTransactionFileSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file submission not found response has a 4xx status code
+func (o *GetTransactionFileSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction file submission not found response has a 5xx status code
+func (o *GetTransactionFileSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction file submission not found response a status code equal to that given
+func (o *GetTransactionFileSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get transaction file submission not found response
+func (o *GetTransactionFileSubmissionNotFound) Code() int {
+	return 404
 }
 
 func (o *GetTransactionFileSubmissionNotFound) Error() string {
@@ -206,7 +329,8 @@ func NewGetTransactionFileSubmissionInternalServerError() *GetTransactionFileSub
 	return &GetTransactionFileSubmissionInternalServerError{}
 }
 
-/*GetTransactionFileSubmissionInternalServerError handles this case with default header values.
+/*
+GetTransactionFileSubmissionInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
@@ -216,6 +340,36 @@ type GetTransactionFileSubmissionInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get transaction file submission internal server error response has a 2xx status code
+func (o *GetTransactionFileSubmissionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction file submission internal server error response has a 3xx status code
+func (o *GetTransactionFileSubmissionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction file submission internal server error response has a 4xx status code
+func (o *GetTransactionFileSubmissionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction file submission internal server error response has a 5xx status code
+func (o *GetTransactionFileSubmissionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get transaction file submission internal server error response a status code equal to that given
+func (o *GetTransactionFileSubmissionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get transaction file submission internal server error response
+func (o *GetTransactionFileSubmissionInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetTransactionFileSubmissionInternalServerError) Error() string {

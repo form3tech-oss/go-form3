@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -242,6 +241,12 @@ func (m *RecallSubmissionUpdate) Json() string {
 // swagger:model RecallSubmissionUpdateAttributes
 type RecallSubmissionUpdateAttributes struct {
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
+	// Scheme-specific status code. Refer to scheme documentation where available.
+	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
+
 	// status
 	Status RecallSubmissionStatus `json:"status,omitempty"`
 
@@ -252,10 +257,28 @@ type RecallSubmissionUpdateAttributes struct {
 func RecallSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *RecallSubmissionUpdateAttributes {
 	return &RecallSubmissionUpdateAttributes{
 
+		ReferenceID: defaults.GetString("RecallSubmissionUpdateAttributes", "reference_id"),
+
+		SchemeStatusCode: defaults.GetString("RecallSubmissionUpdateAttributes", "scheme_status_code"),
+
 		// TODO Status: RecallSubmissionStatus,
 
 		StatusReason: defaults.GetString("RecallSubmissionUpdateAttributes", "status_reason"),
 	}
+}
+
+func (m *RecallSubmissionUpdateAttributes) WithReferenceID(referenceID string) *RecallSubmissionUpdateAttributes {
+
+	m.ReferenceID = referenceID
+
+	return m
+}
+
+func (m *RecallSubmissionUpdateAttributes) WithSchemeStatusCode(schemeStatusCode string) *RecallSubmissionUpdateAttributes {
+
+	m.SchemeStatusCode = schemeStatusCode
+
+	return m
 }
 
 func (m *RecallSubmissionUpdateAttributes) WithStatus(status RecallSubmissionStatus) *RecallSubmissionUpdateAttributes {

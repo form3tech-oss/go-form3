@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -384,21 +383,17 @@ func (m *MandateSubmissionCreationData) Json() string {
 // swagger:model MandateSubmissionCreationDataAttributes
 type MandateSubmissionCreationDataAttributes struct {
 
+	// file identifier
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// file number
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// last payment date
 	// Format: date
 	LastPaymentDate *strfmt.Date `json:"last_payment_date,omitempty"`
-
-	// scheme file id
-	// Max Length: 3
-	// Min Length: 3
-	// Pattern: ^[0-9]{3}$
-	SchemeFileID *string `json:"scheme_file_id,omitempty"`
-
-	// scheme submission id
-	// Max Length: 6
-	// Min Length: 6
-	// Pattern: ^[0-9a-zA-Z]{6}$
-	SchemeSubmissionID *string `json:"scheme_submission_id,omitempty"`
 
 	// status
 	Status MandateSubmissionStatus `json:"status,omitempty"`
@@ -417,11 +412,11 @@ type MandateSubmissionCreationDataAttributes struct {
 func MandateSubmissionCreationDataAttributesWithDefaults(defaults client.Defaults) *MandateSubmissionCreationDataAttributes {
 	return &MandateSubmissionCreationDataAttributes{
 
+		FileIdentifier: defaults.GetStringPtr("MandateSubmissionCreationDataAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("MandateSubmissionCreationDataAttributes", "file_number"),
+
 		LastPaymentDate: defaults.GetStrfmtDatePtr("MandateSubmissionCreationDataAttributes", "last_payment_date"),
-
-		SchemeFileID: defaults.GetStringPtr("MandateSubmissionCreationDataAttributes", "scheme_file_id"),
-
-		SchemeSubmissionID: defaults.GetStringPtr("MandateSubmissionCreationDataAttributes", "scheme_submission_id"),
 
 		// TODO Status: MandateSubmissionStatus,
 
@@ -433,6 +428,30 @@ func MandateSubmissionCreationDataAttributesWithDefaults(defaults client.Default
 	}
 }
 
+func (m *MandateSubmissionCreationDataAttributes) WithFileIdentifier(fileIdentifier string) *MandateSubmissionCreationDataAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *MandateSubmissionCreationDataAttributes) WithoutFileIdentifier() *MandateSubmissionCreationDataAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *MandateSubmissionCreationDataAttributes) WithFileNumber(fileNumber string) *MandateSubmissionCreationDataAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *MandateSubmissionCreationDataAttributes) WithoutFileNumber() *MandateSubmissionCreationDataAttributes {
+	m.FileNumber = nil
+	return m
+}
+
 func (m *MandateSubmissionCreationDataAttributes) WithLastPaymentDate(lastPaymentDate strfmt.Date) *MandateSubmissionCreationDataAttributes {
 
 	m.LastPaymentDate = &lastPaymentDate
@@ -442,30 +461,6 @@ func (m *MandateSubmissionCreationDataAttributes) WithLastPaymentDate(lastPaymen
 
 func (m *MandateSubmissionCreationDataAttributes) WithoutLastPaymentDate() *MandateSubmissionCreationDataAttributes {
 	m.LastPaymentDate = nil
-	return m
-}
-
-func (m *MandateSubmissionCreationDataAttributes) WithSchemeFileID(schemeFileID string) *MandateSubmissionCreationDataAttributes {
-
-	m.SchemeFileID = &schemeFileID
-
-	return m
-}
-
-func (m *MandateSubmissionCreationDataAttributes) WithoutSchemeFileID() *MandateSubmissionCreationDataAttributes {
-	m.SchemeFileID = nil
-	return m
-}
-
-func (m *MandateSubmissionCreationDataAttributes) WithSchemeSubmissionID(schemeSubmissionID string) *MandateSubmissionCreationDataAttributes {
-
-	m.SchemeSubmissionID = &schemeSubmissionID
-
-	return m
-}
-
-func (m *MandateSubmissionCreationDataAttributes) WithoutSchemeSubmissionID() *MandateSubmissionCreationDataAttributes {
-	m.SchemeSubmissionID = nil
 	return m
 }
 
@@ -511,15 +506,15 @@ func (m *MandateSubmissionCreationDataAttributes) WithSubmissionReason(submissio
 func (m *MandateSubmissionCreationDataAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLastPaymentDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSchemeFileID(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSchemeSubmissionID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -537,6 +532,32 @@ func (m *MandateSubmissionCreationDataAttributes) Validate(formats strfmt.Regist
 	return nil
 }
 
+func (m *MandateSubmissionCreationDataAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("data"+"."+"attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MandateSubmissionCreationDataAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("data"+"."+"attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MandateSubmissionCreationDataAttributes) validateLastPaymentDate(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.LastPaymentDate) { // not required
@@ -544,48 +565,6 @@ func (m *MandateSubmissionCreationDataAttributes) validateLastPaymentDate(format
 	}
 
 	if err := validate.FormatOf("data"+"."+"attributes"+"."+"last_payment_date", "body", "date", m.LastPaymentDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *MandateSubmissionCreationDataAttributes) validateSchemeFileID(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.SchemeFileID) { // not required
-		return nil
-	}
-
-	if err := validate.MinLength("data"+"."+"attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), 3); err != nil {
-		return err
-	}
-
-	if err := validate.MaxLength("data"+"."+"attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), 3); err != nil {
-		return err
-	}
-
-	if err := validate.Pattern("data"+"."+"attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), `^[0-9]{3}$`); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *MandateSubmissionCreationDataAttributes) validateSchemeSubmissionID(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.SchemeSubmissionID) { // not required
-		return nil
-	}
-
-	if err := validate.MinLength("data"+"."+"attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), 6); err != nil {
-		return err
-	}
-
-	if err := validate.MaxLength("data"+"."+"attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), 6); err != nil {
-		return err
-	}
-
-	if err := validate.Pattern("data"+"."+"attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), `^[0-9a-zA-Z]{6}$`); err != nil {
 		return err
 	}
 

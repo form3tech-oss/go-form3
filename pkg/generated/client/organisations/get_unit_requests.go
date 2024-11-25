@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetUnit creates a new GetUnitRequest object
@@ -55,7 +54,7 @@ func (o *GetUnitRequest) WithID(id strfmt.UUID) *GetUnitRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get unit Request
 func (o *GetUnitRequest) WithContext(ctx context.Context) *GetUnitRequest {
 	o.Context = ctx

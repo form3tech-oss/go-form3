@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -351,19 +350,19 @@ func (m *DirectDebitSubmission) Json() string {
 // swagger:model DirectDebitSubmissionAttributes
 type DirectDebitSubmissionAttributes struct {
 
-	// scheme file id
-	// Pattern: ^[0-9]{3}$
-	SchemeFileID *string `json:"scheme_file_id,omitempty"`
+	// file identifier
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// file number
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
 
 	// Scheme-specific status (if submission has been submitted to a scheme)
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
 	// [Description](http://api-docs.form3.tech/api.html#enumerations-scheme-status-codes-for-bacs) of `scheme_status_code`
 	SchemeStatusCodeDescription string `json:"scheme_status_code_description,omitempty"`
-
-	// scheme submission id
-	// Pattern: ^[0-9a-zA-Z]{6}$
-	SchemeSubmissionID *string `json:"scheme_submission_id,omitempty"`
 
 	// Status of the submission
 	Status DirectDebitSubmissionStatus `json:"status,omitempty"`
@@ -385,13 +384,13 @@ type DirectDebitSubmissionAttributes struct {
 func DirectDebitSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitSubmissionAttributes {
 	return &DirectDebitSubmissionAttributes{
 
-		SchemeFileID: defaults.GetStringPtr("DirectDebitSubmissionAttributes", "scheme_file_id"),
+		FileIdentifier: defaults.GetStringPtr("DirectDebitSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("DirectDebitSubmissionAttributes", "file_number"),
 
 		SchemeStatusCode: defaults.GetString("DirectDebitSubmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("DirectDebitSubmissionAttributes", "scheme_status_code_description"),
-
-		SchemeSubmissionID: defaults.GetStringPtr("DirectDebitSubmissionAttributes", "scheme_submission_id"),
 
 		// TODO Status: DirectDebitSubmissionStatus,
 
@@ -403,15 +402,27 @@ func DirectDebitSubmissionAttributesWithDefaults(defaults client.Defaults) *Dire
 	}
 }
 
-func (m *DirectDebitSubmissionAttributes) WithSchemeFileID(schemeFileID string) *DirectDebitSubmissionAttributes {
+func (m *DirectDebitSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *DirectDebitSubmissionAttributes {
 
-	m.SchemeFileID = &schemeFileID
+	m.FileIdentifier = &fileIdentifier
 
 	return m
 }
 
-func (m *DirectDebitSubmissionAttributes) WithoutSchemeFileID() *DirectDebitSubmissionAttributes {
-	m.SchemeFileID = nil
+func (m *DirectDebitSubmissionAttributes) WithoutFileIdentifier() *DirectDebitSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *DirectDebitSubmissionAttributes) WithFileNumber(fileNumber string) *DirectDebitSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *DirectDebitSubmissionAttributes) WithoutFileNumber() *DirectDebitSubmissionAttributes {
+	m.FileNumber = nil
 	return m
 }
 
@@ -426,18 +437,6 @@ func (m *DirectDebitSubmissionAttributes) WithSchemeStatusCodeDescription(scheme
 
 	m.SchemeStatusCodeDescription = schemeStatusCodeDescription
 
-	return m
-}
-
-func (m *DirectDebitSubmissionAttributes) WithSchemeSubmissionID(schemeSubmissionID string) *DirectDebitSubmissionAttributes {
-
-	m.SchemeSubmissionID = &schemeSubmissionID
-
-	return m
-}
-
-func (m *DirectDebitSubmissionAttributes) WithoutSchemeSubmissionID() *DirectDebitSubmissionAttributes {
-	m.SchemeSubmissionID = nil
 	return m
 }
 
@@ -473,11 +472,11 @@ func (m *DirectDebitSubmissionAttributes) WithTransactionStartDatetime(transacti
 func (m *DirectDebitSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateSchemeFileID(formats); err != nil {
+	if err := m.validateFileIdentifier(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateSchemeSubmissionID(formats); err != nil {
+	if err := m.validateFileNumber(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -499,26 +498,26 @@ func (m *DirectDebitSubmissionAttributes) Validate(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *DirectDebitSubmissionAttributes) validateSchemeFileID(formats strfmt.Registry) error {
+func (m *DirectDebitSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.SchemeFileID) { // not required
+	if swag.IsZero(m.FileIdentifier) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"scheme_file_id", "body", string(*m.SchemeFileID), `^[0-9]{3}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *DirectDebitSubmissionAttributes) validateSchemeSubmissionID(formats strfmt.Registry) error {
+func (m *DirectDebitSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.SchemeSubmissionID) { // not required
+	if swag.IsZero(m.FileNumber) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"scheme_submission_id", "body", string(*m.SchemeSubmissionID), `^[0-9a-zA-Z]{6}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
 		return err
 	}
 

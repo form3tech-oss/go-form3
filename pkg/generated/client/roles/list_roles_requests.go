@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.ListRoles creates a new ListRolesRequest object
@@ -83,7 +82,7 @@ func (o *ListRolesRequest) WithoutPageSize() *ListRolesRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list roles Request
 func (o *ListRolesRequest) WithContext(ctx context.Context) *ListRolesRequest {
 	o.Context = ctx

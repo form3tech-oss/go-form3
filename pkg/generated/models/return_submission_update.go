@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -42,8 +41,9 @@ type ReturnSubmissionUpdate struct {
 	Type string `json:"type,omitempty"`
 
 	// Version number
+	// Required: true
 	// Minimum: 0
-	Version *int64 `json:"version,omitempty"`
+	Version *int64 `json:"version"`
 }
 
 func ReturnSubmissionUpdateWithDefaults(defaults client.Defaults) *ReturnSubmissionUpdate {
@@ -241,8 +241,8 @@ func (m *ReturnSubmissionUpdate) validateType(formats strfmt.Registry) error {
 
 func (m *ReturnSubmissionUpdate) validateVersion(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Version) { // not required
-		return nil
+	if err := validate.Required("version", "body", m.Version); err != nil {
+		return err
 	}
 
 	if err := validate.MinimumInt("version", "body", int64(*m.Version), 0, false); err != nil {
@@ -281,14 +281,20 @@ func (m *ReturnSubmissionUpdate) Json() string {
 // swagger:model ReturnSubmissionUpdateAttributes
 type ReturnSubmissionUpdateAttributes struct {
 
+	// posting status
+	PostingStatus PostingStatus `json:"posting_status,omitempty"`
+
 	// Details of the account to which funds are redirected (if applicable)
 	RedirectedAccountNumber string `json:"redirected_account_number,omitempty"`
 
 	// Details of the bank to which funds are redirected (if applicable)
 	RedirectedBankID string `json:"redirected_bank_id,omitempty"`
 
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
 	// Route taken for a return
-	// Enum: [on_us]
+	// Enum: ["on_us","xp"]
 	Route string `json:"route,omitempty"`
 
 	// Scheme-specific status (if submission has been submitted to a scheme)
@@ -315,9 +321,13 @@ type ReturnSubmissionUpdateAttributes struct {
 func ReturnSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionUpdateAttributes {
 	return &ReturnSubmissionUpdateAttributes{
 
+		// TODO PostingStatus: PostingStatus,
+
 		RedirectedAccountNumber: defaults.GetString("ReturnSubmissionUpdateAttributes", "redirected_account_number"),
 
 		RedirectedBankID: defaults.GetString("ReturnSubmissionUpdateAttributes", "redirected_bank_id"),
+
+		ReferenceID: defaults.GetString("ReturnSubmissionUpdateAttributes", "reference_id"),
 
 		Route: defaults.GetString("ReturnSubmissionUpdateAttributes", "route"),
 
@@ -335,6 +345,13 @@ func ReturnSubmissionUpdateAttributesWithDefaults(defaults client.Defaults) *Ret
 	}
 }
 
+func (m *ReturnSubmissionUpdateAttributes) WithPostingStatus(postingStatus PostingStatus) *ReturnSubmissionUpdateAttributes {
+
+	m.PostingStatus = postingStatus
+
+	return m
+}
+
 func (m *ReturnSubmissionUpdateAttributes) WithRedirectedAccountNumber(redirectedAccountNumber string) *ReturnSubmissionUpdateAttributes {
 
 	m.RedirectedAccountNumber = redirectedAccountNumber
@@ -345,6 +362,13 @@ func (m *ReturnSubmissionUpdateAttributes) WithRedirectedAccountNumber(redirecte
 func (m *ReturnSubmissionUpdateAttributes) WithRedirectedBankID(redirectedBankID string) *ReturnSubmissionUpdateAttributes {
 
 	m.RedirectedBankID = redirectedBankID
+
+	return m
+}
+
+func (m *ReturnSubmissionUpdateAttributes) WithReferenceID(referenceID string) *ReturnSubmissionUpdateAttributes {
+
+	m.ReferenceID = referenceID
 
 	return m
 }
@@ -412,6 +436,10 @@ func (m *ReturnSubmissionUpdateAttributes) WithStatusReason(statusReason string)
 func (m *ReturnSubmissionUpdateAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validatePostingStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRoute(formats); err != nil {
 		res = append(res, err)
 	}
@@ -434,11 +462,27 @@ func (m *ReturnSubmissionUpdateAttributes) Validate(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *ReturnSubmissionUpdateAttributes) validatePostingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostingStatus) { // not required
+		return nil
+	}
+
+	if err := m.PostingStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "posting_status")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var returnSubmissionUpdateAttributesTypeRoutePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["on_us","xp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -450,6 +494,9 @@ const (
 
 	// ReturnSubmissionUpdateAttributesRouteOnUs captures enum value "on_us"
 	ReturnSubmissionUpdateAttributesRouteOnUs string = "on_us"
+
+	// ReturnSubmissionUpdateAttributesRouteXp captures enum value "xp"
+	ReturnSubmissionUpdateAttributesRouteXp string = "xp"
 )
 
 // prop value enum

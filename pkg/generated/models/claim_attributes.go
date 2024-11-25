@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -580,7 +579,6 @@ type ClaimAttributesDebtorParty struct {
 
 	// account name
 	// Required: true
-	// Pattern: ^[A-Za-z0-9 \/\-?:\(\)\.,’\+\#\=\!\"%&\*\<\>;\{@\r\n]*$
 	AccountName *string `json:"account_name"`
 
 	// account number
@@ -665,10 +663,6 @@ func (m *ClaimAttributesDebtorParty) Validate(formats strfmt.Registry) error {
 func (m *ClaimAttributesDebtorParty) validateAccountName(formats strfmt.Registry) error {
 
 	if err := validate.Required("debtor_party"+"."+"account_name", "body", m.AccountName); err != nil {
-		return err
-	}
-
-	if err := validate.Pattern("debtor_party"+"."+"account_name", "body", string(*m.AccountName), `^[A-Za-z0-9 \/\-?:\(\)\.,’\+\#\=\!\"%&\*\<\>;\{@\r\n]*$`); err != nil {
 		return err
 	}
 

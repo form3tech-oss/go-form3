@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetMetricsPrometheusAPIV1QueryRange creates a new GetMetricsPrometheusAPIV1QueryRangeRequest object
@@ -155,7 +154,7 @@ func (o *GetMetricsPrometheusAPIV1QueryRangeRequest) WithoutTimeout() *GetMetric
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get metrics prometheus API v1 query range Request
 func (o *GetMetricsPrometheusAPIV1QueryRangeRequest) WithContext(ctx context.Context) *GetMetricsPrometheusAPIV1QueryRangeRequest {
 	o.Context = ctx

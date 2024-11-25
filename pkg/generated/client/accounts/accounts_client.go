@@ -8,10 +8,9 @@ package accounts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new accounts API client.
@@ -39,8 +38,8 @@ func (a *CreateAccountRequest) Do() (*CreateAccountCreated, error) {
 		ID:                 "CreateAccount",
 		Method:             "POST",
 		PathPattern:        "/organisation/accounts",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateAccountReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *DeleteAccountRequest) Do() (*DeleteAccountNoContent, error) {
 		ID:                 "DeleteAccount",
 		Method:             "DELETE",
 		PathPattern:        "/organisation/accounts/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteAccountReader{formats: a.formats},
@@ -105,8 +104,8 @@ func (a *GetAccountRequest) Do() (*GetAccountOK, error) {
 		ID:                 "GetAccount",
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetAccountReader{formats: a.formats},
@@ -138,8 +137,8 @@ func (a *ListAccountEventsRequest) Do() (*ListAccountEventsOK, error) {
 		ID:                 "ListAccountEvents",
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts/{id}/events",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListAccountEventsReader{formats: a.formats},
@@ -171,8 +170,8 @@ func (a *ListAccountsRequest) Do() (*ListAccountsOK, error) {
 		ID:                 "ListAccounts",
 		Method:             "GET",
 		PathPattern:        "/organisation/accounts",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListAccountsReader{formats: a.formats},
@@ -204,8 +203,8 @@ func (a *ModifyAccountRequest) Do() (*ModifyAccountOK, error) {
 		ID:                 "ModifyAccount",
 		Method:             "PATCH",
 		PathPattern:        "/organisation/accounts/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ModifyAccountReader{formats: a.formats},

@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -355,6 +354,9 @@ type DirectDebitDecisionSubmissionAttributes struct {
 	// Indicates if the submission was created automatically by the system (`true`) or manually (`false`).
 	Auto bool `json:"auto,omitempty"`
 
+	// Scheme-specific status (if submission has been submitted to a scheme)
+	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
+
 	// status
 	Status DirectDebitDecisionSubmissionStatus `json:"status,omitempty"`
 
@@ -372,6 +374,8 @@ func DirectDebitDecisionSubmissionAttributesWithDefaults(defaults client.Default
 
 		Auto: defaults.GetBool("DirectDebitDecisionSubmissionAttributes", "auto"),
 
+		SchemeStatusCode: defaults.GetString("DirectDebitDecisionSubmissionAttributes", "scheme_status_code"),
+
 		// TODO Status: DirectDebitDecisionSubmissionStatus,
 
 		StatusReason: defaults.GetString("DirectDebitDecisionSubmissionAttributes", "status_reason"),
@@ -383,6 +387,13 @@ func DirectDebitDecisionSubmissionAttributesWithDefaults(defaults client.Default
 func (m *DirectDebitDecisionSubmissionAttributes) WithAuto(auto bool) *DirectDebitDecisionSubmissionAttributes {
 
 	m.Auto = auto
+
+	return m
+}
+
+func (m *DirectDebitDecisionSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *DirectDebitDecisionSubmissionAttributes {
+
+	m.SchemeStatusCode = schemeStatusCode
 
 	return m
 }

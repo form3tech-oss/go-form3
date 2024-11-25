@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionID creates a new GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest object
@@ -81,7 +80,7 @@ func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest) WithRecal
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get directdebits ID recalls recall ID admissions admission ID Request
 func (o *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest) WithContext(ctx context.Context) *GetDirectdebitsIDRecallsRecallIDAdmissionsAdmissionIDRequest {
 	o.Context = ctx

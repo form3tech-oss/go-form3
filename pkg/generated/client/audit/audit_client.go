@@ -8,10 +8,9 @@ package audit
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new audit API client.
@@ -39,8 +38,8 @@ func (a *GetAuditEntryRequest) Do() (*GetAuditEntryOK, error) {
 		ID:                 "GetAuditEntry",
 		Method:             "GET",
 		PathPattern:        "/audit/entries/{record_type}/{id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetAuditEntryReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *ListAuditEntriesRequest) Do() (*ListAuditEntriesOK, error) {
 		ID:                 "ListAuditEntries",
 		Method:             "GET",
 		PathPattern:        "/audit/entries/{record_type}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListAuditEntriesReader{formats: a.formats},

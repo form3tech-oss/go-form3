@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -351,13 +350,26 @@ func (m *PaymentAdmission) Json() string {
 // swagger:model PaymentAdmissionAttributes
 type PaymentAdmissionAttributes struct {
 
+	// account validation outcome
+	AccountValidationOutcome AccountValidationOutcome `json:"account_validation_outcome,omitempty"`
+
 	// Date and time the payment admission was created
 	// Read Only: true
 	// Format: date-time
 	AdmissionDatetime *strfmt.DateTime `json:"admission_datetime,omitempty"`
 
-	// Route taken for an outbound payment
-	// Enum: [on_us]
+	// Clearing infrastructure through which the payment instruction was processed
+	// Pattern: ^[0-9A-Za-z_]*$
+	ClearingSystem string `json:"clearing_system,omitempty"`
+
+	// posting status
+	PostingStatus PostingStatus `json:"posting_status,omitempty"`
+
+	// Additional payment reference assigned by the scheme
+	ReferenceID string `json:"reference_id,omitempty"`
+
+	// Route taken for an inbound payment
+	// Enum: ["on_us","xp"]
 	Route string `json:"route,omitempty"`
 
 	// Refers to individual scheme where applicable
@@ -384,7 +396,15 @@ type PaymentAdmissionAttributes struct {
 func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAdmissionAttributes {
 	return &PaymentAdmissionAttributes{
 
+		// TODO AccountValidationOutcome: AccountValidationOutcome,
+
 		AdmissionDatetime: defaults.GetStrfmtDateTimePtr("PaymentAdmissionAttributes", "admission_datetime"),
+
+		ClearingSystem: defaults.GetString("PaymentAdmissionAttributes", "clearing_system"),
+
+		// TODO PostingStatus: PostingStatus,
+
+		ReferenceID: defaults.GetString("PaymentAdmissionAttributes", "reference_id"),
 
 		Route: defaults.GetString("PaymentAdmissionAttributes", "route"),
 
@@ -403,6 +423,13 @@ func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAd
 	}
 }
 
+func (m *PaymentAdmissionAttributes) WithAccountValidationOutcome(accountValidationOutcome AccountValidationOutcome) *PaymentAdmissionAttributes {
+
+	m.AccountValidationOutcome = accountValidationOutcome
+
+	return m
+}
+
 func (m *PaymentAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *PaymentAdmissionAttributes {
 
 	m.AdmissionDatetime = &admissionDatetime
@@ -412,6 +439,27 @@ func (m *PaymentAdmissionAttributes) WithAdmissionDatetime(admissionDatetime str
 
 func (m *PaymentAdmissionAttributes) WithoutAdmissionDatetime() *PaymentAdmissionAttributes {
 	m.AdmissionDatetime = nil
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithClearingSystem(clearingSystem string) *PaymentAdmissionAttributes {
+
+	m.ClearingSystem = clearingSystem
+
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithPostingStatus(postingStatus PostingStatus) *PaymentAdmissionAttributes {
+
+	m.PostingStatus = postingStatus
+
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithReferenceID(referenceID string) *PaymentAdmissionAttributes {
+
+	m.ReferenceID = referenceID
+
 	return m
 }
 
@@ -478,7 +526,19 @@ func (m *PaymentAdmissionAttributes) WithStatusReason(statusReason PaymentAdmiss
 func (m *PaymentAdmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccountValidationOutcome(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAdmissionDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClearingSystem(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostingStatus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -508,6 +568,22 @@ func (m *PaymentAdmissionAttributes) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *PaymentAdmissionAttributes) validateAccountValidationOutcome(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AccountValidationOutcome) { // not required
+		return nil
+	}
+
+	if err := m.AccountValidationOutcome.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "account_validation_outcome")
+		}
+		return err
+	}
+
+	return nil
+}
+
 func (m *PaymentAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.AdmissionDatetime) { // not required
@@ -521,11 +597,40 @@ func (m *PaymentAdmissionAttributes) validateAdmissionDatetime(formats strfmt.Re
 	return nil
 }
 
+func (m *PaymentAdmissionAttributes) validateClearingSystem(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ClearingSystem) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", string(m.ClearingSystem), `^[0-9A-Za-z_]*$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAdmissionAttributes) validatePostingStatus(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PostingStatus) { // not required
+		return nil
+	}
+
+	if err := m.PostingStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "posting_status")
+		}
+		return err
+	}
+
+	return nil
+}
+
 var paymentAdmissionAttributesTypeRoutePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["on_us"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["on_us","xp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -537,6 +642,9 @@ const (
 
 	// PaymentAdmissionAttributesRouteOnUs captures enum value "on_us"
 	PaymentAdmissionAttributesRouteOnUs string = "on_us"
+
+	// PaymentAdmissionAttributesRouteXp captures enum value "xp"
+	PaymentAdmissionAttributesRouteXp string = "xp"
 )
 
 // prop value enum
@@ -651,6 +759,9 @@ type PaymentAdmissionRelationships struct {
 	// beneficiary account
 	BeneficiaryAccount *RelationshipPaymentAdmissionBeneficiaryAccount `json:"beneficiary_account,omitempty"`
 
+	// beneficiary branch
+	BeneficiaryBranch *RelationshipPaymentAdmissionBeneficiaryBranch `json:"beneficiary_branch,omitempty"`
+
 	// payment
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
@@ -662,6 +773,8 @@ func PaymentAdmissionRelationshipsWithDefaults(defaults client.Defaults) *Paymen
 	return &PaymentAdmissionRelationships{
 
 		BeneficiaryAccount: RelationshipPaymentAdmissionBeneficiaryAccountWithDefaults(defaults),
+
+		BeneficiaryBranch: RelationshipPaymentAdmissionBeneficiaryBranchWithDefaults(defaults),
 
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
@@ -678,6 +791,18 @@ func (m *PaymentAdmissionRelationships) WithBeneficiaryAccount(beneficiaryAccoun
 
 func (m *PaymentAdmissionRelationships) WithoutBeneficiaryAccount() *PaymentAdmissionRelationships {
 	m.BeneficiaryAccount = nil
+	return m
+}
+
+func (m *PaymentAdmissionRelationships) WithBeneficiaryBranch(beneficiaryBranch RelationshipPaymentAdmissionBeneficiaryBranch) *PaymentAdmissionRelationships {
+
+	m.BeneficiaryBranch = &beneficiaryBranch
+
+	return m
+}
+
+func (m *PaymentAdmissionRelationships) WithoutBeneficiaryBranch() *PaymentAdmissionRelationships {
+	m.BeneficiaryBranch = nil
 	return m
 }
 
@@ -713,6 +838,10 @@ func (m *PaymentAdmissionRelationships) Validate(formats strfmt.Registry) error 
 		res = append(res, err)
 	}
 
+	if err := m.validateBeneficiaryBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePayment(formats); err != nil {
 		res = append(res, err)
 	}
@@ -737,6 +866,24 @@ func (m *PaymentAdmissionRelationships) validateBeneficiaryAccount(formats strfm
 		if err := m.BeneficiaryAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("relationships" + "." + "beneficiary_account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentAdmissionRelationships) validateBeneficiaryBranch(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.BeneficiaryBranch) { // not required
+		return nil
+	}
+
+	if m.BeneficiaryBranch != nil {
+		if err := m.BeneficiaryBranch.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("relationships" + "." + "beneficiary_branch")
 			}
 			return err
 		}

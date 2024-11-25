@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetMandateReturn creates a new GetMandateReturnRequest object
@@ -68,7 +67,7 @@ func (o *GetMandateReturnRequest) WithReturnID(returnID strfmt.UUID) *GetMandate
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get mandate return Request
 func (o *GetMandateReturnRequest) WithContext(ctx context.Context) *GetMandateReturnRequest {
 	o.Context = ctx

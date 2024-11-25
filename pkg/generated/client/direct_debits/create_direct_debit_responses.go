@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateDirectDebitReader is a Reader for the CreateDirectDebit structure.
@@ -49,7 +48,8 @@ func NewCreateDirectDebitCreated() *CreateDirectDebitCreated {
 	return &CreateDirectDebitCreated{}
 }
 
-/*CreateDirectDebitCreated handles this case with default header values.
+/*
+CreateDirectDebitCreated handles this case with default header values.
 
 Direct Debit creation response
 */
@@ -59,6 +59,36 @@ type CreateDirectDebitCreated struct {
 
 	// isStream: false
 	*models.DirectDebitCreationResponse
+}
+
+// IsSuccess returns true when this create direct debit created response has a 2xx status code
+func (o *CreateDirectDebitCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create direct debit created response has a 3xx status code
+func (o *CreateDirectDebitCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create direct debit created response has a 4xx status code
+func (o *CreateDirectDebitCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create direct debit created response has a 5xx status code
+func (o *CreateDirectDebitCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create direct debit created response a status code equal to that given
+func (o *CreateDirectDebitCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create direct debit created response
+func (o *CreateDirectDebitCreated) Code() int {
+	return 201
 }
 
 func (o *CreateDirectDebitCreated) Error() string {
@@ -83,7 +113,8 @@ func NewCreateDirectDebitBadRequest() *CreateDirectDebitBadRequest {
 	return &CreateDirectDebitBadRequest{}
 }
 
-/*CreateDirectDebitBadRequest handles this case with default header values.
+/*
+CreateDirectDebitBadRequest handles this case with default header values.
 
 Direct Debit creation error
 */
@@ -93,6 +124,36 @@ type CreateDirectDebitBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create direct debit bad request response has a 2xx status code
+func (o *CreateDirectDebitBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create direct debit bad request response has a 3xx status code
+func (o *CreateDirectDebitBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create direct debit bad request response has a 4xx status code
+func (o *CreateDirectDebitBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create direct debit bad request response has a 5xx status code
+func (o *CreateDirectDebitBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create direct debit bad request response a status code equal to that given
+func (o *CreateDirectDebitBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create direct debit bad request response
+func (o *CreateDirectDebitBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateDirectDebitBadRequest) Error() string {

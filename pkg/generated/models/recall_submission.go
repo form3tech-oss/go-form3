@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -340,131 +339,6 @@ func (m *RecallSubmission) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *RecallSubmission) Json() string {
-	json, err := json.MarshalIndent(m, "  ", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return string(json)
-}
-
-// RecallSubmissionAttributes recall submission attributes
-// swagger:model RecallSubmissionAttributes
-type RecallSubmissionAttributes struct {
-
-	// status
-	Status RecallSubmissionStatus `json:"status,omitempty"`
-
-	// Reason for submission failure if submission status is `delivery_failed`
-	StatusReason string `json:"status_reason,omitempty"`
-
-	// Date and time of the submission
-	// Read Only: true
-	// Format: date-time
-	SubmissionDatetime *strfmt.DateTime `json:"submission_datetime,omitempty"`
-}
-
-func RecallSubmissionAttributesWithDefaults(defaults client.Defaults) *RecallSubmissionAttributes {
-	return &RecallSubmissionAttributes{
-
-		// TODO Status: RecallSubmissionStatus,
-
-		StatusReason: defaults.GetString("RecallSubmissionAttributes", "status_reason"),
-
-		SubmissionDatetime: defaults.GetStrfmtDateTimePtr("RecallSubmissionAttributes", "submission_datetime"),
-	}
-}
-
-func (m *RecallSubmissionAttributes) WithStatus(status RecallSubmissionStatus) *RecallSubmissionAttributes {
-
-	m.Status = status
-
-	return m
-}
-
-func (m *RecallSubmissionAttributes) WithStatusReason(statusReason string) *RecallSubmissionAttributes {
-
-	m.StatusReason = statusReason
-
-	return m
-}
-
-func (m *RecallSubmissionAttributes) WithSubmissionDatetime(submissionDatetime strfmt.DateTime) *RecallSubmissionAttributes {
-
-	m.SubmissionDatetime = &submissionDatetime
-
-	return m
-}
-
-func (m *RecallSubmissionAttributes) WithoutSubmissionDatetime() *RecallSubmissionAttributes {
-	m.SubmissionDatetime = nil
-	return m
-}
-
-// Validate validates this recall submission attributes
-func (m *RecallSubmissionAttributes) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSubmissionDatetime(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *RecallSubmissionAttributes) validateStatus(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Status) { // not required
-		return nil
-	}
-
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("attributes" + "." + "status")
-		}
-		return err
-	}
-
-	return nil
-}
-
-func (m *RecallSubmissionAttributes) validateSubmissionDatetime(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.SubmissionDatetime) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("attributes"+"."+"submission_datetime", "body", "date-time", m.SubmissionDatetime.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *RecallSubmissionAttributes) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *RecallSubmissionAttributes) UnmarshalBinary(b []byte) error {
-	var res RecallSubmissionAttributes
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-func (m *RecallSubmissionAttributes) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

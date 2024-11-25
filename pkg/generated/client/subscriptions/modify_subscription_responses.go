@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ModifySubscriptionReader is a Reader for the ModifySubscription structure.
@@ -70,7 +69,8 @@ func NewModifySubscriptionOK() *ModifySubscriptionOK {
 	return &ModifySubscriptionOK{}
 }
 
-/*ModifySubscriptionOK handles this case with default header values.
+/*
+ModifySubscriptionOK handles this case with default header values.
 
 Subscription details
 */
@@ -80,6 +80,36 @@ type ModifySubscriptionOK struct {
 
 	// isStream: false
 	*models.SubscriptionDetailsResponse
+}
+
+// IsSuccess returns true when this modify subscription o k response has a 2xx status code
+func (o *ModifySubscriptionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this modify subscription o k response has a 3xx status code
+func (o *ModifySubscriptionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify subscription o k response has a 4xx status code
+func (o *ModifySubscriptionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify subscription o k response has a 5xx status code
+func (o *ModifySubscriptionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify subscription o k response a status code equal to that given
+func (o *ModifySubscriptionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the modify subscription o k response
+func (o *ModifySubscriptionOK) Code() int {
+	return 200
 }
 
 func (o *ModifySubscriptionOK) Error() string {
@@ -104,7 +134,8 @@ func NewModifySubscriptionBadRequest() *ModifySubscriptionBadRequest {
 	return &ModifySubscriptionBadRequest{}
 }
 
-/*ModifySubscriptionBadRequest handles this case with default header values.
+/*
+ModifySubscriptionBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -114,6 +145,36 @@ type ModifySubscriptionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this modify subscription bad request response has a 2xx status code
+func (o *ModifySubscriptionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify subscription bad request response has a 3xx status code
+func (o *ModifySubscriptionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify subscription bad request response has a 4xx status code
+func (o *ModifySubscriptionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify subscription bad request response has a 5xx status code
+func (o *ModifySubscriptionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify subscription bad request response a status code equal to that given
+func (o *ModifySubscriptionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the modify subscription bad request response
+func (o *ModifySubscriptionBadRequest) Code() int {
+	return 400
 }
 
 func (o *ModifySubscriptionBadRequest) Error() string {
@@ -138,7 +199,8 @@ func NewModifySubscriptionNotFound() *ModifySubscriptionNotFound {
 	return &ModifySubscriptionNotFound{}
 }
 
-/*ModifySubscriptionNotFound handles this case with default header values.
+/*
+ModifySubscriptionNotFound handles this case with default header values.
 
 Not Found
 */
@@ -148,6 +210,36 @@ type ModifySubscriptionNotFound struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this modify subscription not found response has a 2xx status code
+func (o *ModifySubscriptionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify subscription not found response has a 3xx status code
+func (o *ModifySubscriptionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify subscription not found response has a 4xx status code
+func (o *ModifySubscriptionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify subscription not found response has a 5xx status code
+func (o *ModifySubscriptionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify subscription not found response a status code equal to that given
+func (o *ModifySubscriptionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the modify subscription not found response
+func (o *ModifySubscriptionNotFound) Code() int {
+	return 404
 }
 
 func (o *ModifySubscriptionNotFound) Error() string {
@@ -172,7 +264,8 @@ func NewModifySubscriptionConflict() *ModifySubscriptionConflict {
 	return &ModifySubscriptionConflict{}
 }
 
-/*ModifySubscriptionConflict handles this case with default header values.
+/*
+ModifySubscriptionConflict handles this case with default header values.
 
 Conflict
 */
@@ -182,6 +275,36 @@ type ModifySubscriptionConflict struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this modify subscription conflict response has a 2xx status code
+func (o *ModifySubscriptionConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify subscription conflict response has a 3xx status code
+func (o *ModifySubscriptionConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify subscription conflict response has a 4xx status code
+func (o *ModifySubscriptionConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify subscription conflict response has a 5xx status code
+func (o *ModifySubscriptionConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify subscription conflict response a status code equal to that given
+func (o *ModifySubscriptionConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the modify subscription conflict response
+func (o *ModifySubscriptionConflict) Code() int {
+	return 409
 }
 
 func (o *ModifySubscriptionConflict) Error() string {
@@ -206,7 +329,8 @@ func NewModifySubscriptionInternalServerError() *ModifySubscriptionInternalServe
 	return &ModifySubscriptionInternalServerError{}
 }
 
-/*ModifySubscriptionInternalServerError handles this case with default header values.
+/*
+ModifySubscriptionInternalServerError handles this case with default header values.
 
 Internal Error
 */
@@ -216,6 +340,36 @@ type ModifySubscriptionInternalServerError struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this modify subscription internal server error response has a 2xx status code
+func (o *ModifySubscriptionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify subscription internal server error response has a 3xx status code
+func (o *ModifySubscriptionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify subscription internal server error response has a 4xx status code
+func (o *ModifySubscriptionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this modify subscription internal server error response has a 5xx status code
+func (o *ModifySubscriptionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this modify subscription internal server error response a status code equal to that given
+func (o *ModifySubscriptionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the modify subscription internal server error response
+func (o *ModifySubscriptionInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ModifySubscriptionInternalServerError) Error() string {

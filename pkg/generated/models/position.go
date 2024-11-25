@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -283,11 +282,11 @@ func (m *Position) Json() string {
 type PositionAttributes struct {
 
 	// Current limit
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Limit string `json:"limit,omitempty"`
 
 	// Current position
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Position string `json:"position,omitempty"`
 
 	// Scheme associated with the limit
@@ -355,7 +354,7 @@ func (m *PositionAttributes) validateLimit(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"limit", "body", string(m.Limit), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"limit", "body", string(m.Limit), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -368,7 +367,7 @@ func (m *PositionAttributes) validatePosition(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"position", "body", string(m.Position), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"position", "body", string(m.Position), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

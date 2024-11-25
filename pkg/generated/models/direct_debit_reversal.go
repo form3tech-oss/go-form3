@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -570,7 +569,7 @@ func (m *DirectDebitReversalAttributes) Json() string {
 type DirectDebitReversalAttributesChargesAmount struct {
 
 	// The charges amount
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Amount string `json:"amount,omitempty"`
 
 	// ISO currency code for `amount`
@@ -620,7 +619,7 @@ func (m *DirectDebitReversalAttributesChargesAmount) validateAmount(formats strf
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"charges_amount"+"."+"amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"charges_amount"+"."+"amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -657,7 +656,7 @@ func (m *DirectDebitReversalAttributesChargesAmount) Json() string {
 type DirectDebitReversalAttributesReversalAmount struct {
 
 	// Full amount of the Direct Debit Reversal including charges
-	// Pattern: ^[0-9.]{0,20}$
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
 	Amount string `json:"amount,omitempty"`
 
 	// ISO currency code for `amount`
@@ -707,7 +706,7 @@ func (m *DirectDebitReversalAttributesReversalAmount) validateAmount(formats str
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"reversal_amount"+"."+"amount", "body", string(m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"reversal_amount"+"."+"amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

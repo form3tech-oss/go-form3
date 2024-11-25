@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetAuditEntry creates a new GetAuditEntryRequest object
@@ -68,7 +67,7 @@ func (o *GetAuditEntryRequest) WithRecordType(recordType string) *GetAuditEntryR
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get audit entry Request
 func (o *GetAuditEntryRequest) WithContext(ctx context.Context) *GetAuditEntryRequest {
 	o.Context = ctx

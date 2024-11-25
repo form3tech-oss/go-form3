@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -30,9 +29,9 @@ type AccountHoldingEntity struct {
 	// Pattern: ^[A-Z0-9]{0,16}$
 	BankID *string `json:"bank_id"`
 
-	// ISO 20022 code used to identify the type of bank ID being used
+	// bank id code
 	// Required: true
-	// Enum: [GBDSC]
+	// Enum: ["GBDSC"]
 	BankIDCode *BankIDCode `json:"bank_id_code"`
 
 	// Array for additional ID(s) for agent

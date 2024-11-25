@@ -8,10 +8,9 @@ package a_c_e
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new a c e API client.
@@ -39,8 +38,8 @@ func (a *CreateAceRequest) Do() (*CreateAceCreated, error) {
 		ID:                 "CreateAce",
 		Method:             "POST",
 		PathPattern:        "/security/roles/{role_id}/aces",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateAceReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *DeleteAceRequest) Do() (*DeleteAceNoContent, error) {
 		ID:                 "DeleteAce",
 		Method:             "DELETE",
 		PathPattern:        "/security/roles/{role_id}/aces/{ace_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &DeleteAceReader{formats: a.formats},
@@ -105,8 +104,8 @@ func (a *GetAceRequest) Do() (*GetAceOK, error) {
 		ID:                 "GetAce",
 		Method:             "GET",
 		PathPattern:        "/security/roles/{role_id}/aces/{ace_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetAceReader{formats: a.formats},
@@ -138,8 +137,8 @@ func (a *ListAcesRequest) Do() (*ListAcesOK, error) {
 		ID:                 "ListAces",
 		Method:             "GET",
 		PathPattern:        "/security/roles/{role_id}/aces",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListAcesReader{formats: a.formats},

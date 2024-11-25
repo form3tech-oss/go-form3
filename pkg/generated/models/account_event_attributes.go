@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -32,7 +31,7 @@ type AccountEventAttributes struct {
 	DateTime *strfmt.DateTime `json:"date_time"`
 
 	// Contains the event description
-	// Enum: [pending failed confirmed]
+	// Enum: ["pending","failed","confirmed"]
 	Description string `json:"description,omitempty"`
 
 	// Failure reason. Should only be present when description is failed
@@ -40,12 +39,12 @@ type AccountEventAttributes struct {
 
 	// Contains the routing status
 	// Required: true
-	// Enum: [unroutable routable deleted]
+	// Enum: ["unroutable","routable","deleted"]
 	RoutingStatus *string `json:"routing_status"`
 
 	// Contains the event status
 	// Required: true
-	// Enum: [pending failed confirmed]
+	// Enum: ["pending","failed","confirmed"]
 	Status *string `json:"status"`
 }
 

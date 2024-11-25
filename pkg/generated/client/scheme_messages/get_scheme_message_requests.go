@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetSchemeMessage creates a new GetSchemeMessageRequest object
@@ -55,7 +54,7 @@ func (o *GetSchemeMessageRequest) WithID(id strfmt.UUID) *GetSchemeMessageReques
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get scheme message Request
 func (o *GetSchemeMessageRequest) WithContext(ctx context.Context) *GetSchemeMessageRequest {
 	o.Context = ctx

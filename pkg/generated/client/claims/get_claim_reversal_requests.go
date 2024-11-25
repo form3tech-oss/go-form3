@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetClaimReversal creates a new GetClaimReversalRequest object
@@ -68,7 +67,7 @@ func (o *GetClaimReversalRequest) WithReversalID(reversalID strfmt.UUID) *GetCla
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get claim reversal Request
 func (o *GetClaimReversalRequest) WithContext(ctx context.Context) *GetClaimReversalRequest {
 	o.Context = ctx

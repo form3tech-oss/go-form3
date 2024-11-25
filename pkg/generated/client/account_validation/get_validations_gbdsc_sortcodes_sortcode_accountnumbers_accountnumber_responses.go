@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberReader is a Reader for the GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumber structure.
@@ -56,7 +55,8 @@ func NewGetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK() *Get
 	return &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK handles this case with default header values.
 
 Sort code and account number details
 */
@@ -66,6 +66,36 @@ type GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK struct {
 
 	// isStream: false
 	*models.AccountNumberDetailsResponse
+}
+
+// IsSuccess returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber o k response has a 2xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber o k response has a 3xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber o k response has a 4xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber o k response has a 5xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber o k response a status code equal to that given
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get validations gbdsc sortcodes sortcode accountnumbers accountnumber o k response
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) Code() int {
+	return 200
 }
 
 func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberOK) Error() string {
@@ -90,7 +120,8 @@ func NewGetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadReques
 	return &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest handles this case with default header values.
 
 Validation error
 */
@@ -100,6 +131,36 @@ type GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest s
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber bad request response has a 2xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber bad request response has a 3xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber bad request response has a 4xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber bad request response has a 5xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber bad request response a status code equal to that given
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get validations gbdsc sortcodes sortcode accountnumbers accountnumber bad request response
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberBadRequest) Error() string {
@@ -124,7 +185,8 @@ func NewGetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound(
 	return &GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound{}
 }
 
-/*GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound handles this case with default header values.
+/*
+GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound handles this case with default header values.
 
 Validation failed
 */
@@ -134,6 +196,36 @@ type GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound str
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber not found response has a 2xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber not found response has a 3xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber not found response has a 4xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber not found response has a 5xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get validations gbdsc sortcodes sortcode accountnumbers accountnumber not found response a status code equal to that given
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get validations gbdsc sortcodes sortcode accountnumbers accountnumber not found response
+func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) Code() int {
+	return 404
 }
 
 func (o *GetValidationsGbdscSortcodesSortcodeAccountnumbersAccountnumberNotFound) Error() string {

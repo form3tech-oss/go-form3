@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // PostMetricsPrometheusAPIV1QueryRangeReader is a Reader for the PostMetricsPrometheusAPIV1QueryRange structure.
@@ -63,7 +62,8 @@ func NewPostMetricsPrometheusAPIV1QueryRangeOK() *PostMetricsPrometheusAPIV1Quer
 	return &PostMetricsPrometheusAPIV1QueryRangeOK{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryRangeOK handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryRangeOK handles this case with default header values.
 
 See Prometheus api https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries
 */
@@ -73,6 +73,36 @@ type PostMetricsPrometheusAPIV1QueryRangeOK struct {
 
 	// isStream: false
 	*models.MetricsQueryResponse
+}
+
+// IsSuccess returns true when this post metrics prometheus Api v1 query range o k response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query range o k response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query range o k response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query range o k response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query range o k response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryRangeOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query range o k response
+func (o *PostMetricsPrometheusAPIV1QueryRangeOK) Code() int {
+	return 200
 }
 
 func (o *PostMetricsPrometheusAPIV1QueryRangeOK) Error() string {
@@ -97,7 +127,8 @@ func NewPostMetricsPrometheusAPIV1QueryRangeBadRequest() *PostMetricsPrometheusA
 	return &PostMetricsPrometheusAPIV1QueryRangeBadRequest{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryRangeBadRequest handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryRangeBadRequest handles this case with default header values.
 
 Bad Request
 */
@@ -107,6 +138,36 @@ type PostMetricsPrometheusAPIV1QueryRangeBadRequest struct {
 
 	// isStream: false
 	*models.MetricsQueryResponse
+}
+
+// IsSuccess returns true when this post metrics prometheus Api v1 query range bad request response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query range bad request response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query range bad request response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query range bad request response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query range bad request response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query range bad request response
+func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) Code() int {
+	return 400
 }
 
 func (o *PostMetricsPrometheusAPIV1QueryRangeBadRequest) Error() string {
@@ -131,11 +192,42 @@ func NewPostMetricsPrometheusAPIV1QueryRangeForbidden() *PostMetricsPrometheusAP
 	return &PostMetricsPrometheusAPIV1QueryRangeForbidden{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryRangeForbidden handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryRangeForbidden handles this case with default header values.
 
 Forbidden
 */
 type PostMetricsPrometheusAPIV1QueryRangeForbidden struct {
+}
+
+// IsSuccess returns true when this post metrics prometheus Api v1 query range forbidden response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query range forbidden response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query range forbidden response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query range forbidden response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query range forbidden response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query range forbidden response
+func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) Code() int {
+	return 403
 }
 
 func (o *PostMetricsPrometheusAPIV1QueryRangeForbidden) Error() string {
@@ -152,11 +244,42 @@ func NewPostMetricsPrometheusAPIV1QueryRangeInternalServerError() *PostMetricsPr
 	return &PostMetricsPrometheusAPIV1QueryRangeInternalServerError{}
 }
 
-/*PostMetricsPrometheusAPIV1QueryRangeInternalServerError handles this case with default header values.
+/*
+PostMetricsPrometheusAPIV1QueryRangeInternalServerError handles this case with default header values.
 
 Internal Server Error
 */
 type PostMetricsPrometheusAPIV1QueryRangeInternalServerError struct {
+}
+
+// IsSuccess returns true when this post metrics prometheus Api v1 query range internal server error response has a 2xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post metrics prometheus Api v1 query range internal server error response has a 3xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post metrics prometheus Api v1 query range internal server error response has a 4xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post metrics prometheus Api v1 query range internal server error response has a 5xx status code
+func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post metrics prometheus Api v1 query range internal server error response a status code equal to that given
+func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post metrics prometheus Api v1 query range internal server error response
+func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostMetricsPrometheusAPIV1QueryRangeInternalServerError) Error() string {

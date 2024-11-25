@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.ListUserCredentials creates a new ListUserCredentialsRequest object
@@ -55,7 +54,7 @@ func (o *ListUserCredentialsRequest) WithUserID(userID strfmt.UUID) *ListUserCre
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list user credentials Request
 func (o *ListUserCredentialsRequest) WithContext(ctx context.Context) *ListUserCredentialsRequest {
 	o.Context = ctx

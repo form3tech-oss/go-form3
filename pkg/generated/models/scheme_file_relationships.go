@@ -10,16 +10,18 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // SchemeFileRelationships scheme file relationships
 // swagger:model SchemeFileRelationships
 type SchemeFileRelationships struct {
+
+	// scheme file admissions
+	SchemeFileAdmissions *SchemeFileRelationshipsSchemeFileAdmissions `json:"scheme_file_admissions,omitempty"`
 
 	// scheme file submission
 	SchemeFileSubmission *SchemeFileRelationshipsSchemeFileSubmission `json:"scheme_file_submission,omitempty"`
@@ -28,8 +30,22 @@ type SchemeFileRelationships struct {
 func SchemeFileRelationshipsWithDefaults(defaults client.Defaults) *SchemeFileRelationships {
 	return &SchemeFileRelationships{
 
+		SchemeFileAdmissions: SchemeFileRelationshipsSchemeFileAdmissionsWithDefaults(defaults),
+
 		SchemeFileSubmission: SchemeFileRelationshipsSchemeFileSubmissionWithDefaults(defaults),
 	}
+}
+
+func (m *SchemeFileRelationships) WithSchemeFileAdmissions(schemeFileAdmissions SchemeFileRelationshipsSchemeFileAdmissions) *SchemeFileRelationships {
+
+	m.SchemeFileAdmissions = &schemeFileAdmissions
+
+	return m
+}
+
+func (m *SchemeFileRelationships) WithoutSchemeFileAdmissions() *SchemeFileRelationships {
+	m.SchemeFileAdmissions = nil
+	return m
 }
 
 func (m *SchemeFileRelationships) WithSchemeFileSubmission(schemeFileSubmission SchemeFileRelationshipsSchemeFileSubmission) *SchemeFileRelationships {
@@ -48,6 +64,10 @@ func (m *SchemeFileRelationships) WithoutSchemeFileSubmission() *SchemeFileRelat
 func (m *SchemeFileRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateSchemeFileAdmissions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSchemeFileSubmission(formats); err != nil {
 		res = append(res, err)
 	}
@@ -55,6 +75,24 @@ func (m *SchemeFileRelationships) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SchemeFileRelationships) validateSchemeFileAdmissions(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeFileAdmissions) { // not required
+		return nil
+	}
+
+	if m.SchemeFileAdmissions != nil {
+		if err := m.SchemeFileAdmissions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scheme_file_admissions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -94,6 +132,92 @@ func (m *SchemeFileRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *SchemeFileRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// SchemeFileRelationshipsSchemeFileAdmissions scheme file relationships scheme file admissions
+// swagger:model SchemeFileRelationshipsSchemeFileAdmissions
+type SchemeFileRelationshipsSchemeFileAdmissions struct {
+
+	// data
+	Data []*SchemeFileAdmission `json:"data"`
+}
+
+func SchemeFileRelationshipsSchemeFileAdmissionsWithDefaults(defaults client.Defaults) *SchemeFileRelationshipsSchemeFileAdmissions {
+	return &SchemeFileRelationshipsSchemeFileAdmissions{
+
+		Data: make([]*SchemeFileAdmission, 0),
+	}
+}
+
+func (m *SchemeFileRelationshipsSchemeFileAdmissions) WithData(data []*SchemeFileAdmission) *SchemeFileRelationshipsSchemeFileAdmissions {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this scheme file relationships scheme file admissions
+func (m *SchemeFileRelationshipsSchemeFileAdmissions) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SchemeFileRelationshipsSchemeFileAdmissions) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("scheme_file_admissions" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SchemeFileRelationshipsSchemeFileAdmissions) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SchemeFileRelationshipsSchemeFileAdmissions) UnmarshalBinary(b []byte) error {
+	var res SchemeFileRelationshipsSchemeFileAdmissions
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *SchemeFileRelationshipsSchemeFileAdmissions) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -9,9 +9,8 @@ import (
 	"encoding/json"
 	"log"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 )
 
@@ -26,6 +25,9 @@ const (
 
 	// QueryResponseAdmissionStatusFailed captures enum value "failed"
 	QueryResponseAdmissionStatusFailed QueryResponseAdmissionStatus = "failed"
+
+	// QueryResponseAdmissionStatusPending captures enum value "pending"
+	QueryResponseAdmissionStatusPending QueryResponseAdmissionStatus = "pending"
 )
 
 // for schema
@@ -33,7 +35,7 @@ var queryResponseAdmissionStatusEnum []interface{}
 
 func init() {
 	var res []QueryResponseAdmissionStatus
-	if err := json.Unmarshal([]byte(`["confirmed","failed"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["confirmed","failed","pending"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

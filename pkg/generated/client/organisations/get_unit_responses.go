@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetUnitReader is a Reader for the GetUnit structure.
@@ -32,6 +31,13 @@ func (o *GetUnitReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetUnitNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewGetUnitOK() *GetUnitOK {
 	return &GetUnitOK{}
 }
 
-/*GetUnitOK handles this case with default header values.
+/*
+GetUnitOK handles this case with default header values.
 
 Organisation details
 */
@@ -52,6 +59,36 @@ type GetUnitOK struct {
 
 	// isStream: false
 	*models.OrganisationDetailsResponse
+}
+
+// IsSuccess returns true when this get unit o k response has a 2xx status code
+func (o *GetUnitOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get unit o k response has a 3xx status code
+func (o *GetUnitOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get unit o k response has a 4xx status code
+func (o *GetUnitOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get unit o k response has a 5xx status code
+func (o *GetUnitOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get unit o k response a status code equal to that given
+func (o *GetUnitOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get unit o k response
+func (o *GetUnitOK) Code() int {
+	return 200
 }
 
 func (o *GetUnitOK) Error() string {
@@ -65,6 +102,71 @@ func (o *GetUnitOK) readResponse(response runtime.ClientResponse, consumer runti
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.OrganisationDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetUnitNotFound creates a GetUnitNotFound with default headers values
+func NewGetUnitNotFound() *GetUnitNotFound {
+	return &GetUnitNotFound{}
+}
+
+/*
+GetUnitNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetUnitNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get unit not found response has a 2xx status code
+func (o *GetUnitNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get unit not found response has a 3xx status code
+func (o *GetUnitNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get unit not found response has a 4xx status code
+func (o *GetUnitNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get unit not found response has a 5xx status code
+func (o *GetUnitNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get unit not found response a status code equal to that given
+func (o *GetUnitNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get unit not found response
+func (o *GetUnitNotFound) Code() int {
+	return 404
+}
+
+func (o *GetUnitNotFound) Error() string {
+	return fmt.Sprintf("[GET /organisation/units/{id}][%d] getUnitNotFound", 404)
+}
+
+func (o *GetUnitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

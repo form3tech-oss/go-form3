@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -22,12 +21,17 @@ type DirectDebitReturnReversalAdmissionDetailsResponse struct {
 
 	// data
 	Data *DirectDebitReturnReversalAdmission `json:"data,omitempty"`
+
+	// links
+	Links *Links `json:"links,omitempty"`
 }
 
 func DirectDebitReturnReversalAdmissionDetailsResponseWithDefaults(defaults client.Defaults) *DirectDebitReturnReversalAdmissionDetailsResponse {
 	return &DirectDebitReturnReversalAdmissionDetailsResponse{
 
 		Data: DirectDebitReturnReversalAdmissionWithDefaults(defaults),
+
+		Links: LinksWithDefaults(defaults),
 	}
 }
 
@@ -43,11 +47,27 @@ func (m *DirectDebitReturnReversalAdmissionDetailsResponse) WithoutData() *Direc
 	return m
 }
 
+func (m *DirectDebitReturnReversalAdmissionDetailsResponse) WithLinks(links Links) *DirectDebitReturnReversalAdmissionDetailsResponse {
+
+	m.Links = &links
+
+	return m
+}
+
+func (m *DirectDebitReturnReversalAdmissionDetailsResponse) WithoutLinks() *DirectDebitReturnReversalAdmissionDetailsResponse {
+	m.Links = nil
+	return m
+}
+
 // Validate validates this direct debit return reversal admission details response
 func (m *DirectDebitReturnReversalAdmissionDetailsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLinks(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -67,6 +87,24 @@ func (m *DirectDebitReturnReversalAdmissionDetailsResponse) validateData(formats
 		if err := m.Data.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("data")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DirectDebitReturnReversalAdmissionDetailsResponse) validateLinks(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Links) { // not required
+		return nil
+	}
+
+	if m.Links != nil {
+		if err := m.Links.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("links")
 			}
 			return err
 		}

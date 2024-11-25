@@ -7,10 +7,12 @@ package users
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // DeleteUserReader is a Reader for the DeleteUser structure.
@@ -29,6 +31,20 @@ func (o *DeleteUserReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 
+	case 404:
+		result := NewDeleteUserNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewDeleteUserConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -39,11 +55,42 @@ func NewDeleteUserNoContent() *DeleteUserNoContent {
 	return &DeleteUserNoContent{}
 }
 
-/*DeleteUserNoContent handles this case with default header values.
+/*
+DeleteUserNoContent handles this case with default header values.
 
 User deleted
 */
 type DeleteUserNoContent struct {
+}
+
+// IsSuccess returns true when this delete user no content response has a 2xx status code
+func (o *DeleteUserNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete user no content response has a 3xx status code
+func (o *DeleteUserNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user no content response has a 4xx status code
+func (o *DeleteUserNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete user no content response has a 5xx status code
+func (o *DeleteUserNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user no content response a status code equal to that given
+func (o *DeleteUserNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete user no content response
+func (o *DeleteUserNoContent) Code() int {
+	return 204
 }
 
 func (o *DeleteUserNoContent) Error() string {
@@ -51,6 +98,136 @@ func (o *DeleteUserNoContent) Error() string {
 }
 
 func (o *DeleteUserNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteUserNotFound creates a DeleteUserNotFound with default headers values
+func NewDeleteUserNotFound() *DeleteUserNotFound {
+	return &DeleteUserNotFound{}
+}
+
+/*
+DeleteUserNotFound handles this case with default header values.
+
+Not Found
+*/
+type DeleteUserNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this delete user not found response has a 2xx status code
+func (o *DeleteUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user not found response has a 3xx status code
+func (o *DeleteUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user not found response has a 4xx status code
+func (o *DeleteUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user not found response has a 5xx status code
+func (o *DeleteUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user not found response a status code equal to that given
+func (o *DeleteUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete user not found response
+func (o *DeleteUserNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteUserNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /security/users/{user_id}][%d] deleteUserNotFound", 404)
+}
+
+func (o *DeleteUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteUserConflict creates a DeleteUserConflict with default headers values
+func NewDeleteUserConflict() *DeleteUserConflict {
+	return &DeleteUserConflict{}
+}
+
+/*
+DeleteUserConflict handles this case with default header values.
+
+Conflict
+*/
+type DeleteUserConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this delete user conflict response has a 2xx status code
+func (o *DeleteUserConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user conflict response has a 3xx status code
+func (o *DeleteUserConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user conflict response has a 4xx status code
+func (o *DeleteUserConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user conflict response has a 5xx status code
+func (o *DeleteUserConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user conflict response a status code equal to that given
+func (o *DeleteUserConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete user conflict response
+func (o *DeleteUserConflict) Code() int {
+	return 409
+}
+
+func (o *DeleteUserConflict) Error() string {
+	return fmt.Sprintf("[DELETE /security/users/{user_id}][%d] deleteUserConflict", 409)
+}
+
+func (o *DeleteUserConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

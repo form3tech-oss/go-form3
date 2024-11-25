@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.CreateClaimReversal creates a new CreateClaimReversalRequest object
@@ -86,7 +85,7 @@ func (o *CreateClaimReversalRequest) WithID(id strfmt.UUID) *CreateClaimReversal
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create claim reversal Request
 func (o *CreateClaimReversalRequest) WithContext(ctx context.Context) *CreateClaimReversalRequest {
 	o.Context = ctx

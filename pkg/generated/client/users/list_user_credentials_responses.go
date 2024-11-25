@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListUserCredentialsReader is a Reader for the ListUserCredentials structure.
@@ -32,6 +31,13 @@ func (o *ListUserCredentialsReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 
+	case 404:
+		result := NewListUserCredentialsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewListUserCredentialsOK() *ListUserCredentialsOK {
 	return &ListUserCredentialsOK{}
 }
 
-/*ListUserCredentialsOK handles this case with default header values.
+/*
+ListUserCredentialsOK handles this case with default header values.
 
 List of credentials for user
 */
@@ -52,6 +59,36 @@ type ListUserCredentialsOK struct {
 
 	// isStream: false
 	*models.UserCredentialListResponse
+}
+
+// IsSuccess returns true when this list user credentials o k response has a 2xx status code
+func (o *ListUserCredentialsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list user credentials o k response has a 3xx status code
+func (o *ListUserCredentialsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user credentials o k response has a 4xx status code
+func (o *ListUserCredentialsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user credentials o k response has a 5xx status code
+func (o *ListUserCredentialsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user credentials o k response a status code equal to that given
+func (o *ListUserCredentialsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list user credentials o k response
+func (o *ListUserCredentialsOK) Code() int {
+	return 200
 }
 
 func (o *ListUserCredentialsOK) Error() string {
@@ -65,6 +102,71 @@ func (o *ListUserCredentialsOK) readResponse(response runtime.ClientResponse, co
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.UserCredentialListResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewListUserCredentialsNotFound creates a ListUserCredentialsNotFound with default headers values
+func NewListUserCredentialsNotFound() *ListUserCredentialsNotFound {
+	return &ListUserCredentialsNotFound{}
+}
+
+/*
+ListUserCredentialsNotFound handles this case with default header values.
+
+Not Found
+*/
+type ListUserCredentialsNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this list user credentials not found response has a 2xx status code
+func (o *ListUserCredentialsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user credentials not found response has a 3xx status code
+func (o *ListUserCredentialsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user credentials not found response has a 4xx status code
+func (o *ListUserCredentialsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user credentials not found response has a 5xx status code
+func (o *ListUserCredentialsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user credentials not found response a status code equal to that given
+func (o *ListUserCredentialsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list user credentials not found response
+func (o *ListUserCredentialsNotFound) Code() int {
+	return 404
+}
+
+func (o *ListUserCredentialsNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/users/{user_id}/credentials][%d] listUserCredentialsNotFound", 404)
+}
+
+func (o *ListUserCredentialsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

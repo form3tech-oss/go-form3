@@ -12,10 +12,9 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // Client.CreateDirectDebitSubmission creates a new CreateDirectDebitSubmissionRequest object
@@ -86,7 +85,7 @@ func (o *CreateDirectDebitSubmissionRequest) WithID(id strfmt.UUID) *CreateDirec
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the create direct debit submission Request
 func (o *CreateDirectDebitSubmissionRequest) WithContext(ctx context.Context) *CreateDirectDebitSubmissionRequest {
 	o.Context = ctx

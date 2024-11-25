@@ -1,6 +1,7 @@
 package form3
 
 import (
+	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
@@ -9,7 +10,8 @@ import (
 	"net/url"
 	"os"
 
-	genClient "github.com/form3tech-oss/go-form3/v6/pkg/generated/client"
+	genClient "github.com/form3tech-oss/go-form3/v7/pkg/generated/client"
+	"github.com/go-openapi/runtime"
 	rc "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/google/uuid"
@@ -63,6 +65,8 @@ func New(opts ...Option) (*F3, error) {
 	}
 
 	rt := rc.NewWithClient(f3.baseURL.Host, "/v1", []string{f3.baseURL.Scheme}, f3.httpClient)
+	rt.Producers["application/vnd.api+json"] = runtime.JSONProducer()
+	rt.Consumers["application/vnd.api+json"] = runtime.JSONConsumer()
 
 	defaults := NewClientDefaults()
 	orgUUID := strfmt.UUID(f3.orgID.String())
@@ -111,13 +115,21 @@ func NewFromEnv() (*F3, error) {
 	}
 
 	block, _ := pem.Decode([]byte(privKeyInPEM))
-	if block == nil || block.Type != "RSA PRIVATE KEY" {
+	if block == nil || (block.Type != "RSA PRIVATE KEY" && block.Type != "PRIVATE KEY") {
 		return nil, ErrPEMDecode
 	}
 
 	privateKey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
-		return nil, fmt.Errorf("could not parse private key: %w", err)
+		parsedKey, err := x509.ParsePKCS8PrivateKey(block.Bytes)
+		if err != nil {
+			return nil, fmt.Errorf("error parsing privateKey for both PKCS1 and PKCS8: %w", err)
+		}
+		var ok bool
+		privateKey, ok = parsedKey.(*rsa.PrivateKey)
+		if !ok {
+			return nil, errors.New("parsed privateKey from PKCS8, but it is not compatible with rsa.PrivateKey")
+		}
 	}
 
 	publicKeyID, err := getEnv("FORM3_PUBLIC_KEY_ID")

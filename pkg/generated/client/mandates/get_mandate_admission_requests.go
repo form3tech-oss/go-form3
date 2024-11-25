@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetMandateAdmission creates a new GetMandateAdmissionRequest object
@@ -68,7 +67,7 @@ func (o *GetMandateAdmissionRequest) WithID(id strfmt.UUID) *GetMandateAdmission
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get mandate admission Request
 func (o *GetMandateAdmissionRequest) WithContext(ctx context.Context) *GetMandateAdmissionRequest {
 	o.Context = ctx

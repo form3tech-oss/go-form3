@@ -143,6 +143,8 @@ func Unmarshal{{ pascalize .Name }}Slice(reader io.Reader, consumer runtime.Cons
                     // TODO {{ pascalize .Name}}: {{ .GoType }},
                   {{ else if .IsArray }}
                     {{ pascalize .Name}}: make({{ .GoType }}, 0),
+                  {{ else if and .IsAnonymous (not .IsInterface) (not .IsMap) }}
+                    // TODO {{ pascalize .Name}}: {{ .GoType }},
                   {{ else if .IsComplexObject }}
                     {{ pascalize .Name}}: {{ if not .IsNullable }}*{{ end }}{{ if and (not .IsArray) (not .IsMap) (not .HasDiscriminator) (or .IsNullable  ) }}{{ end }}{{ .GoType }}WithDefaults(defaults),
                   {{ else }}
@@ -153,6 +155,7 @@ func Unmarshal{{ pascalize .Name }}Slice(reader io.Reader, consumer runtime.Cons
         }
 
     {{ range .Properties }}
+    {{ if or (not .IsAnonymous) .IsInterface .IsMap }}
     func ({{ $.ReceiverName }} *{{ pascalize $.Name }}) With{{ pascalize .Name }}({{ varname .Name  }} {{ if and (not .IsArray) (not .IsMap) (not .HasDiscriminator) (not .IsStream) (not .IsNullable) (not .IsPrimitive) }}*{{ end }}{{ .GoType }}) *{{ pascalize $.Name }} {
     {{ if .IsNullable }}
       {{ $.ReceiverName }}.{{ pascalize .Name }} = &{{ varname .Name }}
@@ -163,8 +166,9 @@ func Unmarshal{{ pascalize .Name }}Slice(reader io.Reader, consumer runtime.Cons
     {{ end }}
       return {{ .ReceiverName }}
     }
+    {{ end }}
 
-    {{if .IsNullable}}
+    {{if and .IsNullable (or (not .IsAnonymous) .IsInterface .IsMap) }}
     func ({{ $.ReceiverName }} *{{ pascalize $.Name }}) Without{{ pascalize .Name }}() *{{ pascalize $.Name }} {
       {{ $.ReceiverName }}.{{ pascalize .Name }} = nil
            return {{ .ReceiverName }}

@@ -8,10 +8,9 @@ package metrics_api
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new metrics api API client.
@@ -39,8 +38,8 @@ func (a *GetMetricsPrometheusAPIV1QueryRequest) Do() (*GetMetricsPrometheusAPIV1
 		ID:                 "GetMetricsPrometheusAPIV1Query",
 		Method:             "GET",
 		PathPattern:        "/metrics/prometheus/api/v1/query",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetMetricsPrometheusAPIV1QueryReader{formats: a.formats},
@@ -72,8 +71,8 @@ func (a *GetMetricsPrometheusAPIV1QueryRangeRequest) Do() (*GetMetricsPrometheus
 		ID:                 "GetMetricsPrometheusAPIV1QueryRange",
 		Method:             "GET",
 		PathPattern:        "/metrics/prometheus/api/v1/query_range",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetMetricsPrometheusAPIV1QueryRangeReader{formats: a.formats},
@@ -106,7 +105,7 @@ func (a *GetMetricsPrometheusFederateRequest) Do() (*GetMetricsPrometheusFederat
 		Method:             "GET",
 		PathPattern:        "/metrics/prometheus/federate",
 		ProducesMediaTypes: []string{"text/plain"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetMetricsPrometheusFederateReader{formats: a.formats},
@@ -138,7 +137,7 @@ func (a *PostMetricsPrometheusAPIV1QueryRequest) Do() (*PostMetricsPrometheusAPI
 		ID:                 "PostMetricsPrometheusAPIV1Query",
 		Method:             "POST",
 		PathPattern:        "/metrics/prometheus/api/v1/query",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             a,
@@ -171,7 +170,7 @@ func (a *PostMetricsPrometheusAPIV1QueryRangeRequest) Do() (*PostMetricsPromethe
 		ID:                 "PostMetricsPrometheusAPIV1QueryRange",
 		Method:             "POST",
 		PathPattern:        "/metrics/prometheus/api/v1/query_range",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             a,

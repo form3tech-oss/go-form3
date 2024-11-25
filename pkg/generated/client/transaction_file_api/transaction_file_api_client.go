@@ -8,10 +8,9 @@ package transaction_file_api
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new transaction file api API client.
@@ -39,8 +38,8 @@ func (a *CreateTransactionFileRequest) Do() (*CreateTransactionFileCreated, erro
 		ID:                 "CreateTransactionFile",
 		Method:             "POST",
 		PathPattern:        "/files/transactions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateTransactionFileReader{formats: a.formats},
@@ -64,6 +63,39 @@ func (a *CreateTransactionFileRequest) MustDo() *CreateTransactionFileCreated {
 }
 
 /*
+create transaction file admission API
+*/
+func (a *CreateTransactionFileAdmissionRequest) Do() (*CreateTransactionFileAdmissionCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "CreateTransactionFileAdmission",
+		Method:             "POST",
+		PathPattern:        "/files/transactions/{transaction_file_id}/admissions",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &CreateTransactionFileAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CreateTransactionFileAdmissionCreated), nil
+
+}
+
+func (a *CreateTransactionFileAdmissionRequest) MustDo() *CreateTransactionFileAdmissionCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 create transaction file submission API
 */
 func (a *CreateTransactionFileSubmissionRequest) Do() (*CreateTransactionFileSubmissionCreated, error) {
@@ -72,8 +104,8 @@ func (a *CreateTransactionFileSubmissionRequest) Do() (*CreateTransactionFileSub
 		ID:                 "CreateTransactionFileSubmission",
 		Method:             "POST",
 		PathPattern:        "/files/transactions/{transaction_file_id}/submissions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreateTransactionFileSubmissionReader{formats: a.formats},
@@ -105,8 +137,8 @@ func (a *GetTransactionFileRequest) Do() (*GetTransactionFileOK, error) {
 		ID:                 "GetTransactionFile",
 		Method:             "GET",
 		PathPattern:        "/files/transactions/{transaction_file_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetTransactionFileReader{formats: a.formats},
@@ -130,6 +162,39 @@ func (a *GetTransactionFileRequest) MustDo() *GetTransactionFileOK {
 }
 
 /*
+get transaction file admission API
+*/
+func (a *GetTransactionFileAdmissionRequest) Do() (*GetTransactionFileAdmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionFileAdmission",
+		Method:             "GET",
+		PathPattern:        "/files/transactions/{transaction_file_id}/admissions/{transaction_file_admission_id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionFileAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionFileAdmissionOK), nil
+
+}
+
+func (a *GetTransactionFileAdmissionRequest) MustDo() *GetTransactionFileAdmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 get transaction file submission API
 */
 func (a *GetTransactionFileSubmissionRequest) Do() (*GetTransactionFileSubmissionOK, error) {
@@ -138,8 +203,8 @@ func (a *GetTransactionFileSubmissionRequest) Do() (*GetTransactionFileSubmissio
 		ID:                 "GetTransactionFileSubmission",
 		Method:             "GET",
 		PathPattern:        "/files/transactions/{transaction_file_id}/submissions/{transaction_file_submission_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &GetTransactionFileSubmissionReader{formats: a.formats},
@@ -171,8 +236,8 @@ func (a *ListTransactionFilesRequest) Do() (*ListTransactionFilesOK, error) {
 		ID:                 "ListTransactionFiles",
 		Method:             "GET",
 		PathPattern:        "/files/transactions",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
-		ConsumesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &ListTransactionFilesReader{formats: a.formats},
@@ -204,7 +269,7 @@ func (a *UploadTransactionFileRequest) Do() (*UploadTransactionFileOK, error) {
 		ID:                 "UploadTransactionFile",
 		Method:             "PUT",
 		PathPattern:        "/files/transactions/{transaction_file_id}",
-		ProducesMediaTypes: []string{"application/json", "application/vnd.api+json"},
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/octet-stream"},
 		Schemes:            []string{"https"},
 		Params:             a,

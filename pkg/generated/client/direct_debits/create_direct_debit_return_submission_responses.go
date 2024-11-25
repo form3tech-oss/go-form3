@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateDirectDebitReturnSubmissionReader is a Reader for the CreateDirectDebitReturnSubmission structure.
@@ -49,7 +48,8 @@ func NewCreateDirectDebitReturnSubmissionCreated() *CreateDirectDebitReturnSubmi
 	return &CreateDirectDebitReturnSubmissionCreated{}
 }
 
-/*CreateDirectDebitReturnSubmissionCreated handles this case with default header values.
+/*
+CreateDirectDebitReturnSubmissionCreated handles this case with default header values.
 
 Return submission creation response
 */
@@ -59,6 +59,36 @@ type CreateDirectDebitReturnSubmissionCreated struct {
 
 	// isStream: false
 	*models.DirectDebitReturnSubmissionCreationResponse
+}
+
+// IsSuccess returns true when this create direct debit return submission created response has a 2xx status code
+func (o *CreateDirectDebitReturnSubmissionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create direct debit return submission created response has a 3xx status code
+func (o *CreateDirectDebitReturnSubmissionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create direct debit return submission created response has a 4xx status code
+func (o *CreateDirectDebitReturnSubmissionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create direct debit return submission created response has a 5xx status code
+func (o *CreateDirectDebitReturnSubmissionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create direct debit return submission created response a status code equal to that given
+func (o *CreateDirectDebitReturnSubmissionCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create direct debit return submission created response
+func (o *CreateDirectDebitReturnSubmissionCreated) Code() int {
+	return 201
 }
 
 func (o *CreateDirectDebitReturnSubmissionCreated) Error() string {
@@ -83,7 +113,8 @@ func NewCreateDirectDebitReturnSubmissionBadRequest() *CreateDirectDebitReturnSu
 	return &CreateDirectDebitReturnSubmissionBadRequest{}
 }
 
-/*CreateDirectDebitReturnSubmissionBadRequest handles this case with default header values.
+/*
+CreateDirectDebitReturnSubmissionBadRequest handles this case with default header values.
 
 Return submission creation error
 */
@@ -93,6 +124,36 @@ type CreateDirectDebitReturnSubmissionBadRequest struct {
 
 	// isStream: false
 	*models.APIError
+}
+
+// IsSuccess returns true when this create direct debit return submission bad request response has a 2xx status code
+func (o *CreateDirectDebitReturnSubmissionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create direct debit return submission bad request response has a 3xx status code
+func (o *CreateDirectDebitReturnSubmissionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create direct debit return submission bad request response has a 4xx status code
+func (o *CreateDirectDebitReturnSubmissionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create direct debit return submission bad request response has a 5xx status code
+func (o *CreateDirectDebitReturnSubmissionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create direct debit return submission bad request response a status code equal to that given
+func (o *CreateDirectDebitReturnSubmissionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create direct debit return submission bad request response
+func (o *CreateDirectDebitReturnSubmissionBadRequest) Code() int {
+	return 400
 }
 
 func (o *CreateDirectDebitReturnSubmissionBadRequest) Error() string {

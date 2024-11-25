@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // CreateAceReader is a Reader for the CreateAce structure.
@@ -32,6 +31,27 @@ func (o *CreateAceReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return result, nil
 
+	case 400:
+		result := NewCreateAceBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 404:
+		result := NewCreateAceNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateAceConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +62,8 @@ func NewCreateAceCreated() *CreateAceCreated {
 	return &CreateAceCreated{}
 }
 
-/*CreateAceCreated handles this case with default header values.
+/*
+CreateAceCreated handles this case with default header values.
 
 ACE creation response
 */
@@ -52,6 +73,36 @@ type CreateAceCreated struct {
 
 	// isStream: false
 	*models.AceCreationResponse
+}
+
+// IsSuccess returns true when this create ace created response has a 2xx status code
+func (o *CreateAceCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create ace created response has a 3xx status code
+func (o *CreateAceCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace created response has a 4xx status code
+func (o *CreateAceCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create ace created response has a 5xx status code
+func (o *CreateAceCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace created response a status code equal to that given
+func (o *CreateAceCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create ace created response
+func (o *CreateAceCreated) Code() int {
+	return 201
 }
 
 func (o *CreateAceCreated) Error() string {
@@ -65,6 +116,201 @@ func (o *CreateAceCreated) readResponse(response runtime.ClientResponse, consume
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.AceCreationResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateAceBadRequest creates a CreateAceBadRequest with default headers values
+func NewCreateAceBadRequest() *CreateAceBadRequest {
+	return &CreateAceBadRequest{}
+}
+
+/*
+CreateAceBadRequest handles this case with default header values.
+
+Bad request
+*/
+type CreateAceBadRequest struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create ace bad request response has a 2xx status code
+func (o *CreateAceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create ace bad request response has a 3xx status code
+func (o *CreateAceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace bad request response has a 4xx status code
+func (o *CreateAceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ace bad request response has a 5xx status code
+func (o *CreateAceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace bad request response a status code equal to that given
+func (o *CreateAceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create ace bad request response
+func (o *CreateAceBadRequest) Code() int {
+	return 400
+}
+
+func (o *CreateAceBadRequest) Error() string {
+	return fmt.Sprintf("[POST /security/roles/{role_id}/aces][%d] createAceBadRequest", 400)
+}
+
+func (o *CreateAceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateAceNotFound creates a CreateAceNotFound with default headers values
+func NewCreateAceNotFound() *CreateAceNotFound {
+	return &CreateAceNotFound{}
+}
+
+/*
+CreateAceNotFound handles this case with default header values.
+
+Not Found
+*/
+type CreateAceNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create ace not found response has a 2xx status code
+func (o *CreateAceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create ace not found response has a 3xx status code
+func (o *CreateAceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace not found response has a 4xx status code
+func (o *CreateAceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ace not found response has a 5xx status code
+func (o *CreateAceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace not found response a status code equal to that given
+func (o *CreateAceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create ace not found response
+func (o *CreateAceNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateAceNotFound) Error() string {
+	return fmt.Sprintf("[POST /security/roles/{role_id}/aces][%d] createAceNotFound", 404)
+}
+
+func (o *CreateAceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateAceConflict creates a CreateAceConflict with default headers values
+func NewCreateAceConflict() *CreateAceConflict {
+	return &CreateAceConflict{}
+}
+
+/*
+CreateAceConflict handles this case with default header values.
+
+Conflict
+*/
+type CreateAceConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create ace conflict response has a 2xx status code
+func (o *CreateAceConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create ace conflict response has a 3xx status code
+func (o *CreateAceConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create ace conflict response has a 4xx status code
+func (o *CreateAceConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create ace conflict response has a 5xx status code
+func (o *CreateAceConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create ace conflict response a status code equal to that given
+func (o *CreateAceConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create ace conflict response
+func (o *CreateAceConflict) Code() int {
+	return 409
+}
+
+func (o *CreateAceConflict) Error() string {
+	return fmt.Sprintf("[POST /security/roles/{role_id}/aces][%d] createAceConflict", 409)
+}
+
+func (o *CreateAceConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

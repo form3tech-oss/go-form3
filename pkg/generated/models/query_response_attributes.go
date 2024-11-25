@@ -9,10 +9,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
@@ -35,6 +34,12 @@ type QueryResponseAttributes struct {
 
 	// currency
 	Currency string `json:"currency,omitempty"`
+
+	// information
+	Information *QueryResponseInformation `json:"information,omitempty"`
+
+	// status code
+	StatusCode QueryResponseStatusCode `json:"status_code,omitempty"`
 }
 
 func QueryResponseAttributesWithDefaults(defaults client.Defaults) *QueryResponseAttributes {
@@ -49,6 +54,11 @@ func QueryResponseAttributesWithDefaults(defaults client.Defaults) *QueryRespons
 		CompensationAmount: defaults.GetString("QueryResponseAttributes", "compensation_amount"),
 
 		Currency: defaults.GetString("QueryResponseAttributes", "currency"),
+
+		Information: QueryResponseInformationWithDefaults(defaults),
+
+		// TODO StatusCode: QueryResponseStatusCode,
+
 	}
 }
 
@@ -97,6 +107,25 @@ func (m *QueryResponseAttributes) WithCurrency(currency string) *QueryResponseAt
 	return m
 }
 
+func (m *QueryResponseAttributes) WithInformation(information QueryResponseInformation) *QueryResponseAttributes {
+
+	m.Information = &information
+
+	return m
+}
+
+func (m *QueryResponseAttributes) WithoutInformation() *QueryResponseAttributes {
+	m.Information = nil
+	return m
+}
+
+func (m *QueryResponseAttributes) WithStatusCode(statusCode QueryResponseStatusCode) *QueryResponseAttributes {
+
+	m.StatusCode = statusCode
+
+	return m
+}
+
 // Validate validates this query response attributes
 func (m *QueryResponseAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -110,6 +139,14 @@ func (m *QueryResponseAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCompensation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInformation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusCode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -162,6 +199,40 @@ func (m *QueryResponseAttributes) validateCompensation(formats strfmt.Registry) 
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *QueryResponseAttributes) validateInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Information) { // not required
+		return nil
+	}
+
+	if m.Information != nil {
+		if err := m.Information.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("information")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QueryResponseAttributes) validateStatusCode(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.StatusCode) { // not required
+		return nil
+	}
+
+	if err := m.StatusCode.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("status_code")
+		}
+		return err
 	}
 
 	return nil

@@ -10,10 +10,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/form3tech-oss/go-form3/v6/pkg/client"
-	strfmt "github.com/go-openapi/strfmt"
-
+	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -26,7 +25,7 @@ type AccountAttributes struct {
 	AcceptanceQualifier AcceptanceQualifier `json:"acceptance_qualifier,omitempty"`
 
 	// Is the account business or personal?
-	// Enum: [Personal Business]
+	// Enum: ["Personal","Business"]
 	AccountClassification *string `json:"account_classification,omitempty"`
 
 	// - deprecated - Is the account opted out of account matching, e.g. CoP?
@@ -91,7 +90,7 @@ type AccountAttributes struct {
 	Name []string `json:"name"`
 
 	// Describes the status of the account for name matching via CoP. The value determines the code with which Form3 responds to matched CoP requests to this account.
-	// Enum: [supported switched opted_out not_supported]
+	// Enum: ["supported","switched","opted_out","not_supported"]
 	NameMatchingStatus *string `json:"name_matching_status,omitempty"`
 
 	// organisation identification
@@ -114,7 +113,7 @@ type AccountAttributes struct {
 	SecondaryIdentification string `json:"secondary_identification,omitempty"`
 
 	// Current status of the account
-	// Enum: [pending failed confirmed closed]
+	// Enum: ["pending","failed","confirmed","closed"]
 	Status string `json:"status,omitempty"`
 
 	// status reason
@@ -130,6 +129,10 @@ type AccountAttributes struct {
 	// Max Length: 40
 	// Min Length: 1
 	Title string `json:"title,omitempty"`
+
+	// Account type
+	// Max Length: 35
+	Type string `json:"type,omitempty"`
 
 	// All purpose list of key-value pairs to store specific data for the associated account. It will be added to each payment received to an account.
 	// Max Items: 5
@@ -201,6 +204,8 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 		SwitchedAccountDetails: SwitchedAccountDetailsWithDefaults(defaults),
 
 		Title: defaults.GetString("AccountAttributes", "title"),
+
+		Type: defaults.GetString("AccountAttributes", "type"),
 
 		UserDefinedData: make([]*UserDefinedData, 0),
 
@@ -452,6 +457,13 @@ func (m *AccountAttributes) WithTitle(title string) *AccountAttributes {
 	return m
 }
 
+func (m *AccountAttributes) WithType(typeVar string) *AccountAttributes {
+
+	m.Type = typeVar
+
+	return m
+}
+
 func (m *AccountAttributes) WithUserDefinedData(userDefinedData []*UserDefinedData) *AccountAttributes {
 
 	m.UserDefinedData = userDefinedData
@@ -574,6 +586,10 @@ func (m *AccountAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTitle(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1095,6 +1111,19 @@ func (m *AccountAttributes) validateTitle(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MaxLength("title", "body", string(m.Title), 40); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *AccountAttributes) validateType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("type", "body", string(m.Type), 35); err != nil {
 		return err
 	}
 

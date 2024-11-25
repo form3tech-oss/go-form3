@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // ListAccountsReader is a Reader for the ListAccounts structure.
@@ -42,7 +41,8 @@ func NewListAccountsOK() *ListAccountsOK {
 	return &ListAccountsOK{}
 }
 
-/*ListAccountsOK handles this case with default header values.
+/*
+ListAccountsOK handles this case with default header values.
 
 List of account details
 */
@@ -52,6 +52,36 @@ type ListAccountsOK struct {
 
 	// isStream: false
 	*models.AccountDetailsListResponse
+}
+
+// IsSuccess returns true when this list accounts o k response has a 2xx status code
+func (o *ListAccountsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list accounts o k response has a 3xx status code
+func (o *ListAccountsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accounts o k response has a 4xx status code
+func (o *ListAccountsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list accounts o k response has a 5xx status code
+func (o *ListAccountsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accounts o k response a status code equal to that given
+func (o *ListAccountsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list accounts o k response
+func (o *ListAccountsOK) Code() int {
+	return 200
 }
 
 func (o *ListAccountsOK) Error() string {

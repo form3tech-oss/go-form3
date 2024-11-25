@@ -10,9 +10,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // Client.ListUsers creates a new ListUsersRequest object
@@ -83,7 +82,7 @@ func (o *ListUsersRequest) WithoutPageSize() *ListUsersRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the list users Request
 func (o *ListUsersRequest) WithContext(ctx context.Context) *ListUsersRequest {
 	o.Context = ctx

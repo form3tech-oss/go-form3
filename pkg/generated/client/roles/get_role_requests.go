@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.GetRole creates a new GetRoleRequest object
@@ -55,7 +54,7 @@ func (o *GetRoleRequest) WithRoleID(roleID strfmt.UUID) *GetRoleRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the get role Request
 func (o *GetRoleRequest) WithContext(ctx context.Context) *GetRoleRequest {
 	o.Context = ctx

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	"github.com/form3tech-oss/go-form3/v6/pkg/generated/models"
+	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
 // GetRoleReader is a Reader for the GetRole structure.
@@ -32,6 +31,13 @@ func (o *GetRoleReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetRoleNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -42,7 +48,8 @@ func NewGetRoleOK() *GetRoleOK {
 	return &GetRoleOK{}
 }
 
-/*GetRoleOK handles this case with default header values.
+/*
+GetRoleOK handles this case with default header values.
 
 Role details
 */
@@ -52,6 +59,36 @@ type GetRoleOK struct {
 
 	// isStream: false
 	*models.RoleDetailsResponse
+}
+
+// IsSuccess returns true when this get role o k response has a 2xx status code
+func (o *GetRoleOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get role o k response has a 3xx status code
+func (o *GetRoleOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get role o k response has a 4xx status code
+func (o *GetRoleOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get role o k response has a 5xx status code
+func (o *GetRoleOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get role o k response a status code equal to that given
+func (o *GetRoleOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get role o k response
+func (o *GetRoleOK) Code() int {
+	return 200
 }
 
 func (o *GetRoleOK) Error() string {
@@ -65,6 +102,71 @@ func (o *GetRoleOK) readResponse(response runtime.ClientResponse, consumer runti
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.RoleDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetRoleNotFound creates a GetRoleNotFound with default headers values
+func NewGetRoleNotFound() *GetRoleNotFound {
+	return &GetRoleNotFound{}
+}
+
+/*
+GetRoleNotFound handles this case with default header values.
+
+Not Found
+*/
+type GetRoleNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get role not found response has a 2xx status code
+func (o *GetRoleNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get role not found response has a 3xx status code
+func (o *GetRoleNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get role not found response has a 4xx status code
+func (o *GetRoleNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get role not found response has a 5xx status code
+func (o *GetRoleNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get role not found response a status code equal to that given
+func (o *GetRoleNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get role not found response
+func (o *GetRoleNotFound) Code() int {
+	return 404
+}
+
+func (o *GetRoleNotFound) Error() string {
+	return fmt.Sprintf("[GET /security/roles/{role_id}][%d] getRoleNotFound", 404)
+}
+
+func (o *GetRoleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

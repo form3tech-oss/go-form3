@@ -10,8 +10,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // Client.DeleteAce creates a new DeleteAceRequest object
@@ -68,7 +67,7 @@ func (o *DeleteAceRequest) WithRoleID(roleID strfmt.UUID) *DeleteAceRequest {
 	return o
 }
 
-//////////////////
+// ////////////////
 // WithContext adds the context to the delete ace Request
 func (o *DeleteAceRequest) WithContext(ctx context.Context) *DeleteAceRequest {
 	o.Context = ctx
