@@ -90,11 +90,11 @@ func (m *QueryReference) validateType(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.MinLength("type", "body", string(*m.Type), 1); err != nil {
+	if err := validate.MinLength("type", "body", *m.Type, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("type", "body", string(*m.Type), 45); err != nil {
+	if err := validate.MaxLength("type", "body", *m.Type, 45); err != nil {
 		return err
 	}
 
@@ -107,11 +107,11 @@ func (m *QueryReference) validateValue(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.MinLength("value", "body", string(*m.Value), 1); err != nil {
+	if err := validate.MinLength("value", "body", *m.Value, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("value", "body", string(*m.Value), 45); err != nil {
+	if err := validate.MaxLength("value", "body", *m.Value, 45); err != nil {
 		return err
 	}
 

@@ -156,7 +156,7 @@ func (m *SwitchedAccountDetails) validateAccountNumber(formats strfmt.Registry) 
 		return err
 	}
 
-	if err := validate.Pattern("account_number", "body", string(*m.AccountNumber), `^[0-9]{8}$`); err != nil {
+	if err := validate.Pattern("account_number", "body", *m.AccountNumber, `^[0-9]{8}$`); err != nil {
 		return err
 	}
 

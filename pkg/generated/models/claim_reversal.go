@@ -302,7 +302,7 @@ func (m *ClaimReversal) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -396,7 +396,7 @@ func (m *ClaimReversalAttributes) validateOriginalInstructionID(formats strfmt.R
 		return err
 	}
 
-	if err := validate.MinLength("attributes"+"."+"original_instruction_id", "body", string(*m.OriginalInstructionID), 1); err != nil {
+	if err := validate.MinLength("attributes"+"."+"original_instruction_id", "body", *m.OriginalInstructionID, 1); err != nil {
 		return err
 	}
 

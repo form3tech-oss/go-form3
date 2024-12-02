@@ -303,7 +303,7 @@ func (m *DirectDebitReversalAdmission) validateType(formats strfmt.Registry) err
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 

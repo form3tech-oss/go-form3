@@ -180,7 +180,7 @@ func (m *AuditEntry) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z]*$`); err != nil {
 		return err
 	}
 
@@ -386,7 +386,7 @@ func (m *AuditEntryAttributes) validateDescription(formats strfmt.Registry) erro
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"description", "body", string(m.Description), `^[A-Za-z0-9 .,@:]*$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"description", "body", m.Description, `^[A-Za-z0-9 .,@:]*$`); err != nil {
 		return err
 	}
 
@@ -412,7 +412,7 @@ func (m *AuditEntryAttributes) validateRecordType(formats strfmt.Registry) error
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"record_type", "body", string(m.RecordType), `^[A-Za-z]*$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"record_type", "body", m.RecordType, `^[A-Za-z]*$`); err != nil {
 		return err
 	}
 

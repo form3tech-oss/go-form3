@@ -262,7 +262,7 @@ func (m *ReturnPaymentAttributes) validateAmount(formats strfmt.Registry) error 
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("amount", "body", m.Amount, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

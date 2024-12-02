@@ -132,11 +132,11 @@ func (m *AccountAttributesOrganisationIdentificationActor) validateName(formats 
 
 	for i := 0; i < len(m.Name); i++ {
 
-		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 1); err != nil {
+		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 255); err != nil {
+		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 255); err != nil {
 			return err
 		}
 
@@ -151,7 +151,7 @@ func (m *AccountAttributesOrganisationIdentificationActor) validateResidency(for
 		return nil
 	}
 
-	if err := validate.Pattern("residency", "body", string(m.Residency), `^[A-Z]{2}$`); err != nil {
+	if err := validate.Pattern("residency", "body", m.Residency, `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 

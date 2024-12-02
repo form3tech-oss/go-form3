@@ -302,7 +302,7 @@ func (m *ClaimAttributes) validateClearingID(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("clearing_id", "body", string(*m.ClearingID), `^[0-9]{6}$`); err != nil {
+	if err := validate.Pattern("clearing_id", "body", *m.ClearingID, `^[0-9]{6}$`); err != nil {
 		return err
 	}
 
@@ -407,7 +407,7 @@ func (m *ClaimAttributes) validateReasonCode(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("reason_code", "body", string(*m.ReasonCode), `^[1-9]$`); err != nil {
+	if err := validate.Pattern("reason_code", "body", *m.ReasonCode, `^[1-9]$`); err != nil {
 		return err
 	}
 
@@ -532,7 +532,7 @@ func (m *ClaimAttributesBeneficiaryParty) validateAccountNumber(formats strfmt.R
 		return err
 	}
 
-	if err := validate.Pattern("beneficiary_party"+"."+"account_number", "body", string(*m.AccountNumber), `^[A-Z0-9]{6,34}$`); err != nil {
+	if err := validate.Pattern("beneficiary_party"+"."+"account_number", "body", *m.AccountNumber, `^[A-Z0-9]{6,34}$`); err != nil {
 		return err
 	}
 
@@ -675,7 +675,7 @@ func (m *ClaimAttributesDebtorParty) validateAccountNumber(formats strfmt.Regist
 		return err
 	}
 
-	if err := validate.Pattern("debtor_party"+"."+"account_number", "body", string(*m.AccountNumber), `^[A-Z0-9]{6,34}$`); err != nil {
+	if err := validate.Pattern("debtor_party"+"."+"account_number", "body", *m.AccountNumber, `^[A-Z0-9]{6,34}$`); err != nil {
 		return err
 	}
 
@@ -787,7 +787,7 @@ func (m *ClaimAttributesOriginalInstruction) validateClearingID(formats strfmt.R
 		return err
 	}
 
-	if err := validate.Pattern("original_instruction"+"."+"clearing_id", "body", string(*m.ClearingID), `^[0-9]{6}$`); err != nil {
+	if err := validate.Pattern("original_instruction"+"."+"clearing_id", "body", *m.ClearingID, `^[0-9]{6}$`); err != nil {
 		return err
 	}
 

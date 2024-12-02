@@ -799,7 +799,7 @@ func (m *PaymentAttributes) validateAmount(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("amount", "body", m.Amount, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -940,7 +940,7 @@ func (m *PaymentAttributes) validatePaymentScheme(formats strfmt.Registry) error
 		return nil
 	}
 
-	if err := validate.Pattern("payment_scheme", "body", string(m.PaymentScheme), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("payment_scheme", "body", m.PaymentScheme, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 

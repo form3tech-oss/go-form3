@@ -206,7 +206,7 @@ func (m *SubscriptionUpdateAttributes) validateCallbackURI(formats strfmt.Regist
 		return nil
 	}
 
-	if err := validate.Pattern("callback_uri", "body", string(m.CallbackURI), `^[A-Za-z0-9 .,@:\&\?=\/\-_]*$`); err != nil {
+	if err := validate.Pattern("callback_uri", "body", m.CallbackURI, `^[A-Za-z0-9 .,@:\&\?=\/\-_]*$`); err != nil {
 		return err
 	}
 
@@ -244,7 +244,7 @@ func (m *SubscriptionUpdateAttributes) validateEventType(formats strfmt.Registry
 		return nil
 	}
 
-	if err := validate.Pattern("event_type", "body", string(m.EventType), `^[A-Za-z_-]*$`); err != nil {
+	if err := validate.Pattern("event_type", "body", m.EventType, `^[A-Za-z_-]*$`); err != nil {
 		return err
 	}
 
@@ -257,7 +257,7 @@ func (m *SubscriptionUpdateAttributes) validateRecordType(formats strfmt.Registr
 		return nil
 	}
 
-	if err := validate.Pattern("record_type", "body", string(m.RecordType), `^[A-Za-z_-]*$`); err != nil {
+	if err := validate.Pattern("record_type", "body", m.RecordType, `^[A-Za-z_-]*$`); err != nil {
 		return err
 	}
 

@@ -301,7 +301,7 @@ func (m *DirectDebitSubmission) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -504,7 +504,7 @@ func (m *DirectDebitSubmissionAttributes) validateFileIdentifier(formats strfmt.
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", *m.FileIdentifier, `^[0-9a-zA-Z]+$`); err != nil {
 		return err
 	}
 
@@ -517,7 +517,7 @@ func (m *DirectDebitSubmissionAttributes) validateFileNumber(formats strfmt.Regi
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", *m.FileNumber, `^[0-9]+$`); err != nil {
 		return err
 	}
 

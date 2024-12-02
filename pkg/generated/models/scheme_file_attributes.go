@@ -243,7 +243,7 @@ func (m *SchemeFileAttributes) validateFileHash(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.MinLength("file_hash", "body", string(*m.FileHash), 1); err != nil {
+	if err := validate.MinLength("file_hash", "body", *m.FileHash, 1); err != nil {
 		return err
 	}
 

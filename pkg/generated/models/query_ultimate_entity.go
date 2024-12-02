@@ -369,7 +369,7 @@ func (m *QueryUltimateEntity) validateAdditionalAddressLine(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.MaxLength("additional_address_line", "body", string(m.AdditionalAddressLine), 70); err != nil {
+	if err := validate.MaxLength("additional_address_line", "body", m.AdditionalAddressLine, 70); err != nil {
 		return err
 	}
 
@@ -382,7 +382,7 @@ func (m *QueryUltimateEntity) validateBirthCity(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("birth_city", "body", string(m.BirthCity), 35); err != nil {
+	if err := validate.MaxLength("birth_city", "body", m.BirthCity, 35); err != nil {
 		return err
 	}
 
@@ -395,7 +395,7 @@ func (m *QueryUltimateEntity) validateBirthCountry(formats strfmt.Registry) erro
 		return nil
 	}
 
-	if err := validate.Pattern("birth_country", "body", string(m.BirthCountry), `^[A-Z]{2,2}$`); err != nil {
+	if err := validate.Pattern("birth_country", "body", m.BirthCountry, `^[A-Z]{2,2}$`); err != nil {
 		return err
 	}
 
@@ -421,7 +421,7 @@ func (m *QueryUltimateEntity) validateBirthProvince(formats strfmt.Registry) err
 		return nil
 	}
 
-	if err := validate.MaxLength("birth_province", "body", string(m.BirthProvince), 35); err != nil {
+	if err := validate.MaxLength("birth_province", "body", m.BirthProvince, 35); err != nil {
 		return err
 	}
 
@@ -434,7 +434,7 @@ func (m *QueryUltimateEntity) validateBuildingNumber(formats strfmt.Registry) er
 		return nil
 	}
 
-	if err := validate.MaxLength("building_number", "body", string(m.BuildingNumber), 16); err != nil {
+	if err := validate.MaxLength("building_number", "body", m.BuildingNumber, 16); err != nil {
 		return err
 	}
 
@@ -447,7 +447,7 @@ func (m *QueryUltimateEntity) validateCity(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("city", "body", string(m.City), 35); err != nil {
+	if err := validate.MaxLength("city", "body", m.City, 35); err != nil {
 		return err
 	}
 
@@ -460,7 +460,7 @@ func (m *QueryUltimateEntity) validateCountry(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("country", "body", string(m.Country), `^[A-Z]{2,2}$`); err != nil {
+	if err := validate.Pattern("country", "body", m.Country, `^[A-Z]{2,2}$`); err != nil {
 		return err
 	}
 
@@ -473,7 +473,7 @@ func (m *QueryUltimateEntity) validateCountryOfResidence(formats strfmt.Registry
 		return nil
 	}
 
-	if err := validate.Pattern("country_of_residence", "body", string(m.CountryOfResidence), `^[A-Z]{2,2}$`); err != nil {
+	if err := validate.Pattern("country_of_residence", "body", m.CountryOfResidence, `^[A-Z]{2,2}$`); err != nil {
 		return err
 	}
 
@@ -486,7 +486,7 @@ func (m *QueryUltimateEntity) validateName(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("name", "body", string(m.Name), 140); err != nil {
+	if err := validate.MaxLength("name", "body", m.Name, 140); err != nil {
 		return err
 	}
 
@@ -499,7 +499,7 @@ func (m *QueryUltimateEntity) validateOrganisationIdentification(formats strfmt.
 		return nil
 	}
 
-	if err := validate.MaxLength("organisation_identification", "body", string(m.OrganisationIdentification), 35); err != nil {
+	if err := validate.MaxLength("organisation_identification", "body", m.OrganisationIdentification, 35); err != nil {
 		return err
 	}
 
@@ -512,7 +512,7 @@ func (m *QueryUltimateEntity) validateOrganisationIdentificationIssuer(formats s
 		return nil
 	}
 
-	if err := validate.MaxLength("organisation_identification_issuer", "body", string(m.OrganisationIdentificationIssuer), 35); err != nil {
+	if err := validate.MaxLength("organisation_identification_issuer", "body", m.OrganisationIdentificationIssuer, 35); err != nil {
 		return err
 	}
 
@@ -525,7 +525,7 @@ func (m *QueryUltimateEntity) validateOrganisationIdentificationScheme(formats s
 		return nil
 	}
 
-	if err := validate.MaxLength("organisation_identification_scheme", "body", string(m.OrganisationIdentificationScheme), 35); err != nil {
+	if err := validate.MaxLength("organisation_identification_scheme", "body", m.OrganisationIdentificationScheme, 35); err != nil {
 		return err
 	}
 
@@ -563,7 +563,7 @@ func (m *QueryUltimateEntity) validatePostCode(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("post_code", "body", string(m.PostCode), 16); err != nil {
+	if err := validate.MaxLength("post_code", "body", m.PostCode, 16); err != nil {
 		return err
 	}
 
@@ -594,7 +594,7 @@ func (m *QueryUltimateEntity) validateProvince(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("province", "body", string(m.Province), 35); err != nil {
+	if err := validate.MaxLength("province", "body", m.Province, 35); err != nil {
 		return err
 	}
 
@@ -607,7 +607,7 @@ func (m *QueryUltimateEntity) validateStreetName(formats strfmt.Registry) error 
 		return nil
 	}
 
-	if err := validate.MaxLength("street_name", "body", string(m.StreetName), 70); err != nil {
+	if err := validate.MaxLength("street_name", "body", m.StreetName, 70); err != nil {
 		return err
 	}
 

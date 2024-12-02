@@ -691,7 +691,7 @@ func (m *AccountAttributes) validateAccountNumber(formats strfmt.Registry) error
 		return nil
 	}
 
-	if err := validate.Pattern("account_number", "body", string(m.AccountNumber), `^[A-Z0-9]{0,64}$`); err != nil {
+	if err := validate.Pattern("account_number", "body", m.AccountNumber, `^[A-Z0-9]{0,64}$`); err != nil {
 		return err
 	}
 
@@ -712,11 +712,11 @@ func (m *AccountAttributes) validateAlternativeBankAccountNames(formats strfmt.R
 
 	for i := 0; i < len(m.AlternativeBankAccountNames); i++ {
 
-		if err := validate.MinLength("alternative_bank_account_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeBankAccountNames[i]), 1); err != nil {
+		if err := validate.MinLength("alternative_bank_account_names"+"."+strconv.Itoa(i), "body", m.AlternativeBankAccountNames[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("alternative_bank_account_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeBankAccountNames[i]), 140); err != nil {
+		if err := validate.MaxLength("alternative_bank_account_names"+"."+strconv.Itoa(i), "body", m.AlternativeBankAccountNames[i], 140); err != nil {
 			return err
 		}
 
@@ -739,11 +739,11 @@ func (m *AccountAttributes) validateAlternativeNames(formats strfmt.Registry) er
 
 	for i := 0; i < len(m.AlternativeNames); i++ {
 
-		if err := validate.MinLength("alternative_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeNames[i]), 1); err != nil {
+		if err := validate.MinLength("alternative_names"+"."+strconv.Itoa(i), "body", m.AlternativeNames[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("alternative_names"+"."+strconv.Itoa(i), "body", string(m.AlternativeNames[i]), 140); err != nil {
+		if err := validate.MaxLength("alternative_names"+"."+strconv.Itoa(i), "body", m.AlternativeNames[i], 140); err != nil {
 			return err
 		}
 
@@ -758,11 +758,11 @@ func (m *AccountAttributes) validateBankAccountName(formats strfmt.Registry) err
 		return nil
 	}
 
-	if err := validate.MinLength("bank_account_name", "body", string(m.BankAccountName), 1); err != nil {
+	if err := validate.MinLength("bank_account_name", "body", m.BankAccountName, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("bank_account_name", "body", string(m.BankAccountName), 140); err != nil {
+	if err := validate.MaxLength("bank_account_name", "body", m.BankAccountName, 140); err != nil {
 		return err
 	}
 
@@ -775,7 +775,7 @@ func (m *AccountAttributes) validateBankID(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("bank_id", "body", string(m.BankID), `^[A-Z0-9]{0,16}$`); err != nil {
+	if err := validate.Pattern("bank_id", "body", m.BankID, `^[A-Z0-9]{0,16}$`); err != nil {
 		return err
 	}
 
@@ -788,7 +788,7 @@ func (m *AccountAttributes) validateBankIDCode(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("bank_id_code", "body", string(m.BankIDCode), `^[A-Z]{0,16}$`); err != nil {
+	if err := validate.Pattern("bank_id_code", "body", m.BankIDCode, `^[A-Z]{0,16}$`); err != nil {
 		return err
 	}
 
@@ -801,7 +801,7 @@ func (m *AccountAttributes) validateBaseCurrency(formats strfmt.Registry) error 
 		return nil
 	}
 
-	if err := validate.Pattern("base_currency", "body", string(m.BaseCurrency), `^[A-Z]{3}$`); err != nil {
+	if err := validate.Pattern("base_currency", "body", m.BaseCurrency, `^[A-Z]{3}$`); err != nil {
 		return err
 	}
 
@@ -814,7 +814,7 @@ func (m *AccountAttributes) validateBic(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("bic", "body", string(m.Bic), `^([A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5})$`); err != nil {
+	if err := validate.Pattern("bic", "body", m.Bic, `^([A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5})$`); err != nil {
 		return err
 	}
 
@@ -827,7 +827,7 @@ func (m *AccountAttributes) validateCountry(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("country", "body", string(*m.Country), `^[A-Z]{2}$`); err != nil {
+	if err := validate.Pattern("country", "body", *m.Country, `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 
@@ -840,7 +840,7 @@ func (m *AccountAttributes) validateCustomerID(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("customer_id", "body", string(m.CustomerID), `^[a-zA-Z0-9-$@., ]{0,256}$`); err != nil {
+	if err := validate.Pattern("customer_id", "body", m.CustomerID, `^[a-zA-Z0-9-$@., ]{0,256}$`); err != nil {
 		return err
 	}
 
@@ -853,11 +853,11 @@ func (m *AccountAttributes) validateFirstName(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MinLength("first_name", "body", string(m.FirstName), 1); err != nil {
+	if err := validate.MinLength("first_name", "body", m.FirstName, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("first_name", "body", string(m.FirstName), 40); err != nil {
+	if err := validate.MaxLength("first_name", "body", m.FirstName, 40); err != nil {
 		return err
 	}
 
@@ -870,7 +870,7 @@ func (m *AccountAttributes) validateIban(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("iban", "body", string(m.Iban), `^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$`); err != nil {
+	if err := validate.Pattern("iban", "body", m.Iban, `^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$`); err != nil {
 		return err
 	}
 
@@ -891,11 +891,11 @@ func (m *AccountAttributes) validateName(formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Name); i++ {
 
-		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 1); err != nil {
+		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 140); err != nil {
+		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 140); err != nil {
 			return err
 		}
 
@@ -995,7 +995,7 @@ func (m *AccountAttributes) validateProcessingService(formats strfmt.Registry) e
 		return nil
 	}
 
-	if err := validate.MaxLength("processing_service", "body", string(*m.ProcessingService), 35); err != nil {
+	if err := validate.MaxLength("processing_service", "body", *m.ProcessingService, 35); err != nil {
 		return err
 	}
 
@@ -1008,7 +1008,7 @@ func (m *AccountAttributes) validateReferenceMask(formats strfmt.Registry) error
 		return nil
 	}
 
-	if err := validate.MaxLength("reference_mask", "body", string(*m.ReferenceMask), 35); err != nil {
+	if err := validate.MaxLength("reference_mask", "body", *m.ReferenceMask, 35); err != nil {
 		return err
 	}
 
@@ -1021,11 +1021,11 @@ func (m *AccountAttributes) validateSecondaryIdentification(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.MinLength("secondary_identification", "body", string(m.SecondaryIdentification), 1); err != nil {
+	if err := validate.MinLength("secondary_identification", "body", m.SecondaryIdentification, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("secondary_identification", "body", string(m.SecondaryIdentification), 140); err != nil {
+	if err := validate.MaxLength("secondary_identification", "body", m.SecondaryIdentification, 140); err != nil {
 		return err
 	}
 
@@ -1121,11 +1121,11 @@ func (m *AccountAttributes) validateTitle(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MinLength("title", "body", string(m.Title), 1); err != nil {
+	if err := validate.MinLength("title", "body", m.Title, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("title", "body", string(m.Title), 40); err != nil {
+	if err := validate.MaxLength("title", "body", m.Title, 40); err != nil {
 		return err
 	}
 
@@ -1138,7 +1138,7 @@ func (m *AccountAttributes) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("type", "body", string(m.Type), 35); err != nil {
+	if err := validate.MaxLength("type", "body", m.Type, 35); err != nil {
 		return err
 	}
 
@@ -1182,7 +1182,7 @@ func (m *AccountAttributes) validateUserDefinedInformation(formats strfmt.Regist
 		return nil
 	}
 
-	if err := validate.MaxLength("user_defined_information", "body", string(*m.UserDefinedInformation), 35); err != nil {
+	if err := validate.MaxLength("user_defined_information", "body", *m.UserDefinedInformation, 35); err != nil {
 		return err
 	}
 

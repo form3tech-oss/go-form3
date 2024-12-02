@@ -165,7 +165,7 @@ func (m *MandateAttributesBeneficiaryParty) validateAccountNumber(formats strfmt
 		return nil
 	}
 
-	if err := validate.Pattern("account_number", "body", string(m.AccountNumber), `^[A-Z0-9]{6,34}$`); err != nil {
+	if err := validate.Pattern("account_number", "body", m.AccountNumber, `^[A-Z0-9]{6,34}$`); err != nil {
 		return err
 	}
 

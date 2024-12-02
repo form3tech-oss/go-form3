@@ -76,7 +76,7 @@ func (m *FinCrimePaymentCheckAgentAccountWithBankID) validateBankID(formats strf
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_id", "body", string(m.BankID), 30); err != nil {
+	if err := validate.MaxLength("bank_id", "body", m.BankID, 30); err != nil {
 		return err
 	}
 
@@ -89,7 +89,7 @@ func (m *FinCrimePaymentCheckAgentAccountWithBankID) validateBankIDCode(formats 
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_id_code", "body", string(m.BankIDCode), 5); err != nil {
+	if err := validate.MaxLength("bank_id_code", "body", m.BankIDCode, 5); err != nil {
 		return err
 	}
 

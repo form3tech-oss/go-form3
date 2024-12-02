@@ -103,7 +103,7 @@ func (m *BeneficiaryDebtorAccountProxy) validateProxy(formats strfmt.Registry) e
 		return nil
 	}
 
-	if err := validate.MaxLength("proxy", "body", string(*m.Proxy), 35); err != nil {
+	if err := validate.MaxLength("proxy", "body", *m.Proxy, 35); err != nil {
 		return err
 	}
 
@@ -116,7 +116,7 @@ func (m *BeneficiaryDebtorAccountProxy) validateProxyID(formats strfmt.Registry)
 		return nil
 	}
 
-	if err := validate.MaxLength("proxy_id", "body", string(m.ProxyID), 2048); err != nil {
+	if err := validate.MaxLength("proxy_id", "body", m.ProxyID, 2048); err != nil {
 		return err
 	}
 
@@ -129,7 +129,7 @@ func (m *BeneficiaryDebtorAccountProxy) validateProxyIDCode(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.MaxLength("proxy_id_code", "body", string(*m.ProxyIDCode), 4); err != nil {
+	if err := validate.MaxLength("proxy_id_code", "body", *m.ProxyIDCode, 4); err != nil {
 		return err
 	}
 

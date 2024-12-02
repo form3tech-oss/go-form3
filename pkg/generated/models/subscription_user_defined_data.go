@@ -90,11 +90,11 @@ func (m *SubscriptionUserDefinedData) validateKey(formats strfmt.Registry) error
 		return err
 	}
 
-	if err := validate.MinLength("key", "body", string(*m.Key), 1); err != nil {
+	if err := validate.MinLength("key", "body", *m.Key, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("key", "body", string(*m.Key), 45); err != nil {
+	if err := validate.MaxLength("key", "body", *m.Key, 45); err != nil {
 		return err
 	}
 
@@ -107,11 +107,11 @@ func (m *SubscriptionUserDefinedData) validateValue(formats strfmt.Registry) err
 		return err
 	}
 
-	if err := validate.MinLength("value", "body", string(*m.Value), 1); err != nil {
+	if err := validate.MinLength("value", "body", *m.Value, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("value", "body", string(*m.Value), 45); err != nil {
+	if err := validate.MaxLength("value", "body", *m.Value, 45); err != nil {
 		return err
 	}
 

@@ -105,7 +105,7 @@ func (m *QueryBeneficiaryDebtorOrganisationIdentification) validateIdentificatio
 		return nil
 	}
 
-	if err := validate.MaxLength("identification", "body", string(m.Identification), 35); err != nil {
+	if err := validate.MaxLength("identification", "body", m.Identification, 35); err != nil {
 		return err
 	}
 
@@ -118,7 +118,7 @@ func (m *QueryBeneficiaryDebtorOrganisationIdentification) validateIdentificatio
 		return nil
 	}
 
-	if err := validate.MaxLength("identification_issuer", "body", string(m.IdentificationIssuer), 35); err != nil {
+	if err := validate.MaxLength("identification_issuer", "body", m.IdentificationIssuer, 35); err != nil {
 		return err
 	}
 
@@ -131,7 +131,7 @@ func (m *QueryBeneficiaryDebtorOrganisationIdentification) validateIdentificatio
 		return nil
 	}
 
-	if err := validate.MaxLength("identification_scheme", "body", string(m.IdentificationScheme), 35); err != nil {
+	if err := validate.MaxLength("identification_scheme", "body", m.IdentificationScheme, 35); err != nil {
 		return err
 	}
 

@@ -301,7 +301,7 @@ func (m *PaymentAdmission) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -648,7 +648,7 @@ func (m *PaymentAdmissionAttributes) validateClearingSystem(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", string(m.ClearingSystem), `^[0-9A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", m.ClearingSystem, `^[0-9A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -720,7 +720,7 @@ func (m *PaymentAdmissionAttributes) validateSchemeReceivedDatetime(formats strf
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"scheme_received_datetime", "body", string(*m.SchemeReceivedDatetime), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"scheme_received_datetime", "body", m.SchemeReceivedDatetime.String(), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
 		return err
 	}
 
@@ -795,7 +795,7 @@ func (m *PaymentAdmissionAttributes) validateValidationCompletedDatetime(formats
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"validation_completed_datetime", "body", string(*m.ValidationCompletedDatetime), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"validation_completed_datetime", "body", m.ValidationCompletedDatetime.String(), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
 		return err
 	}
 

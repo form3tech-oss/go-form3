@@ -263,7 +263,7 @@ func (m *Subscription) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z]*$`); err != nil {
 		return err
 	}
 

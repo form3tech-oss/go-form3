@@ -334,7 +334,7 @@ func (m *MandateSubmissionCreationData) validateType(formats strfmt.Registry) er
 		return nil
 	}
 
-	if err := validate.Pattern("data"+"."+"type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("data"+"."+"type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -538,7 +538,7 @@ func (m *MandateSubmissionCreationDataAttributes) validateFileIdentifier(formats
 		return nil
 	}
 
-	if err := validate.Pattern("data"+"."+"attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+	if err := validate.Pattern("data"+"."+"attributes"+"."+"file_identifier", "body", *m.FileIdentifier, `^[0-9a-zA-Z]+$`); err != nil {
 		return err
 	}
 
@@ -551,7 +551,7 @@ func (m *MandateSubmissionCreationDataAttributes) validateFileNumber(formats str
 		return nil
 	}
 
-	if err := validate.Pattern("data"+"."+"attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+	if err := validate.Pattern("data"+"."+"attributes"+"."+"file_number", "body", *m.FileNumber, `^[0-9]+$`); err != nil {
 		return err
 	}
 

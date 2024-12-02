@@ -303,7 +303,7 @@ func (m *DirectDebitReturnReversalAdmission) validateType(formats strfmt.Registr
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -420,7 +420,7 @@ func (m *DirectDebitReturnReversalAdmissionAttributes) validateSchemeStatusCode(
 		return err
 	}
 
-	if err := validate.MinLength("attributes"+"."+"scheme_status_code", "body", string(*m.SchemeStatusCode), 1); err != nil {
+	if err := validate.MinLength("attributes"+"."+"scheme_status_code", "body", *m.SchemeStatusCode, 1); err != nil {
 		return err
 	}
 
@@ -433,7 +433,7 @@ func (m *DirectDebitReturnReversalAdmissionAttributes) validateSchemeStatusCodeD
 		return err
 	}
 
-	if err := validate.MinLength("attributes"+"."+"scheme_status_code_description", "body", string(*m.SchemeStatusCodeDescription), 1); err != nil {
+	if err := validate.MinLength("attributes"+"."+"scheme_status_code_description", "body", *m.SchemeStatusCodeDescription, 1); err != nil {
 		return err
 	}
 

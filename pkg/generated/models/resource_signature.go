@@ -132,7 +132,7 @@ func (m *ResourceSignature) validateReferences(formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.References); i++ {
 
-		if err := validate.MaxLength("references"+"."+strconv.Itoa(i), "body", string(m.References[i]), 50); err != nil {
+		if err := validate.MaxLength("references"+"."+strconv.Itoa(i), "body", m.References[i], 50); err != nil {
 			return err
 		}
 
@@ -187,7 +187,7 @@ func (m *ResourceSignature) validateSignature(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("signature", "body", string(m.Signature), 300); err != nil {
+	if err := validate.MaxLength("signature", "body", m.Signature, 300); err != nil {
 		return err
 	}
 

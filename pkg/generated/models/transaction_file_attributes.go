@@ -284,7 +284,7 @@ func (m *TransactionFileAttributes) validateFileHash(formats strfmt.Registry) er
 		return err
 	}
 
-	if err := validate.MinLength("file_hash", "body", string(*m.FileHash), 1); err != nil {
+	if err := validate.MinLength("file_hash", "body", *m.FileHash, 1); err != nil {
 		return err
 	}
 
@@ -416,7 +416,7 @@ func (m *TransactionFileAttributes) validateTransactionSum(formats strfmt.Regist
 		return nil
 	}
 
-	if err := validate.Pattern("transaction_sum", "body", string(m.TransactionSum), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("transaction_sum", "body", m.TransactionSum, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

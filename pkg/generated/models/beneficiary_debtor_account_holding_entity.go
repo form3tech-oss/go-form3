@@ -267,7 +267,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankAdditionalAddressLin
 
 	for i := 0; i < len(m.BankAdditionalAddressLine); i++ {
 
-		if err := validate.MaxLength("bank_additional_address_line"+"."+strconv.Itoa(i), "body", string(m.BankAdditionalAddressLine[i]), 35); err != nil {
+		if err := validate.MaxLength("bank_additional_address_line"+"."+strconv.Itoa(i), "body", m.BankAdditionalAddressLine[i], 35); err != nil {
 			return err
 		}
 
@@ -282,7 +282,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankBuildingNumber(forma
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_building_number", "body", string(m.BankBuildingNumber), 16); err != nil {
+	if err := validate.MaxLength("bank_building_number", "body", m.BankBuildingNumber, 16); err != nil {
 		return err
 	}
 
@@ -295,7 +295,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankCity(formats strfmt.
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_city", "body", string(m.BankCity), 35); err != nil {
+	if err := validate.MaxLength("bank_city", "body", m.BankCity, 35); err != nil {
 		return err
 	}
 
@@ -308,7 +308,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankCountry(formats strf
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_country", "body", string(m.BankCountry), 2); err != nil {
+	if err := validate.MaxLength("bank_country", "body", m.BankCountry, 2); err != nil {
 		return err
 	}
 
@@ -346,7 +346,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankPostCode(formats str
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_post_code", "body", string(m.BankPostCode), 16); err != nil {
+	if err := validate.MaxLength("bank_post_code", "body", m.BankPostCode, 16); err != nil {
 		return err
 	}
 
@@ -377,7 +377,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankProvince(formats str
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_province", "body", string(m.BankProvince), 35); err != nil {
+	if err := validate.MaxLength("bank_province", "body", m.BankProvince, 35); err != nil {
 		return err
 	}
 
@@ -390,7 +390,7 @@ func (m *BeneficiaryDebtorAccountHoldingEntity) validateBankStreetName(formats s
 		return nil
 	}
 
-	if err := validate.MaxLength("bank_street_name", "body", string(m.BankStreetName), 70); err != nil {
+	if err := validate.MaxLength("bank_street_name", "body", m.BankStreetName, 70); err != nil {
 		return err
 	}
 

@@ -301,7 +301,7 @@ func (m *PaymentSubmission) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -726,7 +726,7 @@ func (m *PaymentSubmissionAttributes) validateClearingSystem(formats strfmt.Regi
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", string(m.ClearingSystem), `^[0-9A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", m.ClearingSystem, `^[0-9A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -739,7 +739,7 @@ func (m *PaymentSubmissionAttributes) validateFileIdentifier(formats strfmt.Regi
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", *m.FileIdentifier, `^[0-9a-zA-Z]+$`); err != nil {
 		return err
 	}
 
@@ -752,7 +752,7 @@ func (m *PaymentSubmissionAttributes) validateFileNumber(formats strfmt.Registry
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", *m.FileNumber, `^[0-9]+$`); err != nil {
 		return err
 	}
 
@@ -850,7 +850,7 @@ func (m *PaymentSubmissionAttributes) validateSchemeResponseReceivedDatetime(for
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"scheme_response_received_datetime", "body", string(*m.SchemeResponseReceivedDatetime), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"scheme_response_received_datetime", "body", m.SchemeResponseReceivedDatetime.String(), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
 		return err
 	}
 
@@ -867,7 +867,7 @@ func (m *PaymentSubmissionAttributes) validateSchemeSentDatetime(formats strfmt.
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"scheme_sent_datetime", "body", string(*m.SchemeSentDatetime), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"scheme_sent_datetime", "body", m.SchemeSentDatetime.String(), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
 		return err
 	}
 

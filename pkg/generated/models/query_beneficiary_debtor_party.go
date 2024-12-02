@@ -369,7 +369,7 @@ func (m *QueryBeneficiaryDebtorParty) validateAccountNumber(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.MaxLength("account_number", "body", string(m.AccountNumber), 34); err != nil {
+	if err := validate.MaxLength("account_number", "body", m.AccountNumber, 34); err != nil {
 		return err
 	}
 
@@ -586,7 +586,7 @@ func (m *QueryBeneficiaryDebtorPartyAccountWith) validateBankID(formats strfmt.R
 		return nil
 	}
 
-	if err := validate.MaxLength("account_with"+"."+"bank_id", "body", string(m.BankID), 35); err != nil {
+	if err := validate.MaxLength("account_with"+"."+"bank_id", "body", m.BankID, 35); err != nil {
 		return err
 	}
 
@@ -599,7 +599,7 @@ func (m *QueryBeneficiaryDebtorPartyAccountWith) validateBankIDCode(formats strf
 		return nil
 	}
 
-	if err := validate.MaxLength("account_with"+"."+"bank_id_code", "body", string(m.BankIDCode), 5); err != nil {
+	if err := validate.MaxLength("account_with"+"."+"bank_id_code", "body", m.BankIDCode, 5); err != nil {
 		return err
 	}
 
@@ -612,7 +612,7 @@ func (m *QueryBeneficiaryDebtorPartyAccountWith) validateBankName(formats strfmt
 		return nil
 	}
 
-	if err := validate.MaxLength("account_with"+"."+"bank_name", "body", string(m.BankName), 140); err != nil {
+	if err := validate.MaxLength("account_with"+"."+"bank_name", "body", m.BankName, 140); err != nil {
 		return err
 	}
 

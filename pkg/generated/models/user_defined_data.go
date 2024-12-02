@@ -88,7 +88,7 @@ func (m *UserDefinedData) validateKey(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.MinLength("key", "body", string(*m.Key), 1); err != nil {
+	if err := validate.MinLength("key", "body", *m.Key, 1); err != nil {
 		return err
 	}
 
@@ -101,7 +101,7 @@ func (m *UserDefinedData) validateValue(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.MinLength("value", "body", string(*m.Value), 1); err != nil {
+	if err := validate.MinLength("value", "body", *m.Value, 1); err != nil {
 		return err
 	}
 
