@@ -350,6 +350,9 @@ func (m *ReturnSubmissionFetch) Json() string {
 // swagger:model ReturnSubmissionFetchAttributes
 type ReturnSubmissionFetchAttributes struct {
 
+	// Indicates if the submission was created automatically by the system (true) or manually (false)
+	Auto *bool `json:"auto,omitempty"`
+
 	// Identification code of the file sent to scheme.
 	// Pattern: ^[0-9a-zA-Z]+$
 	FileIdentifier *string `json:"file_identifier,omitempty"`
@@ -418,6 +421,8 @@ type ReturnSubmissionFetchAttributes struct {
 func ReturnSubmissionFetchAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionFetchAttributes {
 	return &ReturnSubmissionFetchAttributes{
 
+		Auto: defaults.GetBoolPtr("ReturnSubmissionFetchAttributes", "auto"),
+
 		FileIdentifier: defaults.GetStringPtr("ReturnSubmissionFetchAttributes", "file_identifier"),
 
 		FileNumber: defaults.GetStringPtr("ReturnSubmissionFetchAttributes", "file_number"),
@@ -452,6 +457,18 @@ func ReturnSubmissionFetchAttributesWithDefaults(defaults client.Defaults) *Retu
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionFetchAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *ReturnSubmissionFetchAttributes) WithAuto(auto bool) *ReturnSubmissionFetchAttributes {
+
+	m.Auto = &auto
+
+	return m
+}
+
+func (m *ReturnSubmissionFetchAttributes) WithoutAuto() *ReturnSubmissionFetchAttributes {
+	m.Auto = nil
+	return m
 }
 
 func (m *ReturnSubmissionFetchAttributes) WithFileIdentifier(fileIdentifier string) *ReturnSubmissionFetchAttributes {

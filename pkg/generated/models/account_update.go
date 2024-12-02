@@ -291,7 +291,7 @@ type AccountUpdateAttributes struct {
 	AccountClassification string `json:"account_classification,omitempty"`
 
 	// - deprecated - Is the account opted out of account matching, e.g. CoP?
-	AccountMatchingOptOut bool `json:"account_matching_opt_out,omitempty"`
+	AccountMatchingOptOut *bool `json:"account_matching_opt_out,omitempty"`
 
 	// Account number of the account. A unique number will automatically be generated if not provided.
 	// Pattern: ^[A-Z0-9]{0,64}$
@@ -344,7 +344,7 @@ type AccountUpdateAttributes struct {
 	Iban string `json:"iban,omitempty"`
 
 	// Is the account joint?
-	JointAccount bool `json:"joint_account,omitempty"`
+	JointAccount *bool `json:"joint_account,omitempty"`
 
 	// Account holder names (for example title, first name, last name). Used for Confirmation of Payee matching.
 	// Max Items: 4
@@ -362,11 +362,11 @@ type AccountUpdateAttributes struct {
 
 	// - deprecated - Accounting system or service. It will be added to each payment received to an account.
 	// Max Length: 35
-	ProcessingService string `json:"processing_service,omitempty"`
+	ProcessingService *string `json:"processing_service,omitempty"`
 
 	// When set will apply a validation mask on the payment reference to each payment received to an account.
 	// Max Length: 35
-	ReferenceMask string `json:"reference_mask,omitempty"`
+	ReferenceMask *string `json:"reference_mask,omitempty"`
 
 	// Secondary identification, e.g. building society roll number. Used for Confirmation of Payee.
 	// Max Length: 140
@@ -381,7 +381,7 @@ type AccountUpdateAttributes struct {
 	StatusReason StatusReason `json:"status_reason,omitempty"`
 
 	// - deprecated - Indicates whether the account has been switched using the Current Account Switch Service.
-	Switched bool `json:"switched,omitempty"`
+	Switched *bool `json:"switched,omitempty"`
 
 	// switched account details
 	SwitchedAccountDetails *SwitchedAccountDetails `json:"switched_account_details,omitempty"`
@@ -393,7 +393,7 @@ type AccountUpdateAttributes struct {
 
 	// Account type
 	// Max Length: 35
-	Type string `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
 
 	// All purpose list of key-value pairs to store specific data for the associated account. It will be added to each payment received to an account.
 	// Max Items: 5
@@ -401,7 +401,7 @@ type AccountUpdateAttributes struct {
 
 	// - deprecated - All purpose field to store specific data for the associated account. It will be added to each payment received to an account.
 	// Max Length: 35
-	UserDefinedInformation string `json:"user_defined_information,omitempty"`
+	UserDefinedInformation *string `json:"user_defined_information,omitempty"`
 
 	// validation type
 	ValidationType ValidationType `json:"validation_type,omitempty"`
@@ -414,7 +414,7 @@ func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdat
 
 		AccountClassification: defaults.GetString("AccountUpdateAttributes", "account_classification"),
 
-		AccountMatchingOptOut: defaults.GetBool("AccountUpdateAttributes", "account_matching_opt_out"),
+		AccountMatchingOptOut: defaults.GetBoolPtr("AccountUpdateAttributes", "account_matching_opt_out"),
 
 		AccountNumber: defaults.GetString("AccountUpdateAttributes", "account_number"),
 
@@ -440,7 +440,7 @@ func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdat
 
 		Iban: defaults.GetString("AccountUpdateAttributes", "iban"),
 
-		JointAccount: defaults.GetBool("AccountUpdateAttributes", "joint_account"),
+		JointAccount: defaults.GetBoolPtr("AccountUpdateAttributes", "joint_account"),
 
 		Name: make([]string, 0),
 
@@ -450,9 +450,9 @@ func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdat
 
 		PrivateIdentification: AccountAttributesPrivateIdentificationWithDefaults(defaults),
 
-		ProcessingService: defaults.GetString("AccountUpdateAttributes", "processing_service"),
+		ProcessingService: defaults.GetStringPtr("AccountUpdateAttributes", "processing_service"),
 
-		ReferenceMask: defaults.GetString("AccountUpdateAttributes", "reference_mask"),
+		ReferenceMask: defaults.GetStringPtr("AccountUpdateAttributes", "reference_mask"),
 
 		SecondaryIdentification: defaults.GetString("AccountUpdateAttributes", "secondary_identification"),
 
@@ -460,17 +460,17 @@ func AccountUpdateAttributesWithDefaults(defaults client.Defaults) *AccountUpdat
 
 		// TODO StatusReason: StatusReason,
 
-		Switched: defaults.GetBool("AccountUpdateAttributes", "switched"),
+		Switched: defaults.GetBoolPtr("AccountUpdateAttributes", "switched"),
 
 		SwitchedAccountDetails: SwitchedAccountDetailsWithDefaults(defaults),
 
 		Title: defaults.GetString("AccountUpdateAttributes", "title"),
 
-		Type: defaults.GetString("AccountUpdateAttributes", "type"),
+		Type: defaults.GetStringPtr("AccountUpdateAttributes", "type"),
 
 		UserDefinedData: make([]*UserDefinedData, 0),
 
-		UserDefinedInformation: defaults.GetString("AccountUpdateAttributes", "user_defined_information"),
+		UserDefinedInformation: defaults.GetStringPtr("AccountUpdateAttributes", "user_defined_information"),
 
 		// TODO ValidationType: ValidationType,
 
@@ -493,8 +493,13 @@ func (m *AccountUpdateAttributes) WithAccountClassification(accountClassificatio
 
 func (m *AccountUpdateAttributes) WithAccountMatchingOptOut(accountMatchingOptOut bool) *AccountUpdateAttributes {
 
-	m.AccountMatchingOptOut = accountMatchingOptOut
+	m.AccountMatchingOptOut = &accountMatchingOptOut
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutAccountMatchingOptOut() *AccountUpdateAttributes {
+	m.AccountMatchingOptOut = nil
 	return m
 }
 
@@ -584,8 +589,13 @@ func (m *AccountUpdateAttributes) WithIban(iban string) *AccountUpdateAttributes
 
 func (m *AccountUpdateAttributes) WithJointAccount(jointAccount bool) *AccountUpdateAttributes {
 
-	m.JointAccount = jointAccount
+	m.JointAccount = &jointAccount
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutJointAccount() *AccountUpdateAttributes {
+	m.JointAccount = nil
 	return m
 }
 
@@ -629,15 +639,25 @@ func (m *AccountUpdateAttributes) WithoutPrivateIdentification() *AccountUpdateA
 
 func (m *AccountUpdateAttributes) WithProcessingService(processingService string) *AccountUpdateAttributes {
 
-	m.ProcessingService = processingService
+	m.ProcessingService = &processingService
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutProcessingService() *AccountUpdateAttributes {
+	m.ProcessingService = nil
 	return m
 }
 
 func (m *AccountUpdateAttributes) WithReferenceMask(referenceMask string) *AccountUpdateAttributes {
 
-	m.ReferenceMask = referenceMask
+	m.ReferenceMask = &referenceMask
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutReferenceMask() *AccountUpdateAttributes {
+	m.ReferenceMask = nil
 	return m
 }
 
@@ -664,8 +684,13 @@ func (m *AccountUpdateAttributes) WithStatusReason(statusReason StatusReason) *A
 
 func (m *AccountUpdateAttributes) WithSwitched(switched bool) *AccountUpdateAttributes {
 
-	m.Switched = switched
+	m.Switched = &switched
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutSwitched() *AccountUpdateAttributes {
+	m.Switched = nil
 	return m
 }
 
@@ -690,8 +715,13 @@ func (m *AccountUpdateAttributes) WithTitle(title string) *AccountUpdateAttribut
 
 func (m *AccountUpdateAttributes) WithType(typeVar string) *AccountUpdateAttributes {
 
-	m.Type = typeVar
+	m.Type = &typeVar
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutType() *AccountUpdateAttributes {
+	m.Type = nil
 	return m
 }
 
@@ -704,8 +734,13 @@ func (m *AccountUpdateAttributes) WithUserDefinedData(userDefinedData []*UserDef
 
 func (m *AccountUpdateAttributes) WithUserDefinedInformation(userDefinedInformation string) *AccountUpdateAttributes {
 
-	m.UserDefinedInformation = userDefinedInformation
+	m.UserDefinedInformation = &userDefinedInformation
 
+	return m
+}
+
+func (m *AccountUpdateAttributes) WithoutUserDefinedInformation() *AccountUpdateAttributes {
+	m.UserDefinedInformation = nil
 	return m
 }
 
@@ -1211,7 +1246,7 @@ func (m *AccountUpdateAttributes) validateProcessingService(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.MaxLength("attributes"+"."+"processing_service", "body", string(m.ProcessingService), 35); err != nil {
+	if err := validate.MaxLength("attributes"+"."+"processing_service", "body", string(*m.ProcessingService), 35); err != nil {
 		return err
 	}
 
@@ -1224,7 +1259,7 @@ func (m *AccountUpdateAttributes) validateReferenceMask(formats strfmt.Registry)
 		return nil
 	}
 
-	if err := validate.MaxLength("attributes"+"."+"reference_mask", "body", string(m.ReferenceMask), 35); err != nil {
+	if err := validate.MaxLength("attributes"+"."+"reference_mask", "body", string(*m.ReferenceMask), 35); err != nil {
 		return err
 	}
 
@@ -1354,7 +1389,7 @@ func (m *AccountUpdateAttributes) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("attributes"+"."+"type", "body", string(m.Type), 35); err != nil {
+	if err := validate.MaxLength("attributes"+"."+"type", "body", string(*m.Type), 35); err != nil {
 		return err
 	}
 
@@ -1398,7 +1433,7 @@ func (m *AccountUpdateAttributes) validateUserDefinedInformation(formats strfmt.
 		return nil
 	}
 
-	if err := validate.MaxLength("attributes"+"."+"user_defined_information", "body", string(m.UserDefinedInformation), 35); err != nil {
+	if err := validate.MaxLength("attributes"+"."+"user_defined_information", "body", string(*m.UserDefinedInformation), 35); err != nil {
 		return err
 	}
 

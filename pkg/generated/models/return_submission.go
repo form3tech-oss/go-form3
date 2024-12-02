@@ -350,6 +350,9 @@ func (m *ReturnSubmission) Json() string {
 // swagger:model ReturnSubmissionAttributes
 type ReturnSubmissionAttributes struct {
 
+	// Indicates if the submission was created automatically by the system (true) or manually (false)
+	Auto *bool `json:"auto,omitempty"`
+
 	// Identification code of the file sent to scheme.
 	// Pattern: ^[0-9a-zA-Z]+$
 	FileIdentifier *string `json:"file_identifier,omitempty"`
@@ -418,6 +421,8 @@ type ReturnSubmissionAttributes struct {
 func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionAttributes {
 	return &ReturnSubmissionAttributes{
 
+		Auto: defaults.GetBoolPtr("ReturnSubmissionAttributes", "auto"),
+
 		FileIdentifier: defaults.GetStringPtr("ReturnSubmissionAttributes", "file_identifier"),
 
 		FileNumber: defaults.GetStringPtr("ReturnSubmissionAttributes", "file_number"),
@@ -452,6 +457,18 @@ func ReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *ReturnSub
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *ReturnSubmissionAttributes) WithAuto(auto bool) *ReturnSubmissionAttributes {
+
+	m.Auto = &auto
+
+	return m
+}
+
+func (m *ReturnSubmissionAttributes) WithoutAuto() *ReturnSubmissionAttributes {
+	m.Auto = nil
+	return m
 }
 
 func (m *ReturnSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *ReturnSubmissionAttributes {

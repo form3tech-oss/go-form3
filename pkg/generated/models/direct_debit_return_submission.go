@@ -351,6 +351,9 @@ func (m *DirectDebitReturnSubmission) Json() string {
 // swagger:model DirectDebitReturnSubmissionAttributes
 type DirectDebitReturnSubmissionAttributes struct {
 
+	// Indicates if the submission was created automatically by the system (true) or manually (false)
+	Auto *bool `json:"auto,omitempty"`
+
 	// file identifier
 	// Pattern: ^[0-9a-zA-Z]+$
 	FileIdentifier *string `json:"file_identifier,omitempty"`
@@ -385,6 +388,8 @@ type DirectDebitReturnSubmissionAttributes struct {
 func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionAttributes {
 	return &DirectDebitReturnSubmissionAttributes{
 
+		Auto: defaults.GetBoolPtr("DirectDebitReturnSubmissionAttributes", "auto"),
+
 		FileIdentifier: defaults.GetStringPtr("DirectDebitReturnSubmissionAttributes", "file_identifier"),
 
 		FileNumber: defaults.GetStringPtr("DirectDebitReturnSubmissionAttributes", "file_number"),
@@ -401,6 +406,18 @@ func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults)
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("DirectDebitReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithAuto(auto bool) *DirectDebitReturnSubmissionAttributes {
+
+	m.Auto = &auto
+
+	return m
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithoutAuto() *DirectDebitReturnSubmissionAttributes {
+	m.Auto = nil
+	return m
 }
 
 func (m *DirectDebitReturnSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *DirectDebitReturnSubmissionAttributes {

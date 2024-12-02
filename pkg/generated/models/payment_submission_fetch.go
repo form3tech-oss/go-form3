@@ -388,6 +388,16 @@ type PaymentSubmissionFetchAttributes struct {
 	// Enum: ["on_us","xp"]
 	Route string `json:"route,omitempty"`
 
+	// Date and time the final response to the outbound payment was received. Supports RFC3339 Nano
+	// Pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$
+	// Format: date-time
+	SchemeResponseReceivedDatetime *strfmt.DateTime `json:"scheme_response_received_datetime,omitempty"`
+
+	// Date and time the outbound payment was sent, or queued for internal throttling. Supports RFC3339 Nano
+	// Pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$
+	// Format: date-time
+	SchemeSentDatetime *strfmt.DateTime `json:"scheme_sent_datetime,omitempty"`
+
 	// Scheme-specific status (if submission has been submitted to a scheme)
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -441,6 +451,10 @@ func PaymentSubmissionFetchAttributesWithDefaults(defaults client.Defaults) *Pay
 		ReferenceID: defaults.GetString("PaymentSubmissionFetchAttributes", "reference_id"),
 
 		Route: defaults.GetString("PaymentSubmissionFetchAttributes", "route"),
+
+		SchemeResponseReceivedDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionFetchAttributes", "scheme_response_received_datetime"),
+
+		SchemeSentDatetime: defaults.GetStrfmtDateTimePtr("PaymentSubmissionFetchAttributes", "scheme_sent_datetime"),
 
 		SchemeStatusCode: defaults.GetString("PaymentSubmissionFetchAttributes", "scheme_status_code"),
 
@@ -550,6 +564,30 @@ func (m *PaymentSubmissionFetchAttributes) WithRoute(route string) *PaymentSubmi
 	return m
 }
 
+func (m *PaymentSubmissionFetchAttributes) WithSchemeResponseReceivedDatetime(schemeResponseReceivedDatetime strfmt.DateTime) *PaymentSubmissionFetchAttributes {
+
+	m.SchemeResponseReceivedDatetime = &schemeResponseReceivedDatetime
+
+	return m
+}
+
+func (m *PaymentSubmissionFetchAttributes) WithoutSchemeResponseReceivedDatetime() *PaymentSubmissionFetchAttributes {
+	m.SchemeResponseReceivedDatetime = nil
+	return m
+}
+
+func (m *PaymentSubmissionFetchAttributes) WithSchemeSentDatetime(schemeSentDatetime strfmt.DateTime) *PaymentSubmissionFetchAttributes {
+
+	m.SchemeSentDatetime = &schemeSentDatetime
+
+	return m
+}
+
+func (m *PaymentSubmissionFetchAttributes) WithoutSchemeSentDatetime() *PaymentSubmissionFetchAttributes {
+	m.SchemeSentDatetime = nil
+	return m
+}
+
 func (m *PaymentSubmissionFetchAttributes) WithSchemeStatusCode(schemeStatusCode string) *PaymentSubmissionFetchAttributes {
 
 	m.SchemeStatusCode = schemeStatusCode
@@ -645,6 +683,14 @@ func (m *PaymentSubmissionFetchAttributes) Validate(formats strfmt.Registry) err
 	}
 
 	if err := m.validateRoute(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeResponseReceivedDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSchemeSentDatetime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -792,6 +838,40 @@ func (m *PaymentSubmissionFetchAttributes) validateRoute(formats strfmt.Registry
 
 	// value enum
 	if err := m.validateRouteEnum("attributes"+"."+"route", "body", m.Route); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionFetchAttributes) validateSchemeResponseReceivedDatetime(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeResponseReceivedDatetime) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_response_received_datetime", "body", string(*m.SchemeResponseReceivedDatetime), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"scheme_response_received_datetime", "body", "date-time", m.SchemeResponseReceivedDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentSubmissionFetchAttributes) validateSchemeSentDatetime(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeSentDatetime) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_sent_datetime", "body", string(*m.SchemeSentDatetime), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"scheme_sent_datetime", "body", "date-time", m.SchemeSentDatetime.String(), formats); err != nil {
 		return err
 	}
 

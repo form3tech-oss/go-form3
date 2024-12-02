@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
@@ -45,6 +46,10 @@ type NewPayment struct {
 	// relationships
 	Relationships *NewPaymentRelationships `json:"relationships,omitempty"`
 
+	// signatures
+	// Max Items: 1
+	Signatures []*ResourceSignature `json:"signatures,omitempty"`
+
 	// Name of the resource type
 	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
@@ -68,6 +73,8 @@ func NewPaymentWithDefaults(defaults client.Defaults) *NewPayment {
 		OrganisationID: defaults.GetStrfmtUUIDPtr("NewPayment", "organisation_id"),
 
 		Relationships: NewPaymentRelationshipsWithDefaults(defaults),
+
+		Signatures: make([]*ResourceSignature, 0),
 
 		Type: defaults.GetString("NewPayment", "type"),
 
@@ -147,6 +154,13 @@ func (m *NewPayment) WithoutRelationships() *NewPayment {
 	return m
 }
 
+func (m *NewPayment) WithSignatures(signatures []*ResourceSignature) *NewPayment {
+
+	m.Signatures = signatures
+
+	return m
+}
+
 func (m *NewPayment) WithType(typeVar string) *NewPayment {
 
 	m.Type = typeVar
@@ -191,6 +205,10 @@ func (m *NewPayment) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRelationships(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSignatures(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -291,6 +309,37 @@ func (m *NewPayment) validateRelationships(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *NewPayment) validateSignatures(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Signatures) { // not required
+		return nil
+	}
+
+	iSignaturesSize := int64(len(m.Signatures))
+
+	if err := validate.MaxItems("signatures", "body", iSignaturesSize, 1); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Signatures); i++ {
+		if swag.IsZero(m.Signatures[i]) { // not required
+			continue
+		}
+
+		if m.Signatures[i] != nil {
+			if err := m.Signatures[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("signatures" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

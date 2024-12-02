@@ -37,11 +37,11 @@ type AccountAttributes struct {
 
 	// - deprecated - Alternative account names. Used for Confirmation of Payee matching.
 	// Max Items: 3
-	AlternativeBankAccountNames []string `json:"alternative_bank_account_names"`
+	AlternativeBankAccountNames []string `json:"alternative_bank_account_names,omitempty"`
 
 	// Alternative names. Used for Confirmation of Payee matching.
 	// Max Items: 3
-	AlternativeNames []string `json:"alternative_names"`
+	AlternativeNames []string `json:"alternative_names,omitempty"`
 
 	// - deprecated - Primary account name. Used for Confirmation of Payee matching. Required if confirmation_of_payee_enabled is true for the organisation.
 	// Max Length: 140
@@ -87,7 +87,7 @@ type AccountAttributes struct {
 
 	// Account holder names (for example title, first name, last name). Used for Confirmation of Payee matching.
 	// Max Items: 4
-	Name []string `json:"name"`
+	Name []string `json:"name,omitempty"`
 
 	// Describes the status of the account for name matching via CoP. The value determines the code with which Form3 responds to matched CoP requests to this account.
 	// Enum: ["supported","switched","opted_out","not_supported"]
@@ -101,11 +101,11 @@ type AccountAttributes struct {
 
 	// - deprecated - Accounting system or service. It will be added to each payment received to an account.
 	// Max Length: 35
-	ProcessingService string `json:"processing_service,omitempty"`
+	ProcessingService *string `json:"processing_service,omitempty"`
 
 	// When set will apply a validation mask on the payment reference to each payment received to an account.
 	// Max Length: 35
-	ReferenceMask string `json:"reference_mask,omitempty"`
+	ReferenceMask *string `json:"reference_mask,omitempty"`
 
 	// Secondary identification, e.g. building society roll number. Used for Confirmation of Payee.
 	// Max Length: 140
@@ -140,7 +140,7 @@ type AccountAttributes struct {
 
 	// - deprecated - All purpose field to store specific data for the associated account. It will be added to each payment received to an account.
 	// Max Length: 35
-	UserDefinedInformation string `json:"user_defined_information,omitempty"`
+	UserDefinedInformation *string `json:"user_defined_information,omitempty"`
 
 	// validation type
 	ValidationType ValidationType `json:"validation_type,omitempty"`
@@ -189,9 +189,9 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 
 		PrivateIdentification: AccountAttributesPrivateIdentificationWithDefaults(defaults),
 
-		ProcessingService: defaults.GetString("AccountAttributes", "processing_service"),
+		ProcessingService: defaults.GetStringPtr("AccountAttributes", "processing_service"),
 
-		ReferenceMask: defaults.GetString("AccountAttributes", "reference_mask"),
+		ReferenceMask: defaults.GetStringPtr("AccountAttributes", "reference_mask"),
 
 		SecondaryIdentification: defaults.GetString("AccountAttributes", "secondary_identification"),
 
@@ -209,7 +209,7 @@ func AccountAttributesWithDefaults(defaults client.Defaults) *AccountAttributes 
 
 		UserDefinedData: make([]*UserDefinedData, 0),
 
-		UserDefinedInformation: defaults.GetString("AccountAttributes", "user_defined_information"),
+		UserDefinedInformation: defaults.GetStringPtr("AccountAttributes", "user_defined_information"),
 
 		// TODO ValidationType: ValidationType,
 
@@ -393,15 +393,25 @@ func (m *AccountAttributes) WithoutPrivateIdentification() *AccountAttributes {
 
 func (m *AccountAttributes) WithProcessingService(processingService string) *AccountAttributes {
 
-	m.ProcessingService = processingService
+	m.ProcessingService = &processingService
 
+	return m
+}
+
+func (m *AccountAttributes) WithoutProcessingService() *AccountAttributes {
+	m.ProcessingService = nil
 	return m
 }
 
 func (m *AccountAttributes) WithReferenceMask(referenceMask string) *AccountAttributes {
 
-	m.ReferenceMask = referenceMask
+	m.ReferenceMask = &referenceMask
 
+	return m
+}
+
+func (m *AccountAttributes) WithoutReferenceMask() *AccountAttributes {
+	m.ReferenceMask = nil
 	return m
 }
 
@@ -473,8 +483,13 @@ func (m *AccountAttributes) WithUserDefinedData(userDefinedData []*UserDefinedDa
 
 func (m *AccountAttributes) WithUserDefinedInformation(userDefinedInformation string) *AccountAttributes {
 
-	m.UserDefinedInformation = userDefinedInformation
+	m.UserDefinedInformation = &userDefinedInformation
 
+	return m
+}
+
+func (m *AccountAttributes) WithoutUserDefinedInformation() *AccountAttributes {
+	m.UserDefinedInformation = nil
 	return m
 }
 
@@ -980,7 +995,7 @@ func (m *AccountAttributes) validateProcessingService(formats strfmt.Registry) e
 		return nil
 	}
 
-	if err := validate.MaxLength("processing_service", "body", string(m.ProcessingService), 35); err != nil {
+	if err := validate.MaxLength("processing_service", "body", string(*m.ProcessingService), 35); err != nil {
 		return err
 	}
 
@@ -993,7 +1008,7 @@ func (m *AccountAttributes) validateReferenceMask(formats strfmt.Registry) error
 		return nil
 	}
 
-	if err := validate.MaxLength("reference_mask", "body", string(m.ReferenceMask), 35); err != nil {
+	if err := validate.MaxLength("reference_mask", "body", string(*m.ReferenceMask), 35); err != nil {
 		return err
 	}
 
@@ -1167,7 +1182,7 @@ func (m *AccountAttributes) validateUserDefinedInformation(formats strfmt.Regist
 		return nil
 	}
 
-	if err := validate.MaxLength("user_defined_information", "body", string(m.UserDefinedInformation), 35); err != nil {
+	if err := validate.MaxLength("user_defined_information", "body", string(*m.UserDefinedInformation), 35); err != nil {
 		return err
 	}
 
