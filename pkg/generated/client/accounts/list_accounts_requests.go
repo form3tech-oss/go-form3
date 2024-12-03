@@ -36,6 +36,10 @@ func (c *Client) ListAccounts() *ListAccountsRequest {
 
 		FilterType: make([]string, 0),
 
+		PageAfter: c.Defaults.GetStringPtr("ListAccounts", "page[after]"),
+
+		PageBefore: c.Defaults.GetStringPtr("ListAccounts", "page[before]"),
+
 		PageNumber: c.Defaults.GetStringPtr("ListAccounts", "page[number]"),
 
 		PageSize: c.Defaults.GetInt64Ptr("ListAccounts", "page[size]"),
@@ -80,6 +84,14 @@ type ListAccountsRequest struct {
 	/*FilterType      Filter by account type      */
 
 	FilterType []string
+
+	/*PageAfter      Cursor value for getting next page      */
+
+	PageAfter *string
+
+	/*PageBefore      Cursor value for getting previous page      */
+
+	PageBefore *string
 
 	/*PageNumber      Which page to select      */
 
@@ -214,6 +226,34 @@ func (o *ListAccountsRequest) WithoutFilterType() *ListAccountsRequest {
 	return o
 }
 
+func (o *ListAccountsRequest) WithPageAfter(pageAfter string) *ListAccountsRequest {
+
+	o.PageAfter = &pageAfter
+
+	return o
+}
+
+func (o *ListAccountsRequest) WithoutPageAfter() *ListAccountsRequest {
+
+	o.PageAfter = nil
+
+	return o
+}
+
+func (o *ListAccountsRequest) WithPageBefore(pageBefore string) *ListAccountsRequest {
+
+	o.PageBefore = &pageBefore
+
+	return o
+}
+
+func (o *ListAccountsRequest) WithoutPageBefore() *ListAccountsRequest {
+
+	o.PageBefore = nil
+
+	return o
+}
+
 func (o *ListAccountsRequest) WithPageNumber(pageNumber string) *ListAccountsRequest {
 
 	o.PageNumber = &pageNumber
@@ -328,6 +368,38 @@ func (o *ListAccountsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	// query array param filter[type]
 	if err := r.SetQueryParam("filter[type]", joinedFilterType...); err != nil {
 		return err
+	}
+
+	if o.PageAfter != nil {
+
+		// query param page[after]
+		var qrPageAfter string
+		if o.PageAfter != nil {
+			qrPageAfter = *o.PageAfter
+		}
+		qPageAfter := qrPageAfter
+		if qPageAfter != "" {
+			if err := r.SetQueryParam("page[after]", qPageAfter); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.PageBefore != nil {
+
+		// query param page[before]
+		var qrPageBefore string
+		if o.PageBefore != nil {
+			qrPageBefore = *o.PageBefore
+		}
+		qPageBefore := qrPageBefore
+		if qPageBefore != "" {
+			if err := r.SetQueryParam("page[before]", qPageBefore); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if o.PageNumber != nil {

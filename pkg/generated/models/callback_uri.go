@@ -105,7 +105,7 @@ func (m *CallbackURI) validateCallbackURI(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("callback_uri", "body", string(*m.CallbackURI), `^[A-Za-z0-9 .,@:\&\?=\/\-_]*$`); err != nil {
+	if err := validate.Pattern("callback_uri", "body", *m.CallbackURI, `^[A-Za-z0-9 .,@:\&\?=\/\-_]*$`); err != nil {
 		return err
 	}
 

@@ -301,7 +301,7 @@ func (m *ReturnSubmissionFetch) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -349,6 +349,9 @@ func (m *ReturnSubmissionFetch) Json() string {
 // ReturnSubmissionFetchAttributes return submission fetch attributes
 // swagger:model ReturnSubmissionFetchAttributes
 type ReturnSubmissionFetchAttributes struct {
+
+	// Indicates if the submission was created automatically by the system (true) or manually (false)
+	Auto *bool `json:"auto,omitempty"`
 
 	// Identification code of the file sent to scheme.
 	// Pattern: ^[0-9a-zA-Z]+$
@@ -418,6 +421,8 @@ type ReturnSubmissionFetchAttributes struct {
 func ReturnSubmissionFetchAttributesWithDefaults(defaults client.Defaults) *ReturnSubmissionFetchAttributes {
 	return &ReturnSubmissionFetchAttributes{
 
+		Auto: defaults.GetBoolPtr("ReturnSubmissionFetchAttributes", "auto"),
+
 		FileIdentifier: defaults.GetStringPtr("ReturnSubmissionFetchAttributes", "file_identifier"),
 
 		FileNumber: defaults.GetStringPtr("ReturnSubmissionFetchAttributes", "file_number"),
@@ -452,6 +457,18 @@ func ReturnSubmissionFetchAttributesWithDefaults(defaults client.Defaults) *Retu
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTimePtr("ReturnSubmissionFetchAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *ReturnSubmissionFetchAttributes) WithAuto(auto bool) *ReturnSubmissionFetchAttributes {
+
+	m.Auto = &auto
+
+	return m
+}
+
+func (m *ReturnSubmissionFetchAttributes) WithoutAuto() *ReturnSubmissionFetchAttributes {
+	m.Auto = nil
+	return m
 }
 
 func (m *ReturnSubmissionFetchAttributes) WithFileIdentifier(fileIdentifier string) *ReturnSubmissionFetchAttributes {
@@ -673,7 +690,7 @@ func (m *ReturnSubmissionFetchAttributes) validateFileIdentifier(formats strfmt.
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", *m.FileIdentifier, `^[0-9a-zA-Z]+$`); err != nil {
 		return err
 	}
 
@@ -686,7 +703,7 @@ func (m *ReturnSubmissionFetchAttributes) validateFileNumber(formats strfmt.Regi
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", *m.FileNumber, `^[0-9]+$`); err != nil {
 		return err
 	}
 

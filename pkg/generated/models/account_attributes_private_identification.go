@@ -206,11 +206,11 @@ func (m *AccountAttributesPrivateIdentification) validateAddress(formats strfmt.
 
 	for i := 0; i < len(m.Address); i++ {
 
-		if err := validate.MinLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 1); err != nil {
+		if err := validate.MinLength("address"+"."+strconv.Itoa(i), "body", m.Address[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 140); err != nil {
+		if err := validate.MaxLength("address"+"."+strconv.Itoa(i), "body", m.Address[i], 140); err != nil {
 			return err
 		}
 
@@ -225,7 +225,7 @@ func (m *AccountAttributesPrivateIdentification) validateBirthCountry(formats st
 		return nil
 	}
 
-	if err := validate.Pattern("birth_country", "body", string(m.BirthCountry), `^[A-Z]{2}$`); err != nil {
+	if err := validate.Pattern("birth_country", "body", m.BirthCountry, `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 
@@ -251,11 +251,11 @@ func (m *AccountAttributesPrivateIdentification) validateCity(formats strfmt.Reg
 		return nil
 	}
 
-	if err := validate.MinLength("city", "body", string(m.City), 1); err != nil {
+	if err := validate.MinLength("city", "body", m.City, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("city", "body", string(m.City), 35); err != nil {
+	if err := validate.MaxLength("city", "body", m.City, 35); err != nil {
 		return err
 	}
 
@@ -268,7 +268,7 @@ func (m *AccountAttributesPrivateIdentification) validateCountry(formats strfmt.
 		return nil
 	}
 
-	if err := validate.Pattern("country", "body", string(m.Country), `^[A-Z]{2}$`); err != nil {
+	if err := validate.Pattern("country", "body", m.Country, `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 
@@ -281,11 +281,11 @@ func (m *AccountAttributesPrivateIdentification) validateIdentification(formats 
 		return nil
 	}
 
-	if err := validate.MinLength("identification", "body", string(m.Identification), 1); err != nil {
+	if err := validate.MinLength("identification", "body", m.Identification, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("identification", "body", string(m.Identification), 140); err != nil {
+	if err := validate.MaxLength("identification", "body", m.Identification, 140); err != nil {
 		return err
 	}
 
@@ -298,7 +298,7 @@ func (m *AccountAttributesPrivateIdentification) validateIdentificationIssuer(fo
 		return nil
 	}
 
-	if err := validate.MinLength("identification_issuer", "body", string(m.IdentificationIssuer), 1); err != nil {
+	if err := validate.MinLength("identification_issuer", "body", m.IdentificationIssuer, 1); err != nil {
 		return err
 	}
 
@@ -311,11 +311,11 @@ func (m *AccountAttributesPrivateIdentification) validateIdentificationScheme(fo
 		return nil
 	}
 
-	if err := validate.MinLength("identification_scheme", "body", string(m.IdentificationScheme), 1); err != nil {
+	if err := validate.MinLength("identification_scheme", "body", m.IdentificationScheme, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("identification_scheme", "body", string(m.IdentificationScheme), 35); err != nil {
+	if err := validate.MaxLength("identification_scheme", "body", m.IdentificationScheme, 35); err != nil {
 		return err
 	}
 
@@ -328,11 +328,11 @@ func (m *AccountAttributesPrivateIdentification) validateIdentificationSchemeCod
 		return nil
 	}
 
-	if err := validate.MinLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 1); err != nil {
+	if err := validate.MinLength("identification_scheme_code", "body", m.IdentificationSchemeCode, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 35); err != nil {
+	if err := validate.MaxLength("identification_scheme_code", "body", m.IdentificationSchemeCode, 35); err != nil {
 		return err
 	}
 

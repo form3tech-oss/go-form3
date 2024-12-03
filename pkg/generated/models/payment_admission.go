@@ -301,7 +301,7 @@ func (m *PaymentAdmission) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -372,6 +372,11 @@ type PaymentAdmissionAttributes struct {
 	// Enum: ["on_us","xp"]
 	Route string `json:"route,omitempty"`
 
+	// Date and time the inbound payment was received. Supports RFC3339 Nano
+	// Pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$
+	// Format: date-time
+	SchemeReceivedDatetime *strfmt.DateTime `json:"scheme_received_datetime,omitempty"`
+
 	// Refers to individual scheme where applicable
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -391,6 +396,11 @@ type PaymentAdmissionAttributes struct {
 
 	// status reason
 	StatusReason PaymentAdmissionStatusReason `json:"status_reason,omitempty"`
+
+	// Date and time the inbound payment was successfully validated by Form3. Supports RFC3339 Nano
+	// Pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$
+	// Format: date-time
+	ValidationCompletedDatetime *strfmt.DateTime `json:"validation_completed_datetime,omitempty"`
 }
 
 func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAdmissionAttributes {
@@ -408,6 +418,8 @@ func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAd
 
 		Route: defaults.GetString("PaymentAdmissionAttributes", "route"),
 
+		SchemeReceivedDatetime: defaults.GetStrfmtDateTimePtr("PaymentAdmissionAttributes", "scheme_received_datetime"),
+
 		SchemeStatusCode: defaults.GetString("PaymentAdmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("PaymentAdmissionAttributes", "scheme_status_code_description"),
@@ -420,6 +432,7 @@ func PaymentAdmissionAttributesWithDefaults(defaults client.Defaults) *PaymentAd
 
 		// TODO StatusReason: PaymentAdmissionStatusReason,
 
+		ValidationCompletedDatetime: defaults.GetStrfmtDateTimePtr("PaymentAdmissionAttributes", "validation_completed_datetime"),
 	}
 }
 
@@ -467,6 +480,18 @@ func (m *PaymentAdmissionAttributes) WithRoute(route string) *PaymentAdmissionAt
 
 	m.Route = route
 
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithSchemeReceivedDatetime(schemeReceivedDatetime strfmt.DateTime) *PaymentAdmissionAttributes {
+
+	m.SchemeReceivedDatetime = &schemeReceivedDatetime
+
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithoutSchemeReceivedDatetime() *PaymentAdmissionAttributes {
+	m.SchemeReceivedDatetime = nil
 	return m
 }
 
@@ -522,6 +547,18 @@ func (m *PaymentAdmissionAttributes) WithStatusReason(statusReason PaymentAdmiss
 	return m
 }
 
+func (m *PaymentAdmissionAttributes) WithValidationCompletedDatetime(validationCompletedDatetime strfmt.DateTime) *PaymentAdmissionAttributes {
+
+	m.ValidationCompletedDatetime = &validationCompletedDatetime
+
+	return m
+}
+
+func (m *PaymentAdmissionAttributes) WithoutValidationCompletedDatetime() *PaymentAdmissionAttributes {
+	m.ValidationCompletedDatetime = nil
+	return m
+}
+
 // Validate validates this payment admission attributes
 func (m *PaymentAdmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -546,6 +583,10 @@ func (m *PaymentAdmissionAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSchemeReceivedDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSettlementCycle(formats); err != nil {
 		res = append(res, err)
 	}
@@ -559,6 +600,10 @@ func (m *PaymentAdmissionAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatusReason(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValidationCompletedDatetime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -603,7 +648,7 @@ func (m *PaymentAdmissionAttributes) validateClearingSystem(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", string(m.ClearingSystem), `^[0-9A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"clearing_system", "body", m.ClearingSystem, `^[0-9A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -669,6 +714,23 @@ func (m *PaymentAdmissionAttributes) validateRoute(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *PaymentAdmissionAttributes) validateSchemeReceivedDatetime(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeReceivedDatetime) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"scheme_received_datetime", "body", m.SchemeReceivedDatetime.String(), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"scheme_received_datetime", "body", "date-time", m.SchemeReceivedDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *PaymentAdmissionAttributes) validateSettlementCycle(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.SettlementCycle) { // not required
@@ -721,6 +783,23 @@ func (m *PaymentAdmissionAttributes) validateStatusReason(formats strfmt.Registr
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("attributes" + "." + "status_reason")
 		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *PaymentAdmissionAttributes) validateValidationCompletedDatetime(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ValidationCompletedDatetime) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("attributes"+"."+"validation_completed_datetime", "body", m.ValidationCompletedDatetime.String(), `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,9}Z$`); err != nil {
+		return err
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"validation_completed_datetime", "body", "date-time", m.ValidationCompletedDatetime.String(), formats); err != nil {
 		return err
 	}
 

@@ -185,7 +185,7 @@ func (m *PaymentTypeInformation) validateAmount(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9.]{0,14}$`); err != nil {
+	if err := validate.Pattern("amount", "body", m.Amount, `^[0-9.]{0,14}$`); err != nil {
 		return err
 	}
 
@@ -198,7 +198,7 @@ func (m *PaymentTypeInformation) validateCategoryPurpose(formats strfmt.Registry
 		return nil
 	}
 
-	if err := validate.MaxLength("category_purpose", "body", string(m.CategoryPurpose), 35); err != nil {
+	if err := validate.MaxLength("category_purpose", "body", m.CategoryPurpose, 35); err != nil {
 		return err
 	}
 
@@ -211,11 +211,11 @@ func (m *PaymentTypeInformation) validateCurrency(formats strfmt.Registry) error
 		return nil
 	}
 
-	if err := validate.MinLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MinLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MaxLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
@@ -228,11 +228,11 @@ func (m *PaymentTypeInformation) validatePaymentPurpose(formats strfmt.Registry)
 		return nil
 	}
 
-	if err := validate.MinLength("payment_purpose", "body", string(m.PaymentPurpose), 4); err != nil {
+	if err := validate.MinLength("payment_purpose", "body", m.PaymentPurpose, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("payment_purpose", "body", string(m.PaymentPurpose), 35); err != nil {
+	if err := validate.MaxLength("payment_purpose", "body", m.PaymentPurpose, 35); err != nil {
 		return err
 	}
 
@@ -258,7 +258,7 @@ func (m *PaymentTypeInformation) validateRemittanceInformation(formats strfmt.Re
 		return nil
 	}
 
-	if err := validate.MaxLength("remittance_information", "body", string(m.RemittanceInformation), 140); err != nil {
+	if err := validate.MaxLength("remittance_information", "body", m.RemittanceInformation, 140); err != nil {
 		return err
 	}
 
@@ -271,7 +271,7 @@ func (m *PaymentTypeInformation) validateSchemePaymentSubType(formats strfmt.Reg
 		return nil
 	}
 
-	if err := validate.MaxLength("scheme_payment_sub_type", "body", string(m.SchemePaymentSubType), 35); err != nil {
+	if err := validate.MaxLength("scheme_payment_sub_type", "body", m.SchemePaymentSubType, 35); err != nil {
 		return err
 	}
 
@@ -284,7 +284,7 @@ func (m *PaymentTypeInformation) validateSchemePaymentType(formats strfmt.Regist
 		return nil
 	}
 
-	if err := validate.MaxLength("scheme_payment_type", "body", string(m.SchemePaymentType), 35); err != nil {
+	if err := validate.MaxLength("scheme_payment_type", "body", m.SchemePaymentType, 35); err != nil {
 		return err
 	}
 

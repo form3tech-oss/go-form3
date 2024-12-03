@@ -184,7 +184,7 @@ func (m *CorrectionTransactionInformation) validateAmount(formats strfmt.Registr
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9.]{0,14}$`); err != nil {
+	if err := validate.Pattern("amount", "body", m.Amount, `^[0-9.]{0,14}$`); err != nil {
 		return err
 	}
 
@@ -197,11 +197,11 @@ func (m *CorrectionTransactionInformation) validateCurrency(formats strfmt.Regis
 		return nil
 	}
 
-	if err := validate.MinLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MinLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MaxLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
@@ -214,7 +214,7 @@ func (m *CorrectionTransactionInformation) validateEndToEndReference(formats str
 		return nil
 	}
 
-	if err := validate.MaxLength("end_to_end_reference", "body", string(m.EndToEndReference), 35); err != nil {
+	if err := validate.MaxLength("end_to_end_reference", "body", m.EndToEndReference, 35); err != nil {
 		return err
 	}
 
@@ -227,7 +227,7 @@ func (m *CorrectionTransactionInformation) validateInstructionID(formats strfmt.
 		return nil
 	}
 
-	if err := validate.MaxLength("instruction_id", "body", string(m.InstructionID), 35); err != nil {
+	if err := validate.MaxLength("instruction_id", "body", m.InstructionID, 35); err != nil {
 		return err
 	}
 
@@ -278,7 +278,7 @@ func (m *CorrectionTransactionInformation) validateSchemeTransactionID(formats s
 		return nil
 	}
 
-	if err := validate.MaxLength("scheme_transaction_id", "body", string(m.SchemeTransactionID), 35); err != nil {
+	if err := validate.MaxLength("scheme_transaction_id", "body", m.SchemeTransactionID, 35); err != nil {
 		return err
 	}
 
@@ -291,7 +291,7 @@ func (m *CorrectionTransactionInformation) validateUniqueSchemeID(formats strfmt
 		return nil
 	}
 
-	if err := validate.MaxLength("unique_scheme_id", "body", string(m.UniqueSchemeID), 35); err != nil {
+	if err := validate.MaxLength("unique_scheme_id", "body", m.UniqueSchemeID, 35); err != nil {
 		return err
 	}
 

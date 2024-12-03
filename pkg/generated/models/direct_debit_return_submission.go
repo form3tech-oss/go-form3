@@ -302,7 +302,7 @@ func (m *DirectDebitReturnSubmission) validateType(formats strfmt.Registry) erro
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -351,6 +351,9 @@ func (m *DirectDebitReturnSubmission) Json() string {
 // swagger:model DirectDebitReturnSubmissionAttributes
 type DirectDebitReturnSubmissionAttributes struct {
 
+	// Indicates if the submission was created automatically by the system (true) or manually (false)
+	Auto *bool `json:"auto,omitempty"`
+
 	// file identifier
 	// Pattern: ^[0-9a-zA-Z]+$
 	FileIdentifier *string `json:"file_identifier,omitempty"`
@@ -385,6 +388,8 @@ type DirectDebitReturnSubmissionAttributes struct {
 func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *DirectDebitReturnSubmissionAttributes {
 	return &DirectDebitReturnSubmissionAttributes{
 
+		Auto: defaults.GetBoolPtr("DirectDebitReturnSubmissionAttributes", "auto"),
+
 		FileIdentifier: defaults.GetStringPtr("DirectDebitReturnSubmissionAttributes", "file_identifier"),
 
 		FileNumber: defaults.GetStringPtr("DirectDebitReturnSubmissionAttributes", "file_number"),
@@ -401,6 +406,18 @@ func DirectDebitReturnSubmissionAttributesWithDefaults(defaults client.Defaults)
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("DirectDebitReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithAuto(auto bool) *DirectDebitReturnSubmissionAttributes {
+
+	m.Auto = &auto
+
+	return m
+}
+
+func (m *DirectDebitReturnSubmissionAttributes) WithoutAuto() *DirectDebitReturnSubmissionAttributes {
+	m.Auto = nil
+	return m
 }
 
 func (m *DirectDebitReturnSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *DirectDebitReturnSubmissionAttributes {
@@ -505,7 +522,7 @@ func (m *DirectDebitReturnSubmissionAttributes) validateFileIdentifier(formats s
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", string(*m.FileIdentifier), `^[0-9a-zA-Z]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_identifier", "body", *m.FileIdentifier, `^[0-9a-zA-Z]+$`); err != nil {
 		return err
 	}
 
@@ -518,7 +535,7 @@ func (m *DirectDebitReturnSubmissionAttributes) validateFileNumber(formats strfm
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"file_number", "body", string(*m.FileNumber), `^[0-9]+$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"file_number", "body", *m.FileNumber, `^[0-9]+$`); err != nil {
 		return err
 	}
 

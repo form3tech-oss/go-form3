@@ -240,7 +240,7 @@ func (m *Party) validateAdditionalAddressLine(formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.AdditionalAddressLine); i++ {
 
-		if err := validate.MaxLength("additional_address_line"+"."+strconv.Itoa(i), "body", string(m.AdditionalAddressLine[i]), 35); err != nil {
+		if err := validate.MaxLength("additional_address_line"+"."+strconv.Itoa(i), "body", m.AdditionalAddressLine[i], 35); err != nil {
 			return err
 		}
 
@@ -255,7 +255,7 @@ func (m *Party) validateBuildingNumber(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("building_number", "body", string(m.BuildingNumber), 16); err != nil {
+	if err := validate.MaxLength("building_number", "body", m.BuildingNumber, 16); err != nil {
 		return err
 	}
 
@@ -268,7 +268,7 @@ func (m *Party) validateCity(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("city", "body", string(m.City), 35); err != nil {
+	if err := validate.MaxLength("city", "body", m.City, 35); err != nil {
 		return err
 	}
 
@@ -281,7 +281,7 @@ func (m *Party) validateCountry(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("country", "body", string(m.Country), 2); err != nil {
+	if err := validate.MaxLength("country", "body", m.Country, 2); err != nil {
 		return err
 	}
 
@@ -294,7 +294,7 @@ func (m *Party) validateName(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("name", "body", string(m.Name), 140); err != nil {
+	if err := validate.MaxLength("name", "body", m.Name, 140); err != nil {
 		return err
 	}
 
@@ -332,7 +332,7 @@ func (m *Party) validatePostCode(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("post_code", "body", string(m.PostCode), 16); err != nil {
+	if err := validate.MaxLength("post_code", "body", m.PostCode, 16); err != nil {
 		return err
 	}
 
@@ -363,7 +363,7 @@ func (m *Party) validateProvince(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("province", "body", string(m.Province), 35); err != nil {
+	if err := validate.MaxLength("province", "body", m.Province, 35); err != nil {
 		return err
 	}
 
@@ -392,7 +392,7 @@ func (m *Party) validateStreetName(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("street_name", "body", string(m.StreetName), 70); err != nil {
+	if err := validate.MaxLength("street_name", "body", m.StreetName, 70); err != nil {
 		return err
 	}
 

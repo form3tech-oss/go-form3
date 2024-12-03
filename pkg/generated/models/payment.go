@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
@@ -45,6 +46,10 @@ type Payment struct {
 	// relationships
 	Relationships *PaymentRelationships `json:"relationships,omitempty"`
 
+	// signatures
+	// Max Items: 1
+	Signatures []*ResourceSignature `json:"signatures,omitempty"`
+
 	// Name of the resource type
 	// Pattern: ^[A-Za-z_]*$
 	Type string `json:"type,omitempty"`
@@ -68,6 +73,8 @@ func PaymentWithDefaults(defaults client.Defaults) *Payment {
 		OrganisationID: defaults.GetStrfmtUUIDPtr("Payment", "organisation_id"),
 
 		Relationships: PaymentRelationshipsWithDefaults(defaults),
+
+		Signatures: make([]*ResourceSignature, 0),
 
 		Type: defaults.GetString("Payment", "type"),
 
@@ -147,6 +154,13 @@ func (m *Payment) WithoutRelationships() *Payment {
 	return m
 }
 
+func (m *Payment) WithSignatures(signatures []*ResourceSignature) *Payment {
+
+	m.Signatures = signatures
+
+	return m
+}
+
 func (m *Payment) WithType(typeVar string) *Payment {
 
 	m.Type = typeVar
@@ -191,6 +205,10 @@ func (m *Payment) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRelationships(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSignatures(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -296,13 +314,44 @@ func (m *Payment) validateRelationships(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Payment) validateSignatures(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Signatures) { // not required
+		return nil
+	}
+
+	iSignaturesSize := int64(len(m.Signatures))
+
+	if err := validate.MaxItems("signatures", "body", iSignaturesSize, 1); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Signatures); i++ {
+		if swag.IsZero(m.Signatures[i]) { // not required
+			continue
+		}
+
+		if m.Signatures[i] != nil {
+			if err := m.Signatures[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("signatures" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Payment) validateType(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 

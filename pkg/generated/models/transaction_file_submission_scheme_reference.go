@@ -107,7 +107,7 @@ func (m *TransactionFileSubmissionSchemeReference) validateClearingID(formats st
 		return nil
 	}
 
-	if err := validate.Pattern("clearing_id", "body", string(m.ClearingID), `.{6}$`); err != nil {
+	if err := validate.Pattern("clearing_id", "body", m.ClearingID, `.{6}$`); err != nil {
 		return err
 	}
 

@@ -66,11 +66,11 @@ func (m *BranchIdentificationAttributes) validateSecondaryIdentification(formats
 		return err
 	}
 
-	if err := validate.MinLength("secondary_identification", "body", string(*m.SecondaryIdentification), 1); err != nil {
+	if err := validate.MinLength("secondary_identification", "body", *m.SecondaryIdentification, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("secondary_identification", "body", string(*m.SecondaryIdentification), 35); err != nil {
+	if err := validate.MaxLength("secondary_identification", "body", *m.SecondaryIdentification, 35); err != nil {
 		return err
 	}
 

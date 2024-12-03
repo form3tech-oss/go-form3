@@ -167,7 +167,7 @@ func (m *BranchAttributes) validateBankID(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("bank_id", "body", string(*m.BankID), `^[A-Z0-9]{1,11}$`); err != nil {
+	if err := validate.Pattern("bank_id", "body", *m.BankID, `^[A-Z0-9]{1,11}$`); err != nil {
 		return err
 	}
 
@@ -180,7 +180,7 @@ func (m *BranchAttributes) validateBankIDCode(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("bank_id_code", "body", string(*m.BankIDCode), `^[A-Z]{0,16}$`); err != nil {
+	if err := validate.Pattern("bank_id_code", "body", *m.BankIDCode, `^[A-Z]{0,16}$`); err != nil {
 		return err
 	}
 
