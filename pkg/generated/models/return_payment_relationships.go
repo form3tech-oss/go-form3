@@ -20,6 +20,9 @@ import (
 // swagger:model ReturnPaymentRelationships
 type ReturnPaymentRelationships struct {
 
+	// forwarding payment
+	ForwardingPayment *ReturnPaymentRelationshipsForwardingPayment `json:"forwarding_payment,omitempty"`
+
 	// ID of the payment resource related to the return
 	Payment *RelationshipPayments `json:"payment,omitempty"`
 
@@ -36,6 +39,8 @@ type ReturnPaymentRelationships struct {
 func ReturnPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReturnPaymentRelationships {
 	return &ReturnPaymentRelationships{
 
+		ForwardingPayment: ReturnPaymentRelationshipsForwardingPaymentWithDefaults(defaults),
+
 		Payment: RelationshipPaymentsWithDefaults(defaults),
 
 		ReturnAdmission: ReturnPaymentRelationshipsReturnAdmissionWithDefaults(defaults),
@@ -44,6 +49,18 @@ func ReturnPaymentRelationshipsWithDefaults(defaults client.Defaults) *ReturnPay
 
 		ReturnSubmission: ReturnPaymentRelationshipsReturnSubmissionWithDefaults(defaults),
 	}
+}
+
+func (m *ReturnPaymentRelationships) WithForwardingPayment(forwardingPayment ReturnPaymentRelationshipsForwardingPayment) *ReturnPaymentRelationships {
+
+	m.ForwardingPayment = &forwardingPayment
+
+	return m
+}
+
+func (m *ReturnPaymentRelationships) WithoutForwardingPayment() *ReturnPaymentRelationships {
+	m.ForwardingPayment = nil
+	return m
 }
 
 func (m *ReturnPaymentRelationships) WithPayment(payment RelationshipPayments) *ReturnPaymentRelationships {
@@ -98,6 +115,10 @@ func (m *ReturnPaymentRelationships) WithoutReturnSubmission() *ReturnPaymentRel
 func (m *ReturnPaymentRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateForwardingPayment(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePayment(formats); err != nil {
 		res = append(res, err)
 	}
@@ -117,6 +138,24 @@ func (m *ReturnPaymentRelationships) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ReturnPaymentRelationships) validateForwardingPayment(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ForwardingPayment) { // not required
+		return nil
+	}
+
+	if m.ForwardingPayment != nil {
+		if err := m.ForwardingPayment.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("forwarding_payment")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -210,6 +249,92 @@ func (m *ReturnPaymentRelationships) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *ReturnPaymentRelationships) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// ReturnPaymentRelationshipsForwardingPayment return payment relationships forwarding payment
+// swagger:model ReturnPaymentRelationshipsForwardingPayment
+type ReturnPaymentRelationshipsForwardingPayment struct {
+
+	// Array of Outbound Payments created to forward the payment.
+	Data []*RelationshipData `json:"data"`
+}
+
+func ReturnPaymentRelationshipsForwardingPaymentWithDefaults(defaults client.Defaults) *ReturnPaymentRelationshipsForwardingPayment {
+	return &ReturnPaymentRelationshipsForwardingPayment{
+
+		Data: make([]*RelationshipData, 0),
+	}
+}
+
+func (m *ReturnPaymentRelationshipsForwardingPayment) WithData(data []*RelationshipData) *ReturnPaymentRelationshipsForwardingPayment {
+
+	m.Data = data
+
+	return m
+}
+
+// Validate validates this return payment relationships forwarding payment
+func (m *ReturnPaymentRelationshipsForwardingPayment) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReturnPaymentRelationshipsForwardingPayment) validateData(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Data) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Data); i++ {
+		if swag.IsZero(m.Data[i]) { // not required
+			continue
+		}
+
+		if m.Data[i] != nil {
+			if err := m.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("forwarding_payment" + "." + "data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ReturnPaymentRelationshipsForwardingPayment) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ReturnPaymentRelationshipsForwardingPayment) UnmarshalBinary(b []byte) error {
+	var res ReturnPaymentRelationshipsForwardingPayment
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *ReturnPaymentRelationshipsForwardingPayment) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

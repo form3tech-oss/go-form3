@@ -72,7 +72,7 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 
 	// create
 	req := f3.Subscriptions.CreateSubscription()
-	req.WithData(models.Subscription{
+	req.WithData(models.SubscriptionCreate{
 		ID:             &id,
 		OrganisationID: &organisationID,
 		Attributes:     attributes,
@@ -100,7 +100,7 @@ func testCreateAndUpdateSubscriptions(t *testing.T, attributes *models.Subscript
 	assert.Equal(t, id.String(), updateResp.Data.ID.String())
 	assert.Equal(t, &deactivated, updateResp.Data.Attributes.Deactivated)
 
-	//delete
+	// delete
 	_, err = f3.Subscriptions.DeleteSubscription().WithID(id).WithVersion(version + 1).Do()
 	require.NoError(t, err)
 }
