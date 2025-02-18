@@ -34,7 +34,7 @@ type ResourceSignature struct {
 	Role string `json:"role,omitempty"`
 
 	// The cryptographic signature of the payment.
-	// Max Length: 300
+	// Max Length: 500
 	Signature string `json:"signature,omitempty"`
 }
 
@@ -187,7 +187,7 @@ func (m *ResourceSignature) validateSignature(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("signature", "body", m.Signature, 300); err != nil {
+	if err := validate.MaxLength("signature", "body", m.Signature, 500); err != nil {
 		return err
 	}
 

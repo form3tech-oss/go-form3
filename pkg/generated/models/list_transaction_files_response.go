@@ -23,7 +23,7 @@ type ListTransactionFilesResponse struct {
 
 	// data
 	// Required: true
-	Data []*TransactionFile `json:"data"`
+	Data []*ListTransactionFileItem `json:"data"`
 
 	// links
 	Links *Links `json:"links,omitempty"`
@@ -32,13 +32,13 @@ type ListTransactionFilesResponse struct {
 func ListTransactionFilesResponseWithDefaults(defaults client.Defaults) *ListTransactionFilesResponse {
 	return &ListTransactionFilesResponse{
 
-		Data: make([]*TransactionFile, 0),
+		Data: make([]*ListTransactionFileItem, 0),
 
 		Links: LinksWithDefaults(defaults),
 	}
 }
 
-func (m *ListTransactionFilesResponse) WithData(data []*TransactionFile) *ListTransactionFilesResponse {
+func (m *ListTransactionFilesResponse) WithData(data []*ListTransactionFileItem) *ListTransactionFilesResponse {
 
 	m.Data = data
 

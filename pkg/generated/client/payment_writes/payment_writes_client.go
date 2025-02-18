@@ -402,7 +402,7 @@ func (a *CreatePaymentReversalSubmissionRequest) Do() (*CreatePaymentReversalSub
 		Method:             "POST",
 		PathPattern:        "/transaction/payments/{id}/reversals/{reversalId}/submissions",
 		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
-		ConsumesMediaTypes: []string{"application/vnc.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
 		Reader:             &CreatePaymentReversalSubmissionReader{formats: a.formats},

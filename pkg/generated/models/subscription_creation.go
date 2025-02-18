@@ -22,17 +22,17 @@ type SubscriptionCreation struct {
 
 	// data
 	// Required: true
-	Data *Subscription `json:"data"`
+	Data *SubscriptionCreate `json:"data"`
 }
 
 func SubscriptionCreationWithDefaults(defaults client.Defaults) *SubscriptionCreation {
 	return &SubscriptionCreation{
 
-		Data: SubscriptionWithDefaults(defaults),
+		Data: SubscriptionCreateWithDefaults(defaults),
 	}
 }
 
-func (m *SubscriptionCreation) WithData(data Subscription) *SubscriptionCreation {
+func (m *SubscriptionCreation) WithData(data SubscriptionCreate) *SubscriptionCreation {
 
 	m.Data = &data
 
