@@ -88,7 +88,7 @@ func (m *DisputedTransaction) validateAmount(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("amount", "body", string(*m.Amount), `^[0-9.]{0,20}$`); err != nil {
+	if err := validate.Pattern("amount", "body", *m.Amount, `^[0-9.]{0,20}$`); err != nil {
 		return err
 	}
 

@@ -302,7 +302,7 @@ func (m *DirectDebitReversal) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -619,7 +619,7 @@ func (m *DirectDebitReversalAttributesChargesAmount) validateAmount(formats strf
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"charges_amount"+"."+"amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"charges_amount"+"."+"amount", "body", m.Amount, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -706,7 +706,7 @@ func (m *DirectDebitReversalAttributesReversalAmount) validateAmount(formats str
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"reversal_amount"+"."+"amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"reversal_amount"+"."+"amount", "body", m.Amount, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 

@@ -301,7 +301,7 @@ func (m *ReturnAdmission) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -353,7 +353,7 @@ type ReturnAdmissionAttributes struct {
 	// Date and time the payment admission was created
 	// Read Only: true
 	// Format: date-time
-	AdmissionDatetime strfmt.DateTime `json:"admission_datetime,omitempty"`
+	AdmissionDatetime *strfmt.DateTime `json:"admission_datetime,omitempty"`
 
 	// posting status
 	PostingStatus PostingStatus `json:"posting_status,omitempty"`
@@ -392,7 +392,7 @@ type ReturnAdmissionAttributes struct {
 func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmissionAttributes {
 	return &ReturnAdmissionAttributes{
 
-		AdmissionDatetime: defaults.GetStrfmtDateTime("ReturnAdmissionAttributes", "admission_datetime"),
+		AdmissionDatetime: defaults.GetStrfmtDateTimePtr("ReturnAdmissionAttributes", "admission_datetime"),
 
 		// TODO PostingStatus: PostingStatus,
 
@@ -418,8 +418,13 @@ func ReturnAdmissionAttributesWithDefaults(defaults client.Defaults) *ReturnAdmi
 
 func (m *ReturnAdmissionAttributes) WithAdmissionDatetime(admissionDatetime strfmt.DateTime) *ReturnAdmissionAttributes {
 
-	m.AdmissionDatetime = admissionDatetime
+	m.AdmissionDatetime = &admissionDatetime
 
+	return m
+}
+
+func (m *ReturnAdmissionAttributes) WithoutAdmissionDatetime() *ReturnAdmissionAttributes {
+	m.AdmissionDatetime = nil
 	return m
 }
 

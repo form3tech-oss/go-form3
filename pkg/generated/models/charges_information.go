@@ -279,7 +279,7 @@ func (m *ChargesInformationChargesBearerItems0) validateAmount(formats strfmt.Re
 		return nil
 	}
 
-	if err := validate.Pattern("amount", "body", string(m.Amount), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("amount", "body", m.Amount, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -292,7 +292,7 @@ func (m *ChargesInformationChargesBearerItems0) validateCurrency(formats strfmt.
 		return nil
 	}
 
-	if err := validate.MaxLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MaxLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
@@ -531,7 +531,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankAdditionalAddre
 
 	for i := 0; i < len(m.BankAdditionalAddressLine); i++ {
 
-		if err := validate.MaxLength("agent"+"."+"bank_additional_address_line"+"."+strconv.Itoa(i), "body", string(m.BankAdditionalAddressLine[i]), 35); err != nil {
+		if err := validate.MaxLength("agent"+"."+"bank_additional_address_line"+"."+strconv.Itoa(i), "body", m.BankAdditionalAddressLine[i], 35); err != nil {
 			return err
 		}
 
@@ -546,7 +546,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankBuildingNumber(
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_building_number", "body", string(m.BankBuildingNumber), 16); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_building_number", "body", m.BankBuildingNumber, 16); err != nil {
 		return err
 	}
 
@@ -559,7 +559,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankCity(formats st
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_city", "body", string(m.BankCity), 35); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_city", "body", m.BankCity, 35); err != nil {
 		return err
 	}
 
@@ -572,7 +572,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankCountry(formats
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_country", "body", string(m.BankCountry), 2); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_country", "body", m.BankCountry, 2); err != nil {
 		return err
 	}
 
@@ -610,7 +610,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankName(formats st
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_name", "body", string(m.BankName), 140); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_name", "body", m.BankName, 140); err != nil {
 		return err
 	}
 
@@ -623,7 +623,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankPostCode(format
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_post_code", "body", string(m.BankPostCode), 16); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_post_code", "body", m.BankPostCode, 16); err != nil {
 		return err
 	}
 
@@ -654,7 +654,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankProvince(format
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_province", "body", string(m.BankProvince), 35); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_province", "body", m.BankProvince, 35); err != nil {
 		return err
 	}
 
@@ -667,7 +667,7 @@ func (m *ChargesInformationChargesBearerItems0Agent) validateBankStreetName(form
 		return nil
 	}
 
-	if err := validate.MaxLength("agent"+"."+"bank_street_name", "body", string(m.BankStreetName), 70); err != nil {
+	if err := validate.MaxLength("agent"+"."+"bank_street_name", "body", m.BankStreetName, 70); err != nil {
 		return err
 	}
 

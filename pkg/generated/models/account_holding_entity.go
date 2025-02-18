@@ -141,7 +141,7 @@ func (m *AccountHoldingEntity) validateBankID(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("bank_id", "body", string(*m.BankID), `^[A-Z0-9]{0,16}$`); err != nil {
+	if err := validate.Pattern("bank_id", "body", *m.BankID, `^[A-Z0-9]{0,16}$`); err != nil {
 		return err
 	}
 

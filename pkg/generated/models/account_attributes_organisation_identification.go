@@ -232,11 +232,11 @@ func (m *AccountAttributesOrganisationIdentification) validateAddress(formats st
 
 	for i := 0; i < len(m.Address); i++ {
 
-		if err := validate.MinLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 1); err != nil {
+		if err := validate.MinLength("address"+"."+strconv.Itoa(i), "body", m.Address[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("address"+"."+strconv.Itoa(i), "body", string(m.Address[i]), 140); err != nil {
+		if err := validate.MaxLength("address"+"."+strconv.Itoa(i), "body", m.Address[i], 140); err != nil {
 			return err
 		}
 
@@ -251,11 +251,11 @@ func (m *AccountAttributesOrganisationIdentification) validateCity(formats strfm
 		return nil
 	}
 
-	if err := validate.MinLength("city", "body", string(m.City), 1); err != nil {
+	if err := validate.MinLength("city", "body", m.City, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("city", "body", string(m.City), 35); err != nil {
+	if err := validate.MaxLength("city", "body", m.City, 35); err != nil {
 		return err
 	}
 
@@ -268,7 +268,7 @@ func (m *AccountAttributesOrganisationIdentification) validateCountry(formats st
 		return nil
 	}
 
-	if err := validate.Pattern("country", "body", string(m.Country), `^[A-Z]{2}$`); err != nil {
+	if err := validate.Pattern("country", "body", m.Country, `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 
@@ -281,11 +281,11 @@ func (m *AccountAttributesOrganisationIdentification) validateIdentification(for
 		return nil
 	}
 
-	if err := validate.MinLength("identification", "body", string(m.Identification), 1); err != nil {
+	if err := validate.MinLength("identification", "body", m.Identification, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("identification", "body", string(m.Identification), 140); err != nil {
+	if err := validate.MaxLength("identification", "body", m.Identification, 140); err != nil {
 		return err
 	}
 
@@ -298,11 +298,11 @@ func (m *AccountAttributesOrganisationIdentification) validateIdentificationSche
 		return nil
 	}
 
-	if err := validate.MinLength("identification_scheme", "body", string(m.IdentificationScheme), 1); err != nil {
+	if err := validate.MinLength("identification_scheme", "body", m.IdentificationScheme, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("identification_scheme", "body", string(m.IdentificationScheme), 35); err != nil {
+	if err := validate.MaxLength("identification_scheme", "body", m.IdentificationScheme, 35); err != nil {
 		return err
 	}
 
@@ -315,11 +315,11 @@ func (m *AccountAttributesOrganisationIdentification) validateIdentificationSche
 		return nil
 	}
 
-	if err := validate.MinLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 1); err != nil {
+	if err := validate.MinLength("identification_scheme_code", "body", m.IdentificationSchemeCode, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("identification_scheme_code", "body", string(m.IdentificationSchemeCode), 35); err != nil {
+	if err := validate.MaxLength("identification_scheme_code", "body", m.IdentificationSchemeCode, 35); err != nil {
 		return err
 	}
 
@@ -332,7 +332,7 @@ func (m *AccountAttributesOrganisationIdentification) validateTaxResidency(forma
 		return nil
 	}
 
-	if err := validate.Pattern("tax_residency", "body", string(m.TaxResidency), `^[A-Z]{2}$`); err != nil {
+	if err := validate.Pattern("tax_residency", "body", m.TaxResidency, `^[A-Z]{2}$`); err != nil {
 		return err
 	}
 

@@ -221,7 +221,7 @@ func (m *Notification) validateDataRecordType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("data_record_type", "body", string(m.DataRecordType), `^[A-Za-z]*$`); err != nil {
+	if err := validate.Pattern("data_record_type", "body", m.DataRecordType, `^[A-Za-z]*$`); err != nil {
 		return err
 	}
 
@@ -234,7 +234,7 @@ func (m *Notification) validateEventType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("event_type", "body", string(m.EventType), `^[a-z]*$`); err != nil {
+	if err := validate.Pattern("event_type", "body", m.EventType, `^[a-z]*$`); err != nil {
 		return err
 	}
 
@@ -273,7 +273,7 @@ func (m *Notification) validateRecordType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("record_type", "body", string(m.RecordType), `^[A-Za-z]*$`); err != nil {
+	if err := validate.Pattern("record_type", "body", m.RecordType, `^[A-Za-z]*$`); err != nil {
 		return err
 	}
 

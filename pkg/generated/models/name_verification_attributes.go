@@ -201,7 +201,7 @@ func (m *NameVerificationAttributes) validateAccountNumber(formats strfmt.Regist
 		return err
 	}
 
-	if err := validate.Pattern("account_number", "body", string(*m.AccountNumber), `^[A-Z0-9]{6,34}$`); err != nil {
+	if err := validate.Pattern("account_number", "body", *m.AccountNumber, `^[A-Z0-9]{6,34}$`); err != nil {
 		return err
 	}
 
@@ -261,11 +261,11 @@ func (m *NameVerificationAttributes) validateName(formats strfmt.Registry) error
 
 	for i := 0; i < len(m.Name); i++ {
 
-		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 1); err != nil {
+		if err := validate.MinLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 1); err != nil {
 			return err
 		}
 
-		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", string(m.Name[i]), 140); err != nil {
+		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 140); err != nil {
 			return err
 		}
 

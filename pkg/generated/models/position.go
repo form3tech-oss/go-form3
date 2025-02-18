@@ -232,7 +232,7 @@ func (m *Position) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -354,7 +354,7 @@ func (m *PositionAttributes) validateLimit(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"limit", "body", string(m.Limit), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"limit", "body", m.Limit, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -367,7 +367,7 @@ func (m *PositionAttributes) validatePosition(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"position", "body", string(m.Position), `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"position", "body", m.Position, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
 		return err
 	}
 
@@ -380,7 +380,7 @@ func (m *PositionAttributes) validateScheme(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("attributes"+"."+"scheme", "body", string(m.Scheme), `^[A-Za-z_\-]*$`); err != nil {
+	if err := validate.Pattern("attributes"+"."+"scheme", "body", m.Scheme, `^[A-Za-z_\-]*$`); err != nil {
 		return err
 	}
 

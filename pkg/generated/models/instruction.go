@@ -76,7 +76,7 @@ func (m *Instruction) validateCode(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(m.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", m.Code, 4); err != nil {
 		return err
 	}
 
@@ -89,7 +89,7 @@ func (m *Instruction) validateInformation(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.MaxLength("information", "body", string(m.Information), 140); err != nil {
+	if err := validate.MaxLength("information", "body", m.Information, 140); err != nil {
 		return err
 	}
 

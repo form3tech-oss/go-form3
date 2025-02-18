@@ -93,7 +93,7 @@ func (m *DuplicateTransactionInformation) validateEndToEndReference(formats strf
 		return nil
 	}
 
-	if err := validate.MaxLength("end_to_end_reference", "body", string(m.EndToEndReference), 35); err != nil {
+	if err := validate.MaxLength("end_to_end_reference", "body", m.EndToEndReference, 35); err != nil {
 		return err
 	}
 
@@ -131,7 +131,7 @@ func (m *DuplicateTransactionInformation) validateSchemeTransactionID(formats st
 		return nil
 	}
 
-	if err := validate.MaxLength("scheme_transaction_id", "body", string(m.SchemeTransactionID), 35); err != nil {
+	if err := validate.MaxLength("scheme_transaction_id", "body", m.SchemeTransactionID, 35); err != nil {
 		return err
 	}
 

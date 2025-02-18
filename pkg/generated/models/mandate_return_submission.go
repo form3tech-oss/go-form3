@@ -290,7 +290,7 @@ func (m *MandateReturnSubmission) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.Pattern("type", "body", string(m.Type), `^[A-Za-z_]*$`); err != nil {
+	if err := validate.Pattern("type", "body", m.Type, `^[A-Za-z_]*$`); err != nil {
 		return err
 	}
 
@@ -339,6 +339,9 @@ func (m *MandateReturnSubmission) Json() string {
 // swagger:model MandateReturnSubmissionAttributes
 type MandateReturnSubmissionAttributes struct {
 
+	// Indicates if the submission was created automatically by the system (true) or manually (false)
+	Auto *bool `json:"auto,omitempty"`
+
 	// status
 	Status MandateReturnSubmissionStatus `json:"status,omitempty"`
 
@@ -359,6 +362,8 @@ type MandateReturnSubmissionAttributes struct {
 func MandateReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *MandateReturnSubmissionAttributes {
 	return &MandateReturnSubmissionAttributes{
 
+		Auto: defaults.GetBoolPtr("MandateReturnSubmissionAttributes", "auto"),
+
 		// TODO Status: MandateReturnSubmissionStatus,
 
 		StatusReason: defaults.GetString("MandateReturnSubmissionAttributes", "status_reason"),
@@ -367,6 +372,18 @@ func MandateReturnSubmissionAttributesWithDefaults(defaults client.Defaults) *Ma
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("MandateReturnSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *MandateReturnSubmissionAttributes) WithAuto(auto bool) *MandateReturnSubmissionAttributes {
+
+	m.Auto = &auto
+
+	return m
+}
+
+func (m *MandateReturnSubmissionAttributes) WithoutAuto() *MandateReturnSubmissionAttributes {
+	m.Auto = nil
+	return m
 }
 
 func (m *MandateReturnSubmissionAttributes) WithStatus(status MandateReturnSubmissionStatus) *MandateReturnSubmissionAttributes {
