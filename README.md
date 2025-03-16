@@ -6,9 +6,9 @@ A simple go client library for the [Form3 REST APIs](https://api-docs.form3.tech
 
 This is ideal for:
 
-- Calling the API interactively (e.g. investigating resources or testing new features).
+- Calling the API interactively (e.g. investigating resources or testing new features)
 - Scripting (e.g. multi-call investigation or cleanup scripts)
-- Testing, particularly when multiple calls to the API are involved.
+- Testing, particularly when multiple calls to the API are involved
 - Load Testing, with K6 integration for initiating the requests
 
 ## What's included
