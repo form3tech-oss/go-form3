@@ -14,73 +14,73 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Client.GetOrganisationNameverifications creates a new GetOrganisationNameverificationsRequest object
+// Client.ListNameVerifications creates a new ListNameVerificationsRequest object
 // with the default values initialized.
-func (c *Client) GetOrganisationNameverifications() *GetOrganisationNameverificationsRequest {
+func (c *Client) ListNameVerifications() *ListNameVerificationsRequest {
 	var ()
-	return &GetOrganisationNameverificationsRequest{
+	return &ListNameVerificationsRequest{
 
-		FilterAccountClassification: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[account_classification]"),
+		FilterAccountClassification: c.Defaults.GetStringPtr("ListNameVerifications", "filter[account_classification]"),
 
-		FilterAccountNumber: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[account_number]"),
+		FilterAccountNumber: c.Defaults.GetStringPtr("ListNameVerifications", "filter[account_number]"),
 
-		FilterAdmissionActualName: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[admission.actual_name]"),
+		FilterAdmissionActualName: c.Defaults.GetStringPtr("ListNameVerifications", "filter[admission.actual_name]"),
 
-		FilterAdmissionAnswer: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[admission.answer]"),
+		FilterAdmissionAnswer: c.Defaults.GetStringPtr("ListNameVerifications", "filter[admission.answer]"),
 
-		FilterAdmissionCreatedDateFrom: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[admission.created_date_from]"),
+		FilterAdmissionCreatedDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[admission.created_date_from]"),
 
-		FilterAdmissionCreatedDateTo: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[admission.created_date_to]"),
+		FilterAdmissionCreatedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[admission.created_date_to]"),
 
-		FilterAdmissionModifiedDateFrom: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[admission.modified_date_from]"),
+		FilterAdmissionModifiedDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[admission.modified_date_from]"),
 
-		FilterAdmissionModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[admission.modified_date_to]"),
+		FilterAdmissionModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[admission.modified_date_to]"),
 
-		FilterAdmissionReason: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[admission.reason]"),
+		FilterAdmissionReason: c.Defaults.GetStringPtr("ListNameVerifications", "filter[admission.reason]"),
 
-		FilterAdmissionReasonCode: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[admission.reason_code]"),
+		FilterAdmissionReasonCode: c.Defaults.GetStringPtr("ListNameVerifications", "filter[admission.reason_code]"),
 
-		FilterAdmissionStatus: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[admission.status]"),
+		FilterAdmissionStatus: c.Defaults.GetStringPtr("ListNameVerifications", "filter[admission.status]"),
 
-		FilterBankID: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[bank_id]"),
+		FilterBankID: c.Defaults.GetStringPtr("ListNameVerifications", "filter[bank_id]"),
 
-		FilterBankIDCode: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[bank_id_code]"),
+		FilterBankIDCode: c.Defaults.GetStringPtr("ListNameVerifications", "filter[bank_id_code]"),
 
-		FilterCreatedDateFrom: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[created_date_from]"),
+		FilterCreatedDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[created_date_from]"),
 
-		FilterCreatedDateTo: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[created_date_to]"),
+		FilterCreatedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[created_date_to]"),
 
-		FilterModifiedDateFrom: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[modified_date_from]"),
+		FilterModifiedDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[modified_date_from]"),
 
-		FilterModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[modified_date_to]"),
+		FilterModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[modified_date_to]"),
 
 		FilterName: make([]string, 0),
 
-		FilterOrganisationID: c.Defaults.GetStrfmtUUIDPtr("GetOrganisationNameverifications", "filter[organisation_id]"),
+		FilterOrganisationID: c.Defaults.GetStrfmtUUIDPtr("ListNameVerifications", "filter[organisation_id]"),
 
-		FilterSecondaryIdentification: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[secondary_identification]"),
+		FilterSecondaryIdentification: c.Defaults.GetStringPtr("ListNameVerifications", "filter[secondary_identification]"),
 
-		FilterSubmissionActualName: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[submission.actual_name]"),
+		FilterSubmissionActualName: c.Defaults.GetStringPtr("ListNameVerifications", "filter[submission.actual_name]"),
 
-		FilterSubmissionAnswer: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[submission.answer]"),
+		FilterSubmissionAnswer: c.Defaults.GetStringPtr("ListNameVerifications", "filter[submission.answer]"),
 
-		FilterSubmissionCreatedDateFrom: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[submission.created_date_from]"),
+		FilterSubmissionCreatedDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[submission.created_date_from]"),
 
-		FilterSubmissionCreatedDateTo: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[submission.created_date_to]"),
+		FilterSubmissionCreatedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[submission.created_date_to]"),
 
-		FilterSubmissionModifiedDateFrom: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[submission.modified_date_from]"),
+		FilterSubmissionModifiedDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[submission.modified_date_from]"),
 
-		FilterSubmissionModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("GetOrganisationNameverifications", "filter[submission.modified_date_to]"),
+		FilterSubmissionModifiedDateTo: c.Defaults.GetStrfmtDateTimePtr("ListNameVerifications", "filter[submission.modified_date_to]"),
 
-		FilterSubmissionReason: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[submission.reason]"),
+		FilterSubmissionReason: c.Defaults.GetStringPtr("ListNameVerifications", "filter[submission.reason]"),
 
-		FilterSubmissionReasonCode: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[submission.reason_code]"),
+		FilterSubmissionReasonCode: c.Defaults.GetStringPtr("ListNameVerifications", "filter[submission.reason_code]"),
 
-		FilterSubmissionStatus: c.Defaults.GetStringPtr("GetOrganisationNameverifications", "filter[submission.status]"),
+		FilterSubmissionStatus: c.Defaults.GetStringPtr("ListNameVerifications", "filter[submission.status]"),
 
-		PageNumber: c.Defaults.GetInt64Ptr("GetOrganisationNameverifications", "page[number]"),
+		PageNumber: c.Defaults.GetInt64Ptr("ListNameVerifications", "page[number]"),
 
-		PageSize: c.Defaults.GetInt64Ptr("GetOrganisationNameverifications", "page[size]"),
+		PageSize: c.Defaults.GetInt64Ptr("ListNameVerifications", "page[size]"),
 
 		timeout: cr.DefaultTimeout,
 
@@ -89,7 +89,7 @@ func (c *Client) GetOrganisationNameverifications() *GetOrganisationNameverifica
 	}
 }
 
-type GetOrganisationNameverificationsRequest struct {
+type ListNameVerificationsRequest struct {
 
 	/*FilterAccountClassification      Filter by account classification      */
 
@@ -223,439 +223,439 @@ type GetOrganisationNameverificationsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *GetOrganisationNameverificationsRequest) FromJson(j string) (*GetOrganisationNameverificationsRequest, error) {
+func (o *ListNameVerificationsRequest) FromJson(j string) (*ListNameVerificationsRequest, error) {
 
 	return o, nil
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAccountClassification(filterAccountClassification string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAccountClassification(filterAccountClassification string) *ListNameVerificationsRequest {
 
 	o.FilterAccountClassification = &filterAccountClassification
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAccountClassification() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAccountClassification() *ListNameVerificationsRequest {
 
 	o.FilterAccountClassification = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAccountNumber(filterAccountNumber string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAccountNumber(filterAccountNumber string) *ListNameVerificationsRequest {
 
 	o.FilterAccountNumber = &filterAccountNumber
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAccountNumber() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAccountNumber() *ListNameVerificationsRequest {
 
 	o.FilterAccountNumber = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionActualName(filterAdmissionActualName string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionActualName(filterAdmissionActualName string) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionActualName = &filterAdmissionActualName
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionActualName() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionActualName() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionActualName = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionAnswer(filterAdmissionAnswer string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionAnswer(filterAdmissionAnswer string) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionAnswer = &filterAdmissionAnswer
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionAnswer() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionAnswer() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionAnswer = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionCreatedDateFrom(filterAdmissionCreatedDateFrom strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionCreatedDateFrom(filterAdmissionCreatedDateFrom strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionCreatedDateFrom = &filterAdmissionCreatedDateFrom
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionCreatedDateFrom() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionCreatedDateFrom() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionCreatedDateFrom = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionCreatedDateTo(filterAdmissionCreatedDateTo strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionCreatedDateTo(filterAdmissionCreatedDateTo strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionCreatedDateTo = &filterAdmissionCreatedDateTo
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionCreatedDateTo() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionCreatedDateTo() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionCreatedDateTo = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionModifiedDateFrom(filterAdmissionModifiedDateFrom strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionModifiedDateFrom(filterAdmissionModifiedDateFrom strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionModifiedDateFrom = &filterAdmissionModifiedDateFrom
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionModifiedDateFrom() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionModifiedDateFrom() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionModifiedDateFrom = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionModifiedDateTo(filterAdmissionModifiedDateTo strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionModifiedDateTo(filterAdmissionModifiedDateTo strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionModifiedDateTo = &filterAdmissionModifiedDateTo
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionModifiedDateTo() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionModifiedDateTo() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionModifiedDateTo = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionReason(filterAdmissionReason string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionReason(filterAdmissionReason string) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionReason = &filterAdmissionReason
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionReason() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionReason() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionReason = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionReasonCode(filterAdmissionReasonCode string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionReasonCode(filterAdmissionReasonCode string) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionReasonCode = &filterAdmissionReasonCode
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionReasonCode() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionReasonCode() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionReasonCode = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterAdmissionStatus(filterAdmissionStatus string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterAdmissionStatus(filterAdmissionStatus string) *ListNameVerificationsRequest {
 
 	o.FilterAdmissionStatus = &filterAdmissionStatus
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterAdmissionStatus() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterAdmissionStatus() *ListNameVerificationsRequest {
 
 	o.FilterAdmissionStatus = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterBankID(filterBankID string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterBankID(filterBankID string) *ListNameVerificationsRequest {
 
 	o.FilterBankID = &filterBankID
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterBankID() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterBankID() *ListNameVerificationsRequest {
 
 	o.FilterBankID = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterBankIDCode(filterBankIDCode string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterBankIDCode(filterBankIDCode string) *ListNameVerificationsRequest {
 
 	o.FilterBankIDCode = &filterBankIDCode
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterBankIDCode() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterBankIDCode() *ListNameVerificationsRequest {
 
 	o.FilterBankIDCode = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterCreatedDateFrom(filterCreatedDateFrom strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterCreatedDateFrom(filterCreatedDateFrom strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterCreatedDateFrom = &filterCreatedDateFrom
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterCreatedDateFrom() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterCreatedDateFrom() *ListNameVerificationsRequest {
 
 	o.FilterCreatedDateFrom = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterCreatedDateTo(filterCreatedDateTo strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterCreatedDateTo(filterCreatedDateTo strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterCreatedDateTo = &filterCreatedDateTo
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterCreatedDateTo() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterCreatedDateTo() *ListNameVerificationsRequest {
 
 	o.FilterCreatedDateTo = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterModifiedDateFrom(filterModifiedDateFrom strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterModifiedDateFrom(filterModifiedDateFrom strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterModifiedDateFrom = &filterModifiedDateFrom
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterModifiedDateFrom() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterModifiedDateFrom() *ListNameVerificationsRequest {
 
 	o.FilterModifiedDateFrom = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterModifiedDateTo(filterModifiedDateTo strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterModifiedDateTo(filterModifiedDateTo strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterModifiedDateTo = &filterModifiedDateTo
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterModifiedDateTo() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterModifiedDateTo() *ListNameVerificationsRequest {
 
 	o.FilterModifiedDateTo = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterName(filterName []string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterName(filterName []string) *ListNameVerificationsRequest {
 
 	o.FilterName = filterName
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterName() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterName() *ListNameVerificationsRequest {
 
 	o.FilterName = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterOrganisationID(filterOrganisationID strfmt.UUID) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterOrganisationID(filterOrganisationID strfmt.UUID) *ListNameVerificationsRequest {
 
 	o.FilterOrganisationID = &filterOrganisationID
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterOrganisationID() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterOrganisationID() *ListNameVerificationsRequest {
 
 	o.FilterOrganisationID = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSecondaryIdentification(filterSecondaryIdentification string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSecondaryIdentification(filterSecondaryIdentification string) *ListNameVerificationsRequest {
 
 	o.FilterSecondaryIdentification = &filterSecondaryIdentification
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSecondaryIdentification() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSecondaryIdentification() *ListNameVerificationsRequest {
 
 	o.FilterSecondaryIdentification = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionActualName(filterSubmissionActualName string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionActualName(filterSubmissionActualName string) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionActualName = &filterSubmissionActualName
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionActualName() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionActualName() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionActualName = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionAnswer(filterSubmissionAnswer string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionAnswer(filterSubmissionAnswer string) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionAnswer = &filterSubmissionAnswer
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionAnswer() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionAnswer() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionAnswer = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionCreatedDateFrom(filterSubmissionCreatedDateFrom strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionCreatedDateFrom(filterSubmissionCreatedDateFrom strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionCreatedDateFrom = &filterSubmissionCreatedDateFrom
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionCreatedDateFrom() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionCreatedDateFrom() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionCreatedDateFrom = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionCreatedDateTo(filterSubmissionCreatedDateTo strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionCreatedDateTo(filterSubmissionCreatedDateTo strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionCreatedDateTo = &filterSubmissionCreatedDateTo
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionCreatedDateTo() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionCreatedDateTo() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionCreatedDateTo = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionModifiedDateFrom(filterSubmissionModifiedDateFrom strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionModifiedDateFrom(filterSubmissionModifiedDateFrom strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionModifiedDateFrom = &filterSubmissionModifiedDateFrom
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionModifiedDateFrom() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionModifiedDateFrom() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionModifiedDateFrom = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionModifiedDateTo(filterSubmissionModifiedDateTo strfmt.DateTime) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionModifiedDateTo(filterSubmissionModifiedDateTo strfmt.DateTime) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionModifiedDateTo = &filterSubmissionModifiedDateTo
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionModifiedDateTo() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionModifiedDateTo() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionModifiedDateTo = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionReason(filterSubmissionReason string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionReason(filterSubmissionReason string) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionReason = &filterSubmissionReason
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionReason() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionReason() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionReason = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionReasonCode(filterSubmissionReasonCode string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionReasonCode(filterSubmissionReasonCode string) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionReasonCode = &filterSubmissionReasonCode
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionReasonCode() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionReasonCode() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionReasonCode = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithFilterSubmissionStatus(filterSubmissionStatus string) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithFilterSubmissionStatus(filterSubmissionStatus string) *ListNameVerificationsRequest {
 
 	o.FilterSubmissionStatus = &filterSubmissionStatus
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutFilterSubmissionStatus() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutFilterSubmissionStatus() *ListNameVerificationsRequest {
 
 	o.FilterSubmissionStatus = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithPageNumber(pageNumber int64) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithPageNumber(pageNumber int64) *ListNameVerificationsRequest {
 
 	o.PageNumber = &pageNumber
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutPageNumber() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutPageNumber() *ListNameVerificationsRequest {
 
 	o.PageNumber = nil
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithPageSize(pageSize int64) *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithPageSize(pageSize int64) *ListNameVerificationsRequest {
 
 	o.PageSize = &pageSize
 
 	return o
 }
 
-func (o *GetOrganisationNameverificationsRequest) WithoutPageSize() *GetOrganisationNameverificationsRequest {
+func (o *ListNameVerificationsRequest) WithoutPageSize() *ListNameVerificationsRequest {
 
 	o.PageSize = nil
 
@@ -663,20 +663,20 @@ func (o *GetOrganisationNameverificationsRequest) WithoutPageSize() *GetOrganisa
 }
 
 // ////////////////
-// WithContext adds the context to the get organisation nameverifications Request
-func (o *GetOrganisationNameverificationsRequest) WithContext(ctx context.Context) *GetOrganisationNameverificationsRequest {
+// WithContext adds the context to the list name verifications Request
+func (o *ListNameVerificationsRequest) WithContext(ctx context.Context) *ListNameVerificationsRequest {
 	o.Context = ctx
 	return o
 }
 
-// WithHTTPClient adds the HTTPClient to the get organisation nameverifications Request
-func (o *GetOrganisationNameverificationsRequest) WithHTTPClient(client *http.Client) *GetOrganisationNameverificationsRequest {
+// WithHTTPClient adds the HTTPClient to the list name verifications Request
+func (o *ListNameVerificationsRequest) WithHTTPClient(client *http.Client) *ListNameVerificationsRequest {
 	o.HTTPClient = client
 	return o
 }
 
 // WriteToRequest writes these Request to a swagger request
-func (o *GetOrganisationNameverificationsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *ListNameVerificationsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

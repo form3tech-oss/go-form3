@@ -895,7 +895,7 @@ func (m *AccountAttributes) validateName(formats strfmt.Registry) error {
 			return err
 		}
 
-		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 140); err != nil {
+		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 256); err != nil {
 			return err
 		}
 

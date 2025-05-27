@@ -418,7 +418,7 @@ type CreateTransactionFileSubmissionConflict struct {
 	//Payload
 
 	// isStream: false
-	*models.APIError
+	*models.TransactionFileSubmissionConflictError
 }
 
 // IsSuccess returns true when this create transaction file submission conflict response has a 2xx status code
@@ -457,11 +457,11 @@ func (o *CreateTransactionFileSubmissionConflict) Error() string {
 
 func (o *CreateTransactionFileSubmissionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.APIError = new(models.APIError)
+	o.TransactionFileSubmissionConflictError = new(models.TransactionFileSubmissionConflictError)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.TransactionFileSubmissionConflictError); err != nil && err != io.EOF {
 		return err
 	}
 

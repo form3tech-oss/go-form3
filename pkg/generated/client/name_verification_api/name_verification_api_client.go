@@ -30,118 +30,19 @@ type Client struct {
 // range of operations
 
 /*
-get organisation nameverifications API
+create name verification API
 */
-func (a *GetOrganisationNameverificationsRequest) Do() (*GetOrganisationNameverificationsOK, error) {
+func (a *CreateNameVerificationRequest) Do() (*CreateNameVerificationCreated, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationNameverifications",
-		Method:             "GET",
-		PathPattern:        "/organisation/nameverifications",
-		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationNameverificationsReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationNameverificationsOK), nil
-
-}
-
-func (a *GetOrganisationNameverificationsRequest) MustDo() *GetOrganisationNameverificationsOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get organisation nameverifications ID API
-*/
-func (a *GetOrganisationNameverificationsIDRequest) Do() (*GetOrganisationNameverificationsIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationNameverificationsID",
-		Method:             "GET",
-		PathPattern:        "/organisation/nameverifications/{id}",
-		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationNameverificationsIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationNameverificationsIDOK), nil
-
-}
-
-func (a *GetOrganisationNameverificationsIDRequest) MustDo() *GetOrganisationNameverificationsIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-get organisation nameverifications name verification ID admissions ID API
-*/
-func (a *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDRequest) Do() (*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetOrganisationNameverificationsNameVerificationIDAdmissionsID",
-		Method:             "GET",
-		PathPattern:        "/organisation/nameverifications/{name_verification_id}/admissions/{id}",
-		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
-		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
-		Schemes:            []string{"https"},
-		Params:             a,
-		Reader:             &GetOrganisationNameverificationsNameVerificationIDAdmissionsIDReader{formats: a.formats},
-		//AuthInfo: authInfo,
-		Context: a.Context,
-		Client:  a.HTTPClient,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK), nil
-
-}
-
-func (a *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDRequest) MustDo() *GetOrganisationNameverificationsNameVerificationIDAdmissionsIDOK {
-	r0, err := a.Do()
-	if err != nil {
-		panic(err)
-	}
-	return r0
-}
-
-/*
-post organisation nameverifications API
-*/
-func (a *PostOrganisationNameverificationsRequest) Do() (*PostOrganisationNameverificationsCreated, error) {
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PostOrganisationNameverifications",
+		ID:                 "CreateNameVerification",
 		Method:             "POST",
 		PathPattern:        "/organisation/nameverifications",
 		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
 		Schemes:            []string{"https"},
 		Params:             a,
-		Reader:             &PostOrganisationNameverificationsReader{formats: a.formats},
+		Reader:             &CreateNameVerificationReader{formats: a.formats},
 		//AuthInfo: authInfo,
 		Context: a.Context,
 		Client:  a.HTTPClient,
@@ -149,11 +50,110 @@ func (a *PostOrganisationNameverificationsRequest) Do() (*PostOrganisationNameve
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostOrganisationNameverificationsCreated), nil
+	return result.(*CreateNameVerificationCreated), nil
 
 }
 
-func (a *PostOrganisationNameverificationsRequest) MustDo() *PostOrganisationNameverificationsCreated {
+func (a *CreateNameVerificationRequest) MustDo() *CreateNameVerificationCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get name verification API
+*/
+func (a *GetNameVerificationRequest) Do() (*GetNameVerificationOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetNameVerification",
+		Method:             "GET",
+		PathPattern:        "/organisation/nameverifications/{id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetNameVerificationReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetNameVerificationOK), nil
+
+}
+
+func (a *GetNameVerificationRequest) MustDo() *GetNameVerificationOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+get name verification admission API
+*/
+func (a *GetNameVerificationAdmissionRequest) Do() (*GetNameVerificationAdmissionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetNameVerificationAdmission",
+		Method:             "GET",
+		PathPattern:        "/organisation/nameverifications/{name_verification_id}/admissions/{id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetNameVerificationAdmissionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetNameVerificationAdmissionOK), nil
+
+}
+
+func (a *GetNameVerificationAdmissionRequest) MustDo() *GetNameVerificationAdmissionOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+list name verifications API
+*/
+func (a *ListNameVerificationsRequest) Do() (*ListNameVerificationsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListNameVerifications",
+		Method:             "GET",
+		PathPattern:        "/organisation/nameverifications",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &ListNameVerificationsReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListNameVerificationsOK), nil
+
+}
+
+func (a *ListNameVerificationsRequest) MustDo() *ListNameVerificationsOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

@@ -46,6 +46,10 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 
 		FilterBeneficiaryPartyBankID: c.Defaults.GetStringPtr("ListPayments", "filter[beneficiary_party.bank_id]"),
 
+		FilterCreatedDateFrom: c.Defaults.GetStrfmtDatePtr("ListPayments", "filter[created_date_from]"),
+
+		FilterCreatedDateTo: c.Defaults.GetStrfmtDatePtr("ListPayments", "filter[created_date_to]"),
+
 		FilterCurrency: c.Defaults.GetStringPtr("ListPayments", "filter[currency]"),
 
 		FilterDebtorPartyAccountName: c.Defaults.GetStringPtr("ListPayments", "filter[debtor_party.account_name]"),
@@ -218,6 +222,14 @@ type ListPaymentsRequest struct {
 	/*FilterBeneficiaryPartyBankID*/
 
 	FilterBeneficiaryPartyBankID *string
+
+	/*FilterCreatedDateFrom*/
+
+	FilterCreatedDateFrom *strfmt.Date
+
+	/*FilterCreatedDateTo*/
+
+	FilterCreatedDateTo *strfmt.Date
 
 	/*FilterCurrency*/
 
@@ -634,6 +646,34 @@ func (o *ListPaymentsRequest) WithFilterBeneficiaryPartyBankID(filterBeneficiary
 func (o *ListPaymentsRequest) WithoutFilterBeneficiaryPartyBankID() *ListPaymentsRequest {
 
 	o.FilterBeneficiaryPartyBankID = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterCreatedDateFrom(filterCreatedDateFrom strfmt.Date) *ListPaymentsRequest {
+
+	o.FilterCreatedDateFrom = &filterCreatedDateFrom
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterCreatedDateFrom() *ListPaymentsRequest {
+
+	o.FilterCreatedDateFrom = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterCreatedDateTo(filterCreatedDateTo strfmt.Date) *ListPaymentsRequest {
+
+	o.FilterCreatedDateTo = &filterCreatedDateTo
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterCreatedDateTo() *ListPaymentsRequest {
+
+	o.FilterCreatedDateTo = nil
 
 	return o
 }
@@ -1645,6 +1685,38 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qFilterBeneficiaryPartyBankID := qrFilterBeneficiaryPartyBankID
 		if qFilterBeneficiaryPartyBankID != "" {
 			if err := r.SetQueryParam("filter[beneficiary_party.bank_id]", qFilterBeneficiaryPartyBankID); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterCreatedDateFrom != nil {
+
+		// query param filter[created_date_from]
+		var qrFilterCreatedDateFrom strfmt.Date
+		if o.FilterCreatedDateFrom != nil {
+			qrFilterCreatedDateFrom = *o.FilterCreatedDateFrom
+		}
+		qFilterCreatedDateFrom := qrFilterCreatedDateFrom.String()
+		if qFilterCreatedDateFrom != "" {
+			if err := r.SetQueryParam("filter[created_date_from]", qFilterCreatedDateFrom); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterCreatedDateTo != nil {
+
+		// query param filter[created_date_to]
+		var qrFilterCreatedDateTo strfmt.Date
+		if o.FilterCreatedDateTo != nil {
+			qrFilterCreatedDateTo = *o.FilterCreatedDateTo
+		}
+		qFilterCreatedDateTo := qrFilterCreatedDateTo.String()
+		if qFilterCreatedDateTo != "" {
+			if err := r.SetQueryParam("filter[created_date_to]", qFilterCreatedDateTo); err != nil {
 				return err
 			}
 		}

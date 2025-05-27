@@ -28,6 +28,12 @@ const (
 
 	// PartyRoleOriginator captures enum value "Originator"
 	PartyRoleOriginator PartyRole = "Originator"
+
+	// PartyRoleInvoicer captures enum value "Invoicer"
+	PartyRoleInvoicer PartyRole = "Invoicer"
+
+	// PartyRoleInvoicee captures enum value "Invoicee"
+	PartyRoleInvoicee PartyRole = "Invoicee"
 )
 
 // for schema
@@ -35,7 +41,7 @@ var partyRoleEnum []interface{}
 
 func init() {
 	var res []PartyRole
-	if err := json.Unmarshal([]byte(`["InitiatingParty","CaseCreator","Originator"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["InitiatingParty","CaseCreator","Originator","Invoicer","Invoicee"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

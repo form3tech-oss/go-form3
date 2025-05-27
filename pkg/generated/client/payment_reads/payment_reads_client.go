@@ -822,6 +822,39 @@ func (a *GetPositionsRequest) MustDo() *GetPositionsOK {
 }
 
 /*
+get return admission task API
+*/
+func (a *GetReturnAdmissionTaskRequest) Do() (*GetReturnAdmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetReturnAdmissionTask",
+		Method:             "GET",
+		PathPattern:        "/transaction/payments/{paymentId}/returns/{returnId}/admissions/{returnAdmissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetReturnAdmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetReturnAdmissionTaskOK), nil
+
+}
+
+func (a *GetReturnAdmissionTaskRequest) MustDo() *GetReturnAdmissionTaskOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 get return submission task API
 */
 func (a *GetReturnSubmissionTaskRequest) Do() (*GetReturnSubmissionTaskOK, error) {

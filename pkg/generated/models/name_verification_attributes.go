@@ -22,8 +22,7 @@ import (
 type NameVerificationAttributes struct {
 
 	// account classification
-	// Required: true
-	AccountClassification *AccountClassification `json:"account_classification"`
+	AccountClassification AccountClassification `json:"account_classification,omitempty"`
 
 	// account number
 	// Required: true
@@ -42,12 +41,31 @@ type NameVerificationAttributes struct {
 	// Required: true
 	BankIDCode *BankIDCode `json:"bank_id_code"`
 
+	// id code type
+	// Max Length: 36
+	// Min Length: 0
+	IDCodeType *string `json:"id_code_type,omitempty"`
+
 	// Account holder names (for example title, first name, last name). Used for Confirmation of Payee matching.
 	// Required: true
 	Name []string `json:"name"`
 
+	// psp request id
+	// Max Length: 36
+	PspRequestID string `json:"psp_request_id,omitempty"`
+
+	// request datetime
+	// Format: date-time
+	RequestDatetime *strfmt.DateTime `json:"request_datetime,omitempty"`
+
+	// requester
+	Requester *Requester `json:"requester,omitempty"`
+
 	// secondary identification
 	SecondaryIdentification string `json:"secondary_identification,omitempty"`
+
+	// verification scheme
+	VerificationScheme *VerificationScheme `json:"verification_scheme,omitempty"`
 }
 
 func NameVerificationAttributesWithDefaults(defaults client.Defaults) *NameVerificationAttributes {
@@ -63,21 +81,27 @@ func NameVerificationAttributesWithDefaults(defaults client.Defaults) *NameVerif
 
 		// TODO BankIDCode: BankIDCode,
 
+		IDCodeType: defaults.GetStringPtr("NameVerificationAttributes", "id_code_type"),
+
 		Name: make([]string, 0),
 
+		PspRequestID: defaults.GetString("NameVerificationAttributes", "psp_request_id"),
+
+		RequestDatetime: defaults.GetStrfmtDateTimePtr("NameVerificationAttributes", "request_datetime"),
+
+		Requester: RequesterWithDefaults(defaults),
+
 		SecondaryIdentification: defaults.GetString("NameVerificationAttributes", "secondary_identification"),
+
+		// TODO VerificationScheme: VerificationScheme,
+
 	}
 }
 
 func (m *NameVerificationAttributes) WithAccountClassification(accountClassification AccountClassification) *NameVerificationAttributes {
 
-	m.AccountClassification = &accountClassification
+	m.AccountClassification = accountClassification
 
-	return m
-}
-
-func (m *NameVerificationAttributes) WithoutAccountClassification() *NameVerificationAttributes {
-	m.AccountClassification = nil
 	return m
 }
 
@@ -129,6 +153,18 @@ func (m *NameVerificationAttributes) WithoutBankIDCode() *NameVerificationAttrib
 	return m
 }
 
+func (m *NameVerificationAttributes) WithIDCodeType(iDCodeType string) *NameVerificationAttributes {
+
+	m.IDCodeType = &iDCodeType
+
+	return m
+}
+
+func (m *NameVerificationAttributes) WithoutIDCodeType() *NameVerificationAttributes {
+	m.IDCodeType = nil
+	return m
+}
+
 func (m *NameVerificationAttributes) WithName(name []string) *NameVerificationAttributes {
 
 	m.Name = name
@@ -136,10 +172,53 @@ func (m *NameVerificationAttributes) WithName(name []string) *NameVerificationAt
 	return m
 }
 
+func (m *NameVerificationAttributes) WithPspRequestID(pspRequestID string) *NameVerificationAttributes {
+
+	m.PspRequestID = pspRequestID
+
+	return m
+}
+
+func (m *NameVerificationAttributes) WithRequestDatetime(requestDatetime strfmt.DateTime) *NameVerificationAttributes {
+
+	m.RequestDatetime = &requestDatetime
+
+	return m
+}
+
+func (m *NameVerificationAttributes) WithoutRequestDatetime() *NameVerificationAttributes {
+	m.RequestDatetime = nil
+	return m
+}
+
+func (m *NameVerificationAttributes) WithRequester(requester Requester) *NameVerificationAttributes {
+
+	m.Requester = &requester
+
+	return m
+}
+
+func (m *NameVerificationAttributes) WithoutRequester() *NameVerificationAttributes {
+	m.Requester = nil
+	return m
+}
+
 func (m *NameVerificationAttributes) WithSecondaryIdentification(secondaryIdentification string) *NameVerificationAttributes {
 
 	m.SecondaryIdentification = secondaryIdentification
 
+	return m
+}
+
+func (m *NameVerificationAttributes) WithVerificationScheme(verificationScheme VerificationScheme) *NameVerificationAttributes {
+
+	m.VerificationScheme = &verificationScheme
+
+	return m
+}
+
+func (m *NameVerificationAttributes) WithoutVerificationScheme() *NameVerificationAttributes {
+	m.VerificationScheme = nil
 	return m
 }
 
@@ -167,7 +246,27 @@ func (m *NameVerificationAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateIDCodeType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePspRequestID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRequestDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRequester(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVerificationScheme(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -179,17 +278,15 @@ func (m *NameVerificationAttributes) Validate(formats strfmt.Registry) error {
 
 func (m *NameVerificationAttributes) validateAccountClassification(formats strfmt.Registry) error {
 
-	if err := validate.Required("account_classification", "body", m.AccountClassification); err != nil {
-		return err
+	if swag.IsZero(m.AccountClassification) { // not required
+		return nil
 	}
 
-	if m.AccountClassification != nil {
-		if err := m.AccountClassification.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("account_classification")
-			}
-			return err
+	if err := m.AccountClassification.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("account_classification")
 		}
+		return err
 	}
 
 	return nil
@@ -253,6 +350,23 @@ func (m *NameVerificationAttributes) validateBankIDCode(formats strfmt.Registry)
 	return nil
 }
 
+func (m *NameVerificationAttributes) validateIDCodeType(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.IDCodeType) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("id_code_type", "body", *m.IDCodeType, 0); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("id_code_type", "body", *m.IDCodeType, 36); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *NameVerificationAttributes) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -265,10 +379,72 @@ func (m *NameVerificationAttributes) validateName(formats strfmt.Registry) error
 			return err
 		}
 
-		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 140); err != nil {
+		if err := validate.MaxLength("name"+"."+strconv.Itoa(i), "body", m.Name[i], 256); err != nil {
 			return err
 		}
 
+	}
+
+	return nil
+}
+
+func (m *NameVerificationAttributes) validatePspRequestID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PspRequestID) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("psp_request_id", "body", m.PspRequestID, 36); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NameVerificationAttributes) validateRequestDatetime(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RequestDatetime) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("request_datetime", "body", "date-time", m.RequestDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NameVerificationAttributes) validateRequester(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Requester) { // not required
+		return nil
+	}
+
+	if m.Requester != nil {
+		if err := m.Requester.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("requester")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *NameVerificationAttributes) validateVerificationScheme(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.VerificationScheme) { // not required
+		return nil
+	}
+
+	if m.VerificationScheme != nil {
+		if err := m.VerificationScheme.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("verification_scheme")
+			}
+			return err
+		}
 	}
 
 	return nil
