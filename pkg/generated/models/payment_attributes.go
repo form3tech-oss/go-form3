@@ -118,6 +118,9 @@ type PaymentAttributes struct {
 	// reimbursement
 	Reimbursement *ReimbursementAccountHoldingEntity `json:"reimbursement,omitempty"`
 
+	// Information relating to the handling of the remittance information by any of the agents in the transaction processing chain.
+	RelatedRemittanceInformation []*PaymentAttributesRelatedRemittanceInformationItems0 `json:"related_remittance_information"`
+
 	// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts receivable system provided by the debtor for the beneficiary.
 	RemittanceInformation string `json:"remittance_information,omitempty"`
 
@@ -142,6 +145,9 @@ type PaymentAttributes struct {
 
 	// structured reference
 	StructuredReference *PaymentAttributesStructuredReference `json:"structured_reference,omitempty"`
+
+	// Information supplied to enable the matching / reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivables system, in a structured form.
+	StructuredRemittanceInformation []*PaymentAttributesStructuredRemittanceInformationItems0 `json:"structured_remittance_information"`
 
 	// swift
 	Swift *PaymentAttributesSwift `json:"swift,omitempty"`
@@ -225,6 +231,8 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 
 		Reimbursement: ReimbursementAccountHoldingEntityWithDefaults(defaults),
 
+		RelatedRemittanceInformation: make([]*PaymentAttributesRelatedRemittanceInformationItems0, 0),
+
 		RemittanceInformation: defaults.GetString("PaymentAttributes", "remittance_information"),
 
 		SchemePaymentSubType: defaults.GetString("PaymentAttributes", "scheme_payment_sub_type"),
@@ -240,6 +248,8 @@ func PaymentAttributesWithDefaults(defaults client.Defaults) *PaymentAttributes 
 		Settlement: SettlementWithDefaults(defaults),
 
 		StructuredReference: PaymentAttributesStructuredReferenceWithDefaults(defaults),
+
+		StructuredRemittanceInformation: make([]*PaymentAttributesStructuredRemittanceInformationItems0, 0),
 
 		Swift: PaymentAttributesSwiftWithDefaults(defaults),
 
@@ -515,6 +525,13 @@ func (m *PaymentAttributes) WithoutReimbursement() *PaymentAttributes {
 	return m
 }
 
+func (m *PaymentAttributes) WithRelatedRemittanceInformation(relatedRemittanceInformation []*PaymentAttributesRelatedRemittanceInformationItems0) *PaymentAttributes {
+
+	m.RelatedRemittanceInformation = relatedRemittanceInformation
+
+	return m
+}
+
 func (m *PaymentAttributes) WithRemittanceInformation(remittanceInformation string) *PaymentAttributes {
 
 	m.RemittanceInformation = remittanceInformation
@@ -588,6 +605,13 @@ func (m *PaymentAttributes) WithStructuredReference(structuredReference PaymentA
 
 func (m *PaymentAttributes) WithoutStructuredReference() *PaymentAttributes {
 	m.StructuredReference = nil
+	return m
+}
+
+func (m *PaymentAttributes) WithStructuredRemittanceInformation(structuredRemittanceInformation []*PaymentAttributesStructuredRemittanceInformationItems0) *PaymentAttributes {
+
+	m.StructuredRemittanceInformation = structuredRemittanceInformation
+
 	return m
 }
 
@@ -705,6 +729,10 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateRelatedRemittanceInformation(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSchemeProcessingDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -718,6 +746,10 @@ func (m *PaymentAttributes) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStructuredReference(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStructuredRemittanceInformation(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1021,6 +1053,31 @@ func (m *PaymentAttributes) validateReimbursement(formats strfmt.Registry) error
 	return nil
 }
 
+func (m *PaymentAttributes) validateRelatedRemittanceInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RelatedRemittanceInformation) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.RelatedRemittanceInformation); i++ {
+		if swag.IsZero(m.RelatedRemittanceInformation[i]) { // not required
+			continue
+		}
+
+		if m.RelatedRemittanceInformation[i] != nil {
+			if err := m.RelatedRemittanceInformation[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("related_remittance_information" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *PaymentAttributes) validateSchemeProcessingDate(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.SchemeProcessingDate) { // not required
@@ -1083,6 +1140,31 @@ func (m *PaymentAttributes) validateStructuredReference(formats strfmt.Registry)
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributes) validateStructuredRemittanceInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.StructuredRemittanceInformation) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.StructuredRemittanceInformation); i++ {
+		if swag.IsZero(m.StructuredRemittanceInformation[i]) { // not required
+			continue
+		}
+
+		if m.StructuredRemittanceInformation[i] != nil {
+			if err := m.StructuredRemittanceInformation[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("structured_remittance_information" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -2420,6 +2502,239 @@ func (m *PaymentAttributesFx) Json() string {
 	return string(json)
 }
 
+// PaymentAttributesRelatedRemittanceInformationItems0 payment attributes related remittance information items0
+// swagger:model PaymentAttributesRelatedRemittanceInformationItems0
+type PaymentAttributesRelatedRemittanceInformationItems0 struct {
+
+	// remittance id
+	RemittanceID string `json:"remittance_id,omitempty"`
+
+	// Information on the location and/or delivery of the remittance information.
+	RemittanceLocationDetails []*PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 `json:"remittance_location_details"`
+}
+
+func PaymentAttributesRelatedRemittanceInformationItems0WithDefaults(defaults client.Defaults) *PaymentAttributesRelatedRemittanceInformationItems0 {
+	return &PaymentAttributesRelatedRemittanceInformationItems0{
+
+		RemittanceID: defaults.GetString("PaymentAttributesRelatedRemittanceInformationItems0", "remittance_id"),
+
+		RemittanceLocationDetails: make([]*PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0, 0),
+	}
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) WithRemittanceID(remittanceID string) *PaymentAttributesRelatedRemittanceInformationItems0 {
+
+	m.RemittanceID = remittanceID
+
+	return m
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) WithRemittanceLocationDetails(remittanceLocationDetails []*PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) *PaymentAttributesRelatedRemittanceInformationItems0 {
+
+	m.RemittanceLocationDetails = remittanceLocationDetails
+
+	return m
+}
+
+// Validate validates this payment attributes related remittance information items0
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateRemittanceLocationDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) validateRemittanceLocationDetails(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RemittanceLocationDetails) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.RemittanceLocationDetails); i++ {
+		if swag.IsZero(m.RemittanceLocationDetails[i]) { // not required
+			continue
+		}
+
+		if m.RemittanceLocationDetails[i] != nil {
+			if err := m.RemittanceLocationDetails[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("remittance_location_details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesRelatedRemittanceInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesRelatedRemittanceInformationItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 payment attributes related remittance information items0 remittance location details items0
+// swagger:model PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0
+type PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 struct {
+
+	// Electronic address to which an agent is to send the remittance information. If location_coded is EMAL, this contains an email address. If location_coded is URID, this contains a URI.
+	ElectronicAddress string `json:"electronic_address,omitempty"`
+
+	// Method used to deliver the remittance advice information.
+	// Required: true
+	// Enum: ["EMAL","EDIC","FAXI","POST","SMSM","URID"]
+	LocationCoded *string `json:"location_coded"`
+}
+
+func PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0WithDefaults(defaults client.Defaults) *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 {
+	return &PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0{
+
+		ElectronicAddress: defaults.GetString("PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0", "electronic_address"),
+
+		LocationCoded: defaults.GetStringPtr("PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0", "location_coded"),
+	}
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) WithElectronicAddress(electronicAddress string) *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 {
+
+	m.ElectronicAddress = electronicAddress
+
+	return m
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) WithLocationCoded(locationCoded string) *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 {
+
+	m.LocationCoded = &locationCoded
+
+	return m
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) WithoutLocationCoded() *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0 {
+	m.LocationCoded = nil
+	return m
+}
+
+// Validate validates this payment attributes related remittance information items0 remittance location details items0
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLocationCoded(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var paymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0TypeLocationCodedPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["EMAL","EDIC","FAXI","POST","SMSM","URID"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		paymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0TypeLocationCodedPropEnum = append(paymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0TypeLocationCodedPropEnum, v)
+	}
+}
+
+const (
+
+	// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedEMAL captures enum value "EMAL"
+	PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedEMAL string = "EMAL"
+
+	// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedEDIC captures enum value "EDIC"
+	PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedEDIC string = "EDIC"
+
+	// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedFAXI captures enum value "FAXI"
+	PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedFAXI string = "FAXI"
+
+	// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedPOST captures enum value "POST"
+	PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedPOST string = "POST"
+
+	// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedSMSM captures enum value "SMSM"
+	PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedSMSM string = "SMSM"
+
+	// PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedURID captures enum value "URID"
+	PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0LocationCodedURID string = "URID"
+)
+
+// prop value enum
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) validateLocationCodedEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, paymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0TypeLocationCodedPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) validateLocationCoded(formats strfmt.Registry) error {
+
+	if err := validate.Required("location_coded", "body", m.LocationCoded); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateLocationCodedEnum("location_coded", "body", *m.LocationCoded); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesRelatedRemittanceInformationItems0RemittanceLocationDetailsItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
 // PaymentAttributesStructuredReference payment attributes structured reference
 // swagger:model PaymentAttributesStructuredReference
 type PaymentAttributesStructuredReference struct {
@@ -2477,6 +2792,759 @@ func (m *PaymentAttributesStructuredReference) UnmarshalBinary(b []byte) error {
 	return nil
 }
 func (m *PaymentAttributesStructuredReference) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentAttributesStructuredRemittanceInformationItems0 payment attributes structured remittance information items0
+// swagger:model PaymentAttributesStructuredRemittanceInformationItems0
+type PaymentAttributesStructuredRemittanceInformationItems0 struct {
+
+	// parties
+	Parties []*PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0 `json:"parties"`
+
+	// referred document amounts
+	ReferredDocumentAmounts []*PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 `json:"referred_document_amounts"`
+
+	// The identification and the content of the referred document. Multiple occurrences are used when a credit transfer is used to return funds associated with a previously completed credit transfer.
+	ReferredDocumentInformation []*PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 `json:"referred_document_information"`
+}
+
+func PaymentAttributesStructuredRemittanceInformationItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0 {
+	return &PaymentAttributesStructuredRemittanceInformationItems0{
+
+		Parties: make([]*PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0, 0),
+
+		ReferredDocumentAmounts: make([]*PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0, 0),
+
+		ReferredDocumentInformation: make([]*PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0, 0),
+	}
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) WithParties(parties []*PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) *PaymentAttributesStructuredRemittanceInformationItems0 {
+
+	m.Parties = parties
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) WithReferredDocumentAmounts(referredDocumentAmounts []*PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) *PaymentAttributesStructuredRemittanceInformationItems0 {
+
+	m.ReferredDocumentAmounts = referredDocumentAmounts
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) WithReferredDocumentInformation(referredDocumentInformation []*PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) *PaymentAttributesStructuredRemittanceInformationItems0 {
+
+	m.ReferredDocumentInformation = referredDocumentInformation
+
+	return m
+}
+
+// Validate validates this payment attributes structured remittance information items0
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateParties(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferredDocumentAmounts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReferredDocumentInformation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) validateParties(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Parties) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Parties); i++ {
+		if swag.IsZero(m.Parties[i]) { // not required
+			continue
+		}
+
+		if m.Parties[i] != nil {
+			if err := m.Parties[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("parties" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) validateReferredDocumentAmounts(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReferredDocumentAmounts) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ReferredDocumentAmounts); i++ {
+		if swag.IsZero(m.ReferredDocumentAmounts[i]) { // not required
+			continue
+		}
+
+		if m.ReferredDocumentAmounts[i] != nil {
+			if err := m.ReferredDocumentAmounts[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("referred_document_amounts" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) validateReferredDocumentInformation(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ReferredDocumentInformation) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ReferredDocumentInformation); i++ {
+		if swag.IsZero(m.ReferredDocumentInformation[i]) { // not required
+			continue
+		}
+
+		if m.ReferredDocumentInformation[i] != nil {
+			if err := m.ReferredDocumentInformation[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("referred_document_information" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesStructuredRemittanceInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesStructuredRemittanceInformationItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0 payment attributes structured remittance information items0 parties items0
+// swagger:model PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0
+type PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0 struct {
+
+	// Additional information such as the Biller / Merchant Identification in certain Bill Pay use cases.
+	OrganisationIdentifications []*PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 `json:"organisation_identifications"`
+
+	// The type of party.
+	Role PartyRole `json:"role,omitempty"`
+}
+
+func PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0 {
+	return &PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0{
+
+		OrganisationIdentifications: make([]*PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0, 0),
+
+		// TODO Role: PartyRole,
+
+	}
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) WithOrganisationIdentifications(organisationIdentifications []*PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0 {
+
+	m.OrganisationIdentifications = organisationIdentifications
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) WithRole(role PartyRole) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0 {
+
+	m.Role = role
+
+	return m
+}
+
+// Validate validates this payment attributes structured remittance information items0 parties items0
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateOrganisationIdentifications(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRole(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) validateOrganisationIdentifications(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.OrganisationIdentifications) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.OrganisationIdentifications); i++ {
+		if swag.IsZero(m.OrganisationIdentifications[i]) { // not required
+			continue
+		}
+
+		if m.OrganisationIdentifications[i] != nil {
+			if err := m.OrganisationIdentifications[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("organisation_identifications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) validateRole(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Role) { // not required
+		return nil
+	}
+
+	if err := m.Role.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("role")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 payment attributes structured remittance information items0 parties items0 organisation identifications items0
+// swagger:model PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0
+type PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 struct {
+
+	// Name of the identification scheme, in a coded form as published in an external list.
+	IdentificationCode string `json:"identification_code,omitempty"`
+
+	// Entity that assigns the identification.
+	IdentificationIssuer string `json:"identification_issuer,omitempty"`
+
+	// Name of the identification scheme, in a free text form.
+	IdentificationScheme string `json:"identification_scheme,omitempty"`
+}
+
+func PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
+	return &PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0{
+
+		IdentificationCode: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification_code"),
+
+		IdentificationIssuer: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification_issuer"),
+
+		IdentificationScheme: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification_scheme"),
+	}
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) WithIdentificationCode(identificationCode string) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
+
+	m.IdentificationCode = identificationCode
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) WithIdentificationIssuer(identificationIssuer string) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
+
+	m.IdentificationIssuer = identificationIssuer
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) WithIdentificationScheme(identificationScheme string) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
+
+	m.IdentificationScheme = identificationScheme
+
+	return m
+}
+
+// Validate validates this payment attributes structured remittance information items0 parties items0 organisation identifications items0
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 payment attributes structured remittance information items0 referred document amounts items0
+// swagger:model PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0
+type PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 struct {
+
+	// Amount of money.
+	// Pattern: ^[0-9]{0,20}(?:\.[0-9]{1,10})?$
+	Amount string `json:"amount,omitempty"`
+
+	// The code relating to any discount that can be applied to an invoice.
+	AmountType string `json:"amount_type,omitempty"`
+
+	// amount type coded
+	AmountTypeCoded string `json:"amount_type_coded,omitempty"`
+
+	// ISO currency code for transaction amount
+	Currency string `json:"currency,omitempty"`
+
+	// type
+	// Required: true
+	// Enum: ["DiscountAppliedAmount","DuePayableAmount","CreditNoteAmount","TaxAmount","AdjustmentAmount","RemittanceAmount"]
+	Type *string `json:"type"`
+}
+
+func PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+	return &PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0{
+
+		Amount: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0", "amount"),
+
+		AmountType: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0", "amount_type"),
+
+		AmountTypeCoded: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0", "amount_type_coded"),
+
+		Currency: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0", "currency"),
+
+		Type: defaults.GetStringPtr("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0", "type"),
+	}
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) WithAmount(amount string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+
+	m.Amount = amount
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) WithAmountType(amountType string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+
+	m.AmountType = amountType
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) WithAmountTypeCoded(amountTypeCoded string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+
+	m.AmountTypeCoded = amountTypeCoded
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) WithCurrency(currency string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+
+	m.Currency = currency
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) WithType(typeVar string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+
+	m.Type = &typeVar
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) WithoutType() *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0 {
+	m.Type = nil
+	return m
+}
+
+// Validate validates this payment attributes structured remittance information items0 referred document amounts items0
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAmount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) validateAmount(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Amount) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("amount", "body", m.Amount, `^[0-9]{0,20}(?:\.[0-9]{1,10})?$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["DiscountAppliedAmount","DuePayableAmount","CreditNoteAmount","TaxAmount","AdjustmentAmount","RemittanceAmount"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeTypePropEnum = append(paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeDiscountAppliedAmount captures enum value "DiscountAppliedAmount"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeDiscountAppliedAmount string = "DiscountAppliedAmount"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeDuePayableAmount captures enum value "DuePayableAmount"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeDuePayableAmount string = "DuePayableAmount"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeCreditNoteAmount captures enum value "CreditNoteAmount"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeCreditNoteAmount string = "CreditNoteAmount"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeTaxAmount captures enum value "TaxAmount"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeTaxAmount string = "TaxAmount"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeAdjustmentAmount captures enum value "AdjustmentAmount"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeAdjustmentAmount string = "AdjustmentAmount"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeRemittanceAmount captures enum value "RemittanceAmount"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeRemittanceAmount string = "RemittanceAmount"
+)
+
+// prop value enum
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) validateTypeEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0TypeTypePropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentAmountsItems0) Json() string {
+	json, err := json.MarshalIndent(m, "  ", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(json)
+}
+
+// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 payment attributes structured remittance information items0 referred document information items0
+// swagger:model PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0
+type PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 struct {
+
+	// Date associated with the referred document, e.g. the date of the original Credit Transfer (pacs.008) message that is being returned. This is required when the type is RTRN.
+	// Format: date
+	DocumentDate strfmt.Date `json:"document_date,omitempty"`
+
+	// Unique and unambiguous identification of the referred document.
+	DocumentID string `json:"document_id,omitempty"`
+
+	// Proprietary identification of the type of the remittance document. Used to carry the additional information related to the payment.
+	DocumentType string `json:"document_type,omitempty"`
+
+	// Document type in a coded form. Used to carry the additional information related to the payment. Only one of document_type_coded or document_type can be provided.
+	// Enum: ["CINV","AROI","BOLD","CMCN","CREN","CNFA","DEBN","DNFA","DISP","HIRI","MSIN","PUDR","SBIN","SOAC","TSUT","VCHR"]
+	DocumentTypeCoded string `json:"document_type_coded,omitempty"`
+}
+
+func PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
+	return &PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0{
+
+		DocumentDate: defaults.GetStrfmtDate("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_date"),
+
+		DocumentID: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_id"),
+
+		DocumentType: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_type"),
+
+		DocumentTypeCoded: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_type_coded"),
+	}
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) WithDocumentDate(documentDate strfmt.Date) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
+
+	m.DocumentDate = documentDate
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) WithDocumentID(documentID string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
+
+	m.DocumentID = documentID
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) WithDocumentType(documentType string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
+
+	m.DocumentType = documentType
+
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) WithDocumentTypeCoded(documentTypeCoded string) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
+
+	m.DocumentTypeCoded = documentTypeCoded
+
+	return m
+}
+
+// Validate validates this payment attributes structured remittance information items0 referred document information items0
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDocumentDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDocumentTypeCoded(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) validateDocumentDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DocumentDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("document_date", "body", "date", m.DocumentDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0TypeDocumentTypeCodedPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["CINV","AROI","BOLD","CMCN","CREN","CNFA","DEBN","DNFA","DISP","HIRI","MSIN","PUDR","SBIN","SOAC","TSUT","VCHR"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0TypeDocumentTypeCodedPropEnum = append(paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0TypeDocumentTypeCodedPropEnum, v)
+	}
+}
+
+const (
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCINV captures enum value "CINV"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCINV string = "CINV"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedAROI captures enum value "AROI"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedAROI string = "AROI"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedBOLD captures enum value "BOLD"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedBOLD string = "BOLD"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCMCN captures enum value "CMCN"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCMCN string = "CMCN"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCREN captures enum value "CREN"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCREN string = "CREN"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCNFA captures enum value "CNFA"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedCNFA string = "CNFA"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedDEBN captures enum value "DEBN"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedDEBN string = "DEBN"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedDNFA captures enum value "DNFA"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedDNFA string = "DNFA"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedDISP captures enum value "DISP"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedDISP string = "DISP"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedHIRI captures enum value "HIRI"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedHIRI string = "HIRI"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedMSIN captures enum value "MSIN"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedMSIN string = "MSIN"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedPUDR captures enum value "PUDR"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedPUDR string = "PUDR"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedSBIN captures enum value "SBIN"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedSBIN string = "SBIN"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedSOAC captures enum value "SOAC"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedSOAC string = "SOAC"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedTSUT captures enum value "TSUT"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedTSUT string = "TSUT"
+
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedVCHR captures enum value "VCHR"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedVCHR string = "VCHR"
+)
+
+// prop value enum
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) validateDocumentTypeCodedEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0TypeDocumentTypeCodedPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) validateDocumentTypeCoded(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DocumentTypeCoded) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateDocumentTypeCodedEnum("document_type_coded", "body", m.DocumentTypeCoded); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) UnmarshalBinary(b []byte) error {
+	var res PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) Json() string {
 	json, err := json.MarshalIndent(m, "  ", "  ")
 	if err != nil {
 		log.Fatal(err)

@@ -20,41 +20,50 @@ type NameVerificationSubmissionReasonCode string
 
 const (
 
-	// NameVerificationSubmissionReasonCodeANNM captures enum value "ANNM"
-	NameVerificationSubmissionReasonCodeANNM NameVerificationSubmissionReasonCode = "ANNM"
-
-	// NameVerificationSubmissionReasonCodeMBAM captures enum value "MBAM"
-	NameVerificationSubmissionReasonCodeMBAM NameVerificationSubmissionReasonCode = "MBAM"
-
-	// NameVerificationSubmissionReasonCodeBANM captures enum value "BANM"
-	NameVerificationSubmissionReasonCodeBANM NameVerificationSubmissionReasonCode = "BANM"
-
-	// NameVerificationSubmissionReasonCodePANM captures enum value "PANM"
-	NameVerificationSubmissionReasonCodePANM NameVerificationSubmissionReasonCode = "PANM"
-
-	// NameVerificationSubmissionReasonCodeBAMM captures enum value "BAMM"
-	NameVerificationSubmissionReasonCodeBAMM NameVerificationSubmissionReasonCode = "BAMM"
-
-	// NameVerificationSubmissionReasonCodePAMM captures enum value "PAMM"
-	NameVerificationSubmissionReasonCodePAMM NameVerificationSubmissionReasonCode = "PAMM"
-
 	// NameVerificationSubmissionReasonCodeAC01 captures enum value "AC01"
 	NameVerificationSubmissionReasonCodeAC01 NameVerificationSubmissionReasonCode = "AC01"
-
-	// NameVerificationSubmissionReasonCodeIVCR captures enum value "IVCR"
-	NameVerificationSubmissionReasonCodeIVCR NameVerificationSubmissionReasonCode = "IVCR"
-
-	// NameVerificationSubmissionReasonCodeCASS captures enum value "CASS"
-	NameVerificationSubmissionReasonCodeCASS NameVerificationSubmissionReasonCode = "CASS"
-
-	// NameVerificationSubmissionReasonCodeSCNS captures enum value "SCNS"
-	NameVerificationSubmissionReasonCodeSCNS NameVerificationSubmissionReasonCode = "SCNS"
 
 	// NameVerificationSubmissionReasonCodeACNS captures enum value "ACNS"
 	NameVerificationSubmissionReasonCodeACNS NameVerificationSubmissionReasonCode = "ACNS"
 
+	// NameVerificationSubmissionReasonCodeANNM captures enum value "ANNM"
+	NameVerificationSubmissionReasonCodeANNM NameVerificationSubmissionReasonCode = "ANNM"
+
+	// NameVerificationSubmissionReasonCodeBAMM captures enum value "BAMM"
+	NameVerificationSubmissionReasonCodeBAMM NameVerificationSubmissionReasonCode = "BAMM"
+
+	// NameVerificationSubmissionReasonCodeBANM captures enum value "BANM"
+	NameVerificationSubmissionReasonCodeBANM NameVerificationSubmissionReasonCode = "BANM"
+
+	// NameVerificationSubmissionReasonCodeCASS captures enum value "CASS"
+	NameVerificationSubmissionReasonCodeCASS NameVerificationSubmissionReasonCode = "CASS"
+
+	// NameVerificationSubmissionReasonCodeCMTC captures enum value "CMTC"
+	NameVerificationSubmissionReasonCodeCMTC NameVerificationSubmissionReasonCode = "CMTC"
+
+	// NameVerificationSubmissionReasonCodeIVCR captures enum value "IVCR"
+	NameVerificationSubmissionReasonCodeIVCR NameVerificationSubmissionReasonCode = "IVCR"
+
+	// NameVerificationSubmissionReasonCodeMBAM captures enum value "MBAM"
+	NameVerificationSubmissionReasonCodeMBAM NameVerificationSubmissionReasonCode = "MBAM"
+
+	// NameVerificationSubmissionReasonCodeNMTC captures enum value "NMTC"
+	NameVerificationSubmissionReasonCodeNMTC NameVerificationSubmissionReasonCode = "NMTC"
+
+	// NameVerificationSubmissionReasonCodeNOAP captures enum value "NOAP"
+	NameVerificationSubmissionReasonCodeNOAP NameVerificationSubmissionReasonCode = "NOAP"
+
 	// NameVerificationSubmissionReasonCodeOPTO captures enum value "OPTO"
 	NameVerificationSubmissionReasonCodeOPTO NameVerificationSubmissionReasonCode = "OPTO"
+
+	// NameVerificationSubmissionReasonCodePAMM captures enum value "PAMM"
+	NameVerificationSubmissionReasonCodePAMM NameVerificationSubmissionReasonCode = "PAMM"
+
+	// NameVerificationSubmissionReasonCodePANM captures enum value "PANM"
+	NameVerificationSubmissionReasonCodePANM NameVerificationSubmissionReasonCode = "PANM"
+
+	// NameVerificationSubmissionReasonCodeSCNS captures enum value "SCNS"
+	NameVerificationSubmissionReasonCodeSCNS NameVerificationSubmissionReasonCode = "SCNS"
 )
 
 // for schema
@@ -62,7 +71,7 @@ var nameVerificationSubmissionReasonCodeEnum []interface{}
 
 func init() {
 	var res []NameVerificationSubmissionReasonCode
-	if err := json.Unmarshal([]byte(`["ANNM","MBAM","BANM","PANM","BAMM","PAMM","AC01","IVCR","CASS","SCNS","ACNS","OPTO"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AC01","ACNS","ANNM","BAMM","BANM","CASS","CMTC","IVCR","MBAM","NMTC","NOAP","OPTO","PAMM","PANM","SCNS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

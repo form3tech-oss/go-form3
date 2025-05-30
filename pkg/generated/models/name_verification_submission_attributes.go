@@ -8,6 +8,7 @@ package models
 import (
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/form3tech-oss/go-form3/v7/pkg/client"
 	"github.com/go-openapi/errors"
@@ -22,6 +23,10 @@ type NameVerificationSubmissionAttributes struct {
 
 	// actual name
 	ActualName string `json:"actual_name,omitempty"`
+
+	// additional messages
+	// Max Items: 1
+	AdditionalMessages []*NameVerificationSubmissionAdditionalMessage `json:"additional_messages"`
 
 	// answer
 	Answer NameVerificationSubmissionAnswer `json:"answer,omitempty"`
@@ -45,6 +50,8 @@ func NameVerificationSubmissionAttributesWithDefaults(defaults client.Defaults) 
 
 		ActualName: defaults.GetString("NameVerificationSubmissionAttributes", "actual_name"),
 
+		AdditionalMessages: make([]*NameVerificationSubmissionAdditionalMessage, 0),
+
 		// TODO Answer: NameVerificationSubmissionAnswer,
 
 		Reason: defaults.GetString("NameVerificationSubmissionAttributes", "reason"),
@@ -60,6 +67,13 @@ func NameVerificationSubmissionAttributesWithDefaults(defaults client.Defaults) 
 func (m *NameVerificationSubmissionAttributes) WithActualName(actualName string) *NameVerificationSubmissionAttributes {
 
 	m.ActualName = actualName
+
+	return m
+}
+
+func (m *NameVerificationSubmissionAttributes) WithAdditionalMessages(additionalMessages []*NameVerificationSubmissionAdditionalMessage) *NameVerificationSubmissionAttributes {
+
+	m.AdditionalMessages = additionalMessages
 
 	return m
 }
@@ -108,6 +122,10 @@ func (m *NameVerificationSubmissionAttributes) WithStatusReason(statusReason str
 func (m *NameVerificationSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAdditionalMessages(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAnswer(formats); err != nil {
 		res = append(res, err)
 	}
@@ -123,6 +141,37 @@ func (m *NameVerificationSubmissionAttributes) Validate(formats strfmt.Registry)
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *NameVerificationSubmissionAttributes) validateAdditionalMessages(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.AdditionalMessages) { // not required
+		return nil
+	}
+
+	iAdditionalMessagesSize := int64(len(m.AdditionalMessages))
+
+	if err := validate.MaxItems("additional_messages", "body", iAdditionalMessagesSize, 1); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.AdditionalMessages); i++ {
+		if swag.IsZero(m.AdditionalMessages[i]) { // not required
+			continue
+		}
+
+		if m.AdditionalMessages[i] != nil {
+			if err := m.AdditionalMessages[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("additional_messages" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

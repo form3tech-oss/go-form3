@@ -492,6 +492,39 @@ func (a *PatchPaymentAdmissionTaskRequest) MustDo() *PatchPaymentAdmissionTaskOK
 }
 
 /*
+patch return admission task API
+*/
+func (a *PatchReturnAdmissionTaskRequest) Do() (*PatchReturnAdmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchReturnAdmissionTask",
+		Method:             "PATCH",
+		PathPattern:        "/transaction/payments/{paymentId}/returns/{returnId}/admissions/{returnAdmissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchReturnAdmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchReturnAdmissionTaskOK), nil
+
+}
+
+func (a *PatchReturnAdmissionTaskRequest) MustDo() *PatchReturnAdmissionTaskOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 patch reversal admission task API
 */
 func (a *PatchReversalAdmissionTaskRequest) Do() (*PatchReversalAdmissionTaskOK, error) {

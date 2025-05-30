@@ -418,7 +418,7 @@ type CreateSchemeFileSubmissionConflict struct {
 	//Payload
 
 	// isStream: false
-	*models.APIError
+	*models.SchemeFileSubmissionConflictError
 }
 
 // IsSuccess returns true when this create scheme file submission conflict response has a 2xx status code
@@ -457,11 +457,11 @@ func (o *CreateSchemeFileSubmissionConflict) Error() string {
 
 func (o *CreateSchemeFileSubmissionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.APIError = new(models.APIError)
+	o.SchemeFileSubmissionConflictError = new(models.SchemeFileSubmissionConflictError)
 
 	// response payload
 
-	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.SchemeFileSubmissionConflictError); err != nil && err != io.EOF {
 		return err
 	}
 

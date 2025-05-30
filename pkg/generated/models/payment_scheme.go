@@ -20,26 +20,26 @@ type PaymentScheme string
 
 const (
 
-	// PaymentSchemeFDW captures enum value "FDW"
-	PaymentSchemeFDW PaymentScheme = "FDW"
-
-	// PaymentSchemeSEPASCT captures enum value "SEPASCT"
-	PaymentSchemeSEPASCT PaymentScheme = "SEPASCT"
-
 	// PaymentSchemeBACS captures enum value "BACS"
 	PaymentSchemeBACS PaymentScheme = "BACS"
 
-	// PaymentSchemeSEPAINSTANT captures enum value "SEPAINSTANT"
-	PaymentSchemeSEPAINSTANT PaymentScheme = "SEPAINSTANT"
+	// PaymentSchemeFDW captures enum value "FDW"
+	PaymentSchemeFDW PaymentScheme = "FDW"
+
+	// PaymentSchemeFDN captures enum value "FDN"
+	PaymentSchemeFDN PaymentScheme = "FDN"
 
 	// PaymentSchemeFPS captures enum value "FPS"
 	PaymentSchemeFPS PaymentScheme = "FPS"
 
+	// PaymentSchemeSEPASCT captures enum value "SEPASCT"
+	PaymentSchemeSEPASCT PaymentScheme = "SEPASCT"
+
 	// PaymentSchemeTCH captures enum value "TCH"
 	PaymentSchemeTCH PaymentScheme = "TCH"
 
-	// PaymentSchemeFDN captures enum value "FDN"
-	PaymentSchemeFDN PaymentScheme = "FDN"
+	// PaymentSchemeSEPAINSTANT captures enum value "SEPAINSTANT"
+	PaymentSchemeSEPAINSTANT PaymentScheme = "SEPAINSTANT"
 )
 
 // for schema
@@ -47,7 +47,7 @@ var paymentSchemeEnum []interface{}
 
 func init() {
 	var res []PaymentScheme
-	if err := json.Unmarshal([]byte(`["FDW","SEPASCT","BACS","SEPAINSTANT","FPS","TCH","FDN"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["BACS","FDW","FDN","FPS","SEPASCT","TCH","SEPAINSTANT"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

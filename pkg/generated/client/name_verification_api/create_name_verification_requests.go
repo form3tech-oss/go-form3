@@ -17,11 +17,11 @@ import (
 	"github.com/form3tech-oss/go-form3/v7/pkg/generated/models"
 )
 
-// Client.PostOrganisationNameverifications creates a new PostOrganisationNameverificationsRequest object
+// Client.CreateNameVerification creates a new CreateNameVerificationRequest object
 // with the default values initialized.
-func (c *Client) PostOrganisationNameverifications() *PostOrganisationNameverificationsRequest {
+func (c *Client) CreateNameVerification() *CreateNameVerificationRequest {
 	var ()
-	return &PostOrganisationNameverificationsRequest{
+	return &CreateNameVerificationRequest{
 
 		NameVerificationCreation: models.NameVerificationCreationWithDefaults(c.Defaults),
 
@@ -32,7 +32,7 @@ func (c *Client) PostOrganisationNameverifications() *PostOrganisationNameverifi
 	}
 }
 
-type PostOrganisationNameverificationsRequest struct {
+type CreateNameVerificationRequest struct {
 
 	/*NameVerificationCreationRequest*/
 
@@ -46,7 +46,7 @@ type PostOrganisationNameverificationsRequest struct {
 	formats   strfmt.Registry
 }
 
-func (o *PostOrganisationNameverificationsRequest) FromJson(j string) (*PostOrganisationNameverificationsRequest, error) {
+func (o *CreateNameVerificationRequest) FromJson(j string) (*CreateNameVerificationRequest, error) {
 
 	var m models.NameVerificationCreation
 	if err := json.Unmarshal([]byte(j), &m); err != nil {
@@ -58,14 +58,14 @@ func (o *PostOrganisationNameverificationsRequest) FromJson(j string) (*PostOrga
 	return o, nil
 }
 
-func (o *PostOrganisationNameverificationsRequest) WithNameVerificationCreationRequest(nameVerificationCreationRequest models.NameVerificationCreation) *PostOrganisationNameverificationsRequest {
+func (o *CreateNameVerificationRequest) WithNameVerificationCreationRequest(nameVerificationCreationRequest models.NameVerificationCreation) *CreateNameVerificationRequest {
 
 	o.NameVerificationCreation = &nameVerificationCreationRequest
 
 	return o
 }
 
-func (o *PostOrganisationNameverificationsRequest) WithoutNameVerificationCreationRequest() *PostOrganisationNameverificationsRequest {
+func (o *CreateNameVerificationRequest) WithoutNameVerificationCreationRequest() *CreateNameVerificationRequest {
 
 	o.NameVerificationCreation = &models.NameVerificationCreation{}
 
@@ -73,20 +73,20 @@ func (o *PostOrganisationNameverificationsRequest) WithoutNameVerificationCreati
 }
 
 // ////////////////
-// WithContext adds the context to the post organisation nameverifications Request
-func (o *PostOrganisationNameverificationsRequest) WithContext(ctx context.Context) *PostOrganisationNameverificationsRequest {
+// WithContext adds the context to the create name verification Request
+func (o *CreateNameVerificationRequest) WithContext(ctx context.Context) *CreateNameVerificationRequest {
 	o.Context = ctx
 	return o
 }
 
-// WithHTTPClient adds the HTTPClient to the post organisation nameverifications Request
-func (o *PostOrganisationNameverificationsRequest) WithHTTPClient(client *http.Client) *PostOrganisationNameverificationsRequest {
+// WithHTTPClient adds the HTTPClient to the create name verification Request
+func (o *CreateNameVerificationRequest) WithHTTPClient(client *http.Client) *CreateNameVerificationRequest {
 	o.HTTPClient = client
 	return o
 }
 
 // WriteToRequest writes these Request to a swagger request
-func (o *PostOrganisationNameverificationsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
+func (o *CreateNameVerificationRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
 	if err := r.SetTimeout(o.timeout); err != nil {
 		return err

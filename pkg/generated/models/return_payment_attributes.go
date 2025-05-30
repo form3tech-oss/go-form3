@@ -34,6 +34,12 @@ type ReturnPaymentAttributes struct {
 	// ISO currency code for transaction amount
 	Currency string `json:"currency,omitempty"`
 
+	// Unique identification, as assigned by the initiating party, to unambiguously identify the transaction. This identification is passed on, unchanged, throughout the entire end-to-end chain.
+	EndToEndReference string `json:"end_to_end_reference,omitempty"`
+
+	// Unique identification, as assigned by the initiating party to unambiguously identify the transaction. This identification is an point-to-point reference and is passed on, unchanged, throughout the entire chain. Cannot include leading, trailing or internal spaces.
+	InstructionID string `json:"instruction_id,omitempty"`
+
 	// Time a payment was released from being held due to a limit breach
 	// Read Only: true
 	// Format: date-time
@@ -74,6 +80,10 @@ func ReturnPaymentAttributesWithDefaults(defaults client.Defaults) *ReturnPaymen
 		ClearingID: defaults.GetString("ReturnPaymentAttributes", "clearing_id"),
 
 		Currency: defaults.GetString("ReturnPaymentAttributes", "currency"),
+
+		EndToEndReference: defaults.GetString("ReturnPaymentAttributes", "end_to_end_reference"),
+
+		InstructionID: defaults.GetString("ReturnPaymentAttributes", "instruction_id"),
 
 		LimitBreachEndDatetime: defaults.GetStrfmtDateTimePtr("ReturnPaymentAttributes", "limit_breach_end_datetime"),
 
@@ -117,6 +127,20 @@ func (m *ReturnPaymentAttributes) WithClearingID(clearingID string) *ReturnPayme
 func (m *ReturnPaymentAttributes) WithCurrency(currency string) *ReturnPaymentAttributes {
 
 	m.Currency = currency
+
+	return m
+}
+
+func (m *ReturnPaymentAttributes) WithEndToEndReference(endToEndReference string) *ReturnPaymentAttributes {
+
+	m.EndToEndReference = endToEndReference
+
+	return m
+}
+
+func (m *ReturnPaymentAttributes) WithInstructionID(instructionID string) *ReturnPaymentAttributes {
+
+	m.InstructionID = instructionID
 
 	return m
 }
