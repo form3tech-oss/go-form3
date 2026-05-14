@@ -8,7 +8,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"time"
@@ -87,7 +87,7 @@ date: %s`,
 		req.Method == http.MethodPut ||
 		req.Method == http.MethodPatch) &&
 		req.Body != nil {
-		body, err := ioutil.ReadAll(req.Body)
+		body, err := io.ReadAll(req.Body)
 		if err != nil {
 			return nil, fmt.Errorf("error reading request body: %w", err)
 		}
@@ -96,20 +96,26 @@ date: %s`,
 			return nil, fmt.Errorf("error hashing: %w", err)
 		}
 		digest := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
+		contentType := req.Header.Get("Content-Type")
+		if contentType == "" {
+			contentType = ReqMimeType
+		}
+		contentLength := int64(len(body))
 
 		msgToSign += fmt.Sprintf(`
 content-type: %s
 digest: SHA-256=%s
 content-length: %d`,
-			ReqMimeType,
+			contentType,
 			digest,
-			req.ContentLength,
+			contentLength,
 		)
 
 		headers = append(headers, "content-type", "digest", "content-length")
 
-		req.Body = ioutil.NopCloser(bytes.NewBuffer(body))
-		req.Header.Set("Content-Type", ReqMimeType)
+		req.Body = io.NopCloser(bytes.NewBuffer(body))
+		req.ContentLength = contentLength
+		req.Header.Set("Content-Type", contentType)
 		req.Header.Set("Digest", digest)
 	}
 
