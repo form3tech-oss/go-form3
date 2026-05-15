@@ -31,6 +31,13 @@ func (o *GetDirectDebitReturnReversalReader) ReadResponse(response runtime.Clien
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetDirectDebitReturnReversalNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetDirectDebitReturnReversalOK) readResponse(response runtime.ClientRes
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.DirectDebitReturnReversalDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDirectDebitReturnReversalNotFound creates a GetDirectDebitReturnReversalNotFound with default headers values
+func NewGetDirectDebitReturnReversalNotFound() *GetDirectDebitReturnReversalNotFound {
+	return &GetDirectDebitReturnReversalNotFound{}
+}
+
+/*
+GetDirectDebitReturnReversalNotFound handles this case with default header values.
+
+Not found error
+*/
+type GetDirectDebitReturnReversalNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get direct debit return reversal not found response has a 2xx status code
+func (o *GetDirectDebitReturnReversalNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get direct debit return reversal not found response has a 3xx status code
+func (o *GetDirectDebitReturnReversalNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit return reversal not found response has a 4xx status code
+func (o *GetDirectDebitReturnReversalNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get direct debit return reversal not found response has a 5xx status code
+func (o *GetDirectDebitReturnReversalNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit return reversal not found response a status code equal to that given
+func (o *GetDirectDebitReturnReversalNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get direct debit return reversal not found response
+func (o *GetDirectDebitReturnReversalNotFound) Code() int {
+	return 404
+}
+
+func (o *GetDirectDebitReturnReversalNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/returns/{returnId}/reversals/{reversalId}][%d] getDirectDebitReturnReversalNotFound", 404)
+}
+
+func (o *GetDirectDebitReturnReversalNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

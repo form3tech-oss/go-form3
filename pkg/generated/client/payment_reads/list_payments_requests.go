@@ -86,6 +86,8 @@ func (c *Client) ListPayments() *ListPaymentsRequest {
 
 		FilterRecallDecisionSubmissionSubmissionDateTo: c.Defaults.GetStrfmtDateTimePtr("ListPayments", "filter[recall_decision_submission.submission_date_to]"),
 
+		FilterRecallSubmissionID: c.Defaults.GetStrfmtUUIDPtr("ListPayments", "filter[recall_submission.id]"),
+
 		FilterRecallSubmissionStatus: c.Defaults.GetStringPtr("ListPayments", "filter[recall_submission.status]"),
 
 		FilterRecallSubmissionSubmissionDateFrom: c.Defaults.GetStrfmtDateTimePtr("ListPayments", "filter[recall_submission.submission_date_from]"),
@@ -302,6 +304,10 @@ type ListPaymentsRequest struct {
 	/*FilterRecallDecisionSubmissionSubmissionDateTo*/
 
 	FilterRecallDecisionSubmissionSubmissionDateTo *strfmt.DateTime
+
+	/*FilterRecallSubmissionID*/
+
+	FilterRecallSubmissionID *strfmt.UUID
 
 	/*FilterRecallSubmissionStatus*/
 
@@ -926,6 +932,20 @@ func (o *ListPaymentsRequest) WithFilterRecallDecisionSubmissionSubmissionDateTo
 func (o *ListPaymentsRequest) WithoutFilterRecallDecisionSubmissionSubmissionDateTo() *ListPaymentsRequest {
 
 	o.FilterRecallDecisionSubmissionSubmissionDateTo = nil
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithFilterRecallSubmissionID(filterRecallSubmissionID strfmt.UUID) *ListPaymentsRequest {
+
+	o.FilterRecallSubmissionID = &filterRecallSubmissionID
+
+	return o
+}
+
+func (o *ListPaymentsRequest) WithoutFilterRecallSubmissionID() *ListPaymentsRequest {
+
+	o.FilterRecallSubmissionID = nil
 
 	return o
 }
@@ -1992,6 +2012,22 @@ func (o *ListPaymentsRequest) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		qFilterRecallDecisionSubmissionSubmissionDateTo := qrFilterRecallDecisionSubmissionSubmissionDateTo.String()
 		if qFilterRecallDecisionSubmissionSubmissionDateTo != "" {
 			if err := r.SetQueryParam("filter[recall_decision_submission.submission_date_to]", qFilterRecallDecisionSubmissionSubmissionDateTo); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	if o.FilterRecallSubmissionID != nil {
+
+		// query param filter[recall_submission.id]
+		var qrFilterRecallSubmissionID strfmt.UUID
+		if o.FilterRecallSubmissionID != nil {
+			qrFilterRecallSubmissionID = *o.FilterRecallSubmissionID
+		}
+		qFilterRecallSubmissionID := qrFilterRecallSubmissionID.String()
+		if qFilterRecallSubmissionID != "" {
+			if err := r.SetQueryParam("filter[recall_submission.id]", qFilterRecallSubmissionID); err != nil {
 				return err
 			}
 		}

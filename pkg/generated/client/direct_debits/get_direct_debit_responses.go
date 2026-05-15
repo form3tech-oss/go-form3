@@ -31,6 +31,13 @@ func (o *GetDirectDebitReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetDirectDebitNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetDirectDebitOK) readResponse(response runtime.ClientResponse, consume
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.DirectDebitDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDirectDebitNotFound creates a GetDirectDebitNotFound with default headers values
+func NewGetDirectDebitNotFound() *GetDirectDebitNotFound {
+	return &GetDirectDebitNotFound{}
+}
+
+/*
+GetDirectDebitNotFound handles this case with default header values.
+
+Not found error
+*/
+type GetDirectDebitNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get direct debit not found response has a 2xx status code
+func (o *GetDirectDebitNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get direct debit not found response has a 3xx status code
+func (o *GetDirectDebitNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit not found response has a 4xx status code
+func (o *GetDirectDebitNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get direct debit not found response has a 5xx status code
+func (o *GetDirectDebitNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit not found response a status code equal to that given
+func (o *GetDirectDebitNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get direct debit not found response
+func (o *GetDirectDebitNotFound) Code() int {
+	return 404
+}
+
+func (o *GetDirectDebitNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}][%d] getDirectDebitNotFound", 404)
+}
+
+func (o *GetDirectDebitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

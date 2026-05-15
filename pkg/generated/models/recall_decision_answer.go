@@ -31,6 +31,9 @@ const (
 
 	// RecallDecisionAnswerPartiallyAccepted captures enum value "partially_accepted"
 	RecallDecisionAnswerPartiallyAccepted RecallDecisionAnswer = "partially_accepted"
+
+	// RecallDecisionAnswerPaymentCancelled captures enum value "payment_cancelled"
+	RecallDecisionAnswerPaymentCancelled RecallDecisionAnswer = "payment_cancelled"
 )
 
 // for schema
@@ -38,7 +41,7 @@ var recallDecisionAnswerEnum []interface{}
 
 func init() {
 	var res []RecallDecisionAnswer
-	if err := json.Unmarshal([]byte(`["accepted","rejected","pending","partially_accepted"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","rejected","pending","partially_accepted","payment_cancelled"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

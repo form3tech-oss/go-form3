@@ -213,13 +213,13 @@ func (m *User) Json() string {
 type UserAttributes struct {
 
 	// client credential ids
-	ClientCredentialIds []string `json:"client_credential_ids"`
+	ClientCredentialIds []string `json:"client_credential_ids,omitempty"`
 
 	// Email address
 	Email string `json:"email,omitempty"`
 
 	// public key ids
-	PublicKeyIds []strfmt.UUID `json:"public_key_ids"`
+	PublicKeyIds []strfmt.UUID `json:"public_key_ids,omitempty"`
 
 	// List of roles that this user belongs to
 	RoleIds []strfmt.UUID `json:"role_ids"`

@@ -38,6 +38,13 @@ func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsReader) ReadResponse(re
 		}
 		return nil, result
 
+	case 404:
+		result := NewPostDirectdebitsIDReversalsReversalIDSubmissionsNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -161,6 +168,71 @@ func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) Error() str
 }
 
 func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostDirectdebitsIDReversalsReversalIDSubmissionsNotFound creates a PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound with default headers values
+func NewPostDirectdebitsIDReversalsReversalIDSubmissionsNotFound() *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound {
+	return &PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound{}
+}
+
+/*
+PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound handles this case with default header values.
+
+Not found error
+*/
+type PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this post directdebits Id reversals reversal Id submissions not found response has a 2xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post directdebits Id reversals reversal Id submissions not found response has a 3xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post directdebits Id reversals reversal Id submissions not found response has a 4xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post directdebits Id reversals reversal Id submissions not found response has a 5xx status code
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post directdebits Id reversals reversal Id submissions not found response a status code equal to that given
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the post directdebits Id reversals reversal Id submissions not found response
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) Code() int {
+	return 404
+}
+
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) Error() string {
+	return fmt.Sprintf("[POST /transaction/directdebits/{id}/reversals/{reversalId}/submissions][%d] postDirectdebitsIdReversalsReversalIdSubmissionsNotFound", 404)
+}
+
+func (o *PostDirectdebitsIDReversalsReversalIDSubmissionsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

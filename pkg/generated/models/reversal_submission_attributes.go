@@ -20,6 +20,14 @@ import (
 // swagger:model ReversalSubmissionAttributes
 type ReversalSubmissionAttributes struct {
 
+	// Identification code of the file sent to scheme.
+	// Pattern: ^[0-9a-zA-Z]+$
+	FileIdentifier *string `json:"file_identifier,omitempty"`
+
+	// Number of the file sent to scheme.
+	// Pattern: ^[0-9]+$
+	FileNumber *string `json:"file_number,omitempty"`
+
 	// Scheme-specific status code, refer to scheme documentation
 	SchemeStatusCode string `json:"scheme_status_code,omitempty"`
 
@@ -46,6 +54,10 @@ type ReversalSubmissionAttributes struct {
 func ReversalSubmissionAttributesWithDefaults(defaults client.Defaults) *ReversalSubmissionAttributes {
 	return &ReversalSubmissionAttributes{
 
+		FileIdentifier: defaults.GetStringPtr("ReversalSubmissionAttributes", "file_identifier"),
+
+		FileNumber: defaults.GetStringPtr("ReversalSubmissionAttributes", "file_number"),
+
 		SchemeStatusCode: defaults.GetString("ReversalSubmissionAttributes", "scheme_status_code"),
 
 		SchemeStatusCodeDescription: defaults.GetString("ReversalSubmissionAttributes", "scheme_status_code_description"),
@@ -58,6 +70,30 @@ func ReversalSubmissionAttributesWithDefaults(defaults client.Defaults) *Reversa
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("ReversalSubmissionAttributes", "transaction_start_datetime"),
 	}
+}
+
+func (m *ReversalSubmissionAttributes) WithFileIdentifier(fileIdentifier string) *ReversalSubmissionAttributes {
+
+	m.FileIdentifier = &fileIdentifier
+
+	return m
+}
+
+func (m *ReversalSubmissionAttributes) WithoutFileIdentifier() *ReversalSubmissionAttributes {
+	m.FileIdentifier = nil
+	return m
+}
+
+func (m *ReversalSubmissionAttributes) WithFileNumber(fileNumber string) *ReversalSubmissionAttributes {
+
+	m.FileNumber = &fileNumber
+
+	return m
+}
+
+func (m *ReversalSubmissionAttributes) WithoutFileNumber() *ReversalSubmissionAttributes {
+	m.FileNumber = nil
+	return m
 }
 
 func (m *ReversalSubmissionAttributes) WithSchemeStatusCode(schemeStatusCode string) *ReversalSubmissionAttributes {
@@ -106,6 +142,14 @@ func (m *ReversalSubmissionAttributes) WithTransactionStartDatetime(transactionS
 func (m *ReversalSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateFileIdentifier(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFileNumber(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -121,6 +165,32 @@ func (m *ReversalSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ReversalSubmissionAttributes) validateFileIdentifier(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileIdentifier) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("file_identifier", "body", *m.FileIdentifier, `^[0-9a-zA-Z]+$`); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ReversalSubmissionAttributes) validateFileNumber(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.FileNumber) { // not required
+		return nil
+	}
+
+	if err := validate.Pattern("file_number", "body", *m.FileNumber, `^[0-9]+$`); err != nil {
+		return err
+	}
+
 	return nil
 }
 

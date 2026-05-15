@@ -363,12 +363,10 @@ type PaymentSubmissionAttributes struct {
 	FileNumber *string `json:"file_number,omitempty"`
 
 	// Time a payment was released from being held due to a limit breach
-	// Read Only: true
 	// Format: date-time
 	LimitBreachEndDatetime *strfmt.DateTime `json:"limit_breach_end_datetime,omitempty"`
 
 	// Start time a payment was held due to a limit breach
-	// Read Only: true
 	// Format: date-time
 	LimitBreachStartDatetime *strfmt.DateTime `json:"limit_breach_start_datetime,omitempty"`
 

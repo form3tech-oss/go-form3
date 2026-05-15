@@ -31,6 +31,13 @@ func (o *GetDirectdebitsIDDecisionsDecisionIDReader) ReadResponse(response runti
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetDirectdebitsIDDecisionsDecisionIDNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetDirectdebitsIDDecisionsDecisionIDOK) readResponse(response runtime.C
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.DirectDebitDecisionDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDirectdebitsIDDecisionsDecisionIDNotFound creates a GetDirectdebitsIDDecisionsDecisionIDNotFound with default headers values
+func NewGetDirectdebitsIDDecisionsDecisionIDNotFound() *GetDirectdebitsIDDecisionsDecisionIDNotFound {
+	return &GetDirectdebitsIDDecisionsDecisionIDNotFound{}
+}
+
+/*
+GetDirectdebitsIDDecisionsDecisionIDNotFound handles this case with default header values.
+
+Not found error
+*/
+type GetDirectdebitsIDDecisionsDecisionIDNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get directdebits Id decisions decision Id not found response has a 2xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get directdebits Id decisions decision Id not found response has a 3xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get directdebits Id decisions decision Id not found response has a 4xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get directdebits Id decisions decision Id not found response has a 5xx status code
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get directdebits Id decisions decision Id not found response a status code equal to that given
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get directdebits Id decisions decision Id not found response
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) Code() int {
+	return 404
+}
+
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/decisions/{decisionId}][%d] getDirectdebitsIdDecisionsDecisionIdNotFound", 404)
+}
+
+func (o *GetDirectdebitsIDDecisionsDecisionIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

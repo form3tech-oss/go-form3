@@ -20,6 +20,9 @@ import (
 // swagger:model TransactionFileSubmissionRelationships
 type TransactionFileSubmissionRelationships struct {
 
+	// transaction file submission tasks
+	TransactionFileSubmissionTasks *ThinRelationship `json:"transaction_file_submission_tasks,omitempty"`
+
 	// transaction files
 	TransactionFiles *TransactionFileSubmissionRelationshipsTransactionFiles `json:"transaction_files,omitempty"`
 }
@@ -27,8 +30,22 @@ type TransactionFileSubmissionRelationships struct {
 func TransactionFileSubmissionRelationshipsWithDefaults(defaults client.Defaults) *TransactionFileSubmissionRelationships {
 	return &TransactionFileSubmissionRelationships{
 
+		TransactionFileSubmissionTasks: ThinRelationshipWithDefaults(defaults),
+
 		TransactionFiles: TransactionFileSubmissionRelationshipsTransactionFilesWithDefaults(defaults),
 	}
+}
+
+func (m *TransactionFileSubmissionRelationships) WithTransactionFileSubmissionTasks(transactionFileSubmissionTasks ThinRelationship) *TransactionFileSubmissionRelationships {
+
+	m.TransactionFileSubmissionTasks = &transactionFileSubmissionTasks
+
+	return m
+}
+
+func (m *TransactionFileSubmissionRelationships) WithoutTransactionFileSubmissionTasks() *TransactionFileSubmissionRelationships {
+	m.TransactionFileSubmissionTasks = nil
+	return m
 }
 
 func (m *TransactionFileSubmissionRelationships) WithTransactionFiles(transactionFiles TransactionFileSubmissionRelationshipsTransactionFiles) *TransactionFileSubmissionRelationships {
@@ -47,6 +64,10 @@ func (m *TransactionFileSubmissionRelationships) WithoutTransactionFiles() *Tran
 func (m *TransactionFileSubmissionRelationships) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateTransactionFileSubmissionTasks(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTransactionFiles(formats); err != nil {
 		res = append(res, err)
 	}
@@ -54,6 +75,24 @@ func (m *TransactionFileSubmissionRelationships) Validate(formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *TransactionFileSubmissionRelationships) validateTransactionFileSubmissionTasks(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TransactionFileSubmissionTasks) { // not required
+		return nil
+	}
+
+	if m.TransactionFileSubmissionTasks != nil {
+		if err := m.TransactionFileSubmissionTasks.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("transaction_file_submission_tasks")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

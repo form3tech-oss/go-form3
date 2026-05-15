@@ -38,6 +38,20 @@ func (o *CreateMandateReturnSubmissionReader) ReadResponse(response runtime.Clie
 		}
 		return nil, result
 
+	case 404:
+		result := NewCreateMandateReturnSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewCreateMandateReturnSubmissionConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -161,6 +175,136 @@ func (o *CreateMandateReturnSubmissionBadRequest) Error() string {
 }
 
 func (o *CreateMandateReturnSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateMandateReturnSubmissionNotFound creates a CreateMandateReturnSubmissionNotFound with default headers values
+func NewCreateMandateReturnSubmissionNotFound() *CreateMandateReturnSubmissionNotFound {
+	return &CreateMandateReturnSubmissionNotFound{}
+}
+
+/*
+CreateMandateReturnSubmissionNotFound handles this case with default header values.
+
+Mandate Return not found error
+*/
+type CreateMandateReturnSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create mandate return submission not found response has a 2xx status code
+func (o *CreateMandateReturnSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create mandate return submission not found response has a 3xx status code
+func (o *CreateMandateReturnSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate return submission not found response has a 4xx status code
+func (o *CreateMandateReturnSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mandate return submission not found response has a 5xx status code
+func (o *CreateMandateReturnSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate return submission not found response a status code equal to that given
+func (o *CreateMandateReturnSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create mandate return submission not found response
+func (o *CreateMandateReturnSubmissionNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateMandateReturnSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns/{returnId}/submissions][%d] createMandateReturnSubmissionNotFound", 404)
+}
+
+func (o *CreateMandateReturnSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateMandateReturnSubmissionConflict creates a CreateMandateReturnSubmissionConflict with default headers values
+func NewCreateMandateReturnSubmissionConflict() *CreateMandateReturnSubmissionConflict {
+	return &CreateMandateReturnSubmissionConflict{}
+}
+
+/*
+CreateMandateReturnSubmissionConflict handles this case with default header values.
+
+Mandate Return Submission conflict error
+*/
+type CreateMandateReturnSubmissionConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create mandate return submission conflict response has a 2xx status code
+func (o *CreateMandateReturnSubmissionConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create mandate return submission conflict response has a 3xx status code
+func (o *CreateMandateReturnSubmissionConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate return submission conflict response has a 4xx status code
+func (o *CreateMandateReturnSubmissionConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mandate return submission conflict response has a 5xx status code
+func (o *CreateMandateReturnSubmissionConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate return submission conflict response a status code equal to that given
+func (o *CreateMandateReturnSubmissionConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create mandate return submission conflict response
+func (o *CreateMandateReturnSubmissionConflict) Code() int {
+	return 409
+}
+
+func (o *CreateMandateReturnSubmissionConflict) Error() string {
+	return fmt.Sprintf("[POST /transaction/mandates/{id}/returns/{returnId}/submissions][%d] createMandateReturnSubmissionConflict", 409)
+}
+
+func (o *CreateMandateReturnSubmissionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

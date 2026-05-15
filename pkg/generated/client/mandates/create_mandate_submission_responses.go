@@ -38,6 +38,13 @@ func (o *CreateMandateSubmissionReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 
+	case 409:
+		result := NewCreateMandateSubmissionConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -161,6 +168,71 @@ func (o *CreateMandateSubmissionBadRequest) Error() string {
 }
 
 func (o *CreateMandateSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateMandateSubmissionConflict creates a CreateMandateSubmissionConflict with default headers values
+func NewCreateMandateSubmissionConflict() *CreateMandateSubmissionConflict {
+	return &CreateMandateSubmissionConflict{}
+}
+
+/*
+CreateMandateSubmissionConflict handles this case with default header values.
+
+Mandate Submission conflict error
+*/
+type CreateMandateSubmissionConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this create mandate submission conflict response has a 2xx status code
+func (o *CreateMandateSubmissionConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create mandate submission conflict response has a 3xx status code
+func (o *CreateMandateSubmissionConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create mandate submission conflict response has a 4xx status code
+func (o *CreateMandateSubmissionConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create mandate submission conflict response has a 5xx status code
+func (o *CreateMandateSubmissionConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create mandate submission conflict response a status code equal to that given
+func (o *CreateMandateSubmissionConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create mandate submission conflict response
+func (o *CreateMandateSubmissionConflict) Code() int {
+	return 409
+}
+
+func (o *CreateMandateSubmissionConflict) Error() string {
+	return fmt.Sprintf("[POST /transaction/mandates/{id}/submissions][%d] createMandateSubmissionConflict", 409)
+}
+
+func (o *CreateMandateSubmissionConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

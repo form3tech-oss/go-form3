@@ -34,7 +34,7 @@ type MandateAttributesDebtorParty struct {
 	AccountWith *AccountHoldingEntity `json:"account_with,omitempty"`
 
 	// address
-	Address []string `json:"address"`
+	Address []string `json:"address,omitempty"`
 
 	// country
 	Country string `json:"country,omitempty"`

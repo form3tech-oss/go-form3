@@ -31,6 +31,13 @@ func (o *GetDirectdebitsIDRecallsRecallIDReader) ReadResponse(response runtime.C
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetDirectdebitsIDRecallsRecallIDNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetDirectdebitsIDRecallsRecallIDOK) readResponse(response runtime.Clien
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.DirectDebitRecallDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDirectdebitsIDRecallsRecallIDNotFound creates a GetDirectdebitsIDRecallsRecallIDNotFound with default headers values
+func NewGetDirectdebitsIDRecallsRecallIDNotFound() *GetDirectdebitsIDRecallsRecallIDNotFound {
+	return &GetDirectdebitsIDRecallsRecallIDNotFound{}
+}
+
+/*
+GetDirectdebitsIDRecallsRecallIDNotFound handles this case with default header values.
+
+Not found error
+*/
+type GetDirectdebitsIDRecallsRecallIDNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get directdebits Id recalls recall Id not found response has a 2xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get directdebits Id recalls recall Id not found response has a 3xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get directdebits Id recalls recall Id not found response has a 4xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get directdebits Id recalls recall Id not found response has a 5xx status code
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get directdebits Id recalls recall Id not found response a status code equal to that given
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get directdebits Id recalls recall Id not found response
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) Code() int {
+	return 404
+}
+
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/recalls/{recallId}][%d] getDirectdebitsIdRecallsRecallIdNotFound", 404)
+}
+
+func (o *GetDirectdebitsIDRecallsRecallIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

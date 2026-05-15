@@ -96,6 +96,40 @@ func (a *GetReportAdmissionRequest) MustDo() *GetReportAdmissionOK {
 }
 
 /*
+get report content API
+*/
+func (a *GetReportContentRequest) Do() (*GetReportContentOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetReportContent",
+		Method:             "GET",
+		PathPattern:        "/notification/reports/{id}/content",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		// TODO - pass streaming response to reader.
+		Reader: &GetReportContentReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetReportContentOK), nil
+
+}
+
+func (a *GetReportContentRequest) MustDo() *GetReportContentOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 list reports API
 */
 func (a *ListReportsRequest) Do() (*ListReportsOK, error) {

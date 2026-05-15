@@ -32,7 +32,7 @@ func (c *Client) GetSchemeFile() *GetSchemeFileRequest {
 
 type GetSchemeFileRequest struct {
 
-	/*Accept      Acceptable Formats, possible values are "application/vnd.api+json" and "application/xml"      */
+	/*Accept      Acceptable Formats, possible values are "application/vnd.api+json", "application/x.form3.standard18", "application/xml"      */
 
 	Accept *string
 

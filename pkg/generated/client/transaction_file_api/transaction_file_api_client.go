@@ -228,6 +228,39 @@ func (a *GetTransactionFileSubmissionRequest) MustDo() *GetTransactionFileSubmis
 }
 
 /*
+get transaction file submission task API
+*/
+func (a *GetTransactionFileSubmissionTaskRequest) Do() (*GetTransactionFileSubmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTransactionFileSubmissionTask",
+		Method:             "GET",
+		PathPattern:        "/files/transactions/{transaction_file_id}/submissions/{transaction_file_submission_id}/tasks/{task_id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &GetTransactionFileSubmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTransactionFileSubmissionTaskOK), nil
+
+}
+
+func (a *GetTransactionFileSubmissionTaskRequest) MustDo() *GetTransactionFileSubmissionTaskOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 list transaction files API
 */
 func (a *ListTransactionFilesRequest) Do() (*ListTransactionFilesOK, error) {
@@ -253,6 +286,39 @@ func (a *ListTransactionFilesRequest) Do() (*ListTransactionFilesOK, error) {
 }
 
 func (a *ListTransactionFilesRequest) MustDo() *ListTransactionFilesOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+patch transaction file submission task API
+*/
+func (a *PatchTransactionFileSubmissionTaskRequest) Do() (*PatchTransactionFileSubmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchTransactionFileSubmissionTask",
+		Method:             "PATCH",
+		PathPattern:        "/files/transactions/{transaction_file_id}/submissions/{transaction_file_submission_id}/tasks/{task_id}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchTransactionFileSubmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchTransactionFileSubmissionTaskOK), nil
+
+}
+
+func (a *PatchTransactionFileSubmissionTaskRequest) MustDo() *PatchTransactionFileSubmissionTaskOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

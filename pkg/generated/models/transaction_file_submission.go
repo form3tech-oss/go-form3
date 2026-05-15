@@ -390,6 +390,10 @@ type TransactionFileSubmissionAttributes struct {
 	// Read Only: true
 	// Format: date-time
 	TransactionStartDatetime strfmt.DateTime `json:"transaction_start_datetime,omitempty"`
+
+	// Determines how a transaction file should be processed when validation errors are present
+	// Enum: ["reject_entire_file","reject_invalid_transactions"]
+	TransactionValidationErrorHandling string `json:"transaction_validation_error_handling,omitempty"`
 }
 
 func TransactionFileSubmissionAttributesWithDefaults(defaults client.Defaults) *TransactionFileSubmissionAttributes {
@@ -404,6 +408,8 @@ func TransactionFileSubmissionAttributesWithDefaults(defaults client.Defaults) *
 		SubmissionDatetime: defaults.GetStrfmtDateTime("TransactionFileSubmissionAttributes", "submission_datetime"),
 
 		TransactionStartDatetime: defaults.GetStrfmtDateTime("TransactionFileSubmissionAttributes", "transaction_start_datetime"),
+
+		TransactionValidationErrorHandling: defaults.GetString("TransactionFileSubmissionAttributes", "transaction_validation_error_handling"),
 	}
 }
 
@@ -442,6 +448,13 @@ func (m *TransactionFileSubmissionAttributes) WithTransactionStartDatetime(trans
 	return m
 }
 
+func (m *TransactionFileSubmissionAttributes) WithTransactionValidationErrorHandling(transactionValidationErrorHandling string) *TransactionFileSubmissionAttributes {
+
+	m.TransactionValidationErrorHandling = transactionValidationErrorHandling
+
+	return m
+}
+
 // Validate validates this transaction file submission attributes
 func (m *TransactionFileSubmissionAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
@@ -459,6 +472,10 @@ func (m *TransactionFileSubmissionAttributes) Validate(formats strfmt.Registry) 
 	}
 
 	if err := m.validateTransactionStartDatetime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTransactionValidationErrorHandling(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -529,6 +546,49 @@ func (m *TransactionFileSubmissionAttributes) validateTransactionStartDatetime(f
 	}
 
 	if err := validate.FormatOf("attributes"+"."+"transaction_start_datetime", "body", "date-time", m.TransactionStartDatetime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var transactionFileSubmissionAttributesTypeTransactionValidationErrorHandlingPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["reject_entire_file","reject_invalid_transactions"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		transactionFileSubmissionAttributesTypeTransactionValidationErrorHandlingPropEnum = append(transactionFileSubmissionAttributesTypeTransactionValidationErrorHandlingPropEnum, v)
+	}
+}
+
+const (
+
+	// TransactionFileSubmissionAttributesTransactionValidationErrorHandlingRejectEntireFile captures enum value "reject_entire_file"
+	TransactionFileSubmissionAttributesTransactionValidationErrorHandlingRejectEntireFile string = "reject_entire_file"
+
+	// TransactionFileSubmissionAttributesTransactionValidationErrorHandlingRejectInvalidTransactions captures enum value "reject_invalid_transactions"
+	TransactionFileSubmissionAttributesTransactionValidationErrorHandlingRejectInvalidTransactions string = "reject_invalid_transactions"
+)
+
+// prop value enum
+func (m *TransactionFileSubmissionAttributes) validateTransactionValidationErrorHandlingEnum(path, location string, value string) error {
+	if err := validate.Enum(path, location, value, transactionFileSubmissionAttributesTypeTransactionValidationErrorHandlingPropEnum); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *TransactionFileSubmissionAttributes) validateTransactionValidationErrorHandling(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.TransactionValidationErrorHandling) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTransactionValidationErrorHandlingEnum("attributes"+"."+"transaction_validation_error_handling", "body", m.TransactionValidationErrorHandling); err != nil {
 		return err
 	}
 

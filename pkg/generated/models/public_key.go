@@ -316,26 +316,50 @@ func (m *PublicKey) Json() string {
 // swagger:model PublicKeyAttributes
 type PublicKeyAttributes struct {
 
+	// When in pending_deletion state, indicates the date of permanent deletion
+	// Format: date-time
+	DeletionDate strfmt.DateTime `json:"deletion_date,omitempty"`
+
 	// expires on
 	// Format: date-time
 	ExpiresOn strfmt.DateTime `json:"expires_on,omitempty"`
 
-	// fingerprint
+	// Key fingerprint
 	Fingerprint string `json:"fingerprint,omitempty"`
+
+	// key state
+	KeyState KeyState `json:"key_state,omitempty"`
 
 	// public key
 	PublicKey string `json:"public_key,omitempty"`
+
+	// The user identifier
+	// Format: uuid
+	UserID strfmt.UUID `json:"user_id,omitempty"`
 }
 
 func PublicKeyAttributesWithDefaults(defaults client.Defaults) *PublicKeyAttributes {
 	return &PublicKeyAttributes{
 
+		DeletionDate: defaults.GetStrfmtDateTime("PublicKeyAttributes", "deletion_date"),
+
 		ExpiresOn: defaults.GetStrfmtDateTime("PublicKeyAttributes", "expires_on"),
 
 		Fingerprint: defaults.GetString("PublicKeyAttributes", "fingerprint"),
 
+		// TODO KeyState: KeyState,
+
 		PublicKey: defaults.GetString("PublicKeyAttributes", "public_key"),
+
+		UserID: defaults.GetStrfmtUUID("PublicKeyAttributes", "user_id"),
 	}
+}
+
+func (m *PublicKeyAttributes) WithDeletionDate(deletionDate strfmt.DateTime) *PublicKeyAttributes {
+
+	m.DeletionDate = deletionDate
+
+	return m
 }
 
 func (m *PublicKeyAttributes) WithExpiresOn(expiresOn strfmt.DateTime) *PublicKeyAttributes {
@@ -352,9 +376,23 @@ func (m *PublicKeyAttributes) WithFingerprint(fingerprint string) *PublicKeyAttr
 	return m
 }
 
+func (m *PublicKeyAttributes) WithKeyState(keyState KeyState) *PublicKeyAttributes {
+
+	m.KeyState = keyState
+
+	return m
+}
+
 func (m *PublicKeyAttributes) WithPublicKey(publicKey string) *PublicKeyAttributes {
 
 	m.PublicKey = publicKey
+
+	return m
+}
+
+func (m *PublicKeyAttributes) WithUserID(userID strfmt.UUID) *PublicKeyAttributes {
+
+	m.UserID = userID
 
 	return m
 }
@@ -363,13 +401,38 @@ func (m *PublicKeyAttributes) WithPublicKey(publicKey string) *PublicKeyAttribut
 func (m *PublicKeyAttributes) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDeletionDate(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateExpiresOn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKeyState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserID(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PublicKeyAttributes) validateDeletionDate(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.DeletionDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"deletion_date", "body", "date-time", m.DeletionDate.String(), formats); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -380,6 +443,35 @@ func (m *PublicKeyAttributes) validateExpiresOn(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("attributes"+"."+"expires_on", "body", "date-time", m.ExpiresOn.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PublicKeyAttributes) validateKeyState(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.KeyState) { // not required
+		return nil
+	}
+
+	if err := m.KeyState.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("attributes" + "." + "key_state")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *PublicKeyAttributes) validateUserID(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserID) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("attributes"+"."+"user_id", "body", "uuid", m.UserID.String(), formats); err != nil {
 		return err
 	}
 

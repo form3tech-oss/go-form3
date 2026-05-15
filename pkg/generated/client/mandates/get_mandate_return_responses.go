@@ -31,6 +31,13 @@ func (o *GetMandateReturnReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetMandateReturnNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetMandateReturnOK) readResponse(response runtime.ClientResponse, consu
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.MandateReturnDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetMandateReturnNotFound creates a GetMandateReturnNotFound with default headers values
+func NewGetMandateReturnNotFound() *GetMandateReturnNotFound {
+	return &GetMandateReturnNotFound{}
+}
+
+/*
+GetMandateReturnNotFound handles this case with default header values.
+
+Mandate Return not found error
+*/
+type GetMandateReturnNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get mandate return not found response has a 2xx status code
+func (o *GetMandateReturnNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get mandate return not found response has a 3xx status code
+func (o *GetMandateReturnNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate return not found response has a 4xx status code
+func (o *GetMandateReturnNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get mandate return not found response has a 5xx status code
+func (o *GetMandateReturnNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate return not found response a status code equal to that given
+func (o *GetMandateReturnNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get mandate return not found response
+func (o *GetMandateReturnNotFound) Code() int {
+	return 404
+}
+
+func (o *GetMandateReturnNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/mandates/{id}/returns/{returnId}][%d] getMandateReturnNotFound", 404)
+}
+
+func (o *GetMandateReturnNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

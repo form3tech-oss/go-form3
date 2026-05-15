@@ -38,6 +38,13 @@ func (o *GetValidationsGbdscSortcodesSortcodeReader) ReadResponse(response runti
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetValidationsGbdscSortcodesSortcodeNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -161,6 +168,71 @@ func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) Error() string {
 }
 
 func (o *GetValidationsGbdscSortcodesSortcodeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetValidationsGbdscSortcodesSortcodeNotFound creates a GetValidationsGbdscSortcodesSortcodeNotFound with default headers values
+func NewGetValidationsGbdscSortcodesSortcodeNotFound() *GetValidationsGbdscSortcodesSortcodeNotFound {
+	return &GetValidationsGbdscSortcodesSortcodeNotFound{}
+}
+
+/*
+GetValidationsGbdscSortcodesSortcodeNotFound handles this case with default header values.
+
+Validation failed
+*/
+type GetValidationsGbdscSortcodesSortcodeNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get validations gbdsc sortcodes sortcode not found response has a 2xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get validations gbdsc sortcodes sortcode not found response has a 3xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get validations gbdsc sortcodes sortcode not found response has a 4xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get validations gbdsc sortcodes sortcode not found response has a 5xx status code
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get validations gbdsc sortcodes sortcode not found response a status code equal to that given
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get validations gbdsc sortcodes sortcode not found response
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) Code() int {
+	return 404
+}
+
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) Error() string {
+	return fmt.Sprintf("[GET /validations/gbdsc/sortcodes/{sortcode}][%d] getValidationsGbdscSortcodesSortcodeNotFound", 404)
+}
+
+func (o *GetValidationsGbdscSortcodesSortcodeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

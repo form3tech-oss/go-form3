@@ -31,6 +31,13 @@ func (o *GetDirectDebitReversalAdmissionReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetDirectDebitReversalAdmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetDirectDebitReversalAdmissionOK) readResponse(response runtime.Client
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.DirectDebitReversalAdmissionDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDirectDebitReversalAdmissionNotFound creates a GetDirectDebitReversalAdmissionNotFound with default headers values
+func NewGetDirectDebitReversalAdmissionNotFound() *GetDirectDebitReversalAdmissionNotFound {
+	return &GetDirectDebitReversalAdmissionNotFound{}
+}
+
+/*
+GetDirectDebitReversalAdmissionNotFound handles this case with default header values.
+
+Not found error
+*/
+type GetDirectDebitReversalAdmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get direct debit reversal admission not found response has a 2xx status code
+func (o *GetDirectDebitReversalAdmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get direct debit reversal admission not found response has a 3xx status code
+func (o *GetDirectDebitReversalAdmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get direct debit reversal admission not found response has a 4xx status code
+func (o *GetDirectDebitReversalAdmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get direct debit reversal admission not found response has a 5xx status code
+func (o *GetDirectDebitReversalAdmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get direct debit reversal admission not found response a status code equal to that given
+func (o *GetDirectDebitReversalAdmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get direct debit reversal admission not found response
+func (o *GetDirectDebitReversalAdmissionNotFound) Code() int {
+	return 404
+}
+
+func (o *GetDirectDebitReversalAdmissionNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/directdebits/{id}/reversals/{reversalId}/admissions/{admissionId}][%d] getDirectDebitReversalAdmissionNotFound", 404)
+}
+
+func (o *GetDirectDebitReversalAdmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

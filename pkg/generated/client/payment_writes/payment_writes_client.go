@@ -492,6 +492,39 @@ func (a *PatchPaymentAdmissionTaskRequest) MustDo() *PatchPaymentAdmissionTaskOK
 }
 
 /*
+patch payment submission task API
+*/
+func (a *PatchPaymentSubmissionTaskRequest) Do() (*PatchPaymentSubmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchPaymentSubmissionTask",
+		Method:             "PATCH",
+		PathPattern:        "/transaction/payments/{id}/submissions/{submissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchPaymentSubmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchPaymentSubmissionTaskOK), nil
+
+}
+
+func (a *PatchPaymentSubmissionTaskRequest) MustDo() *PatchPaymentSubmissionTaskOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 patch return admission task API
 */
 func (a *PatchReturnAdmissionTaskRequest) Do() (*PatchReturnAdmissionTaskOK, error) {
@@ -517,6 +550,39 @@ func (a *PatchReturnAdmissionTaskRequest) Do() (*PatchReturnAdmissionTaskOK, err
 }
 
 func (a *PatchReturnAdmissionTaskRequest) MustDo() *PatchReturnAdmissionTaskOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+patch return submission task API
+*/
+func (a *PatchReturnSubmissionTaskRequest) Do() (*PatchReturnSubmissionTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchReturnSubmissionTask",
+		Method:             "PATCH",
+		PathPattern:        "/transaction/payments/{paymentId}/returns/{returnId}/submissions/{returnSubmissionId}/tasks/{taskId}",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &PatchReturnSubmissionTaskReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchReturnSubmissionTaskOK), nil
+
+}
+
+func (a *PatchReturnSubmissionTaskRequest) MustDo() *PatchReturnSubmissionTaskOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

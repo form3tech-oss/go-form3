@@ -30,6 +30,72 @@ type Client struct {
 // range of operations
 
 /*
+cancel public key deletion API
+*/
+func (a *CancelPublicKeyDeletionRequest) Do() (*CancelPublicKeyDeletionNoContent, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "CancelPublicKeyDeletion",
+		Method:             "POST",
+		PathPattern:        "/security/users/{user_id}/authn/public_keys/{public_key_id}/cancel_deletion",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &CancelPublicKeyDeletionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CancelPublicKeyDeletionNoContent), nil
+
+}
+
+func (a *CancelPublicKeyDeletionRequest) MustDo() *CancelPublicKeyDeletionNoContent {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+create public key for user API
+*/
+func (a *CreatePublicKeyForUserRequest) Do() (*CreatePublicKeyForUserCreated, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "CreatePublicKeyForUser",
+		Method:             "POST",
+		PathPattern:        "/security/users/{user_id}/authn/public_keys",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &CreatePublicKeyForUserReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*CreatePublicKeyForUserCreated), nil
+
+}
+
+func (a *CreatePublicKeyForUserRequest) MustDo() *CreatePublicKeyForUserCreated {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
 create user API
 */
 func (a *CreateUserRequest) Do() (*CreateUserCreated, error) {
@@ -484,6 +550,39 @@ func (a *ModifyUserRequest) Do() (*ModifyUserOK, error) {
 }
 
 func (a *ModifyUserRequest) MustDo() *ModifyUserOK {
+	r0, err := a.Do()
+	if err != nil {
+		panic(err)
+	}
+	return r0
+}
+
+/*
+schedule public key deletion API
+*/
+func (a *SchedulePublicKeyDeletionRequest) Do() (*SchedulePublicKeyDeletionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "SchedulePublicKeyDeletion",
+		Method:             "POST",
+		PathPattern:        "/security/users/{user_id}/authn/public_keys/{public_key_id}/schedule_deletion",
+		ProducesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		ConsumesMediaTypes: []string{"application/vnd.api+json", "application/json"},
+		Schemes:            []string{"https"},
+		Params:             a,
+		Reader:             &SchedulePublicKeyDeletionReader{formats: a.formats},
+		//AuthInfo: authInfo,
+		Context: a.Context,
+		Client:  a.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*SchedulePublicKeyDeletionOK), nil
+
+}
+
+func (a *SchedulePublicKeyDeletionRequest) MustDo() *SchedulePublicKeyDeletionOK {
 	r0, err := a.Do()
 	if err != nil {
 		panic(err)

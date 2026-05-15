@@ -22,8 +22,9 @@ import (
 type ResourceSignature struct {
 
 	// The key identifier used for signature verification.
-	// Format: uuid
-	KeyID strfmt.UUID `json:"key_id,omitempty"`
+	// Max Length: 64
+	// Min Length: 1
+	KeyID string `json:"key_id,omitempty"`
 
 	// Reference information associated with the signature.
 	// Max Items: 10
@@ -41,7 +42,7 @@ type ResourceSignature struct {
 func ResourceSignatureWithDefaults(defaults client.Defaults) *ResourceSignature {
 	return &ResourceSignature{
 
-		KeyID: defaults.GetStrfmtUUID("ResourceSignature", "key_id"),
+		KeyID: defaults.GetString("ResourceSignature", "key_id"),
 
 		References: make([]string, 0),
 
@@ -51,7 +52,7 @@ func ResourceSignatureWithDefaults(defaults client.Defaults) *ResourceSignature 
 	}
 }
 
-func (m *ResourceSignature) WithKeyID(keyID strfmt.UUID) *ResourceSignature {
+func (m *ResourceSignature) WithKeyID(keyID string) *ResourceSignature {
 
 	m.KeyID = keyID
 
@@ -111,7 +112,11 @@ func (m *ResourceSignature) validateKeyID(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("key_id", "body", "uuid", m.KeyID.String(), formats); err != nil {
+	if err := validate.MinLength("key_id", "body", m.KeyID, 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("key_id", "body", m.KeyID, 64); err != nil {
 		return err
 	}
 

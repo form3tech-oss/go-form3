@@ -22,7 +22,7 @@ type SchemeFileAttributes struct {
 
 	// The format of the file that will be submitted to Form3
 	// Required: true
-	// Enum: ["xml"]
+	// Enum: ["xml","csv","standard18"]
 	FileFormat *string `json:"file_format"`
 
 	// Hashed content of the file
@@ -37,7 +37,7 @@ type SchemeFileAttributes struct {
 
 	// The file type
 	// Required: true
-	// Enum: ["switch","ISA"]
+	// Enum: ["switch","ISA","redirection","bacs"]
 	FileType *string `json:"file_type"`
 
 	// The algorithm used to generate the signature
@@ -52,7 +52,7 @@ type SchemeFileAttributes struct {
 
 	// Scheme/gateway that the file is to be processed by
 	// Required: true
-	// Enum: ["CASS","CISA"]
+	// Enum: ["CASS","CISA","BPRS","BACS"]
 	PaymentScheme *string `json:"payment_scheme"`
 }
 
@@ -201,7 +201,7 @@ var schemeFileAttributesTypeFileFormatPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["xml"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["xml","csv","standard18"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -213,6 +213,12 @@ const (
 
 	// SchemeFileAttributesFileFormatXML captures enum value "xml"
 	SchemeFileAttributesFileFormatXML string = "xml"
+
+	// SchemeFileAttributesFileFormatCsv captures enum value "csv"
+	SchemeFileAttributesFileFormatCsv string = "csv"
+
+	// SchemeFileAttributesFileFormatStandard18 captures enum value "standard18"
+	SchemeFileAttributesFileFormatStandard18 string = "standard18"
 )
 
 // prop value enum
@@ -267,7 +273,7 @@ var schemeFileAttributesTypeFileTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["switch","ISA"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["switch","ISA","redirection","bacs"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -282,6 +288,12 @@ const (
 
 	// SchemeFileAttributesFileTypeISA captures enum value "ISA"
 	SchemeFileAttributesFileTypeISA string = "ISA"
+
+	// SchemeFileAttributesFileTypeRedirection captures enum value "redirection"
+	SchemeFileAttributesFileTypeRedirection string = "redirection"
+
+	// SchemeFileAttributesFileTypeBacs captures enum value "bacs"
+	SchemeFileAttributesFileTypeBacs string = "bacs"
 )
 
 // prop value enum
@@ -363,7 +375,7 @@ var schemeFileAttributesTypePaymentSchemePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["CASS","CISA"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CASS","CISA","BPRS","BACS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -378,6 +390,12 @@ const (
 
 	// SchemeFileAttributesPaymentSchemeCISA captures enum value "CISA"
 	SchemeFileAttributesPaymentSchemeCISA string = "CISA"
+
+	// SchemeFileAttributesPaymentSchemeBPRS captures enum value "BPRS"
+	SchemeFileAttributesPaymentSchemeBPRS string = "BPRS"
+
+	// SchemeFileAttributesPaymentSchemeBACS captures enum value "BACS"
+	SchemeFileAttributesPaymentSchemeBACS string = "BACS"
 )
 
 // prop value enum

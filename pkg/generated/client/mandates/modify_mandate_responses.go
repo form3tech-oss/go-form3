@@ -38,6 +38,20 @@ func (o *ModifyMandateReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 
+	case 404:
+		result := NewModifyMandateNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
+	case 409:
+		result := NewModifyMandateConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -161,6 +175,136 @@ func (o *ModifyMandateBadRequest) Error() string {
 }
 
 func (o *ModifyMandateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyMandateNotFound creates a ModifyMandateNotFound with default headers values
+func NewModifyMandateNotFound() *ModifyMandateNotFound {
+	return &ModifyMandateNotFound{}
+}
+
+/*
+ModifyMandateNotFound handles this case with default header values.
+
+Mandate not found error
+*/
+type ModifyMandateNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this modify mandate not found response has a 2xx status code
+func (o *ModifyMandateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify mandate not found response has a 3xx status code
+func (o *ModifyMandateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify mandate not found response has a 4xx status code
+func (o *ModifyMandateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify mandate not found response has a 5xx status code
+func (o *ModifyMandateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify mandate not found response a status code equal to that given
+func (o *ModifyMandateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the modify mandate not found response
+func (o *ModifyMandateNotFound) Code() int {
+	return 404
+}
+
+func (o *ModifyMandateNotFound) Error() string {
+	return fmt.Sprintf("[PATCH /transaction/mandates/{id}][%d] modifyMandateNotFound", 404)
+}
+
+func (o *ModifyMandateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewModifyMandateConflict creates a ModifyMandateConflict with default headers values
+func NewModifyMandateConflict() *ModifyMandateConflict {
+	return &ModifyMandateConflict{}
+}
+
+/*
+ModifyMandateConflict handles this case with default header values.
+
+Mandate conflict error
+*/
+type ModifyMandateConflict struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this modify mandate conflict response has a 2xx status code
+func (o *ModifyMandateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this modify mandate conflict response has a 3xx status code
+func (o *ModifyMandateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this modify mandate conflict response has a 4xx status code
+func (o *ModifyMandateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this modify mandate conflict response has a 5xx status code
+func (o *ModifyMandateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this modify mandate conflict response a status code equal to that given
+func (o *ModifyMandateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the modify mandate conflict response
+func (o *ModifyMandateConflict) Code() int {
+	return 409
+}
+
+func (o *ModifyMandateConflict) Error() string {
+	return fmt.Sprintf("[PATCH /transaction/mandates/{id}][%d] modifyMandateConflict", 409)
+}
+
+func (o *ModifyMandateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

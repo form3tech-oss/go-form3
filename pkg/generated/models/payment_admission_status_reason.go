@@ -154,6 +154,12 @@ const (
 
 	// PaymentAdmissionStatusReasonRejectedByCustomer captures enum value "rejected_by_customer"
 	PaymentAdmissionStatusReasonRejectedByCustomer PaymentAdmissionStatusReason = "rejected_by_customer"
+
+	// PaymentAdmissionStatusReasonBeneficiaryNameNotPresent captures enum value "beneficiary_name_not_present"
+	PaymentAdmissionStatusReasonBeneficiaryNameNotPresent PaymentAdmissionStatusReason = "beneficiary_name_not_present"
+
+	// PaymentAdmissionStatusReasonInvalidBeneficiaryAccountType captures enum value "invalid_beneficiary_account_type"
+	PaymentAdmissionStatusReasonInvalidBeneficiaryAccountType PaymentAdmissionStatusReason = "invalid_beneficiary_account_type"
 )
 
 // for schema
@@ -161,7 +167,7 @@ var paymentAdmissionStatusReasonEnum []interface{}
 
 func init() {
 	var res []PaymentAdmissionStatusReason
-	if err := json.Unmarshal([]byte(`["accepted","account_closed","account_closed_beneficiary_deceased","account_closed_beneficiary_sensitivities","account_closed_business_reasons","account_closed_currency","account_closed_stopped","account_closed_terms_and_conditions","account_closed_transferred","agent_clearing_process_error","agent_clearing_process_timeout","agent_reason_unknown","agent_suspended","agent_unavailable","amount_exceeds_settlement_limit","amount_invalid_or_missing","amount_not_allowed","bankid_not_provisioned","beneficiary_agent_clearing_process_error","beneficiary_agent_clearing_process_timeout","beneficiary_agent_suspended","beneficiary_agent_unavailable","blocked_account","business_reasons","customer_check_failed","customer_reason_unknown","duplicate_payment","end_to_end_id_missing_or_invalid","incorrect_reference_reference_mask","incorrect_reference_secondary_identification","incorrect_reference_validation_type","invalid_bank_ID","invalid_bank_operation_code","invalid_beneficiary_address","invalid_beneficiary_agent_BIC","invalid_beneficiary_details","invalid_debtor_agent_BIC","invalid_debtor_details","original_payment_not_received","regulatory_reason","scheme_timeout","transaction_forbidden","transaction_type_not_supported","unknown_accountnumber","rejected_by_customer"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["accepted","account_closed","account_closed_beneficiary_deceased","account_closed_beneficiary_sensitivities","account_closed_business_reasons","account_closed_currency","account_closed_stopped","account_closed_terms_and_conditions","account_closed_transferred","agent_clearing_process_error","agent_clearing_process_timeout","agent_reason_unknown","agent_suspended","agent_unavailable","amount_exceeds_settlement_limit","amount_invalid_or_missing","amount_not_allowed","bankid_not_provisioned","beneficiary_agent_clearing_process_error","beneficiary_agent_clearing_process_timeout","beneficiary_agent_suspended","beneficiary_agent_unavailable","blocked_account","business_reasons","customer_check_failed","customer_reason_unknown","duplicate_payment","end_to_end_id_missing_or_invalid","incorrect_reference_reference_mask","incorrect_reference_secondary_identification","incorrect_reference_validation_type","invalid_bank_ID","invalid_bank_operation_code","invalid_beneficiary_address","invalid_beneficiary_agent_BIC","invalid_beneficiary_details","invalid_debtor_agent_BIC","invalid_debtor_details","original_payment_not_received","regulatory_reason","scheme_timeout","transaction_forbidden","transaction_type_not_supported","unknown_accountnumber","rejected_by_customer","beneficiary_name_not_present","invalid_beneficiary_account_type"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

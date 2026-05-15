@@ -38,6 +38,13 @@ func (o *GetMandateSubmissionReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 
+	case 404:
+		result := NewGetMandateSubmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -161,6 +168,71 @@ func (o *GetMandateSubmissionBadRequest) Error() string {
 }
 
 func (o *GetMandateSubmissionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetMandateSubmissionNotFound creates a GetMandateSubmissionNotFound with default headers values
+func NewGetMandateSubmissionNotFound() *GetMandateSubmissionNotFound {
+	return &GetMandateSubmissionNotFound{}
+}
+
+/*
+GetMandateSubmissionNotFound handles this case with default header values.
+
+Mandate not found error
+*/
+type GetMandateSubmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get mandate submission not found response has a 2xx status code
+func (o *GetMandateSubmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get mandate submission not found response has a 3xx status code
+func (o *GetMandateSubmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate submission not found response has a 4xx status code
+func (o *GetMandateSubmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get mandate submission not found response has a 5xx status code
+func (o *GetMandateSubmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate submission not found response a status code equal to that given
+func (o *GetMandateSubmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get mandate submission not found response
+func (o *GetMandateSubmissionNotFound) Code() int {
+	return 404
+}
+
+func (o *GetMandateSubmissionNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/mandates/{id}/submissions/{submissionId}][%d] getMandateSubmissionNotFound", 404)
+}
+
+func (o *GetMandateSubmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.APIError = new(models.APIError)
 

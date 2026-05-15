@@ -23,6 +23,9 @@ type TransactionFileRelationships struct {
 	// reports
 	Reports *ThinRelationship `json:"reports,omitempty"`
 
+	// scheme files
+	SchemeFiles *ThinRelationship `json:"scheme_files,omitempty"`
+
 	// transaction file admissions
 	TransactionFileAdmissions *TransactionFileRelationshipsTransactionFileAdmissions `json:"transaction_file_admissions,omitempty"`
 
@@ -34,6 +37,8 @@ func TransactionFileRelationshipsWithDefaults(defaults client.Defaults) *Transac
 	return &TransactionFileRelationships{
 
 		Reports: ThinRelationshipWithDefaults(defaults),
+
+		SchemeFiles: ThinRelationshipWithDefaults(defaults),
 
 		TransactionFileAdmissions: TransactionFileRelationshipsTransactionFileAdmissionsWithDefaults(defaults),
 
@@ -50,6 +55,18 @@ func (m *TransactionFileRelationships) WithReports(reports ThinRelationship) *Tr
 
 func (m *TransactionFileRelationships) WithoutReports() *TransactionFileRelationships {
 	m.Reports = nil
+	return m
+}
+
+func (m *TransactionFileRelationships) WithSchemeFiles(schemeFiles ThinRelationship) *TransactionFileRelationships {
+
+	m.SchemeFiles = &schemeFiles
+
+	return m
+}
+
+func (m *TransactionFileRelationships) WithoutSchemeFiles() *TransactionFileRelationships {
+	m.SchemeFiles = nil
 	return m
 }
 
@@ -85,6 +102,10 @@ func (m *TransactionFileRelationships) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSchemeFiles(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTransactionFileAdmissions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -109,6 +130,24 @@ func (m *TransactionFileRelationships) validateReports(formats strfmt.Registry) 
 		if err := m.Reports.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("reports")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *TransactionFileRelationships) validateSchemeFiles(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.SchemeFiles) { // not required
+		return nil
+	}
+
+	if m.SchemeFiles != nil {
+		if err := m.SchemeFiles.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scheme_files")
 			}
 			return err
 		}

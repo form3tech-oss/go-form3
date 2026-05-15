@@ -31,6 +31,13 @@ func (o *GetMandateAdmissionReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 
+	case 404:
+		result := NewGetMandateAdmissionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("unknown error", response, response.Code())
 	}
@@ -95,6 +102,71 @@ func (o *GetMandateAdmissionOK) readResponse(response runtime.ClientResponse, co
 	// response payload
 
 	if err := consumer.Consume(response.Body(), o.MandateAdmissionDetailsResponse); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetMandateAdmissionNotFound creates a GetMandateAdmissionNotFound with default headers values
+func NewGetMandateAdmissionNotFound() *GetMandateAdmissionNotFound {
+	return &GetMandateAdmissionNotFound{}
+}
+
+/*
+GetMandateAdmissionNotFound handles this case with default header values.
+
+Mandate Admission not found error
+*/
+type GetMandateAdmissionNotFound struct {
+
+	//Payload
+
+	// isStream: false
+	*models.APIError
+}
+
+// IsSuccess returns true when this get mandate admission not found response has a 2xx status code
+func (o *GetMandateAdmissionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get mandate admission not found response has a 3xx status code
+func (o *GetMandateAdmissionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get mandate admission not found response has a 4xx status code
+func (o *GetMandateAdmissionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get mandate admission not found response has a 5xx status code
+func (o *GetMandateAdmissionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get mandate admission not found response a status code equal to that given
+func (o *GetMandateAdmissionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get mandate admission not found response
+func (o *GetMandateAdmissionNotFound) Code() int {
+	return 404
+}
+
+func (o *GetMandateAdmissionNotFound) Error() string {
+	return fmt.Sprintf("[GET /transaction/mandates/{id}/admissions/{admissionId}][%d] getMandateAdmissionNotFound", 404)
+}
+
+func (o *GetMandateAdmissionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.APIError = new(models.APIError)
+
+	// response payload
+
+	if err := consumer.Consume(response.Body(), o.APIError); err != nil && err != io.EOF {
 		return err
 	}
 

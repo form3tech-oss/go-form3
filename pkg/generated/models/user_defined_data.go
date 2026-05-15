@@ -22,11 +22,13 @@ type UserDefinedData struct {
 
 	// Key of the pair
 	// Required: true
+	// Max Length: 45
 	// Min Length: 1
 	Key *string `json:"key"`
 
 	// Value of the pair
 	// Required: true
+	// Max Length: 45
 	// Min Length: 1
 	Value *string `json:"value"`
 }
@@ -92,6 +94,10 @@ func (m *UserDefinedData) validateKey(formats strfmt.Registry) error {
 		return err
 	}
 
+	if err := validate.MaxLength("key", "body", *m.Key, 45); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -102,6 +108,10 @@ func (m *UserDefinedData) validateValue(formats strfmt.Registry) error {
 	}
 
 	if err := validate.MinLength("value", "body", *m.Value, 1); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("value", "body", *m.Value, 45); err != nil {
 		return err
 	}
 

@@ -119,7 +119,7 @@ type PaymentAttributes struct {
 	Reimbursement *ReimbursementAccountHoldingEntity `json:"reimbursement,omitempty"`
 
 	// Information relating to the handling of the remittance information by any of the agents in the transaction processing chain.
-	RelatedRemittanceInformation []*PaymentAttributesRelatedRemittanceInformationItems0 `json:"related_remittance_information"`
+	RelatedRemittanceInformation []*PaymentAttributesRelatedRemittanceInformationItems0 `json:"related_remittance_information,omitempty"`
 
 	// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts receivable system provided by the debtor for the beneficiary.
 	RemittanceInformation string `json:"remittance_information,omitempty"`
@@ -147,7 +147,7 @@ type PaymentAttributes struct {
 	StructuredReference *PaymentAttributesStructuredReference `json:"structured_reference,omitempty"`
 
 	// Information supplied to enable the matching / reconciliation of an entry with the items that the payment is intended to settle, such as commercial invoices in an accounts' receivables system, in a structured form.
-	StructuredRemittanceInformation []*PaymentAttributesStructuredRemittanceInformationItems0 `json:"structured_remittance_information"`
+	StructuredRemittanceInformation []*PaymentAttributesStructuredRemittanceInformationItems0 `json:"structured_remittance_information,omitempty"`
 
 	// swift
 	Swift *PaymentAttributesSwift `json:"swift,omitempty"`
@@ -3090,6 +3090,9 @@ func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0) Js
 // swagger:model PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0
 type PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 struct {
 
+	// Unique and unambigious identification of a party.
+	Identification string `json:"identification,omitempty"`
+
 	// Name of the identification scheme, in a coded form as published in an external list.
 	IdentificationCode string `json:"identification_code,omitempty"`
 
@@ -3103,12 +3106,21 @@ type PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0Organisa
 func PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
 	return &PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0{
 
+		Identification: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification"),
+
 		IdentificationCode: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification_code"),
 
 		IdentificationIssuer: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification_issuer"),
 
 		IdentificationScheme: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0", "identification_scheme"),
 	}
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) WithIdentification(identification string) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
+
+	m.Identification = identification
+
+	return m
 }
 
 func (m *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0) WithIdentificationCode(identificationCode string) *PaymentAttributesStructuredRemittanceInformationItems0PartiesItems0OrganisationIdentificationsItems0 {
@@ -3357,7 +3369,7 @@ type PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInfor
 
 	// Date associated with the referred document, e.g. the date of the original Credit Transfer (pacs.008) message that is being returned. This is required when the type is RTRN.
 	// Format: date
-	DocumentDate strfmt.Date `json:"document_date,omitempty"`
+	DocumentDate *strfmt.Date `json:"document_date,omitempty"`
 
 	// Unique and unambiguous identification of the referred document.
 	DocumentID string `json:"document_id,omitempty"`
@@ -3366,14 +3378,14 @@ type PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInfor
 	DocumentType string `json:"document_type,omitempty"`
 
 	// Document type in a coded form. Used to carry the additional information related to the payment. Only one of document_type_coded or document_type can be provided.
-	// Enum: ["CINV","AROI","BOLD","CMCN","CREN","CNFA","DEBN","DNFA","DISP","HIRI","MSIN","PUDR","SBIN","SOAC","TSUT","VCHR"]
+	// Enum: ["CINV","AROI","BOLD","CMCN","CREN","CNFA","DEBN","DNFA","DISP","HIRI","MSIN","PUOR","SBIN","SOAC","TSUT","VCHR"]
 	DocumentTypeCoded string `json:"document_type_coded,omitempty"`
 }
 
 func PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0WithDefaults(defaults client.Defaults) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
 	return &PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0{
 
-		DocumentDate: defaults.GetStrfmtDate("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_date"),
+		DocumentDate: defaults.GetStrfmtDatePtr("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_date"),
 
 		DocumentID: defaults.GetString("PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0", "document_id"),
 
@@ -3385,8 +3397,13 @@ func PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInfor
 
 func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) WithDocumentDate(documentDate strfmt.Date) *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
 
-	m.DocumentDate = documentDate
+	m.DocumentDate = &documentDate
 
+	return m
+}
+
+func (m *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0) WithoutDocumentDate() *PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0 {
+	m.DocumentDate = nil
 	return m
 }
 
@@ -3446,7 +3463,7 @@ var paymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInform
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["CINV","AROI","BOLD","CMCN","CREN","CNFA","DEBN","DNFA","DISP","HIRI","MSIN","PUDR","SBIN","SOAC","TSUT","VCHR"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CINV","AROI","BOLD","CMCN","CREN","CNFA","DEBN","DNFA","DISP","HIRI","MSIN","PUOR","SBIN","SOAC","TSUT","VCHR"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -3489,8 +3506,8 @@ const (
 	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedMSIN captures enum value "MSIN"
 	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedMSIN string = "MSIN"
 
-	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedPUDR captures enum value "PUDR"
-	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedPUDR string = "PUDR"
+	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedPUOR captures enum value "PUOR"
+	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedPUOR string = "PUOR"
 
 	// PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedSBIN captures enum value "SBIN"
 	PaymentAttributesStructuredRemittanceInformationItems0ReferredDocumentInformationItems0DocumentTypeCodedSBIN string = "SBIN"
